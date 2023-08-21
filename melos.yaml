@@ -1,0 +1,59 @@
+name: monorepo
+
+repository: https://github.com/mrverdant13/altoke_app
+
+packages:
+  - ./packages/brick/hooks/
+  - ./packages/brick_generator/
+  - ./packages/reference_app/
+
+scripts:
+  # Formatting
+  f:
+    description: Format a package
+    run: dart format .
+    packageFilters: {}
+    exec:
+      failFast: true
+      concurrency: 1
+  F:
+    description: Format all packages
+    run: melos run f --no-select
+  F:ci:
+    description: Format all packages (CI)
+    run: melos exec --fail-fast -- "dart format --set-exit-if-changed ."
+
+  # Analyzing
+  a.d:
+    description: Analyze a Dart package
+    run: dart analyze
+    packageFilters:
+      flutter: false
+    exec:
+      failFast: true
+      concurrency: 1
+  a.f:
+    description: Analyze a Flutter package
+    run: flutter analyze
+    packageFilters:
+      flutter: true
+    exec:
+      failFast: true
+      concurrency: 1
+  A:
+    description: Analyze all packages
+    run: melos run a.d --no-select && melos run a.f --no-select
+  A:ci:
+    description: Analyze all packages (CI)
+    run: melos exec --fail-fast --no-flutter -- "dart analyze --fatal-infos --fatal-warnings" && melos exec --fail-fast --flutter -- "flutter analyze --fatal-infos --fatal-warnings --no-pub --no-congratulate --no-preamble"
+
+  # Brick management
+  BG:
+    description: Generate brick
+    run: dart run MELOS_ROOT_PATH/packages/brick_generator/lib/main.dart
+  BA:
+    description: Add brick globally
+    run: mason add -g altoke_app --path MELOS_ROOT_PATH/packages/brick/
+  B:
+    description: Generate brick and add it globally
+    run: melos run BG && melos run BA
