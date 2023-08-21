@@ -20,6 +20,15 @@ final brickTemplatePath = path.joinAll([
 final brickTemplateDir = Directory(brickTemplatePath);
 
 Future<void> main(List<String> args) async {
+  final rootPath = Platform.environment['MELOS_ROOT_PATH'];
+  if (rootPath == null) {
+    throw Exception(
+      'MELOS_ROOT_PATH environment variable not found. '
+      'Please run this script from a Melos workspace.',
+    );
+  }
+  Directory.current = Directory(rootPath);
+
   // Remove target directory
   if (brickTemplateDir.existsSync()) {
     await Shell.removeDirectory(brickTemplateDir);
