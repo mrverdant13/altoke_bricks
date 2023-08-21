@@ -15,7 +15,7 @@ final brickTemplatePath = path.joinAll([
   'packages',
   'brick',
   '__brick__',
-  'reference_app',
+  Placeholder.appPackageName.parameter,
 ]);
 final brickTemplateDir = Directory(brickTemplatePath);
 
@@ -37,10 +37,4 @@ Future<void> main(List<String> args) async {
     for (final fsEntity in fsEntities)
       if (fsEntity is File) fsEntity.parametrize(),
   ]);
-
-  // Use parametrized project name
-  await Shell.renameDirectory(
-    directory: brickTemplateDir,
-    newName: Placeholder.appPackageName.parameter,
-  );
 }
