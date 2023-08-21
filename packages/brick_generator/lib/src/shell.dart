@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:meta/meta.dart';
-import 'package:path/path.dart' as path;
 
 class Shell {
   static Future<void> copyDirectory({
@@ -48,17 +47,6 @@ class Shell {
       ]);
     }
     throw UnsupportedError('Unsupported platform');
-  }
-
-  static Future<void> renameDirectory({
-    required Directory directory,
-    required String newName,
-  }) async {
-    await copyDirectory(
-      source: directory,
-      destination: Directory(path.joinAll([directory.parent.path, newName])),
-    );
-    await removeDirectory(directory);
   }
 
   @visibleForTesting
