@@ -1,0 +1,6 @@
+name: altoke_app
+description: An opinionated template for Flutter apps.
+version: 0.0.1
+
+environment:
+  mason: ">=0.1.0-dev.50 <0.1.0"
