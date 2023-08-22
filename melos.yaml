@@ -47,6 +47,31 @@ scripts:
     description: Analyze all packages (CI)
     run: melos exec --fail-fast --no-flutter -- "dart analyze --fatal-infos --fatal-warnings" && melos exec --fail-fast --flutter -- "flutter analyze --fatal-infos --fatal-warnings --no-pub --no-congratulate --no-preamble"
 
+  # Testing
+  t.d:
+    description: Test a Dart package
+    run: dart test
+    packageFilters:
+      flutter: false
+      dirExists:
+        - test
+    exec:
+      failFast: true
+      concurrency: 1
+  t.f:
+    description: Test a Flutter package
+    run: flutter test
+    packageFilters:
+      flutter: true
+      dirExists:
+        - test
+    exec:
+      failFast: true
+      concurrency: 1
+  T:
+    description: Test all packages
+    run: melos run t.d --no-select && melos run t.f --no-select
+
   # Brick management
   BG:
     description: Generate brick
