@@ -1,0 +1,44 @@
+name: generate_template
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/generate_template.yml
+      - packages/brick_generator/**
+      - packages/reference_app/**
+  workflow_dispatch: {}
+
+jobs:
+  generate-template:
+    name: Format and analyze codebase
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Install dart
+        uses: dart-lang/setup-dart@v1
+      - name: Install melos
+        run: dart pub global activate melos 3.1.1
+      - name: Initialize melos
+        run: melos bs
+      - name: Generate template
+        run: melos run BG
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v5
+        with:
+          base: main
+          add-paths: |
+            /packages/brick/__brick__/**
+          branch: chore/brick/update-template
+          branch-suffix: timestamp
+          commit-message: "chore(brick): update template"
+          title: "chore(brick): update template"
+          body: Update template.
+          delete-branch: true
+          labels: bot
+          author: Altoke Bot <altoke.bot@users.noreply.github.com>
+          committer: Altoke Bot <altoke.bot@users.noreply.github.com>
+          assignees: mrverdant13
+          reviewers: mrverdant13
