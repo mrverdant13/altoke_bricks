@@ -1,0 +1,35 @@
+/.DS_Store
+/.atom/
+/.idea/
+/.vscode/
+
+# Files and directories created by pub
+/.dart_tool/
+/.packages/
+/**/pubspec.lock
+
+# Conventional directory for build outputs
+/build/
+
+# Local development
+/melos_overrides.yaml
+/**/melos_*.iml
+
+# Project platforms
+/**/reference_app/android/
+/**/reference_app/ios/
+/**/reference_app/linux/
+/**/reference_app/macos/
+/**/reference_app/web/
+/**/reference_app/windows/
+
+
+
+
+
+
+# =============== EXCEPTIONS ===============
+
+# Included in the git repo as per requirement of `melos`.
+# See: https://melos.invertase.dev/getting-started#configure-the-workspace
+!/pubspec.lock
