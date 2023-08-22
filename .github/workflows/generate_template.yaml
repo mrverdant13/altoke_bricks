@@ -30,9 +30,8 @@ jobs:
         with:
           base: main
           add-paths: |
-            /packages/brick/__brick__/**
+            ./packages/brick/__brick__/**
           branch: chore/brick/update-template
-          branch-suffix: timestamp
           commit-message: "chore(brick): update template"
           title: "chore(brick): update template"
           body: Update template.
