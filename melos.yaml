@@ -14,7 +14,6 @@ scripts:
     run: dart format .
     packageFilters: {}
     exec:
-      failFast: true
       concurrency: 1
   F:
     description: Format all packages
@@ -26,51 +25,62 @@ scripts:
   # Analyzing
   a.d:
     description: Analyze a Dart package
-    run: dart analyze
+    run: dart analyze --fatal-infos --fatal-warnings
     packageFilters:
       flutter: false
     exec:
-      failFast: true
       concurrency: 1
+      orderDependents: true
   a.f:
     description: Analyze a Flutter package
-    run: flutter analyze
+    run: flutter analyze --fatal-infos --fatal-warnings
     packageFilters:
       flutter: true
     exec:
-      failFast: true
       concurrency: 1
+      orderDependents: true
   A:
     description: Analyze all packages
     run: melos run a.d --no-select && melos run a.f --no-select
   A:ci:
     description: Analyze all packages (CI)
-    run: melos exec --fail-fast --no-flutter -- "dart analyze --fatal-infos --fatal-warnings" && melos exec --fail-fast --flutter -- "flutter analyze --fatal-infos --fatal-warnings --no-pub --no-congratulate --no-preamble"
+    run: melos exec --fail-fast --order-dependents --no-flutter -- "dart analyze --fatal-infos --fatal-warnings" && melos exec --fail-fast --order-dependents --flutter -- "flutter analyze --fatal-infos --fatal-warnings --no-pub --no-congratulate --no-preamble"
 
-  # Testing
+  # Testing & Coverage
   t.d:
     description: Test a Dart package
-    run: dart test
+    run: >
+      dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random --color &&
+      dart pub global run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib -b MELOS_PACKAGE_PATH
     packageFilters:
       flutter: false
       dirExists:
         - test
     exec:
-      failFast: true
       concurrency: 1
+      orderDependents: true
   t.f:
     description: Test a Flutter package
-    run: flutter test
+    run: flutter test -x ci-only --coverage -r expanded --test-randomize-ordering-seed random
     packageFilters:
       flutter: true
       dirExists:
         - test
     exec:
-      failFast: true
       concurrency: 1
+      orderDependents: true
   T:
     description: Test all packages
     run: melos run t.d --no-select && melos run t.f --no-select
+  T:ci:
+    description: Test all packages (CI)
+    run: melos exec --fail-fast --order-dependents --no-flutter -- "dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random && dart pub global run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib -b MELOS_PACKAGE_PATH" && melos exec --fail-fast --order-dependents --flutter -- "flutter test -x ci-only --coverage -r expanded --test-randomize-ordering-seed random"
+  TC:
+    description: Merge all packages coverage trace files ignoring data related to generated files.
+    run: >
+      coverde rm MELOS_ROOT_PATH/coverage/filtered.lcov.info &&
+      melos exec --file-exists=coverage/lcov.info -- "coverde filter --input ./coverage/lcov.info --output MELOS_ROOT_PATH/coverage/filtered.lcov.info --paths-parent MELOS_PACKAGE_PATH" &&
+      coverde check -i coverage/filtered.lcov.info 100
 
   # Brick management
   BG:
