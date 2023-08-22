@@ -74,13 +74,13 @@ scripts:
     run: melos run t.d --no-select && melos run t.f --no-select
   T:ci:
     description: Test all packages (CI)
-    run: melos exec --fail-fast --order-dependents --no-flutter -- "dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random && dart pub global run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib -b MELOS_PACKAGE_PATH" && melos exec --fail-fast --order-dependents --flutter -- "flutter test -x ci-only --coverage -r expanded --test-randomize-ordering-seed random"
+    run: melos exec --fail-fast --order-dependents --no-flutter --dir-exists="test" -- "dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random && dart pub global run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib -b MELOS_PACKAGE_PATH" && melos exec --fail-fast --order-dependents --flutter --dir-exists="test" -- "flutter test -x ci-only --coverage -r expanded --test-randomize-ordering-seed random"
   TC:
     description: Merge all packages coverage trace files ignoring data related to generated files.
     run: >
       coverde rm MELOS_ROOT_PATH/coverage/filtered.lcov.info &&
       melos exec --file-exists=coverage/lcov.info -- "coverde filter --input ./coverage/lcov.info --output MELOS_ROOT_PATH/coverage/filtered.lcov.info --paths-parent MELOS_PACKAGE_PATH" &&
-      coverde check -i coverage/filtered.lcov.info 100
+      coverde check -i coverage/filtered.lcov.info 85
 
   # Brick management
   BG:

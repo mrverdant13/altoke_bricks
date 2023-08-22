@@ -1,0 +1,38 @@
+version: 2
+enable-beta-ecosystems: true
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - ci
+  - package-ecosystem: pub
+    directory: /packages/brick/hooks/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - p:b-hooks
+  - package-ecosystem: pub
+    directory: /packages/brick_generator/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - p:b-gen
+  - package-ecosystem: pub
+    directory: /packages/reference_app/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - p:ref

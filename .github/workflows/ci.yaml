@@ -1,0 +1,50 @@
+name: ci
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  min-conditions:
+    name: Format and analyze codebase
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.13.0
+      - name: Install melos
+        run: dart pub global activate melos 3.1.1
+      - name: Initialize melos
+        run: melos bs
+      - name: Format and analyze
+        run: melos run F:ci && melos run A:ci
+
+  test:
+    name: Test implementation
+    needs: min-conditions
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.13.0
+      - name: Install melos
+        run: dart pub global activate melos 3.1.1
+      - name: Install coverage
+        run: dart pub global activate coverage 1.6.3
+      - name: Install coverde
+        run: dart pub global activate coverde 0.2.0+2
+      - name: Initialize melos
+        run: melos bs
+      - name: Run tests, merge tests if needed, and check coverage
+        run: melos run T:ci && melos run TC
