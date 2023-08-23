@@ -15,6 +15,9 @@
 /melos_overrides.yaml
 /**/melos_*.iml
 
+# Testing
+/**/coverage/
+
 # Project platforms
 /**/reference_app/android/
 /**/reference_app/ios/
