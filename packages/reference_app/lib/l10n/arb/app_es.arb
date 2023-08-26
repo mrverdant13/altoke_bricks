@@ -11,6 +11,10 @@
   "@counterExampleLabel": {
     "description": "Label for the counter example"
   },
+  "counterAppBarTitle": "Contador",
+  "@counterAppBarTitle": {
+    "description": "Título de la cabecera de la página de contador"
+  },
   "homePushTimesMessage": "{pushTimes, plural, =0{Aún no has pulsado el botón} =1{Has pulsado el botón una vez} other{Has pulsado el botón {pushTimes} veces}}.",
   "@homePushTimesMessage": {
     "description": "Mensaje con el número de veces que se ha pulsado el botón",
