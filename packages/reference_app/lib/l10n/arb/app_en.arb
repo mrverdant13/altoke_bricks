@@ -5,7 +5,7 @@
   },
   "homeAppBarTitle": "Examples",
   "@homeAppBarTitle": {
-    "description": "App bar title for the home page"
+    "description": "App bar title for the home screen"
   },
   "counterExampleLabel": "Contador",
   "@counterExampleLabel": {
