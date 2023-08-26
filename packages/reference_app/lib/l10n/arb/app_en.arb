@@ -7,6 +7,10 @@
   "@homeAppBarTitle": {
     "description": "App bar title for the home page"
   },
+  "counterExampleLabel": "Contador",
+  "@counterExampleLabel": {
+    "description": "Etiqueta del ejemplo de contador"
+  },
   "homePushTimesMessage": "You have {pushTimes, plural, =0{not pushed the button yet} =1{pushed the button one time} other{pushed the button {pushTimes} times}}.",
   "@homePushTimesMessage": {
     "description": "Message with the number of times the button has been pushed",
