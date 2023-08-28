@@ -18,6 +18,9 @@
 # Testing
 /**/coverage/
 
+# Generated source files
+/**/*.gr.dart
+
 # Project platforms
 /**/reference_app/android/
 /**/reference_app/ios/
