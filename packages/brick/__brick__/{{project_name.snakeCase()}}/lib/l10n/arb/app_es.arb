@@ -3,8 +3,20 @@
   "@appTitle": {
     "description": "Título de la aplicación"
   },
-  "homePushTimesMessage": "{pushTimes, plural, =0{Aún no has pulsado el botón} =1{Has pulsado el botón una vez} other{Has pulsado el botón {pushTimes} veces}}.",
-  "@homePushTimesMessage": {
+  "homeAppBarTitle": "Ejemplos",
+  "@homeAppBarTitle": {
+    "description": "Título de la cabecera de la página de inicio"
+  },
+  "counterExampleLabel": "Contador",
+  "@counterExampleLabel": {
+    "description": "Etiqueta del ejemplo de contador"
+  },
+  "counterAppBarTitle": "Contador",
+  "@counterAppBarTitle": {
+    "description": "Título de la cabecera de la página de contador"
+  },
+  "counterPushTimesMessage": "{pushTimes, plural, =0{Aún no has pulsado el botón} =1{Has pulsado el botón una vez} other{Has pulsado el botón {pushTimes} veces}}.",
+  "@counterPushTimesMessage": {
     "description": "Mensaje con el número de veces que se ha pulsado el botón",
     "placeholders": {
       "pushTimes": {
@@ -13,8 +25,8 @@
       }
     }
   },
-  "homeIncrementButtonTooltip": "Incrementar",
-  "@homeIncrementButtonTooltip": {
+  "counterIncrementButtonTooltip": "Incrementar",
+  "@counterIncrementButtonTooltip": {
     "description": "Tooltip del botón de incrementar"
   }
 }
