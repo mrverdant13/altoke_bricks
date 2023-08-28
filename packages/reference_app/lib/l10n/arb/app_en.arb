@@ -7,9 +7,9 @@
   "@homeAppBarTitle": {
     "description": "App bar title for the home screen"
   },
-  "counterExampleLabel": "Contador",
+  "counterExampleLabel": "Counter",
   "@counterExampleLabel": {
-    "description": "Etiqueta del ejemplo de contador"
+    "description": "Label for the counter example"
   },
   "counterAppBarTitle": "Counter",
   "@counterAppBarTitle": {

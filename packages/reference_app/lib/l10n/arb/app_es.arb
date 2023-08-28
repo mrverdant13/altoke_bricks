@@ -7,9 +7,9 @@
   "@homeAppBarTitle": {
     "description": "Título de la cabecera de la página de inicio"
   },
-  "counterExampleLabel": "Counter",
+  "counterExampleLabel": "Contador",
   "@counterExampleLabel": {
-    "description": "Label for the counter example"
+    "description": "Etiqueta del ejemplo de contador"
   },
   "counterAppBarTitle": "Contador",
   "@counterAppBarTitle": {
