@@ -19,15 +19,21 @@
 /**/coverage/
 
 # Generated source files
-/**/*.gr.dart
+/**/__brick__/**/*.gr.dart
 
 # Project platforms
-/**/reference_app/android/
-/**/reference_app/ios/
-/**/reference_app/linux/
-/**/reference_app/macos/
-/**/reference_app/web/
-/**/reference_app/windows/
+/**/__brick__/**/android/
+/**/reference_app/**/android/
+/**/__brick__/**/ios/
+/**/reference_app/**/ios/
+/**/__brick__/**/linux/
+/**/reference_app/**/linux/
+/**/__brick__/**/macos/
+/**/reference_app/**/macos/
+/**/__brick__/**/web/
+/**/reference_app/**/web/
+/**/__brick__/**/windows/
+/**/reference_app/**/windows/
 
 
 
