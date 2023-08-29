@@ -10,7 +10,10 @@ class SliverCounterAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return SliverAppBar(
-      title: Text(l10n.counterAppBarTitle),
+      title: Text(
+        l10n.counterAppBarTitle,
+        key: const Key('<counter::sliver-counter-app-bar::title>'),
+      ),
       floating: true,
     );
   }

@@ -5,7 +5,7 @@ import 'package:auto_route/auto_route.dart';
   generateForDir: ['lib/routing/'],
 )
 class AppRouter extends $AppRouter {
-  @override
+  @override // coverage:ignore-line
   RouteType get defaultRouteType => const RouteType.adaptive();
 
   @override
