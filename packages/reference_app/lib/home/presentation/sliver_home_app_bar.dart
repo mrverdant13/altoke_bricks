@@ -10,7 +10,10 @@ class SliverHomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return SliverAppBar(
-      title: Text(l10n.homeAppBarTitle),
+      title: Text(
+        l10n.homeAppBarTitle,
+        key: const Key('<counter::sliver-home-app-bar::title>'),
+      ),
       floating: true,
     );
   }

@@ -42,6 +42,9 @@ class SliverCounterBody extends StatelessWidget {
                     ),
                     child: Text(
                       l10n.counterPushTimesMessage(count),
+                      key: const Key(
+                        '<counter::sliver-counter-body::push-count-message>',
+                      ),
                     ),
                   ),
                   AnimatedDefaultTextStyle(
