@@ -52,4 +52,23 @@ extension AppTester on WidgetTester {
       ),
     );
   }
+
+  Future<void> pumpSimpleAppWithTestableWidget({
+    required Widget testableWidget,
+  }) async {
+    await pumpWidget(
+      MaterialApp(
+        theme: ThemeData.light(
+          useMaterial3: true,
+        ),
+        darkTheme: ThemeData.dark(
+          useMaterial3: true,
+        ),
+        onGenerateTitle: (BuildContext context) => context.l10n.appTitle,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: testableWidget,
+      ),
+    );
+  }
 }

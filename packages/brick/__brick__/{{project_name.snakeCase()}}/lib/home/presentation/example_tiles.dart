@@ -12,7 +12,10 @@ class CounterExampleTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return ListTile(
-      title: Text(l10n.counterExampleLabel),
+      title: Text(
+        l10n.counterExampleLabel,
+        key: const Key('<counter::example-tile::title>'),
+      ),
       onTap: () {
         context.navigateTo(
           CounterRoute(),
