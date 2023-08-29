@@ -7,6 +7,42 @@ import 'package:mocktail/mocktail.dart';
 import '../../helpers/helpers.dart';
 
 void main() {
+  final localizationVAriant = LocalizationVariant.withCommonSelector(
+    localizedTextSelector: (l10n) => l10n.counterExampleLabel,
+    partialCases: {
+      const (Locale('en'), 'Counter'),
+      const (Locale('es'), 'Contador'),
+    },
+  );
+
+  testExhaustiveLocalizationVariant(
+    '''
+
+GIVEN a localization variant
+WHEN testing the counter example tile
+THEN all supported locales should be considered
+''',
+    localizationVAriant,
+  );
+
+  testLocalizedWidget(
+    '''
+
+GIVEN a counter example tile
+WHEN it is displayed
+THEN the tile should include the localized label
+''',
+    Scaffold(
+      body: CounterExampleTile(),
+    ),
+    ancestorFinder: find.byKey(
+      const Key(
+        '<counter::example-tile::title>',
+      ),
+    ),
+    variant: localizationVAriant,
+  );
+
   testWidgets(
     '''
 
