@@ -3,6 +3,20 @@ import 'dart:io';
 import 'package:brick_generator/src/placeholders.dart';
 import 'package:meta/meta.dart';
 
+abstract class AltokeRegexp {
+  @visibleForTesting
+  static final spacingGroupsRegexp = RegExp(
+    r'(\s+)?[\/#]\*w ((?:\d+[v>]\s*)+) w\*[\/#](\s+)?',
+    dotAll: true,
+  );
+
+  @visibleForTesting
+  static final spacingGroupDataRegexp = RegExp(
+    r'(\d+)([v>])',
+    dotAll: true,
+  );
+}
+
 @visibleForTesting
 abstract class NumSignBasedRegexp {
   static final variable = RegExp(
@@ -51,6 +65,10 @@ extension ReferenceFile on File {
         .replaceAllMapped(
           SlashBasedRegexp.variable,
           transformaVariableMatch,
+        )
+        .replaceAllMapped(
+          AltokeRegexp.spacingGroupsRegexp,
+          transformWhitespaceActionsMatch,
         );
     for (final placeholder in Placeholder.values) {
       resolvedContents = resolvedContents.replaceAll(
@@ -66,4 +84,27 @@ extension ReferenceFile on File {
 String transformaVariableMatch(Match match) {
   final variable = match.group(2);
   return '{{$variable}}';
+}
+
+@visibleForTesting
+String transformWhitespaceActionsMatch(Match match) {
+  final buf = StringBuffer();
+  final candidates =
+      AltokeRegexp.spacingGroupDataRegexp.allMatches(match.group(2) ?? '');
+  for (final candidate in candidates) {
+    final count = int.tryParse(candidate.group(1) ?? '') ?? 0;
+    final action = () {
+      final actionChar = candidate.group(2);
+      switch (actionChar) {
+        case 'v':
+          return '\n';
+        case '>':
+          return ' ';
+        default:
+          return '';
+      }
+    }();
+    buf.write(action * count);
+  }
+  return buf.toString();
 }
