@@ -22,6 +22,20 @@ Future<void> run(HookContext context) async {
   await runCommand(
     command: 'dart',
     args: [
+      'run',
+      'build_runner',
+      'build',
+      '-d',
+    ],
+    projectPath: projectPath,
+    logger: logger,
+    prefix: '🏭 ',
+    startMessage: 'Running code generation.',
+    completeMessage: 'Code generation complete!',
+  );
+  await runCommand(
+    command: 'dart',
+    args: [
       'fix',
       '--apply',
       '--code=directives_ordering',
