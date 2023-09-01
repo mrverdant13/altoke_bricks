@@ -1,14 +1,13 @@
 import 'package:{{project_name.snakeCase()}}/l10n/l10n.dart';
-import 'package:{{project_name.snakeCase()}}/routing/routing.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({
-    required this.router,
+    required this.routerConfig,
     super.key,
   });
 
-  final AppRouter router;
+  final RouterConfig<Object> routerConfig;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
       onGenerateTitle: (BuildContext context) => context.l10n.appTitle,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      routerConfig: router.config(),
+      routerConfig: routerConfig,
     );
   }
 }

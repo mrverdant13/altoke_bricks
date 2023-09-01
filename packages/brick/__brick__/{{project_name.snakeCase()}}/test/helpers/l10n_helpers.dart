@@ -66,8 +66,8 @@ void testLocalizedWidget(
         localizedTextSelector,
         literalText,
       ) = l10nCase;
-      await tester.pumpSimpleAppWithTestableWidget(
-        testableWidget: Builder(
+      await tester.pumpTestableWidget(
+        Builder(
           builder: (context) => Localizations.override(
             context: context,
             locale: locale,
