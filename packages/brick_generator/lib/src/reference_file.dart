@@ -5,6 +5,12 @@ import 'package:meta/meta.dart';
 
 abstract class AltokeRegexp {
   @visibleForTesting
+  static final remotionRegexp = RegExp(
+    r'(\s+)?[\/#]\*remove-start\*[\/#]([\s\S]*?)[\/#]\*remove-end\*[\/#](\s+)?',
+    dotAll: true,
+  );
+
+  @visibleForTesting
   static final spacingGroupsRegexp = RegExp(
     r'(\s+)?[\/#]\*w ((?:\d+[v>]\s*)+) w\*[\/#](\s+)?',
     dotAll: true,
@@ -58,6 +64,10 @@ extension ReferenceFile on File {
   @visibleForTesting
   Future<void> resolveContents() async {
     var resolvedContents = (await readAsString())
+        .replaceAll(
+          AltokeRegexp.remotionRegexp,
+          '',
+        )
         .replaceAllMapped(
           NumSignBasedRegexp.variable,
           transformaVariableMatch,
