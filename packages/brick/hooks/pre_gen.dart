@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:mason/mason.dart';
 
+import 'router/router.dart';
+
 void run(HookContext context) {
   final logger = context.logger;
   var flutterProjectName =
@@ -32,4 +34,5 @@ void run(HookContext context) {
     }
   }
   context.vars['project_description'] = projectDescription;
+  Router.select(context: context);
 }
