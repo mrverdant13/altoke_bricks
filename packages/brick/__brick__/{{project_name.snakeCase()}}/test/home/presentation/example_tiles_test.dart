@@ -1,7 +1,9 @@
 import 'package:{{project_name.snakeCase()}}/home/home.dart';
 import 'package:{{project_name.snakeCase()}}/routing/routing.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../helpers/helpers.dart';
@@ -41,9 +43,7 @@ THEN the tile should include the localized label
       ),
     ),
     variant: localizationVAriant,
-  );
-
-  testWidgets(
+  );{{#use_auto_route_router}}testWidgets(
     '''
 
 GIVEN a counter example tile
@@ -56,16 +56,40 @@ THEN the counter route should be visited
       final routingController = MockRoutingController();
       when(() => routingController.navigate(any()))
           .thenAnswer((_) async => null);
-      await tester.pumpRoutedAppWithTestableWidget(
-        routingController: routingController,
-        testableWidget: Scaffold(
-          body: CounterExampleTile(),
-        ),
-      );
+      await tester.pumpTestableWidget(RouterScope(
+            controller: routingController,
+            inheritableObserversBuilder: () => [],
+            stateHash: 0,
+            child: Scaffold(
+              body: CounterExampleTile(),
+            ),
+          ),);
       final counterExampleTileFinder = find.byType(CounterExampleTile);
       await tester.tap(counterExampleTileFinder);
       verify(() => routingController.navigate(CounterRoute())).called(1);
       verifyNoMoreInteractions(routingController);
     },
-  );
-}
+  );{{/use_auto_route_router}}{{#use_go_router_router}}testWidgets(
+    '''
+
+GIVEN a counter example tile
+AND an injected router
+WHEN the tile is tapped
+THEN the counter route should be visited
+''',
+    (tester) async {
+      registerRoutingFallbackValues();
+      final goRouter = MockGoRouter();
+      when(() => goRouter.go(any())).thenAnswer((_) async => null);
+      await tester.pumpTestableWidget(InheritedGoRouter(
+            goRouter: goRouter,
+            child: Scaffold(
+              body: CounterExampleTile(),
+            ),
+          ),);
+      final counterExampleTileFinder = find.byType(CounterExampleTile);
+      await tester.tap(counterExampleTileFinder);
+      verify(() => goRouter.go(CounterRouteData().location)).called(1);
+      verifyNoMoreInteractions(goRouter);
+    },
+  );{{/use_go_router_router}}}

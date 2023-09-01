@@ -1,11 +1,6 @@
-import 'package:{{project_name.snakeCase()}}/counter/counter.dart';
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-
-@RoutePage(
+import 'package:{{project_name.snakeCase()}}/counter/counter.dart';{{#use_auto_route_router}}import 'package:auto_route/auto_route.dart';{{/use_auto_route_router}}import 'package:flutter/material.dart';{{#use_auto_route_router}}@RoutePage(
   name: 'CounterRoute',
-)
-class CounterScreen extends StatefulWidget {
+){{/use_auto_route_router}}class CounterScreen extends StatefulWidget {
   const CounterScreen({
     super.key,
   });
