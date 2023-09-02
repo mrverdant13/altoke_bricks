@@ -8,7 +8,7 @@ environment:
   flutter: 3.13.0
 
 dependencies:
-  {{#use_auto_route_router}}auto_route: ^7.8.1
+  {{#use_auto_route_router}}auto_route: ^7.8.3
   {{/use_auto_route_router}}flutter:
     sdk: flutter
   flutter_localizations:
