@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 abstract class AltokeRegexp {
   @visibleForTesting
   static final remotionRegexp = RegExp(
-    r'([\/#]\*drop\*[\/#].*)|((\s+)?[\/#]\*remove-start\*[\/#]([\s\S]*?)[\/#]\*remove-end\*[\/#](\s+)?)',
+    r'(((\/)|(#)|(<!--))\*drop\*((\/)|(#)|(-->)).*)|((\s+)?((\/)|(#)|(<!--))\*remove-start\*((\/)|(#)|(-->))([\s\S]*?)((\/)|(#)|(<!--))\*remove-end\*((\/)|(#)|(-->))(\s+)?)',
     dotAll: true,
   );
 
