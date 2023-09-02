@@ -17,16 +17,15 @@ enum Router {
     required HookContext context,
   }) {
     final logger = context.logger;
-    final selectableRouters = [...Router.values];
     final candidateVarIdentifier =
         Platform.environment['ALTOKE_PROJECT_ROUTER'];
-    final candidate = selectableRouters.firstWhereOrNull(
+    final candidate = Router.values.firstWhereOrNull(
       (router) => router.varIdentifier == candidateVarIdentifier?.trim(),
     );
     final selectedRouter = candidate ??
         logger.chooseOne<Router>(
           'Which router do you want to use?',
-          choices: selectableRouters,
+          choices: Router.values,
           display: (router) => router.label,
         );
     for (final router in Router.values) {
