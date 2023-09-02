@@ -34,7 +34,7 @@ GIVEN a counter body
 WHEN it is displayed
 THEN the body should include the localized message
 ''',
-      CustomScrollView(
+      const CustomScrollView(
         slivers: [
           SliverCounterBody(
             count: 0,
@@ -77,7 +77,7 @@ GIVEN a counter body
 WHEN it is displayed
 THEN the body should include the localized message
 ''',
-      CustomScrollView(
+      const CustomScrollView(
         slivers: [
           SliverCounterBody(
             count: 1,
@@ -120,7 +120,7 @@ GIVEN a counter body
 WHEN it is displayed
 THEN the body should include the localized message
 ''',
-      CustomScrollView(
+      const CustomScrollView(
         slivers: [
           SliverCounterBody(
             count: 8,

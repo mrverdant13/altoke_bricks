@@ -15,7 +15,7 @@ class CounterExampleTile extends StatelessWidget {
         key: const Key('<counter::example-tile::title>'),
       ),
       onTap: () {
-{{#use_auto_route_router}}context.navigateTo(CounterRoute());{{/use_auto_route_router}}{{#use_go_router_router}}CounterRouteData().go(context);{{/use_go_router_router}}
+{{#use_auto_route_router}}context.navigateTo(const CounterRoute());{{/use_auto_route_router}}{{#use_go_router_router}}const CounterRouteData().go(context);{{/use_go_router_router}}
 },
     );
   }

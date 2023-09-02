@@ -25,7 +25,7 @@ import 'package:{{project_name.snakeCase()}}/home/home.dart';{{#use_auto_route_r
               return SliverCrossAxisGroup(
                 slivers: [
                   if (width > maxContentWidth) contentLateralSpacer,
-                  SliverConstrainedCrossAxis(
+                  const SliverConstrainedCrossAxis(
                     maxExtent: maxContentWidth,
                     sliver: SliverMainAxisGroup(
                       slivers: [

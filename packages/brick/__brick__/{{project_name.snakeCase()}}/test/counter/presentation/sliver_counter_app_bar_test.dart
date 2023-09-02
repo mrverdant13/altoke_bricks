@@ -30,7 +30,7 @@ GIVEN a sliver counter app bar
 WHEN it is displayed
 THEN the app bar should include the localized title
 ''',
-    CustomScrollView(
+    const CustomScrollView(
       slivers: [
         SliverCounterAppBar(),
       ],
