@@ -11,6 +11,12 @@ abstract class AltokeRegexp {
   );
 
   @visibleForTesting
+  static final variableRegexp = RegExp(
+    r'(\s+)?((#)|(\/\*)|(<!--)){{(.*?)}}((#)|(\*\/)|(-->))(\s+)?',
+    dotAll: true,
+  );
+
+  @visibleForTesting
   static final spacingGroupsRegexp = RegExp(
     r'(\s+)?[\/#]\*w ((?:\d+[v>]\s*)+) w\*[\/#](\s+)?',
     dotAll: true,
@@ -19,22 +25,6 @@ abstract class AltokeRegexp {
   @visibleForTesting
   static final spacingGroupDataRegexp = RegExp(
     r'(\d+)([v>])',
-    dotAll: true,
-  );
-}
-
-@visibleForTesting
-abstract class NumSignBasedRegexp {
-  static final variable = RegExp(
-    r'(\s+)?#{{(.*?)}}#(\s+)?',
-    dotAll: true,
-  );
-}
-
-@visibleForTesting
-abstract class SlashBasedRegexp {
-  static final variable = RegExp(
-    r'(\s+)?\/\*{{(.*?)}}\*\/(\s+)?',
     dotAll: true,
   );
 }
@@ -69,11 +59,7 @@ extension ReferenceFile on File {
           '',
         )
         .replaceAllMapped(
-          NumSignBasedRegexp.variable,
-          transformaVariableMatch,
-        )
-        .replaceAllMapped(
-          SlashBasedRegexp.variable,
+          AltokeRegexp.variableRegexp,
           transformaVariableMatch,
         )
         .replaceAllMapped(
@@ -92,7 +78,7 @@ extension ReferenceFile on File {
 
 @visibleForTesting
 String transformaVariableMatch(Match match) {
-  final variable = match.group(2);
+  final variable = match.group(6);
   return '{{$variable}}';
 }
 
