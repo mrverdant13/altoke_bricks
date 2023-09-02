@@ -17,7 +17,8 @@ THEN the home screen should be shown
       await tester.pumpWidget(
         MyApp(
           routerConfig: AppRouter().config(
-            deepLinkBuilder: (_) => DeepLink.path('/'),
+            // ignore: use_named_constants
+            deepLinkBuilder: (_) => const DeepLink.path('/'),
           ),
         ),
       );
