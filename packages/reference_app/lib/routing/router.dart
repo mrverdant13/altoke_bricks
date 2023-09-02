@@ -62,6 +62,7 @@ class CounterRouteData extends GoRouteData {
 /*{{/use_go_router_router}}*/
 
 /*drop*/
+// coverage:ignore-start
 enum RouterPackage {
   autoRoute('auto_route'),
   goRouter('go_router'),
@@ -107,3 +108,4 @@ class InheritedRouterPackage extends InheritedWidget {
     return package != oldWidget.package;
   }
 }
+// coverage:ignore-end
