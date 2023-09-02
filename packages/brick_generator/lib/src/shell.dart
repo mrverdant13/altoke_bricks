@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:meta/meta.dart';
 
+/// Shell utilities.
 class Shell {
+  /// Copies a directory located at [source] to [destination].
   static Future<void> copyDirectory({
     required Directory source,
     required Directory destination,
@@ -28,6 +30,7 @@ class Shell {
     throw UnsupportedError('Unsupported platform');
   }
 
+  /// Removes a [directory].
   static Future<void> removeDirectory(
     Directory directory,
   ) {
@@ -49,6 +52,7 @@ class Shell {
     throw UnsupportedError('Unsupported platform');
   }
 
+  /// Runs a process by executing [cmd] with [args].
   @visibleForTesting
   static Future<ProcessResult> run(
     String cmd,
@@ -66,6 +70,9 @@ class Shell {
     return result;
   }
 
+  /// Throws a [ProcessException] if the [pr] failed.
+  ///
+  /// The [process] and [args] are used to give context to the exception.
   @visibleForTesting
   static void throwIfProcessFailed(
     ProcessResult pr,
@@ -75,12 +82,12 @@ class Shell {
     if (pr.exitCode != 0) {
       final values = {
         'Standard out': pr.stdout.toString().trim(),
-        'Standard error': pr.stderr.toString().trim()
+        'Standard error': pr.stderr.toString().trim(),
       }..removeWhere((k, v) => v.isEmpty);
       final message = switch (values) {
-        Map<String, String> m when m.isEmpty => 'Unknown error',
-        Map<String, String> m when m.length == 1 => m.values.single,
-        Map<String, String> m =>
+        final Map<String, String> m when m.isEmpty => 'Unknown error',
+        final Map<String, String> m when m.length == 1 => m.values.single,
+        final Map<String, String> m =>
           m.entries.map((e) => '${e.key}\n${e.value}').join('\n'),
       };
       throw ProcessException(process, args, message, pr.exitCode);

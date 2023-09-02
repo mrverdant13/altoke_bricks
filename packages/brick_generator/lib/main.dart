@@ -5,18 +5,28 @@ import 'package:brick_generator/src/reference_file.dart';
 import 'package:brick_generator/src/shell.dart';
 import 'package:path/path.dart' as path;
 
+/// Path to the reference app.
+///
+/// This path is relative to the root of the Melos workspace.
 final referenceAppPath = path.joinAll([
   'packages',
   'reference_app',
 ]);
+
+/// Reference app directory.
 final referenceAppDir = Directory(referenceAppPath);
 
+/// Path to the brick template.
+///
+/// This path is relative to the root of the Melos workspace.
 final brickTemplatePath = path.joinAll([
   'packages',
   'brick',
   '__brick__',
   Placeholder.appPackageName.parameter,
 ]);
+
+/// Brick template directory.
 final brickTemplateDir = Directory(brickTemplatePath);
 
 Future<void> main(List<String> args) async {

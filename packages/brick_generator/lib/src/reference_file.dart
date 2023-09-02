@@ -3,25 +3,31 @@ import 'dart:io';
 import 'package:brick_generator/src/placeholders.dart';
 import 'package:meta/meta.dart';
 
+/// Regexp patterns to parametrize the template.
+@visibleForTesting
 abstract class AltokeRegexp {
+  /// Regexp to identify blocks to be removed.
   @visibleForTesting
   static final remotionRegexp = RegExp(
     r'(((\/)|(#)|(<!--))\*drop\*((\/)|(#)|(-->)).*)|((\s+)?((\/)|(#)|(<!--))\*remove-start\*((\/)|(#)|(-->))([\s\S]*?)((\/)|(#)|(<!--))\*remove-end\*((\/)|(#)|(-->))(\s+)?)',
     dotAll: true,
   );
 
+  /// Regexp to identify variables to be resolved.
   @visibleForTesting
   static final variableRegexp = RegExp(
     r'(\s+)?((#)|(\/\*)|(<!--)){{(.*?)}}((#)|(\*\/)|(-->))(\s+)?',
     dotAll: true,
   );
 
+  /// Regexp to identify whitespace actions to be resolved.
   @visibleForTesting
   static final spacingGroupsRegexp = RegExp(
     r'(\s+)?((\/)|(#)|(<!--))\*w ((?:\d+[v>]\s*)+) w\*((\/)|(#)|(-->))(\s+)?',
     dotAll: true,
   );
 
+  /// Regexp to identify a single whitespace action to be resolved.
   @visibleForTesting
   static final spacingGroupDataRegexp = RegExp(
     r'(\d+)([v>])',
@@ -29,7 +35,9 @@ abstract class AltokeRegexp {
   );
 }
 
+/// Extension methods for a reference [File] to be parametrized.
 extension ReferenceFile on File {
+  /// Parametrizes the reference file.
   Future<void> parametrize() async {
     try {
       if (isGitIgnored) {
@@ -42,15 +50,17 @@ extension ReferenceFile on File {
     }
   }
 
+  /// Checks if the reference file is git ignored.
   @visibleForTesting
   bool get isGitIgnored {
     final result = Process.runSync(
       'git',
-      ['check-ignore', this.path, '--quiet'],
+      ['check-ignore', path, '--quiet'],
     );
     return result.exitCode == 0;
   }
 
+  /// Resolves the parametrized contents of the reference [File].
   @visibleForTesting
   Future<void> resolveContents() async {
     var resolvedContents = (await readAsString())
@@ -76,12 +86,15 @@ extension ReferenceFile on File {
   }
 }
 
+/// Transforms a variable match into an actual mustache variable.
 @visibleForTesting
 String transformaVariableMatch(Match match) {
   final variable = match.group(6);
   return '{{$variable}}';
 }
 
+/// Transforms a whitespace actions match into an actual set of spacing actions,
+/// such as new lines and spaces.
 @visibleForTesting
 String transformWhitespaceActionsMatch(Match match) {
   final buf = StringBuffer();
