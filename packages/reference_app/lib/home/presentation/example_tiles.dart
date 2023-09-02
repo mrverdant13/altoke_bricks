@@ -26,12 +26,12 @@ class CounterExampleTile extends StatelessWidget {
           case RouterPackage.autoRoute:
             /*remove-end*/
             /*{{#use_auto_route_router}}*/
-            context.navigateTo(CounterRoute());
+            context.navigateTo(const CounterRoute());
           /*{{/use_auto_route_router}}*/
           /*remove-start*/
           case RouterPackage.goRouter: /*remove-end*/
             /*{{#use_go_router_router}}*/
-            CounterRouteData().go(context);
+            const CounterRouteData().go(context);
           /*{{/use_go_router_router}}*/
           /*remove-start*/
         } /*remove-end*/

@@ -38,7 +38,7 @@ void testExhaustiveLocalizationVariant(
   test(
     description,
     () async {
-      final supportedLocales = AppLocalizations.supportedLocales;
+      const supportedLocales = AppLocalizations.supportedLocales;
       final locales = variant.values.map((e) => e.$1);
       expect(
         locales,

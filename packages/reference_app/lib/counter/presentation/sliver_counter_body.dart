@@ -33,7 +33,6 @@ class SliverCounterBody extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   AnimatedDefaultTextStyle(
                     duration: const Duration(milliseconds: 300),

@@ -40,7 +40,7 @@ class _CounterScreenState extends State<CounterScreen> {
           SliverLayoutBuilder(
             builder: (context, constraints) {
               final width = constraints.crossAxisExtent;
-              final contentLateralSpacer = SliverCrossAxisExpanded(
+              const contentLateralSpacer = SliverCrossAxisExpanded(
                 flex: 1,
                 sliver: SliverToBoxAdapter(),
               );
@@ -51,7 +51,7 @@ class _CounterScreenState extends State<CounterScreen> {
                     maxExtent: maxContentWidth,
                     sliver: SliverMainAxisGroup(
                       slivers: [
-                        SliverCounterAppBar(),
+                        const SliverCounterAppBar(),
                         SliverCounterBody(count: counter),
                       ],
                     ),

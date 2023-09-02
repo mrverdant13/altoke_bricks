@@ -1,5 +1,7 @@
 # Altoke App
 
+[![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
+
 An Altoke App.
 
 ## Internationalization
@@ -137,4 +139,5 @@ _For more information, see the [`go_router` package][flutter_package_go_router] 
 <!--{{/use_go_router_router}}-->
 
 [flutter_package_intl]: https://pub.dev/packages/intl
-
+[very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
+[very_good_analysis_link]: https://github.com/VeryGoodOpenSource/very_good_analysis

@@ -34,7 +34,7 @@ GIVEN a counter example tile
 WHEN it is displayed
 THEN the tile should include the localized label
 ''',
-    Scaffold(
+    const Scaffold(
       body: CounterExampleTile(),
     ),
     ancestorFinder: find.byKey(
@@ -66,7 +66,7 @@ THEN the counter route should be visited
             controller: routingController,
             inheritableObserversBuilder: () => [],
             stateHash: 0,
-            child: Scaffold(
+            child: const Scaffold(
               body: CounterExampleTile(),
             ),
           ), /*remove-start*/
@@ -74,7 +74,7 @@ THEN the counter route should be visited
       );
       final counterExampleTileFinder = find.byType(CounterExampleTile);
       await tester.tap(counterExampleTileFinder);
-      verify(() => routingController.navigate(CounterRoute())).called(1);
+      verify(() => routingController.navigate(const CounterRoute())).called(1);
       verifyNoMoreInteractions(routingController);
     },
   );
@@ -92,13 +92,13 @@ THEN the counter route should be visited
     (tester) async {
       registerRoutingFallbackValues();
       final goRouter = MockGoRouter();
-      when(() => goRouter.go(any())).thenAnswer((_) async => null);
+      when(() => goRouter.go(any())).thenAnswer((_) async {});
       await tester.pumpTestableWidget(
         /*remove-start*/ InheritedRouterPackage(
           package: RouterPackage.goRouter,
           child: /*remove-end*/ InheritedGoRouter(
             goRouter: goRouter,
-            child: Scaffold(
+            child: const Scaffold(
               body: CounterExampleTile(),
             ),
           ), /*remove-start*/
@@ -106,7 +106,7 @@ THEN the counter route should be visited
       );
       final counterExampleTileFinder = find.byType(CounterExampleTile);
       await tester.tap(counterExampleTileFinder);
-      verify(() => goRouter.go(CounterRouteData().location)).called(1);
+      verify(() => goRouter.go(const CounterRouteData().location)).called(1);
       verifyNoMoreInteractions(goRouter);
     },
   );

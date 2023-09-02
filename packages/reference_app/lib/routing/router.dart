@@ -72,7 +72,7 @@ enum RouterPackage {
 
   final String identifier;
 
-  static late final fromEnv = RouterPackage.values.firstWhere(
+  static final fromEnv = RouterPackage.values.firstWhere(
     (routerPackage) => routerPackage.identifier == routerIdentifier,
   );
 
@@ -86,9 +86,9 @@ const routerIdentifier = String.fromEnvironment('REF_ALTOKE_ROUTER');
 
 class InheritedRouterPackage extends InheritedWidget {
   const InheritedRouterPackage({
-    super.key,
     required this.package,
     required super.child,
+    super.key,
   });
 
   final RouterPackage package;
@@ -98,7 +98,7 @@ class InheritedRouterPackage extends InheritedWidget {
   }
 
   static InheritedRouterPackage of(BuildContext context) {
-    final InheritedRouterPackage? result = maybeOf(context);
+    final result = maybeOf(context);
     assert(result != null, 'No InheritedRouterPackage found in context');
     return result!;
   }

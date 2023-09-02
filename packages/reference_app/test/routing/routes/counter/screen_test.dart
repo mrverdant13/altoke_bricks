@@ -20,7 +20,7 @@ THEN the counter screen should be shown
       await tester.pumpWidget(
         MyApp(
           routerConfig: AppRouter().config(
-            deepLinkBuilder: (_) => DeepLink.path('/counter'),
+            deepLinkBuilder: (_) => const DeepLink.path('/counter'),
           ),
         ),
       );
@@ -42,7 +42,7 @@ THEN the counter value should be 1
       await tester.pumpWidget(
         MyApp(
           routerConfig: AppRouter().config(
-            deepLinkBuilder: (_) => DeepLink.path('/counter'),
+            deepLinkBuilder: (_) => const DeepLink.path('/counter'),
           ),
         ),
       );

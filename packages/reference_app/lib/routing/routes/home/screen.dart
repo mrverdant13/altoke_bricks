@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
               return SliverCrossAxisGroup(
                 slivers: [
                   if (width > maxContentWidth) contentLateralSpacer,
-                  SliverConstrainedCrossAxis(
+                  const SliverConstrainedCrossAxis(
                     maxExtent: maxContentWidth,
                     sliver: SliverMainAxisGroup(
                       slivers: [
