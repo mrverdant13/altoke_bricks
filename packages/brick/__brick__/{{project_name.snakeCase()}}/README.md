@@ -83,8 +83,7 @@ Widget build(BuildContext context) {
 - Every localized message must be defined in every ARB file, even if it is the same as in other ARB files.\
   If a localized message is not defined in a specific ARB file, the console will show a warning when trying to generate the Dart code for the localized messages, and the set of missing localized messages will be added to the `lib/l10n/arb/untranslated-messages.json` file.
 
-
-## Deep linking
+{{#use_auto_route_router}}## Deep linking
 
 This project uses the [`auto_route` package][flutter_package_auto_route] to support deep linking.
 
@@ -94,13 +93,23 @@ This project uses the [`auto_route` package][flutter_package_auto_route] to supp
 2. Register the new route in the `AppRouter` class, within the `lib/routing/router.dart` file, placing it in the desired routing structure.
 3. Update the actual routing setup with code generation.
 
-_For more information, see the [`auto_route` package][flutter_package_auto_route] documentation._
+_For more information, see the [`auto_route` package][flutter_package_auto_route] documentation._{{/use_auto_route_router}}{{#use_go_router_router}}## Deep linking
 
+This project uses the [`go_router` package][flutter_package_go_router] to support deep linking.
+
+### Adding new routes
+
+1. Create the widget implementation of the new route within the `lib/routing/routes/` directory, replicating the desired routing structure.
+2. Register the new route in the `lib/routing/router.dart` file, placing it in the desired routing structure and using the proper annotation.
+3. Update the actual routing setup with code generation.
+
+_For more information, see the [`go_router` package][flutter_package_go_router] documentation._{{/use_go_router_router}}
 
 <!-- LINKS -->
 
 [flutter_docs_internationalization_link]: https://docs.flutter.dev/ui/accessibility-and-localization/internationalization
-[flutter_package_auto_route]: https://pub.dev/packages/auto_route
-[flutter_package_flutter_localizations]: https://api.flutter.dev/flutter/flutter_localizations/flutter_localizations-library.html
-[flutter_package_intl]: https://pub.dev/packages/intl
+{{#use_auto_route_router}}[flutter_package_auto_route]: https://pub.dev/packages/auto_route
+{{/use_auto_route_router}}[flutter_package_flutter_localizations]: https://api.flutter.dev/flutter/flutter_localizations/flutter_localizations-library.html
+{{#use_go_router_router}}[flutter_package_go_router]: https://pub.dev/packages/go_router
+{{/use_go_router_router}}[flutter_package_intl]: https://pub.dev/packages/intl
 
