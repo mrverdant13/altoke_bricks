@@ -18,7 +18,7 @@ abstract class AltokeRegexp {
 
   @visibleForTesting
   static final spacingGroupsRegexp = RegExp(
-    r'(\s+)?[\/#]\*w ((?:\d+[v>]\s*)+) w\*[\/#](\s+)?',
+    r'(\s+)?((\/)|(#)|(<!--))\*w ((?:\d+[v>]\s*)+) w\*((\/)|(#)|(-->))(\s+)?',
     dotAll: true,
   );
 
@@ -86,7 +86,7 @@ String transformaVariableMatch(Match match) {
 String transformWhitespaceActionsMatch(Match match) {
   final buf = StringBuffer();
   final candidates =
-      AltokeRegexp.spacingGroupDataRegexp.allMatches(match.group(2) ?? '');
+      AltokeRegexp.spacingGroupDataRegexp.allMatches(match.group(6) ?? '');
   for (final candidate in candidates) {
     final count = int.tryParse(candidate.group(1) ?? '') ?? 0;
     final action = () {
