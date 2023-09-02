@@ -38,7 +38,9 @@ dev_dependencies:
   go_router_builder: ^2.3.1
   #*w 1v 2> w*#
   #{{/use_go_router_router}}#
+  meta: ^1.9.1
   mocktail: ^1.0.0
+  very_good_analysis: ^5.1.0
 
 flutter:
   generate: true

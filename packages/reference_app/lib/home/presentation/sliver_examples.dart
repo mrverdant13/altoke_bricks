@@ -9,7 +9,7 @@ class SliverExamples extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverList.list(
-      children: [
+      children: const [
         CounterExampleTile(),
       ],
     );

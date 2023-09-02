@@ -7,5 +7,5 @@ class MockRoutingController extends Mock implements RoutingController {}
 class MockGoRouter extends Mock implements GoRouter {}
 
 void registerRoutingFallbackValues() {
-  registerFallbackValue(PageRouteInfo(''));
+  registerFallbackValue(const PageRouteInfo(''));
 }
