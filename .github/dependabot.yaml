@@ -17,7 +17,7 @@ updates:
       - mrverdant13
     labels:
       - build
-      - p:b-hooks
+      - p:brick
   - package-ecosystem: pub
     directory: /packages/brick_generator/
     schedule:
@@ -26,7 +26,7 @@ updates:
       - mrverdant13
     labels:
       - build
-      - p:b-gen
+      - p:bg
   - package-ecosystem: pub
     directory: /packages/reference_app/
     schedule:
