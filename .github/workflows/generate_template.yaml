@@ -36,7 +36,9 @@ jobs:
           title: "chore(brick): update template"
           body: Update template.
           delete-branch: true
-          labels: bot
+          labels: |
+            bot
+            p:brick
           author: Altoke Bot <altoke.bot@users.noreply.github.com>
           committer: Altoke Bot <altoke.bot@users.noreply.github.com>
           assignees: mrverdant13
