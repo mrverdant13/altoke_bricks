@@ -2,6 +2,9 @@ import 'package:altoke_app/home/home.dart';
 import 'package:altoke_app/routing/routing.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+/*remove-start*/
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+/*remove-end*/
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
@@ -60,8 +63,10 @@ THEN the counter route should be visited
       when(() => routingController.navigate(any()))
           .thenAnswer((_) async => null);
       await tester.pumpTestableWidget(
-        /*remove-start*/ InheritedRouterPackage(
-          package: RouterPackage.autoRoute,
+        /*remove-start*/ ProviderScope(
+          overrides: [
+            routerPod.overrideWithValue(RouterPackage.autoRoute),
+          ],
           child: /*remove-end*/ RouterScope(
             controller: routingController,
             inheritableObserversBuilder: () => [],
@@ -94,8 +99,10 @@ THEN the counter route should be visited
       final goRouter = MockGoRouter();
       when(() => goRouter.go(any())).thenAnswer((_) async {});
       await tester.pumpTestableWidget(
-        /*remove-start*/ InheritedRouterPackage(
-          package: RouterPackage.goRouter,
+        /*remove-start*/ ProviderScope(
+          overrides: [
+            routerPod.overrideWithValue(RouterPackage.goRouter),
+          ],
           child: /*remove-end*/ InheritedGoRouter(
             goRouter: goRouter,
             child: const Scaffold(

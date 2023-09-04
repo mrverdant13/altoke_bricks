@@ -19,4 +19,11 @@ targets:
         generate_for:
           - lib/routing/router.dart
       #{{/use_go_router_router}}#
+      #*w 1v 6> w*#
+      riverpod_generator:
+        options:
+          provider_name_suffix: Pod
+          provider_family_name_suffix: Pod
+        generate_for:
+          - lib/**/state/**_pod.dart
       #*w 1v w*#

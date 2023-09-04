@@ -9,21 +9,10 @@ import 'package:flutter/material.dart';
   name: 'CounterRoute',
 )
 /*{{/use_auto_route_router}}*/
-class CounterScreen extends StatefulWidget {
+class CounterScreen extends StatelessWidget {
   const CounterScreen({
     super.key,
   });
-
-  @override
-  State<CounterScreen> createState() => _CounterScreenState();
-}
-
-class _CounterScreenState extends State<CounterScreen> {
-  @visibleForTesting
-  int counter = 0;
-
-  @visibleForTesting
-  void incrementCounter() => setState(() => counter++);
 
   @visibleForTesting
   static const maxContentWidth = 1200.0;
@@ -47,12 +36,12 @@ class _CounterScreenState extends State<CounterScreen> {
               return SliverCrossAxisGroup(
                 slivers: [
                   if (width > maxContentWidth) contentLateralSpacer,
-                  SliverConstrainedCrossAxis(
+                  const SliverConstrainedCrossAxis(
                     maxExtent: maxContentWidth,
                     sliver: SliverMainAxisGroup(
                       slivers: [
-                        const SliverCounterAppBar(),
-                        SliverCounterBody(count: counter),
+                        SliverCounterAppBar(),
+                        SliverCounterBody(),
                       ],
                     ),
                   ),
@@ -70,9 +59,7 @@ class _CounterScreenState extends State<CounterScreen> {
               ((width - maxContentWidth) / 2).clamp(0.0, double.infinity);
           return Padding(
             padding: EdgeInsets.only(right: rightPadding),
-            child: CounterFab(
-              onTap: incrementCounter,
-            ),
+            child: const CounterFab(),
           );
         },
       ),

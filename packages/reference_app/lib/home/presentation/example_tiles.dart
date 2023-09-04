@@ -4,6 +4,9 @@ import 'package:altoke_app/routing/routing.dart';
 import 'package:auto_route/auto_route.dart';
 /*{{/use_auto_route_router}}*/
 import 'package:flutter/material.dart';
+/*remove-start*/
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+/*remove-end*/
 
 class CounterExampleTile extends StatelessWidget {
   const CounterExampleTile({
@@ -21,7 +24,8 @@ class CounterExampleTile extends StatelessWidget {
       onTap: () {
         /*w 1v w*/
         /*remove-start*/
-        final routerPackage = RouterPackage.of(context);
+        final container = ProviderScope.containerOf(context, listen: false);
+        final routerPackage = container.read(routerPod);
         switch (routerPackage) {
           case RouterPackage.autoRoute:
             /*remove-end*/
