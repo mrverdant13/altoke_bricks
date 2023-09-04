@@ -1,7 +1,5 @@
 import 'package:{{project_name.snakeCase()}}/l10n/l10n.dart';
-import 'package:{{project_name.snakeCase()}}/routing/routing.dart';{{#use_auto_route_router}}import 'package:auto_route/auto_route.dart';{{/use_auto_route_router}}import 'package:flutter/material.dart';
-
-class CounterExampleTile extends StatelessWidget {
+import 'package:{{project_name.snakeCase()}}/routing/routing.dart';{{#use_auto_route_router}}import 'package:auto_route/auto_route.dart';{{/use_auto_route_router}}import 'package:flutter/material.dart';class CounterExampleTile extends StatelessWidget {
   const CounterExampleTile({
     super.key,
   });

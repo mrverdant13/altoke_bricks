@@ -1,13 +1,12 @@
+import 'package:{{project_name.snakeCase()}}/counter/counter.dart';
 import 'package:{{project_name.snakeCase()}}/l10n/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SliverCounterBody extends StatelessWidget {
   const SliverCounterBody({
-    required this.count,
     super.key,
   });
-
-  final int count;
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +38,14 @@ class SliverCounterBody extends StatelessWidget {
                     style: textTheme.bodyMedium!.copyWith(
                       fontSize: pushMessageFontSize,
                     ),
-                    child: Text(
-                      l10n.counterPushTimesMessage(count),
-                      key: const Key(
-                        '<counter::sliver-counter-body::push-count-message>',
+                    child: Consumer(
+                      builder: (context, ref, _) => Text(
+                        l10n.counterPushTimesMessage(
+                          ref.watch(counterPod),
+                        ),
+                        key: const Key(
+                          '<counter::sliver-counter-body::push-count-message>',
+                        ),
                       ),
                     ),
                   ),
@@ -51,8 +54,10 @@ class SliverCounterBody extends StatelessWidget {
                     style: textTheme.titleMedium!.copyWith(
                       fontSize: countFontSize,
                     ),
-                    child: Text(
-                      '$count',
+                    child: Consumer(
+                      builder: (context, ref, _) => Text(
+                        '${ref.watch(counterPod)}',
+                      ),
                     ),
                   ),
                 ],
