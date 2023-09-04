@@ -13,17 +13,22 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  flutter_riverpod: ^2.3.10
   {{#use_go_router_router}}go_router: ^10.1.2
   {{/use_go_router_router}}intl: ^0.18.1
+  riverpod_annotation: ^2.1.4
 
 dev_dependencies:
   {{#use_auto_route_router}}auto_route_generator: ^7.3.1
   {{/use_auto_route_router}}build_runner: ^2.4.6
+  custom_lint: ^0.5.3
   flutter_test:
     sdk: flutter
   {{#use_go_router_router}}go_router_builder: ^2.3.1
   {{/use_go_router_router}}meta: ^1.9.1
   mocktail: ^1.0.0
+  riverpod_generator: ^2.3.1
+  riverpod_lint: ^2.0.3
   very_good_analysis: ^5.1.0
 
 flutter:

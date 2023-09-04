@@ -1,8 +1,20 @@
 import 'package:{{project_name.snakeCase()}}/counter/counter.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../helpers/helpers.dart';
+
+class _FakeCounter extends Counter {
+  _FakeCounter({
+    required int initialValue,
+  }) : _initialValue = initialValue;
+
+  final int _initialValue;
+
+  @override
+  int build() => _initialValue;
+}
 
 void main() {
   {
@@ -34,10 +46,15 @@ GIVEN a counter body
 WHEN it is displayed
 THEN the body should include the localized message
 ''',
-      const CustomScrollView(
+      CustomScrollView(
         slivers: [
-          SliverCounterBody(
-            count: 0,
+          ProviderScope(
+            overrides: [
+              counterPod.overrideWith(
+                () => _FakeCounter(initialValue: 0),
+              ),
+            ],
+            child: const SliverCounterBody(),
           ),
         ],
       ),
@@ -77,10 +94,15 @@ GIVEN a counter body
 WHEN it is displayed
 THEN the body should include the localized message
 ''',
-      const CustomScrollView(
+      CustomScrollView(
         slivers: [
-          SliverCounterBody(
-            count: 1,
+          ProviderScope(
+            overrides: [
+              counterPod.overrideWith(
+                () => _FakeCounter(initialValue: 1),
+              ),
+            ],
+            child: const SliverCounterBody(),
           ),
         ],
       ),
@@ -120,10 +142,15 @@ GIVEN a counter body
 WHEN it is displayed
 THEN the body should include the localized message
 ''',
-      const CustomScrollView(
+      CustomScrollView(
         slivers: [
-          SliverCounterBody(
-            count: 8,
+          ProviderScope(
+            overrides: [
+              counterPod.overrideWith(
+                () => _FakeCounter(initialValue: 8),
+              ),
+            ],
+            child: const SliverCounterBody(),
           ),
         ],
       ),

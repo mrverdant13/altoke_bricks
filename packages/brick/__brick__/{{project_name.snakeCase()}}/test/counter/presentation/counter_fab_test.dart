@@ -1,5 +1,6 @@
 import 'package:{{project_name.snakeCase()}}/counter/counter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../helpers/helpers.dart';
@@ -30,9 +31,7 @@ GIVEN a counter fab
 WHEN it is displayed
 THEN the fab should include the localized tooltip
 ''',
-    CounterFab(
-      onTap: () {},
-    ),
+    const CounterFab(),
     postPumpAction: (tester) async {
       final tooltipFinder = find.byType(Tooltip);
       await tester.longPress(tooltipFinder);
@@ -40,5 +39,35 @@ THEN the fab should include the localized tooltip
     },
     ancestorFinder: find.byType(Overlay),
     variant: localizationVariant,
+  );
+
+  testWidgets(
+    '''
+
+GIVEN a counter fab
+WHEN it is tapped
+THEN the counter should be incremented
+''',
+    (tester) async {
+      final container = ProviderContainer();
+      await tester.pumpTestableWidget(
+        ProviderScope(
+          parent: container,
+          child: Consumer(
+            builder: (context, ref, child) {
+              ref.watch(counterPod);
+              return child!;
+            },
+            child: const CounterFab(),
+          ),
+        ),
+      );
+      expect(container.read(counterPod), 0);
+      await tester.pumpAndSettle();
+      final incrementButtonFinder = find.byType(CounterFab);
+      await tester.tap(incrementButtonFinder);
+      await tester.pumpAndSettle();
+      expect(container.read(counterPod), 1);
+    },
   );
 }
