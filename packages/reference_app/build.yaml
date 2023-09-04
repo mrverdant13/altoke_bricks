@@ -16,7 +16,6 @@ targets:
       #{{/use_auto_route_router}}#
       #{{#use_go_router_router}}#
       go_router_builder:
-        options:
         generate_for:
           - lib/routing/router.dart
       #{{/use_go_router_router}}#
