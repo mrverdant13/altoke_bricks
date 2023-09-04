@@ -8,7 +8,10 @@ import 'package:go_router/go_router.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  final routerConfig = /*remove-start*/ switch (RouterPackage.fromEnv) {
+  /*remove-start*/
+  final routerPackage = RouterPackage.fromEnv;
+  /*remove-end*/
+  final routerConfig = /*remove-start*/ switch (routerPackage) {
     RouterPackage.autoRoute =>
       /*remove-end*/
       /*{{#use_auto_route_router}}*/
@@ -23,12 +26,14 @@ void main() {
   } /*remove-end*/;
   runApp(
     ProviderScope(
-      child: /*remove-start*/ InheritedRouterPackage(
-        package: RouterPackage.fromEnv,
-        child: /*remove-end*/ MyApp(
-          routerConfig: routerConfig as RouterConfig<Object>,
-        ), /*remove-start*/
-      ), /*remove-end*/
+      /*remove-start*/
+      overrides: [
+        routerPod.overrideWithValue(routerPackage),
+      ],
+      /*remove-end*/
+      child: MyApp(
+        routerConfig: routerConfig as RouterConfig<Object>,
+      ),
     ),
   );
 }

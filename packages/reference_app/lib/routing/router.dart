@@ -3,6 +3,9 @@ import 'package:altoke_app/routing/routing.dart';
 import 'package:auto_route/auto_route.dart';
 /*{{/use_auto_route_router}}*/
 import 'package:flutter/widgets.dart';
+/*remove-start*/
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+/*remove-end*/
 /*{{#use_go_router_router}}*/
 import 'package:go_router/go_router.dart';
 
@@ -75,37 +78,17 @@ enum RouterPackage {
   static final fromEnv = RouterPackage.values.firstWhere(
     (routerPackage) => routerPackage.identifier == routerIdentifier,
   );
-
-  static RouterPackage of(BuildContext context) {
-    return InheritedRouterPackage.of(context).package;
-  }
 }
 
 @visibleForTesting
 const routerIdentifier = String.fromEnvironment('REF_ALTOKE_ROUTER');
 
-class InheritedRouterPackage extends InheritedWidget {
-  const InheritedRouterPackage({
-    required this.package,
-    required super.child,
-    super.key,
-  });
+final routerPod = Provider<RouterPackage>(
+  (_) => throw UnimplementedError(
+    'No router package has been provided. ',
+  ),
+  name: 'routerPod',
+  dependencies: const [],
+);
 
-  final RouterPackage package;
-
-  static InheritedRouterPackage? maybeOf(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<InheritedRouterPackage>();
-  }
-
-  static InheritedRouterPackage of(BuildContext context) {
-    final result = maybeOf(context);
-    assert(result != null, 'No InheritedRouterPackage found in context');
-    return result!;
-  }
-
-  @override
-  bool updateShouldNotify(InheritedRouterPackage oldWidget) {
-    return package != oldWidget.package;
-  }
-}
 // coverage:ignore-end
