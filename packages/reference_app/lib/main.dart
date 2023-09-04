@@ -1,6 +1,7 @@
 import 'package:altoke_app/app/app.dart';
 import 'package:altoke_app/routing/routing.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 /*{{#use_go_router_router}}*/
 import 'package:go_router/go_router.dart';
 /*{{/use_go_router_router}}*/
@@ -21,13 +22,13 @@ void main() {
     /*remove-start*/,
   } /*remove-end*/;
   runApp(
-    /*remove-start*/
-    InheritedRouterPackage(
-      package: RouterPackage.fromEnv,
-      child: /*remove-end*/ MyApp(
-        routerConfig: routerConfig as RouterConfig<Object>,
-      ),
-      /*remove-start*/
-    ), /*remove-end*/
+    ProviderScope(
+      child: /*remove-start*/ InheritedRouterPackage(
+        package: RouterPackage.fromEnv,
+        child: /*remove-end*/ MyApp(
+          routerConfig: routerConfig as RouterConfig<Object>,
+        ), /*remove-start*/
+      ), /*remove-end*/
+    ),
   );
 }
