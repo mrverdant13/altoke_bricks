@@ -1,0 +1,13 @@
+name: brick_e2e
+publish_to: none
+
+environment:
+  sdk: ">=3.1.0 <4.0.0"
+
+dev_dependencies:
+  mason: ^0.1.0-dev.50
+  meta: ^1.9.1
+  mocktail: ^1.0.0
+  path: ^1.8.3
+  test: ^1.24.6
+  very_good_analysis: ^5.1.0
