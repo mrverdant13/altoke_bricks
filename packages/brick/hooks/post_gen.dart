@@ -10,9 +10,15 @@ Future<void> run(HookContext context) async {
     context.vars['project_name'] as String,
   );
   final logger = context.logger;
+  if (bool.tryParse('${context.vars['silent']}') ?? false) {
+    logger.level = Level.quiet;
+  }
   await runCommand(
     command: 'flutter',
-    args: ['pub', 'get'],
+    args: [
+      'pub',
+      'get',
+    ],
     projectPath: projectPath,
     logger: logger,
     prefix: '📦 ',
@@ -48,7 +54,10 @@ Future<void> run(HookContext context) async {
   );
   await runCommand(
     command: 'dart',
-    args: ['format', '.'],
+    args: [
+      'format',
+      '.',
+    ],
     projectPath: projectPath,
     logger: logger,
     prefix: '🪄  ',
