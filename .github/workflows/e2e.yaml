@@ -32,9 +32,9 @@ jobs:
         with:
           flutter-version: 3.13.0
       - name: Install melos
-        run: pub global activate melos 3.1.1
+        run: dart pub global activate melos 3.1.1
       - name: Install coverde
-        run: pub global activate coverde 0.2.0+2
+        run: dart pub global activate coverde 0.2.0+2
       - name: Initialize melos
         run: melos bs
       - name: Run E2E tests
