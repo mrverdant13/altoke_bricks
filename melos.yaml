@@ -4,6 +4,7 @@ repository: https://github.com/mrverdant13/altoke_app
 
 packages:
   - ./packages/brick/hooks/
+  - ./packages/brick_e2e/
   - ./packages/brick_generator/
   - ./packages/reference_app/
 
