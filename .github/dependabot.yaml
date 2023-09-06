@@ -19,6 +19,16 @@ updates:
       - build
       - p:brick
   - package-ecosystem: pub
+    directory: /packages/brick_e2e/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - p:brick
+      - test
+  - package-ecosystem: pub
     directory: /packages/brick_generator/
     schedule:
       interval: daily

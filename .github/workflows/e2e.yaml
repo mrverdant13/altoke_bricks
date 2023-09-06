@@ -1,0 +1,40 @@
+name: e2e
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - packages/brick/**
+  workflow_dispatch: {}
+
+jobs:
+  e2e:
+    name: E2E testing
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+          - windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.13.0
+      - name: Install melos
+        run: pub global activate melos 3.1.1
+      - name: Install coverde
+        run: pub global activate coverde 0.2.0+2
+      - name: Initialize melos
+        run: melos bs
+      - name: Run E2E tests
+        run: melos run t.e2e.d
