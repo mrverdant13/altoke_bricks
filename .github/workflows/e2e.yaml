@@ -10,6 +10,7 @@ on:
       - main
     paths:
       - packages/brick/**
+      - packages/brick_e2e/**
   workflow_dispatch: {}
 
 jobs:
