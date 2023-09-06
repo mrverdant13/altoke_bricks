@@ -69,6 +69,16 @@ scripts:
     exec:
       concurrency: 1
       orderDependents: true
+  t.e2e.d:
+    description: Run E2E tests
+    run: dart test e2e --run-skipped -t e2e
+    packageFilters:
+      flutter: false
+      dirExists:
+        - e2e
+    exec:
+      concurrency: 1
+      orderDependents: true
   T:
     description: Test all packages
     run: melos run t.d --no-select && melos run t.f --no-select
