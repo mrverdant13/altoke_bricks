@@ -40,12 +40,27 @@ scripts:
     exec:
       concurrency: 1
       orderDependents: true
+  a.c:
+    description: Analyze a package with custom lint rules
+    run: dart run custom_lint
+    packageFilters:
+      dependsOn:
+        - custom_lint
+    exec:
+      concurrency: 1
+      orderDependents: true
   A:
     description: Analyze all packages
-    run: melos run a.d --no-select && melos run a.f --no-select
+    run: >
+      melos run a.d --no-select &&
+      melos run a.f --no-select &&
+      melos run a.c --no-select
   A:ci:
     description: Analyze all packages (CI)
-    run: melos exec --fail-fast --order-dependents --no-flutter -- "dart analyze --fatal-infos --fatal-warnings" && melos exec --fail-fast --order-dependents --flutter -- "flutter analyze --fatal-infos --fatal-warnings --no-pub --no-congratulate --no-preamble"
+    run: >
+      melos exec --fail-fast --order-dependents --no-flutter -- "dart analyze --fatal-infos --fatal-warnings" &&
+      melos exec --fail-fast --order-dependents --flutter -- "flutter analyze --fatal-infos --fatal-warnings --no-pub --no-congratulate --no-preamble" &&
+      melos exec --fail-fast --order-dependents --depends-on=custom_lint -- "dart run custom_lint --fatal-infos --fatal-warnings"
 
   # Testing & Coverage
   t.d:
