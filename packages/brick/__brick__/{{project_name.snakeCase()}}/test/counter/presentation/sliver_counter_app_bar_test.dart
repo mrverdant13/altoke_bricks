@@ -1,3 +1,4 @@
+// cspell:ignore contador
 import 'package:{{project_name.snakeCase()}}/counter/counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

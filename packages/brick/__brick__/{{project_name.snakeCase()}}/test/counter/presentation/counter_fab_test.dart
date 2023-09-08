@@ -1,3 +1,4 @@
+// cspell:ignore incrementar
 import 'package:{{project_name.snakeCase()}}/counter/counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
