@@ -9,8 +9,11 @@ on:
     branches:
       - main
     paths:
+      - .github/workflows/e2e.yaml
       - packages/brick/**
       - packages/brick_e2e/**
+      - melos.yaml
+      - pubspec.yaml
   workflow_dispatch: {}
 
 jobs:
