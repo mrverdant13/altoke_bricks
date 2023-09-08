@@ -19,6 +19,7 @@ class Shell {
     if (Platform.isWindows) {
       return run('cmd', [
         '/c',
+        // cspell: disable-next-line
         'xcopy',
         source.path,
         destination.path,

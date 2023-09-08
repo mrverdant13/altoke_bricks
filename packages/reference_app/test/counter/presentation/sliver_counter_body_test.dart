@@ -1,3 +1,4 @@
+// cspell:ignore botón, pulsado, veces
 import 'package:altoke_app/counter/counter.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -1,3 +1,4 @@
+// cspell:ignore ejemplos
 import 'package:altoke_app/home/home.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
