@@ -70,7 +70,7 @@ extension ReferenceFile on File {
         )
         .replaceAllMapped(
           AltokeRegexp.variableRegexp,
-          transformaVariableMatch,
+          transformVariableMatch,
         )
         .replaceAllMapped(
           AltokeRegexp.spacingGroupsRegexp,
@@ -88,7 +88,7 @@ extension ReferenceFile on File {
 
 /// Transforms a variable match into an actual mustache variable.
 @visibleForTesting
-String transformaVariableMatch(Match match) {
+String transformVariableMatch(Match match) {
   final variable = match.group(6);
   return '{{$variable}}';
 }

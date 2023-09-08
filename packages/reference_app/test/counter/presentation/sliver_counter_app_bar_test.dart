@@ -1,3 +1,4 @@
+// cspell:ignore contador
 import 'package:altoke_app/counter/counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

@@ -1,3 +1,4 @@
+// cspell:ignore contador
 import 'package:altoke_app/home/home.dart';
 import 'package:altoke_app/routing/routing.dart';
 /*{{#use_auto_route_router}}*/
