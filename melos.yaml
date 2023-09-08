@@ -9,6 +9,10 @@ packages:
   - ./packages/reference_app/
 
 scripts:
+  S:
+    description: Run spell checking for the entire project
+    run: cspell lint --no-progress -c ./.cspell/cspell.yaml MELOS_ROOT_PATH/**
+
   # Formatting
   f:
     description: Format a package
