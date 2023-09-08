@@ -1,0 +1,33 @@
+version: "0.2"
+$schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+language: en
+ignorePaths:
+  - "**/__brick__/**"
+  - "**/.cspell/*.txt"
+  - "**/.git/**"
+  - "**/.gitignore"
+  - "**/pubspec.lock"
+  - "**/*.arb"
+enableGlobDot: true
+dictionaryDefinitions:
+  - name: global-allow
+    path: ./global.allow.txt
+    addWords: true
+  - name: dart-allow
+    path: ./dart.allow.txt
+    addWords: true
+  - name: ci-allow
+    path: ./ci.allow.txt
+    addWords: true
+dictionaries:
+  - global-allow
+useGitignore: true
+overrides:
+  - filename: "**/{*.dart,pubspec.yaml,.metadata}"
+    dictionaries:
+      - dart-allow
+  - filename: "**/.github/**/*"
+    dictionaries:
+      - ci-allow
+enableFiletypes:
+  - github-actions-workflow

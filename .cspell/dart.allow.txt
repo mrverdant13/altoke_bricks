@@ -1,0 +1,4 @@
+# Allowed words for Dart files
+mocktail
+unmanaged
+writeln

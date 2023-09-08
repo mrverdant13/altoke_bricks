@@ -1,0 +1,8 @@
+# Globally allowed words
+altoke
+coverde
+github
+lcov
+melos
+pubspec
+riverpod
