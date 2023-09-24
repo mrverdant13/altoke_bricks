@@ -14,7 +14,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^2.3.10
-  {{#use_go_router_router}}go_router: ^10.1.2
+  {{#use_go_router_router}}go_router: ^11.0.0
   {{/use_go_router_router}}intl: ^0.18.1
   riverpod_annotation: ^2.1.4
 
