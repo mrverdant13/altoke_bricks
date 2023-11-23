@@ -4,47 +4,47 @@ publish_to: none
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.1.0 <4.0.0"
-  flutter: 3.13.0
+  sdk: ">=3.2.0 <4.0.0"
+  flutter: 3.16.0
 
 dependencies:
   #*w 1v 2> w*#
   #{{#use_auto_route_router}}#
-  auto_route: ^7.8.3
+  auto_route: ^7.8.4
   #*w 1v 2> w*#
   #{{/use_auto_route_router}}#
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  flutter_riverpod: ^2.3.10
+  flutter_riverpod: ^2.4.8
   #*w 1v 2> w*#
   #{{#use_go_router_router}}#
-  go_router: ^11.0.0
+  go_router: ^12.1.1
   #*w 1v 2> w*#
   #{{/use_go_router_router}}#
   intl: ^0.18.1
-  riverpod_annotation: ^2.1.4
+  riverpod_annotation: ^2.3.2
 
 dev_dependencies:
   #*w 1v 2> w*#
   #{{#use_auto_route_router}}#
-  auto_route_generator: ^7.3.1
+  auto_route_generator: ^7.3.2
   #*w 1v 2> w*#
   #{{/use_auto_route_router}}#
   build_runner: ^2.4.6
-  custom_lint: ^0.5.3
+  custom_lint: ^0.5.7
   flutter_test:
     sdk: flutter
   #*w 1v 2> w*#
   #{{#use_go_router_router}}#
-  go_router_builder: ^2.3.1
+  go_router_builder: ^2.3.4
   #*w 1v 2> w*#
   #{{/use_go_router_router}}#
-  meta: ^1.9.1
-  mocktail: ^1.0.0
-  riverpod_generator: ^2.3.1
-  riverpod_lint: ^2.0.3
+  meta: ^1.10.0
+  mocktail: ^1.0.1
+  riverpod_generator: ^2.3.8
+  riverpod_lint: ^2.3.6
   very_good_analysis: ^5.1.0
 
 flutter:

@@ -22,7 +22,7 @@ jobs:
       - name: Install dart
         uses: dart-lang/setup-dart@v1
       - name: Install melos
-        run: dart pub global activate melos 3.1.1
+        run: dart pub global activate melos 3.2.0
       - name: Initialize melos
         run: melos bs --no-flutter
       - name: Generate template
@@ -34,8 +34,8 @@ jobs:
           add-paths: |
             ./packages/brick/__brick__/**
           branch: chore/brick/update-template
-          commit-message: "chore(brick): update template"
-          title: "chore(brick): update template"
+          commit-message: 'chore(brick): update template'
+          title: 'chore(brick): update template'
           body: Update template.
           delete-branch: true
           labels: |
