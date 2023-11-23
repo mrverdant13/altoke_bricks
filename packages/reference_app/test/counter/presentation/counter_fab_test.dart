@@ -50,10 +50,13 @@ WHEN it is tapped
 THEN the counter should be incremented
 ''',
     (tester) async {
+      // *NOTE* using a tear down and an uncontrolled provider scope as
+      // workarounds. More details at: https://github.com/rrousselGit/riverpod/issues/1941
       final container = ProviderContainer();
+      addTearDown(container.dispose);
       await tester.pumpTestableWidget(
-        ProviderScope(
-          parent: container,
+        UncontrolledProviderScope(
+          container: container,
           child: Consumer(
             builder: (context, ref, child) {
               ref.watch(counterPod);
