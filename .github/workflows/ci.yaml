@@ -19,9 +19,9 @@ jobs:
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.13.0
+          flutter-version: 3.16.0
       - name: Install melos
-        run: dart pub global activate melos 3.1.1
+        run: dart pub global activate melos 3.2.0
       - name: Initialize melos
         run: melos bs
       - name: Format and analyze
@@ -41,9 +41,9 @@ jobs:
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.13.0
+          flutter-version: 3.16.0
       - name: Install melos
-        run: dart pub global activate melos 3.1.1
+        run: dart pub global activate melos 3.2.0
       - name: Install coverage
         run: dart pub global activate coverage 1.6.3
       - name: Install coverde
