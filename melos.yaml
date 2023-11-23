@@ -18,7 +18,8 @@ scripts:
   f:
     description: Format a package
     run: dart format .
-    packageFilters: {}
+    packageFilters:
+      ignore: monorepo
     exec:
       concurrency: 1
   F:
@@ -26,7 +27,7 @@ scripts:
     run: melos run f --no-select
   F:ci:
     description: Format all packages (CI)
-    run: melos exec --fail-fast -- "dart format --set-exit-if-changed ."
+    run: melos exec --ignore monorepo --fail-fast -- "dart format --set-exit-if-changed ."
 
   # Analyzing
   a.d:
