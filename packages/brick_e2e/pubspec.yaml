@@ -2,7 +2,7 @@ name: brick_e2e
 publish_to: none
 
 environment:
-  sdk: ">=3.1.0 <4.0.0"
+  sdk: ">=3.2.0 <4.0.0"
 
 dev_dependencies:
   mason: ^0.1.0-dev.51
