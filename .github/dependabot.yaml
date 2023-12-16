@@ -46,3 +46,12 @@ updates:
     labels:
       - build
       - p:ref
+  - package-ecosystem: pub
+    directory: /packages/reference_app/packages/app/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - p:ref

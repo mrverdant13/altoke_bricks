@@ -4,6 +4,14 @@
 
 An Altoke App.
 
+## Mono-repo management
+
+This project uses [Melos][docs_melos_link] to manage the mono-repo.
+
+You can check the available scripts in the `melos.yaml` file, located in the root directory of the project.
+
+**Note:** Don't forget to run `melos bootstrap` first.
+
 <!--*w 2v w*-->
 <!--{{#use_auto_route_router}}-->
 ## Deep linking <!--*remove-start*-->(`auto_route`)<!--*remove-end*-->
@@ -116,18 +124,9 @@ Widget build(BuildContext context) {
 - Every localized message must be defined in every ARB file, even if it is the same as in other ARB files.\
   If a localized message is not defined in a specific ARB file, the console will show a warning when trying to generate the Dart code for the localized messages, and the set of missing localized messages will be added to the `lib/l10n/arb/untranslated-messages.json` file.
 
-## Testing
-
-To run all unit and widget tests, run the following command:
-
-```sh
-flutter test --coverage --test-randomize-ordering-seed random
-```
-
-To manage the test coverage (filter trace files, compute coverage value, generate coverage reports, etc.), you can use [`coverde`][pub_package_coverde].
-
 <!-- LINKS -->
 
+[docs_melos_link]: https://melos.invertase.dev/
 [flutter_docs_internationalization_link]: https://docs.flutter.dev/ui/accessibility-and-localization/internationalization
 
 <!--*w 1v w*-->
@@ -138,7 +137,6 @@ To manage the test coverage (filter trace files, compute coverage value, generat
 <!--*w 1v w*-->
 <!--{{/use_auto_route_router}}-->
 
-[pub_package_coverde]: https://pub.dev/packages/coverde
 [pub_package_flutter_localizations]: https://api.flutter.dev/flutter/flutter_localizations/flutter_localizations-library.html
 
 <!--*w 1v w*-->

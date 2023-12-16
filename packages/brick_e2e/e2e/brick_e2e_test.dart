@@ -1,7 +1,6 @@
 @Tags(['e2e'])
 library brick_e2e;
 
-// import 'dart:io' as io;
 import 'dart:io' show Directory, Process, Stdin, Stdout, systemEncoding;
 
 import 'package:mason/mason.dart';
@@ -117,73 +116,61 @@ ${description.trim()}
           directoryGeneratorTarget.dir.path,
           projectName,
         );
-        const flutterTestFullCommand =
-            '''flutter test --no-pub --coverage --test-randomize-ordering-seed random''';
-        final [flutterTestCommand, ...flutterTestArgs] = flutterTestFullCommand
-            .split(' ')
-            .where((arg) => arg.isNotEmpty)
-            .toList();
-        final flutterTest = await Process.run(
-          flutterTestCommand,
-          flutterTestArgs,
+        const testFullCommand = 'melos run T';
+        final [testCommand, ...testArgs] = testFullCommand.split(' ');
+        final testResult = await Process.run(
+          testCommand,
+          testArgs,
           workingDirectory: applicationPath,
           runInShell: true,
         );
         expect(
-          flutterTest.exitCode,
+          testResult.exitCode,
           equals(0),
-          reason: '`flutter test` failed',
+          reason: 'Tests failed',
         );
         expect(
-          flutterTest.stderr,
+          testResult.stderr,
           isEmpty,
-          reason: '`flutter test` failed',
+          reason: 'Tests failed',
         );
-        const coverdeFilterFullCommand =
-            '''coverde filter -i ./coverage/lcov.info -o coverage/filtered.lcov.info -f .g.dart,.gr.dart''';
-        final [coverdeFilterCommand, ...coverdeFilterArgs] =
-            coverdeFilterFullCommand
-                .split(' ')
-                .where((arg) => arg.isNotEmpty)
-                .toList();
+        const mergeCoverageFullCommand = 'melos run M';
+        final [mergeCoverageCommand, ...mergeCoverageArgs] =
+            mergeCoverageFullCommand.split(' ');
         final coverdeFilter = await Process.run(
-          coverdeFilterCommand,
-          coverdeFilterArgs,
+          mergeCoverageCommand,
+          mergeCoverageArgs,
           workingDirectory: applicationPath,
           runInShell: true,
         );
         expect(
           coverdeFilter.exitCode,
           equals(0),
-          reason: '`coverde filter` failed',
+          reason: 'Coverage gathering failed',
         );
         expect(
           coverdeFilter.stderr,
           isEmpty,
-          reason: '`coverde filter` failed',
+          reason: 'Coverage gathering failed',
         );
-        const coverdeCheckFullCommand =
-            '''coverde check -i coverage/filtered.lcov.info 100''';
-        final [coverdeCheckCommand, ...coverdeCheckArgs] =
-            coverdeCheckFullCommand
-                .split(' ')
-                .where((arg) => arg.isNotEmpty)
-                .toList();
+        const checkCoverageFullCommand = 'melos run C';
+        final [checkCoverageCommand, ...checkCoverageArgs] =
+            checkCoverageFullCommand.split(' ');
         final coverdeCheck = await Process.run(
-          coverdeCheckCommand,
-          coverdeCheckArgs,
+          checkCoverageCommand,
+          checkCoverageArgs,
           workingDirectory: applicationPath,
           runInShell: true,
         );
         expect(
           coverdeCheck.exitCode,
           equals(0),
-          reason: '`coverde check` failed',
+          reason: 'Coverage check failed',
         );
         expect(
           coverdeCheck.stderr,
           isEmpty,
-          reason: '`coverde check` failed',
+          reason: 'Coverage check failed',
         );
         tempDirectory.deleteSync(recursive: true);
         //   },

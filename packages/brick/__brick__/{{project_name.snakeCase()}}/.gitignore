@@ -1,46 +1,28 @@
-# Miscellaneous
-/*.class
-/*.log
-/*.pyc
-/*.swp
 /.DS_Store
 /.atom/
-/.buildlog/
-/.history
-/.svn/
-/migrate_working_dir/
-
-# IntelliJ related
-/*.iml
-/*.ipr
-/*.iws
 /.idea/
-
-# VS Code
 /.vscode/
 
-# Flutter/Dart/Pub related
-/**/doc/api/
-/**/ios/Flutter/.last_build_id
+# Files and directories created by pub
 /.dart_tool/
-/.flutter-plugins
-/.flutter-plugins-dependencies
-/.packages
-/.pub-cache/
-/.pub/
-/build/
-/**/untranslated-messages.json
+/.packages/
+/**/pubspec.lock
 
-# Symbolication related
-/app.*.symbols
-
-# Obfuscation related
-/app.*.map.json
-
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+# Local development
+/melos_overrides.yaml
+/**/melos_*.iml
 
 # Testing
 /coverage/
+
+
+
+
+
+
+
+# =============== EXCEPTIONS ===============
+
+# Included in the git repo as per requirement of `melos`.
+# See: https://melos.invertase.dev/getting-started#configure-the-workspace
+!/pubspec.lock

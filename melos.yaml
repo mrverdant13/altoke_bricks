@@ -7,7 +7,7 @@ packages:
   - ./packages/brick/hooks/
   - ./packages/brick_e2e/
   - ./packages/brick_generator/
-  - ./packages/reference_app/
+  - ./packages/reference_app/packages/app/
 
 scripts:
   S:
@@ -91,16 +91,18 @@ scripts:
     exec:
       concurrency: 1
       orderDependents: true
-  t.e2e.d:
-    description: Run E2E tests
-    run: dart test e2e --run-skipped -t e2e
-    packageFilters:
-      flutter: false
-      dirExists:
-        - e2e
-    exec:
-      concurrency: 1
-      orderDependents: true
+  # HACK: E2E tests cannot be run with Melos
+  # This is because Melos does not support running scripts for other Melos mono-repos.
+  # t.e2e.d:
+  #   description: Run E2E tests
+  #   run: dart test e2e --run-skipped -t e2e
+  #   packageFilters:
+  #     flutter: false
+  #     dirExists:
+  #       - e2e
+  #   exec:
+  #     concurrency: 1
+  #     orderDependents: true
   T:
     description: Test all packages
     run: melos run t.d --no-select && melos run t.f --no-select
