@@ -4,6 +4,14 @@
 
 An Altoke App.
 
+## Mono-repo management
+
+This project uses [Melos][docs_melos_link] to manage the mono-repo.
+
+You can check the available scripts in the `melos.yaml` file, located in the root directory of the project.
+
+**Note:** Don't forget to run `melos bootstrap` first.
+
 <!--*w 2v w*-->
 <!--{{#use_auto_route_router}}-->
 ## Deep linking <!--*remove-start*-->(`auto_route`)<!--*remove-end*-->
@@ -128,6 +136,7 @@ To manage the test coverage (filter trace files, compute coverage value, generat
 
 <!-- LINKS -->
 
+[docs_melos_link]: https://melos.invertase.dev/
 [flutter_docs_internationalization_link]: https://docs.flutter.dev/ui/accessibility-and-localization/internationalization
 
 <!--*w 1v w*-->
