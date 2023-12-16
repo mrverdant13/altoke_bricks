@@ -45,3 +45,4 @@ jobs:
         # Check the root melos.yaml for more details
         # run: melos run t.e2e.d
         run: dart test e2e --run-skipped -t e2e -r expanded --test-randomize-ordering-seed=random
+        working-directory: packages/brick_e2e
