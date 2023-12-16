@@ -38,7 +38,7 @@ updates:
       - build
       - p:bg
   - package-ecosystem: pub
-    directory: /packages/reference_app/
+    directory: /packages/reference_app/packages/app/
     schedule:
       interval: daily
     reviewers:
