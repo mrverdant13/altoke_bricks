@@ -14,25 +14,15 @@ Future<void> run(HookContext context) async {
     logger.level = Level.quiet;
   }
   await runCommand(
-    command: 'flutter',
-    args: [
-      'pub',
-      'get',
-    ],
+    'melos bs',
     projectPath: projectPath,
     logger: logger,
     prefix: '📦 ',
-    startMessage: 'Resolving dependencies.',
-    completeMessage: 'Dependencies resolved!',
+    startMessage: 'Bootstrapping project.',
+    completeMessage: 'Project bootstrapped!',
   );
   await runCommand(
-    command: 'dart',
-    args: [
-      'run',
-      'build_runner',
-      'build',
-      '-d',
-    ],
+    'melos run G',
     projectPath: projectPath,
     logger: logger,
     prefix: '🏭 ',
@@ -40,12 +30,7 @@ Future<void> run(HookContext context) async {
     completeMessage: 'Code generation complete!',
   );
   await runCommand(
-    command: 'dart',
-    args: [
-      'fix',
-      '--apply',
-      '--code=directives_ordering',
-    ],
+    'dart fix --apply --code=directives_ordering',
     projectPath: projectPath,
     logger: logger,
     prefix: '🔧 ',
@@ -53,11 +38,7 @@ Future<void> run(HookContext context) async {
     completeMessage: 'Fixes applied!',
   );
   await runCommand(
-    command: 'dart',
-    args: [
-      'format',
-      '.',
-    ],
+    'melos run F',
     projectPath: projectPath,
     logger: logger,
     prefix: '🪄  ',
@@ -66,15 +47,15 @@ Future<void> run(HookContext context) async {
   );
 }
 
-Future<void> runCommand({
-  required String command,
-  required List<String> args,
+Future<void> runCommand(
+  String fullCommand, {
   required String projectPath,
   required Logger logger,
   required String prefix,
   required String startMessage,
   required String completeMessage,
 }) async {
+  final [command, ...args] = fullCommand.split(' ');
   const progressMessages = [
     'This may take a while',
     'Still working',
@@ -90,17 +71,16 @@ Future<void> runCommand({
       progress.update('$prefix$startMessage $message');
     },
   );
-  final process = await Process.start(
+  final result = await Process.run(
     command,
     args,
     workingDirectory: projectPath,
-    runInShell: Platform.isWindows,
+    runInShell: true,
   );
-  await Future.wait([
-    process.stdout.forEach((_) {}), // Required to avoid halting
-    // stdout.addStream(process.stdout), // Avoid verbose output
-    stderr.addStream(process.stderr),
-  ]);
+  if (result.exitCode != 0) {
+    logger.alert(result.stderr?.toString());
+    exit(result.exitCode);
+  }
   progressTimer.cancel();
   progress.complete('$prefix$completeMessage');
 }
