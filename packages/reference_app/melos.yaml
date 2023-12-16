@@ -99,3 +99,8 @@ scripts:
     run: >
       coverde rm MELOS_ROOT_PATH/coverage/filtered.lcov.info &&
       melos exec --file-exists=coverage/lcov.info -- "coverde filter --input ./coverage/lcov.info --output MELOS_ROOT_PATH/coverage/filtered.lcov.info --paths-parent MELOS_PACKAGE_PATH  --filters \.g\.dart,\.gr\.dart"
+
+  C:
+    description: Check coverage
+    run: >
+      coverde check -i MELOS_ROOT_PATH/coverage/filtered.lcov.info 100
