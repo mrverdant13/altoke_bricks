@@ -51,6 +51,9 @@ Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
 
 ## Features
 
+- **Mono-repo setup:**\
+  Supported with [Melos][docs_melos_link], with pre-configured scripts for common tasks.
+
 - **Deep linking:**\
   Supported with one the following packages:
   - [`auto_route`][pub_package_auto_route]
@@ -74,6 +77,7 @@ Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
 <!-- LINKS -->
 
 [dart_and_flutter_linter_rules_link]: https://dart.dev/tools/linter-rules
+[docs_melos_link]: https://melos.invertase.dev/
 [flutter_docs_internationalization_link]: https://docs.flutter.dev/ui/accessibility-and-localization/internationalization
 [flutter_web_link]: https://flutter.dev/
 [pub_package_auto_route]: https://pub.dev/packages/auto_route
