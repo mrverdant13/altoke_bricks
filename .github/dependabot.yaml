@@ -64,3 +64,12 @@ updates:
     labels:
       - build
       - p:ref
+  - package-ecosystem: pub
+    directory: /packages/reference_app/packages/tasks/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - p:ref
