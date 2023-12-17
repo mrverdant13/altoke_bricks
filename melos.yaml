@@ -10,6 +10,7 @@ packages:
   - ./packages/reference_app/packages/common/
   - ./packages/reference_app/packages/tasks/
   - ./packages/reference_app/packages/tasks_storage/tasks_storage/
+  - ./packages/reference_app/packages/tasks_storage/tasks_sembast_storage/
 
 scripts:
   S:

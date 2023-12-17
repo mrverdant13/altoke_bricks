@@ -54,6 +54,9 @@ Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
 - **Mono-repo setup:**\
   Supported with [Melos][docs_melos_link], with pre-configured scripts for common tasks.
 
+- **Data persistence:**\
+  Supported with [`sembast`][pub_package_sembast].
+
 - **Deep linking:**\
   Supported with one the following packages:
   - [`auto_route`][pub_package_auto_route]
@@ -85,4 +88,5 @@ Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
 [pub_package_flutter_riverpod]: https://pub.dev/packages/flutter_riverpod
 [pub_package_go_router]: https://pub.dev/packages/go_router
 [pub_package_riverpod_lint]: https://pub.dev/packages/riverpod_lint
+[pub_package_sembast]: https://pub.dev/packages/sembast
 [pub_package_very_good_analysis]: https://pub.dev/packages/very_good_analysis

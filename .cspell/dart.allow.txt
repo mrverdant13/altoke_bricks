@@ -2,5 +2,6 @@
 endtemplate
 mocktail
 nodoc
+unawaited
 unmanaged
 writeln

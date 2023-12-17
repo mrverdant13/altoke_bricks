@@ -6,3 +6,4 @@ lcov
 melos
 pubspec
 riverpod
+sembast
