@@ -1,4 +1,6 @@
 # Allowed words for Dart files
+endtemplate
 mocktail
+nodoc
 unmanaged
 writeln
