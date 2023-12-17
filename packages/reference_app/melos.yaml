@@ -4,6 +4,7 @@ packages:
   - ./packages/app/
   - ./packages/common/
   - ./packages/tasks/
+  - ./packages/tasks_storage/tasks_storage/
 
 scripts:
   # Code Generation
