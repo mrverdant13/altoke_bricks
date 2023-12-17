@@ -10,6 +10,15 @@ updates:
     labels:
       - ci
   - package-ecosystem: pub
+    directory: /
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - chore
+  - package-ecosystem: pub
     directory: /packages/brick/hooks/
     schedule:
       interval: daily
