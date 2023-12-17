@@ -8,6 +8,7 @@ packages:
   - ./packages/brick_generator/
   - ./packages/reference_app/packages/app/
   - ./packages/reference_app/packages/common/
+  - ./packages/reference_app/packages/tasks/
 
 scripts:
   S:
