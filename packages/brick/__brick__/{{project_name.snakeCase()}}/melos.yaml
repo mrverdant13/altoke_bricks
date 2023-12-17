@@ -3,6 +3,7 @@ name: monorepo
 packages:
   - ./packages/app/
   - ./packages/common/
+  - ./packages/tasks/
 
 scripts:
   # Code Generation
