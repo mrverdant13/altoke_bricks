@@ -7,6 +7,7 @@ packages:
   - ./packages/brick_e2e/
   - ./packages/brick_generator/
   - ./packages/reference_app/packages/app/
+  - ./packages/reference_app/packages/common/
 
 scripts:
   S:
