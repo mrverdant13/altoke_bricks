@@ -163,7 +163,9 @@ AND null is returned
 
 │  ├─ THAT has several task records
 AND a reference task
-├─ THAT includes a non-empty description matcher
+├─ THAT includes a non-null title matcher
+├─ AND includes a non-null status matcher
+├─ AND includes a non-null description matcher
 WHEN a delete operation is performed with the reference task
 THEN the task records matching the reference task are dropped
 AND the task records not matching the reference task are kept
@@ -308,6 +310,679 @@ AND the task records not matching the reference task are kept
             final noMatchInDescription =
                 !description.contains('matching-pattern');
             if (noMatchInDescription) return true;
+            final noMatchInStatus = isCompleted != false;
+            return noMatchInStatus;
+          }
+
+          final expectedResultingTasks = [
+            for (final task in tasks)
+              if (shouldBeKept(task)) task,
+          ];
+          expect(
+            resultingTaskSnapshots,
+            hasLength(expectedResultingTasks.length),
+          );
+          final resultingTasks = [
+            for (final taskSnapshot in resultingTaskSnapshots)
+              taskSnapshot.toTask(),
+          ];
+          expect(resultingTasks, unorderedEquals(expectedResultingTasks));
+        },
+      );
+
+      test(
+        '''
+
+│  ├─ THAT has several task records
+AND a reference task
+├─ THAT includes a null title matcher
+├─ AND includes a non-null status matcher
+├─ AND includes a non-null description matcher
+WHEN a delete operation is performed with the reference task
+THEN the task records matching the reference task are dropped
+AND the task records not matching the reference task are kept
+''',
+        () async {
+          final tasks = [
+            Task(
+              id: '0',
+              title: 'title 0',
+              description: 'description 0',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 0),
+            ),
+            Task(
+              id: '1',
+              title: 'title 1 matching-pattern',
+              description: 'description 1',
+              isCompleted: true,
+              // ignore: avoid_redundant_argument_values
+              createdAt: DateTime(2020, 1, 1),
+            ),
+            Task(
+              id: '2',
+              title: 'title 2',
+              description: 'description 2 matching-pattern',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 2),
+            ),
+            Task(
+              id: '3',
+              title: 'title 3 matching-pattern',
+              description: 'description 3 matching-pattern',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 3),
+            ),
+            Task(
+              id: '4',
+              title: 'title 4',
+              description: 'description 4',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 4),
+            ),
+            Task(
+              id: '5',
+              title: 'title 5 matching-pattern',
+              description: 'description 5',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 5),
+            ),
+            Task(
+              id: '6',
+              title: 'title 6',
+              description: 'description 6 matching-pattern',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 6),
+            ),
+            Task(
+              id: '7',
+              title: 'title 7 matching-pattern',
+              description: 'description 7 matching-pattern',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 7),
+            ),
+            Task(
+              id: '8',
+              title: 'title 8',
+              description: 'description 8',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 8),
+            ),
+            Task(
+              id: '9',
+              title: 'title 9 matching-pattern',
+              description: 'description 9',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 9),
+            ),
+            Task(
+              id: '10',
+              title: 'title 10',
+              description: 'description 10 matching-pattern',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 10),
+            ),
+            Task(
+              id: '11',
+              title: 'title 11 matching-pattern',
+              description: 'description 11 matching-pattern',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 11),
+            ),
+            Task(
+              id: '12',
+              title: 'title 12',
+              description: 'description 12',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 12),
+            ),
+            Task(
+              id: '13',
+              title: 'title 13 matching-pattern',
+              description: 'description 13',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 13),
+            ),
+            Task(
+              id: '14',
+              title: 'title 14',
+              description: 'description 14 matching-pattern',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 14),
+            ),
+            Task(
+              id: '15',
+              title: 'title 15 matching-pattern',
+              description: 'description 15 matching-pattern',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 15),
+            ),
+          ];
+          await storage.store.records([
+            for (final task in tasks) task.id,
+          ]).add(
+            database,
+            [for (final task in tasks) task.toSembastJson()],
+          );
+          final initialTasksCount = await storage.store.count(database);
+          expect(initialTasksCount, tasks.length);
+          final referenceTask = PartialTask(
+            description: () => 'matching-pattern',
+            isCompleted: () => false,
+          );
+          await storage.deleteAll(referenceTask: referenceTask);
+          final resultingTaskSnapshots = await storage.store.find(database);
+
+          bool shouldBeKept(Task task) {
+            final Task(:description, :isCompleted) = task;
+            if (description == null) return true;
+            final noMatchInDescription =
+                !description.contains('matching-pattern');
+            if (noMatchInDescription) return true;
+            final noMatchInStatus = isCompleted != false;
+            return noMatchInStatus;
+          }
+
+          final expectedResultingTasks = [
+            for (final task in tasks)
+              if (shouldBeKept(task)) task,
+          ];
+          expect(
+            resultingTaskSnapshots,
+            hasLength(expectedResultingTasks.length),
+          );
+          final resultingTasks = [
+            for (final taskSnapshot in resultingTaskSnapshots)
+              taskSnapshot.toTask(),
+          ];
+          expect(resultingTasks, unorderedEquals(expectedResultingTasks));
+        },
+      );
+
+      test(
+        '''
+
+│  ├─ THAT has several task records
+AND a reference task
+├─ THAT includes a non-null title matcher
+├─ AND includes a null status matcher
+├─ AND includes a non-null description matcher
+WHEN a delete operation is performed with the reference task
+THEN the task records matching the reference task are dropped
+AND the task records not matching the reference task are kept
+''',
+        () async {
+          final tasks = [
+            Task(
+              id: '0',
+              title: 'title 0',
+              description: 'description 0',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 0),
+            ),
+            Task(
+              id: '1',
+              title: 'title 1 matching-pattern',
+              description: 'description 1',
+              isCompleted: true,
+              // ignore: avoid_redundant_argument_values
+              createdAt: DateTime(2020, 1, 1),
+            ),
+            Task(
+              id: '2',
+              title: 'title 2',
+              description: 'description 2 matching-pattern',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 2),
+            ),
+            Task(
+              id: '3',
+              title: 'title 3 matching-pattern',
+              description: 'description 3 matching-pattern',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 3),
+            ),
+            Task(
+              id: '4',
+              title: 'title 4',
+              description: 'description 4',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 4),
+            ),
+            Task(
+              id: '5',
+              title: 'title 5 matching-pattern',
+              description: 'description 5',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 5),
+            ),
+            Task(
+              id: '6',
+              title: 'title 6',
+              description: 'description 6 matching-pattern',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 6),
+            ),
+            Task(
+              id: '7',
+              title: 'title 7 matching-pattern',
+              description: 'description 7 matching-pattern',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 7),
+            ),
+            Task(
+              id: '8',
+              title: 'title 8',
+              description: 'description 8',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 8),
+            ),
+            Task(
+              id: '9',
+              title: 'title 9 matching-pattern',
+              description: 'description 9',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 9),
+            ),
+            Task(
+              id: '10',
+              title: 'title 10',
+              description: 'description 10 matching-pattern',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 10),
+            ),
+            Task(
+              id: '11',
+              title: 'title 11 matching-pattern',
+              description: 'description 11 matching-pattern',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 11),
+            ),
+            Task(
+              id: '12',
+              title: 'title 12',
+              description: 'description 12',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 12),
+            ),
+            Task(
+              id: '13',
+              title: 'title 13 matching-pattern',
+              description: 'description 13',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 13),
+            ),
+            Task(
+              id: '14',
+              title: 'title 14',
+              description: 'description 14 matching-pattern',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 14),
+            ),
+            Task(
+              id: '15',
+              title: 'title 15 matching-pattern',
+              description: 'description 15 matching-pattern',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 15),
+            ),
+          ];
+          await storage.store.records([
+            for (final task in tasks) task.id,
+          ]).add(
+            database,
+            [for (final task in tasks) task.toSembastJson()],
+          );
+          final initialTasksCount = await storage.store.count(database);
+          expect(initialTasksCount, tasks.length);
+          final referenceTask = PartialTask(
+            title: () => 'matching-pattern',
+            description: () => 'matching-pattern',
+          );
+          await storage.deleteAll(referenceTask: referenceTask);
+          final resultingTaskSnapshots = await storage.store.find(database);
+
+          bool shouldBeKept(Task task) {
+            final Task(:title, :description) = task;
+            final noMatchInTitle = !title.contains('matching-pattern');
+            if (noMatchInTitle) return true;
+            if (description == null) return true;
+            final noMatchInDescription =
+                !description.contains('matching-pattern');
+            return noMatchInDescription;
+          }
+
+          final expectedResultingTasks = [
+            for (final task in tasks)
+              if (shouldBeKept(task)) task,
+          ];
+          expect(
+            resultingTaskSnapshots,
+            hasLength(expectedResultingTasks.length),
+          );
+          final resultingTasks = [
+            for (final taskSnapshot in resultingTaskSnapshots)
+              taskSnapshot.toTask(),
+          ];
+          expect(resultingTasks, unorderedEquals(expectedResultingTasks));
+        },
+      );
+
+      test(
+        '''
+
+│  ├─ THAT has several task records
+AND a reference task
+├─ THAT includes a non-null title matcher
+├─ AND includes a non-null status matcher
+├─ AND includes a null description matcher
+WHEN a delete operation is performed with the reference task
+THEN the task records matching the reference task are dropped
+AND the task records not matching the reference task are kept
+''',
+        () async {
+          final tasks = [
+            Task(
+              id: '0',
+              title: 'title 0',
+              description: 'description 0',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 0),
+            ),
+            Task(
+              id: '1',
+              title: 'title 1 matching-pattern',
+              description: 'description 1',
+              isCompleted: true,
+              // ignore: avoid_redundant_argument_values
+              createdAt: DateTime(2020, 1, 1),
+            ),
+            Task(
+              id: '2',
+              title: 'title 2',
+              description: 'description 2 matching-pattern',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 2),
+            ),
+            Task(
+              id: '3',
+              title: 'title 3 matching-pattern',
+              description: 'description 3 matching-pattern',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 3),
+            ),
+            Task(
+              id: '4',
+              title: 'title 4',
+              description: 'description 4',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 4),
+            ),
+            Task(
+              id: '5',
+              title: 'title 5 matching-pattern',
+              description: 'description 5',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 5),
+            ),
+            Task(
+              id: '6',
+              title: 'title 6',
+              description: 'description 6 matching-pattern',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 6),
+            ),
+            Task(
+              id: '7',
+              title: 'title 7 matching-pattern',
+              description: 'description 7 matching-pattern',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 7),
+            ),
+            Task(
+              id: '8',
+              title: 'title 8',
+              description: 'description 8',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 8),
+            ),
+            Task(
+              id: '9',
+              title: 'title 9 matching-pattern',
+              description: 'description 9',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 9),
+            ),
+            Task(
+              id: '10',
+              title: 'title 10',
+              description: 'description 10 matching-pattern',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 10),
+            ),
+            Task(
+              id: '11',
+              title: 'title 11 matching-pattern',
+              description: 'description 11 matching-pattern',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 11),
+            ),
+            Task(
+              id: '12',
+              title: 'title 12',
+              description: 'description 12',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 12),
+            ),
+            Task(
+              id: '13',
+              title: 'title 13 matching-pattern',
+              description: 'description 13',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 13),
+            ),
+            Task(
+              id: '14',
+              title: 'title 14',
+              description: 'description 14 matching-pattern',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 14),
+            ),
+            Task(
+              id: '15',
+              title: 'title 15 matching-pattern',
+              description: 'description 15 matching-pattern',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 15),
+            ),
+          ];
+          await storage.store.records([
+            for (final task in tasks) task.id,
+          ]).add(
+            database,
+            [for (final task in tasks) task.toSembastJson()],
+          );
+          final initialTasksCount = await storage.store.count(database);
+          expect(initialTasksCount, tasks.length);
+          final referenceTask = PartialTask(
+            title: () => 'matching-pattern',
+            isCompleted: () => false,
+          );
+          await storage.deleteAll(referenceTask: referenceTask);
+          final resultingTaskSnapshots = await storage.store.find(database);
+
+          bool shouldBeKept(Task task) {
+            final Task(:title, :isCompleted) = task;
+            final noMatchInTitle = !title.contains('matching-pattern');
+            if (noMatchInTitle) return true;
+            final noMatchInStatus = isCompleted != false;
+            return noMatchInStatus;
+          }
+
+          final expectedResultingTasks = [
+            for (final task in tasks)
+              if (shouldBeKept(task)) task,
+          ];
+          expect(
+            resultingTaskSnapshots,
+            hasLength(expectedResultingTasks.length),
+          );
+          final resultingTasks = [
+            for (final taskSnapshot in resultingTaskSnapshots)
+              taskSnapshot.toTask(),
+          ];
+          expect(resultingTasks, unorderedEquals(expectedResultingTasks));
+        },
+      );
+
+      test(
+        '''
+
+│  ├─ THAT has several task records
+AND a reference task
+├─ THAT includes a non-null title matcher
+├─ AND includes a non-null status matcher
+├─ AND includes a non-null empty description matcher
+WHEN a delete operation is performed with the reference task
+THEN the task records matching the reference task are dropped
+AND the task records not matching the reference task are kept
+''',
+        () async {
+          final tasks = [
+            Task(
+              id: '0',
+              title: 'title 0',
+              description: 'description 0',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 0),
+            ),
+            Task(
+              id: '1',
+              title: 'title 1 matching-pattern',
+              description: 'description 1',
+              isCompleted: true,
+              // ignore: avoid_redundant_argument_values
+              createdAt: DateTime(2020, 1, 1),
+            ),
+            Task(
+              id: '2',
+              title: 'title 2',
+              description: 'description 2 matching-pattern',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 2),
+            ),
+            Task(
+              id: '3',
+              title: 'title 3 matching-pattern',
+              description: 'description 3 matching-pattern',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 3),
+            ),
+            Task(
+              id: '4',
+              title: 'title 4',
+              description: 'description 4',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 4),
+            ),
+            Task(
+              id: '5',
+              title: 'title 5 matching-pattern',
+              description: 'description 5',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 5),
+            ),
+            Task(
+              id: '6',
+              title: 'title 6',
+              description: 'description 6 matching-pattern',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 6),
+            ),
+            Task(
+              id: '7',
+              title: 'title 7 matching-pattern',
+              description: 'description 7 matching-pattern',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 7),
+            ),
+            Task(
+              id: '8',
+              title: 'title 8',
+              description: 'description 8',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 8),
+            ),
+            Task(
+              id: '9',
+              title: 'title 9 matching-pattern',
+              description: 'description 9',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 9),
+            ),
+            Task(
+              id: '10',
+              title: 'title 10',
+              description: 'description 10 matching-pattern',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 10),
+            ),
+            Task(
+              id: '11',
+              title: 'title 11 matching-pattern',
+              description: 'description 11 matching-pattern',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 11),
+            ),
+            Task(
+              id: '12',
+              title: 'title 12',
+              description: 'description 12',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 12),
+            ),
+            Task(
+              id: '13',
+              title: 'title 13 matching-pattern',
+              description: 'description 13',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 13),
+            ),
+            Task(
+              id: '14',
+              title: 'title 14',
+              description: 'description 14 matching-pattern',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 14),
+            ),
+            Task(
+              id: '15',
+              title: 'title 15 matching-pattern',
+              description: 'description 15 matching-pattern',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 15),
+            ),
+          ];
+          await storage.store.records([
+            for (final task in tasks) task.id,
+          ]).add(
+            database,
+            [for (final task in tasks) task.toSembastJson()],
+          );
+          final initialTasksCount = await storage.store.count(database);
+          expect(initialTasksCount, tasks.length);
+          final referenceTask = PartialTask(
+            title: () => 'matching-pattern',
+            isCompleted: () => false,
+            description: () => '',
+          );
+          await storage.deleteAll(referenceTask: referenceTask);
+          final resultingTaskSnapshots = await storage.store.find(database);
+
+          bool shouldBeKept(Task task) {
+            final Task(:title, :isCompleted) = task;
+            final noMatchInTitle = !title.contains('matching-pattern');
+            if (noMatchInTitle) return true;
             final noMatchInStatus = isCompleted != false;
             return noMatchInStatus;
           }
