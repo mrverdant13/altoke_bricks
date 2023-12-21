@@ -4,7 +4,7 @@ import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_memory.dart';
 import 'package:tasks/tasks.dart';
 import 'package:tasks_sembast_storage/src/tasks_sembast_storage.dart';
-import 'package:tasks_sembast_storage/tasks_sembast_storage.dart';
+import 'package:tasks_storage/tasks_storage.dart';
 import 'package:test/test.dart';
 
 void main() {
