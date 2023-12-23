@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:realm_dart/realm.dart';
+import 'package:realm/realm.dart';
 import 'package:tasks/tasks.dart';
 import 'package:tasks_realm_storage/src/tasks_realm_storage.dart';
 import 'package:tasks_storage/tasks_storage.dart';

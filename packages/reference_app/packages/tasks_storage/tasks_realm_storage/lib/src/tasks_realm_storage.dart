@@ -1,5 +1,5 @@
 import 'package:meta/meta.dart';
-import 'package:realm_dart/realm.dart';
+import 'package:realm/realm.dart';
 import 'package:tasks/tasks.dart';
 import 'package:tasks_storage/tasks_storage.dart';
 

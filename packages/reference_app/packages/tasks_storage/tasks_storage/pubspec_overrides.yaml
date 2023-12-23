@@ -1,6 +1,0 @@
-# melos_managed_dependency_overrides: common,tasks
-dependency_overrides:
-  common:
-    path: ..\\..\\common
-  tasks:
-    path: ..\\..\\tasks

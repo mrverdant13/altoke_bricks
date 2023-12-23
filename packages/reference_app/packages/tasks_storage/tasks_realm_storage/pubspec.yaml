@@ -5,12 +5,13 @@ publish_to: none
 
 environment:
   sdk: ">=3.2.0 <4.0.0"
+  flutter: 3.16.0
 
 dependencies:
   common:
     path: ../../common/
   meta: ^1.10.0
-  realm_dart: ^1.6.1
+  realm: ^1.6.1
   tasks:
     path: ../../tasks/
   tasks_storage:
