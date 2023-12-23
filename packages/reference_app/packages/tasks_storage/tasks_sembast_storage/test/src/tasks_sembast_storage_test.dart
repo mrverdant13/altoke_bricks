@@ -110,7 +110,7 @@ THEN the task record is dropped
 AND the deleted task is returned
 ''',
         () async {
-          const taskId = 'taskId';
+          const taskId = 3254;
           const newTask = NewTask(title: 'title', description: 'description');
           await storage.store
               .record(taskId)
@@ -142,7 +142,7 @@ THEN no task record is dropped
 AND null is returned
 ''',
         () async {
-          const taskId = 'taskId';
+          const taskId = 7923;
           const newTask = NewTask(title: 'title', description: 'description');
           await storage.store.add(database, newTask.toSembastJson());
           final initialTasks = await storage.store.find(database);
@@ -173,14 +173,14 @@ AND the task records not matching the reference task are kept
         () async {
           final tasks = [
             Task(
-              id: '0',
+              id: 0,
               title: 'title 0',
               description: 'description 0',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 0),
             ),
             Task(
-              id: '1',
+              id: 1,
               title: 'title 1 matching-pattern',
               description: 'description 1',
               isCompleted: true,
@@ -188,98 +188,98 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 1),
             ),
             Task(
-              id: '2',
+              id: 2,
               title: 'title 2',
               description: 'description 2 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 2),
             ),
             Task(
-              id: '3',
+              id: 3,
               title: 'title 3 matching-pattern',
               description: 'description 3 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 3),
             ),
             Task(
-              id: '4',
+              id: 4,
               title: 'title 4',
               description: 'description 4',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 4),
             ),
             Task(
-              id: '5',
+              id: 5,
               title: 'title 5 matching-pattern',
               description: 'description 5',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 5),
             ),
             Task(
-              id: '6',
+              id: 6,
               title: 'title 6',
               description: 'description 6 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 6),
             ),
             Task(
-              id: '7',
+              id: 7,
               title: 'title 7 matching-pattern',
               description: 'description 7 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 7),
             ),
             Task(
-              id: '8',
+              id: 8,
               title: 'title 8',
               description: 'description 8',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 8),
             ),
             Task(
-              id: '9',
+              id: 9,
               title: 'title 9 matching-pattern',
               description: 'description 9',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 9),
             ),
             Task(
-              id: '10',
+              id: 10,
               title: 'title 10',
               description: 'description 10 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 10),
             ),
             Task(
-              id: '11',
+              id: 11,
               title: 'title 11 matching-pattern',
               description: 'description 11 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 11),
             ),
             Task(
-              id: '12',
+              id: 12,
               title: 'title 12',
               description: 'description 12',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 12),
             ),
             Task(
-              id: '13',
+              id: 13,
               title: 'title 13 matching-pattern',
               description: 'description 13',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 13),
             ),
             Task(
-              id: '14',
+              id: 14,
               title: 'title 14',
               description: 'description 14 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 14),
             ),
             Task(
-              id: '15',
+              id: 15,
               title: 'title 15 matching-pattern',
               description: 'description 15 matching-pattern',
               isCompleted: false,
@@ -345,14 +345,14 @@ AND the task records not matching the reference task are kept
         () async {
           final tasks = [
             Task(
-              id: '0',
+              id: 0,
               title: 'title 0',
               description: 'description 0',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 0),
             ),
             Task(
-              id: '1',
+              id: 1,
               title: 'title 1 matching-pattern',
               description: 'description 1',
               isCompleted: true,
@@ -360,98 +360,98 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 1),
             ),
             Task(
-              id: '2',
+              id: 2,
               title: 'title 2',
               description: 'description 2 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 2),
             ),
             Task(
-              id: '3',
+              id: 3,
               title: 'title 3 matching-pattern',
               description: 'description 3 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 3),
             ),
             Task(
-              id: '4',
+              id: 4,
               title: 'title 4',
               description: 'description 4',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 4),
             ),
             Task(
-              id: '5',
+              id: 5,
               title: 'title 5 matching-pattern',
               description: 'description 5',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 5),
             ),
             Task(
-              id: '6',
+              id: 6,
               title: 'title 6',
               description: 'description 6 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 6),
             ),
             Task(
-              id: '7',
+              id: 7,
               title: 'title 7 matching-pattern',
               description: 'description 7 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 7),
             ),
             Task(
-              id: '8',
+              id: 8,
               title: 'title 8',
               description: 'description 8',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 8),
             ),
             Task(
-              id: '9',
+              id: 9,
               title: 'title 9 matching-pattern',
               description: 'description 9',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 9),
             ),
             Task(
-              id: '10',
+              id: 10,
               title: 'title 10',
               description: 'description 10 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 10),
             ),
             Task(
-              id: '11',
+              id: 11,
               title: 'title 11 matching-pattern',
               description: 'description 11 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 11),
             ),
             Task(
-              id: '12',
+              id: 12,
               title: 'title 12',
               description: 'description 12',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 12),
             ),
             Task(
-              id: '13',
+              id: 13,
               title: 'title 13 matching-pattern',
               description: 'description 13',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 13),
             ),
             Task(
-              id: '14',
+              id: 14,
               title: 'title 14',
               description: 'description 14 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 14),
             ),
             Task(
-              id: '15',
+              id: 15,
               title: 'title 15 matching-pattern',
               description: 'description 15 matching-pattern',
               isCompleted: false,
@@ -514,14 +514,14 @@ AND the task records not matching the reference task are kept
         () async {
           final tasks = [
             Task(
-              id: '0',
+              id: 0,
               title: 'title 0',
               description: 'description 0',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 0),
             ),
             Task(
-              id: '1',
+              id: 1,
               title: 'title 1 matching-pattern',
               description: 'description 1',
               isCompleted: true,
@@ -529,98 +529,98 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 1),
             ),
             Task(
-              id: '2',
+              id: 2,
               title: 'title 2',
               description: 'description 2 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 2),
             ),
             Task(
-              id: '3',
+              id: 3,
               title: 'title 3 matching-pattern',
               description: 'description 3 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 3),
             ),
             Task(
-              id: '4',
+              id: 4,
               title: 'title 4',
               description: 'description 4',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 4),
             ),
             Task(
-              id: '5',
+              id: 5,
               title: 'title 5 matching-pattern',
               description: 'description 5',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 5),
             ),
             Task(
-              id: '6',
+              id: 6,
               title: 'title 6',
               description: 'description 6 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 6),
             ),
             Task(
-              id: '7',
+              id: 7,
               title: 'title 7 matching-pattern',
               description: 'description 7 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 7),
             ),
             Task(
-              id: '8',
+              id: 8,
               title: 'title 8',
               description: 'description 8',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 8),
             ),
             Task(
-              id: '9',
+              id: 9,
               title: 'title 9 matching-pattern',
               description: 'description 9',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 9),
             ),
             Task(
-              id: '10',
+              id: 10,
               title: 'title 10',
               description: 'description 10 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 10),
             ),
             Task(
-              id: '11',
+              id: 11,
               title: 'title 11 matching-pattern',
               description: 'description 11 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 11),
             ),
             Task(
-              id: '12',
+              id: 12,
               title: 'title 12',
               description: 'description 12',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 12),
             ),
             Task(
-              id: '13',
+              id: 13,
               title: 'title 13 matching-pattern',
               description: 'description 13',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 13),
             ),
             Task(
-              id: '14',
+              id: 14,
               title: 'title 14',
               description: 'description 14 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 14),
             ),
             Task(
-              id: '15',
+              id: 15,
               title: 'title 15 matching-pattern',
               description: 'description 15 matching-pattern',
               isCompleted: false,
@@ -683,14 +683,14 @@ AND the task records not matching the reference task are kept
         () async {
           final tasks = [
             Task(
-              id: '0',
+              id: 0,
               title: 'title 0',
               description: 'description 0',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 0),
             ),
             Task(
-              id: '1',
+              id: 1,
               title: 'title 1 matching-pattern',
               description: 'description 1',
               isCompleted: true,
@@ -698,98 +698,98 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 1),
             ),
             Task(
-              id: '2',
+              id: 2,
               title: 'title 2',
               description: 'description 2 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 2),
             ),
             Task(
-              id: '3',
+              id: 3,
               title: 'title 3 matching-pattern',
               description: 'description 3 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 3),
             ),
             Task(
-              id: '4',
+              id: 4,
               title: 'title 4',
               description: 'description 4',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 4),
             ),
             Task(
-              id: '5',
+              id: 5,
               title: 'title 5 matching-pattern',
               description: 'description 5',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 5),
             ),
             Task(
-              id: '6',
+              id: 6,
               title: 'title 6',
               description: 'description 6 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 6),
             ),
             Task(
-              id: '7',
+              id: 7,
               title: 'title 7 matching-pattern',
               description: 'description 7 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 7),
             ),
             Task(
-              id: '8',
+              id: 8,
               title: 'title 8',
               description: 'description 8',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 8),
             ),
             Task(
-              id: '9',
+              id: 9,
               title: 'title 9 matching-pattern',
               description: 'description 9',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 9),
             ),
             Task(
-              id: '10',
+              id: 10,
               title: 'title 10',
               description: 'description 10 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 10),
             ),
             Task(
-              id: '11',
+              id: 11,
               title: 'title 11 matching-pattern',
               description: 'description 11 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 11),
             ),
             Task(
-              id: '12',
+              id: 12,
               title: 'title 12',
               description: 'description 12',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 12),
             ),
             Task(
-              id: '13',
+              id: 13,
               title: 'title 13 matching-pattern',
               description: 'description 13',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 13),
             ),
             Task(
-              id: '14',
+              id: 14,
               title: 'title 14',
               description: 'description 14 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 14),
             ),
             Task(
-              id: '15',
+              id: 15,
               title: 'title 15 matching-pattern',
               description: 'description 15 matching-pattern',
               isCompleted: false,
@@ -850,14 +850,14 @@ AND the task records not matching the reference task are kept
         () async {
           final tasks = [
             Task(
-              id: '0',
+              id: 0,
               title: 'title 0',
               description: 'description 0',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 0),
             ),
             Task(
-              id: '1',
+              id: 1,
               title: 'title 1 matching-pattern',
               description: 'description 1',
               isCompleted: true,
@@ -865,98 +865,98 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 1),
             ),
             Task(
-              id: '2',
+              id: 2,
               title: 'title 2',
               description: 'description 2 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 2),
             ),
             Task(
-              id: '3',
+              id: 3,
               title: 'title 3 matching-pattern',
               description: 'description 3 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 3),
             ),
             Task(
-              id: '4',
+              id: 4,
               title: 'title 4',
               description: 'description 4',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 4),
             ),
             Task(
-              id: '5',
+              id: 5,
               title: 'title 5 matching-pattern',
               description: 'description 5',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 5),
             ),
             Task(
-              id: '6',
+              id: 6,
               title: 'title 6',
               description: 'description 6 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 6),
             ),
             Task(
-              id: '7',
+              id: 7,
               title: 'title 7 matching-pattern',
               description: 'description 7 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 7),
             ),
             Task(
-              id: '8',
+              id: 8,
               title: 'title 8',
               description: 'description 8',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 8),
             ),
             Task(
-              id: '9',
+              id: 9,
               title: 'title 9 matching-pattern',
               description: 'description 9',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 9),
             ),
             Task(
-              id: '10',
+              id: 10,
               title: 'title 10',
               description: 'description 10 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 10),
             ),
             Task(
-              id: '11',
+              id: 11,
               title: 'title 11 matching-pattern',
               description: 'description 11 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 11),
             ),
             Task(
-              id: '12',
+              id: 12,
               title: 'title 12',
               description: 'description 12',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 12),
             ),
             Task(
-              id: '13',
+              id: 13,
               title: 'title 13 matching-pattern',
               description: 'description 13',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 13),
             ),
             Task(
-              id: '14',
+              id: 14,
               title: 'title 14',
               description: 'description 14 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 14),
             ),
             Task(
-              id: '15',
+              id: 15,
               title: 'title 15 matching-pattern',
               description: 'description 15 matching-pattern',
               isCompleted: false,
@@ -1016,14 +1016,14 @@ AND the task records not matching the reference task are kept
         () async {
           final tasks = [
             Task(
-              id: '0',
+              id: 0,
               title: 'title 0',
               description: 'description 0',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 0),
             ),
             Task(
-              id: '1',
+              id: 1,
               title: 'title 1 matching-pattern',
               description: 'description 1',
               isCompleted: true,
@@ -1031,7 +1031,7 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 1),
             ),
             Task(
-              id: '2',
+              id: 2,
               title: 'title 2',
               // ignore: avoid_redundant_argument_values
               description: null,
@@ -1039,7 +1039,7 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 2),
             ),
             Task(
-              id: '3',
+              id: 3,
               title: 'title 3 matching-pattern',
               // ignore: avoid_redundant_argument_values
               description: null,
@@ -1047,21 +1047,21 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 3),
             ),
             Task(
-              id: '4',
+              id: 4,
               title: 'title 4',
               description: 'description 4',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 4),
             ),
             Task(
-              id: '5',
+              id: 5,
               title: 'title 5 matching-pattern',
               description: 'description 5',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 5),
             ),
             Task(
-              id: '6',
+              id: 6,
               title: 'title 6',
               // ignore: avoid_redundant_argument_values
               description: null,
@@ -1069,7 +1069,7 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 6),
             ),
             Task(
-              id: '7',
+              id: 7,
               title: 'title 7 matching-pattern',
               // ignore: avoid_redundant_argument_values
               description: null,
@@ -1077,21 +1077,21 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 7),
             ),
             Task(
-              id: '8',
+              id: 8,
               title: 'title 8',
               description: 'description 8',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 8),
             ),
             Task(
-              id: '9',
+              id: 9,
               title: 'title 9 matching-pattern',
               description: 'description 9',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 9),
             ),
             Task(
-              id: '10',
+              id: 10,
               title: 'title 10',
               // ignore: avoid_redundant_argument_values
               description: null,
@@ -1099,7 +1099,7 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 10),
             ),
             Task(
-              id: '11',
+              id: 11,
               title: 'title 11 matching-pattern',
               // ignore: avoid_redundant_argument_values
               description: null,
@@ -1107,21 +1107,21 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 11),
             ),
             Task(
-              id: '12',
+              id: 12,
               title: 'title 12',
               description: 'description 12',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 12),
             ),
             Task(
-              id: '13',
+              id: 13,
               title: 'title 13 matching-pattern',
               description: 'description 13',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 13),
             ),
             Task(
-              id: '14',
+              id: 14,
               title: 'title 14',
               // ignore: avoid_redundant_argument_values
               description: null,
@@ -1129,7 +1129,7 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 14),
             ),
             Task(
-              id: '15',
+              id: 15,
               title: 'title 15 matching-pattern',
               // ignore: avoid_redundant_argument_values
               description: null,
@@ -1191,7 +1191,7 @@ THEN all task records are dropped
           final tasks = List.generate(
             30,
             (index) => Task(
-              id: '$index',
+              id: index,
               title: 'title $index',
               description: 'description $index',
               isCompleted: index % 7 == 0,
@@ -1222,7 +1222,7 @@ THEN a task record is registered
 ''',
         () async {
           final task = Task(
-            id: 'id',
+            id: 10,
             title: 'title',
             description: 'description',
             isCompleted: false,
@@ -1249,7 +1249,7 @@ THEN all task records are updated
           final tasks = List.generate(
             30,
             (index) => Task(
-              id: '$index',
+              id: index,
               title: 'title $index',
               description: 'description $index',
               isCompleted: index % 7 == 0,
@@ -1290,7 +1290,7 @@ THEN a task record is updated
 ''',
         () async {
           final task = Task(
-            id: 'id',
+            id: 53,
             title: 'title',
             description: 'description',
             isCompleted: false,
@@ -1375,7 +1375,7 @@ AND no task record is updated
 ''',
         () async {
           final task = Task(
-            id: 'id',
+            id: 573,
             title: 'title',
             description: 'description',
             isCompleted: false,
@@ -1437,7 +1437,7 @@ WHEN the task is requested
 THEN the task is returned
 ''',
         () async {
-          const taskId = 'taskId';
+          const taskId = 3745;
           final task = Task(
             id: taskId,
             title: 'title',
@@ -1469,7 +1469,7 @@ WHEN the task is requested
 THEN null is returned
 ''',
         () async {
-          const taskId = 'taskId';
+          const taskId = 3952;
           final filter = Filter.byKey(taskId);
           final initialMatchingTasksCount = await storage.store.count(
             database,
@@ -1501,20 +1501,20 @@ THEN the paginated tasks that match the conditions are continuously emitted as t
           // Stage 00
           final tasksForStage00 = <Task>[
             Task(
-              id: 'id 00',
+              id: 0,
               title: 'title 00',
               description: 'description 00',
               isCompleted: true,
               createdAt: DateTime.now(),
             ),
             Task(
-              id: 'id 01',
+              id: 1,
               title: 'title 01',
               isCompleted: false,
               createdAt: DateTime.now(),
             ),
             Task(
-              id: 'id 02',
+              id: 2,
               title: 'title 02',
               isCompleted: true,
               createdAt: DateTime.now(),
@@ -1527,7 +1527,7 @@ THEN the paginated tasks that match the conditions are continuously emitted as t
 
           // Stage 01
           final newTaskInStage01 = Task(
-            id: 'id 03',
+            id: 3,
             title: 'title 03',
             isCompleted: true,
             createdAt: DateTime.now(),
@@ -1635,39 +1635,39 @@ THEN the paginated tasks that match the conditions are continuously emitted as t
           // Stage 00
           final tasksForStage00 = <Task>[
             Task(
-              id: 'id 00',
+              id: 0,
               title: 'title 00',
               description: 'description 00 matching-pattern',
               isCompleted: true,
               createdAt: DateTime.now(),
             ),
             Task(
-              id: 'id 01',
+              id: 1,
               title: 'title 01',
               isCompleted: false,
               createdAt: DateTime.now(),
             ),
             Task(
-              id: 'id 02',
+              id: 2,
               title: 'title 02',
               isCompleted: true,
               createdAt: DateTime.now(),
             ),
             Task(
-              id: 'id 03',
+              id: 3,
               title: 'title 03',
               description: 'description 03 matching-pattern',
               isCompleted: true,
               createdAt: DateTime.now(),
             ),
             Task(
-              id: 'id 04',
+              id: 4,
               title: 'title 04',
               isCompleted: false,
               createdAt: DateTime.now(),
             ),
             Task(
-              id: 'id 05',
+              id: 5,
               title: 'title 05',
               description: 'description 05 matching-pattern',
               isCompleted: false,
@@ -1690,7 +1690,7 @@ THEN the paginated tasks that match the conditions are continuously emitted as t
 
           // Stage 01
           final newTaskInStage01 = Task(
-            id: 'id 06',
+            id: 6,
             title: 'title 06 matching-pattern',
             isCompleted: true,
             createdAt: DateTime.now(),
@@ -1837,14 +1837,14 @@ THEN the quantity of persisted tasks that match the conditions is continuously e
           {
             final initialTasks = [
               Task(
-                id: 'id 00',
+                id: 0,
                 title: 'title 00',
                 description: 'description 00',
                 isCompleted: true,
                 createdAt: DateTime.now(),
               ),
               Task(
-                id: 'id 01',
+                id: 1,
                 title: 'title 01',
                 isCompleted: false,
                 createdAt: DateTime.now(),
@@ -1861,7 +1861,7 @@ THEN the quantity of persisted tasks that match the conditions is continuously e
           // Stage 01
           {
             final newTask = Task(
-              id: 'id 03',
+              id: 3,
               title: 'title 03',
               isCompleted: true,
               createdAt: DateTime.now(),
@@ -1926,14 +1926,14 @@ THEN the quantity of persisted tasks that match the conditions is continuously e
           {
             final initialTasks = [
               Task(
-                id: 'id 00',
+                id: 0,
                 title: 'title 00',
                 description: 'description 00 matching-pattern',
                 isCompleted: true,
                 createdAt: DateTime.now(),
               ),
               Task(
-                id: 'id 01',
+                id: 1,
                 title: 'title 01',
                 isCompleted: false,
                 createdAt: DateTime.now(),
@@ -1950,7 +1950,7 @@ THEN the quantity of persisted tasks that match the conditions is continuously e
           // Stage 01
           {
             final newTask = Task(
-              id: 'id 03',
+              id: 3,
               title: 'title 03 matching-pattern',
               isCompleted: true,
               createdAt: DateTime.now(),
@@ -1998,13 +1998,13 @@ THEN the action is properly executed
         rawMigration: ({required tasksStore}) async {
           final initialCount = await tasksStore.count(database);
           expect(initialCount, isZero);
-          await tasksStore.record('0').put(database, {'key': 'value'});
+          await tasksStore.record(0).put(database, {'key': 'value'});
           final resultingCount = await tasksStore.count(database);
           expect(resultingCount, 1);
           final record = await tasksStore.find(database);
           expect(record, hasLength(1));
           final snapshot = record.single;
-          expect(snapshot.key, '0');
+          expect(snapshot.key, 0);
           expect(snapshot.value, {'key': 'value'});
           return 'result';
         },

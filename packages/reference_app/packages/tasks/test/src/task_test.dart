@@ -11,7 +11,7 @@ THEN an instance of the task is returned
 ''',
     () {
       final task = Task(
-        id: 'id',
+        id: 37,
         title: 'title',
         isCompleted: false,
         createdAt: DateTime.now(),

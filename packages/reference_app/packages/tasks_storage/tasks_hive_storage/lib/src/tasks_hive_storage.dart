@@ -35,12 +35,11 @@ class TasksHiveStorage implements TasksStorage {
 
   @override
   Future<Task?> delete({
-    required String taskId,
+    required int taskId,
   }) async {
-    final taskKey = int.parse(taskId);
-    final rawTask = box.get(taskKey);
+    final rawTask = box.get(taskId);
     if (rawTask == null) return null;
-    await box.delete(taskKey);
+    await box.delete(taskId);
     return rawTask.toTaskWithId(taskId);
   }
 
@@ -53,7 +52,7 @@ class TasksHiveStorage implements TasksStorage {
       await box.clear();
       return;
     }
-    final keysToDelete = box.tasks.where(filter).toTaskKeys();
+    final keysToDelete = box.tasks.where(filter).toTaskIds();
     await box.deleteAll(keysToDelete);
   }
 
@@ -61,30 +60,29 @@ class TasksHiveStorage implements TasksStorage {
   Future<void> insert({
     required Task task,
   }) async {
-    await box.put(task.key, task.toHiveJson());
+    await box.put(task.id, task.toHiveJson());
   }
 
   @override
   Future<void> markAllAsCompleted() async {
     await box.putAll({
       for (final task in box.tasks)
-        task.key: task.copyWith(isCompleted: true).toHiveJson(),
+        task.id: task.copyWith(isCompleted: true).toHiveJson(),
     });
   }
 
   @override
   Future<void> update({
-    required String taskId,
+    required int taskId,
     required PartialTask partialTask,
   }) async {
     if (partialTask case PartialTask(:final title?) when title().isEmpty) {
       throw const UpdateTaskFailureEmptyTitle();
     }
-    final taskKey = int.parse(taskId);
-    final rawTask = box.get(taskKey);
+    final rawTask = box.get(taskId);
     if (rawTask == null) return;
     await box.put(
-      taskKey,
+      taskId,
       {
         ...rawTask,
         ...partialTask.toJson(),
@@ -94,10 +92,9 @@ class TasksHiveStorage implements TasksStorage {
 
   @override
   Future<Task?> getById(
-    String taskId,
+    int taskId,
   ) async {
-    final taskKey = int.parse(taskId);
-    final rawTask = box.get(taskKey);
+    final rawTask = box.get(taskId);
     if (rawTask == null) return null;
     return rawTask.toTaskWithId(taskId);
   }
@@ -163,9 +160,6 @@ extension HiveTask on Task {
 
   /// Field key for the task creation date.
   static const createdAtFieldJsonKey = 'createdAt';
-
-  /// The task key.
-  int get key => int.parse(id);
 }
 
 /// An extension on [NewTask] to add serialization capabilities.
@@ -199,7 +193,7 @@ extension SerializableHiveTask on Task {
 extension on Json {
   Task toTask() {
     return Task(
-      id: this[HiveTask.idFieldJsonKey] as String,
+      id: this[HiveTask.idFieldJsonKey] as int,
       title: this[HiveTask.titleFieldJsonKey] as String,
       isCompleted: this[HiveTask.statusFieldJsonKey] as bool,
       createdAt: DateTime.parse(
@@ -209,7 +203,7 @@ extension on Json {
     );
   }
 
-  Task toTaskWithId(String id) {
+  Task toTaskWithId(int id) {
     return {
       HiveTask.idFieldJsonKey: id,
       ...this,
@@ -314,7 +308,7 @@ extension on FilteringItems {
 @visibleForTesting
 extension DeserializableTaskRecordEntry on TaskRecordEntry {
   /// Converts a [TaskRecordEntry] to a [Task].
-  Task toTask() => value.toTaskWithId(key.toString());
+  Task toTask() => value.toTaskWithId(key as int);
 }
 
 /// An extension on [TaskRecordEntriesIterable] to add deserialization
@@ -330,7 +324,7 @@ extension DeserializableTaskRecordEntriesIterable on TaskRecordEntriesIterable {
 extension SerializableTasksIterable on TasksIterable {
   /// Converts an [Iterable] of [Task]s to a list of their corresponding
   /// keys.
-  Iterable<int> toTaskKeys() => map((task) => task.key);
+  Iterable<int> toTaskIds() => map((task) => task.id);
 }
 
 /// An entry that represents a task record.

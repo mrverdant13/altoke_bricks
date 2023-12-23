@@ -35,7 +35,7 @@ class TasksSembastStorage implements TasksStorage {
 
   @override
   Future<Task?> delete({
-    required String taskId,
+    required int taskId,
   }) async {
     final taskSnapshot = await store.record(taskId).getSnapshot(database);
     if (taskSnapshot == null) return null;
@@ -98,7 +98,7 @@ class TasksSembastStorage implements TasksStorage {
 
   @override
   Future<void> update({
-    required String taskId,
+    required int taskId,
     required PartialTask partialTask,
   }) async {
     if (partialTask case PartialTask(:final title?) when title().isEmpty) {
@@ -109,7 +109,7 @@ class TasksSembastStorage implements TasksStorage {
 
   @override
   Future<Task?> getById(
-    String taskId,
+    int taskId,
   ) async {
     final taskSnapshot = await store.record(taskId).getSnapshot(database);
     return taskSnapshot?.toTask();
@@ -158,7 +158,7 @@ class TasksSembastStorage implements TasksStorage {
 }
 
 /// A reference to a raw tasks store.
-typedef TasksStoreRef = StoreRef<String, Json>;
+typedef TasksStoreRef = StoreRef<int, Json>;
 
 /// Abstract class that holds the field keys for the [Json] representation of
 /// the different variants of a task.
@@ -210,7 +210,7 @@ extension SerializableSembastTask on Task {
 extension on Json {
   Task toTask() {
     return Task(
-      id: this[SembastTask.idFieldJsonKey] as String,
+      id: this[SembastTask.idFieldJsonKey] as int,
       title: this[SembastTask.titleFieldJsonKey] as String,
       isCompleted: this[SembastTask.statusFieldJsonKey] as bool,
       createdAt: DateTime.parse(
@@ -307,7 +307,7 @@ List<Task> tasksFromSnapshots(List<TaskSnapshot> snapshots) {
 }
 
 /// A snapshot that represents a task.
-typedef TaskSnapshot = RecordSnapshot<String, Json>;
+typedef TaskSnapshot = RecordSnapshot<int, Json>;
 
 /// The signature of a migration callback that can unsafely access the
 /// [tasksStore].

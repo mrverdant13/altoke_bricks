@@ -60,10 +60,9 @@ class TasksRealmStorage implements TasksStorage {
 
   @override
   Future<Task?> delete({
-    required String taskId,
+    required int taskId,
   }) async {
-    final numericTaskId = int.parse(taskId);
-    final existingRealmTask = database.find<RealmTask>(numericTaskId);
+    final existingRealmTask = database.find<RealmTask>(taskId);
     if (existingRealmTask == null) return null;
     final existingTask = existingRealmTask.toTask();
     await database.write(() async {
@@ -111,14 +110,14 @@ class TasksRealmStorage implements TasksStorage {
 
   @override
   Future<void> update({
-    required String taskId,
+    required int taskId,
     required PartialTask partialTask,
   }) async {
     if (partialTask case PartialTask(:final title?)
         when title().trim().isEmpty) {
       throw const UpdateTaskFailureEmptyTitle();
     }
-    final existingTask = database.find<RealmTask>(int.parse(taskId));
+    final existingTask = database.find<RealmTask>(taskId);
     if (existingTask == null) return;
     await database.write(() async {
       existingTask.applyPartial(partialTask);
@@ -127,9 +126,9 @@ class TasksRealmStorage implements TasksStorage {
 
   @override
   Future<Task?> getById(
-    String taskId,
+    int taskId,
   ) async {
-    final task = database.find<RealmTask>(int.parse(taskId));
+    final task = database.find<RealmTask>(taskId);
     if (task == null) return null;
     return task.toTask();
   }
@@ -198,7 +197,7 @@ extension SerializableRealmTask on Task {
   /// Converts a [Task] to a [RealmTask].
   RealmTask toRealmTask() {
     return RealmTask(
-      int.parse(id),
+      id,
       title,
       isCompleted,
       createdAt,
@@ -213,7 +212,7 @@ extension DeserializableRealmTask on RealmTask {
   /// Converts an [RealmTask] to a [Task].
   Task toTask() {
     return Task(
-      id: '$id',
+      id: id,
       title: title,
       isCompleted: isCompleted,
       createdAt: createdAt,

@@ -19,7 +19,7 @@ abstract interface class TasksStorage {
 
   /// Retrieves a task by its ID.
   Future<Task?> getById(
-    String taskId,
+    int taskId,
   );
 
   /// Returns a stream of the tasks that match the given [statusFilter] and
@@ -42,7 +42,7 @@ abstract interface class TasksStorage {
   ///
   /// Throws an [UpdateTaskFailure] if the task fails to be updated.
   Future<void> update({
-    required String taskId,
+    required int taskId,
     required PartialTask partialTask,
   });
 
@@ -51,7 +51,7 @@ abstract interface class TasksStorage {
 
   /// Deletes a task identified by its [taskId].
   Future<Task?> delete({
-    required String taskId,
+    required int taskId,
   });
 
   /// Deletes all tasks that match the given [referenceTask].

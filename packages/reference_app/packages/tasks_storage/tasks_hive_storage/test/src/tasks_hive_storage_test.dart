@@ -111,15 +111,15 @@ THEN the task record is dropped
 AND the deleted task is returned
 ''',
         () async {
-          const taskKey = 13;
+          const taskId = 13;
           const newTask = NewTask(title: 'title', description: 'description');
-          await box.put(taskKey, newTask.toHiveJson());
-          bool filter(dynamic key) => key == taskKey;
+          await box.put(taskId, newTask.toHiveJson());
+          bool filter(dynamic key) => key == taskId;
           final initialMatchingTasksCount = box.keys.where(filter).length;
           expect(initialMatchingTasksCount, 1);
-          final deletedTask = await storage.delete(taskId: taskKey.toString());
+          final deletedTask = await storage.delete(taskId: taskId);
           expect(deletedTask, isNotNull);
-          expect(deletedTask?.key, taskKey);
+          expect(deletedTask?.id, taskId);
           final resultingMatchingTasksCount = box.keys.where(filter).length;
           expect(resultingMatchingTasksCount, isZero);
         },
@@ -135,14 +135,14 @@ THEN no task record is dropped
 AND null is returned
 ''',
         () async {
-          const taskKey = 17;
+          const taskId = 17;
           const newTask = NewTask(title: 'title', description: 'description');
           await box.add(newTask.toHiveJson());
           final initialTaskEntries = box.toMap().entries;
           expect(initialTaskEntries, hasLength(1));
           final initialTaskEntry = initialTaskEntries.single;
-          expect(initialTaskEntry.key, isNot(taskKey));
-          final deletedTask = await storage.delete(taskId: taskKey.toString());
+          expect(initialTaskEntry.key, isNot(taskId));
+          final deletedTask = await storage.delete(taskId: taskId);
           expect(deletedTask, isNull);
           final resultingTaskEntries = box.toMap().entries;
           expect(resultingTaskEntries, hasLength(1));
@@ -166,14 +166,14 @@ AND the task records not matching the reference task are kept
         () async {
           final tasks = [
             Task(
-              id: '0',
+              id: 0,
               title: 'title 0',
               description: 'description 0',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 0),
             ),
             Task(
-              id: '1',
+              id: 1,
               title: 'title 1 matching-pattern',
               description: 'description 1',
               isCompleted: true,
@@ -181,98 +181,98 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 1),
             ),
             Task(
-              id: '2',
+              id: 2,
               title: 'title 2',
               description: 'description 2 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 2),
             ),
             Task(
-              id: '3',
+              id: 3,
               title: 'title 3 matching-pattern',
               description: 'description 3 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 3),
             ),
             Task(
-              id: '4',
+              id: 4,
               title: 'title 4',
               description: 'description 4',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 4),
             ),
             Task(
-              id: '5',
+              id: 5,
               title: 'title 5 matching-pattern',
               description: 'description 5',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 5),
             ),
             Task(
-              id: '6',
+              id: 6,
               title: 'title 6',
               description: 'description 6 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 6),
             ),
             Task(
-              id: '7',
+              id: 7,
               title: 'title 7 matching-pattern',
               description: 'description 7 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 7),
             ),
             Task(
-              id: '8',
+              id: 8,
               title: 'title 8',
               description: 'description 8',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 8),
             ),
             Task(
-              id: '9',
+              id: 9,
               title: 'title 9 matching-pattern',
               description: 'description 9',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 9),
             ),
             Task(
-              id: '10',
+              id: 10,
               title: 'title 10',
               description: 'description 10 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 10),
             ),
             Task(
-              id: '11',
+              id: 11,
               title: 'title 11 matching-pattern',
               description: 'description 11 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 11),
             ),
             Task(
-              id: '12',
+              id: 12,
               title: 'title 12',
               description: 'description 12',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 12),
             ),
             Task(
-              id: '13',
+              id: 13,
               title: 'title 13 matching-pattern',
               description: 'description 13',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 13),
             ),
             Task(
-              id: '14',
+              id: 14,
               title: 'title 14',
               description: 'description 14 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 14),
             ),
             Task(
-              id: '15',
+              id: 15,
               title: 'title 15 matching-pattern',
               description: 'description 15 matching-pattern',
               isCompleted: false,
@@ -280,7 +280,7 @@ AND the task records not matching the reference task are kept
             ),
           ];
           await box.putAll({
-            for (final task in tasks) task.key: task.toHiveJson(),
+            for (final task in tasks) task.id: task.toHiveJson(),
           });
           final initialTasksCount = box.length;
           expect(initialTasksCount, tasks.length);
@@ -335,14 +335,14 @@ AND the task records not matching the reference task are kept
         () async {
           final tasks = [
             Task(
-              id: '0',
+              id: 0,
               title: 'title 0',
               description: 'description 0',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 0),
             ),
             Task(
-              id: '1',
+              id: 1,
               title: 'title 1 matching-pattern',
               description: 'description 1',
               isCompleted: true,
@@ -350,98 +350,98 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 1),
             ),
             Task(
-              id: '2',
+              id: 2,
               title: 'title 2',
               description: 'description 2 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 2),
             ),
             Task(
-              id: '3',
+              id: 3,
               title: 'title 3 matching-pattern',
               description: 'description 3 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 3),
             ),
             Task(
-              id: '4',
+              id: 4,
               title: 'title 4',
               description: 'description 4',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 4),
             ),
             Task(
-              id: '5',
+              id: 5,
               title: 'title 5 matching-pattern',
               description: 'description 5',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 5),
             ),
             Task(
-              id: '6',
+              id: 6,
               title: 'title 6',
               description: 'description 6 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 6),
             ),
             Task(
-              id: '7',
+              id: 7,
               title: 'title 7 matching-pattern',
               description: 'description 7 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 7),
             ),
             Task(
-              id: '8',
+              id: 8,
               title: 'title 8',
               description: 'description 8',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 8),
             ),
             Task(
-              id: '9',
+              id: 9,
               title: 'title 9 matching-pattern',
               description: 'description 9',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 9),
             ),
             Task(
-              id: '10',
+              id: 10,
               title: 'title 10',
               description: 'description 10 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 10),
             ),
             Task(
-              id: '11',
+              id: 11,
               title: 'title 11 matching-pattern',
               description: 'description 11 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 11),
             ),
             Task(
-              id: '12',
+              id: 12,
               title: 'title 12',
               description: 'description 12',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 12),
             ),
             Task(
-              id: '13',
+              id: 13,
               title: 'title 13 matching-pattern',
               description: 'description 13',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 13),
             ),
             Task(
-              id: '14',
+              id: 14,
               title: 'title 14',
               description: 'description 14 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 14),
             ),
             Task(
-              id: '15',
+              id: 15,
               title: 'title 15 matching-pattern',
               description: 'description 15 matching-pattern',
               isCompleted: false,
@@ -449,7 +449,7 @@ AND the task records not matching the reference task are kept
             ),
           ];
           await box.putAll({
-            for (final task in tasks) task.key: task.toHiveJson(),
+            for (final task in tasks) task.id: task.toHiveJson(),
           });
           final initialTasksCount = box.length;
           expect(initialTasksCount, tasks.length);
@@ -501,14 +501,14 @@ AND the task records not matching the reference task are kept
         () async {
           final tasks = [
             Task(
-              id: '0',
+              id: 0,
               title: 'title 0',
               description: 'description 0',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 0),
             ),
             Task(
-              id: '1',
+              id: 1,
               title: 'title 1 matching-pattern',
               description: 'description 1',
               isCompleted: true,
@@ -516,98 +516,98 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 1),
             ),
             Task(
-              id: '2',
+              id: 2,
               title: 'title 2',
               description: 'description 2 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 2),
             ),
             Task(
-              id: '3',
+              id: 3,
               title: 'title 3 matching-pattern',
               description: 'description 3 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 3),
             ),
             Task(
-              id: '4',
+              id: 4,
               title: 'title 4',
               description: 'description 4',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 4),
             ),
             Task(
-              id: '5',
+              id: 5,
               title: 'title 5 matching-pattern',
               description: 'description 5',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 5),
             ),
             Task(
-              id: '6',
+              id: 6,
               title: 'title 6',
               description: 'description 6 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 6),
             ),
             Task(
-              id: '7',
+              id: 7,
               title: 'title 7 matching-pattern',
               description: 'description 7 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 7),
             ),
             Task(
-              id: '8',
+              id: 8,
               title: 'title 8',
               description: 'description 8',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 8),
             ),
             Task(
-              id: '9',
+              id: 9,
               title: 'title 9 matching-pattern',
               description: 'description 9',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 9),
             ),
             Task(
-              id: '10',
+              id: 10,
               title: 'title 10',
               description: 'description 10 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 10),
             ),
             Task(
-              id: '11',
+              id: 11,
               title: 'title 11 matching-pattern',
               description: 'description 11 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 11),
             ),
             Task(
-              id: '12',
+              id: 12,
               title: 'title 12',
               description: 'description 12',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 12),
             ),
             Task(
-              id: '13',
+              id: 13,
               title: 'title 13 matching-pattern',
               description: 'description 13',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 13),
             ),
             Task(
-              id: '14',
+              id: 14,
               title: 'title 14',
               description: 'description 14 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 14),
             ),
             Task(
-              id: '15',
+              id: 15,
               title: 'title 15 matching-pattern',
               description: 'description 15 matching-pattern',
               isCompleted: false,
@@ -615,7 +615,7 @@ AND the task records not matching the reference task are kept
             ),
           ];
           await box.putAll({
-            for (final task in tasks) task.key: task.toHiveJson(),
+            for (final task in tasks) task.id: task.toHiveJson(),
           });
           final initialTasksCount = box.length;
           expect(initialTasksCount, tasks.length);
@@ -667,14 +667,14 @@ AND the task records not matching the reference task are kept
         () async {
           final tasks = [
             Task(
-              id: '0',
+              id: 0,
               title: 'title 0',
               description: 'description 0',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 0),
             ),
             Task(
-              id: '1',
+              id: 1,
               title: 'title 1 matching-pattern',
               description: 'description 1',
               isCompleted: true,
@@ -682,98 +682,98 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 1),
             ),
             Task(
-              id: '2',
+              id: 2,
               title: 'title 2',
               description: 'description 2 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 2),
             ),
             Task(
-              id: '3',
+              id: 3,
               title: 'title 3 matching-pattern',
               description: 'description 3 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 3),
             ),
             Task(
-              id: '4',
+              id: 4,
               title: 'title 4',
               description: 'description 4',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 4),
             ),
             Task(
-              id: '5',
+              id: 5,
               title: 'title 5 matching-pattern',
               description: 'description 5',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 5),
             ),
             Task(
-              id: '6',
+              id: 6,
               title: 'title 6',
               description: 'description 6 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 6),
             ),
             Task(
-              id: '7',
+              id: 7,
               title: 'title 7 matching-pattern',
               description: 'description 7 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 7),
             ),
             Task(
-              id: '8',
+              id: 8,
               title: 'title 8',
               description: 'description 8',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 8),
             ),
             Task(
-              id: '9',
+              id: 9,
               title: 'title 9 matching-pattern',
               description: 'description 9',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 9),
             ),
             Task(
-              id: '10',
+              id: 10,
               title: 'title 10',
               description: 'description 10 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 10),
             ),
             Task(
-              id: '11',
+              id: 11,
               title: 'title 11 matching-pattern',
               description: 'description 11 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 11),
             ),
             Task(
-              id: '12',
+              id: 12,
               title: 'title 12',
               description: 'description 12',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 12),
             ),
             Task(
-              id: '13',
+              id: 13,
               title: 'title 13 matching-pattern',
               description: 'description 13',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 13),
             ),
             Task(
-              id: '14',
+              id: 14,
               title: 'title 14',
               description: 'description 14 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 14),
             ),
             Task(
-              id: '15',
+              id: 15,
               title: 'title 15 matching-pattern',
               description: 'description 15 matching-pattern',
               isCompleted: false,
@@ -781,7 +781,7 @@ AND the task records not matching the reference task are kept
             ),
           ];
           await box.putAll({
-            for (final task in tasks) task.key: task.toHiveJson(),
+            for (final task in tasks) task.id: task.toHiveJson(),
           });
           final initialTasksCount = box.length;
           expect(initialTasksCount, tasks.length);
@@ -831,14 +831,14 @@ AND the task records not matching the reference task are kept
         () async {
           final tasks = [
             Task(
-              id: '0',
+              id: 0,
               title: 'title 0',
               description: 'description 0',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 0),
             ),
             Task(
-              id: '1',
+              id: 1,
               title: 'title 1 matching-pattern',
               description: 'description 1',
               isCompleted: true,
@@ -846,98 +846,98 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 1),
             ),
             Task(
-              id: '2',
+              id: 2,
               title: 'title 2',
               description: 'description 2 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 2),
             ),
             Task(
-              id: '3',
+              id: 3,
               title: 'title 3 matching-pattern',
               description: 'description 3 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 3),
             ),
             Task(
-              id: '4',
+              id: 4,
               title: 'title 4',
               description: 'description 4',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 4),
             ),
             Task(
-              id: '5',
+              id: 5,
               title: 'title 5 matching-pattern',
               description: 'description 5',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 5),
             ),
             Task(
-              id: '6',
+              id: 6,
               title: 'title 6',
               description: 'description 6 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 6),
             ),
             Task(
-              id: '7',
+              id: 7,
               title: 'title 7 matching-pattern',
               description: 'description 7 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 7),
             ),
             Task(
-              id: '8',
+              id: 8,
               title: 'title 8',
               description: 'description 8',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 8),
             ),
             Task(
-              id: '9',
+              id: 9,
               title: 'title 9 matching-pattern',
               description: 'description 9',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 9),
             ),
             Task(
-              id: '10',
+              id: 10,
               title: 'title 10',
               description: 'description 10 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 10),
             ),
             Task(
-              id: '11',
+              id: 11,
               title: 'title 11 matching-pattern',
               description: 'description 11 matching-pattern',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 11),
             ),
             Task(
-              id: '12',
+              id: 12,
               title: 'title 12',
               description: 'description 12',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 12),
             ),
             Task(
-              id: '13',
+              id: 13,
               title: 'title 13 matching-pattern',
               description: 'description 13',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 13),
             ),
             Task(
-              id: '14',
+              id: 14,
               title: 'title 14',
               description: 'description 14 matching-pattern',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 14),
             ),
             Task(
-              id: '15',
+              id: 15,
               title: 'title 15 matching-pattern',
               description: 'description 15 matching-pattern',
               isCompleted: false,
@@ -945,7 +945,7 @@ AND the task records not matching the reference task are kept
             ),
           ];
           await box.putAll({
-            for (final task in tasks) task.key: task.toHiveJson(),
+            for (final task in tasks) task.id: task.toHiveJson(),
           });
           final initialTasksCount = box.length;
           expect(initialTasksCount, tasks.length);
@@ -994,14 +994,14 @@ AND the task records not matching the reference task are kept
         () async {
           final tasks = [
             Task(
-              id: '0',
+              id: 0,
               title: 'title 0',
               description: 'description 0',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 0),
             ),
             Task(
-              id: '1',
+              id: 1,
               title: 'title 1 matching-pattern',
               description: 'description 1',
               isCompleted: true,
@@ -1009,7 +1009,7 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 1),
             ),
             Task(
-              id: '2',
+              id: 2,
               title: 'title 2',
               // ignore: avoid_redundant_argument_values
               description: null,
@@ -1017,7 +1017,7 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 2),
             ),
             Task(
-              id: '3',
+              id: 3,
               title: 'title 3 matching-pattern',
               // ignore: avoid_redundant_argument_values
               description: null,
@@ -1025,21 +1025,21 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 3),
             ),
             Task(
-              id: '4',
+              id: 4,
               title: 'title 4',
               description: 'description 4',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 4),
             ),
             Task(
-              id: '5',
+              id: 5,
               title: 'title 5 matching-pattern',
               description: 'description 5',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 5),
             ),
             Task(
-              id: '6',
+              id: 6,
               title: 'title 6',
               // ignore: avoid_redundant_argument_values
               description: null,
@@ -1047,7 +1047,7 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 6),
             ),
             Task(
-              id: '7',
+              id: 7,
               title: 'title 7 matching-pattern',
               // ignore: avoid_redundant_argument_values
               description: null,
@@ -1055,21 +1055,21 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 7),
             ),
             Task(
-              id: '8',
+              id: 8,
               title: 'title 8',
               description: 'description 8',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 8),
             ),
             Task(
-              id: '9',
+              id: 9,
               title: 'title 9 matching-pattern',
               description: 'description 9',
               isCompleted: true,
               createdAt: DateTime(2020, 1, 9),
             ),
             Task(
-              id: '10',
+              id: 10,
               title: 'title 10',
               // ignore: avoid_redundant_argument_values
               description: null,
@@ -1077,7 +1077,7 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 10),
             ),
             Task(
-              id: '11',
+              id: 11,
               title: 'title 11 matching-pattern',
               // ignore: avoid_redundant_argument_values
               description: null,
@@ -1085,21 +1085,21 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 11),
             ),
             Task(
-              id: '12',
+              id: 12,
               title: 'title 12',
               description: 'description 12',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 12),
             ),
             Task(
-              id: '13',
+              id: 13,
               title: 'title 13 matching-pattern',
               description: 'description 13',
               isCompleted: false,
               createdAt: DateTime(2020, 1, 13),
             ),
             Task(
-              id: '14',
+              id: 14,
               title: 'title 14',
               // ignore: avoid_redundant_argument_values
               description: null,
@@ -1107,7 +1107,7 @@ AND the task records not matching the reference task are kept
               createdAt: DateTime(2020, 1, 14),
             ),
             Task(
-              id: '15',
+              id: 15,
               title: 'title 15 matching-pattern',
               // ignore: avoid_redundant_argument_values
               description: null,
@@ -1116,7 +1116,7 @@ AND the task records not matching the reference task are kept
             ),
           ];
           await box.putAll({
-            for (final task in tasks) task.key: task.toHiveJson(),
+            for (final task in tasks) task.id: task.toHiveJson(),
           });
           final initialTasksCount = box.length;
           expect(initialTasksCount, tasks.length);
@@ -1166,7 +1166,7 @@ THEN all task records are dropped
           final tasks = List.generate(
             30,
             (index) => Task(
-              id: '$index',
+              id: index,
               title: 'title $index',
               description: 'description $index',
               isCompleted: index % 7 == 0,
@@ -1174,7 +1174,7 @@ THEN all task records are dropped
             ),
           );
           await box.putAll({
-            for (final task in tasks) task.key: task.toHiveJson(),
+            for (final task in tasks) task.id: task.toHiveJson(),
           });
           final initialTasksCount = box.length;
           expect(initialTasksCount, tasks.length);
@@ -1193,7 +1193,7 @@ THEN a task record is registered
 ''',
         () async {
           final task = Task(
-            id: '83',
+            id: 83,
             title: 'title',
             description: 'description',
             isCompleted: false,
@@ -1220,7 +1220,7 @@ THEN all task records are updated
           final tasks = List.generate(
             30,
             (index) => Task(
-              id: '$index',
+              id: index,
               title: 'title $index',
               description: 'description $index',
               isCompleted: index % 7 == 0,
@@ -1228,7 +1228,7 @@ THEN all task records are updated
             ),
           );
           await box.putAll({
-            for (final task in tasks) task.key: task.toHiveJson(),
+            for (final task in tasks) task.id: task.toHiveJson(),
           });
           bool filter(Json rawTask) =>
               !(rawTask[HiveTask.statusFieldJsonKey] as bool);
@@ -1250,20 +1250,20 @@ THEN a task record is updated
 ''',
         () async {
           final task = Task(
-            id: '31',
+            id: 31,
             title: 'title',
             description: 'description',
             isCompleted: false,
             createdAt: DateTime.now(),
           );
-          await box.put(task.key, task.toHiveJson());
+          await box.put(task.id, task.toHiveJson());
           final existingTasksCount = box.length;
           expect(existingTasksCount, 1);
           const newTitle = 'new title';
           const newDescription = 'new description';
           const newStatus = true;
           bool filter(TaskRecordEntry rawTask) =>
-              rawTask.key == task.key &&
+              rawTask.key == task.id &&
               rawTask.value[HiveTask.titleFieldJsonKey] == newTitle &&
               rawTask.value[HiveTask.descriptionFieldJsonKey] ==
                   newDescription &&
@@ -1320,20 +1320,20 @@ AND no task record is updated
 ''',
         () async {
           final task = Task(
-            id: '103',
+            id: 103,
             title: 'title',
             description: 'description',
             isCompleted: false,
             createdAt: DateTime.now(),
           );
-          await box.put(task.key, task.toHiveJson());
+          await box.put(task.id, task.toHiveJson());
           final existingTasksCount = box.length;
           expect(existingTasksCount, 1);
           const newTitle = '';
           const newDescription = 'new description';
           const newStatus = true;
           bool filter(TaskRecordEntry rawTask) =>
-              rawTask.key == task.key &&
+              rawTask.key == task.id &&
               rawTask.value[HiveTask.titleFieldJsonKey] == newTitle &&
               rawTask.value[HiveTask.descriptionFieldJsonKey] ==
                   newDescription &&
@@ -1367,7 +1367,7 @@ WHEN the task is requested
 THEN the task is returned
 ''',
         () async {
-          const taskId = '991';
+          const taskId = 991;
           final task = Task(
             id: taskId,
             title: 'title',
@@ -1375,8 +1375,8 @@ THEN the task is returned
             isCompleted: false,
             createdAt: DateTime.now(),
           );
-          await box.put(task.key, task.toHiveJson());
-          bool filter(dynamic key) => key == task.key;
+          await box.put(task.id, task.toHiveJson());
+          bool filter(dynamic key) => key == task.id;
           final initialMatchingTasksCount = box.keys.where(filter).length;
           expect(initialMatchingTasksCount, 1);
           final retrievedTask = await storage.getById(taskId);
@@ -1394,7 +1394,7 @@ WHEN the task is requested
 THEN null is returned
 ''',
         () async {
-          const taskId = '325';
+          const taskId = 325;
           bool filter(dynamic key) => key == taskId;
           final initialMatchingTasksCount = box.keys.where(filter).length;
           expect(initialMatchingTasksCount, isZero);
@@ -1423,20 +1423,20 @@ THEN the paginated tasks that match the conditions are continuously emitted as t
           // Stage 00
           final tasksForStage00 = <Task>[
             Task(
-              id: '0',
+              id: 0,
               title: 'title 00',
               description: 'description 00',
               isCompleted: true,
               createdAt: DateTime.now(),
             ),
             Task(
-              id: '1',
+              id: 1,
               title: 'title 01',
               isCompleted: false,
               createdAt: DateTime.now(),
             ),
             Task(
-              id: '2',
+              id: 2,
               title: 'title 02',
               isCompleted: true,
               createdAt: DateTime.now(),
@@ -1449,7 +1449,7 @@ THEN the paginated tasks that match the conditions are continuously emitted as t
 
           // Stage 01
           final newTaskInStage01 = Task(
-            id: '3',
+            id: 3,
             title: 'title 03',
             isCompleted: true,
             createdAt: DateTime.now(),
@@ -1504,11 +1504,11 @@ THEN the paginated tasks that match the conditions are continuously emitted as t
 
           // Stage 00
           await box.putAll({
-            for (final task in tasksForStage00) task.key: task.toHiveJson(),
+            for (final task in tasksForStage00) task.id: task.toHiveJson(),
           });
 
           // Stage 01
-          await box.put(newTaskInStage01.key, newTaskInStage01.toHiveJson());
+          await box.put(newTaskInStage01.id, newTaskInStage01.toHiveJson());
 
           // Stage 02
           {
@@ -1564,39 +1564,39 @@ THEN the paginated tasks that match the conditions are continuously emitted as t
           // Stage 00
           final tasksForStage00 = <Task>[
             Task(
-              id: '0',
+              id: 0,
               title: 'title 00',
               description: 'description 00 matching-pattern',
               isCompleted: true,
               createdAt: DateTime.now(),
             ),
             Task(
-              id: '1',
+              id: 1,
               title: 'title 01',
               isCompleted: false,
               createdAt: DateTime.now(),
             ),
             Task(
-              id: '2',
+              id: 2,
               title: 'title 02',
               isCompleted: true,
               createdAt: DateTime.now(),
             ),
             Task(
-              id: '3',
+              id: 3,
               title: 'title 03',
               description: 'description 03 matching-pattern',
               isCompleted: true,
               createdAt: DateTime.now(),
             ),
             Task(
-              id: '4',
+              id: 4,
               title: 'title 04',
               isCompleted: false,
               createdAt: DateTime.now(),
             ),
             Task(
-              id: '5',
+              id: 5,
               title: 'title 05',
               description: 'description 05 matching-pattern',
               isCompleted: false,
@@ -1619,7 +1619,7 @@ THEN the paginated tasks that match the conditions are continuously emitted as t
 
           // Stage 01
           final newTaskInStage01 = Task(
-            id: '6',
+            id: 6,
             title: 'title 06 matching-pattern',
             isCompleted: true,
             createdAt: DateTime.now(),
@@ -1704,11 +1704,11 @@ THEN the paginated tasks that match the conditions are continuously emitted as t
 
           // Stage 00
           await box.putAll({
-            for (final task in tasksForStage00) task.key: task.toHiveJson(),
+            for (final task in tasksForStage00) task.id: task.toHiveJson(),
           });
 
           // Stage 01
-          await box.put(newTaskInStage01.key, newTaskInStage01.toHiveJson());
+          await box.put(newTaskInStage01.id, newTaskInStage01.toHiveJson());
 
           // Stage 02
           {
@@ -1774,33 +1774,33 @@ THEN the quantity of persisted tasks that match the conditions is continuously e
           {
             final initialTasks = [
               Task(
-                id: '0',
+                id: 0,
                 title: 'title 00',
                 description: 'description 00',
                 isCompleted: true,
                 createdAt: DateTime.now(),
               ),
               Task(
-                id: '1',
+                id: 1,
                 title: 'title 01',
                 isCompleted: false,
                 createdAt: DateTime.now(),
               ),
             ];
             await box.putAll({
-              for (final task in initialTasks) task.key: task.toHiveJson(),
+              for (final task in initialTasks) task.id: task.toHiveJson(),
             });
           }
 
           // Stage 01
           {
             final newTask = Task(
-              id: '3',
+              id: 3,
               title: 'title 03',
               isCompleted: true,
               createdAt: DateTime.now(),
             );
-            await box.put(newTask.key, newTask.toHiveJson());
+            await box.put(newTask.id, newTask.toHiveJson());
           }
 
           // Stage 02
@@ -1868,33 +1868,33 @@ THEN the quantity of persisted tasks that match the conditions is continuously e
           {
             final initialTasks = [
               Task(
-                id: '0',
+                id: 0,
                 title: 'title 00',
                 description: 'description 00 matching-pattern',
                 isCompleted: true,
                 createdAt: DateTime.now(),
               ),
               Task(
-                id: '1',
+                id: 1,
                 title: 'title 01',
                 isCompleted: false,
                 createdAt: DateTime.now(),
               ),
             ];
             await box.putAll({
-              for (final task in initialTasks) task.key: task.toHiveJson(),
+              for (final task in initialTasks) task.id: task.toHiveJson(),
             });
           }
 
           // Stage 01
           {
             final newTask = Task(
-              id: '3',
+              id: 3,
               title: 'title 03 matching-pattern',
               isCompleted: true,
               createdAt: DateTime.now(),
             );
-            await box.put(newTask.key, newTask.toHiveJson());
+            await box.put(newTask.id, newTask.toHiveJson());
           }
 
           // Stage 02
