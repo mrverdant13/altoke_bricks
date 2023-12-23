@@ -147,14 +147,14 @@ scripts:
     exec:
       failFast: true
       concurrency: 1
-  d.r:
+  g.r:
     description: Generate code for a package with Realm
     run: >
       melos exec --depends-on realm --fail-fast --concurrency 1 -- "dart run realm generate" &&
       melos exec --depends-on realm_dart --fail-fast --concurrency 1 -- "dart run realm_dart generate"
   G:
     description: Generate code for all packages
-    run: melos run g.d --no-select && melos run d.r --no-select
+    run: melos run g.d --no-select && melos run g.r --no-select
 
   # Brick management
   BG:
