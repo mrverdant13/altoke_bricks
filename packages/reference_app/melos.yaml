@@ -9,21 +9,44 @@ packages:
   - ./packages/tasks_storage/tasks_sembast_storage/
   - ./packages/tasks_storage/tasks_storage/
 
+command:
+  bootstrap:
+    hooks:
+      post:
+        run: >
+          melos exec --depends-on realm -- "dart run realm install" &&
+          melos exec --depends-on realm_dart -- "dart run realm_dart install"
+  clean:
+    hooks:
+      pre:
+        run: >
+          melos exec -- "coverde rm .dart_tool/ build/ pubspec_overrides.yaml" &&
+          melos exec --depends-on realm -- "coverde rm binary/" &&
+          melos exec --depends-on realm_dart -- "coverde rm binary/"
+
 scripts:
   # Code Generation
-  g:
+  g.d:
     description: Generate code for a package
     run: dart run build_runner build --delete-conflicting-outputs
     packageFilters:
       dependsOn:
         - build_runner
+      noDependsOn:
+        - realm
+        - realm_dart
     exec:
       concurrency: 1
       failFast: true
       orderDependents: true
+  g.r:
+    description: Generate Realm code for a package
+    run: >
+      melos exec --depends-on realm --fail-fast --concurrency 1 --order-dependents -- "dart run realm generate" &&
+      melos exec --depends-on realm_dart --fail-fast --concurrency 1 --order-dependents -- "dart run realm_dart generate"
   G:
     description: Generate code for all packages
-    run: melos run g --no-select
+    run: melos run g.d --no-select && melos run g.r --no-select
 
   # Formatting
   f:
