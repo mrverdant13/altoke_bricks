@@ -10,8 +10,24 @@ packages:
   - ./packages/reference_app/packages/common/
   - ./packages/reference_app/packages/tasks/
   - ./packages/reference_app/packages/tasks_storage/tasks_hive_storage/
+  - ./packages/reference_app/packages/tasks_storage/tasks_realm_storage/
   - ./packages/reference_app/packages/tasks_storage/tasks_sembast_storage/
   - ./packages/reference_app/packages/tasks_storage/tasks_storage/
+
+command:
+  bootstrap:
+    hooks:
+      post:
+        run: >
+          melos exec --depends-on realm -- "dart run realm install" &&
+          melos exec --depends-on realm_dart -- "dart run realm_dart install"
+  clean:
+    hooks:
+      pre:
+        run: >
+          melos exec -- "coverde rm .dart_tool/ build/ pubspec_overrides.yaml" &&
+          melos exec --depends-on realm -- "coverde rm binary/" &&
+          melos exec --depends-on realm_dart -- "coverde rm binary/"
 
 scripts:
   S:
@@ -119,18 +135,26 @@ scripts:
       coverde check -i coverage/filtered.lcov.info 100
 
   # Code generation
-  g:
+  g.d:
     description: Generate code for a package
     run: dart run build_runner build -d
     packageFilters:
       dependsOn:
         - build_runner
+      noDependsOn:
+        - realm
+        - realm_dart
     exec:
       failFast: true
       concurrency: 1
+  d.r:
+    description: Generate code for a package with Realm
+    run: >
+      melos exec --depends-on realm --fail-fast --concurrency 1 -- "dart run realm generate" &&
+      melos exec --depends-on realm_dart --fail-fast --concurrency 1 -- "dart run realm_dart generate"
   G:
     description: Generate code for all packages
-    run: melos run g --no-select
+    run: melos run g.d --no-select && melos run d.r --no-select
 
   # Brick management
   BG:

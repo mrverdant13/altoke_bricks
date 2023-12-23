@@ -83,6 +83,15 @@ updates:
       - build
       - p:ref
   - package-ecosystem: pub
+    directory: /packages/reference_app/packages/tasks_storage/tasks_realm_storage/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - p:ref
+  - package-ecosystem: pub
     directory: /packages/reference_app/packages/tasks_storage/tasks_sembast_storage/
     schedule:
       interval: daily

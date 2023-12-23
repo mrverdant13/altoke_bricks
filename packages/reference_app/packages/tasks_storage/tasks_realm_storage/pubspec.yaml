@@ -1,0 +1,21 @@
+name: tasks_realm_storage
+description: A persistent storage for tasks built on top of Realm.
+version: 0.0.1+1
+publish_to: none
+
+environment:
+  sdk: ">=3.2.0 <4.0.0"
+
+dependencies:
+  common:
+    path: ../../common/
+  meta: ^1.10.0
+  realm_dart: ^1.6.1
+  tasks:
+    path: ../../tasks/
+  tasks_storage:
+    path: ../tasks_storage/
+
+dev_dependencies:
+  test: ^1.24.9
+  very_good_analysis: ^5.1.0
