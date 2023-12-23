@@ -56,9 +56,9 @@ Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
 
 - **Data persistence:**\
   Local data persistence example. Supported with one of the following packages:
-    - [`hive`][pub_package_hive].
-    - [`realm`][pub_package_realm].
-    - [`sembast`][pub_package_sembast].
+    - [`hive`][pub_package_hive] ([Hive docs][docs_hive_link]).
+    - [`realm`][pub_package_realm] ([Realm docs for Flutter][docs_realm_for_flutter_link]).
+    - [`sembast`][pub_package_sembast] ([Sembast docs][docs_sembast_link]).
 
 - **Deep linking:**\
   Supported with one the following packages:
@@ -83,7 +83,10 @@ Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
 <!-- LINKS -->
 
 [dart_and_flutter_linter_rules_link]: https://dart.dev/tools/linter-rules
+[docs_hive_link]: https://docs.hivedb.dev/
 [docs_melos_link]: https://melos.invertase.dev/
+[docs_sembast_link]: https://github.com/tekartik/sembast.dart/blob/master/sembast/doc/guide.md
+[docs_realm_for_flutter_link]: https://www.mongodb.com/docs/realm/sdk/flutter/
 [flutter_docs_internationalization_link]: https://docs.flutter.dev/ui/accessibility-and-localization/internationalization
 [flutter_web_link]: https://flutter.dev/
 [pub_package_auto_route]: https://pub.dev/packages/auto_route
