@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:common/common.dart';
 import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
@@ -22,7 +24,7 @@ class TasksHiveStorage implements TasksStorage {
 
   /// Box for the tasks.
   @visibleForTesting
-  late final Box<Json> box;
+  late final Box<Map<dynamic, dynamic>> box;
 
   @override
   Future<void> create({
@@ -109,24 +111,26 @@ class TasksHiveStorage implements TasksStorage {
       statusFilter: statusFilter,
       nullableSearchTerm: searchTerm,
     ).toHiveFilter();
-    return box
-        .watch()
-        .map(
-          (_) => (box.tasks.where(dbFilter).toList()
-                ..sort((a, b) => b.createdAt.compareTo(a.createdAt)))
-              .skip(offset)
-              .take(limit)
-              .toList(),
-        )
-        .distinct(
-      (previous, next) {
-        if (previous.length != next.length) return false;
-        for (var i = 0; i < previous.length; i++) {
-          if (previous[i] != next[i]) return false;
-        }
-        return true;
-      },
-    );
+
+    List<Task> getTasks() => (box.tasks.where(dbFilter).toList()
+          ..sort((a, b) => b.createdAt.compareTo(a.createdAt)))
+        .skip(offset)
+        .take(limit)
+        .toList();
+
+    bool tasksListsAreEqual(List<Task> previous, List<Task> next) {
+      if (previous.length != next.length) return false;
+      for (var i = 0; i < previous.length; i++) {
+        if (previous[i] != next[i]) return false;
+      }
+      return true;
+    }
+
+    return () async* {
+      yield getTasks();
+      yield* box.watch().map((_) => getTasks());
+    }()
+        .distinct(tasksListsAreEqual);
   }
 
   @override
@@ -138,7 +142,14 @@ class TasksHiveStorage implements TasksStorage {
       statusFilter: statusFilter,
       nullableSearchTerm: searchTerm,
     ).toHiveFilter();
-    return box.watch().map((_) => box.tasks.where(dbFilter).length).distinct();
+
+    int getCount() => box.tasks.where(dbFilter).length;
+
+    return () async* {
+      yield getCount();
+      yield* box.watch().map((_) => getCount());
+    }()
+        .distinct();
   }
 }
 
@@ -189,7 +200,7 @@ extension SerializableHiveTask on Task {
   }
 }
 
-extension on Json {
+extension on Map<dynamic, dynamic> {
   Task toTask() {
     return Task(
       id: this[HiveTask.idFieldJsonKey] as int,
@@ -269,7 +280,7 @@ typedef WhereCallback<T> = bool Function(T element);
 extension on TasksStatusFilter {
   WhereCallback<Task> toHiveFilter() {
     return switch (this) {
-      TasksStatusFilter.all => (_) => true,
+      TasksStatusFilter.all => (task) => true,
       TasksStatusFilter.uncompleted => (task) => !task.isCompleted,
       TasksStatusFilter.completed => (task) => task.isCompleted,
     };
@@ -307,7 +318,8 @@ extension on FilteringItems {
 @visibleForTesting
 extension DeserializableTaskRecordEntry on TaskRecordEntry {
   /// Converts a [TaskRecordEntry] to a [Task].
-  Task toTask() => value.toTaskWithId(key as int);
+  Task toTask() =>
+      (jsonDecode(jsonEncode(value)) as Json).toTaskWithId(key as int);
 }
 
 /// An extension on [TaskRecordEntriesIterable] to add deserialization
@@ -327,7 +339,7 @@ extension SerializableTasksIterable on TasksIterable {
 }
 
 /// An entry that represents a task record.
-typedef TaskRecordEntry = MapEntry<dynamic, Json>;
+typedef TaskRecordEntry = MapEntry<dynamic, Map<dynamic, dynamic>>;
 
 /// An [Iterable] of [TaskRecordEntry]s.
 typedef TaskRecordEntriesIterable = Iterable<TaskRecordEntry>;
@@ -335,6 +347,8 @@ typedef TaskRecordEntriesIterable = Iterable<TaskRecordEntry>;
 /// An [Iterable] of [Task]s.
 typedef TasksIterable = Iterable<Task>;
 
-extension on Box<Json> {
-  Iterable<Task> get tasks => toMap().entries.toTasks();
+extension on Box<Map<dynamic, dynamic>> {
+  Iterable<Task> get tasks {
+    return toMap().entries.toTasks();
+  }
 }
