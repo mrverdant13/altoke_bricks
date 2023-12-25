@@ -18,7 +18,6 @@ class TasksHiveStorage implements TasksStorage {
         );
 
   /// Name for the tasks box.
-  @visibleForTesting
   static const boxName = '.tasks-hive-storage.';
 
   /// Box for the tasks.
