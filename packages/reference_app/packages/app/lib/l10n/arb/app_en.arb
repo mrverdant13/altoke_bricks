@@ -11,6 +11,10 @@
   "@counterExampleLabel": {
     "description": "Label for the counter example"
   },
+  "tasksExampleLabel": "Tasks",
+  "@tasksExampleLabel": {
+    "description": "Label for the tasks example"
+  },
   "counterAppBarTitle": "Counter",
   "@counterAppBarTitle": {
     "description": "App bar title for the counter example"
@@ -28,5 +32,13 @@
   "counterIncrementButtonTooltip": "Increment",
   "@counterIncrementButtonTooltip": {
     "description": "Tooltip for the increment button"
+  },
+  "tasksEmptyTasksMessage": "No tasks yet",
+  "@tasksEmptyTasksMessage": {
+    "description": "Message shown when there are no tasks"
+  },
+  "tasksUnexpectedErrorMessage": "Uh oh! Something went wrong.",
+  "@tasksUnexpectedErrorMessage": {
+    "description": "Message shown when an unexpected error occurs"
   }
 }

@@ -11,6 +11,10 @@
   "@counterExampleLabel": {
     "description": "Etiqueta del ejemplo de contador"
   },
+  "tasksExampleLabel": "Tareas",
+  "@tasksExampleLabel": {
+    "description": "Etiqueta del ejemplo de tareas"
+  },
   "counterAppBarTitle": "Contador",
   "@counterAppBarTitle": {
     "description": "Título de la cabecera de la página de contador"
@@ -28,5 +32,13 @@
   "counterIncrementButtonTooltip": "Incrementar",
   "@counterIncrementButtonTooltip": {
     "description": "Tooltip del botón de incrementar"
+  },
+  "tasksEmptyTasksMessage": "Aún no hay tareas",
+  "@tasksEmptyTasksMessage": {
+    "description": "Mensaje mostrado cuando no hay tareas"
+  },
+  "tasksUnexpectedErrorMessage": "Oh no! Algo salió mal",
+  "@tasksUnexpectedErrorMessage": {
+    "description": "Mensaje mostrado cuando ocurre un error inesperado"
   }
 }

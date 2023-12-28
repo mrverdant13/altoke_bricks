@@ -1,3 +1,4 @@
+import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/tasks/tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,18 +13,17 @@ class SliverTasksList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     return ref.watch(asyncFilteredTasksCountPod).when(
           data: (tasksCount) {
             if (tasksCount == 0) {
-              return const SliverFillRemaining(
+              return SliverFillRemaining(
                 hasScrollBody: false,
                 child: Padding(
-                  padding: EdgeInsets.all(15),
+                  padding: const EdgeInsets.all(15),
                   child: Center(
                     child: Text(
-                      // TODO(mrverdant13): Localize.
-                      'No tasks found',
-                      // context.l10n.tasksEmptyTasksMessage,
+                      l10n.tasksEmptyTasksMessage,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -32,15 +32,13 @@ class SliverTasksList extends ConsumerWidget {
             }
             return const SliverNonEmptyTasksList();
           },
-          error: (error, stackTrace) => const SliverFillRemaining(
+          error: (error, stackTrace) => SliverFillRemaining(
             hasScrollBody: false,
             child: Padding(
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               child: Center(
                 child: Text(
-                  // TODO(mrverdant13): Localize.
-                  'Unexpected error',
-                  // context.l10n.tasksUnexpectedErrorMessage,
+                  l10n.tasksUnexpectedErrorMessage,
                   textAlign: TextAlign.center,
                 ),
               ),

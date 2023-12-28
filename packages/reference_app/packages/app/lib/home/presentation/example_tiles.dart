@@ -54,11 +54,9 @@ class TasksExampleTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return ListTile(
-      title: const Text(
-        // TODO(mrverdant13): Localize.
-        'Tasks',
-        // l10n.tasksExampleLabel,
-        key: Key('<tasks::example-tile::title>'),
+      title: Text(
+        l10n.tasksExampleLabel,
+        key: const Key('<tasks::example-tile::title>'),
       ),
       onTap: () {
         /*w 1v w*/
