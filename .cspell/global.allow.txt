@@ -4,6 +4,7 @@ coverde
 github
 lcov
 melos
+mrverdant13
 pubspec
 riverpod
 sembast
