@@ -1,18 +1,23 @@
-import 'dart:developer';
-
-/*{{#use_realm_database}}*/
-import 'package:altoke_app/external/external.dart' show realmDb, realmDbPod;
-/*{{/use_realm_database}}*/
-/*{{#use_sembast_database}}*/
-import 'package:altoke_app/external/external.dart' show sembastDb, sembastDbPod;
-/*{{/use_sembast_database}}*/
+import 'package:altoke_app/external/external.dart'
+    show
 /*remove-start*/
-import 'package:altoke_app/external/external.dart' show DatabasePackage;
+        DatabasePackage,
 /*remove-end*/
+/*{{#use_realm_database}}*/
+        realmDb,
+        realmDbPod
+/*{{/use_realm_database}}*/
+/*remove-start*/
+        ,
+/*remove-end*/
+/*{{#use_sembast_database}}*/
+        sembastDb,
+        sembastDbPod
+/*{{/use_sembast_database}}*/
+    ;
 /*{{#use_hive_database}}*/
 import 'package:altoke_app/tasks/tasks.dart' show tasksBox, tasksBoxPod;
 /*{{/use_hive_database}}*/
-import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 /*{{#use_hive_database}}*/
 import 'package:tasks_hive_storage/tasks_hive_storage.dart'
@@ -44,7 +49,6 @@ part 'tasks_storage.pod.g.dart';
   ],
 )
 TasksStorage tasksStorage(TasksStorageRef ref) {
-  if (kDebugMode) log('building `tasksStoragePod`');
   /*{{#use_hive_database}}*/
   final tasksBox = ref.watch(tasksBoxPod);
   /*{{/use_hive_database}}*/
@@ -83,10 +87,5 @@ TasksStorage tasksStorage(TasksStorageRef ref) {
     /*{{/use_sembast_database}}*/
     /*remove-start*/,
   } /*remove-end*/;
-  ref.onDispose(
-    () async {
-      if (kDebugMode) log('disposing `tasksStoragePod`');
-    },
-  );
   return storage;
 }
