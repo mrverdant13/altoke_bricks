@@ -44,3 +44,42 @@ class CounterExampleTile extends StatelessWidget {
     );
   }
 }
+
+class TasksExampleTile extends StatelessWidget {
+  const TasksExampleTile({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return ListTile(
+      title: const Text(
+        // TODO(mrverdant13): Localize.
+        'Tasks',
+        // l10n.tasksExampleLabel,
+        key: Key('<tasks::example-tile::title>'),
+      ),
+      onTap: () {
+        /*w 1v w*/
+        /*remove-start*/
+        final container = ProviderScope.containerOf(context, listen: false);
+        final routerPackage = container.read(routerPod);
+        switch (routerPackage) {
+          case RouterPackage.autoRoute:
+            /*remove-end*/
+            /*{{#use_auto_route_router}}*/
+            context.navigateTo(const TasksRoute());
+          /*{{/use_auto_route_router}}*/
+          /*remove-start*/
+          case RouterPackage.goRouter: /*remove-end*/
+            /*{{#use_go_router_router}}*/
+            const TasksRouteData().go(context);
+          /*{{/use_go_router_router}}*/
+          /*remove-start*/
+        } /*remove-end*/
+        /*w 1v w*/
+      },
+    );
+  }
+}

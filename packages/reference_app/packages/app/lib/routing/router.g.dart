@@ -9,6 +9,7 @@ part of 'router.dart';
 List<RouteBase> get $appRoutes => [
       $homeRouteData,
       $counterRouteData,
+      $tasksRouteData,
     ];
 
 RouteBase get $homeRouteData => GoRouteData.$route(
@@ -46,6 +47,30 @@ extension $CounterRouteDataExtension on CounterRouteData {
 
   String get location => GoRouteData.$location(
         '/counter',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $tasksRouteData => GoRouteData.$route(
+      path: '/tasks',
+      name: 'TasksRoute',
+      factory: $TasksRouteDataExtension._fromState,
+    );
+
+extension $TasksRouteDataExtension on TasksRouteData {
+  static TasksRouteData _fromState(GoRouterState state) =>
+      const TasksRouteData();
+
+  String get location => GoRouteData.$location(
+        '/tasks',
       );
 
   void go(BuildContext context) => context.go(location);

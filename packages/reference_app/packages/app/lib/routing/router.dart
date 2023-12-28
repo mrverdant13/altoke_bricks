@@ -32,6 +32,11 @@ class AppRouter extends $AppRouter {
       title: (context, data) => 'Counter',
       page: CounterRoute.page,
     ),
+    AdaptiveRoute(
+      path: '/tasks',
+      title: (context, data) => 'Tasks',
+      page: TasksRoute.page,
+    ),
   ];
 }
 /*{{/use_auto_route_router}}*/
@@ -60,6 +65,19 @@ class CounterRouteData extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const CounterScreen();
+  }
+}
+
+@TypedGoRoute<TasksRouteData>(
+  path: '/tasks',
+  name: 'TasksRoute',
+)
+class TasksRouteData extends GoRouteData {
+  const TasksRouteData();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const TasksScreen();
   }
 }
 /*{{/use_go_router_router}}*/

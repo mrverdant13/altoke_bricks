@@ -11,6 +11,7 @@ class SliverExamples extends StatelessWidget {
     return SliverList.list(
       children: const [
         CounterExampleTile(),
+        TasksExampleTile(),
       ],
     );
   }
