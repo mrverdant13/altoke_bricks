@@ -1,5 +1,11 @@
 /// Placeholders for the generated code.
 enum Placeholder {
+  /// The file-system entity name based on the project name.
+  appPath(
+    'altoke-app',
+    '{{project_name.kebabCase()}}',
+  ),
+
   /// The package name of the app.
   appPackageName(
     'altoke_app',
