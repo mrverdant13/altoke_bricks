@@ -113,14 +113,11 @@ class LoggingPodsObserver implements ProviderObserver {
         ..write('Arguments: ')
         ..writeln(args);
     }
-    buf
-      ..write('❌ Error: ')
-      ..writeln(error)
-      ..write('❌ Stack trace: ')
-      ..writeln(stackTrace);
     log(
       buf.toString(),
       name: provider.name ?? provider.runtimeType.toString(),
+      error: error,
+      stackTrace: stackTrace,
     );
   }
 }
