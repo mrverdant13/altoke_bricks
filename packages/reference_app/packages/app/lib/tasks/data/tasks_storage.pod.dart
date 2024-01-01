@@ -1,8 +1,10 @@
+/*{{^ use_hive_database}}*/
 import 'package:altoke_app/external/external.dart'
     show
 /*remove-start*/
         DatabasePackage,
 /*remove-end*/
+/*w 1> w*/
 /*{{#use_realm_database}}*/
         realmDb,
         realmDbPod
@@ -15,6 +17,7 @@ import 'package:altoke_app/external/external.dart'
         sembastDbPod
 /*{{/use_sembast_database}}*/
     ;
+/*{{/use_hive_database}}*/
 /*{{#use_hive_database}}*/
 import 'package:altoke_app/tasks/tasks.dart' show tasksBox, tasksBoxPod;
 /*{{/use_hive_database}}*/
@@ -49,6 +52,7 @@ part 'tasks_storage.pod.g.dart';
   ],
 )
 TasksStorage tasksStorage(TasksStorageRef ref) {
+  /*w 1v w*/
   /*{{#use_hive_database}}*/
   final tasksBox = ref.watch(tasksBoxPod);
   /*{{/use_hive_database}}*/
