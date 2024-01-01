@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:mason/mason.dart';
 
+import 'database/database.dart';
 import 'router/router.dart';
 
 void run(HookContext context) {
@@ -35,4 +36,5 @@ void run(HookContext context) {
   }
   context.vars['project_description'] = projectDescription;
   Router.select(context: context);
+  Database.select(context: context);
 }
