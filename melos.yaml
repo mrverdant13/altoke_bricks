@@ -10,6 +10,13 @@ packages:
   - ./packages/reference_app/packages/common/
   - ./packages/reference_app/packages/tasks/
 
+command:
+  clean:
+    hooks:
+      pre:
+        run: >
+          melos exec -- "coverde rm .dart_tool/ build/ pubspec_overrides.yaml"
+
 scripts:
   S:
     description: Run spell checking for the entire project
