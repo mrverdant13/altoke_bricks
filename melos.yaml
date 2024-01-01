@@ -10,6 +10,13 @@ packages:
   - ./packages/reference_app/packages/common/
   - ./packages/reference_app/packages/tasks/
 
+command:
+  clean:
+    hooks:
+      pre:
+        run: >
+          melos exec -- "coverde rm .dart_tool/ build/ pubspec_overrides.yaml"
+
 scripts:
   S:
     description: Run spell checking for the entire project
@@ -112,7 +119,7 @@ scripts:
     description: Merge all packages coverage trace files ignoring data related to generated files.
     run: >
       coverde rm MELOS_ROOT_PATH/coverage/filtered.lcov.info &&
-      melos exec --file-exists=coverage/lcov.info -- "coverde filter --input ./coverage/lcov.info --output MELOS_ROOT_PATH/coverage/filtered.lcov.info --paths-parent MELOS_PACKAGE_PATH  --filters \.g\.dart,\.gr\.dart" &&
+      melos exec --file-exists=coverage/lcov.info -- "coverde filter --input ./coverage/lcov.info --output MELOS_ROOT_PATH/coverage/filtered.lcov.info --paths-parent MELOS_PACKAGE_PATH  --filters \.g\.dart,\.gr\.dart,\.freezed\.dart" &&
       coverde check -i coverage/filtered.lcov.info 100
 
   # Code generation
