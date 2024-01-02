@@ -2,35 +2,44 @@ import 'dart:io';
 
 import 'package:brick_generator/src/placeholders.dart';
 import 'package:meta/meta.dart';
+import 'package:path/path.dart' as p;
 
 /// Regexp patterns to parametrize the template.
 @visibleForTesting
 abstract class AltokeRegexp {
-  /// Regexp to identify blocks to be removed.
+  /// Regexp to identify blocks to be removed from the contents of a file.
   @visibleForTesting
   static final remotionRegexp = RegExp(
     r'(((\/)|(#)|(<!--))\*drop\*((\/)|(#)|(-->)).*)|((\s+)?((\/)|(#)|(<!--))\*remove-start\*((\/)|(#)|(-->))([\s\S]*?)((\/)|(#)|(<!--))\*remove-end\*((\/)|(#)|(-->))(\s+)?)',
     dotAll: true,
   );
 
-  /// Regexp to identify variables to be resolved.
+  /// Regexp to identify variables to be resolved within the contents of a file.
   @visibleForTesting
   static final variableRegexp = RegExp(
     r'(\s+)?((#)|(\/\*)|(<!--)){{(.*?)}}((#)|(\*\/)|(-->))(\s+)?',
     dotAll: true,
   );
 
-  /// Regexp to identify whitespace actions to be resolved.
+  /// Regexp to identify whitespace actions to be resolved within the contents
+  /// of a file.
   @visibleForTesting
   static final spacingGroupsRegexp = RegExp(
     r'(\s+)?((\/)|(#)|(<!--))\*w ((?:\d+[v>]\s*)+) w\*((\/)|(#)|(-->))(\s+)?',
     dotAll: true,
   );
 
-  /// Regexp to identify a single whitespace action to be resolved.
+  /// Regexp to identify a single whitespace action to be resolved within the
+  /// contents of a file.
   @visibleForTesting
   static final spacingGroupDataRegexp = RegExp(
     r'(\d+)([v>])',
+    dotAll: true,
+  );
+
+  /// Regexp to identify a conditional file to be resolved within its path.
+  static final conditionalPathRegexp = RegExp(
+    r'_condition_\._(.*?)_\._(.*?)_\._',
     dotAll: true,
   );
 }
@@ -44,7 +53,14 @@ extension ReferenceFile on File {
         await delete(recursive: true);
         return;
       }
-      await resolveContents();
+      final resolvedPath = await resolvePath();
+      final resultingFile = await () async {
+        if (p.equals(resolvedPath, path)) return this;
+        final dir = Directory(p.dirname(resolvedPath));
+        if (!dir.existsSync()) await dir.create(recursive: true);
+        return rename(resolvedPath);
+      }();
+      await resultingFile.resolveContents();
     } catch (e) {
       stderr.writeln(e);
     }
@@ -69,6 +85,10 @@ extension ReferenceFile on File {
           '',
         )
         .replaceAllMapped(
+          AltokeRegexp.conditionalPathRegexp,
+          transformConditionalPathMatch,
+        )
+        .replaceAllMapped(
           AltokeRegexp.variableRegexp,
           transformVariableMatch,
         )
@@ -84,6 +104,23 @@ extension ReferenceFile on File {
     }
     await writeAsString(resolvedContents);
   }
+
+  /// Resolves the parametrized path of the reference [File].
+  @visibleForTesting
+  Future<String> resolvePath() async {
+    return path.replaceAllMapped(
+      AltokeRegexp.conditionalPathRegexp,
+      transformConditionalPathMatch,
+    );
+  }
+}
+
+/// Transforms a variable match into an actual mustache variable.
+@visibleForTesting
+String transformConditionalPathMatch(Match match) {
+  final variable = match.group(1);
+  final pathSegment = match.group(2);
+  return '{{#$variable}}$pathSegment{{${p.separator}$variable}}';
 }
 
 /// Transforms a variable match into an actual mustache variable.
