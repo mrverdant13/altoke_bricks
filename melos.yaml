@@ -27,6 +27,13 @@ command:
           melos exec -- "coverde rm .dart_tool/ build/ pubspec_overrides.yaml" &&
           melos exec --depends-on realm -- "coverde rm binary/ default.realm.management default.realm.lock"
 
+command:
+  clean:
+    hooks:
+      pre:
+        run: >
+          melos exec -- "coverde rm .dart_tool/ build/ pubspec_overrides.yaml"
+
 scripts:
   S:
     description: Run spell checking for the entire project
