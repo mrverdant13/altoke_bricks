@@ -9,8 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 /*{{#use_go_router_router}}*/
 import 'package:go_router/go_router.dart';
-import 'package:hive/hive.dart';
 /*{{/use_go_router_router}}*/
+/*{{#use_hive_database}}*/
+import 'package:hive/hive.dart';
+/*{{/use_hive_database}}*/
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 /*{{#use_realm_database}}*/
