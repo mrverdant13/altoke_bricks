@@ -5,6 +5,13 @@ packages:
   - ./packages/common/
   - ./packages/tasks/
 
+command:
+  clean:
+    hooks:
+      pre:
+        run: >
+          melos exec -- "coverde rm .dart_tool/ build/ pubspec_overrides.yaml"
+
 scripts:
   # Code Generation
   g:
