@@ -4,9 +4,17 @@ packages:
   - ./packages/app/
   - ./packages/common/
   - ./packages/tasks/
-  - ./packages/tasks_storage/tasks_hive_storage/
-  - ./packages/tasks_storage/tasks_realm_storage/
-  - ./packages/tasks_storage/tasks_sembast_storage/
+  #*w 1v 2> w*#
+  #{{#use_hive_database}}#
+  - ./packages/tasks_storage/_condition_._use_hive_database_._tasks_hive_storage_._/
+  #{{/use_hive_database}}#
+  #{{#use_realm_database}}#
+  - ./packages/tasks_storage/_condition_._use_realm_database_._tasks_realm_storage_._/
+  #{{/use_realm_database}}#
+  #{{#use_sembast_database}}#
+  - ./packages/tasks_storage/_condition_._use_sembast_database_._tasks_sembast_storage_._/
+  #{{/use_sembast_database}}#
+  #*w 1v 2> w*#
   - ./packages/tasks_storage/tasks_storage/
 
 command:
@@ -21,13 +29,6 @@ command:
         run: >
           melos exec -- "coverde rm .dart_tool/ build/ pubspec_overrides.yaml" &&
           melos exec --depends-on realm -- "coverde rm binary/ default.realm.management default.realm.lock"
-
-command:
-  clean:
-    hooks:
-      pre:
-        run: >
-          melos exec -- "coverde rm .dart_tool/ build/ pubspec_overrides.yaml"
 
 scripts:
   # Code Generation

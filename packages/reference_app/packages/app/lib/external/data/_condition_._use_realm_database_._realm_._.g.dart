@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'realm.dart';
+part of '_condition_._use_realm_database_._realm_._.dart';
 
 // **************************************************************************
 // RiverpodGenerator

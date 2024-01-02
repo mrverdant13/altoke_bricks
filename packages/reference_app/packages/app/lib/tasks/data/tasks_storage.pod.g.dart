@@ -6,7 +6,7 @@ part of 'tasks_storage.pod.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$tasksStorageHash() => r'b57d45695924bb9db6dadd377ae8bba97d4c06d9';
+String _$tasksStorageHash() => r'6537da604d51840854fa4f0974056f4fd8f850b1';
 
 /// See also [tasksStorage].
 @ProviderFor(tasksStorage)

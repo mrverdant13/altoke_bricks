@@ -52,20 +52,20 @@ dependencies:
   #*w 1v 2> w*#
   #{{#use_hive_database}}#
   tasks_hive_storage:
-    path: ../tasks_storage/tasks_hive_storage/
+    path: ../tasks_storage/_condition_._use_hive_database_._tasks_hive_storage_._/
   #*w 1v 2> w*#
   #{{/use_hive_database}}#
   #*w 1v 2> w*#
   #{{#use_realm_database}}#
   tasks_realm_storage:
-    path: ../tasks_storage/tasks_realm_storage/
+    path: ../tasks_storage/_condition_._use_realm_database_._tasks_realm_storage_._/
   #*w 1v 2> w*#
   #{{/use_realm_database}}#
   #*w 1v 2> w*#
   #{{#use_sembast_database}}#
   #*w 1v 2> w*#
   tasks_sembast_storage:
-    path: ../tasks_storage/tasks_sembast_storage/
+    path: ../tasks_storage/_condition_._use_sembast_database_._tasks_sembast_storage_._/
   #*w 1v 2> w*#
   #{{/use_sembast_database}}#
   tasks_storage:

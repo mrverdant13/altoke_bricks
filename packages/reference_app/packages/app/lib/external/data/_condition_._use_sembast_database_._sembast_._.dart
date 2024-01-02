@@ -6,7 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sembast/sembast.dart';
 import 'package:tasks_sembast_storage/tasks_sembast_storage.dart';
 
-part 'sembast.g.dart';
+part '_condition_._use_sembast_database_._sembast_._.g.dart';
 
 @Riverpod(dependencies: [])
 Database sembastDb(SembastDbRef ref) {

@@ -6,11 +6,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 /*{{#use_hive_database}}*/
-export 'hive.dart'; /*{{/use_hive_database}}*/
+export '_condition_._use_hive_database_._hive_._.dart'; /*{{/use_hive_database}}*/
 /*{{#use_realm_database}}*/
-export 'realm.dart'; /*{{/use_realm_database}}*/
+export '_condition_._use_realm_database_._realm_._.dart'; /*{{/use_realm_database}}*/
 /*{{#use_sembast_database}}*/
-export 'sembast.dart'; /*{{/use_sembast_database}}*/
+export '_condition_._use_sembast_database_._sembast_._.dart'; /*{{/use_sembast_database}}*/
 
 part 'data.g.dart';
 

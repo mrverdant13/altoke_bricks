@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'tasks_box.pod.dart';
+part of '_condition_._use_hive_database_._tasks_box.pod_._.dart';
 
 // **************************************************************************
 // RiverpodGenerator

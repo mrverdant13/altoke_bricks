@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'sembast.dart';
+part of '_condition_._use_sembast_database_._sembast_._.dart';
 
 // **************************************************************************
 // RiverpodGenerator
