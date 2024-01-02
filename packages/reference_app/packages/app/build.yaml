@@ -47,6 +47,7 @@ targets:
           #{{#use_hive_database}}#
           - lib/tasks/data/_condition_._use_hive_database_._tasks_box.pod_._.dart
           #{{/use_hive_database}}#
+          #*w 1v 10> w*#
           - lib/tasks/data/tasks_storage.pod.dart
           - lib/tasks/state/async_filtered_tasks_count.pod.dart
           - lib/tasks/state/async_paginated_filtered_tasks.pod.dart
