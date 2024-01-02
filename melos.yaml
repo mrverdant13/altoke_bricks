@@ -9,9 +9,9 @@ packages:
   - ./packages/reference_app/packages/app/
   - ./packages/reference_app/packages/common/
   - ./packages/reference_app/packages/tasks/
-  - ./packages/reference_app/packages/tasks_storage/tasks_hive_storage/
-  - ./packages/reference_app/packages/tasks_storage/tasks_realm_storage/
-  - ./packages/reference_app/packages/tasks_storage/tasks_sembast_storage/
+  - ./packages/reference_app/packages/tasks_storage/_condition_._use_hive_database_._tasks_hive_storage_._/
+  - ./packages/reference_app/packages/tasks_storage/_condition_._use_realm_database_._tasks_realm_storage_._/
+  - ./packages/reference_app/packages/tasks_storage/_condition_._use_sembast_database_._tasks_sembast_storage_._/
   - ./packages/reference_app/packages/tasks_storage/tasks_storage/
 
 command:
