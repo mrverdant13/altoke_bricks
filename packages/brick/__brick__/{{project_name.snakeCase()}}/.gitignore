@@ -11,6 +11,7 @@
 # Local development
 /melos_overrides.yaml
 /**/melos_*.iml
+/**/pubspec_overrides.yaml
 
 # Testing
 /coverage/

@@ -4,6 +4,20 @@ import 'package:meta/meta.dart';
 
 /// Shell utilities.
 class Shell {
+  /// Removes untracked files from the provided [directory].
+  static Future<void> gitCleanDirectory(
+    Directory directory,
+  ) async {
+    final result = await run('git', [
+      'clean',
+      '-dfX',
+      directory.path,
+    ]);
+    if (result.exitCode != 0) {
+      throw Exception('Failed to git-clean directory: ${directory.path}');
+    }
+  }
+
   /// Copies a directory located at [source] to [destination].
   static Future<void> copyDirectory({
     required Directory source,
