@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:common/common.dart';
 import 'package:hive/hive.dart';
 import 'package:tasks/tasks.dart';
 import 'package:tasks_hive_storage/src/tasks_hive_storage.dart';
@@ -20,7 +19,8 @@ THEN an instance of the storage is returned
     () async {
       final databaseDir = Directory.systemTemp.createTempSync('hive-testing-');
       Hive.init(databaseDir.path);
-      final box = await Hive.openBox<Json>(TasksHiveStorage.boxName);
+      final box =
+          await Hive.openBox<Map<dynamic, dynamic>>(TasksHiveStorage.boxName);
       final storage = TasksHiveStorage(box: box);
       expect(storage, isNotNull);
       expect(storage, isA<TasksStorage>());
@@ -36,7 +36,7 @@ GIVEN a tasks storage
 ├─ THAT uses a Hive box''',
     () {
       late Directory databaseDir;
-      late Box<Json> box;
+      late Box<Map<dynamic, dynamic>> box;
       late TasksHiveStorage storage;
 
       setUp(() async {
@@ -69,7 +69,7 @@ THEN a task record is registered
           final existingTasksCount = box.length;
           expect(existingTasksCount, isZero);
           await storage.create(newTask: newTask);
-          bool filter(Json rawTask) =>
+          bool filter(Map<dynamic, dynamic> rawTask) =>
               rawTask[HiveTask.titleFieldJsonKey] == newTask.title &&
               rawTask[HiveTask.descriptionFieldJsonKey] == newTask.description;
           final resultingMatchingTasksCount = box.values.where(filter).length;
@@ -1230,7 +1230,7 @@ THEN all task records are updated
           await box.putAll({
             for (final task in tasks) task.id: task.toHiveJson(),
           });
-          bool filter(Json rawTask) =>
+          bool filter(Map<dynamic, dynamic> rawTask) =>
               !(rawTask[HiveTask.statusFieldJsonKey] as bool);
           final initialIncompleteTasksCount = box.values.where(filter).length;
           expect(initialIncompleteTasksCount, isPositive);
