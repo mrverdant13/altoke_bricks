@@ -44,6 +44,9 @@ Future<void> main(List<String> args) async {
     await Shell.removeDirectory(brickTemplateDir);
   }
 
+  // Remove untracked files
+  await Shell.gitCleanDirectory(referenceAppDir);
+
   // Copy reference project
   await Shell.copyDirectory(
     source: referenceAppDir,
