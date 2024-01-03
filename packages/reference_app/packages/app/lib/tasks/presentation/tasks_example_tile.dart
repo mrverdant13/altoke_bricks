@@ -8,43 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 /*remove-end*/
 
-class CounterExampleTile extends StatelessWidget {
-  const CounterExampleTile({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    return ListTile(
-      title: Text(
-        l10n.counterExampleLabel,
-        key: const Key('<counter::example-tile::title>'),
-      ),
-      onTap: () {
-        /*w 1v w*/
-        /*remove-start*/
-        final container = ProviderScope.containerOf(context, listen: false);
-        final routerPackage = container.read(routerPod);
-        switch (routerPackage) {
-          case RouterPackage.autoRoute:
-            /*remove-end*/
-            /*{{#use_auto_route_router}}*/
-            context.navigateTo(const CounterRoute());
-          /*{{/use_auto_route_router}}*/
-          /*remove-start*/
-          case RouterPackage.goRouter: /*remove-end*/
-            /*{{#use_go_router_router}}*/
-            const CounterRouteData().go(context);
-          /*{{/use_go_router_router}}*/
-          /*remove-start*/
-        } /*remove-end*/
-        /*w 1v w*/
-      },
-    );
-  }
-}
-
 class TasksExampleTile extends StatelessWidget {
   const TasksExampleTile({
     super.key,
