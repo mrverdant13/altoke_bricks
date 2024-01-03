@@ -39,7 +39,7 @@ abstract class AltokeRegexp {
 
   /// Regexp to identify a conditional file to be resolved within its path.
   static final conditionalPathRegexp = RegExp(
-    r'_condition_\._(.*?)_\._(.*?)_\._',
+    '_condition___(.*?)___(.*?)___',
     dotAll: true,
   );
 }
@@ -86,15 +86,15 @@ extension ReferenceFile on File {
         )
         .replaceAllMapped(
           AltokeRegexp.conditionalPathRegexp,
-          transformConditionalPathMatch,
+          transformConditionalPathMatchForFileContents,
         )
         .replaceAllMapped(
           AltokeRegexp.variableRegexp,
-          transformVariableMatch,
+          transformVariableMatchForFileContents,
         )
         .replaceAllMapped(
           AltokeRegexp.spacingGroupsRegexp,
-          transformWhitespaceActionsMatch,
+          transformWhitespaceActionsMatchForFileContents,
         );
     for (final placeholder in Placeholder.values) {
       resolvedContents = resolvedContents.replaceAll(
@@ -110,30 +110,40 @@ extension ReferenceFile on File {
   Future<String> resolvePath() async {
     return path.replaceAllMapped(
       AltokeRegexp.conditionalPathRegexp,
-      transformConditionalPathMatch,
+      transformConditionalPathMatchForFilePath,
     );
   }
 }
 
-/// Transforms a variable match into an actual mustache variable.
+/// Transforms a variable match into an actual mustache variable, in the path
+/// of a file.
 @visibleForTesting
-String transformConditionalPathMatch(Match match) {
+String transformConditionalPathMatchForFilePath(Match match) {
   final variable = match.group(1);
   final pathSegment = match.group(2);
   return '{{#$variable}}$pathSegment{{${p.separator}$variable}}';
 }
 
-/// Transforms a variable match into an actual mustache variable.
+/// Transforms a variable match into an actual mustache variable, in the
+/// contents of a file.
 @visibleForTesting
-String transformVariableMatch(Match match) {
+String transformConditionalPathMatchForFileContents(Match match) {
+  final pathSegment = match.group(2);
+  return '$pathSegment';
+}
+
+/// Transforms a variable match into an actual mustache variable, in the
+/// contents of a file.
+@visibleForTesting
+String transformVariableMatchForFileContents(Match match) {
   final variable = match.group(6);
   return '{{$variable}}';
 }
 
 /// Transforms a whitespace actions match into an actual set of spacing actions,
-/// such as new lines and spaces.
+/// such as new lines and spaces, in the contents of a file.
 @visibleForTesting
-String transformWhitespaceActionsMatch(Match match) {
+String transformWhitespaceActionsMatchForFileContents(Match match) {
   final buf = StringBuffer();
   final candidates =
       AltokeRegexp.spacingGroupDataRegexp.allMatches(match.group(6) ?? '');
