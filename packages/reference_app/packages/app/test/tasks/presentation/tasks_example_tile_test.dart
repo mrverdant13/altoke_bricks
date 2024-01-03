@@ -1,3 +1,4 @@
+// cspell:ignore tareas
 import 'package:altoke_app/routing/routing.dart';
 import 'package:altoke_app/tasks/tasks.dart';
 /*{{#use_auto_route_router}}*/

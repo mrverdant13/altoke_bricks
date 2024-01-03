@@ -8,6 +8,10 @@ ignorePaths:
   - "**/.gitignore"
   - "**/pubspec.lock"
   - "**/*.arb"
+  - "**/*.fakes.*"
+  - "**/*.freezed.dart"
+  - "**/*.g.dart"
+  - "**/*.gr.dart"
 enableGlobDot: true
 dictionaryDefinitions:
   - name: global-allow

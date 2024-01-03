@@ -5,6 +5,7 @@ github
 lcov
 melos
 mrverdant13
+nullable
 pubspec
 riverpod
 sembast
