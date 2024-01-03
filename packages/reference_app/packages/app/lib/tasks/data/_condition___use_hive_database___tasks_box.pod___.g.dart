@@ -1,24 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '_condition_._use_sembast_database_._sembast_._.dart';
+part of '_condition___use_hive_database___tasks_box.pod___.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$sembastDbHash() => r'9593864c43b21f7e6542d7bde9db91632bba9060';
+String _$tasksBoxHash() => r'f6b0cda868fa3abc34f3a970ea69dba5cb2046dd';
 
-/// See also [sembastDb].
-@ProviderFor(sembastDb)
-final sembastDbPod = AutoDisposeProvider<Database>.internal(
-  sembastDb,
-  name: r'sembastDbPod',
+/// See also [tasksBox].
+@ProviderFor(tasksBox)
+final tasksBoxPod = AutoDisposeProvider<Box<Map<dynamic, dynamic>>>.internal(
+  tasksBox,
+  name: r'tasksBoxPod',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$sembastDbHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$tasksBoxHash,
   dependencies: const <ProviderOrFamily>[],
   allTransitiveDependencies: const <ProviderOrFamily>{},
 );
 
-typedef SembastDbRef = AutoDisposeProviderRef<Database>;
+typedef TasksBoxRef = AutoDisposeProviderRef<Box<Map<dynamic, dynamic>>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

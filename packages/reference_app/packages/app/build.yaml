@@ -39,13 +39,13 @@ targets:
           - lib/external/data/data.dart
           #*w 1v 10> w*#
           #{{#use_realm_database}}#
-          - lib/external/data/_condition_._use_realm_database_._realm_._.dart
+          - lib/external/data/_condition___use_realm_database___realm___.dart
           #{{/use_realm_database}}#
           #{{#use_sembast_database}}#
-          - lib/external/data/_condition_._use_sembast_database_._sembast_._.dart
+          - lib/external/data/_condition___use_sembast_database___sembast___.dart
           #{{/use_sembast_database}}#
           #{{#use_hive_database}}#
-          - lib/tasks/data/_condition_._use_hive_database_._tasks_box.pod_._.dart
+          - lib/tasks/data/_condition___use_hive_database___tasks_box.pod___.dart
           #{{/use_hive_database}}#
           #*w 1v 10> w*#
           - lib/tasks/data/tasks_storage.pod.dart

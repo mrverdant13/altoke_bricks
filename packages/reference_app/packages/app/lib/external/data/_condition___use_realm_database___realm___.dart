@@ -6,7 +6,7 @@ import 'package:realm/realm.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tasks_realm_storage/tasks_realm_storage.dart';
 
-part '_condition_._use_realm_database_._realm_._.g.dart';
+part '_condition___use_realm_database___realm___.g.dart';
 
 @Riverpod(dependencies: [])
 Realm realmDb(RealmDbRef ref) {

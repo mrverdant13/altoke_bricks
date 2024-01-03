@@ -184,7 +184,7 @@ class _$TaskImpl implements _Task {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskImpl &&
@@ -367,7 +367,7 @@ class _$NewTaskImpl implements _NewTask {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NewTaskImpl &&
@@ -543,7 +543,7 @@ class _$PartialTaskImpl implements _PartialTask {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PartialTaskImpl &&
