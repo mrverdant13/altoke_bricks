@@ -137,10 +137,20 @@ class TasksSembastStorage implements TasksStorage {
         ),
       ],
     );
+
+    bool tasksListsAreEqual(List<Task> previous, List<Task> next) {
+      if (previous.length != next.length) return false;
+      for (var i = 0; i < previous.length; i++) {
+        if (previous[i] != next[i]) return false;
+      }
+      return true;
+    }
+
     return store
         .query(finder: dbFinder)
         .onSnapshots(database)
-        .map(tasksFromSnapshots);
+        .map(tasksFromSnapshots)
+        .distinct(tasksListsAreEqual);
   }
 
   @override
@@ -153,7 +163,7 @@ class TasksSembastStorage implements TasksStorage {
       nullableSearchTerm: searchTerm,
     ).toSembastFilter();
     final dbFinder = Finder(filter: dbFilter);
-    return store.query(finder: dbFinder).onCount(database);
+    return store.query(finder: dbFinder).onCount(database).distinct();
   }
 }
 

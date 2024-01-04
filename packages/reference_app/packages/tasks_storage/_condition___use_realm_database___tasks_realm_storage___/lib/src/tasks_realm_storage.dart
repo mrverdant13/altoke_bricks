@@ -153,10 +153,20 @@ class TasksRealmStorage implements TasksStorage {
           'TRUEPREDICATE SORT(createdAt DESC)',
         ),
     };
+
+    bool tasksListsAreEqual(List<Task> previous, List<Task> next) {
+      if (previous.length != next.length) return false;
+      for (var i = 0; i < previous.length; i++) {
+        if (previous[i] != next[i]) return false;
+      }
+      return true;
+    }
+
     return filteredTasksQuery.changes
         .asBroadcastStream()
         .map((changes) => changes.results.skip(offset).take(limit))
-        .map(tasksFromRealmTasks);
+        .map(tasksFromRealmTasks)
+        .distinct(tasksListsAreEqual);
   }
 
   @override
@@ -172,7 +182,9 @@ class TasksRealmStorage implements TasksStorage {
     final filteredTasksQuery = queryExpression == null
         ? allTasksQuery
         : allTasksQuery.query(queryExpression);
-    return filteredTasksQuery.changes.map((changes) => changes.results.length);
+    return filteredTasksQuery.changes
+        .map((changes) => changes.results.length)
+        .distinct();
   }
 }
 

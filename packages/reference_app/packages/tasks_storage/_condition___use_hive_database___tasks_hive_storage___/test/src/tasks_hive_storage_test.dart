@@ -57,6 +57,7 @@ GIVEN a tasks storage
       test(
         '''
 
+│  ├─ THAT does not have task records
 AND the valid data for a new task
 WHEN the task is created
 THEN a task record is registered
@@ -74,6 +75,36 @@ THEN a task record is registered
               rawTask[HiveTask.descriptionFieldJsonKey] == newTask.description;
           final resultingMatchingTasksCount = box.values.where(filter).length;
           expect(resultingMatchingTasksCount, existingTasksCount + 1);
+        },
+      );
+
+      test(
+        '''
+
+│  ├─ THAT has task records
+AND the valid data for a new task
+WHEN the task is created
+THEN a task record is registered
+''',
+        () async {
+          const existingTaskId = 13;
+          const existingTask = NewTask(
+            title: 'title',
+            description: 'description',
+          );
+          await box.put(existingTaskId, existingTask.toHiveJson());
+          final initialTasksCount = box.length;
+          expect(initialTasksCount, 1);
+          const newTask = NewTask(
+            title: 'title',
+            description: 'description',
+          );
+          await storage.create(newTask: newTask);
+          bool filter(Map<dynamic, dynamic> rawTask) =>
+              rawTask[HiveTask.titleFieldJsonKey] == newTask.title &&
+              rawTask[HiveTask.descriptionFieldJsonKey] == newTask.description;
+          final resultingMatchingTasksCount = box.values.where(filter).length;
+          expect(resultingMatchingTasksCount, initialTasksCount + 1);
         },
       );
 
@@ -1427,19 +1458,20 @@ THEN the paginated tasks that match the conditions are continuously emitted as t
               title: 'title 00',
               description: 'description 00',
               isCompleted: true,
-              createdAt: DateTime.now(),
+              createdAt: DateTime(2020, 1, 0),
             ),
             Task(
               id: 1,
               title: 'title 01',
               isCompleted: false,
-              createdAt: DateTime.now(),
+              // ignore: avoid_redundant_argument_values
+              createdAt: DateTime(2020, 1, 1),
             ),
             Task(
               id: 2,
               title: 'title 02',
               isCompleted: true,
-              createdAt: DateTime.now(),
+              createdAt: DateTime(2020, 1, 2),
             ),
           ];
           final sortedTasksForStage00 = [...tasksForStage00]
@@ -1452,7 +1484,7 @@ THEN the paginated tasks that match the conditions are continuously emitted as t
             id: 3,
             title: 'title 03',
             isCompleted: true,
-            createdAt: DateTime.now(),
+            createdAt: DateTime(2020, 1, 3),
           );
           final tasksForStage01 = <Task>[
             ...tasksForStage00,
@@ -1561,6 +1593,11 @@ THEN the paginated tasks that match the conditions are continuously emitted as t
             searchTerm: 'matching-pattern',
           );
 
+          bool matches(Task task) =>
+              task.isCompleted &&
+              (task.title.contains('matching-pattern') ||
+                  (task.description?.contains('matching-pattern') ?? false));
+
           // Stage 00
           final tasksForStage00 = <Task>[
             Task(
@@ -1568,98 +1605,72 @@ THEN the paginated tasks that match the conditions are continuously emitted as t
               title: 'title 00',
               description: 'description 00 matching-pattern',
               isCompleted: true,
-              createdAt: DateTime.now(),
+              createdAt: DateTime(2020, 1, 0),
             ),
             Task(
               id: 1,
               title: 'title 01',
               isCompleted: false,
-              createdAt: DateTime.now(),
+              // ignore: avoid_redundant_argument_values
+              createdAt: DateTime(2020, 1, 1),
             ),
             Task(
               id: 2,
               title: 'title 02',
               isCompleted: true,
-              createdAt: DateTime.now(),
+              createdAt: DateTime(2020, 1, 2),
             ),
             Task(
               id: 3,
               title: 'title 03',
               description: 'description 03 matching-pattern',
               isCompleted: true,
-              createdAt: DateTime.now(),
+              createdAt: DateTime(2020, 1, 3),
             ),
             Task(
               id: 4,
               title: 'title 04',
               isCompleted: false,
-              createdAt: DateTime.now(),
+              createdAt: DateTime(2020, 1, 4),
             ),
             Task(
               id: 5,
               title: 'title 05',
               description: 'description 05 matching-pattern',
               isCompleted: false,
-              createdAt: DateTime.now(),
+              createdAt: DateTime(2020, 1, 5),
             ),
           ];
           final sortedTasksForStage00 = [...tasksForStage00]
             ..sort((tA, tB) => tB.createdAt.compareTo(tA.createdAt));
-          final expectedTasksForStage00 = sortedTasksForStage00
-              .where(
-                (task) =>
-                    task.isCompleted &&
-                    (task.title.contains('matching-pattern') ||
-                        (task.description?.contains('matching-pattern') ??
-                            false)),
-              )
-              .skip(2)
-              .take(2)
-              .toList();
+          final expectedTasksForStage00 =
+              sortedTasksForStage00.where(matches).skip(2).take(2).toList();
 
           // Stage 01
           final newTaskInStage01 = Task(
             id: 6,
             title: 'title 06 matching-pattern',
             isCompleted: true,
-            createdAt: DateTime.now(),
+            createdAt: DateTime(2020, 1, 6),
           );
           final tasksForStage01 = <Task>[
             ...tasksForStage00,
             newTaskInStage01,
           ];
-          // final sortedTasksForStage01 = [...tasksForStage01]
-          //   ..sort((tA, tB) => tB.createdAt.compareTo(tA.createdAt));
-          // final expectedTasksForStage01 = sortedTasksForStage01
-          //     .where(
-          //       (task) =>
-          //           task.isCompleted &&
-          //           (task.title.contains('matching-pattern') ||
-          //               (task.description?.contains('matching-pattern') ??
-          //                   false)),
-          //     )
-          //     .skip(2)
-          //     .take(2)
-          //     .toList();
+          final sortedTasksForStage01 = [...tasksForStage01]
+            ..sort((tA, tB) => tB.createdAt.compareTo(tA.createdAt));
+          final expectedTasksForStage01 =
+              sortedTasksForStage01.where(matches).skip(2).take(2).toList();
 
           // Stage 02
           final tasksForStage02 = <Task>[
             for (final task in tasksForStage01)
-              if (task.title != '0') task,
+              if (!task.title.contains('00')) task,
           ];
           final sortedTasksForStage02 = [...tasksForStage02]
             ..sort((tA, tB) => tB.createdAt.compareTo(tA.createdAt));
-          final expectedTasksForStage02 = sortedTasksForStage02
-              .where(
-                (task) =>
-                    task.isCompleted &&
-                    (task.title.contains('matching-pattern') ||
-                        (task.description?.contains('matching-pattern') ??
-                            false)),
-              )
-              .skip(2)
-              .take(2)
-              .toList();
+          final expectedTasksForStage02 =
+              sortedTasksForStage02.where(matches).skip(2).take(2).toList();
 
           // Stage 03
           // final tasksForStage03 = <Task>[
@@ -1672,16 +1683,179 @@ THEN the paginated tasks that match the conditions are continuously emitted as t
           // final sortedTasksForStage03 = [...tasksForStage03]
           //   ..sort((tA, tB) => tB.createdAt.compareTo(tA.createdAt));
           // final expectedTasksForStage03 = sortedTasksForStage03
-          //     .where(
-          //       (task) =>
-          //           task.isCompleted &&
-          //           (task.title.contains('matching-pattern') ||
-          //               (task.description?.contains('matching-pattern') ??
-          //                   false)),
-          //     )
+          //     .where(matches)
           //     .skip(2)
           //     .take(2)
           //     .toList();
+
+          unawaited(
+            expectLater(
+              stream,
+              emitsInOrder(
+                [
+                  orderedEquals(expectedTasksForStage00),
+                  orderedEquals(expectedTasksForStage01),
+                  orderedEquals(expectedTasksForStage02),
+
+                  // Not emitted since the tasks have not been updated
+                  // orderedEquals(expectedTasksForStage03),
+                ],
+              ),
+            ),
+          );
+
+          // Stage 00
+          await box.putAll({
+            for (final task in tasksForStage00) task.id: task.toHiveJson(),
+          });
+
+          // Stage 01
+          await box.put(newTaskInStage01.id, newTaskInStage01.toHiveJson());
+
+          // Stage 02
+          {
+            final keysToDelete = box.toMap().entries.where(
+              (entry) {
+                final rawTitle = entry.value[HiveTask.titleFieldJsonKey];
+                if (rawTitle is! String) return false;
+                return rawTitle.contains('00');
+              },
+            ).map(
+              (taskRecordEntry) => taskRecordEntry.key,
+            );
+            await box.deleteAll(keysToDelete);
+          }
+
+          // Stage 03
+          {
+            final updatedTaskRecordEntries = box
+                .toMap()
+                .entries
+                .where(
+                  (entry) =>
+                      entry.value[HiveTask.descriptionFieldJsonKey] == null,
+                )
+                .map(
+                  (entry) => entry
+                    ..value[HiveTask.descriptionFieldJsonKey] =
+                        'updated description',
+                );
+            await box.putAll(Map.fromEntries(updatedTaskRecordEntries));
+          }
+        },
+      );
+
+      test(
+        '''
+
+│  ├─ THAT has task records
+AND pagination parameters
+WHEN a tasks page is watched
+├─ THAT are filtered by their status (uncompleted)
+├─ AND are not filtered by their content
+THEN the paginated tasks that match the conditions are continuously emitted as they change
+''',
+        () async {
+          final stream = storage.watchPaginated(
+            offset: 2,
+            limit: 2,
+            statusFilter: TasksStatusFilter.uncompleted,
+          );
+
+          bool matches(Task task) => !task.isCompleted;
+
+          // Stage 00
+          final tasksForStage00 = <Task>[
+            Task(
+              id: 0,
+              title: 'title 00',
+              description: 'description 00',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 0),
+            ),
+            Task(
+              id: 1,
+              title: 'title 01',
+              isCompleted: false,
+              // ignore: avoid_redundant_argument_values
+              createdAt: DateTime(2020, 1, 1),
+            ),
+            Task(
+              id: 2,
+              title: 'title 02',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 2),
+            ),
+            Task(
+              id: 3,
+              title: 'title 03',
+              description: 'description 03',
+              isCompleted: true,
+              createdAt: DateTime(2020, 1, 3),
+            ),
+            Task(
+              id: 4,
+              title: 'title 04',
+              description: 'description 04',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 4),
+            ),
+            Task(
+              id: 5,
+              title: 'title 05',
+              isCompleted: false,
+              createdAt: DateTime(2020, 1, 5),
+            ),
+          ];
+          final sortedTasksForStage00 = [...tasksForStage00]
+            ..sort((tA, tB) => tB.createdAt.compareTo(tA.createdAt));
+          final expectedTasksForStage00 =
+              sortedTasksForStage00.where(matches).skip(2).take(2).toList();
+
+          // Stage 01
+          final newTaskInStage01 = Task(
+            id: 6,
+            title: 'title 06',
+            isCompleted: true,
+            createdAt: DateTime(2020, 1, 6),
+          );
+          final tasksForStage01 = <Task>[
+            ...tasksForStage00,
+            newTaskInStage01,
+          ];
+          // final sortedTasksForStage01 = [...tasksForStage01]
+          //   ..sort((tA, tB) => tB.createdAt.compareTo(tA.createdAt));
+          // final expectedTasksForStage01 = sortedTasksForStage01
+          //     .where(matches)
+          //     .skip(2)
+          //     .take(2)
+          //     .toList();
+
+          // Stage 02
+          final tasksForStage02 = <Task>[
+            for (final task in tasksForStage01)
+              if (task.title != '0') task,
+          ];
+          // final sortedTasksForStage02 = [...tasksForStage02]
+          //   ..sort((tA, tB) => tB.createdAt.compareTo(tA.createdAt));
+          // final expectedTasksForStage02 = sortedTasksForStage02
+          //     .where(matches)
+          //     .skip(2)
+          //     .take(2)
+          //     .toList();
+
+          // Stage 03
+          final tasksForStage03 = <Task>[
+            for (final task in tasksForStage02)
+              if (task.description == null)
+                task.copyWith(description: 'updated description')
+              else
+                task,
+          ];
+          final sortedTasksForStage03 = [...tasksForStage03]
+            ..sort((tA, tB) => tB.createdAt.compareTo(tA.createdAt));
+          final expectedTasksForStage03 =
+              sortedTasksForStage03.where(matches).skip(2).take(2).toList();
 
           unawaited(
             expectLater(
@@ -1693,10 +1867,10 @@ THEN the paginated tasks that match the conditions are continuously emitted as t
                   // Not emitted since the tasks have not been updated
                   // orderedEquals(expectedTasksForStage01),
 
-                  orderedEquals(expectedTasksForStage02),
-
                   // Not emitted since the tasks have not been updated
-                  // orderedEquals(expectedTasksForStage03),
+                  // orderedEquals(expectedTasksForStage02),
+
+                  orderedEquals(expectedTasksForStage03),
                 ],
               ),
             ),
@@ -1765,6 +1939,9 @@ THEN the quantity of persisted tasks that match the conditions is continuously e
                   2,
                   3,
                   1,
+
+                  // Not emitted since the tasks count has not changed
+                  // 1,
                 ],
               ),
             ),
@@ -1778,13 +1955,14 @@ THEN the quantity of persisted tasks that match the conditions is continuously e
                 title: 'title 00',
                 description: 'description 00',
                 isCompleted: true,
-                createdAt: DateTime.now(),
+                createdAt: DateTime(2020, 1, 0),
               ),
               Task(
                 id: 1,
                 title: 'title 01',
                 isCompleted: false,
-                createdAt: DateTime.now(),
+                // ignore: avoid_redundant_argument_values
+                createdAt: DateTime(2020, 1, 1),
               ),
             ];
             await box.putAll({
@@ -1798,7 +1976,7 @@ THEN the quantity of persisted tasks that match the conditions is continuously e
               id: 3,
               title: 'title 03',
               isCompleted: true,
-              createdAt: DateTime.now(),
+              createdAt: DateTime(2020, 1, 3),
             );
             await box.put(newTask.id, newTask.toHiveJson());
           }
@@ -1872,13 +2050,14 @@ THEN the quantity of persisted tasks that match the conditions is continuously e
                 title: 'title 00',
                 description: 'description 00 matching-pattern',
                 isCompleted: true,
-                createdAt: DateTime.now(),
+                createdAt: DateTime(2020, 1, 0),
               ),
               Task(
                 id: 1,
                 title: 'title 01',
                 isCompleted: false,
-                createdAt: DateTime.now(),
+                // ignore: avoid_redundant_argument_values
+                createdAt: DateTime(2020, 1, 1),
               ),
             ];
             await box.putAll({
@@ -1892,7 +2071,7 @@ THEN the quantity of persisted tasks that match the conditions is continuously e
               id: 3,
               title: 'title 03 matching-pattern',
               isCompleted: true,
-              createdAt: DateTime.now(),
+              createdAt: DateTime(2020, 1, 3),
             );
             await box.put(newTask.id, newTask.toHiveJson());
           }
