@@ -22,6 +22,7 @@ class TasksScreen extends ConsumerWidget {
           SliverTasksList(),
         ],
       ),
+      floatingActionButton: NewTaskFab(),
     );
   }
 }
