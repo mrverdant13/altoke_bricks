@@ -8,6 +8,7 @@ packages:
   - ./packages/brick_generator/
   - ./packages/reference_app/packages/app/
   - ./packages/reference_app/packages/common/
+  - ./packages/reference_app/packages/element_in_memory_cache/
   - ./packages/reference_app/packages/tasks/
   - ./packages/reference_app/packages/tasks_storage/_condition___use_hive_database___tasks_hive_storage___/
   - ./packages/reference_app/packages/tasks_storage/_condition___use_realm_database___tasks_realm_storage___/

@@ -3,6 +3,7 @@ name: monorepo
 packages:
   - ./packages/app/
   - ./packages/common/
+  - ./packages/element_in_memory_cache/
   - ./packages/tasks/
   #*w 1v 2> w*#
   #{{#use_hive_database}}#
