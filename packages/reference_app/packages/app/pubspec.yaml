@@ -39,6 +39,7 @@ dependencies:
   path_provider: ^2.1.1
   #*w 1v 2> w*#
   #{{#use_realm_database}}#
+  reactive_forms: ^16.1.1
   realm: ^1.6.1
   #*w 1v 2> w*#
   #{{/use_realm_database}}#
