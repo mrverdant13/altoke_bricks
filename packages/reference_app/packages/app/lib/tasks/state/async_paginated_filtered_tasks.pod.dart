@@ -6,7 +6,7 @@ part 'async_paginated_filtered_tasks.pod.g.dart';
 
 @Riverpod(
   dependencies: [
-    tasksStorage,
+    tasksRepository,
     SelectedTasksStatusFilter,
     TaskSearchTerm,
   ],
@@ -18,8 +18,8 @@ Stream<List<Task>> asyncPaginatedFilteredTasks(
 }) {
   final statusFilter = ref.watch(selectedTasksStatusFilterPod);
   final searchTerm = ref.watch(taskSearchTermPod);
-  final tasksStorage = ref.watch(tasksStoragePod);
-  return tasksStorage.watchPaginated(
+  final tasksRepository = ref.watch(tasksRepositoryPod);
+  return tasksRepository.watchPaginatedTasks(
     offset: offset,
     limit: limit,
     statusFilter: statusFilter,

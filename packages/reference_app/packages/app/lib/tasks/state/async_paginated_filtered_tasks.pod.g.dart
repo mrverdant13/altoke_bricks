@@ -7,7 +7,7 @@ part of 'async_paginated_filtered_tasks.pod.dart';
 // **************************************************************************
 
 String _$asyncPaginatedFilteredTasksHash() =>
-    r'd0298f57f8a9ed334542c21cbe86f895674dd3a0';
+    r'25c422ef700176c4759151cb3a548f6573aaa81a';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -61,7 +61,7 @@ class AsyncPaginatedFilteredTasksFamily extends Family<AsyncValue<List<Task>>> {
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
-    tasksStoragePod,
+    tasksRepositoryPod,
     selectedTasksStatusFilterPod,
     taskSearchTermPod
   ];
@@ -71,8 +71,8 @@ class AsyncPaginatedFilteredTasksFamily extends Family<AsyncValue<List<Task>>> {
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    tasksStoragePod,
-    ...?tasksStoragePod.allTransitiveDependencies,
+    tasksRepositoryPod,
+    ...?tasksRepositoryPod.allTransitiveDependencies,
     selectedTasksStatusFilterPod,
     ...?selectedTasksStatusFilterPod.allTransitiveDependencies,
     taskSearchTermPod,

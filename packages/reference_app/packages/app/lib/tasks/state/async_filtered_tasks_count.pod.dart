@@ -5,7 +5,7 @@ part 'async_filtered_tasks_count.pod.g.dart';
 
 @Riverpod(
   dependencies: [
-    tasksStorage,
+    tasksRepository,
     SelectedTasksStatusFilter,
     TaskSearchTerm,
   ],
@@ -15,8 +15,8 @@ Stream<int> asyncFilteredTasksCount(
 ) {
   final statusFilter = ref.watch(selectedTasksStatusFilterPod);
   final searchTerm = ref.watch(taskSearchTermPod);
-  final tasksStorage = ref.watch(tasksStoragePod);
-  return tasksStorage.watchCount(
+  final tasksRepository = ref.watch(tasksRepositoryPod);
+  return tasksRepository.watchCount(
     statusFilter: statusFilter,
     searchTerm: searchTerm,
   );

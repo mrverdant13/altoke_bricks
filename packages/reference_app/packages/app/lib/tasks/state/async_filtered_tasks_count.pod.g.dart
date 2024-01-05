@@ -7,7 +7,7 @@ part of 'async_filtered_tasks_count.pod.dart';
 // **************************************************************************
 
 String _$asyncFilteredTasksCountHash() =>
-    r'3e9aa0ce7e5a957b19e9651503274b3e389ccf3c';
+    r'4bedf84b7845a84a8b8973c3f8d31f54c06a3507';
 
 /// See also [asyncFilteredTasksCount].
 @ProviderFor(asyncFilteredTasksCount)
@@ -18,13 +18,13 @@ final asyncFilteredTasksCountPod = AutoDisposeStreamProvider<int>.internal(
       ? null
       : _$asyncFilteredTasksCountHash,
   dependencies: <ProviderOrFamily>[
-    tasksStoragePod,
+    tasksRepositoryPod,
     selectedTasksStatusFilterPod,
     taskSearchTermPod
   ],
   allTransitiveDependencies: <ProviderOrFamily>{
-    tasksStoragePod,
-    ...?tasksStoragePod.allTransitiveDependencies,
+    tasksRepositoryPod,
+    ...?tasksRepositoryPod.allTransitiveDependencies,
     selectedTasksStatusFilterPod,
     ...?selectedTasksStatusFilterPod.allTransitiveDependencies,
     taskSearchTermPod,
