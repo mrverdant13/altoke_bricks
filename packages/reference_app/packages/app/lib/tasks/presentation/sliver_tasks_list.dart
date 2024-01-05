@@ -14,47 +14,50 @@ class SliverTasksList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    return ref.watch(asyncFilteredTasksCountPod).when(
-          data: (tasksCount) {
-            if (tasksCount == 0) {
-              return SliverFillRemaining(
-                hasScrollBody: false,
-                child: Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Center(
-                    child: Text(
-                      l10n.tasksEmptyTasksMessage,
-                      textAlign: TextAlign.center,
+    return TaskDeletionSnackbarWrapper(
+      child: ref.watch(asyncFilteredTasksCountPod).when(
+            data: (tasksCount) {
+              if (tasksCount == 0) {
+                return SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Center(
+                      child: Text(
+                        l10n.tasksEmptyTasksMessage,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
-                ),
-              );
-            }
-            return const SliverNonEmptyTasksList();
-          },
-          error: (error, stackTrace) => SliverFillRemaining(
-            hasScrollBody: false,
-            child: Padding(
-              padding: const EdgeInsets.all(15),
-              child: Center(
-                child: Text(
-                  l10n.tasksUnexpectedErrorMessage,
-                  textAlign: TextAlign.center,
+                );
+              }
+              return const SliverNonEmptyTasksList();
+            },
+            error: (error, stackTrace) => SliverFillRemaining(
+              hasScrollBody: false,
+              child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: Center(
+                  child: Text(
+                    l10n.tasksUnexpectedErrorMessage,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
             ),
-          ),
-          loading: () => SliverPadding(
-            padding: EdgeInsets.zero,
-            sliver: SliverList.builder(
-              itemCount: 100,
-              itemBuilder: (context, index) => const TaskTile.skeleton(),
+            loading: () => SliverPadding(
+              padding: EdgeInsets.zero,
+              sliver: SliverList.builder(
+                itemCount: 100,
+                itemBuilder: (context, index) => const TaskTile.skeleton(),
+              ),
             ),
           ),
-        );
+    );
   }
 }
 
+@visibleForTesting
 class SliverNonEmptyTasksList extends ConsumerWidget {
   const SliverNonEmptyTasksList({
     super.key,
@@ -117,5 +120,71 @@ class SliverNonEmptyTasksList extends ConsumerWidget {
         },
       ),
     );
+  }
+}
+
+@visibleForTesting
+class TaskDeletionSnackbarWrapper extends ConsumerStatefulWidget {
+  const TaskDeletionSnackbarWrapper({
+    required this.child,
+    super.key,
+  });
+
+  final Widget child;
+
+  @override
+  ConsumerState<TaskDeletionSnackbarWrapper> createState() =>
+      _TaskDeletionSnackbarWrapperState();
+}
+
+class _TaskDeletionSnackbarWrapperState
+    extends ConsumerState<TaskDeletionSnackbarWrapper> {
+  late bool snackbarIsVisible;
+  late ScaffoldMessengerState scaffoldMessengerState;
+
+  @override
+  void initState() {
+    super.initState();
+    snackbarIsVisible = false;
+  }
+
+  @override
+  void dispose() {
+    if (snackbarIsVisible) scaffoldMessengerState.hideCurrentSnackBar();
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    scaffoldMessengerState = ScaffoldMessenger.of(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    ref.listen(
+      latestDeletedTaskPod,
+      (previousDeletedTaskState, deletedTaskState) {
+        if (!mounted) return;
+        if (previousDeletedTaskState == null) return;
+        if (previousDeletedTaskState == deletedTaskState) return;
+        final task = deletedTaskState.valueOrNull;
+        if (task == null) return;
+        final snackbar = SnackBar(
+          // TODO(mrverdant13): Localize.
+          content: const Text('Task deleted'),
+          onVisible: () => snackbarIsVisible = true,
+          action: SnackBarAction(
+            // TODO(mrverdant13): Localize.
+            label: 'Undo',
+            onPressed: ref.read(latestDeletedTaskPod.notifier).restore,
+          ),
+        );
+        scaffoldMessengerState.hideCurrentSnackBar();
+        final controller = scaffoldMessengerState.showSnackBar(snackbar);
+        controller.closed.then((_) => snackbarIsVisible = false);
+      },
+    );
+    return widget.child;
   }
 }

@@ -2,8 +2,10 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:altoke_app/tasks/tasks.dart';
+/*{{/use_auto_route_router}}*/
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tasks/tasks.dart';
 
 @visibleForTesting
 const opacityWhenCompleted = 0.6;
@@ -19,15 +21,25 @@ class TaskTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final (hasDescription) = ref.watch(
+    final (taskId, hasDescription) = ref.watch(
       taskPod.select(
-        (task) => task.description != null,
+        (task) => (task.id, task.description != null),
       ),
     );
-    return BaseTaskTile(
-      title: const TaskTitle(),
-      subtitle: hasDescription ? const Description() : null,
-      trailing: const TaskCheckbox(),
+    final isBeingUpdated = ref.watch(
+      taskEditorPod(taskId).select(
+        (state) => state.isLoading,
+      ),
+    );
+    return AbsorbPointer(
+      absorbing: isBeingUpdated,
+      child: DismissibleWrapper(
+        child: BaseTaskTile(
+          title: const TaskTitle(),
+          subtitle: hasDescription ? const Description() : null,
+          trailing: const TaskCheckbox(),
+        ),
+      ),
     );
   }
 }
@@ -176,6 +188,69 @@ class SkeletonTaskTitleState extends _TaskTitleState
 
 // ** ^ TASK TITLE ^ ** //
 
+// ** v DISMISSIBLE WRAPPER v ** //
+
+@visibleForTesting
+class DismissibleWrapper extends ConsumerStatefulWidget {
+  const DismissibleWrapper({
+    required this.child,
+    super.key,
+  });
+
+  final Widget child;
+
+  @override
+  ConsumerState<DismissibleWrapper> createState() => _DismissibleWrapperState();
+}
+
+class _DismissibleWrapperState extends ConsumerState<DismissibleWrapper> {
+  late bool isBeingDismissed;
+
+  @override
+  void initState() {
+    super.initState();
+    isBeingDismissed = false;
+  }
+
+  @visibleForTesting
+  void onDismissed(DismissDirection dismissDirection) {
+    final taskId = ref.read(taskPod).id;
+    ref.read(taskEditorPod(taskId).notifier).deleteTask();
+    isBeingDismissed = true;
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    if (isBeingDismissed) return const SizedBox.shrink();
+    final taskId = ref.watch(
+      taskPod.select(
+        (task) => task.id,
+      ),
+    );
+    return Dismissible(
+      key: ValueKey('<tasks:dismissible-wrapper:task-$taskId>'),
+      background: const SizedBox.shrink(),
+      secondaryBackground: ColoredBox(
+        color: theme.colorScheme.error,
+        child: const Align(
+          alignment: Alignment.centerRight,
+          child: Padding(
+            padding: EdgeInsets.all(10),
+            child: Icon(Icons.delete_outlined),
+          ),
+        ),
+      ),
+      direction: DismissDirection.endToStart,
+      onDismissed: onDismissed,
+      child: widget.child,
+    );
+  }
+}
+
+// ** ^ DISMISSIBLE WRAPPER ^ ** //
+
 // ** v TASK DESCRIPTION v ** //
 
 @visibleForTesting
@@ -228,13 +303,28 @@ class TaskCheckbox extends ConsumerStatefulWidget {
 class _TaskCheckboxState extends ConsumerState<TaskCheckbox> {
   @override
   Widget build(BuildContext context) {
-    final isCompleted = ref.watch(
+    final (taskId, isCompleted) = ref.watch(
       taskPod.select(
-        (task) => task.isCompleted,
+        (task) => (task.id, task.isCompleted),
+      ),
+    );
+    final resolvedTaskEditorPod = taskEditorPod(taskId);
+    final isBeingUpdated = ref.watch(
+      resolvedTaskEditorPod.select(
+        (state) => state.isLoading,
       ),
     );
     return BaseTaskCheckbox(
       isCompleted: isCompleted,
+      onChanged: isBeingUpdated
+          ? null
+          : (isCompleted) {
+              if (isCompleted == null) return;
+              final partial = PartialTask(isCompleted: () => isCompleted);
+              ref
+                  .read(resolvedTaskEditorPod.notifier)
+                  .updateTask(partialTask: partial);
+            },
     );
   }
 }
