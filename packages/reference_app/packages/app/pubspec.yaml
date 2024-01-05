@@ -63,6 +63,8 @@ dependencies:
     path: ../tasks_storage/_condition___use_realm_database___tasks_realm_storage___/
   #*w 1v 2> w*#
   #{{/use_realm_database}}#
+  tasks_repository:
+    path: ../tasks_repository/
   #*w 1v 2> w*#
   #{{#use_sembast_database}}#
   #*w 1v 2> w*#

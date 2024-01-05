@@ -5,6 +5,7 @@ packages:
   - ./packages/common/
   - ./packages/element_in_memory_cache/
   - ./packages/tasks/
+  - ./packages/tasks_repository/
   #*w 1v 2> w*#
   #{{#use_hive_database}}#
   - ./packages/tasks_storage/_condition___use_hive_database___tasks_hive_storage___/
