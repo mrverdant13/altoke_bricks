@@ -44,6 +44,9 @@ targets:
           #{{#use_sembast_database}}#
           - lib/external/data/_condition___use_sembast_database___sembast___.dart
           #{{/use_sembast_database}}#
+          #*w 1v 10> w*#
+          - lib/tasks/data/latest_deleted_task_cache.pod.dart
+          #*w 1v 10> w*#
           #{{#use_hive_database}}#
           - lib/tasks/data/_condition___use_hive_database___tasks_box.pod___.dart
           #{{/use_hive_database}}#
