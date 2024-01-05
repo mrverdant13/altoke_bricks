@@ -9,8 +9,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 /*{{#use_go_router_router}}*/
 import 'package:go_router/go_router.dart';
 
-part 'router.g.dart';
 /*{{/use_go_router_router}}*/
+
+part 'router.g.dart';
 
 /*{{#use_auto_route_router}}*/
 @AutoRouterConfig(
@@ -36,6 +37,11 @@ class AppRouter extends $AppRouter {
       path: '/tasks',
       title: (context, data) => 'Tasks',
       page: TasksRoute.page,
+    ),
+    AdaptiveRoute(
+      path: '/tasks/new',
+      title: (context, data) => 'New Task',
+      page: NewTaskRoute.page,
     ),
   ];
 }
@@ -78,6 +84,19 @@ class TasksRouteData extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const TasksScreen();
+  }
+}
+
+@TypedGoRoute<NewTaskRouteData>(
+  path: '/tasks/new',
+  name: 'NewTaskRoute',
+)
+class NewTaskRouteData extends GoRouteData {
+  const NewTaskRouteData();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const NewTaskScreen();
   }
 }
 /*{{/use_go_router_router}}*/
