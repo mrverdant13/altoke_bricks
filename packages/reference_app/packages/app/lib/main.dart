@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:altoke_app/app/app.dart';
+import 'package:altoke_app/app/state/logging_provider_observer.dart';
 import 'package:altoke_app/external/external.dart';
 import 'package:altoke_app/routing/routing.dart';
 import 'package:altoke_app/tasks/tasks.dart';
@@ -30,99 +31,6 @@ import 'package:tasks_hive_storage/tasks_hive_storage.dart';
 import 'package:tasks_realm_storage/tasks_realm_storage.dart';
 /*{{/use_realm_database}}*/
 import 'package:universal_io/io.dart';
-
-class LoggingPodsObserver implements ProviderObserver {
-  @override
-  void didAddProvider(
-    ProviderBase<Object?> provider,
-    Object? value,
-    ProviderContainer container,
-  ) {
-    final buf = StringBuffer()..writeln('didAddProvider 🧬');
-    final args = provider.argument;
-    if (args != null) {
-      buf
-        ..write('Arguments: ')
-        ..writeln(args);
-    }
-    if (value == null) {
-      buf.writeln('❌ Errored initialization');
-    } else {
-      buf
-        ..write('Initial value: ')
-        ..write(value);
-    }
-    log(
-      buf.toString(),
-      name: provider.name ?? provider.runtimeType.toString(),
-    );
-  }
-
-  @override
-  void didDisposeProvider(
-    ProviderBase<Object?> provider,
-    ProviderContainer container,
-  ) {
-    final buf = StringBuffer()..writeln('didDisposeProvider 💀');
-    final args = provider.argument;
-    if (args != null) {
-      buf
-        ..write('Arguments: ')
-        ..writeln(args);
-    }
-    log(
-      buf.toString(),
-      name: provider.name ?? provider.runtimeType.toString(),
-    );
-  }
-
-  @override
-  void didUpdateProvider(
-    ProviderBase<Object?> provider,
-    Object? previousValue,
-    Object? newValue,
-    ProviderContainer container,
-  ) {
-    final buf = StringBuffer()..writeln('didUpdateProvider 🔃');
-    final args = provider.argument;
-    if (args != null) {
-      buf
-        ..write('Arguments: ')
-        ..writeln(args);
-    }
-    buf
-      ..write('┌─ ')
-      ..writeln(previousValue ?? '❌')
-      ..write('└> ')
-      ..writeln(newValue ?? '❌');
-    log(
-      buf.toString(),
-      name: provider.name ?? provider.runtimeType.toString(),
-    );
-  }
-
-  @override
-  void providerDidFail(
-    ProviderBase<Object?> provider,
-    Object error,
-    StackTrace stackTrace,
-    ProviderContainer container,
-  ) {
-    final buf = StringBuffer()..writeln('providerDidFail 🐛');
-    final args = provider.argument;
-    if (args != null) {
-      buf
-        ..write('Arguments: ')
-        ..writeln(args);
-    }
-    log(
-      buf.toString(),
-      name: provider.name ?? provider.runtimeType.toString(),
-      error: error,
-      stackTrace: stackTrace,
-    );
-  }
-}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
