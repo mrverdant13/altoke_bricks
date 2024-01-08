@@ -36,6 +36,11 @@ class TaskForm extends StatelessWidget {
                   // TODO(mrverdant13): Localize.
                   labelText: 'Title',
                 ),
+                validationMessages: {
+                  ValidationMessage.required: (_) =>
+                      // TODO(mrverdant13): Localize.
+                      'The title must not be empty',
+                },
               ),
               const SizedBox.square(dimension: 20),
               ReactiveTextField<String>(

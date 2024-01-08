@@ -5,7 +5,6 @@ class TaskFormGroup extends FormGroup {
       : titleControl = FormControl<String>(
           validators: [
             Validators.required,
-            Validators.minLength(1),
           ],
         ),
         descriptionControl = FormControl<String>(
