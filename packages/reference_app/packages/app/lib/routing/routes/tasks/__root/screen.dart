@@ -16,9 +16,8 @@ class TasksScreen extends ConsumerWidget {
     return const Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            floating: true,
-          ),
+          SliverAppBar(floating: true),
+          SliverTasksFilterControls(),
           SliverTasksList(),
         ],
       ),
