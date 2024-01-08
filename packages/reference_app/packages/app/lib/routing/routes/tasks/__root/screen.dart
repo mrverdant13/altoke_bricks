@@ -1,3 +1,4 @@
+import 'package:altoke_app/app/app.dart';
 import 'package:altoke_app/tasks/tasks.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class TasksScreen extends ConsumerWidget {
     return const Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(floating: true),
+          SliverResponsiveAppBar(),
           SliverTasksFilterControls(),
           SliverTasksList(),
         ],
