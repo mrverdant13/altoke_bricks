@@ -75,7 +75,7 @@ class LoggingPodsObserver implements ProviderObserver {
     Object? value,
     ProviderContainer container,
   ) {
-    if (!kDebugMode) return;
+    if (provider.shouldBeIgnored) return;
     final buf = StringBuffer()..writeln(provider.loggingName);
     final stringifiedArgs = resolveStringifiedArgs(
       provider: provider,
@@ -101,7 +101,7 @@ class LoggingPodsObserver implements ProviderObserver {
     ProviderBase<Object?> provider,
     ProviderContainer container,
   ) {
-    if (!kDebugMode) return;
+    if (provider.shouldBeIgnored) return;
     final buf = StringBuffer()
       ..writeln(provider.loggingName)
       ..writeln('💀');
@@ -124,7 +124,7 @@ class LoggingPodsObserver implements ProviderObserver {
     Object? newValue,
     ProviderContainer container,
   ) {
-    if (!kDebugMode) return;
+    if (provider.shouldBeIgnored) return;
     final buf = StringBuffer()..writeln(provider.loggingName);
     final stringifiedArgs = resolveStringifiedArgs(
       provider: provider,
@@ -158,7 +158,7 @@ class LoggingPodsObserver implements ProviderObserver {
     StackTrace stackTrace,
     ProviderContainer container,
   ) {
-    if (!kDebugMode) return;
+    if (provider.shouldBeIgnored) return;
     final buf = StringBuffer()
       ..writeln(provider.loggingName)
       ..writeln('❌');
@@ -181,4 +181,10 @@ class LoggingPodsObserver implements ProviderObserver {
 
 extension on ProviderBase<dynamic> {
   String get loggingName => name ?? runtimeType.toString();
+
+  bool get shouldBeIgnored {
+    if (!kDebugMode) return true; // Only log in debug mode.
+    if (this == taskPod) return true; // Scoping pod only.
+    return false;
+  }
 }
