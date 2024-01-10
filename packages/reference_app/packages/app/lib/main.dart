@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:altoke_app/app/app.dart';
-import 'package:altoke_app/app/state/logging_provider_observer.dart';
 import 'package:altoke_app/external/external.dart';
 import 'package:altoke_app/routing/routing.dart';
 import 'package:altoke_app/tasks/tasks.dart';
@@ -82,9 +81,6 @@ Future<void> main() async {
         /*{{#use_sembast_database}}*/
         sembastDbPod.overrideWithValue(sembastDb),
         /*{{/use_sembast_database}}*/
-      ],
-      observers: [
-        LoggingPodsObserver(),
       ],
       child: MyApp(
         routerConfig: routerConfig as RouterConfig<Object>,
