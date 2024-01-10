@@ -21,18 +21,18 @@ class TaskTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final (taskId, hasDescription) = ref.watch(
+    final hasDescription = ref.watch(
       taskPod.select(
-        (task) => (task.id, task.description != null),
+        (task) => task.description != null,
       ),
     );
-    final isBeingUpdated = ref.watch(
-      taskEditorPod(taskId).select(
+    final isLoading = ref.watch(
+      tasksMutatorPod.select(
         (state) => state.isLoading,
       ),
     );
     return AbsorbPointer(
-      absorbing: isBeingUpdated,
+      absorbing: isLoading,
       child: DismissibleWrapper(
         child: BaseTaskTile(
           title: const TaskTitle(),
@@ -215,7 +215,7 @@ class _DismissibleWrapperState extends ConsumerState<DismissibleWrapper> {
   @visibleForTesting
   void onDismissed(DismissDirection dismissDirection) {
     final taskId = ref.read(taskPod).id;
-    ref.read(taskEditorPod(taskId).notifier).deleteTask();
+    ref.read(tasksMutatorPod.notifier).deleteTask(taskId: taskId);
     isBeingDismissed = true;
     setState(() {});
   }
@@ -308,9 +308,8 @@ class _TaskCheckboxState extends ConsumerState<TaskCheckbox> {
         (task) => (task.id, task.isCompleted),
       ),
     );
-    final resolvedTaskEditorPod = taskEditorPod(taskId);
     final isBeingUpdated = ref.watch(
-      resolvedTaskEditorPod.select(
+      tasksMutatorPod.select(
         (state) => state.isLoading,
       ),
     );
@@ -322,8 +321,8 @@ class _TaskCheckboxState extends ConsumerState<TaskCheckbox> {
               if (isCompleted == null) return;
               final partial = PartialTask(isCompleted: () => isCompleted);
               ref
-                  .read(resolvedTaskEditorPod.notifier)
-                  .updateTask(partialTask: partial);
+                  .read(tasksMutatorPod.notifier)
+                  .updateTask(taskId: taskId, partialTask: partial);
             },
     );
   }

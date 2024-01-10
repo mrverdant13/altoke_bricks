@@ -5,5 +5,5 @@ export 'selected_tasks_status_filter.pod.dart';
 export 'task.form_group.dart';
 export 'task.pod.dart';
 export 'task_creator.pod.dart';
-export 'task_editor.pod.dart';
 export 'task_search_term.pod.dart';
+export 'tasks_mutator.pod.dart';

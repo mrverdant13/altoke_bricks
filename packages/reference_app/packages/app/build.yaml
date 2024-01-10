@@ -58,7 +58,7 @@ targets:
           - lib/tasks/state/async_paginated_filtered_tasks.pod.dart
           - lib/tasks/state/selected_tasks_status_filter.pod.dart
           - lib/tasks/state/task_creator.pod.dart
-          - lib/tasks/state/task_editor.pod.dart
           - lib/tasks/state/task_search_term.pod.dart
           - lib/tasks/state/task.pod.dart
+          - lib/tasks/state/tasks_mutator.pod.dart
 #*w 1v w*#
