@@ -14,6 +14,7 @@ import 'package:go_router/go_router.dart';
 /*{{/use_go_router_router}}*/
 import 'package:mocktail/mocktail.dart';
 
+import '../../helpers/fallback_values.dart';
 import '../../helpers/helpers.dart';
 
 void main() {
@@ -63,7 +64,7 @@ WHEN the tile is tapped
 THEN the tasks route should be visited
 ''',
     (tester) async {
-      registerRoutingFallbackValues();
+      registerFallbackValues();
       final routingController = MockRoutingController();
       when(() => routingController.navigate(any()))
           .thenAnswer((_) async => null);
@@ -100,7 +101,7 @@ WHEN the tile is tapped
 THEN the tasks route should be visited
 ''',
     (tester) async {
-      registerRoutingFallbackValues();
+      registerFallbackValues();
       final goRouter = MockGoRouter();
       when(() => goRouter.go(any())).thenAnswer((_) async {});
       await tester.pumpTestableWidget(

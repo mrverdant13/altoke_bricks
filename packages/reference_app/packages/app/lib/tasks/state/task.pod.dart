@@ -6,6 +6,6 @@ part 'task.pod.g.dart';
 @Riverpod(dependencies: [])
 Task task(TaskRef ref) {
   throw UnimplementedError(
-    '`taskPod` was not initialized.',
+    '`${taskPod.name}` was not initialized.',
   );
 }
