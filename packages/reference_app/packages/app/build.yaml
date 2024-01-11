@@ -56,6 +56,8 @@ targets:
           - lib/tasks/state/async_filtered_tasks_count.pod.dart
           - lib/tasks/state/async_latest_deleted_task.pod.dart
           - lib/tasks/state/async_paginated_filtered_tasks.pod.dart
+          - lib/tasks/state/async_task.pod.dart
+          - lib/tasks/state/scoped_task_id.pod.dart
           - lib/tasks/state/selected_tasks_status_filter.pod.dart
           - lib/tasks/state/task_creator.pod.dart
           - lib/tasks/state/task_search_term.pod.dart

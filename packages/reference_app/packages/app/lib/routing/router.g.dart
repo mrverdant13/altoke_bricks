@@ -11,6 +11,7 @@ List<RouteBase> get $appRoutes => [
       $counterRouteData,
       $tasksRouteData,
       $newTaskRouteData,
+      $taskDetailsRouteData,
     ];
 
 RouteBase get $homeRouteData => GoRouteData.$route(
@@ -96,6 +97,32 @@ extension $NewTaskRouteDataExtension on NewTaskRouteData {
 
   String get location => GoRouteData.$location(
         '/tasks/new',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $taskDetailsRouteData => GoRouteData.$route(
+      path: '/tasks/:taskId',
+      name: 'TaskDetailsRoute',
+      factory: $TaskDetailsRouteDataExtension._fromState,
+    );
+
+extension $TaskDetailsRouteDataExtension on TaskDetailsRouteData {
+  static TaskDetailsRouteData _fromState(GoRouterState state) =>
+      TaskDetailsRouteData(
+        taskId: int.parse(state.pathParameters['taskId']!),
+      );
+
+  String get location => GoRouteData.$location(
+        '/tasks/${Uri.encodeComponent(taskId.toString())}',
       );
 
   void go(BuildContext context) => context.go(location);

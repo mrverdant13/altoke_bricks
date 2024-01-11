@@ -1,7 +1,9 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:altoke_app/routing/routing.dart';
 import 'package:altoke_app/tasks/tasks.dart';
+import 'package:auto_route/auto_route.dart';
 /*{{/use_auto_route_router}}*/
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,6 +40,25 @@ class TaskTile extends ConsumerWidget {
           title: const TaskTitle(),
           subtitle: hasDescription ? const Description() : null,
           trailing: const TaskCheckbox(),
+          onTap: () {
+            final taskId = ref.read(taskPod).id;
+            /*remove-start*/
+            final routerPackage = ref.read(routerPod);
+            switch (routerPackage) {
+              case RouterPackage.autoRoute:
+                /*remove-end*/
+                /*{{#use_auto_route_router}}*/
+                context.navigateTo(TaskDetailsRoute(taskId: taskId));
+              /*{{/use_auto_route_router}}*/
+              /*remove-start*/
+              case RouterPackage.goRouter: /*remove-end*/
+                /*{{#use_go_router_router}}*/
+                TaskDetailsRouteData(taskId: taskId).go(context);
+              /*{{/use_go_router_router}}*/
+              /*remove-start*/
+            } /*remove-end*/
+            /*w 1v w*/
+          },
         ),
       ),
     );

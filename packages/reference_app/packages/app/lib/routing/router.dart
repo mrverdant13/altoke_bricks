@@ -43,6 +43,11 @@ class AppRouter extends $AppRouter {
       title: (context, data) => 'New Task',
       page: NewTaskRoute.page,
     ),
+    AdaptiveRoute(
+      path: '/tasks/:taskId',
+      title: (context, data) => 'Task Details',
+      page: TaskDetailsRoute.page,
+    ),
   ];
 }
 /*{{/use_auto_route_router}}*/
@@ -97,6 +102,23 @@ class NewTaskRouteData extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const NewTaskScreen();
+  }
+}
+
+@TypedGoRoute<TaskDetailsRouteData>(
+  path: '/tasks/:taskId',
+  name: 'TaskDetailsRoute',
+)
+class TaskDetailsRouteData extends GoRouteData {
+  const TaskDetailsRouteData({
+    required this.taskId,
+  });
+
+  final int taskId;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return TaskDetailsScreen(taskId: taskId);
   }
 }
 /*{{/use_go_router_router}}*/

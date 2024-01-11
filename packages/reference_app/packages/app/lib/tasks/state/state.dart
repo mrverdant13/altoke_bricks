@@ -1,6 +1,8 @@
 export 'async_filtered_tasks_count.pod.dart';
 export 'async_latest_deleted_task.pod.dart';
 export 'async_paginated_filtered_tasks.pod.dart';
+export 'async_task.pod.dart';
+export 'scoped_task_id.pod.dart';
 export 'selected_tasks_status_filter.pod.dart';
 export 'task.form_group.dart';
 export 'task.pod.dart';
