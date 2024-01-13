@@ -7,7 +7,7 @@ part of 'latest_deleted_task_cache.pod.dart';
 // **************************************************************************
 
 String _$latestDeletedTaskCacheHash() =>
-    r'7335831a28cabfefc317ed5ebbab7f53e1353d29';
+    r'8373128af1bf5923a7a3b8860a02d736a748a88e';
 
 /// See also [latestDeletedTaskCache].
 @ProviderFor(latestDeletedTaskCache)
