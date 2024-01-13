@@ -49,6 +49,9 @@ Future<void> main() async {
     /*{{/use_go_router_router}}*/
     /*remove-start*/,
   } /*remove-end*/;
+  /*remove-start*/
+  final databasePackage = DatabasePackage.fromEnv;
+  /*remove-end*/
   /*{{#use_hive_database}}*/
   await initHiveDatabase(
     version: 1,
@@ -71,6 +74,7 @@ Future<void> main() async {
       overrides: [
         /*remove-start*/
         routerPod.overrideWithValue(routerPackage),
+        databasePod.overrideWithValue(databasePackage),
         /*remove-end*/
         /*{{#use_hive_database}}*/
         tasksBoxPod.overrideWithValue(tasksBox),
