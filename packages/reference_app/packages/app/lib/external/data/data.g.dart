@@ -655,3 +655,24 @@ final _$rawFakeTasksJsonLiteral = [
     'createdAt': '2023-01-23T17:23:48Z'
   }
 ];
+
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+String _$databaseHash() => r'0386955534328798424d248f36ac1cc53309d73f';
+
+/// See also [database].
+@ProviderFor(database)
+final databasePod = AutoDisposeProvider<DatabasePackage>.internal(
+  database,
+  name: r'databasePod',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$databaseHash,
+  dependencies: const <ProviderOrFamily>[],
+  allTransitiveDependencies: const <ProviderOrFamily>{},
+);
+
+typedef DatabaseRef = AutoDisposeProviderRef<DatabasePackage>;
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

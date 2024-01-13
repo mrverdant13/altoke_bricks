@@ -1,9 +1,12 @@
 import 'package:common/common.dart';
 /*remove-start*/
 import 'package:flutter/foundation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 /*remove-end*/
 import 'package:json_annotation/json_annotation.dart';
+/*remove-start*/
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+/*remove-end*/
 
 /*{{#use_hive_database}}*/
 export '_condition___use_hive_database___hive___.dart'; /*{{/use_hive_database}}*/
@@ -39,11 +42,10 @@ enum DatabasePackage {
 @visibleForTesting
 const databaseIdentifier = String.fromEnvironment('REF_ALTOKE_DATABASE');
 
-final databasePod = Provider<DatabasePackage>(
-  (_) => throw UnimplementedError(
+@Riverpod(dependencies: [])
+DatabasePackage database(DatabaseRef ref) {
+  throw UnimplementedError(
     'No database package has been provided. ',
-  ),
-  name: 'databasePod',
-  dependencies: const [],
-);
+  );
+}
 // coverage:ignore-end
