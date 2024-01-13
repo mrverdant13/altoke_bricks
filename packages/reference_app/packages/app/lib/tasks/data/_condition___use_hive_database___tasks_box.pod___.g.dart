@@ -6,7 +6,7 @@ part of '_condition___use_hive_database___tasks_box.pod___.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$tasksBoxHash() => r'f6b0cda868fa3abc34f3a970ea69dba5cb2046dd';
+String _$tasksBoxHash() => r'6a0b2fc713943814affef8d6fdf17d791b4445bb';
 
 /// See also [tasksBox].
 @ProviderFor(tasksBox)
