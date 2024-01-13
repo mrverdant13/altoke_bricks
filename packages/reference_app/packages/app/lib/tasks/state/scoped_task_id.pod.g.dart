@@ -6,7 +6,7 @@ part of 'scoped_task_id.pod.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$scopedTaskIdHash() => r'856792045b5c0242e8589ff61806edb956311ab2';
+String _$scopedTaskIdHash() => r'e07f85d89e3931d62a2cb5c35725e482e174d6c2';
 
 /// See also [scopedTaskId].
 @ProviderFor(scopedTaskId)
