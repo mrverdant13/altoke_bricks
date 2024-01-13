@@ -15,7 +15,7 @@ class UpdateTaskFab extends ConsumerWidget {
     final l10n = context.l10n;
     final taskId = ref.watch(scopedTaskIdPod);
     final enabled = ReactiveForm.of(context)!.enabled;
-    return FloatingActionButton.extended(
+    return FloatingActionButton(
       tooltip: l10n.tasksUpdateTaskButtonTooltip,
       onPressed: enabled
           ? () {
@@ -37,10 +37,7 @@ class UpdateTaskFab extends ConsumerWidget {
               }
             }
           : null,
-      icon: const Icon(Icons.save),
-      label: Text(
-        l10n.tasksUpdateTaskButtonLabel,
-      ),
+      child: const Icon(Icons.save),
     );
   }
 }

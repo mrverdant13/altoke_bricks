@@ -153,12 +153,8 @@
   "@tasksNoTaskFoundByIdMessage": {
     "description": "Message shown when no task is found for a given id"
   },
-  "tasksUpdateTaskButtonTooltip": "Update task",
+  "tasksUpdateTaskButtonTooltip": "Apply changes",
   "@tasksUpdateTaskButtonTooltip": {
     "description": "Tooltip for the update task button"
-  },
-  "tasksUpdateTaskButtonLabel": "Apply changes",
-  "@tasksUpdateTaskButtonLabel": {
-    "description": "Label for the update task button"
   }
 }

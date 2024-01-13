@@ -73,8 +73,8 @@
   "@tasksFailedToMarkAllTasksAsCompletedSnackbarMessage": {
     "description": "Mensaje mostrado cuando ocurre un error al marcar todas las tareas como completadas"
   },
-  "tasaksDeleteAllCompletedTasksButtonTooltip": "Borrar todas las tareas completadas",
-  "@tasaksDeleteAllCompletedTasksButtonTooltip": {
+  "tasksDeleteAllCompletedTasksButtonTooltip": "Borrar todas las tareas completadas",
+  "@tasksDeleteAllCompletedTasksButtonTooltip": {
     "description": "Tooltip del botón de borrar todas las tareas completadas"
   },
   "tasksAllCompletedTasksDeletedSnackbarMessage": "Todas las tareas completadas han sido borradas",
@@ -93,8 +93,8 @@
   "@tasksUnexpectedTasksLoadErrorMessage": {
     "description": "Mensaje mostrado cuando ocurre un error inesperado al cargar las tareas"
   },
-  "tasksTasksDeletedSnackbarMessage": "Tarea borrada",
-  "@tasksTasksDeletedSnackbarMessage": {
+  "tasksTaskDeletedSnackbarMessage": "Tarea borrada",
+  "@tasksTaskDeletedSnackbarMessage": {
     "description": "Mensaje mostrado cuando se borra una tarea"
   },
   "tasksRestoreDeletedTaskSnackbarActionLabel": "Deshacer",
@@ -129,8 +129,8 @@
   "@tasksExistingTaskDetailsAppBarTitle": {
     "description": "Título de la cabecera de la página de detalles de una tarea existente"
   },
-  "tasksNonEnexistingTaskDetailsAppBarTitle": "Tarea no encontrada",
-  "@tasksNonEnexistingTaskDetailsAppBarTitle": {
+  "tasksNonExistingTaskDetailsAppBarTitle": "Tarea no encontrada",
+  "@tasksNonExistingTaskDetailsAppBarTitle": {
     "description": "Título de la cabecera de la página de detalles de una tarea no encontrada"
   },
   "tasksErroredTaskDetailsAppBarTitle": "Error",
@@ -153,12 +153,8 @@
   "@tasksNoTaskFoundByIdMessage": {
     "description": "Mensaje mostrado cuando no se encuentra ninguna tarea con un id especificado"
   },
-  "tasksUpdateTaskButtonTooltip": "Actualizar tarea",
+  "tasksUpdateTaskButtonTooltip": "Aplicar cambios",
   "@tasksUpdateTaskButtonTooltip": {
     "description": "Tooltip del botón de actualizar tarea"
-  },
-  "tasksUpdpateTaskButtonLabel": "Aplicar cambios",
-  "@tasksUpdpateTaskButtonLabel": {
-    "description": "Etiqueta del botón de actualizar tarea"
   }
 }
