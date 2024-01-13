@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/tasks/tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -75,20 +76,19 @@ class _TasksContentFilterTextFieldState
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return TextFormField(
-      decoration: const InputDecoration(
-        // TODO(mrverdant13): Localize.
-        labelText: 'Search by content',
-        // TODO(mrverdant13): Localize.
-        hintText: 'Search by content',
-        prefixIcon: Padding(
+      decoration: InputDecoration(
+        labelText: l10n.tasksTaskContentSearchTextFieldLabel,
+        hintText: l10n.tasksTaskContentSearchTextFieldHint,
+        prefixIcon: const Padding(
           padding: EdgeInsets.only(
             left: 15,
             right: 5,
           ),
           child: Icon(Icons.search, size: 16),
         ),
-        prefixIconConstraints: BoxConstraints(),
+        prefixIconConstraints: const BoxConstraints(),
       ),
       onChanged: (searchTerm) {
         debounceTimer?.cancel();
@@ -112,6 +112,7 @@ class TasksStatusFilterDropdown extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     return DropdownButtonHideUnderline(
       child: DropdownButtonFormField(
         value: ref.watch(selectedTasksStatusFilterPod),
@@ -124,7 +125,7 @@ class TasksStatusFilterDropdown extends ConsumerWidget {
                 children: [
                   Icon(filter.icon, size: 16),
                   const SizedBox(width: 5),
-                  Text(filter.label),
+                  Text(filter.getLocalizedLabel(context)),
                 ],
               ),
             ),
@@ -133,11 +134,8 @@ class TasksStatusFilterDropdown extends ConsumerWidget {
           if (filter == null) return;
           ref.read(selectedTasksStatusFilterPod.notifier).filter = filter;
         },
-        decoration: const InputDecoration(
-          // TODO(mrverdant13): Localize.
-          labelText: 'Search by status',
-          // TODO(mrverdant13): Localize.
-          hintText: 'Search by status',
+        decoration: InputDecoration(
+          labelText: l10n.tasksTaskStatusFilterDropdownLabel,
         ),
       ),
     );
@@ -145,17 +143,15 @@ class TasksStatusFilterDropdown extends ConsumerWidget {
 }
 
 extension on TasksStatusFilter {
-  String get label {
+  String getLocalizedLabel(BuildContext context) {
+    final l10n = context.l10n;
     switch (this) {
       case TasksStatusFilter.all:
-        // TODO(mrverdant13): Localize.
-        return 'All';
+        return l10n.tasksTaskStatusFilterDropdownAllItemLabel;
       case TasksStatusFilter.uncompleted:
-        // TODO(mrverdant13): Localize.
-        return 'Uncompleted';
+        return l10n.tasksTaskStatusFilterDropdownUncompletedItemLabel;
       case TasksStatusFilter.completed:
-        // TODO(mrverdant13): Localize.
-        return 'Completed';
+        return l10n.tasksTaskStatusFilterDropdownCompletedItemLabel;
     }
   }
 

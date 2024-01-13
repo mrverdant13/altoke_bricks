@@ -39,7 +39,7 @@ class SliverTasksList extends ConsumerWidget {
                 padding: const EdgeInsets.all(15),
                 child: Center(
                   child: Text(
-                    l10n.tasksUnexpectedErrorMessage,
+                    l10n.tasksUnexpectedTasksLoadErrorMessage,
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -162,6 +162,7 @@ class _TaskDeletionSnackbarWrapperState
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     ref.listen(
       latestDeletedTaskPod,
       (previousDeletedTaskState, deletedTaskState) {
@@ -171,12 +172,10 @@ class _TaskDeletionSnackbarWrapperState
         final task = deletedTaskState.valueOrNull;
         if (task == null) return;
         final snackbar = SnackBar(
-          // TODO(mrverdant13): Localize.
-          content: const Text('Task deleted'),
+          content: Text(l10n.tasksTaskDeletedSnackbarMessage),
           onVisible: () => snackbarIsVisible = true,
           action: SnackBarAction(
-            // TODO(mrverdant13): Localize.
-            label: 'Undo',
+            label: l10n.tasksRestoreDeletedTaskSnackbarActionLabel,
             onPressed: ref.read(latestDeletedTaskPod.notifier).restore,
           ),
         );

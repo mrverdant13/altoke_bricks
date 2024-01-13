@@ -1,4 +1,5 @@
 import 'package:altoke_app/app/app.dart';
+import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/routing/routing.dart';
 import 'package:altoke_app/tasks/tasks.dart';
 /*{{#use_auto_route_router}}*/
@@ -7,6 +8,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:tasks_storage/tasks_storage.dart';
 
 /*{{#use_auto_route_router}}*/
 @RoutePage(
@@ -28,6 +30,7 @@ class TaskDetailsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     ref.listen(
       tasksMutatorPod,
       (previousState, newState) {
@@ -51,14 +54,17 @@ class TaskDetailsScreen extends ConsumerWidget {
               /*remove-start*/
             } /*remove-end*/
           /*w 1v w*/
-          case TasksMutationFailure():
+          case TasksMutationFailure(:final error):
+            error as UpdateTaskFailure;
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(
-                const SnackBar(
+                SnackBar(
                   content: Text(
-                    // TODO(mrverdant13): Localize.
-                    'Failed to update task',
+                    switch (error) {
+                      UpdateTaskFailureEmptyTitle() =>
+                        l10n.tasksUpdateTaskFailureEmptyTitleSnackbarMessage,
+                    },
                   ),
                 ),
               );
@@ -90,6 +96,7 @@ class ScreenContent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     ref.listen(
       asyncTaskPod.select(
         (asyncTask) => asyncTask.valueOrNull,
@@ -103,22 +110,21 @@ class ScreenContent extends ConsumerWidget {
       },
     );
     final asyncTask = ref.watch(asyncTaskPod);
-    const sliverNotFoundMessage = SliverFillRemaining(
+    final sliverNotFoundMessage = SliverFillRemaining(
       hasScrollBody: false,
       child: Padding(
-        padding: EdgeInsets.all(15),
+        padding: const EdgeInsets.all(15),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.error_outline,
               size: 75,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
-              // TODO(mrverdant13): Localize.
-              'No task found',
+              l10n.tasksNoTaskFoundByIdMessage,
             ),
           ],
         ),
@@ -147,25 +153,22 @@ class ScreenContent extends ConsumerWidget {
                     ),
                   )
                   .when(
-                    // TODO(mrverdant13): Localize.
-                    data: (taskExists) =>
-                        taskExists ? 'Task details' : 'Task not found',
-                    // TODO(mrverdant13): Localize.
-                    error: (error, stackTrace) => 'Failed to load task',
-                    // TODO(mrverdant13): Localize.
-                    loading: () => 'Loading task',
+                    data: (taskExists) => taskExists
+                        ? l10n.tasksExistingTaskDetailsAppBarTitle
+                        : l10n.tasksNonExistingTaskDetailsAppBarTitle,
+                    error: (_, __) => l10n.tasksErroredTaskDetailsAppBarTitle,
+                    loading: () => l10n.tasksLoadingTaskDetailsAppBarTitle,
                   ),
             ),
           ),
           asyncTask.when(
             data: (task) => task == null ? sliverNotFoundMessage : sliverForm,
-            error: (error, stackTrace) => const SliverFillRemaining(
+            error: (_, __) => SliverFillRemaining(
               hasScrollBody: false,
               child: Padding(
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
                 child: Text(
-                  // TODO(mrverdant13): Localize.
-                  'Failed to load task',
+                  l10n.tasksUnexpectedErrorWhenLoadingTaskDetailsMessage,
                 ),
               ),
             ),

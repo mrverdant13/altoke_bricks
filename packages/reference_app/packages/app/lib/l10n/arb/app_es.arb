@@ -33,12 +33,136 @@
   "@counterIncrementButtonTooltip": {
     "description": "Tooltip del botón de incrementar"
   },
+  "tasksTasksListAppBarTitle": "Tareas",
+  "@tasksTasksListAppBarTitle": {
+    "description": "Título de la cabecera de la página de lista de tareas"
+  },
+  "tasksTaskContentSearchTextFieldLabel": "Buscar por contenido",
+  "@tasksTaskContentSearchTextFieldLabel": {
+    "description": "Etiqueta del campo de búsqueda por contenido"
+  },
+  "tasksTaskContentSearchTextFieldHint": "Buscar por contenido",
+  "@tasksTaskContentSearchTextFieldHint": {
+    "description": "Pista del campo de búsqueda por contenido"
+  },
+  "tasksTaskStatusFilterDropdownLabel": "Filtrar por estado",
+  "@tasksTaskStatusFilterDropdownLabel": {
+    "description": "Etiqueta del desplegable de filtrar por estado"
+  },
+  "tasksTaskStatusFilterDropdownAllItemLabel": "Todos",
+  "@tasksTaskStatusFilterDropdownAllItemLabel": {
+    "description": "Etiqueta del elemento del desplegable para no filtrar por estado"
+  },
+  "tasksTaskStatusFilterDropdownUncompletedItemLabel": "No completadas",
+  "@tasksTaskStatusFilterDropdownUncompletedItemLabel": {
+    "description": "Etiqueta del elemento del desplegable para filtrar por tareas no completadas"
+  },
+  "tasksTaskStatusFilterDropdownCompletedItemLabel": "Completadas",
+  "@tasksTaskStatusFilterDropdownCompletedItemLabel": {
+    "description": "Etiqueta del elemento del desplegable para filtrar por tareas completadas"
+  },
+  "tasksMarkAllTasksAsCompletedButtonTooltip": "Marcar todas las tareas como completadas",
+  "@tasksMarkAllTasksAsCompletedButtonTooltip": {
+    "description": "Tooltip del botón de marcar todas las tareas como completadas"
+  },
+  "tasksAllTasksMarkedAsCompletedSnackbarMessage": "Todas las tareas han sido marcadas como completadas",
+  "@tasksAllTasksMarkedAsCompletedSnackbarMessage": {
+    "description": "Mensaje mostrado cuando se marcan todas las tareas como completadas"
+  },
+  "tasksFailedToMarkAllTasksAsCompletedSnackbarMessage": "Algo salió mal al marcar todas las tareas como completadas",
+  "@tasksFailedToMarkAllTasksAsCompletedSnackbarMessage": {
+    "description": "Mensaje mostrado cuando ocurre un error al marcar todas las tareas como completadas"
+  },
+  "tasaksDeleteAllCompletedTasksButtonTooltip": "Borrar todas las tareas completadas",
+  "@tasaksDeleteAllCompletedTasksButtonTooltip": {
+    "description": "Tooltip del botón de borrar todas las tareas completadas"
+  },
+  "tasksAllCompletedTasksDeletedSnackbarMessage": "Todas las tareas completadas han sido borradas",
+  "@tasksAllCompletedTasksDeletedSnackbarMessage": {
+    "description": "Mensaje mostrado cuando se borran todas las tareas completadas"
+  },
+  "tasksFailedToDeleteAllCompletedTasksSnackbarMessage": "Algo salió mal al borrar todas las tareas completadas",
+  "@tasksFailedToDeleteAllCompletedTasksSnackbarMessage": {
+    "description": "Mensaje mostrado cuando ocurre un error al borrar todas las tareas completadas"
+  },
   "tasksEmptyTasksMessage": "Aún no hay tareas",
   "@tasksEmptyTasksMessage": {
     "description": "Mensaje mostrado cuando no hay tareas"
   },
-  "tasksUnexpectedErrorMessage": "Oh no! Algo salió mal",
-  "@tasksUnexpectedErrorMessage": {
-    "description": "Mensaje mostrado cuando ocurre un error inesperado"
+  "tasksUnexpectedTasksLoadErrorMessage": "Oh no! Algo salió mal al cargar las tareas",
+  "@tasksUnexpectedTasksLoadErrorMessage": {
+    "description": "Mensaje mostrado cuando ocurre un error inesperado al cargar las tareas"
+  },
+  "tasksTasksDeletedSnackbarMessage": "Tarea borrada",
+  "@tasksTasksDeletedSnackbarMessage": {
+    "description": "Mensaje mostrado cuando se borra una tarea"
+  },
+  "tasksRestoreDeletedTaskSnackbarActionLabel": "Deshacer",
+  "@tasksRestoreDeletedTaskSnackbarActionLabel": {
+    "description": "Etiqueta de la acción de deshacer el borrado de una tarea"
+  },
+  "tasksTaskTitleTextFieldLabel": "Título",
+  "@tasksTaskTitleTextFieldLabel": {
+    "description": "Etiqueta del campo de texto del título de una tarea"
+  },
+  "tasksRequiredTaskTitleTextFieldErrorMessage": "El título es obligatorio",
+  "@tasksRequiredTaskTitleTextFieldErrorMessage": {
+    "description": "Mensaje mostrado cuando el título de una tarea es obligatorio"
+  },
+  "tasksTaskDescriptionTextFieldLabel": "Descripción",
+  "@tasksTaskDescriptionTextFieldLabel": {
+    "description": "Etiqueta del campo de texto de la descripción de una tarea"
+  },
+  "tasksNewTaskButtonTooltip": "Crear tarea",
+  "@tasksNewTaskButtonTooltip": {
+    "description": "Tooltip del botón de nueva tarea"
+  },
+  "tasksNewTaskAppBarTitle": "Nueva tarea",
+  "@tasksNewTaskAppBarTitle": {
+    "description": "Título de la cabecera de la página de nueva tarea"
+  },
+  "tasksCreateTaskButtonTooltip": "Crear tarea",
+  "@tasksCreateTaskButtonTooltip": {
+    "description": "Tooltip del botón de crear tarea"
+  },
+  "tasksCreateTaskButtonLabel": "Crear tarea",
+  "@tasksCreateTaskButtonLabel": {
+    "description": "Etiqueta del botón de crear tarea"
+  },
+  "tasksExistingTaskDetailsAppBarTitle": "Detalles",
+  "@tasksExistingTaskDetailsAppBarTitle": {
+    "description": "Título de la cabecera de la página de detalles de una tarea existente"
+  },
+  "tasksNonEnexistingTaskDetailsAppBarTitle": "Tarea no encontrada",
+  "@tasksNonEnexistingTaskDetailsAppBarTitle": {
+    "description": "Título de la cabecera de la página de detalles de una tarea no encontrada"
+  },
+  "tasksErroredTaskDetailsAppBarTitle": "Error",
+  "@tasksErroredTaskDetailsAppBarTitle": {
+    "description": "Título de la cabecera de la página de detalles de una tarea cuando ocurre un error"
+  },
+  "tasksLoadingTaskDetailsAppBarTitle": "Cargando...",
+  "@tasksLoadingTaskDetailsAppBarTitle": {
+    "description": "Título de la cabecera de la página de detalles de una tarea cuando se está cargando"
+  },
+  "tasksUnexpectedErrorWhenLoadingTaskDetailsMessage": "Oh no! Algo salió mal al cargar los detalles de la tarea",
+  "@tasksUnexpectedErrorWhenLoadingTaskDetailsMessage": {
+    "description": "Mensaje mostrado cuando ocurre un error inesperado al cargar los detalles de una tarea"
+  },
+  "tasksUpdateTaskFailureEmptyTitleSnackbarMessage": "El título de una tarea no puede estar vacío",
+  "@tasksUpdateTaskFailureEmptyTitleSnackbarMessage": {
+    "description": "Mensaje mostrado cuando se intenta actualizar una tarea con un título vacío"
+  },
+  "tasksNoTaskFoundByIdMessage": "No se encontró ninguna tarea",
+  "@tasksNoTaskFoundByIdMessage": {
+    "description": "Mensaje mostrado cuando no se encuentra ninguna tarea con un id especificado"
+  },
+  "tasksUpdateTaskButtonTooltip": "Actualizar tarea",
+  "@tasksUpdateTaskButtonTooltip": {
+    "description": "Tooltip del botón de actualizar tarea"
+  },
+  "tasksUpdpateTaskButtonLabel": "Aplicar cambios",
+  "@tasksUpdpateTaskButtonLabel": {
+    "description": "Etiqueta del botón de actualizar tarea"
   }
 }

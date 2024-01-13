@@ -78,8 +78,11 @@ sealed class TasksMutationState {
     try {
       await callback();
       return const TasksMutationIdle();
-    } catch (_) {
-      return const TasksMutationFailure();
+    } catch (error, stackTrace) {
+      return TasksMutationFailure(
+        error: error,
+        stackTrace: stackTrace,
+      );
     }
   }
 
@@ -111,5 +114,11 @@ class TasksDeletingAllCompleted extends TasksMutating {
 }
 
 class TasksMutationFailure extends TasksMutationState {
-  const TasksMutationFailure();
+  const TasksMutationFailure({
+    required this.error,
+    required this.stackTrace,
+  });
+
+  final Object error;
+  final StackTrace stackTrace;
 }

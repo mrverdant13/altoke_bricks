@@ -1,4 +1,5 @@
 import 'package:altoke_app/app/app.dart';
+import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/tasks/tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,13 +11,13 @@ class SliverTasksAppBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const SliverResponsiveAppBar(
+    final l10n = context.l10n;
+    return SliverResponsiveAppBar(
       title: Text(
-        // TODO(mrverdant13): Localize.
-        'Tasks',
-        key: Key('<tasks::sliver-tasks-app-bar::title>'),
+        l10n.tasksTasksListAppBarTitle,
+        key: const Key('<tasks::sliver-tasks-app-bar::title>'),
       ),
-      actions: [
+      actions: const [
         MarkAllTasksAsCompletedButton(),
         DeleteCompletedTasksButton(),
       ],
@@ -31,15 +32,16 @@ class MarkAllTasksAsCompletedButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     ref.listen<TasksMutationState>(
       tasksMutatorPod,
       (previousState, newState) {
         if (previousState is! TasksMarkingAllAsCompleted) return;
         final message = switch (newState) {
-          // TODO(mrverdant13): Localize.
-          TasksMutationIdle() => 'All tasks marked as completed',
-          // TODO(mrverdant13): Localize.
-          TasksMutationFailure() => 'Failed to mark all tasks as completed',
+          TasksMutationIdle() =>
+            l10n.tasksAllTasksMarkedAsCompletedSnackbarMessage,
+          TasksMutationFailure() =>
+            l10n.tasksFailedToMarkAllTasksAsCompletedSnackbarMessage,
           _ => null,
         };
         if (message == null) return;
@@ -52,8 +54,7 @@ class MarkAllTasksAsCompletedButton extends ConsumerWidget {
       },
     );
     return IconButton(
-      // TODO(mrverdant13): Localize.
-      tooltip: 'Mark all tasks as completed',
+      tooltip: l10n.tasksMarkAllTasksAsCompletedButtonTooltip,
       icon: const Icon(Icons.done_all),
       onPressed: () {
         ref.read(tasksMutatorPod.notifier).markAllAsCompleted();
@@ -69,15 +70,16 @@ class DeleteCompletedTasksButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     ref.listen<TasksMutationState>(
       tasksMutatorPod,
       (previousState, newState) {
         if (previousState is! TasksDeletingAllCompleted) return;
         final message = switch (newState) {
-          // TODO(mrverdant13): Localize.
-          TasksMutationIdle() => 'All completed tasks deleted',
-          // TODO(mrverdant13): Localize.
-          TasksMutationFailure() => 'Failed to delete all completed tasks',
+          TasksMutationIdle() =>
+            l10n.tasksAllCompletedTasksDeletedSnackbarMessage,
+          TasksMutationFailure() =>
+            l10n.tasksFailedToDeleteAllCompletedTasksSnackbarMessage,
           _ => null,
         };
         if (message == null) return;
@@ -90,8 +92,7 @@ class DeleteCompletedTasksButton extends ConsumerWidget {
       },
     );
     return IconButton(
-      // TODO(mrverdant13): Localize.
-      tooltip: 'Delete completed tasks',
+      tooltip: l10n.tasksDeleteAllCompletedTasksButtonTooltip,
       icon: const Icon(Icons.remove_done),
       onPressed: () {
         ref.read(tasksMutatorPod.notifier).deleteAllCompletedTasks();

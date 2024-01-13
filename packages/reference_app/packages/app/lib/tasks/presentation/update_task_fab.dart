@@ -1,3 +1,4 @@
+import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/tasks/tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,11 +12,11 @@ class UpdateTaskFab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     final taskId = ref.watch(scopedTaskIdPod);
     final enabled = ReactiveForm.of(context)!.enabled;
     return FloatingActionButton.extended(
-      // TODO(mrverdant13): Localize.
-      tooltip: 'Apply Changes',
+      tooltip: l10n.tasksUpdateTaskButtonTooltip,
       onPressed: enabled
           ? () {
               final formGroup = ReactiveForm.of(context)! as TaskFormGroup;
@@ -37,8 +38,9 @@ class UpdateTaskFab extends ConsumerWidget {
             }
           : null,
       icon: const Icon(Icons.save),
-      // TODO(mrverdant13): Localize.
-      label: const Text('Apply Changes'),
+      label: Text(
+        l10n.tasksUpdateTaskButtonLabel,
+      ),
     );
   }
 }

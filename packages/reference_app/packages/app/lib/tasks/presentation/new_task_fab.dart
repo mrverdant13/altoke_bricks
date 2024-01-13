@@ -1,3 +1,4 @@
+import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/routing/routing.dart';
 /*{{#use_auto_route_router}}*/
 import 'package:auto_route/auto_route.dart';
@@ -14,9 +15,9 @@ class NewTaskFab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return FloatingActionButton(
-      // TODO(mrverdant13): Localize.
-      tooltip: 'Create Task',
+      tooltip: l10n.tasksNewTaskButtonTooltip,
       onPressed: () {
         /*w 1v w*/
         /*remove-start*/

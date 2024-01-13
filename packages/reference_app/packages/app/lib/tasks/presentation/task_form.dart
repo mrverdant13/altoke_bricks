@@ -1,3 +1,4 @@
+import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/tasks/tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -10,6 +11,7 @@ class TaskForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = context.l10n;
     return LayoutBuilder(
       builder: (context, constraints) {
         final width = constraints.maxWidth;
@@ -32,22 +34,19 @@ class TaskForm extends StatelessWidget {
             children: [
               ReactiveTextField<String>(
                 formControlName: TaskFormGroup.titleControlName,
-                decoration: const InputDecoration(
-                  // TODO(mrverdant13): Localize.
-                  labelText: 'Title',
+                decoration: InputDecoration(
+                  labelText: l10n.tasksTaskTitleTextFieldLabel,
                 ),
                 validationMessages: {
                   ValidationMessage.required: (_) =>
-                      // TODO(mrverdant13): Localize.
-                      'The title must not be empty',
+                      l10n.tasksRequiredTaskTitleTextFieldErrorMessage,
                 },
               ),
               const SizedBox.square(dimension: 20),
               ReactiveTextField<String>(
                 formControlName: TaskFormGroup.descriptionControlName,
-                decoration: const InputDecoration(
-                  // TODO(mrverdant13): Localize.
-                  labelText: 'Description',
+                decoration: InputDecoration(
+                  labelText: l10n.tasksTaskDescriptionTextFieldLabel,
                 ),
                 maxLines: null,
               ),

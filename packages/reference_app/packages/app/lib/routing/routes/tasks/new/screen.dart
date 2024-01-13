@@ -1,4 +1,5 @@
 import 'package:altoke_app/app/app.dart';
+import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/routing/routing.dart';
 import 'package:altoke_app/tasks/tasks.dart';
 /*{{#use_auto_route_router}}*/
@@ -20,6 +21,7 @@ class NewTaskScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     ref.listen(
       taskCreatorPod.select(
         (asyncTaskCreated) => asyncTaskCreated.valueOrNull ?? false,
@@ -50,13 +52,14 @@ class NewTaskScreen extends ConsumerWidget {
       builder: (context, formGroup, child) => child!,
       child: Scaffold(
         appBar: AppBar(elevation: 0, toolbarHeight: 0),
-        body: const CustomScrollView(
+        body: CustomScrollView(
           slivers: [
             SliverResponsiveAppBar(
-              // TODO(mrverdant13): Localize.
-              title: Text('New Task'),
+              title: Text(
+                l10n.tasksNewTaskAppBarTitle,
+              ),
             ),
-            SliverPadding(
+            const SliverPadding(
               padding: EdgeInsets.all(15),
               sliver: SliverToBoxAdapter(
                 child: Padding(

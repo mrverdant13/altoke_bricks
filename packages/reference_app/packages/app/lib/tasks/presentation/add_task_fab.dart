@@ -1,3 +1,4 @@
+import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/tasks/tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,9 +12,9 @@ class AddTaskFab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     return FloatingActionButton.extended(
-      // TODO(mrverdant13): Localize.
-      tooltip: 'Create Task',
+      tooltip: l10n.tasksCreateTaskButtonTooltip,
       onPressed: () {
         final formGroup = ReactiveForm.of(context)! as TaskFormGroup;
         if (formGroup.valid) {
@@ -27,8 +28,9 @@ class AddTaskFab extends ConsumerWidget {
         }
       },
       icon: const Icon(Icons.add),
-      // TODO(mrverdant13): Localize.
-      label: const Text('Add Task'),
+      label: Text(
+        l10n.tasksCreateTaskButtonLabel,
+      ),
     );
   }
 }
