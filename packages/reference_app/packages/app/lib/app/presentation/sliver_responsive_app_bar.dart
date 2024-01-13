@@ -16,12 +16,16 @@ class SliverResponsiveAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.sizeOf(context).height;
-    final floating = screenHeight > 400;
-    return SliverAppBar(
-      floating: floating,
-      title: title,
-      actions: actions,
+    return SliverLayoutBuilder(
+      builder: (context, constraints) {
+        final floating = constraints.viewportMainAxisExtent > 400;
+        return SliverAppBar(
+          floating: floating,
+          snap: floating,
+          title: title,
+          actions: actions,
+        );
+      },
     );
   }
 }
