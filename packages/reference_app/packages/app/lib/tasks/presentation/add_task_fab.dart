@@ -13,8 +13,8 @@ class AddTaskFab extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    return FloatingActionButton.extended(
-      tooltip: l10n.tasksCreateTaskButtonTooltip,
+    return FloatingActionButton(
+      tooltip: l10n.tasksAddTaskButtonTooltip,
       onPressed: () {
         final formGroup = ReactiveForm.of(context)! as TaskFormGroup;
         if (formGroup.valid) {
@@ -27,10 +27,7 @@ class AddTaskFab extends ConsumerWidget {
           formGroup.markAllAsTouched();
         }
       },
-      icon: const Icon(Icons.add),
-      label: Text(
-        l10n.tasksCreateTaskButtonLabel,
-      ),
+      child: const Icon(Icons.add),
     );
   }
 }

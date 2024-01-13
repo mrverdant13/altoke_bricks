@@ -121,13 +121,9 @@
   "@tasksNewTaskAppBarTitle": {
     "description": "Título de la cabecera de la página de nueva tarea"
   },
-  "tasksCreateTaskButtonTooltip": "Crear tarea",
-  "@tasksCreateTaskButtonTooltip": {
-    "description": "Tooltip del botón de crear tarea"
-  },
-  "tasksCreateTaskButtonLabel": "Crear tarea",
-  "@tasksCreateTaskButtonLabel": {
-    "description": "Etiqueta del botón de crear tarea"
+  "tasksAddTaskButtonTooltip": "Crear tarea",
+  "@tasksAddTaskButtonTooltip": {
+    "description": "Tooltip del botón de agregar tarea"
   },
   "tasksExistingTaskDetailsAppBarTitle": "Detalles",
   "@tasksExistingTaskDetailsAppBarTitle": {

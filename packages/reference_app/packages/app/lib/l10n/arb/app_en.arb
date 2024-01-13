@@ -121,13 +121,9 @@
   "@tasksNewTaskAppBarTitle": {
     "description": "App bar title for the new task screen"
   },
-  "tasksCreateTaskButtonTooltip": "Create task",
-  "@tasksCreateTaskButtonTooltip": {
-    "description": "Tooltip for the create task button"
-  },
-  "tasksCreateTaskButtonLabel": "Create task",
-  "@tasksCreateTaskButtonLabel": {
-    "description": "Label for the create task button"
+  "tasksAddTaskButtonTooltip": "Create task",
+  "@tasksAddTaskButtonTooltip": {
+    "description": "Tooltip for the add task button"
   },
   "tasksExistingTaskDetailsAppBarTitle": "Details",
   "@tasksExistingTaskDetailsAppBarTitle": {
