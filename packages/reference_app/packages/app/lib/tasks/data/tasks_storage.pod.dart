@@ -3,6 +3,8 @@ import 'package:altoke_app/external/external.dart'
     show
 /*remove-start*/
         DatabasePackage,
+        database,
+        databasePod,
 /*remove-end*/
 /*w 1> w*/
 /*{{#use_realm_database}}*/
@@ -40,6 +42,9 @@ part 'tasks_storage.pod.g.dart';
 
 @Riverpod(
   dependencies: [
+    /*remove-start*/
+    database,
+    /*remove-end*/
     /*{{#use_hive_database}}*/
     tasksBox,
     /*{{/use_hive_database}}*/
@@ -53,24 +58,15 @@ part 'tasks_storage.pod.g.dart';
 )
 TasksStorage tasksStorage(TasksStorageRef ref) {
   /*w 1v w*/
-  /*{{#use_hive_database}}*/
-  final tasksBox = ref.watch(tasksBoxPod);
-  /*{{/use_hive_database}}*/
-  /*{{#use_realm_database}}*/
-  final realmDb = ref.watch(realmDbPod);
-  /*{{/use_realm_database}}*/
-  /*{{#use_sembast_database}}*/
-  final sembastDb = ref.watch(sembastDbPod);
-  /*{{/use_sembast_database}}*/
   /*remove-start*/
-  final databasePackage = DatabasePackage.fromEnv;
+  final databasePackage = ref.watch(databasePod);
   /*remove-end*/
   final storage = /*remove-start*/ switch (databasePackage) {
     DatabasePackage.hive =>
       /*remove-end*/
       /*{{#use_hive_database}}*/
       TasksHiveStorage(
-        box: tasksBox,
+        box: ref.watch(tasksBoxPod),
       )
     /*{{/use_hive_database}}*/
     /*remove-start*/,
@@ -78,7 +74,7 @@ TasksStorage tasksStorage(TasksStorageRef ref) {
       /*remove-end*/
       /*{{#use_realm_database}}*/
       TasksRealmStorage(
-        database: realmDb,
+        database: ref.watch(realmDbPod),
       )
     /*{{/use_realm_database}}*/
     /*remove-start*/,
@@ -86,7 +82,7 @@ TasksStorage tasksStorage(TasksStorageRef ref) {
       /*remove-end*/
       /*{{#use_sembast_database}}*/
       TasksSembastStorage(
-        database: sembastDb,
+        database: ref.watch(sembastDbPod),
       )
     /*{{/use_sembast_database}}*/
     /*remove-start*/,
