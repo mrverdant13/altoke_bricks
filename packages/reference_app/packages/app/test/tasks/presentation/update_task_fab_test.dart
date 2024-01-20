@@ -14,8 +14,15 @@ void main() {
   final tooltipLocalizationVariant = LocalizationVariant.withCommonSelector(
     localizedTextSelector: (l10n) => l10n.tasksUpdateTaskButtonTooltip,
     partialCases: {
-      const (Locale('en'), 'Apply changes'),
-      const (Locale('es'), 'Aplicar cambios'),
+      const (
+        Locale('en'),
+        'Apply changes',
+      ),
+      const (
+        Locale('es'),
+        // cspell:disable-next-line
+        'Aplicar cambios',
+      ),
     },
   );
 

@@ -13,8 +13,15 @@ GIVEN a localization variant for the title of the new task app bar''',
       final localizationVariant = LocalizationVariant.withCommonSelector(
         localizedTextSelector: (l10) => l10.tasksNewTaskAppBarTitle,
         partialCases: {
-          const (Locale('en'), 'New task'),
-          const (Locale('es'), 'Nueva tarea'),
+          const (
+            Locale('en'),
+            'New task',
+          ),
+          const (
+            Locale('es'),
+            // cspell:disable-next-line
+            'Nueva tarea',
+          ),
         },
       );
 

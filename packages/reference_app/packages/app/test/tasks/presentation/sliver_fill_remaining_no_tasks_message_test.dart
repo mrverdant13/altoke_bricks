@@ -13,8 +13,15 @@ GIVEN a localization variant for the message shown when there are no tasks''',
       final localizationVariant = LocalizationVariant.withCommonSelector(
         localizedTextSelector: (l10) => l10.tasksEmptyTasksMessage,
         partialCases: {
-          const (Locale('en'), 'No tasks yet'),
-          const (Locale('es'), 'Aún no hay tareas'),
+          const (
+            Locale('en'),
+            'No tasks yet',
+          ),
+          const (
+            Locale('es'),
+            // cspell:disable-next-line
+            'Aún no hay tareas',
+          ),
         },
       );
 

@@ -23,8 +23,15 @@ GIVEN a localization variant for the tasks content filter text field label''',
         localizedTextSelector: (l10n) =>
             l10n.tasksTaskContentSearchTextFieldLabel,
         partialCases: {
-          const (Locale('en'), 'Search by content'),
-          const (Locale('es'), 'Buscar por contenido'),
+          const (
+            Locale('en'),
+            'Search by content',
+          ),
+          const (
+            Locale('es'),
+            // cspell:disable-next-line
+            'Buscar por contenido',
+          ),
         },
       );
 
@@ -143,8 +150,15 @@ GIVEN a localization variant for the tasks status filter dropdown label''',
         localizedTextSelector: (l10n) =>
             l10n.tasksTaskStatusFilterDropdownLabel,
         partialCases: {
-          const (Locale('en'), 'Filter by status'),
-          const (Locale('es'), 'Filtrar por estado'),
+          const (
+            Locale('en'),
+            'Filter by status',
+          ),
+          const (
+            Locale('es'),
+            // cspell:disable-next-line
+            'Filtrar por estado',
+          ),
         },
       );
 
@@ -308,8 +322,15 @@ GIVEN a localization variant for a dropdown item label that corresponds to the o
         localizedTextSelector: (l10n) =>
             l10n.tasksTaskStatusFilterDropdownAllItemLabel,
         partialCases: {
-          const (Locale('en'), 'All'),
-          const (Locale('es'), 'Todos'),
+          const (
+            Locale('en'),
+            'All',
+          ),
+          const (
+            Locale('es'),
+            // cspell:disable-next-line
+            'Todos',
+          ),
         },
       );
 
@@ -353,8 +374,15 @@ GIVEN a localization variant for a dropdown item label that corresponds to the o
         localizedTextSelector: (l10n) =>
             l10n.tasksTaskStatusFilterDropdownCompletedItemLabel,
         partialCases: {
-          const (Locale('en'), 'Completed'),
-          const (Locale('es'), 'Completadas'),
+          const (
+            Locale('en'),
+            'Completed',
+          ),
+          const (
+            Locale('es'),
+            // cspell:disable-next-line
+            'Completadas',
+          ),
         },
       );
 
@@ -398,8 +426,15 @@ GIVEN a localization variant for a dropdown item label that corresponds to the o
         localizedTextSelector: (l10n) =>
             l10n.tasksTaskStatusFilterDropdownUncompletedItemLabel,
         partialCases: {
-          const (Locale('en'), 'Uncompleted'),
-          const (Locale('es'), 'No completadas'),
+          const (
+            Locale('en'),
+            'Uncompleted',
+          ),
+          const (
+            Locale('es'),
+            // cspell:disable-next-line
+            'No completadas',
+          ),
         },
       );
 

@@ -13,8 +13,15 @@ GIVEN a localization variant for the message shown when a task is not found by i
       final localizationVariant = LocalizationVariant.withCommonSelector(
         localizedTextSelector: (l10) => l10.tasksNoTaskFoundByIdMessage,
         partialCases: {
-          const (Locale('en'), 'No task found'),
-          const (Locale('es'), 'No se encontró ninguna tarea'),
+          const (
+            Locale('en'),
+            'No task found',
+          ),
+          const (
+            Locale('es'),
+            // cspell:disable-next-line
+            'No se encontró ninguna tarea',
+          ),
         },
       );
 

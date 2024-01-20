@@ -33,8 +33,15 @@ AND a localization variant for the label of the task title field''',
           final localizationVariant = LocalizationVariant.withCommonSelector(
             localizedTextSelector: (l10n) => l10n.tasksTaskTitleTextFieldLabel,
             partialCases: {
-              const (Locale('en'), 'Title'),
-              const (Locale('es'), 'Título'),
+              const (
+                Locale('en'),
+                'Title',
+              ),
+              const (
+                Locale('es'),
+                // cspell:disable-next-line
+                'Título',
+              ),
             },
           );
 
@@ -79,8 +86,15 @@ AND a localization variant for the error message of the task title field when th
             localizedTextSelector: (l10n) =>
                 l10n.tasksRequiredTaskTitleTextFieldErrorMessage,
             partialCases: {
-              const (Locale('en'), 'The title is required'),
-              const (Locale('es'), 'El título es obligatorio'),
+              const (
+                Locale('en'),
+                'The title is required',
+              ),
+              const (
+                Locale('es'),
+                // cspell:disable-next-line
+                'El título es obligatorio',
+              ),
             },
           );
 
@@ -134,8 +148,15 @@ AND a localization variant for the label of the task description field''',
             localizedTextSelector: (l10n) =>
                 l10n.tasksTaskDescriptionTextFieldLabel,
             partialCases: {
-              const (Locale('en'), 'Description'),
-              const (Locale('es'), 'Descripción'),
+              const (
+                Locale('en'),
+                'Description',
+              ),
+              const (
+                Locale('es'),
+                // cspell:disable-next-line
+                'Descripción',
+              ),
             },
           );
 

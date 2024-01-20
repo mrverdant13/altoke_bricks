@@ -1,4 +1,3 @@
-// cspell:ignore contador
 import 'package:altoke_app/counter/counter.dart';
 import 'package:altoke_app/routing/routing.dart';
 /*{{#use_auto_route_router}}*/
@@ -20,8 +19,15 @@ void main() {
   final localizationVariant = LocalizationVariant.withCommonSelector(
     localizedTextSelector: (l10n) => l10n.counterExampleLabel,
     partialCases: {
-      const (Locale('en'), 'Counter'),
-      const (Locale('es'), 'Contador'),
+      const (
+        Locale('en'),
+        'Counter',
+      ),
+      const (
+        Locale('es'),
+        // cspell:disable-next-line
+        'Contador',
+      ),
     },
   );
 

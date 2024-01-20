@@ -173,6 +173,7 @@ GIVEN a localization variant for the error message of the task error item''',
           ),
           const (
             Locale('es'),
+            // cspell:disable-next-line
             'Oh no! Algo salió mal al cargar las tareas',
           ),
         },
@@ -211,9 +212,15 @@ GIVEN a localization variant for the label of the retry button''',
       final localizationVariant = LocalizationVariant.withCommonSelector(
         localizedTextSelector: (l10n) => l10n.genericRetryButtonLabel,
         partialCases: {
-          const (Locale('en'), 'Retry'),
-          // cspell:disable-next-line
-          const (Locale('es'), 'Reintentar'),
+          const (
+            Locale('en'),
+            'Retry',
+          ),
+          const (
+            Locale('es'),
+            // cspell:disable-next-line
+            'Reintentar',
+          ),
         },
       );
 

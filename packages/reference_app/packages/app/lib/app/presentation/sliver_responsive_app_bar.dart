@@ -1,4 +1,3 @@
-// cspell:ignore appbar
 import 'package:flutter/material.dart';
 
 class SliverResponsiveAppBar extends StatelessWidget {
@@ -8,9 +7,11 @@ class SliverResponsiveAppBar extends StatelessWidget {
     super.key,
   });
 
+  // cspell:disable-next-line
   /// {@macro flutter.material.appbar.title}
   final Widget? title;
 
+  // cspell:disable-next-line
   /// {@macro flutter.material.appbar.actions}
   final List<Widget>? actions;
 

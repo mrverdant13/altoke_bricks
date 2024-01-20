@@ -20,6 +20,7 @@ GIVEN a localization variant for the message shown when there is a counting erro
           ),
           const (
             Locale('es'),
+            // cspell:disable-next-line
             'Oh no! Algo salió mal al cargar las tareas',
           ),
         },

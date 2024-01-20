@@ -18,8 +18,15 @@ GIVEN a localization variant for the mark all tasks as completed button tooltip'
         localizedTextSelector: (l10n) =>
             l10n.tasksMarkAllTasksAsCompletedButtonTooltip,
         partialCases: {
-          const (Locale('en'), 'Mark all tasks as completed'),
-          const (Locale('es'), 'Marcar todas las tareas como completadas'),
+          const (
+            Locale('en'),
+            'Mark all tasks as completed',
+          ),
+          const (
+            Locale('es'),
+            // cspell:disable-next-line
+            'Marcar todas las tareas como completadas',
+          ),
         },
       );
 
@@ -257,8 +264,15 @@ GIVEN a localization variant for the delete all completed tasks button tooltip''
         localizedTextSelector: (l10n) =>
             l10n.tasksDeleteAllCompletedTasksButtonTooltip,
         partialCases: {
-          const (Locale('en'), 'Delete all completed tasks'),
-          const (Locale('es'), 'Borrar todas las tareas completadas'),
+          const (
+            Locale('en'),
+            'Delete all completed tasks',
+          ),
+          const (
+            Locale('es'),
+            // cspell:disable-next-line
+            'Borrar todas las tareas completadas',
+          ),
         },
       );
 

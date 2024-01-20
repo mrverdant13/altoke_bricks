@@ -148,8 +148,15 @@ GIVEN a localization variant for the error message used when a task title is emp
         localizedTextSelector: (l10) =>
             l10.tasksUpdateTaskFailureEmptyTitleSnackbarMessage,
         partialCases: {
-          const (Locale('en'), 'A task title cannot be empty'),
-          const (Locale('es'), 'El título de una tarea no puede estar vacío'),
+          const (
+            Locale('en'),
+            'A task title cannot be empty',
+          ),
+          const (
+            Locale('es'),
+            // cspell:disable-next-line
+            'El título de una tarea no puede estar vacío',
+          ),
         },
       );
 

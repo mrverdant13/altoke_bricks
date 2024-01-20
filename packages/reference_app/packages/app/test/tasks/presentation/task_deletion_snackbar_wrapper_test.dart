@@ -19,8 +19,15 @@ GIVEN a localization variant for the task deletion snackbar content''',
       final localizationVariant = LocalizationVariant.withCommonSelector(
         localizedTextSelector: (l10n) => l10n.tasksTaskDeletedSnackbarMessage,
         partialCases: {
-          const (Locale('en'), 'Task deleted'),
-          const (Locale('es'), 'Tarea borrada'),
+          const (
+            Locale('en'),
+            'Task deleted',
+          ),
+          const (
+            Locale('es'),
+            // cspell:disable-next-line
+            'Tarea borrada',
+          ),
         },
       );
 
@@ -79,8 +86,15 @@ GIVEN a localization variant for the task deletion snackbar action''',
         localizedTextSelector: (l10n) =>
             l10n.tasksRestoreDeletedTaskSnackbarActionLabel,
         partialCases: {
-          const (Locale('en'), 'Undo'),
-          const (Locale('es'), 'Deshacer'),
+          const (
+            Locale('en'),
+            'Undo',
+          ),
+          const (
+            Locale('es'),
+            // cspell:disable-next-line
+            'Deshacer',
+          ),
         },
       );
 

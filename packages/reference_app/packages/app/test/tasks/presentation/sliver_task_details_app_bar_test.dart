@@ -15,8 +15,15 @@ GIVEN a localization variant for the app bar title when the details for an exist
       final localizationVariant = LocalizationVariant.withCommonSelector(
         localizedTextSelector: (l10) => l10.tasksExistingTaskDetailsAppBarTitle,
         partialCases: {
-          const (Locale('en'), 'Details'),
-          const (Locale('es'), 'Detalles'),
+          const (
+            Locale('en'),
+            'Details',
+          ),
+          const (
+            Locale('es'),
+            // cspell:disable-next-line
+            'Detalles',
+          ),
         },
       );
 
@@ -72,8 +79,15 @@ GIVEN a localization variant for the app bar title when the details for a non-ex
         localizedTextSelector: (l10) =>
             l10.tasksNonExistingTaskDetailsAppBarTitle,
         partialCases: {
-          const (Locale('en'), 'Task not found'),
-          const (Locale('es'), 'Tarea no encontrada'),
+          const (
+            Locale('en'),
+            'Task not found',
+          ),
+          const (
+            Locale('es'),
+            // cspell:disable-next-line
+            'Tarea no encontrada',
+          ),
         },
       );
 
@@ -174,8 +188,15 @@ GIVEN a localization variant for the app bar title when the details for a loadin
       final localizationVariant = LocalizationVariant.withCommonSelector(
         localizedTextSelector: (l10) => l10.tasksLoadingTaskDetailsAppBarTitle,
         partialCases: {
-          const (Locale('en'), 'Loading...'),
-          const (Locale('es'), 'Cargando...'),
+          const (
+            Locale('en'),
+            'Loading...',
+          ),
+          const (
+            Locale('es'),
+            // cspell:disable-next-line
+            'Cargando...',
+          ),
         },
       );
 
