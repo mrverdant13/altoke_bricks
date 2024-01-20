@@ -13,7 +13,6 @@ part 'tasks_mutator.pod.g.dart';
 class TasksMutator extends _$TasksMutator {
   @override
   TasksMutationState build() {
-    ref.watch(tasksRepositoryPod);
     return const TasksMutationIdle();
   }
 
@@ -122,3 +121,6 @@ class TasksMutationFailure extends TasksMutationState {
   final Object error;
   final StackTrace stackTrace;
 }
+
+@visibleForTesting
+typedef TestableTasksMutator = _$TasksMutator;

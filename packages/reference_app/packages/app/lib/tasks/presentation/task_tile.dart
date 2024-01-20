@@ -38,7 +38,7 @@ class TaskTile extends ConsumerWidget {
       child: DismissibleWrapper(
         child: BaseTaskTile(
           title: const TaskTitle(),
-          subtitle: hasDescription ? const Description() : null,
+          subtitle: hasDescription ? const TaskDescription() : null,
           trailing: const TaskCheckbox(),
           onTap: () {
             final taskId = ref.read(taskPod).id;
@@ -225,26 +225,27 @@ class DismissibleWrapper extends ConsumerStatefulWidget {
 }
 
 class _DismissibleWrapperState extends ConsumerState<DismissibleWrapper> {
-  late bool isBeingDismissed;
+  late bool isBeingDeleted;
 
   @override
   void initState() {
     super.initState();
-    isBeingDismissed = false;
+    isBeingDeleted = false;
   }
 
   @visibleForTesting
   void onDismissed(DismissDirection dismissDirection) {
+    if (!mounted) return;
     final taskId = ref.read(taskPod).id;
     ref.read(tasksMutatorPod.notifier).deleteTask(taskId: taskId);
-    isBeingDismissed = true;
+    isBeingDeleted = true;
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    if (isBeingDismissed) return const SizedBox.shrink();
+    if (isBeingDeleted) return const SizedBox.shrink();
     final taskId = ref.watch(
       taskPod.select(
         (task) => task.id,
@@ -275,8 +276,8 @@ class _DismissibleWrapperState extends ConsumerState<DismissibleWrapper> {
 // ** v TASK DESCRIPTION v ** //
 
 @visibleForTesting
-class Description extends ConsumerWidget {
-  const Description({
+class TaskDescription extends ConsumerWidget {
+  const TaskDescription({
     super.key,
   });
 

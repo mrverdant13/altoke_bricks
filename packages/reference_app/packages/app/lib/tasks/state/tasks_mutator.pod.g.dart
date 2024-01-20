@@ -6,7 +6,7 @@ part of 'tasks_mutator.pod.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$tasksMutatorHash() => r'c5c7d3b4c9e8df1b37fba169994c684c03c762d3';
+String _$tasksMutatorHash() => r'a49f51a21f94af0d3582a1c11c2a25fe4cb1fbf8';
 
 /// See also [TasksMutator].
 @ProviderFor(TasksMutator)

@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:altoke_app/external/external.dart';
-import 'package:flutter/foundation.dart';
 import 'package:realm/realm.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tasks_realm_storage/tasks_realm_storage.dart';
@@ -11,7 +10,7 @@ part '_condition___use_realm_database___realm___.g.dart';
 @Riverpod(dependencies: [])
 Realm realmDb(RealmDbRef ref) {
   throw UnimplementedError(
-    '`realmDbPod` was not initialized.',
+    '`${realmDbPod.name}` was not initialized.',
   );
 }
 
@@ -19,9 +18,10 @@ Future<void> runRealmMigrations({
   required Migration migration,
   required int oldVersion,
   required int newVersion,
+  required bool isDebugMode,
 }) async {
   // Migration logic v
-  if (kDebugMode) {
+  if (isDebugMode) {
     // coverage:ignore-start
     log(
       'Realm migration: '

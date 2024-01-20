@@ -6,8 +6,7 @@ import 'package:tasks/tasks.dart';
 import 'package:tasks_repository/tasks_repository.dart';
 
 import '../../helpers/fallback_values.dart';
-
-class MockTasksRepository extends Mock implements TasksRepository {}
+import '../../helpers/mocks/mock_tasks_repository.dart';
 
 void main() {
   setUpAll(registerFallbackValues);
@@ -26,9 +25,7 @@ AND an injected tasks repository''',
           tasksRepository = MockTasksRepository();
           container = ProviderContainer(
             overrides: [
-              tasksRepositoryPod.overrideWith(
-                (ref) => tasksRepository,
-              ),
+              tasksRepositoryPod.overrideWithValue(tasksRepository),
             ],
           );
         },

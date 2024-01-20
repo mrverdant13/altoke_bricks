@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:altoke_app/external/external.dart';
-import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sembast/sembast.dart';
 import 'package:tasks_sembast_storage/tasks_sembast_storage.dart';
@@ -15,13 +14,14 @@ Database sembastDb(SembastDbRef ref) {
   );
 }
 
-Future<void> runSembastMigrations(
-  Database database,
-  int oldVersion,
-  int newVersion,
-) async {
+Future<void> runSembastMigrations({
+  required Database database,
+  required int oldVersion,
+  required int newVersion,
+  required bool isDebugMode,
+}) async {
   // Migration logic v
-  if (kDebugMode) {
+  if (isDebugMode) {
     // coverage:ignore-start
     log(
       'Sembast migration: '

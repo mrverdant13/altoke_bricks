@@ -20,7 +20,6 @@ class SliverTasksFilterControls extends ConsumerWidget {
         return Theme(
           data: theme.copyWith(
             inputDecorationTheme: theme.inputDecorationTheme.copyWith(
-              floatingLabelBehavior: FloatingLabelBehavior.always,
               filled: true,
               border: const OutlineInputBorder(),
               isDense: width < 400,
@@ -79,9 +78,12 @@ class _TasksContentFilterTextFieldState
     final l10n = context.l10n;
     return TextFormField(
       decoration: InputDecoration(
-        labelText: l10n.tasksTaskContentSearchTextFieldLabel,
-        hintText: l10n.tasksTaskContentSearchTextFieldHint,
+        label: Text(
+          l10n.tasksTaskContentSearchTextFieldLabel,
+          key: const Key('<tasks::task-content-filter-text-field::label>'),
+        ),
         prefixIcon: const Padding(
+          key: Key('<tasks::task-content-filter-text-field::prefix-icon>'),
           padding: EdgeInsets.only(
             left: 15,
             right: 5,
@@ -135,7 +137,10 @@ class TasksStatusFilterDropdown extends ConsumerWidget {
           ref.read(selectedTasksStatusFilterPod.notifier).filter = filter;
         },
         decoration: InputDecoration(
-          labelText: l10n.tasksTaskStatusFilterDropdownLabel,
+          label: Text(
+            l10n.tasksTaskStatusFilterDropdownLabel,
+            key: const Key('<tasks::task-status-filter-dropdown::label>'),
+          ),
         ),
       ),
     );

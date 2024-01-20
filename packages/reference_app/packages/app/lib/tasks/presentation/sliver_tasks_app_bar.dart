@@ -14,8 +14,8 @@ class SliverTasksAppBar extends ConsumerWidget {
     final l10n = context.l10n;
     return SliverResponsiveAppBar(
       title: Text(
-        l10n.tasksTasksListAppBarTitle,
         key: const Key('<tasks::sliver-tasks-app-bar::title>'),
+        l10n.tasksTasksListAppBarTitle,
       ),
       actions: const [
         MarkAllTasksAsCompletedButton(),
@@ -25,6 +25,7 @@ class SliverTasksAppBar extends ConsumerWidget {
   }
 }
 
+@visibleForTesting
 class MarkAllTasksAsCompletedButton extends ConsumerWidget {
   const MarkAllTasksAsCompletedButton({
     super.key,
@@ -63,6 +64,7 @@ class MarkAllTasksAsCompletedButton extends ConsumerWidget {
   }
 }
 
+@visibleForTesting
 class DeleteCompletedTasksButton extends ConsumerWidget {
   const DeleteCompletedTasksButton({
     super.key,

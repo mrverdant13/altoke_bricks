@@ -13,6 +13,18 @@ class TasksScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    return const TasksScreenLayout();
+  }
+}
+
+@visibleForTesting
+class TasksScreenLayout extends ConsumerWidget {
+  const TasksScreenLayout({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
     return const Scaffold(
       body: CustomScrollView(
         slivers: [

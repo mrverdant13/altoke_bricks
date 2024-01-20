@@ -1,17 +1,17 @@
 import 'dart:developer';
 
 import 'package:altoke_app/external/external.dart';
-import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:tasks_hive_storage/tasks_hive_storage.dart';
 
 Future<void> runHiveMigrations({
   required int newVersion,
+  required bool isDebugMode,
 }) async {
   final metadataBox = await Hive.openBox<Object>('.hive-metadata.');
   final oldVersion = metadataBox.get('version');
   // Migration logic v
-  if (kDebugMode) {
+  if (isDebugMode) {
     // coverage:ignore-start
     log(
       'Hive migration: '

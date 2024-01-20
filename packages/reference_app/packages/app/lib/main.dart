@@ -105,6 +105,7 @@ Future<void> initHiveDatabase({
   if (!kIsWeb) Hive.init(hiveDbDir.path);
   await runHiveMigrations(
     newVersion: version,
+    isDebugMode: kDebugMode,
   );
 }
 /*{{/use_hive_database}}*/
@@ -138,6 +139,7 @@ Future<Realm> initRealmDatabase({
           migration: migration,
           oldVersion: oldVersion,
           newVersion: version,
+          isDebugMode: kDebugMode,
         );
       },
     ),
@@ -154,7 +156,13 @@ Future<Database> initSembastDatabase({
     return databaseFactoryWeb.openDatabase(
       'db.sembast',
       version: version,
-      onVersionChanged: runSembastMigrations,
+      onVersionChanged: (database, oldVersion, newVersion) =>
+          runSembastMigrations(
+        database: database,
+        oldVersion: oldVersion,
+        newVersion: newVersion,
+        isDebugMode: kDebugMode,
+      ),
     );
   }
   final docsDir = await getApplicationDocumentsDirectory();
@@ -165,7 +173,13 @@ Future<Database> initSembastDatabase({
   final database = await databaseFactoryIo.openDatabase(
     path.join(sembastDbDir.path, 'db.sembast'),
     version: version,
-    onVersionChanged: runSembastMigrations,
+    onVersionChanged: (database, oldVersion, newVersion) =>
+        runSembastMigrations(
+      database: database,
+      oldVersion: oldVersion,
+      newVersion: newVersion,
+      isDebugMode: kDebugMode,
+    ),
   );
   return database;
 }

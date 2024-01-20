@@ -19,4 +19,6 @@ void registerFallbackValues() {
       title: 'title',
     ),
   );
+  registerFallbackValue(TasksStatusFilter.completed);
+  registerFallbackValue(const PartialTask());
 }

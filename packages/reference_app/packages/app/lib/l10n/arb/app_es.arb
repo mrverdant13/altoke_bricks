@@ -3,6 +3,10 @@
   "@appTitle": {
     "description": "Título de la aplicación"
   },
+  "genericRetryButtonLabel": "Reintentar",
+  "@genericRetryButtonLabel": {
+    "description": "Etiqueta de un botón genérico de reintento"
+  },
   "homeAppBarTitle": "Ejemplos",
   "@homeAppBarTitle": {
     "description": "Título de la cabecera de la página de inicio"
@@ -40,10 +44,6 @@
   "tasksTaskContentSearchTextFieldLabel": "Buscar por contenido",
   "@tasksTaskContentSearchTextFieldLabel": {
     "description": "Etiqueta del campo de búsqueda por contenido"
-  },
-  "tasksTaskContentSearchTextFieldHint": "Buscar por contenido",
-  "@tasksTaskContentSearchTextFieldHint": {
-    "description": "Pista del campo de búsqueda por contenido"
   },
   "tasksTaskStatusFilterDropdownLabel": "Filtrar por estado",
   "@tasksTaskStatusFilterDropdownLabel": {

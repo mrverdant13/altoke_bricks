@@ -14,7 +14,6 @@ import 'package:go_router/go_router.dart';
 /*{{/use_go_router_router}}*/
 import 'package:mocktail/mocktail.dart';
 
-import '../../helpers/fallback_values.dart';
 import '../../helpers/helpers.dart';
 
 void main() {

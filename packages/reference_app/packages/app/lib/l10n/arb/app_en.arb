@@ -3,6 +3,10 @@
   "@appTitle": {
     "description": "App title"
   },
+  "genericRetryButtonLabel": "Retry",
+  "@genericRetryButtonLabel": {
+    "description": "Label for a generic retry button"
+  },
   "homeAppBarTitle": "Examples",
   "@homeAppBarTitle": {
     "description": "App bar title for the home screen"
@@ -40,10 +44,6 @@
   "tasksTaskContentSearchTextFieldLabel": "Search by content",
   "@tasksTaskContentSearchTextFieldLabel": {
     "description": "Label for the task content search text field"
-  },
-  "tasksTaskContentSearchTextFieldHint": "Search by content",
-  "@tasksTaskContentSearchTextFieldHint": {
-    "description": "Hint for the task content search text field"
   },
   "tasksTaskStatusFilterDropdownLabel": "Filter by status",
   "@tasksTaskStatusFilterDropdownLabel": {

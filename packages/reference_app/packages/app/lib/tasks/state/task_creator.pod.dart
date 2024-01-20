@@ -1,4 +1,5 @@
 import 'package:altoke_app/tasks/tasks.dart';
+import 'package:meta/meta.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tasks/tasks.dart';
 
@@ -12,7 +13,6 @@ part 'task_creator.pod.g.dart';
 class TaskCreator extends _$TaskCreator {
   @override
   Future<bool> build() async {
-    ref.watch(tasksRepositoryPod);
     return false;
   }
 
@@ -28,3 +28,6 @@ class TaskCreator extends _$TaskCreator {
     state = newState.whenData((_) => true);
   }
 }
+
+@visibleForTesting
+typedef TestableTaskCreator = _$TaskCreator;

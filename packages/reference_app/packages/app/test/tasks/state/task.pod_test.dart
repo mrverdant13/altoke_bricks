@@ -13,6 +13,7 @@ THEN the pod should throw an error
 ''',
     () async {
       final container = ProviderContainer();
+      addTearDown(container.dispose);
 
       void action() => container.read(taskPod);
 
