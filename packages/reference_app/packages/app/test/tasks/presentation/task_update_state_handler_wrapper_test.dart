@@ -11,6 +11,7 @@ import 'package:tasks_storage/tasks_storage.dart';
 import '../../helpers/helpers.dart';
 
 void main() {
+/*w 1v w*/
 /*{{#use_auto_route_router}}*/
   testWidgets(
     '''

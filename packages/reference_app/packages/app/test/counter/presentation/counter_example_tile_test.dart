@@ -129,4 +129,5 @@ THEN the counter route should be visited
     },
   );
 /*{{/use_go_router_router}}*/
+/*w 1v w*/
 }
