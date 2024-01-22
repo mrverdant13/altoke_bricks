@@ -2,6 +2,7 @@
 endtemplate
 mocktail
 nodoc
+rxdart
 unawaited
 unmanaged
 vsync
