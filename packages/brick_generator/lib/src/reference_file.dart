@@ -38,8 +38,14 @@ abstract class AltokeRegexp {
   );
 
   /// Regexp to identify a conditional file to be resolved within its path.
-  static final conditionalPathRegexp = RegExp(
-    '_condition___(.*?)___(.*?)___',
+  static final conditionalFileRegexp = RegExp(
+    '_conditional_file___([a-zA-Z0-9_-]+)___([a-zA-Z0-9_.-]+)',
+    dotAll: true,
+  );
+
+  /// Regexp to identify a conditional directory to be resolved within its path.
+  static final conditionalDirRegexp = RegExp(
+    '_conditional_dir___([a-zA-Z0-9_-]+)___([a-zA-Z0-9_.-]+)',
     dotAll: true,
   );
 }
@@ -85,8 +91,12 @@ extension ReferenceFile on File {
           '',
         )
         .replaceAllMapped(
-          AltokeRegexp.conditionalPathRegexp,
-          transformConditionalPathMatchForFileContents,
+          AltokeRegexp.conditionalFileRegexp,
+          transformConditionalFileMatchForFileContents,
+        )
+        .replaceAllMapped(
+          AltokeRegexp.conditionalDirRegexp,
+          transformConditionalDirMatchForFileContents,
         )
         .replaceAllMapped(
           AltokeRegexp.variableRegexp,
@@ -108,26 +118,48 @@ extension ReferenceFile on File {
   /// Resolves the parametrized path of the reference [File].
   @visibleForTesting
   Future<String> resolvePath() async {
-    return path.replaceAllMapped(
-      AltokeRegexp.conditionalPathRegexp,
-      transformConditionalPathMatchForFilePath,
-    );
+    return path
+        .replaceAllMapped(
+          AltokeRegexp.conditionalFileRegexp,
+          transformConditionalFileMatchForFilePath,
+        )
+        .replaceAllMapped(
+          AltokeRegexp.conditionalDirRegexp,
+          transformConditionalDirMatchForFilePath,
+        );
   }
 }
 
-/// Transforms a variable match into an actual mustache variable, in the path
-/// of a file.
+/// Transforms a conditional file match into a parametrized conditional
+/// filename, in the path of a file.
 @visibleForTesting
-String transformConditionalPathMatchForFilePath(Match match) {
+String transformConditionalFileMatchForFilePath(Match match) {
   final variable = match.group(1);
   final pathSegment = match.group(2);
   return '{{#$variable}}$pathSegment{{${p.separator}$variable}}';
 }
 
-/// Transforms a variable match into an actual mustache variable, in the
-/// contents of a file.
+/// Transforms a conditional file match into an filename, in the contents of a
+/// file.
 @visibleForTesting
-String transformConditionalPathMatchForFileContents(Match match) {
+String transformConditionalFileMatchForFileContents(Match match) {
+  final pathSegment = match.group(2);
+  return '$pathSegment';
+}
+
+/// Transforms a conditional directory match into a parametrized conditional
+/// directory path segment, in the path of a file.
+@visibleForTesting
+String transformConditionalDirMatchForFilePath(Match match) {
+  final variable = match.group(1);
+  final pathSegment = match.group(2);
+  return '{{#$variable}}$pathSegment{{${p.separator}$variable}}';
+}
+
+/// Transforms a conditional directory match into an directory path segment, in
+/// the contents of a file.
+@visibleForTesting
+String transformConditionalDirMatchForFileContents(Match match) {
   final pathSegment = match.group(2);
   return '$pathSegment';
 }
