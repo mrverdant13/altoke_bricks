@@ -87,7 +87,11 @@ Future<void> main() async {
         /*{{/use_sembast_database}}*/
       ],
       child: MyApp(
-        routerConfig: routerConfig as RouterConfig<Object>,
+        routerConfig: routerConfig
+            /*remove-start*/
+            as RouterConfig<Object>
+        /*remove-end*/
+        ,
       ),
     ),
   );

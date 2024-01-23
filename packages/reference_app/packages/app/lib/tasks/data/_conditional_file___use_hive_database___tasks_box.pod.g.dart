@@ -1,24 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '_condition___use_realm_database___realm___.dart';
+part of '_conditional_file___use_hive_database___tasks_box.pod.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$realmDbHash() => r'742339eb2b3ca9ce61aaa2cf7b7835451345b851';
+String _$tasksBoxHash() => r'6a0b2fc713943814affef8d6fdf17d791b4445bb';
 
-/// See also [realmDb].
-@ProviderFor(realmDb)
-final realmDbPod = AutoDisposeProvider<Realm>.internal(
-  realmDb,
-  name: r'realmDbPod',
+/// See also [tasksBox].
+@ProviderFor(tasksBox)
+final tasksBoxPod = AutoDisposeProvider<Box<Map<dynamic, dynamic>>>.internal(
+  tasksBox,
+  name: r'tasksBoxPod',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$realmDbHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$tasksBoxHash,
   dependencies: const <ProviderOrFamily>[],
   allTransitiveDependencies: const <ProviderOrFamily>{},
 );
 
-typedef RealmDbRef = AutoDisposeProviderRef<Realm>;
+typedef TasksBoxRef = AutoDisposeProviderRef<Box<Map<dynamic, dynamic>>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

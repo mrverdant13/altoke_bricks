@@ -9,11 +9,11 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 /*remove-end*/
 
 /*{{#use_hive_database}}*/
-export '_condition___use_hive_database___hive___.dart'; /*{{/use_hive_database}}*/
+export '_conditional_file___use_hive_database___hive.dart'; /*{{/use_hive_database}}*/
 /*{{#use_realm_database}}*/
-export '_condition___use_realm_database___realm___.dart'; /*{{/use_realm_database}}*/
+export '_conditional_file___use_realm_database___realm.dart'; /*{{/use_realm_database}}*/
 /*{{#use_sembast_database}}*/
-export '_condition___use_sembast_database___sembast___.dart'; /*{{/use_sembast_database}}*/
+export '_conditional_file___use_sembast_database___sembast.dart'; /*{{/use_sembast_database}}*/
 
 part 'data.g.dart';
 

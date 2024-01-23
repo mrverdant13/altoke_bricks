@@ -11,7 +11,9 @@ import 'package:go_router/go_router.dart';
 
 /*{{/use_go_router_router}}*/
 
+/*{{#use_go_router_router}}*/
 part 'router.g.dart';
+/*{{/use_go_router_router}}*/
 
 /*{{#use_auto_route_router}}*/
 @AutoRouterConfig(

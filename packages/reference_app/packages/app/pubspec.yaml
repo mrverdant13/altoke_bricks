@@ -27,7 +27,6 @@ dependencies:
   go_router: ^12.1.1
   #*w 1v 2> w*#
   #{{/use_go_router_router}}#
-  #*w 1v 2> w*#
   #{{#use_hive_database}}#
   hive: ^2.2.3
   #*w 1v 2> w*#
@@ -37,9 +36,9 @@ dependencies:
   meta: ^1.10.0
   path: ^1.8.3
   path_provider: ^2.1.1
+  reactive_forms: ^16.1.1
   #*w 1v 2> w*#
   #{{#use_realm_database}}#
-  reactive_forms: ^16.1.1
   realm: ^1.6.1
   #*w 1v 2> w*#
   #{{/use_realm_database}}#
@@ -55,13 +54,12 @@ dependencies:
   #*w 1v 2> w*#
   #{{#use_hive_database}}#
   tasks_hive_storage:
-    path: ../tasks_storage/_condition___use_hive_database___tasks_hive_storage___/
+    path: ../tasks_storage/_conditional_dir___use_hive_database___tasks_hive_storage/
   #*w 1v 2> w*#
   #{{/use_hive_database}}#
-  #*w 1v 2> w*#
   #{{#use_realm_database}}#
   tasks_realm_storage:
-    path: ../tasks_storage/_condition___use_realm_database___tasks_realm_storage___/
+    path: ../tasks_storage/_conditional_dir___use_realm_database___tasks_realm_storage/
   #*w 1v 2> w*#
   #{{/use_realm_database}}#
   tasks_repository:
@@ -70,7 +68,7 @@ dependencies:
   #{{#use_sembast_database}}#
   #*w 1v 2> w*#
   tasks_sembast_storage:
-    path: ../tasks_storage/_condition___use_sembast_database___tasks_sembast_storage___/
+    path: ../tasks_storage/_conditional_dir___use_sembast_database___tasks_sembast_storage/
   #*w 1v 2> w*#
   #{{/use_sembast_database}}#
   tasks_storage:

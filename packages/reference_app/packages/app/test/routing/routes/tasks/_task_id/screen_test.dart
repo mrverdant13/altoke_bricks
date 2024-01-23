@@ -10,11 +10,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 /*{{#use_go_router_router}}*/
 import 'package:go_router/go_router.dart';
+/*{{/use_go_router_router}}*/
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:tasks/tasks.dart';
 
 import '../../../../helpers/app_tester.dart';
-/*{{/use_go_router_router}}*/
 
 void main() {
 /*w 1v w*/

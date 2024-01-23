@@ -1,10 +1,14 @@
 import 'package:altoke_app/routing/routing.dart';
 import 'package:altoke_app/tasks/tasks.dart';
+/*{{#use_auto_route_router}}*/
 import 'package:auto_route/auto_route.dart';
+/*{{/use_auto_route_router}}*/
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+/*{{#use_go_router_router}}*/
 import 'package:go_router/go_router.dart';
+/*{{/use_go_router_router}}*/
 import 'package:mocktail/mocktail.dart';
 import 'package:tasks/tasks.dart';
 
@@ -258,8 +262,8 @@ THEN the task details route for the given task should be visited
             child: const Scaffold(
               body: TaskTile(),
             ),
-          ), /*remove-start*/
-        ), /*remove-end*/
+          ),
+        ),
       );
       final taskTileFinder = find.byType(TaskTile);
       await tester.tap(taskTileFinder);
@@ -304,8 +308,8 @@ THEN the task details route for the given task should be visited
             child: const Scaffold(
               body: TaskTile(),
             ),
-          ), /*remove-start*/
-        ), /*remove-end*/
+          ),
+        ),
       );
       final taskTileFinder = find.byType(TaskTile);
       await tester.tap(taskTileFinder);

@@ -1,4 +1,11 @@
-import 'package:altoke_app/external/external.dart';
+/*{{^use_hive_database}}*/
+import 'package:altoke_app/external/external.dart' /*remove-start*/
+    show
+        DatabasePackage,
+        databasePod,
+        realmDbPod,
+        sembastDbPod /*remove-end*/;
+/*{{/use_hive_database}}*/
 import 'package:altoke_app/tasks/tasks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -8,7 +15,6 @@ import '../../helpers/helpers.dart';
 
 void main() {
   /*w 1v w*/
-
   /*{{#use_hive_database}}*/
   test(
     '''
@@ -103,6 +109,7 @@ THEN the pod should return the storage
       );
     },
   );
+  /*{{/use_sembast_database}}*/
 
   /*w 1v w*/
 }

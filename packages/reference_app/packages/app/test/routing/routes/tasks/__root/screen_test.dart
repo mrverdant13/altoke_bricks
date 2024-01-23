@@ -9,8 +9,9 @@ import 'package:flutter_test/flutter_test.dart';
 /*{{#use_go_router_router}}*/
 import 'package:go_router/go_router.dart';
 
-import '../../../../helpers/app_tester.dart';
 /*{{/use_go_router_router}}*/
+
+import '../../../../helpers/app_tester.dart';
 
 void main() {
 /*w 1v w*/

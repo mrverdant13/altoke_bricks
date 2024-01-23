@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:altoke_app/routing/routing.dart';
 import 'package:altoke_app/tasks/tasks.dart';
+/*{{#use_auto_route_router}}*/
 import 'package:auto_route/auto_route.dart';
 /*{{/use_auto_route_router}}*/
 import 'package:flutter/material.dart';

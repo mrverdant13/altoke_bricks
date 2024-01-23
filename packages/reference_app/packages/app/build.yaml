@@ -39,19 +39,20 @@ targets:
           - lib/external/data/data.dart
           #*w 1v 10> w*#
           #{{#use_realm_database}}#
-          - lib/external/data/_condition___use_realm_database___realm___.dart
+          - lib/external/data/_conditional_file___use_realm_database___realm.dart
+          #*w 1v 10> w*#
           #{{/use_realm_database}}#
           #{{#use_sembast_database}}#
-          - lib/external/data/_condition___use_sembast_database___sembast___.dart
-          #{{/use_sembast_database}}#
+          - lib/external/data/_conditional_file___use_sembast_database___sembast.dart
           #*w 1v 10> w*#
+          #{{/use_sembast_database}}#
           - lib/tasks/data/latest_deleted_task_cache.pod.dart
           - lib/tasks/data/tasks_repository.pod.dart
           #*w 1v 10> w*#
           #{{#use_hive_database}}#
-          - lib/tasks/data/_condition___use_hive_database___tasks_box.pod___.dart
-          #{{/use_hive_database}}#
+          - lib/tasks/data/_conditional_file___use_hive_database___tasks_box.pod.dart
           #*w 1v 10> w*#
+          #{{/use_hive_database}}#
           - lib/tasks/data/tasks_storage.pod.dart
           - lib/tasks/state/async_filtered_tasks_count.pod.dart
           - lib/tasks/state/async_latest_deleted_task.pod.dart
