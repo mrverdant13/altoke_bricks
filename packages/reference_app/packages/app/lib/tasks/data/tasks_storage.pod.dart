@@ -1,4 +1,4 @@
-/*{{^ use_hive_database}}*/
+/*{{^use_hive_database}}*/
 import 'package:altoke_app/external/external.dart'
     show
 /*remove-start*/
