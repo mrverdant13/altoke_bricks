@@ -20,17 +20,34 @@ packages:
   - ./packages/tasks_storage/tasks_storage/
 
 command:
+  #*w 1v 2> w*#
+  #{{#use_realm_database}}#
   bootstrap:
     hooks:
       post:
         run: >
           melos exec --depends-on realm -- "dart run realm install"
+  #*w 1v 2> w*#
+  #{{/use_realm_database}}#
   clean:
     hooks:
       pre:
+        #*w 1v 8> w*#
+        #*replace-start*#
         run: >
-          melos exec -- "coverde rm .dart_tool/ build/ pubspec_overrides.yaml" &&
+          melos exec -- "coverde rm .dart_tool/ build/ pubspec_overrides.yaml"
+          &&
           melos exec --depends-on realm -- "coverde rm binary/ default.realm.management default.realm.lock"
+        #*with i8*#
+        # run: >
+        #   melos exec -- "coverde rm .dart_tool/ build/ pubspec_overrides.yaml"
+        #   #{{#use_realm_database}}#
+        #   #*w 1v 10> w*#
+        #   &&
+        #   melos exec --depends-on realm -- "coverde rm binary/ default.realm.management default.realm.lock"
+        #   #{{/use_realm_database}}#
+        #*replace-end*#
+        #*w 2v w*#
 
 scripts:
   # Code Generation
@@ -44,6 +61,8 @@ scripts:
       concurrency: 1
       failFast: true
       orderDependents: true
+  #*w 1v 2> w*#
+  #{{#use_realm_database}}#
   g.r:
     description: Generate Realm code for a package
     run: dart run realm generate
@@ -56,9 +75,26 @@ scripts:
       concurrency: 1
       failFast: true
       orderDependents: true
+  #*w 1v 2> w*#
+  #{{/use_realm_database}}#
   G:
     description: Generate code for all packages
-    run: melos run g.d --no-select && melos run g.r --no-select
+    #*w 1v 4> w*#
+    #*replace-start*#
+    run: >
+      melos run g.d --no-select
+      &&
+      melos run g.r --no-select
+    #*with i4*#
+    # run: >
+    #   melos run g.d --no-select
+    #   #{{#use_realm_database}}#
+    #   #*w 1v 6> w*#
+    #   &&
+    #   melos run g.r --no-select
+    #   #{{/use_realm_database}}#
+    #*replace-end*#
+    #*w 2v 2> w*#
 
   # Formatting
   f:
