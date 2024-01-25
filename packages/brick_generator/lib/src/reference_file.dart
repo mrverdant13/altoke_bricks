@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:brick_generator/src/placeholders.dart';
@@ -11,6 +12,18 @@ abstract class AltokeRegexp {
   @visibleForTesting
   static final remotionRegexp = RegExp(
     r'(((\/)|(#)|(<!--))\*drop\*((\/)|(#)|(-->)).*)|((\s+)?((\/)|(#)|(<!--))\*remove-start\*((\/)|(#)|(-->))([\s\S]*?)((\/)|(#)|(<!--))\*remove-end\*((\/)|(#)|(-->))(\s+)?)',
+    dotAll: true,
+  );
+
+  /// Regexp to identify a conditional file to be resolved within its path.
+  static final conditionalFileRegexp = RegExp(
+    '_conditional_file___([a-zA-Z0-9_-]+)___([a-zA-Z0-9_.-]+)',
+    dotAll: true,
+  );
+
+  /// Regexp to identify a conditional directory to be resolved within its path.
+  static final conditionalDirRegexp = RegExp(
+    '_conditional_dir___([a-zA-Z0-9_-]+)___([a-zA-Z0-9_.-]+)',
     dotAll: true,
   );
 
@@ -37,15 +50,10 @@ abstract class AltokeRegexp {
     dotAll: true,
   );
 
-  /// Regexp to identify a conditional file to be resolved within its path.
-  static final conditionalFileRegexp = RegExp(
-    '_conditional_file___([a-zA-Z0-9_-]+)___([a-zA-Z0-9_.-]+)',
-    dotAll: true,
-  );
-
-  /// Regexp to identify a conditional directory to be resolved within its path.
-  static final conditionalDirRegexp = RegExp(
-    '_conditional_dir___([a-zA-Z0-9_-]+)___([a-zA-Z0-9_.-]+)',
+  /// Regexp to identify a block to be replaced within the contents of a file.
+  @visibleForTesting
+  static final replacementRegexp = RegExp(
+    r'((?:\/\*)|(?:#\*)|(?:<!--))replace-start(?:(?:\*\/)|(?:\*#)|(?:-->))(?:[\s\S]*?)(?:(?:\/\*)|(?:#\*)|(?:<!--))with\s*(?:i(\d+))?(?:(?:\*\/)|(?:\*#)|(?:-->))\s*([\s\S]*?)\s*(?:(?:\/\*)|(?:#\*)|(?:<!--))replace-end(?:(?:\*\/)|(?:\*#)|(?:-->))',
     dotAll: true,
   );
 }
@@ -91,6 +99,10 @@ extension ReferenceFile on File {
           '',
         )
         .replaceAllMapped(
+          AltokeRegexp.replacementRegexp,
+          transformReplacementMatchForFileContents,
+        )
+        .replaceAllMapped(
           AltokeRegexp.conditionalFileRegexp,
           transformConditionalFileMatchForFileContents,
         )
@@ -127,6 +139,68 @@ extension ReferenceFile on File {
           AltokeRegexp.conditionalDirRegexp,
           transformConditionalDirMatchForFilePath,
         );
+  }
+}
+
+/// Transforms a replacement match into the actual replacement block, in the
+/// contents of a file.
+@visibleForTesting
+String transformReplacementMatchForFileContents(Match match) {
+  final type = match.group(1);
+  final indentation = int.tryParse(match.group(2) ?? '') ?? 0;
+  final rawLines = LineSplitter.split((match.group(3) ?? '').trim());
+
+  String computeSlashBasedReplacement() {
+    final buf = StringBuffer();
+    final lines = rawLines.map(
+      (line) => line.replaceFirst(
+        RegExp(r'\s*\/\/ '),
+        ' ' * indentation,
+      ),
+    );
+    for (final line in lines) {
+      buf.writeln(line);
+    }
+    return buf.toString().trim();
+  }
+
+  String computeHashBasedReplacement() {
+    final buf = StringBuffer();
+    final lines = rawLines.map(
+      (line) => line.replaceFirst(
+        RegExp(r'\s*#* '),
+        ' ' * indentation,
+      ),
+    );
+    for (final line in lines) {
+      buf.writeln(line);
+    }
+    return buf.toString().trim();
+  }
+
+  String computeHtmlBasedReplacement() {
+    final buf = StringBuffer();
+    final lines = rawLines.map(
+      (line) => line.replaceFirst(
+        RegExp(r'\s*<!-- '),
+        ' ' * indentation,
+      ),
+    );
+    for (final line in lines) {
+      buf.writeln(line.substring(0, line.length - 3).trim());
+    }
+    return buf.toString().trim();
+  }
+
+  switch (type) {
+    case '/*':
+      return computeSlashBasedReplacement();
+    case '#*':
+      return computeHashBasedReplacement();
+    case '<!--':
+      return computeHtmlBasedReplacement();
+    case _:
+      return '';
   }
 }
 
