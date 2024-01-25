@@ -66,7 +66,6 @@ dependencies:
     path: ../tasks_repository/
   #*w 1v 2> w*#
   #{{#use_sembast_database}}#
-  #*w 1v 2> w*#
   tasks_sembast_storage:
     path: ../tasks_storage/_conditional_dir___use_sembast_database___tasks_sembast_storage/
   #*w 1v 2> w*#
