@@ -10,6 +10,9 @@ packages:
   #{{#use_hive_database}}#
   - ./packages/tasks_storage/_conditional_dir___use_hive_database___tasks_hive_storage/
   #{{/use_hive_database}}#
+  #{{#use_isar_database}}#
+  - ./packages/tasks_storage/_conditional_dir___use_isar_database___tasks_isar_storage/
+  #{{/use_isar_database}}#
   #{{#use_realm_database}}#
   - ./packages/tasks_storage/_conditional_dir___use_realm_database___tasks_realm_storage/
   #{{/use_realm_database}}#
