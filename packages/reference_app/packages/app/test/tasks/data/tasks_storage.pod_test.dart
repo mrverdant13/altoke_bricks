@@ -3,6 +3,7 @@ import 'package:altoke_app/external/external.dart' /*remove-start*/
     show
         DatabasePackage,
         databasePod,
+        isarDbPod,
         realmDbPod,
         sembastDbPod /*remove-end*/;
 /*{{/use_hive_database}}*/
@@ -46,6 +47,38 @@ THEN the pod should return the storage
     },
   );
   /*{{/use_hive_database}}*/
+
+  /*{{#use_isar_database}}*/
+  test(
+    '''
+
+GIVEN an injected tasks storage
+AND an injected Isar database
+WHEN the pod is read
+THEN the pod should return the storage
+''',
+    () async {
+      final container = ProviderContainer(
+        overrides: [
+          /*remove-start*/
+          databasePod.overrideWithValue(
+            DatabasePackage.isar,
+          ),
+          /*remove-end*/
+          isarDbPod.overrideWithValue(
+            FakeIsar(),
+          ),
+        ],
+      );
+      addTearDown(container.dispose);
+      final storage = container.read(tasksStoragePod);
+      expect(
+        storage,
+        isA<TasksStorage>(),
+      );
+    },
+  );
+  /*{{/use_isar_database}}*/
 
   /*{{#use_realm_database}}*/
   test(

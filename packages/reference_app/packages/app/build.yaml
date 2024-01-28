@@ -20,6 +20,12 @@ targets:
           - lib/routing/router.dart
       #{{/use_go_router_router}}#
       #*w 1v 6> w*#
+      #{{#use_isar_database}}#
+      isar_generator:isar_generator:
+        generate_for:
+          - lib/external/data/_conditional_file___use_isar_database___isar.dart
+      #*w 1v 6> w*#
+      #{{/use_isar_database}}#
       json_serializable:
         generate_for:
           - lib/external/data/data.dart
@@ -38,6 +44,10 @@ targets:
           - lib/**/state/**_pod.dart
           - lib/external/data/data.dart
           #*w 1v 10> w*#
+          #{{#use_isar_database}}#
+          - lib/external/data/_conditional_file___use_isar_database___isar.dart
+          #*w 1v 10> w*#
+          #{{/use_isar_database}}#
           #{{#use_realm_database}}#
           - lib/external/data/_conditional_file___use_realm_database___realm.dart
           #*w 1v 10> w*#

@@ -10,6 +10,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 /*{{#use_hive_database}}*/
 export '_conditional_file___use_hive_database___hive.dart'; /*{{/use_hive_database}}*/
+/*{{#use_isar_database}}*/
+export '_conditional_file___use_isar_database___isar.dart'; /*{{/use_isar_database}}*/
 /*{{#use_realm_database}}*/
 export '_conditional_file___use_realm_database___realm.dart'; /*{{/use_realm_database}}*/
 /*{{#use_sembast_database}}*/
@@ -26,6 +28,7 @@ Iterable<Json> get rawFakeTasks => _$rawFakeTasksJsonLiteral;
 // coverage:ignore-start
 enum DatabasePackage {
   hive('hive'),
+  isar('isar'),
   realm('realm'),
   sembast('sembast'),
   ;

@@ -13,6 +13,9 @@ import 'package:go_router/go_router.dart';
 /*{{#use_hive_database}}*/
 import 'package:hive/hive.dart';
 /*{{/use_hive_database}}*/
+/*{{#use_isar_database}}*/
+import 'package:isar/isar.dart';
+/*{{/use_isar_database}}*/
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 /*{{#use_realm_database}}*/
@@ -26,6 +29,9 @@ import 'package:sembast_web/sembast_web.dart';
 /*{{#use_hive_database}}*/
 import 'package:tasks_hive_storage/tasks_hive_storage.dart';
 /*{{/use_hive_database}}*/
+/*{{#use_isar_database}}*/
+import 'package:tasks_isar_storage/tasks_isar_storage.dart';
+/*{{/use_isar_database}}*/
 /*{{#use_realm_database}}*/
 import 'package:tasks_realm_storage/tasks_realm_storage.dart';
 /*{{/use_realm_database}}*/
@@ -59,6 +65,11 @@ Future<void> main() async {
   final tasksBox =
       await Hive.openBox<Map<dynamic, dynamic>>(TasksHiveStorage.boxName);
   /*{{/use_hive_database}}*/
+  /*{{#use_isar_database}}*/
+  final isarDb = await initIsarDatabase(
+    version: 1,
+  );
+  /*{{/use_isar_database}}*/
   /*{{#use_realm_database}}*/
   final realmDb = await initRealmDatabase(
     version: 1,
@@ -79,6 +90,9 @@ Future<void> main() async {
         /*{{#use_hive_database}}*/
         tasksBoxPod.overrideWithValue(tasksBox),
         /*{{/use_hive_database}}*/
+        /*{{#use_isar_database}}*/
+        isarDbPod.overrideWithValue(isarDb),
+        /*{{/use_isar_database}}*/
         /*{{#use_realm_database}}*/
         realmDbPod.overrideWithValue(realmDb),
         /*{{/use_realm_database}}*/
@@ -113,6 +127,31 @@ Future<void> initHiveDatabase({
   );
 }
 /*{{/use_hive_database}}*/
+
+/*{{#use_isar_database}}*/
+Future<Isar> initIsarDatabase({
+  required int version,
+}) async {
+  final docsDir = await getApplicationDocumentsDirectory();
+  final appDocsDir = Directory(path.join(docsDir.path, 'altoke-app'));
+  final isarDbDir = Directory(path.join(appDocsDir.path, 'isar-db'));
+  if (!isarDbDir.existsSync()) isarDbDir.createSync(recursive: true);
+  log('Isar DB dir: ${isarDbDir.path}');
+  final isar = await Isar.open(
+    [
+      IsarMetadataSchema,
+      IsarTaskSchema,
+    ],
+    directory: isarDbDir.path,
+  );
+  await runIsarMigrations(
+    database: isar,
+    newVersion: version,
+    isDebugMode: kDebugMode,
+  );
+  return isar;
+}
+/*{{/use_isar_database}}*/
 
 /*{{#use_realm_database}}*/
 Future<Realm> initRealmDatabase({

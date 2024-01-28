@@ -7,6 +7,13 @@ import 'package:altoke_app/external/external.dart'
         databasePod,
 /*remove-end*/
 /*w 1> w*/
+/*{{#use_isar_database}}*/
+        isarDb,
+        isarDbPod
+/*{{/use_isar_database}}*/
+/*remove-start*/
+        ,
+/*remove-end*/
 /*{{#use_realm_database}}*/
         realmDb,
         realmDbPod
@@ -28,6 +35,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tasks_hive_storage/tasks_hive_storage.dart'
     show TasksHiveStorage;
 /*{{/use_hive_database}}*/
+/*{{#use_isar_database}}*/
+import 'package:tasks_isar_storage/tasks_isar_storage.dart'
+    show TasksIsarStorage;
+/*{{/use_isar_database}}*/
 /*{{#use_realm_database}}*/
 import 'package:tasks_realm_storage/tasks_realm_storage.dart'
     show TasksRealmStorage;
@@ -45,6 +56,9 @@ part 'tasks_storage.pod.g.dart';
     /*remove-start*/
     database,
     /*remove-end*/
+    /*{{#use_isar_database}}*/
+    isarDb,
+    /*{{/use_isar_database}}*/
     /*{{#use_hive_database}}*/
     tasksBox,
     /*{{/use_hive_database}}*/
@@ -69,6 +83,14 @@ TasksStorage tasksStorage(TasksStorageRef ref) {
         box: ref.watch(tasksBoxPod),
       )
     /*{{/use_hive_database}}*/
+    /*remove-start*/,
+    DatabasePackage.isar =>
+      /*remove-end*/
+      /*{{#use_isar_database}}*/
+      TasksIsarStorage(
+        database: ref.watch(isarDbPod),
+      )
+    /*{{/use_isar_database}}*/
     /*remove-start*/,
     DatabasePackage.realm =>
       /*remove-end*/

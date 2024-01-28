@@ -6,7 +6,7 @@ part of 'tasks_storage.pod.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$tasksStorageHash() => r'd1005e82ce91d66e0a64b2626ef721f9c62ee239';
+String _$tasksStorageHash() => r'e6e5b98c3554c92ad9fb4378ca78789a841442f8';
 
 /// See also [tasksStorage].
 @ProviderFor(tasksStorage)
@@ -17,6 +17,7 @@ final tasksStoragePod = AutoDisposeProvider<TasksStorage>.internal(
       const bool.fromEnvironment('dart.vm.product') ? null : _$tasksStorageHash,
   dependencies: <ProviderOrFamily>{
     databasePod,
+    isarDbPod,
     tasksBoxPod,
     realmDbPod,
     sembastDbPod
@@ -24,6 +25,8 @@ final tasksStoragePod = AutoDisposeProvider<TasksStorage>.internal(
   allTransitiveDependencies: <ProviderOrFamily>{
     databasePod,
     ...?databasePod.allTransitiveDependencies,
+    isarDbPod,
+    ...?isarDbPod.allTransitiveDependencies,
     tasksBoxPod,
     ...?tasksBoxPod.allTransitiveDependencies,
     realmDbPod,
