@@ -3,6 +3,7 @@ altoke
 coverde
 github
 lcov
+linux
 melos
 mrverdant13
 nullable
