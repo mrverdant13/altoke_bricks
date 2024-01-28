@@ -5,6 +5,7 @@ import 'package:mason/mason.dart';
 
 enum Database {
   hive('Hive', 'hive'),
+  isar('Isar', 'isar'),
   realm('Realm', 'realm'),
   sembast('Sembast', 'sembast'),
   ;
