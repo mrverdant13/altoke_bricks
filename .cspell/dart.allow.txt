@@ -1,5 +1,6 @@
 # Allowed words for Dart files
 endtemplate
+isar
 mocktail
 nodoc
 rxdart

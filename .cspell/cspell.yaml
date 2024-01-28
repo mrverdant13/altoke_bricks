@@ -27,7 +27,7 @@ dictionaries:
   - global-allow
 useGitignore: true
 overrides:
-  - filename: "**/{*.dart,pubspec.yaml,.metadata}"
+  - filename: "**/{*.dart,pubspec.yaml,.metadata,build.yaml,melos.yaml}"
     dictionaries:
       - dart-allow
   - filename: "**/.github/**/*"
