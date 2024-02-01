@@ -25,6 +25,13 @@ import 'package:altoke_app/external/external.dart'
         sembastDb,
         sembastDbPod
 /*{{/use_sembast_database}}*/
+/*remove-start*/
+        ,
+/*remove-end*/
+/*{{#use_sqlite_database}}*/
+        sqliteDb,
+        sqliteDbPod
+/*{{/use_sqlite_database}}*/
     ;
 /*{{/use_hive_database}}*/
 /*{{#use_hive_database}}*/
@@ -47,6 +54,10 @@ import 'package:tasks_realm_storage/tasks_realm_storage.dart'
 import 'package:tasks_sembast_storage/tasks_sembast_storage.dart'
     show TasksSembastStorage;
 /*{{/use_sembast_database}}*/
+/*{{#use_sqlite_database}}*/
+import 'package:tasks_sqlite_storage/tasks_sqlite_storage.dart'
+    show TasksSqliteStorage;
+/*{{/use_sqlite_database}}*/
 import 'package:tasks_storage/tasks_storage.dart' show TasksStorage;
 
 part 'tasks_storage.pod.g.dart';
@@ -68,6 +79,9 @@ part 'tasks_storage.pod.g.dart';
     /*{{#use_sembast_database}}*/
     sembastDb,
     /*{{/use_sembast_database}}*/
+    /*{{#use_sqlite_database}}*/
+    sqliteDb,
+    /*{{/use_sqlite_database}}*/
   ],
 )
 TasksStorage tasksStorage(TasksStorageRef ref) {
@@ -107,6 +121,18 @@ TasksStorage tasksStorage(TasksStorageRef ref) {
         database: ref.watch(sembastDbPod),
       )
     /*{{/use_sembast_database}}*/
+    /*remove-start*/,
+    DatabasePackage.sqlite =>
+      /*remove-end*/
+      /*{{#use_sqlite_database}}*/
+      TasksSqliteStorage(
+        tasksDao: ref.watch(
+          sqliteDbPod.select(
+            (database) => database.tasksDrift,
+          ),
+        ),
+      )
+    /*{{/use_sqlite_database}}*/
     /*remove-start*/,
   } /*remove-end*/;
   return storage;

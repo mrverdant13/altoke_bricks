@@ -16,6 +16,8 @@ export '_conditional_file___use_isar_database___isar.dart'; /*{{/use_isar_databa
 export '_conditional_file___use_realm_database___realm.dart'; /*{{/use_realm_database}}*/
 /*{{#use_sembast_database}}*/
 export '_conditional_file___use_sembast_database___sembast.dart'; /*{{/use_sembast_database}}*/
+/*{{#use_sqlite_database}}*/
+export '_conditional_file___use_sqlite_database___sqlite.dart'; /*{{/use_sqlite_database}}*/
 
 part 'data.g.dart';
 
@@ -31,6 +33,7 @@ enum DatabasePackage {
   isar('isar'),
   realm('realm'),
   sembast('sembast'),
+  sqlite('sqlite'),
   ;
 
   const DatabasePackage(this.identifier);

@@ -15,6 +15,11 @@ dependencies:
   #{{/use_auto_route_router}}#
   common:
     path: ../common/
+  #*w 1v 2> w*#
+  #{{#use_sqlite_database}}#
+  drift: ^2.15.0
+  #*w 1v 2> w*#
+  #{{/use_sqlite_database}}#
   element_in_memory_cache:
     path: ../element_in_memory_cache/
   flutter:
@@ -55,6 +60,11 @@ dependencies:
   sembast_web: ^2.2.0
   #*w 1v 2> w*#
   #{{/use_sembast_database}}#
+  #{{#use_sqlite_database}}#
+  sqlite3: ^2.3.0
+  sqlite3_flutter_libs: ^0.5.19+1
+  #*w 1v 2> w*#
+  #{{/use_sqlite_database}}#
   tasks:
     path: ../tasks/
   #*w 1v 2> w*#
@@ -81,6 +91,11 @@ dependencies:
     path: ../tasks_storage/_conditional_dir___use_sembast_database___tasks_sembast_storage/
   #*w 1v 2> w*#
   #{{/use_sembast_database}}#
+  #{{#use_sqlite_database}}#
+  tasks_sqlite_storage:
+    path: ../tasks_storage/_conditional_dir___use_sqlite_database___tasks_sqlite_storage/
+  #*w 1v 2> w*#
+  #{{/use_sqlite_database}}#
   tasks_storage:
     path: ../tasks_storage/tasks_storage/
   universal_io: ^2.2.2
@@ -93,6 +108,11 @@ dev_dependencies:
   #{{/use_auto_route_router}}#
   build_runner: ^2.4.6
   custom_lint: ^0.5.7
+  #*w 1v 2> w*#
+  #{{#use_sqlite_database}}#
+  drift_dev: ^2.15.0
+  #*w 1v 2> w*#
+  #{{/use_sqlite_database}}#
   flutter_test:
     sdk: flutter
   #*w 1v 2> w*#

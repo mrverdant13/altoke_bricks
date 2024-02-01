@@ -4,6 +4,10 @@ import 'package:altoke_app/app/app.dart';
 import 'package:altoke_app/external/external.dart';
 import 'package:altoke_app/routing/routing.dart';
 import 'package:altoke_app/tasks/tasks.dart';
+/*{{#use_sqlite_database}}*/
+import 'package:drift/drift.dart';
+import 'package:drift/native.dart';
+/*{{/use_sqlite_database}}*/
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,6 +30,12 @@ import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
 import 'package:sembast_web/sembast_web.dart';
 /*{{/use_sembast_database}}*/
+/*{{#use_sqlite_database}}*/
+import 'package:sqlite3/sqlite3.dart' /*remove-start*/
+    hide
+        Database /*remove-end*/;
+import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
+/*{{/use_sqlite_database}}*/
 /*{{#use_hive_database}}*/
 import 'package:tasks_hive_storage/tasks_hive_storage.dart';
 /*{{/use_hive_database}}*/
@@ -34,8 +44,27 @@ import 'package:tasks_isar_storage/tasks_isar_storage.dart';
 /*{{/use_isar_database}}*/
 /*{{#use_realm_database}}*/
 import 'package:tasks_realm_storage/tasks_realm_storage.dart';
-/*{{/use_realm_database}}*/
 import 'package:universal_io/io.dart';
+
+class LoggerObserver extends ProviderObserver {
+  const LoggerObserver();
+
+  @override
+  void providerDidFail(
+    ProviderBase<Object?> provider,
+    Object error,
+    StackTrace stackTrace,
+    ProviderContainer container,
+  ) {
+    if (!kDebugMode) return;
+    log(
+      'Provider failed\n$error',
+      error: error,
+      // stackTrace: stackTrace,
+      name: provider.name ?? provider.runtimeType.toString(),
+    );
+  }
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -80,8 +109,16 @@ Future<void> main() async {
     version: 1,
   );
   /*{{/use_sembast_database}}*/
+  /*{{#use_sqlite_database}}*/
+  final sqliteDb = await initSqliteDatabase(
+    version: 1,
+  );
+  /*{{/use_sqlite_database}}*/
   runApp(
     ProviderScope(
+      observers: const [
+        LoggerObserver(),
+      ],
       overrides: [
         /*remove-start*/
         routerPod.overrideWithValue(routerPackage),
@@ -99,6 +136,9 @@ Future<void> main() async {
         /*{{#use_sembast_database}}*/
         sembastDbPod.overrideWithValue(sembastDb),
         /*{{/use_sembast_database}}*/
+        /*{{#use_sqlite_database}}*/
+        sqliteDbPod.overrideWithValue(sqliteDb),
+        /*{{/use_sqlite_database}}*/
       ],
       child: MyApp(
         routerConfig: routerConfig
@@ -119,7 +159,7 @@ Future<void> initHiveDatabase({
   final appDocsDir = Directory(path.join(docsDir.path, 'altoke-app'));
   final hiveDbDir = Directory(path.join(appDocsDir.path, 'hive-db'));
   if (!hiveDbDir.existsSync()) hiveDbDir.createSync(recursive: true);
-  log('Hive DB dir: ${hiveDbDir.path}');
+  if (kDebugMode) log('Hive DB dir: ${hiveDbDir.path}');
   if (!kIsWeb) Hive.init(hiveDbDir.path);
   await runHiveMigrations(
     newVersion: version,
@@ -136,7 +176,7 @@ Future<Isar> initIsarDatabase({
   final appDocsDir = Directory(path.join(docsDir.path, 'altoke-app'));
   final isarDbDir = Directory(path.join(appDocsDir.path, 'isar-db'));
   if (!isarDbDir.existsSync()) isarDbDir.createSync(recursive: true);
-  log('Isar DB dir: ${isarDbDir.path}');
+  if (kDebugMode) log('Isar DB dir: ${isarDbDir.path}');
   final isar = await Isar.open(
     [
       IsarMetadataSchema,
@@ -158,7 +198,7 @@ Future<Realm> initRealmDatabase({
   required int version,
 }) async {
   if (kIsWeb) {
-    log('Using in-memory Realm DB');
+    if (kDebugMode) log('Using in-memory Realm DB');
     return Realm(
       Configuration.inMemory([
         RealmTaskSchema,
@@ -169,7 +209,7 @@ Future<Realm> initRealmDatabase({
   final appDocsDir = Directory(path.join(docsDir.path, 'altoke-app'));
   final realmDbDir = Directory(path.join(appDocsDir.path, 'realm-db'));
   if (!realmDbDir.existsSync()) realmDbDir.createSync(recursive: true);
-  log('Realm DB dir: ${realmDbDir.path}');
+  if (kDebugMode) log('Realm DB dir: ${realmDbDir.path}');
   final database = Realm(
     Configuration.local(
       [
@@ -212,7 +252,7 @@ Future<Database> initSembastDatabase({
   final appDocsDir = Directory(path.join(docsDir.path, 'altoke-app'));
   final sembastDbDir = Directory(path.join(appDocsDir.path, 'sembast-db'));
   if (!sembastDbDir.existsSync()) sembastDbDir.createSync(recursive: true);
-  log('Sembast DB dir: ${sembastDbDir.path}');
+  if (kDebugMode) log('Sembast DB dir: ${sembastDbDir.path}');
   final database = await databaseFactoryIo.openDatabase(
     path.join(sembastDbDir.path, 'db.sembast'),
     version: version,
@@ -227,3 +267,50 @@ Future<Database> initSembastDatabase({
   return database;
 }
 /*{{/use_sembast_database}}*/
+
+/*{{#use_sqlite_database}}*/
+Future<SqliteDatabase> initSqliteDatabase({
+  required int version,
+}) async {
+  final docsDir = await getApplicationDocumentsDirectory();
+  final tempDir = await getTemporaryDirectory();
+  final appDocsDir = Directory(path.join(docsDir.path, 'altoke-app'));
+  final sqliteDbDir = Directory(path.join(appDocsDir.path, 'sqlite-db'));
+  if (!sqliteDbDir.existsSync()) sqliteDbDir.createSync(recursive: true);
+  final sqliteDbFile = File(path.join(sqliteDbDir.path, 'db.sqlite'));
+  if (kDebugMode) log('SQLite DB dir: ${sqliteDbDir.path}');
+  final database = SqliteDatabase(
+    openConnection: LazyDatabase(
+      () async {
+        if (Platform.isAndroid) {
+          await applyWorkaroundToOpenSqlite3OnOldAndroidVersions();
+        }
+        sqlite3.tempDirectory = tempDir.path;
+        return NativeDatabase.createInBackground(sqliteDbFile);
+      },
+    ),
+    migrationStrategy: MigrationStrategy(
+      onCreate: (migrator) async {
+        if (kDebugMode) log('onCreate');
+        await migrator.createAll();
+        await runSqliteMigrations(
+          migrator: migrator,
+          oldVersion: 0,
+          newVersion: version,
+          isDebugMode: kDebugMode,
+        );
+      },
+      onUpgrade: (migrator, from, to) async {
+        if (kDebugMode) log('onUpgrade');
+        await runSqliteMigrations(
+          migrator: migrator,
+          oldVersion: from,
+          newVersion: to,
+          isDebugMode: kDebugMode,
+        );
+      },
+    ),
+  );
+  return database;
+}
+/*{{/use_sqlite_database}}*/
