@@ -151,7 +151,7 @@ class TasksIsarStorage implements TasksStorage {
 
     return query
         .watch(fireImmediately: true)
-        .map(todosFromIsarTasks)
+        .map(tasksFromIsarTasks)
         .distinct(tasksListsAreEqual);
   }
 
@@ -301,12 +301,12 @@ typedef IsarTasksIterable = Iterable<IsarTask>;
 
 /// Converts an [IsarTask] to a [Task]s.
 @visibleForTesting
-Task todoFromIsarTask(IsarTask isarTask) {
+Task taskFromIsarTask(IsarTask isarTask) {
   return isarTask.toTask();
 }
 
 /// Converts an [IsarTasksIterable] to a list of [Task]s.
 @visibleForTesting
-List<Task> todosFromIsarTasks(IsarTasksIterable isarTasks) {
-  return isarTasks.map(todoFromIsarTask).toList();
+List<Task> tasksFromIsarTasks(IsarTasksIterable isarTasks) {
+  return isarTasks.map(taskFromIsarTask).toList();
 }
