@@ -19,6 +19,9 @@ packages:
   #{{#use_sembast_database}}#
   - ./packages/tasks_storage/_conditional_dir___use_sembast_database___tasks_sembast_storage/
   #{{/use_sembast_database}}#
+  #{{#use_sqlite_database}}#
+  - ./packages/tasks_storage/_conditional_dir___use_sqlite_database___tasks_sqlite_storage/
+  #{{/use_sqlite_database}}#
   #*w 1v 2> w*#
   - ./packages/tasks_storage/tasks_storage/
 
@@ -178,7 +181,7 @@ scripts:
     description: Merge all coverage reports
     run: >
       coverde rm MELOS_ROOT_PATH/coverage/filtered.lcov.info &&
-      melos exec --file-exists=coverage/lcov.info -- "coverde filter --input ./coverage/lcov.info --output MELOS_ROOT_PATH/coverage/filtered.lcov.info --paths-parent MELOS_PACKAGE_PATH  --filters \.freezed\.dart,\.g\.dart,\.gr\.dart"
+      melos exec -j 1 --file-exists=coverage/lcov.info -- "coverde filter --input ./coverage/lcov.info --output MELOS_ROOT_PATH/coverage/filtered.lcov.info --paths-parent MELOS_PACKAGE_PATH  --filters \.drift\.dart,\.freezed\.dart,\.g\.dart,\.gr\.dart"
 
   C:
     description: Check coverage
