@@ -10,3 +10,4 @@ nullable
 pubspec
 riverpod
 sembast
+sqlite

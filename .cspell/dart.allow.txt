@@ -1,9 +1,12 @@
 # Allowed words for Dart files
+autoincrement
 endtemplate
+insertable
 isar
 mocktail
 nodoc
 rxdart
+strftime
 unawaited
 unmanaged
 vsync
