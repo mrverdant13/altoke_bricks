@@ -1,0 +1,52 @@
+import 'package:{{project_name.snakeCase()}}/external/external.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+
+import '../../helpers/helpers.dart';
+
+void main() {
+  test(
+    '''
+
+GIVEN a scoped Realm DB pod
+WHEN the pod is invoked
+THEN the pod should throw an error
+
+''',
+    () async {
+      final container = ProviderContainer();
+      addTearDown(container.dispose);
+      void action() => container.read(realmDbPod);
+      expect(
+        action,
+        throwsA(
+          isA<UnimplementedError>().having(
+            (error) => error.message,
+            'message',
+            '`realmDbPod` was not initialized.',
+          ),
+        ),
+      );
+    },
+  );
+
+  test(
+    '''
+
+GIVEN a migration handler
+WHEN it is run
+THEN no action should be performed
+''',
+    () async {
+      final migration = MockRealmMigration();
+      await runRealmMigrations(
+        migration: migration,
+        oldVersion: 3,
+        newVersion: 7,
+        isDebugMode: false,
+      );
+      verifyNoMoreInteractions(migration);
+    },
+  );
+}

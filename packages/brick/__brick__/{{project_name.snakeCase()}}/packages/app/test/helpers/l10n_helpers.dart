@@ -26,7 +26,7 @@ class LocalizationVariant extends ValueVariant<LocalizedTextCase> {
 
   @override
   String describeValue(LocalizedTextCase value) {
-    return value.$1.toString();
+    return '${value.$1}';
   }
 }
 

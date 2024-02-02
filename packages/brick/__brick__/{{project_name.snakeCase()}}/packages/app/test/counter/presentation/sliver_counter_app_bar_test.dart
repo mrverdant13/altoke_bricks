@@ -1,4 +1,3 @@
-// cspell:ignore contador
 import 'package:{{project_name.snakeCase()}}/counter/counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,8 +8,15 @@ void main() {
   final localizationVariant = LocalizationVariant.withCommonSelector(
     localizedTextSelector: (l10n) => l10n.counterAppBarTitle,
     partialCases: {
-      const (Locale('en'), 'Counter'),
-      const (Locale('es'), 'Contador'),
+      const (
+        Locale('en'),
+        'Counter',
+      ),
+      const (
+        Locale('es'),
+        // cspell:disable-next-line
+        'Contador',
+      ),
     },
   );
 

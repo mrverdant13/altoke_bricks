@@ -11,7 +11,7 @@ class Task with _$Task {
   /// {@macro task}
   const factory Task({
     /// The task ID.
-    required String id,
+    required int id,
 
     /// The task title.
     required String title,

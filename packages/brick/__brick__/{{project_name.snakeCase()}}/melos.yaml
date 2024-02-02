@@ -3,18 +3,29 @@ name: monorepo
 packages:
   - ./packages/app/
   - ./packages/common/
+  - ./packages/element_in_memory_cache/
   - ./packages/tasks/
+  - ./packages/tasks_repository/
+  {{#use_hive_database}}- ./packages/tasks_storage/tasks_hive_storage/{{/use_hive_database}}{{#use_isar_database}}- ./packages/tasks_storage/tasks_isar_storage/{{/use_isar_database}}{{#use_realm_database}}- ./packages/tasks_storage/tasks_realm_storage/{{/use_realm_database}}{{#use_sembast_database}}- ./packages/tasks_storage/tasks_sembast_storage/{{/use_sembast_database}}{{#use_sqlite_database}}- ./packages/tasks_storage/tasks_sqlite_storage/{{/use_sqlite_database}}
+  - ./packages/tasks_storage/tasks_storage/
 
 command:
-  clean:
+  {{#use_realm_database}}bootstrap:
+    hooks:
+      post:
+        run: >
+          melos exec --depends-on realm -- "dart run realm install"
+  {{/use_realm_database}}clean:
     hooks:
       pre:
         run: >
-          melos exec -- "coverde rm .dart_tool/ build/ pubspec_overrides.yaml"
+          melos exec -- "coverde rm .dart_tool/ build/ pubspec_overrides.yaml"{{#use_realm_database}}
+          &&
+          melos exec --depends-on realm -- "coverde rm binary/ default.realm.management default.realm.lock"{{/use_realm_database}}
 
 scripts:
   # Code Generation
-  g:
+  g.d:
     description: Generate code for a package
     run: dart run build_runner build --delete-conflicting-outputs
     packageFilters:
@@ -24,9 +35,24 @@ scripts:
       concurrency: 1
       failFast: true
       orderDependents: true
-  G:
+  {{#use_realm_database}}g.r:
+    description: Generate Realm code for a package
+    run: dart run realm generate
+    packageFilters:
+      dependsOn:
+        - realm
+      ignore:
+        - {{project_name.snakeCase()}}
+    exec:
+      concurrency: 1
+      failFast: true
+      orderDependents: true
+  {{/use_realm_database}}G:
     description: Generate code for all packages
-    run: melos run g --no-select
+    run: >
+      melos run g.d --no-select{{#use_realm_database}}
+      &&
+      melos run g.r --no-select{{/use_realm_database}}
 
   # Formatting
   f:
@@ -107,7 +133,7 @@ scripts:
     description: Merge all coverage reports
     run: >
       coverde rm MELOS_ROOT_PATH/coverage/filtered.lcov.info &&
-      melos exec --file-exists=coverage/lcov.info -- "coverde filter --input ./coverage/lcov.info --output MELOS_ROOT_PATH/coverage/filtered.lcov.info --paths-parent MELOS_PACKAGE_PATH  --filters \.g\.dart,\.gr\.dart"
+      melos exec -c 1 --file-exists=coverage/lcov.info -- "coverde filter --input ./coverage/lcov.info --output MELOS_ROOT_PATH/coverage/filtered.lcov.info --paths-parent MELOS_PACKAGE_PATH  --filters \.drift\.dart,\.freezed\.dart,\.g\.dart,\.gr\.dart"
 
   C:
     description: Check coverage

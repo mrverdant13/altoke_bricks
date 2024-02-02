@@ -1,4 +1,5 @@
-import 'package:{{project_name.snakeCase()}}/home/home.dart';
+import 'package:{{project_name.snakeCase()}}/counter/counter.dart';
+import 'package:{{project_name.snakeCase()}}/tasks/tasks.dart';
 import 'package:flutter/widgets.dart';
 
 class SliverExamples extends StatelessWidget {
@@ -11,6 +12,7 @@ class SliverExamples extends StatelessWidget {
     return SliverList.list(
       children: const [
         CounterExampleTile(),
+        TasksExampleTile(),
       ],
     );
   }

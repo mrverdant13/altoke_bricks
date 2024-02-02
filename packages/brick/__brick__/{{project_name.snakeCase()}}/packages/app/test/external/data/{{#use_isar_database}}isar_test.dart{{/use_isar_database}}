@@ -1,0 +1,93 @@
+import 'dart:ffi';
+import 'dart:io';
+
+import 'package:{{project_name.snakeCase()}}/external/external.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:isar/isar.dart';
+
+void main() {
+  test(
+    '''
+
+GIVEN a scoped Isar DB pod
+WHEN the pod is invoked
+THEN the pod should throw an error
+
+''',
+    () async {
+      final container = ProviderContainer();
+      addTearDown(container.dispose);
+      void action() => container.read(isarDbPod);
+      expect(
+        action,
+        throwsA(
+          isA<UnimplementedError>().having(
+            (error) => error.message,
+            'message',
+            '`isarDbPod` was not initialized.',
+          ),
+        ),
+      );
+    },
+  );
+
+  test(
+    '''
+
+GIVEN a migration handler
+WHEN it is run
+THEN no action should be performed
+''',
+    () async {
+      // This step is a workaround to avoid issues affecting test suits.
+      // See: https://github.com/isar/isar/issues/1518
+      final isarLibDir = Directory.systemTemp.createTempSync('isar-test-lib-');
+      final abi = Abi.current();
+      await Isar.initializeIsarCore(
+        download: true,
+        libraries: {
+          abi: '${isarLibDir.path}${Platform.pathSeparator}${abi.localName}',
+        },
+      );
+      final dbDir = Directory.systemTemp.createTempSync('isar-testing-');
+      final isar = await Isar.open(
+        [IsarMetadataSchema],
+        directory: dbDir.path,
+        inspector: false,
+        relaxedDurability: false,
+      );
+      final metadataCollection = isar.metadata;
+      final initialVersion = await metadataCollection.getVersion();
+      expect(initialVersion, isZero);
+      await runIsarMigrations(
+        database: isar,
+        newVersion: 7,
+        isDebugMode: false,
+      );
+      final finalVersion = await metadataCollection.getVersion();
+      expect(finalVersion, 7);
+      await isar.close(deleteFromDisk: true);
+      await dbDir.delete(recursive: true);
+    },
+  );
+}
+
+extension on Abi {
+  String get localName {
+    switch (this) {
+      case Abi.macosArm64 || Abi.macosX64:
+        // cspell: disable-next-line
+        return 'libisar.dylib';
+      case Abi.linuxX64:
+        // cspell: disable-next-line
+        return 'libisar.so';
+      case Abi.windowsArm64 || Abi.windowsX64:
+        return 'isar.dll';
+      default:
+        throw UnsupportedError(
+          'Unsupported processor architecture "$this" for tests',
+        );
+    }
+  }
+}

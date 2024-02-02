@@ -1,15 +1,21 @@
-// cspell:ignore contador
-import 'package:{{project_name.snakeCase()}}/home/home.dart';
+import 'package:{{project_name.snakeCase()}}/counter/counter.dart';
 import 'package:{{project_name.snakeCase()}}/routing/routing.dart';{{#use_auto_route_router}}import 'package:auto_route/auto_route.dart';{{/use_auto_route_router}}import 'package:flutter/material.dart';import 'package:flutter_test/flutter_test.dart';{{#use_go_router_router}}import 'package:go_router/go_router.dart';{{/use_go_router_router}}import 'package:mocktail/mocktail.dart';
 
 import '../../helpers/helpers.dart';
 
 void main() {
-  final localizationVAriant = LocalizationVariant.withCommonSelector(
+  final localizationVariant = LocalizationVariant.withCommonSelector(
     localizedTextSelector: (l10n) => l10n.counterExampleLabel,
     partialCases: {
-      const (Locale('en'), 'Counter'),
-      const (Locale('es'), 'Contador'),
+      const (
+        Locale('en'),
+        'Counter',
+      ),
+      const (
+        Locale('es'),
+        // cspell:disable-next-line
+        'Contador',
+      ),
     },
   );
 
@@ -20,7 +26,7 @@ GIVEN a localization variant
 WHEN testing the counter example tile
 THEN all supported locales should be considered
 ''',
-    localizationVAriant,
+    localizationVariant,
   );
 
   testLocalizedWidget(
@@ -38,7 +44,7 @@ THEN the tile should include the localized label
         '<counter::example-tile::title>',
       ),
     ),
-    variant: localizationVAriant,
+    variant: localizationVariant,
   );{{#use_auto_route_router}}testWidgets(
     '''
 
@@ -48,7 +54,7 @@ WHEN the tile is tapped
 THEN the counter route should be visited
 ''',
     (tester) async {
-      registerRoutingFallbackValues();
+      registerFallbackValues();
       final routingController = MockRoutingController();
       when(() => routingController.navigate(any()))
           .thenAnswer((_) async => null);
@@ -74,7 +80,7 @@ WHEN the tile is tapped
 THEN the counter route should be visited
 ''',
     (tester) async {
-      registerRoutingFallbackValues();
+      registerFallbackValues();
       final goRouter = MockGoRouter();
       when(() => goRouter.go(any())).thenAnswer((_) async {});
       await tester.pumpTestableWidget(InheritedGoRouter(
@@ -88,4 +94,5 @@ THEN the counter route should be visited
       verify(() => goRouter.go(const CounterRouteData().location)).called(1);
       verifyNoMoreInteractions(goRouter);
     },
-  );{{/use_go_router_router}}}
+  );{{/use_go_router_router}}
+}
