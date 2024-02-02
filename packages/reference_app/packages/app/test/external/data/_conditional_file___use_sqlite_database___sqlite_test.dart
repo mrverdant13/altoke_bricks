@@ -33,8 +33,7 @@ THEN the pod should throw an error
     },
   );
 
-  test(
-      '''
+  test('''
 
 GIVEN a SQLite database constructor
 AND a migration strategy
@@ -42,8 +41,7 @@ WHEN it is invoked
 THEN the SQLite database should be created
 AND the schema version should be 1
 AND the migration strategy should be the provided one
-''',
-      () {
+''', () {
     final migrationStrategy = MigrationStrategy();
     final database = SqliteDatabase(
       openConnection: NativeDatabase.memory(),
