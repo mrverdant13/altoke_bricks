@@ -181,7 +181,7 @@ scripts:
     description: Merge all coverage reports
     run: >
       coverde rm MELOS_ROOT_PATH/coverage/filtered.lcov.info &&
-      melos exec -j 1 --file-exists=coverage/lcov.info -- "coverde filter --input ./coverage/lcov.info --output MELOS_ROOT_PATH/coverage/filtered.lcov.info --paths-parent MELOS_PACKAGE_PATH  --filters \.drift\.dart,\.freezed\.dart,\.g\.dart,\.gr\.dart"
+      melos exec -c 1 --file-exists=coverage/lcov.info -- "coverde filter --input ./coverage/lcov.info --output MELOS_ROOT_PATH/coverage/filtered.lcov.info --paths-parent MELOS_PACKAGE_PATH  --filters \.drift\.dart,\.freezed\.dart,\.g\.dart,\.gr\.dart"
 
   C:
     description: Check coverage
