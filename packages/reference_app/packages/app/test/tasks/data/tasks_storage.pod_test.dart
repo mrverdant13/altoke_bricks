@@ -10,7 +10,9 @@ import 'package:altoke_app/external/external.dart' /*remove-start*/
         sqliteDbPod /*remove-end*/;
 /*{{/use_hive_database}}*/
 import 'package:altoke_app/tasks/tasks.dart';
+/*{{#use_sqlite_database}}*/
 import 'package:drift/native.dart';
+/*{{/use_sqlite_database}}*/
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tasks_storage/tasks_storage.dart';
