@@ -10,8 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';{{#use_go_router_router}
 import 'package:path_provider/path_provider.dart';{{#use_realm_database}}import 'package:realm/realm.dart';{{/use_realm_database}}{{#use_sembast_database}}import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
 import 'package:sembast_web/sembast_web.dart';{{/use_sembast_database}}{{#use_sqlite_database}}import 'package:sqlite3/sqlite3.dart';
-import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';{{/use_sqlite_database}}{{#use_hive_database}}import 'package:tasks_hive_storage/tasks_hive_storage.dart';{{/use_hive_database}}{{#use_isar_database}}import 'package:tasks_isar_storage/tasks_isar_storage.dart';{{/use_isar_database}}{{#use_realm_database}}import 'package:tasks_realm_storage/tasks_realm_storage.dart';
-import 'package:universal_io/io.dart';
+import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';{{/use_sqlite_database}}{{#use_hive_database}}import 'package:tasks_hive_storage/tasks_hive_storage.dart';{{/use_hive_database}}{{#use_isar_database}}import 'package:tasks_isar_storage/tasks_isar_storage.dart';{{/use_isar_database}}{{#use_realm_database}}import 'package:tasks_realm_storage/tasks_realm_storage.dart';{{/use_realm_database}}import 'package:universal_io/io.dart';
 
 class LoggerObserver extends ProviderObserver {
   const LoggerObserver();
