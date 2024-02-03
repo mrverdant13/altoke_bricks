@@ -44,6 +44,7 @@ import 'package:tasks_isar_storage/tasks_isar_storage.dart';
 /*{{/use_isar_database}}*/
 /*{{#use_realm_database}}*/
 import 'package:tasks_realm_storage/tasks_realm_storage.dart';
+/*{{/use_realm_database}}*/
 import 'package:universal_io/io.dart';
 
 class LoggerObserver extends ProviderObserver {
