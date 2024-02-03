@@ -1,5 +1,6 @@
 # Globally allowed words
 altoke
+ansi
 coverde
 github
 lcov
