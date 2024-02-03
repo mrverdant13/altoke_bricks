@@ -1,6 +1,7 @@
 @Tags(['e2e'])
 library brick_e2e;
 
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io'
     show Directory, Process, ProcessResult, Stdin, Stdout, systemEncoding;
@@ -29,6 +30,15 @@ enum Router {
           'use_${router.identifier}_router': router == this,
       };
 }
+
+Future<MasonGenerator> generator = Future(() async {
+  final rootDir = Directory.current.parent.parent;
+  final brickPath = path.joinAll([rootDir.path, 'packages', 'brick']);
+  final brick = Brick.path(brickPath);
+  return MasonGenerator.fromBrick(brick);
+});
+
+final greenCheck = green.wrap('✓');
 
 enum Database {
   hive('hive'),
@@ -85,6 +95,9 @@ ${description.trim()}
     test(
       composedDescription,
       () async {
+        final logger = Logger(
+          level: Level.verbose,
+        );
         // final terminalStdout = io.stdout;
         // final mockStdin = MockStdin();
         // final mockStdout = MockStdout();
@@ -92,17 +105,17 @@ ${description.trim()}
         // IOOverrides.runZoned(
         //   () async {
         registerFallbackValue(systemEncoding);
-        print('Fallback system encoding registered');
         // when(() => mockStdout.supportsAnsiEscapes).thenReturn(true);
-        final rootDir = Directory.current.parent.parent;
-        final brickPath = path.joinAll([rootDir.path, 'packages', 'brick']);
-        final brick = Brick.path(brickPath);
-        final masonGenerator = await MasonGenerator.fromBrick(brick);
-        print('Mason generator created');
+        // final rootDir = Directory.current.parent.parent;
+        // final brickPath = path.joinAll([rootDir.path, 'packages', 'brick']);
+        // final brick = Brick.path(brickPath);
+        // final masonGenerator = await MasonGenerator.fromBrick(brick);
+        final masonGenerator = await generator;
+        logger.info('$greenCheck Mason generator created');
         final tempDirectory = Directory.systemTemp.createTempSync(
           'altoke-app-e2e-test-${router.identifier}-${database.identifier}-',
         );
-        print('Temp directory created');
+        logger.info('$greenCheck Temp directory created');
         final directoryGeneratorTarget =
             DirectoryGeneratorTarget(tempDirectory);
 
@@ -116,17 +129,11 @@ ${description.trim()}
         final projectDescription =
             'E2E App (`${router.identifier}` - `${database.identifier}`).';
         final vars = <String, dynamic>{
-          'silent': true,
           'project_name': projectName,
           'project_description': projectDescription,
           ...router.selectionVarsMap,
           ...database.selectionVarsMap,
         };
-        const encoder = JsonEncoder.withIndent('  ');
-        print(
-          'Initial vars:\n'
-          '${encoder.convert(vars)}',
-        );
         // var stepIndex = 0;
         // when(mockStdin.readLineSync).thenReturn(
         //   () {
@@ -152,12 +159,9 @@ ${description.trim()}
         await masonGenerator.generate(
           directoryGeneratorTarget,
           vars: vars,
+          logger: logger,
         );
-        print('App generation completed');
-        print(
-          'Vars after generation:\n'
-          '${encoder.convert(vars)}',
-        );
+        logger.info('$greenCheck App generation completed');
         await masonGenerator.hooks.postGen(
           workingDirectory: directoryGeneratorTarget.dir.path,
           vars: vars,
@@ -166,57 +170,52 @@ ${description.trim()}
               ..clear()
               ..addAll(updatedVars);
           },
+          logger: logger,
         );
-        print('App post-gen hook executed');
-        print(
-          'Vars after post-gen hook:\n'
-          '${encoder.convert(vars)}',
-        );
+        logger.info('$greenCheck App post-gen hook executed');
         final applicationPath = path.join(
           directoryGeneratorTarget.dir.path,
           projectName,
         );
-        const testFullCommand = 'melos run T';
-        final [testCommand, ...testArgs] = testFullCommand.split(' ');
-        final testResult = await Process.run(
-          testCommand,
-          testArgs,
-          workingDirectory: applicationPath,
-          runInShell: true,
+        final testResult = await runCommand(
+          'melos run T',
+          projectPath: applicationPath,
+          logger: logger,
+          prefix: '🧪 ',
+          startMessage: 'Running tests.',
+          successMessage: 'Tests complete!',
+          failureMessage: 'Tests failed!',
         );
-        print('Test result: $testResult');
         expect(
           testResult,
           isSuccessfulProcessResult,
           reason: 'Tests failed',
         );
-        const mergeCoverageFullCommand = 'melos run M';
-        final [mergeCoverageCommand, ...mergeCoverageArgs] =
-            mergeCoverageFullCommand.split(' ');
-        final coverdeFilterResult = await Process.run(
-          mergeCoverageCommand,
-          mergeCoverageArgs,
-          workingDirectory: applicationPath,
-          runInShell: true,
+        final coverageMergingResult = await runCommand(
+          'melos run M',
+          projectPath: applicationPath,
+          logger: logger,
+          prefix: '📃 ',
+          startMessage: 'Gathering test coverage.',
+          successMessage: 'Test coverage gathered!',
+          failureMessage: 'Test coverage gathering failed!',
         );
-        print('Coverage filter result: $coverdeFilterResult');
         expect(
-          coverdeFilterResult,
+          coverageMergingResult,
           isSuccessfulProcessResult,
           reason: 'Coverage gathering failed',
         );
-        const checkCoverageFullCommand = 'melos run C';
-        final [checkCoverageCommand, ...checkCoverageArgs] =
-            checkCoverageFullCommand.split(' ');
-        final coverdeCheckResult = await Process.run(
-          checkCoverageCommand,
-          checkCoverageArgs,
-          workingDirectory: applicationPath,
-          runInShell: true,
+        final coverageCheckResult = await runCommand(
+          'melos run C',
+          projectPath: applicationPath,
+          logger: logger,
+          prefix: '🕵🏻 ',
+          startMessage: 'Checking test coverage.',
+          successMessage: 'Coverage check complete!',
+          failureMessage: 'Coverage check failed!',
         );
-        print('Coverage check result: $coverdeCheckResult');
         expect(
-          coverdeCheckResult,
+          coverageCheckResult,
           isSuccessfulProcessResult,
           reason: 'Coverage check failed',
         );
@@ -259,3 +258,36 @@ final isSuccessfulProcessResult = isA<ProcessResult>()
   'stderr',
   isEmpty,
 );
+
+Future<ProcessResult> runCommand(
+  String fullCommand, {
+  required String projectPath,
+  required Logger logger,
+  required String prefix,
+  required String startMessage,
+  required String successMessage,
+  required String failureMessage,
+}) async {
+  final [command, ...args] = fullCommand.split(' ');
+  final progress = logger.progress('$prefix$startMessage');
+  final progressTimer = Timer.periodic(
+    const Duration(milliseconds: 100),
+    (timer) {
+      progress.update('$prefix$startMessage');
+    },
+  );
+  final result = await Process.run(
+    command,
+    args,
+    workingDirectory: projectPath,
+    runInShell: true,
+  );
+  progressTimer.cancel();
+  switch (result.exitCode) {
+    case 0:
+      progress.complete('$prefix$successMessage');
+    case _:
+      progress.fail('$prefix$failureMessage');
+  }
+  return result;
+}

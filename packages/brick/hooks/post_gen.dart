@@ -10,9 +10,6 @@ Future<void> run(HookContext context) async {
     context.vars['project_name'] as String,
   );
   final logger = context.logger;
-  if (bool.tryParse('${context.vars['silent']}') ?? false) {
-    logger.level = Level.quiet;
-  }
   await runCommand(
     'melos bs',
     projectPath: projectPath,
@@ -77,10 +74,13 @@ Future<void> runCommand(
     workingDirectory: projectPath,
     runInShell: true,
   );
-  if (result.exitCode != 0) {
-    logger.alert(result.stderr?.toString());
-    exit(result.exitCode);
-  }
   progressTimer.cancel();
-  progress.complete('$prefix$completeMessage');
+  switch (result.exitCode) {
+    case 0:
+      progress.complete('$prefix$completeMessage');
+    case _:
+      final errorDetails = result.stderr?.toString();
+      progress.fail('$prefix${errorDetails == null ? '' : '\n$errorDetails'}');
+      exit(result.exitCode);
+  }
 }
