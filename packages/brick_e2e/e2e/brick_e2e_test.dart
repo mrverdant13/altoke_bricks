@@ -231,13 +231,7 @@ ${description.trim()}
   }
 }
 
-final isSuccessfulProcessResult = isA<ProcessResult>()
-    .having(
-  (processResult) => processResult.exitCode,
-  'exitCode',
-  isZero,
-)
-    .having(
+final isSuccessfulProcessResult = isA<ProcessResult>().having(
   (processResult) {
     final rawLines = LineSplitter.split(processResult.stderr.toString());
     final sanitizedLines = rawLines.where(
@@ -257,6 +251,10 @@ final isSuccessfulProcessResult = isA<ProcessResult>()
   },
   'stderr',
   isEmpty,
+).having(
+  (processResult) => processResult.exitCode,
+  'exitCode',
+  isZero,
 );
 
 Future<ProcessResult> runCommand(
