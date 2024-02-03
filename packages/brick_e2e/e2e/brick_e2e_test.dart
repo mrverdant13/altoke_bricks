@@ -92,14 +92,17 @@ ${description.trim()}
         // IOOverrides.runZoned(
         //   () async {
         registerFallbackValue(systemEncoding);
+        print('Fallback system encoding registered');
         // when(() => mockStdout.supportsAnsiEscapes).thenReturn(true);
         final rootDir = Directory.current.parent.parent;
         final brickPath = path.joinAll([rootDir.path, 'packages', 'brick']);
         final brick = Brick.path(brickPath);
         final masonGenerator = await MasonGenerator.fromBrick(brick);
+        print('Mason generator created');
         final tempDirectory = Directory.systemTemp.createTempSync(
           'altoke-app-e2e-test-${router.identifier}-${database.identifier}-',
         );
+        print('Temp directory created');
         final directoryGeneratorTarget =
             DirectoryGeneratorTarget(tempDirectory);
 
@@ -119,6 +122,11 @@ ${description.trim()}
           ...router.selectionVarsMap,
           ...database.selectionVarsMap,
         };
+        const encoder = JsonEncoder.withIndent('  ');
+        print(
+          'Initial vars:\n'
+          '${encoder.convert(vars)}',
+        );
         // var stepIndex = 0;
         // when(mockStdin.readLineSync).thenReturn(
         //   () {
@@ -141,11 +149,14 @@ ${description.trim()}
         //       ..addAll(updatedVars);
         //   },
         // );
-        final logger = Logger();
         await masonGenerator.generate(
           directoryGeneratorTarget,
           vars: vars,
-          logger: logger,
+        );
+        print('App generation completed');
+        print(
+          'Vars after generation:\n'
+          '${encoder.convert(vars)}',
         );
         await masonGenerator.hooks.postGen(
           workingDirectory: directoryGeneratorTarget.dir.path,
@@ -155,6 +166,11 @@ ${description.trim()}
               ..clear()
               ..addAll(updatedVars);
           },
+        );
+        print('App post-gen hook executed');
+        print(
+          'Vars after post-gen hook:\n'
+          '${encoder.convert(vars)}',
         );
         final applicationPath = path.join(
           directoryGeneratorTarget.dir.path,
@@ -168,6 +184,7 @@ ${description.trim()}
           workingDirectory: applicationPath,
           runInShell: true,
         );
+        print('Test result: $testResult');
         expect(
           testResult,
           isSuccessfulProcessResult,
@@ -182,6 +199,7 @@ ${description.trim()}
           workingDirectory: applicationPath,
           runInShell: true,
         );
+        print('Coverage filter result: $coverdeFilterResult');
         expect(
           coverdeFilterResult,
           isSuccessfulProcessResult,
@@ -196,25 +214,12 @@ ${description.trim()}
           workingDirectory: applicationPath,
           runInShell: true,
         );
+        print('Coverage check result: $coverdeCheckResult');
         expect(
           coverdeCheckResult,
           isSuccessfulProcessResult,
           reason: 'Coverage check failed',
         );
-        // expect(
-        //   coverdeCheck.exitCode,
-        //   isZero,
-        //   reason: 'Coverage check failed'
-        //       '\n'
-        //       '${coverdeCheck.stderr}',
-        // );
-        // expect(
-        //   coverdeCheck.stderr,
-        //   isEmpty,
-        //   reason: 'Coverage check failed'
-        //       '\n'
-        //       '${coverdeCheck.stderr}',
-        // );
         tempDirectory.deleteSync(recursive: true);
         //   },
         //   stdin: () => mockStdin,
