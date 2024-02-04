@@ -24,10 +24,14 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          # TODO(mrverdant13): Re-enable macOS and Ubuntu
-          # - macos-latest
-          # - ubuntu-latest
-          - windows-latest
+          - macos-latest
+          - ubuntu-latest
+          # HACK(mrverdant13): E2E tests fail on Windows
+          # This is due to a drive issue affecting the coverage gathering step.
+          # The Dart SDK is installed in the C: drive, as well as the global packages.
+          # The issue is that the coverage gathering step, on Windows, uses a relative path
+          # that assumes the Dart SDK is installed in the same drive as the project.
+          # - windows-latest
     defaults:
       run:
         working-directory: packages/brick_e2e
