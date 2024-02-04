@@ -150,7 +150,7 @@ scripts:
     description: Test a Dart package
     run: >
       dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random --color &&
-      dart pub global run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib -b MELOS_PACKAGE_PATH
+      dart pub global run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib
     packageFilters:
       flutter: false
       dirExists:
