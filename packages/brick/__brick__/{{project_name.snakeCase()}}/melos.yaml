@@ -100,10 +100,9 @@ scripts:
   # Testing & Coverage
   t.d:
     description: Test a Dart package
-    # TODO(mrverdant13): Remove verbosity option.
     run: >
-      dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random --color --verbose-trace --chain-stack-traces &&
-      dart pub global run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib --packages=.dart_tool/package_config.json -v
+      dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random --color &&
+      dart pub global run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib
     packageFilters:
       flutter: false
       dirExists:
