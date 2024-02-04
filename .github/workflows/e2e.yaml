@@ -43,9 +43,10 @@ jobs:
         run: dart pub global activate coverde 0.2.0+2
       - name: Initialize melos
         run: melos bs
+      - name: Go to the E2E tests directory
+        run: cd packages/brick_e2e
       - name: Run E2E tests
         # HACK: E2E tests cannot be run with Melos
         # Check the root melos.yaml for more details
         # run: melos run t.e2e.d
         run: dart test e2e --run-skipped -t e2e -j 1 -r expanded --verbose-trace --chain-stack-traces --test-randomize-ordering-seed=random
-        working-directory: packages/brick_e2e
