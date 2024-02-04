@@ -31,9 +31,15 @@ enum Router {
       };
 }
 
+final logger = Logger(
+  level: Level.verbose,
+);
+
 Future<MasonGenerator> generator = Future(() async {
   final rootDir = Directory.current.parent.parent;
+  logger.info('$greenCheck Root monorepo directory: ${rootDir.path}');
   final brickPath = path.joinAll([rootDir.path, 'packages', 'brick']);
+  logger.info('$greenCheck Brick path: $brickPath');
   final brick = Brick.path(brickPath);
   return MasonGenerator.fromBrick(brick);
 });
@@ -95,9 +101,6 @@ ${description.trim()}
     test(
       composedDescription,
       () async {
-        final logger = Logger(
-          level: Level.verbose,
-        );
         // final terminalStdout = io.stdout;
         // final mockStdin = MockStdin();
         // final mockStdout = MockStdout();
@@ -180,7 +183,6 @@ ${description.trim()}
         final testResult = await runCommand(
           'melos run T',
           projectPath: applicationPath,
-          logger: logger,
           prefix: '🧪 ',
           startMessage: 'Running tests.',
           successMessage: 'Tests complete!',
@@ -194,7 +196,6 @@ ${description.trim()}
         final coverageMergingResult = await runCommand(
           'melos run M',
           projectPath: applicationPath,
-          logger: logger,
           prefix: '📃 ',
           startMessage: 'Gathering test coverage.',
           successMessage: 'Test coverage gathered!',
@@ -208,7 +209,6 @@ ${description.trim()}
         final coverageCheckResult = await runCommand(
           'melos run C',
           projectPath: applicationPath,
-          logger: logger,
           prefix: '🕵🏻 ',
           startMessage: 'Checking test coverage.',
           successMessage: 'Coverage check complete!',
@@ -260,7 +260,6 @@ final isSuccessfulProcessResult = isA<ProcessResult>().having(
 Future<ProcessResult> runCommand(
   String fullCommand, {
   required String projectPath,
-  required Logger logger,
   required String prefix,
   required String startMessage,
   required String successMessage,
