@@ -191,7 +191,7 @@ ${description.trim()}
         expect(
           testResult,
           isSuccessfulProcessResult,
-          reason: 'Tests failed',
+          reason: 'Tests failed\n${testResult.stdout}',
         );
         final coverageMergingResult = await runCommand(
           'melos run M',
