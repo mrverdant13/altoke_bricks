@@ -57,8 +57,10 @@ Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
 - **Data persistence:**\
   Local data persistence example. Supported with one of the following packages:
     - [`hive`][pub_package_hive] ([Hive docs][docs_hive_link]).
+    - [`isar`][pub_package_isar] ([Isar docs][docs_isar_link]).
     - [`realm`][pub_package_realm] ([Realm docs for Flutter][docs_realm_for_flutter_link]).
     - [`sembast`][pub_package_sembast] ([Sembast docs][docs_sembast_link]).
+    - [`drift` (SQLite)][pub_package_drift] ([Drift docs][docs_drift_link]).
 
 - **Deep linking:**\
   Supported with one the following packages:
@@ -78,12 +80,14 @@ Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
     - [`riverpod_lint`][pub_package_riverpod_lint].
 
 - **Testing:**\
-  Widget tests with 100% coverage.
+  Tests with 100% coverage.
 
 <!-- LINKS -->
 
 [dart_and_flutter_linter_rules_link]: https://dart.dev/tools/linter-rules
+[docs_drift_link]:https://drift.simonbinder.eu/
 [docs_hive_link]: https://docs.hivedb.dev/
+[docs_isar_link]: https://isar.dev/
 [docs_melos_link]: https://melos.invertase.dev/
 [docs_sembast_link]: https://github.com/tekartik/sembast.dart/blob/master/sembast/doc/guide.md
 [docs_realm_for_flutter_link]: https://www.mongodb.com/docs/realm/sdk/flutter/
@@ -93,7 +97,9 @@ Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
 [pub_package_custom_lint]: https://pub.dev/packages/custom_lint
 [pub_package_flutter_riverpod]: https://pub.dev/packages/flutter_riverpod
 [pub_package_go_router]: https://pub.dev/packages/go_router
+[pub_package_drift]: https://pub.dev/packages/drift
 [pub_package_hive]: https://pub.dev/packages/hive
+[pub_package_isar]: https://pub.dev/packages/isar
 [pub_package_realm]: https://pub.dev/packages/realm
 [pub_package_riverpod_lint]: https://pub.dev/packages/riverpod_lint
 [pub_package_sembast]: https://pub.dev/packages/sembast
