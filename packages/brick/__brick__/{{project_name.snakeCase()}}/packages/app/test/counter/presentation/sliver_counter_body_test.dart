@@ -1,4 +1,3 @@
-// cspell:ignore botón, pulsado, veces
 import 'package:{{project_name.snakeCase()}}/counter/counter.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,8 +21,15 @@ void main() {
     final localizationVariant = LocalizationVariant.withCommonSelector(
       localizedTextSelector: (l10n) => l10n.counterPushTimesMessage(0),
       partialCases: {
-        const (Locale('en'), 'You have not pushed the button yet.'),
-        const (Locale('es'), 'Aún no has pulsado el botón.'),
+        const (
+          Locale('en'),
+          'You have not pushed the button yet.',
+        ),
+        const (
+          Locale('es'),
+          // cspell:disable-next-line
+          'Aún no has pulsado el botón.',
+        ),
       },
     );
 
@@ -70,8 +76,15 @@ THEN the body should include the localized message
     final localizationVariant = LocalizationVariant.withCommonSelector(
       localizedTextSelector: (l10n) => l10n.counterPushTimesMessage(1),
       partialCases: {
-        const (Locale('en'), 'You have pushed the button one time.'),
-        const (Locale('es'), 'Has pulsado el botón una vez.'),
+        const (
+          Locale('en'),
+          'You have pushed the button one time.',
+        ),
+        const (
+          Locale('es'),
+          // cspell:disable-next-line
+          'Has pulsado el botón una vez.',
+        ),
       },
     );
 
@@ -118,8 +131,15 @@ THEN the body should include the localized message
     final localizationVariant = LocalizationVariant.withCommonSelector(
       localizedTextSelector: (l10n) => l10n.counterPushTimesMessage(8),
       partialCases: {
-        const (Locale('en'), 'You have pushed the button 8 times.'),
-        const (Locale('es'), 'Has pulsado el botón 8 veces.'),
+        const (
+          Locale('en'),
+          'You have pushed the button 8 times.',
+        ),
+        const (
+          Locale('es'),
+          // cspell:disable-next-line
+          'Has pulsado el botón 8 veces.',
+        ),
       },
     );
 

@@ -8,6 +8,11 @@ ignorePaths:
   - "**/.gitignore"
   - "**/pubspec.lock"
   - "**/*.arb"
+  - "**/*.fakes.*"
+  - "**/*.drift.dart"
+  - "**/*.freezed.dart"
+  - "**/*.g.dart"
+  - "**/*.gr.dart"
 enableGlobDot: true
 dictionaryDefinitions:
   - name: global-allow
@@ -23,7 +28,7 @@ dictionaries:
   - global-allow
 useGitignore: true
 overrides:
-  - filename: "**/{*.dart,pubspec.yaml,.metadata}"
+  - filename: "**/{*.dart,pubspec.yaml,.metadata,build.yaml,melos.yaml,*.drift}"
     dictionaries:
       - dart-allow
   - filename: "**/.github/**/*"

@@ -9,6 +9,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 /*{{#use_go_router_router}}*/
 import 'package:go_router/go_router.dart';
 
+/*{{/use_go_router_router}}*/
+
+/*{{#use_go_router_router}}*/
 part 'router.g.dart';
 /*{{/use_go_router_router}}*/
 
@@ -31,6 +34,21 @@ class AppRouter extends $AppRouter {
       path: '/counter',
       title: (context, data) => 'Counter',
       page: CounterRoute.page,
+    ),
+    AdaptiveRoute(
+      path: '/tasks',
+      title: (context, data) => 'Tasks',
+      page: TasksRoute.page,
+    ),
+    AdaptiveRoute(
+      path: '/tasks/new',
+      title: (context, data) => 'New Task',
+      page: NewTaskRoute.page,
+    ),
+    AdaptiveRoute(
+      path: '/tasks/:taskId',
+      title: (context, data) => 'Task Details',
+      page: TaskDetailsRoute.page,
     ),
   ];
 }
@@ -60,6 +78,49 @@ class CounterRouteData extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const CounterScreen();
+  }
+}
+
+@TypedGoRoute<TasksRouteData>(
+  path: '/tasks',
+  name: 'TasksRoute',
+)
+class TasksRouteData extends GoRouteData {
+  const TasksRouteData();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const TasksScreen();
+  }
+}
+
+@TypedGoRoute<NewTaskRouteData>(
+  path: '/tasks/new',
+  name: 'NewTaskRoute',
+)
+class NewTaskRouteData extends GoRouteData {
+  const NewTaskRouteData();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const NewTaskScreen();
+  }
+}
+
+@TypedGoRoute<TaskDetailsRouteData>(
+  path: '/tasks/:taskId',
+  name: 'TaskDetailsRoute',
+)
+class TaskDetailsRouteData extends GoRouteData {
+  const TaskDetailsRouteData({
+    required this.taskId,
+  });
+
+  final int taskId;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return TaskDetailsScreen(taskId: taskId);
   }
 }
 /*{{/use_go_router_router}}*/

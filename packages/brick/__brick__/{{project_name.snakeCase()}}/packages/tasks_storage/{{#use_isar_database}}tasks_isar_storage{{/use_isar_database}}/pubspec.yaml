@@ -1,0 +1,25 @@
+name: tasks_isar_storage
+description: A persistent storage for tasks built on top of Isar.
+version: 0.0.1+1
+publish_to: none
+
+environment:
+  sdk: ">=3.2.0 <4.0.0"
+  flutter: 3.16.0
+
+dependencies:
+  common:
+    path: ../../common/
+  isar: ^3.1.0+1
+  meta: ^1.10.0
+  tasks:
+    path: ../../tasks/
+  tasks_storage:
+    path: ../tasks_storage/
+
+dev_dependencies:
+  build_runner: ^2.4.8
+  isar_flutter_libs: ^3.1.0+1
+  isar_generator: ^3.1.0+1
+  test: ^1.24.9
+  very_good_analysis: ^5.1.0

@@ -1,4 +1,5 @@
-import 'package:altoke_app/home/home.dart';
+import 'package:altoke_app/counter/counter.dart';
+import 'package:altoke_app/tasks/tasks.dart';
 import 'package:flutter/widgets.dart';
 
 class SliverExamples extends StatelessWidget {
@@ -11,6 +12,7 @@ class SliverExamples extends StatelessWidget {
     return SliverList.list(
       children: const [
         CounterExampleTile(),
+        TasksExampleTile(),
       ],
     );
   }

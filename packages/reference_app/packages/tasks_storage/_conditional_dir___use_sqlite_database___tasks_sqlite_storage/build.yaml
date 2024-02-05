@@ -1,0 +1,17 @@
+targets:
+  $default:
+    builders:
+      drift_dev:
+        enabled: false
+      drift_dev:analyzer:
+        enabled: true
+        options: &options
+          sql:
+            dialect: sqlite
+        generate_for:
+          - lib/tasks.drift
+      drift_dev:modular:
+        enabled: true
+        options: *options
+        generate_for:
+          - lib/tasks.drift

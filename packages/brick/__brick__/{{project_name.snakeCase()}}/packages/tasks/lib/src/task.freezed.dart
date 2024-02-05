@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Task {
   /// The task ID.
-  String get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
 
   /// The task title.
   String get title => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $TaskCopyWith<$Res> {
       _$TaskCopyWithImpl<$Res, Task>;
   @useResult
   $Res call(
-      {String id,
+      {int id,
       String title,
       bool isCompleted,
       DateTime createdAt,
@@ -71,7 +71,7 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -100,7 +100,7 @@ abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id,
+      {int id,
       String title,
       bool isCompleted,
       DateTime createdAt,
@@ -127,7 +127,7 @@ class __$$TaskImplCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -160,7 +160,7 @@ class _$TaskImpl implements _Task {
 
   /// The task ID.
   @override
-  final String id;
+  final int id;
 
   /// The task title.
   @override
@@ -184,7 +184,7 @@ class _$TaskImpl implements _Task {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskImpl &&
@@ -211,7 +211,7 @@ class _$TaskImpl implements _Task {
 
 abstract class _Task implements Task {
   const factory _Task(
-      {required final String id,
+      {required final int id,
       required final String title,
       required final bool isCompleted,
       required final DateTime createdAt,
@@ -220,7 +220,7 @@ abstract class _Task implements Task {
   @override
 
   /// The task ID.
-  String get id;
+  int get id;
   @override
 
   /// The task title.
@@ -367,7 +367,7 @@ class _$NewTaskImpl implements _NewTask {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NewTaskImpl &&
@@ -543,7 +543,7 @@ class _$PartialTaskImpl implements _PartialTask {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PartialTaskImpl &&

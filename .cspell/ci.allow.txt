@@ -1,3 +1,2 @@
 # Allowed words for CI files
-mrverdant13
 subosito

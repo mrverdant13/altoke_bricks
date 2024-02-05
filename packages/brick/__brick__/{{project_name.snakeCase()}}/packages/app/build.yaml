@@ -10,12 +10,55 @@ targets:
         options:
           enable_cached_builds: true
         generate_for:
-          - lib/routing/router.dart{{/use_auto_route_router}}{{#use_go_router_router}}go_router_builder:
+          - lib/routing/router.dart
+      {{/use_auto_route_router}}{{#use_sqlite_database}}drift_dev:
+        enabled: false
+      drift_dev:analyzer:
+        enabled: true
+        options: &drift_options
+          sql:
+            dialect: sqlite
         generate_for:
-          - lib/routing/router.dart{{/use_go_router_router}}
-      riverpod_generator:
+          - lib/external/data/sqlite.dart
+      drift_dev:modular:
+        enabled: true
+        options: *drift_options
+        generate_for:
+          - lib/external/data/sqlite.dart
+      {{/use_sqlite_database}}{{#use_go_router_router}}go_router_builder:
+        generate_for:
+          - lib/routing/router.dart
+      {{/use_go_router_router}}{{#use_isar_database}}isar_generator:isar_generator:
+        generate_for:
+          - lib/external/data/isar.dart
+      {{/use_isar_database}}json_serializable:
+        generate_for:
+          - lib/external/data/data.dart
+      {{#use_realm_database}}realm:realm_generator:
+        enabled: false
+        generate_for: []
+      {{/use_realm_database}}riverpod_generator:
         options:
           provider_name_suffix: Pod
           provider_family_name_suffix: Pod
         generate_for:
           - lib/**/state/**_pod.dart
+          - lib/external/data/data.dart
+          {{#use_isar_database}}- lib/external/data/isar.dart
+          {{/use_isar_database}}{{#use_realm_database}}- lib/external/data/realm.dart
+          {{/use_realm_database}}{{#use_sembast_database}}- lib/external/data/sembast.dart
+          {{/use_sembast_database}}{{#use_sqlite_database}}- lib/external/data/sqlite.dart
+          {{/use_sqlite_database}}- lib/tasks/data/latest_deleted_task_cache.pod.dart
+          - lib/tasks/data/tasks_repository.pod.dart
+          {{#use_hive_database}}- lib/tasks/data/tasks_box.pod.dart
+          {{/use_hive_database}}- lib/tasks/data/tasks_storage.pod.dart
+          - lib/tasks/state/async_filtered_tasks_count.pod.dart
+          - lib/tasks/state/async_latest_deleted_task.pod.dart
+          - lib/tasks/state/async_paginated_filtered_tasks.pod.dart
+          - lib/tasks/state/async_task.pod.dart
+          - lib/tasks/state/scoped_task_id.pod.dart
+          - lib/tasks/state/selected_tasks_status_filter.pod.dart
+          - lib/tasks/state/task_creator.pod.dart
+          - lib/tasks/state/task_search_term.pod.dart
+          - lib/tasks/state/task.pod.dart
+          - lib/tasks/state/tasks_mutator.pod.dart

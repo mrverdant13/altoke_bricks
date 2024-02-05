@@ -1,0 +1,15 @@
+name: tasks_storage
+description: An interface for a storage for tasks.
+version: 0.0.1+1
+publish_to: none
+
+environment:
+  sdk: ">=3.2.0 <4.0.0"
+
+dependencies:
+  tasks:
+    path: ../../tasks/
+
+dev_dependencies:
+  test: ^1.24.9
+  very_good_analysis: ^5.1.0

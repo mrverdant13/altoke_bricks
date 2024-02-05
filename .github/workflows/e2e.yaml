@@ -9,11 +9,12 @@ on:
     branches:
       - main
     paths:
-      - .github/workflows/e2e.yaml
-      - packages/brick/**
-      - packages/brick_e2e/**
-      - melos.yaml
-      - pubspec.yaml
+      - '.github/workflows/e2e.yaml'
+      - 'packages/brick/**'
+      - '!packages/brick/*.md'
+      - 'packages/brick_e2e/**'
+      - 'melos.yaml'
+      - 'pubspec.yaml'
   workflow_dispatch: {}
 
 jobs:
@@ -26,7 +27,15 @@ jobs:
         os:
           - macos-latest
           - ubuntu-latest
-          - windows-latest
+          # HACK(mrverdant13): E2E tests fail on Windows
+          # This is due to a drive issue affecting the coverage gathering step.
+          # The Dart SDK is installed in the C: drive, as well as the global packages.
+          # The issue is that the coverage gathering step, on Windows, uses a relative path
+          # that assumes the Dart SDK is installed in the same drive as the project.
+          # - windows-latest
+    defaults:
+      run:
+        working-directory: packages/brick_e2e
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -36,13 +45,14 @@ jobs:
           flutter-version: 3.16.0
       - name: Install melos
         run: dart pub global activate melos 3.2.0
+      - name: Install coverage
+        run: dart pub global activate coverage 1.7.2
       - name: Install coverde
         run: dart pub global activate coverde 0.2.0+2
-      - name: Initialize melos
-        run: melos bs
+      - name: Install dependencies
+        run: dart pub get
       - name: Run E2E tests
         # HACK: E2E tests cannot be run with Melos
         # Check the root melos.yaml for more details
         # run: melos run t.e2e.d
-        run: dart test e2e --run-skipped -t e2e -r expanded --test-randomize-ordering-seed=random
-        working-directory: packages/brick_e2e
+        run: dart test e2e --run-skipped -t e2e -j 1 -r expanded --verbose-trace --chain-stack-traces --test-randomize-ordering-seed=random

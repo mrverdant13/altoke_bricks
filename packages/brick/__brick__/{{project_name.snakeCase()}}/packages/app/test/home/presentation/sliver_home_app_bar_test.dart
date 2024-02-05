@@ -1,4 +1,3 @@
-// cspell:ignore ejemplos
 import 'package:{{project_name.snakeCase()}}/home/home.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,8 +8,15 @@ void main() {
   final localizationVariant = LocalizationVariant.withCommonSelector(
     localizedTextSelector: (l10n) => l10n.homeAppBarTitle,
     partialCases: {
-      const (Locale('en'), 'Examples'),
-      const (Locale('es'), 'Ejemplos'),
+      const (
+        Locale('en'),
+        'Examples',
+      ),
+      const (
+        Locale('es'),
+        // cspell:disable-next-line
+        'Ejemplos',
+      ),
     },
   );
 

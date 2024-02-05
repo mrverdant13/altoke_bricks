@@ -1,0 +1,6 @@
+targets:
+  $default:
+    builders:
+      isar_generator:generator:
+        generate_for:
+          - lib/src/tasks_isar_storage.dart

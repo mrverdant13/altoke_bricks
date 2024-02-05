@@ -59,4 +59,5 @@ THEN the home screen should be shown
     },
   );
 /*{{/use_go_router_router}}*/
+/*w 1v w*/
 }

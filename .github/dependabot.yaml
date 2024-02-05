@@ -65,7 +65,88 @@ updates:
       - build
       - p:ref
   - package-ecosystem: pub
+    directory: /packages/reference_app/packages/common/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - p:ref
+  - package-ecosystem: pub
+    directory: /packages/reference_app/packages/element_in_memory_cache/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - p:ref
+  - package-ecosystem: pub
     directory: /packages/reference_app/packages/tasks/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - p:ref
+  - package-ecosystem: pub
+    directory: /packages/reference_app/packages/tasks_repository/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - p:ref
+  - package-ecosystem: pub
+    directory: /packages/reference_app/packages/tasks_storage/_conditional_dir___use_hive_database___tasks_hive_storage/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - p:ref
+  - package-ecosystem: pub
+    directory: /packages/reference_app/packages/tasks_storage/_conditional_dir___use_isar_database___tasks_isar_storage/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - p:ref
+  - package-ecosystem: pub
+    directory: /packages/reference_app/packages/tasks_storage/_conditional_dir___use_realm_database___tasks_realm_storage/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - p:ref
+  - package-ecosystem: pub
+    directory: /packages/reference_app/packages/tasks_storage/_conditional_dir___use_sembast_database___tasks_sembast_storage/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - p:ref
+  - package-ecosystem: pub
+    directory: /packages/reference_app/packages/tasks_storage/_conditional_dir___use_sqlite_database___tasks_sqlite_storage/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - p:ref
+  - package-ecosystem: pub
+    directory: /packages/reference_app/packages/tasks_storage/tasks_storage/
     schedule:
       interval: daily
     reviewers:

@@ -31,4 +31,5 @@ THEN the home screen should be shown
       final homeScreenFinder = find.byType(HomeScreen);
       expect(homeScreenFinder, findsOneWidget);
     },
-  );{{/use_go_router_router}}}
+  );{{/use_go_router_router}}
+}

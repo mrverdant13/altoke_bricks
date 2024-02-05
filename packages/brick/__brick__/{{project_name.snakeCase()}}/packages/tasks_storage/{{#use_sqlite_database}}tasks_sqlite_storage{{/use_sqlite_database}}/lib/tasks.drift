@@ -1,0 +1,13 @@
+CREATE TABLE tasks (
+    id INT NOT NULL PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    is_completed BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at INT NOT NULL DEFAULT(STRFTIME('%s', 'now') * 1000),
+    description TEXT
+);
+
+add: INSERT INTO tasks (title, description, is_completed) VALUES (:title, :description, :is_completed);
+deleteById: DELETE FROM tasks WHERE id = :id;
+insert: INSERT INTO tasks (id, title, is_completed, created_at, description) VALUES (:id, :title, :is_completed, :created_at, :description);
+markAllAsCompleted: UPDATE tasks SET is_completed = TRUE WHERE is_completed = FALSE;
+getById: SELECT * FROM tasks WHERE id = :id;

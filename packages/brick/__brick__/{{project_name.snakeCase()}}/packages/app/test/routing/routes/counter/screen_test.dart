@@ -46,4 +46,5 @@ THEN the counter screen should be shown
       final counterScreenFinder = find.byType(CounterScreen);
       expect(counterScreenFinder, findsOneWidget);
     },
-  );{{/use_go_router_router}}}
+  );{{/use_go_router_router}}
+}

@@ -43,4 +43,7 @@
 /android/app/release
 
 # Testing
-/coverage/
+/coverage/{{#use_realm_database}}
+
+# Realm
+/binary/{{/use_realm_database}}

@@ -44,3 +44,10 @@
 
 # Testing
 /coverage/
+
+#{{#use_realm_database}}#
+#*w 2v w*#
+# Realm
+/binary/
+#{{/use_realm_database}}#
+#*w 1v w*#

@@ -1,8 +1,14 @@
 # Globally allowed words
 altoke
+ansi
 coverde
 github
 lcov
+linux
 melos
+mrverdant13
+nullable
 pubspec
 riverpod
+sembast
+sqlite
