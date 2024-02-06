@@ -18,12 +18,15 @@ command:
   {{/use_realm_database}}clean:
     hooks:
       pre:
-        run: >
-          melos exec -- "coverde rm .dart_tool/ build/ pubspec_overrides.yaml"{{#use_realm_database}}
-          &&
-          melos exec --depends-on realm -- "coverde rm binary/ default.realm.management default.realm.lock"{{/use_realm_database}}
+        run: melos run clean-up
 
 scripts:
+  clean-up:
+    description: Deep clean-up by removing all git-ignored elements.
+    run: git clean -dfX .
+    exec:
+      concurrency: 1
+
   # Code Generation
   g.d:
     description: Generate code for a package
