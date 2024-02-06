@@ -1,22 +1,16 @@
 # Altoke App
 
-<!-- [github_actions_workflow_ci_badge]: https://github.com/mrverdant13/altoke_app/actions/workflows/ci.yaml/badge.svg -->
-<!-- [github_actions_workflow_ci_link]: https://github.com/mrverdant13/altoke_app/actions/workflows/ci.yaml -->
-<!-- [github_actions_workflow_e2e_badge]: https://github.com/mrverdant13/altoke_app/actions/workflows/e2e.yaml/badge.svg -->
-<!-- [github_actions_workflow_e2e_link]: https://github.com/mrverdant13/altoke_app/actions/workflows/e2e.yaml -->
-
-
 <p align="center">
   <p align="center">
     <a href="https://github.com/mrverdant13/altoke_app/actions/workflows/ci.yaml">
       <img
-        src="https://github.com/mrverdant13/altoke_app/actions/workflows/ci.yaml/badge.svg"
+        src="https://github.com/mrverdant13/altoke_app/actions/workflows/ci.yaml/badge.svg?branch=main"
         alt="GH Actions - CI workflow"
       />
     </a>
     <a href="https://github.com/mrverdant13/altoke_app/actions/workflows/e2e.yaml">
       <img
-        src="https://github.com/mrverdant13/altoke_app/actions/workflows/e2e.yaml/badge.svg"
+        src="https://github.com/mrverdant13/altoke_app/actions/workflows/e2e.yaml/badge.svg?branch=main"
         alt="GH Actions - E2E workflow"
       />
     </a>
