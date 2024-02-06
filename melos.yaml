@@ -99,7 +99,7 @@ scripts:
     description: Test a Dart package
     run: >
       dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random --color &&
-      dart pub global run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib -b MELOS_PACKAGE_PATH
+      format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib -b MELOS_PACKAGE_PATH
     packageFilters:
       flutter: false
       dirExists:
@@ -134,7 +134,7 @@ scripts:
     run: melos run t.d --no-select && melos run t.f --no-select
   T:ci:
     description: Test all packages (CI)
-    run: melos exec --fail-fast --order-dependents --no-flutter --dir-exists="test" -- "dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random && dart pub global run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib -b MELOS_PACKAGE_PATH" && melos exec --fail-fast --order-dependents --flutter --dir-exists="test" -- "flutter test -x ci-only --coverage -r expanded --test-randomize-ordering-seed random"
+    run: melos exec --fail-fast --order-dependents --no-flutter --dir-exists="test" -- "dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random && format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib -b MELOS_PACKAGE_PATH" && melos exec --fail-fast --order-dependents --flutter --dir-exists="test" -- "flutter test -x ci-only --coverage -r expanded --test-randomize-ordering-seed random"
   TC:
     description: Merge all packages coverage trace files ignoring data related to generated files.
     run: >
