@@ -158,7 +158,7 @@ scripts:
   test.all:
     description: Test all packages
     run: melos run test.dart --no-select && melos run test.flutter --no-select
-  test:ci:
+  test.ci:
     description: Test all packages (CI)
     run: melos exec --fail-fast --order-dependents --no-flutter --dir-exists="test" -- "dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random && format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib -b MELOS_PACKAGE_PATH" && melos exec --fail-fast --order-dependents --flutter --dir-exists="test" -- "flutter test -x ci-only --coverage -r expanded --test-randomize-ordering-seed random"
   coverage.merge:
