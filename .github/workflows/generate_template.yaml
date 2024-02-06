@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - .github/workflows/generate_template.yml
+      - packages/brick/.gitignore
       - packages/brick_generator/**
       - packages/reference_app/**
       - melos.yaml

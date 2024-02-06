@@ -19,10 +19,6 @@
 # Testing
 /**/coverage/
 
-# Generated source files
-/**/__brick__/**/*.gr.dart
-/**/__brick__/**/*.g.dart
-
 # Project platforms
 /**/__brick__/**/android/
 /**/reference_app/**/android/
