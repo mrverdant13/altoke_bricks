@@ -27,11 +27,17 @@ command:
   clean:
     hooks:
       pre:
-        run: >
-          melos exec -- "coverde rm .dart_tool/ build/ pubspec_overrides.yaml" &&
-          melos exec --depends-on realm -- "coverde rm binary/ default.realm.management default.realm.lock"
+        run: melos run C
 
 scripts:
+  # Clean up
+  C:
+    description: Deep clean up
+    run: >
+      git clean --exclude="!android" --exclude="!ios" --exclude="!linux" --exclude="!macos" --exclude="!web" --exclude="!windows" -dfX .
+    exec:
+      concurrency: 1
+
   S:
     description: Run spell checking for the entire project
     run: cspell lint --no-progress -c ./.cspell/cspell.yaml MELOS_ROOT_PATH/**
