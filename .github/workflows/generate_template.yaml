@@ -28,7 +28,7 @@ jobs:
       - name: Initialize melos
         run: melos bs
       - name: Generate template
-        run: melos run BG
+        run: melos run brick.gen
       - name: Create PR
         uses: peter-evans/create-pull-request@v5
         with:
