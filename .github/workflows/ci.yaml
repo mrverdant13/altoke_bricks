@@ -32,7 +32,7 @@ jobs:
       - name: Initialize melos
         run: melos bs
       - name: Format and analyze
-        run: melos run format:ci && melos run analyze:ci
+        run: melos run format.ci && melos run analyze.ci
 
   test:
     name: Test implementation
@@ -61,4 +61,4 @@ jobs:
       - name: Initialize melos
         run: melos bs
       - name: Run tests, merge coverage data, and check coverage
-        run: melos run test:ci && melos run coverage.merge && melos run coverage.check
+        run: melos run test.ci && melos run coverage.merge && melos run coverage.check
