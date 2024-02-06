@@ -6,6 +6,11 @@ on:
       - main
     paths-ignore:
       - 'packages/brick/*.md'
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'packages/brick/*.md'
 
 jobs:
   min-conditions:
@@ -27,7 +32,7 @@ jobs:
       - name: Initialize melos
         run: melos bs
       - name: Format and analyze
-        run: melos run F:ci && melos run A:ci
+        run: melos run format:ci && melos run analyze:ci
 
   test:
     name: Test implementation
@@ -55,5 +60,5 @@ jobs:
         run: dart pub global activate coverde 0.2.0+2
       - name: Initialize melos
         run: melos bs
-      - name: Run tests, merge tests if needed, and check coverage
-        run: melos run T:ci && melos run TC
+      - name: Run tests, merge coverage data, and check coverage
+        run: melos run test:ci && melos run coverage.merge && melos run coverage.check
