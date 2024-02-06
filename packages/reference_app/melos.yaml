@@ -38,24 +38,15 @@ command:
   clean:
     hooks:
       pre:
-        #*w 1v 8> w*#
-        #*replace-start*#
-        run: >
-          melos exec -- "coverde rm .dart_tool/ build/ pubspec_overrides.yaml"
-          &&
-          melos exec --depends-on realm -- "coverde rm binary/ default.realm.management default.realm.lock"
-        #*with i8*#
-        # run: >
-        #   melos exec -- "coverde rm .dart_tool/ build/ pubspec_overrides.yaml"
-        #   #{{#use_realm_database}}#
-        #   #*w 1v 10> w*#
-        #   &&
-        #   melos exec --depends-on realm -- "coverde rm binary/ default.realm.management default.realm.lock"
-        #   #{{/use_realm_database}}#
-        #*replace-end*#
-        #*w 2v w*#
+        run: melos run clean-up
 
 scripts:
+  clean-up:
+    description: Deep clean-up by removing all git-ignored elements.
+    run: git clean -dfX .
+    exec:
+      concurrency: 1
+
   # Code Generation
   g.d:
     description: Generate code for a package
