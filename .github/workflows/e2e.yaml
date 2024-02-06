@@ -13,7 +13,6 @@ on:
       - 'packages/brick/**'
       - '!packages/brick/*.md'
       - 'packages/brick_e2e/**'
-      - 'melos.yaml'
       - 'pubspec.yaml'
   workflow_dispatch: {}
 
