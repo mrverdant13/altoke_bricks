@@ -41,7 +41,7 @@ jobs:
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.16.0
+          flutter-version: 3.16.9
       - name: Install melos
         run: dart pub global activate melos 4.1.0
       - name: Install coverage
