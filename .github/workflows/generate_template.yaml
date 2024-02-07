@@ -25,7 +25,7 @@ jobs:
         with:
           flutter-version: 3.16.0
       - name: Install melos
-        run: dart pub global activate melos 3.2.0
+        run: dart pub global activate melos 4.1.0
       - name: Initialize melos
         run: melos bs
       - name: Generate template
