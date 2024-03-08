@@ -17,7 +17,7 @@ dependencies:
     path: ../common/
   #*w 1v 2> w*#
   #{{#use_sqlite_database}}#
-  drift: ^2.15.0
+  drift: ^2.16.0
   #*w 1v 2> w*#
   #{{/use_sqlite_database}}#
   element_in_memory_cache:
@@ -110,7 +110,7 @@ dev_dependencies:
   custom_lint: ^0.6.0
   #*w 1v 2> w*#
   #{{#use_sqlite_database}}#
-  drift_dev: ^2.15.0
+  drift_dev: ^2.16.0
   #*w 1v 2> w*#
   #{{/use_sqlite_database}}#
   flutter_test:
