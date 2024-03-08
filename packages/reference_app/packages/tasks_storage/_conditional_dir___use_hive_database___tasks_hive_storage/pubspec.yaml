@@ -10,7 +10,7 @@ dependencies:
   common:
     path: ../../common/
   hive: ^2.2.3
-  meta: ^1.10.0
+  meta: ^1.11.0
   tasks:
     path: ../../tasks/
   tasks_storage:

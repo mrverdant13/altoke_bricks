@@ -9,7 +9,7 @@ environment:
 dependencies:
   element_in_memory_cache:
     path: ../element_in_memory_cache/
-  meta: ^1.10.0
+  meta: ^1.11.0
   tasks:
     path: ../tasks/
   tasks_storage:

@@ -10,7 +10,7 @@ dependencies:
   common:
     path: ../../common/
   drift: ^2.16.0
-  meta: ^1.10.0
+  meta: ^1.11.0
   tasks:
     path: ../../tasks/
   tasks_storage:

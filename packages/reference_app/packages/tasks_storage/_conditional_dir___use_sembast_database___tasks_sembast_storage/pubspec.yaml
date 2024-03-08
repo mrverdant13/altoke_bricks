@@ -9,7 +9,7 @@ environment:
 dependencies:
   common:
     path: ../../common/
-  meta: ^1.10.0
+  meta: ^1.11.0
   sembast: ^3.6.0
   tasks:
     path: ../../tasks/

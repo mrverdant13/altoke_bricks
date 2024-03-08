@@ -44,7 +44,7 @@ dependencies:
   #*w 1v 2> w*#
   #{{/use_isar_database}}#
   json_annotation: ^4.8.1
-  meta: ^1.10.0
+  meta: ^1.11.0
   path: ^1.8.3
   path_provider: ^2.1.2
   reactive_forms: ^16.1.1
