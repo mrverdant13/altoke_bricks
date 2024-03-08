@@ -21,8 +21,8 @@ packages:
 command:
   bootstrap:
     environment:
-      sdk: ">=3.2.6 <4.0.0"
-      flutter: ">=3.16.9 <4.0.0"
+      sdk: ">=3.3.1 <4.0.0"
+      flutter: ">=3.19.3 <4.0.0"
     hooks:
       post:
         run: >
