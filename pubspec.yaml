@@ -1,8 +1,8 @@
-name: monorepo
+name: altoke_app_template_monorepo
 
 environment:
   sdk: ">=3.2.6 <4.0.0"
-  flutter: ^3.16.9
+  flutter: ">=3.16.9 <4.0.0"
 
 dev_dependencies:
   melos: ^4.1.0
