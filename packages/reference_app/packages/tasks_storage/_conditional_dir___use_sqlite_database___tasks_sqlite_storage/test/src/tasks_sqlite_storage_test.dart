@@ -2121,8 +2121,8 @@ extension on NewTask {
   Insertable<DriftTask> toSqliteTask() {
     return DriftTasksCompanion.insert(
       title: title,
-      isCompleted: Value.ofNullable(isCompleted),
-      description: Value.ofNullable(description),
+      isCompleted: Value.absentIfNull(isCompleted),
+      description: Value.absentIfNull(description),
     );
   }
 }
