@@ -17,7 +17,7 @@
 /**/pubspec_overrides.yaml
 
 # Testing
-/**/coverage/
+/coverage/
 
 # Project platforms
 /**/__brick__/**/android/
