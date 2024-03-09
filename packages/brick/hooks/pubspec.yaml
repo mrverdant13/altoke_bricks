@@ -2,7 +2,7 @@ name: brick_hooks
 publish_to: none
 
 environment:
-  sdk: ">=3.2.6 <4.0.0"
+  sdk: ">=3.3.1 <4.0.0"
 
 dependencies:
   collection: ^1.18.0
