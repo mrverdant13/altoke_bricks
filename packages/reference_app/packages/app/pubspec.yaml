@@ -107,7 +107,7 @@ dev_dependencies:
   #*w 1v 2> w*#
   #{{/use_auto_route_router}}#
   build_runner: ^2.4.8
-  custom_lint: ^0.6.0
+  custom_lint: ^0.6.2
   #*w 1v 2> w*#
   #{{#use_sqlite_database}}#
   drift_dev: ^2.16.0
