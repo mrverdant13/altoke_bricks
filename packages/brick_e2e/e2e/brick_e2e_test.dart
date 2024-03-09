@@ -181,7 +181,7 @@ ${description.trim()}
           projectName,
         );
         final testResult = await runCommand(
-          'melos run T',
+          'melos run test.all',
           projectPath: applicationPath,
           prefix: '🧪 ',
           startMessage: 'Running tests.',
@@ -194,7 +194,7 @@ ${description.trim()}
           reason: 'Tests failed\n${testResult.stdout}',
         );
         final coverageMergingResult = await runCommand(
-          'melos run M',
+          'melos run coverage.merge',
           projectPath: applicationPath,
           prefix: '📃 ',
           startMessage: 'Gathering test coverage.',
@@ -207,7 +207,7 @@ ${description.trim()}
           reason: 'Coverage gathering failed',
         );
         final coverageCheckResult = await runCommand(
-          'melos run C',
+          'melos run coverage.check',
           projectPath: applicationPath,
           prefix: '🕵🏻 ',
           startMessage: 'Checking test coverage.',

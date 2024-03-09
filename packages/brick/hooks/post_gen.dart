@@ -19,7 +19,7 @@ Future<void> run(HookContext context) async {
     completeMessage: 'Project bootstrapped!',
   );
   await runCommand(
-    'melos run G',
+    'melos run gen.all',
     projectPath: projectPath,
     logger: logger,
     prefix: '🏭 ',
@@ -35,7 +35,7 @@ Future<void> run(HookContext context) async {
     completeMessage: 'Fixes applied!',
   );
   await runCommand(
-    'melos run F',
+    'melos run format.all',
     projectPath: projectPath,
     logger: logger,
     prefix: '🪄  ',
