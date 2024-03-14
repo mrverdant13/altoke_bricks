@@ -5,15 +5,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
 on:
-  pull_request:
-    branches:
-      - main
-    paths:
-      - '.github/workflows/e2e.yaml'
-      - 'packages/brick/**'
-      - '!packages/brick/*.md'
-      - 'packages/brick_e2e/**'
-      - 'pubspec.yaml'
   workflow_dispatch: {}
 
 jobs:
