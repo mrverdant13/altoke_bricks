@@ -51,6 +51,7 @@ scripts:
     exec:
       failFast: true
       concurrency: 1
+      orderDependents: true
   gen.realm:
     description: Generate code for a package with Realm
     run: dart run realm generate
@@ -62,9 +63,16 @@ scripts:
     exec:
       failFast: true
       concurrency: 1
+      orderDependents: true
   gen.all:
     description: Generate code for all packages
     run: melos run gen --no-select && melos run gen.realm --no-select
+  gen.all.fast:
+    description: Generate code for all packages (multi-threaded)
+    run: >
+      melos exec --depends-on=build_runner -- "dart run build_runner build -d"
+      &&
+      melos exec --depends-on=realm --ignore=altoke_app -- "dart run realm generate"
 
   # Spell checking
   spellcheck:
@@ -163,7 +171,10 @@ scripts:
     run: melos run test.dart --no-select && melos run test.flutter --no-select
   test.ci:
     description: Test all packages (CI)
-    run: melos exec --fail-fast --order-dependents --no-flutter --dir-exists="test" -- "dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random && format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib -b MELOS_PACKAGE_PATH" && melos exec --fail-fast --order-dependents --flutter --dir-exists="test" -- "flutter test -x ci-only --coverage -r expanded --test-randomize-ordering-seed random"
+    run: >
+      melos exec --fail-fast --order-dependents --no-flutter --dir-exists="test" -- "dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random && format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib -b MELOS_PACKAGE_PATH"
+      &&
+      melos exec --fail-fast --order-dependents --flutter --dir-exists="test" -- "flutter test -x ci-only --coverage -r expanded --test-randomize-ordering-seed random"
   coverage.merge:
     description: Merge all packages coverage trace files ignoring data related to generated files
     run: >
