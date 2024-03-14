@@ -9,6 +9,7 @@ Future<void> run(HookContext context) async {
     Directory.current.path,
     context.vars['project_name'] as String,
   );
+  final actualAppPath = path.joinAll([projectPath, 'packages', 'app']);
   final logger = context.logger;
   await runCommand(
     'melos bs',
@@ -19,23 +20,24 @@ Future<void> run(HookContext context) async {
     completeMessage: 'Project bootstrapped!',
   );
   await runCommand(
-    'melos run gen.all',
+    'melos run gen.all.fast',
     projectPath: projectPath,
     logger: logger,
     prefix: '🏭 ',
     startMessage: 'Running code generation.',
     completeMessage: 'Code generation complete!',
   );
+  const dartFixCommand = 'dart fix --apply --code=directives_ordering';
   await runCommand(
-    'dart fix --apply --code=directives_ordering',
-    projectPath: projectPath,
+    '$dartFixCommand lib && $dartFixCommand test',
+    projectPath: actualAppPath,
     logger: logger,
     prefix: '🔧 ',
     startMessage: 'Applying fixes.',
     completeMessage: 'Fixes applied!',
   );
   await runCommand(
-    'melos run format.all',
+    'melos run format.all.fast',
     projectPath: projectPath,
     logger: logger,
     prefix: '🪄  ',
@@ -44,7 +46,7 @@ Future<void> run(HookContext context) async {
   );
 }
 
-Future<void> runCommand(
+Future<ProcessResult> runCommand(
   String fullCommand, {
   required String projectPath,
   required Logger logger,
@@ -83,4 +85,5 @@ Future<void> runCommand(
       progress.fail('$prefix${errorDetails == null ? '' : '\n$errorDetails'}');
       exit(result.exitCode);
   }
+  return result;
 }
