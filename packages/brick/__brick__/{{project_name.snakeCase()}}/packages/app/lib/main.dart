@@ -2,8 +2,7 @@ import 'dart:developer';
 
 import 'package:{{project_name.snakeCase()}}/app/app.dart';
 import 'package:{{project_name.snakeCase()}}/external/external.dart';
-import 'package:{{project_name.snakeCase()}}/routing/routing.dart';
-import 'package:{{project_name.snakeCase()}}/tasks/tasks.dart';{{#use_sqlite_database}}import 'package:drift/drift.dart';
+import 'package:{{project_name.snakeCase()}}/routing/routing.dart';{{#use_hive_database}}import 'package:{{project_name.snakeCase()}}/tasks/tasks.dart';{{/use_hive_database}}{{#use_sqlite_database}}import 'package:drift/drift.dart';
 import 'package:drift/native.dart';{{/use_sqlite_database}}import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';{{#use_go_router_router}}import 'package:go_router/go_router.dart';{{/use_go_router_router}}{{#use_hive_database}}import 'package:hive/hive.dart';{{/use_hive_database}}{{#use_isar_database}}import 'package:isar/isar.dart';{{/use_isar_database}}import 'package:path/path.dart' as path;

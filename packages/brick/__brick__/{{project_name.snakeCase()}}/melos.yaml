@@ -11,6 +11,9 @@ packages:
 
 command:
   {{#use_realm_database}}bootstrap:
+    environment:
+      sdk: ">=3.3.1 <4.0.0"
+      flutter: ">=3.19.3 <4.0.0"
     hooks:
       post:
         run: >
@@ -18,17 +21,18 @@ command:
   {{/use_realm_database}}clean:
     hooks:
       pre:
-        run: melos run clean-up
+        run: melos run clean
 
 scripts:
-  clean-up:
+  # Clean-up
+  clean:
     description: Deep clean-up by removing all git-ignored elements.
     run: git clean -dfX .
     exec:
       concurrency: 1
 
   # Code Generation
-  g.d:
+  gen:
     description: Generate code for a package
     run: dart run build_runner build --delete-conflicting-outputs
     packageFilters:
@@ -38,8 +42,8 @@ scripts:
       concurrency: 1
       failFast: true
       orderDependents: true
-  {{#use_realm_database}}g.r:
-    description: Generate Realm code for a package
+  {{#use_realm_database}}gen.realm:
+    description: Generate code for a package with Realm
     run: dart run realm generate
     packageFilters:
       dependsOn:
@@ -50,41 +54,54 @@ scripts:
       concurrency: 1
       failFast: true
       orderDependents: true
-  {{/use_realm_database}}G:
+  {{/use_realm_database}}gen.all:
     description: Generate code for all packages
     run: >
-      melos run g.d --no-select{{#use_realm_database}}
+      melos run gen --no-select{{#use_realm_database}}
       &&
-      melos run g.r --no-select{{/use_realm_database}}
+      melos run gen.realm --no-select{{/use_realm_database}}
+
+  gen.all.fast:
+    description: Generate code for all packages (concurrent)
+    run: >
+      melos exec --fail-fast --depends-on=build_runner -- "dart run build_runner build --delete-conflicting-outputs"{{#use_realm_database}}
+      &&
+      melos exec --fail-fast --depends-on=realm --ignore={{project_name.snakeCase()}} -- "dart run realm generate"{{/use_realm_database}}
 
   # Formatting
-  f:
+  format:
     description: Format a package
     run: dart format .
     exec:
       concurrency: 1
-  F:
+  format.all:
     description: Format all packages
-    run: melos run f --no-select
+    run: melos run format --no-select
+  format.all.fast:
+    description: Format all packages (concurrent)
+    run: melos exec -- "dart format ."
+  format.ci:
+    description: Format all packages (CI)
+    run: melos exec --fail-fast -- "dart format --set-exit-if-changed ."
 
   # Analyzing
-  a.d:
+  analyze.dart:
     description: Analyze a Dart package
-    run: dart analyze --fatal-infos --fatal-warnings
+    run: dart analyze
     packageFilters:
       flutter: false
     exec:
       concurrency: 1
       orderDependents: true
-  a.f:
+  analyze.flutter:
     description: Analyze a Flutter package
-    run: flutter analyze --fatal-infos --fatal-warnings
+    run: flutter analyze --no-pub
     packageFilters:
       flutter: true
     exec:
       concurrency: 1
       orderDependents: true
-  a.c:
+  analyze.custom:
     description: Analyze a package with custom lint rules
     run: dart run custom_lint
     packageFilters:
@@ -93,18 +110,37 @@ scripts:
     exec:
       concurrency: 1
       orderDependents: true
-  A:
+  analyze.all:
     description: Analyze all packages
     run: >
-      melos run a.d --no-select &&
-      melos run a.f --no-select &&
-      melos run a.c --no-select
+      melos run analyze.dart --no-select
+      &&
+      melos run analyze.flutter --no-select
+      &&
+      melos run analyze.custom --no-select
+  analyze.all.fast:
+    description: Analyze all packages (concurrent)
+    run: >
+      melos exec --fail-fast --no-flutter -- "dart analyze"
+      &&
+      melos exec --fail-fast --flutter -- "flutter analyze --no-pub"
+      &&
+      melos exec --fail-fast --depends-on=custom_lint -- "dart run custom_lint"
+  analyze.ci:
+    description: Analyze all packages (CI)
+    run: >
+      melos exec --fail-fast --no-flutter -- "dart analyze --fatal-infos --fatal-warnings"
+      &&
+      melos exec --fail-fast --flutter -- "flutter analyze --fatal-infos --fatal-warnings --no-pub --no-congratulate --no-preamble"
+      &&
+      melos exec --fail-fast --depends-on=custom_lint -- "dart run custom_lint --fatal-infos --fatal-warnings"
 
   # Testing & Coverage
-  t.d:
+  test.dart:
     description: Test a Dart package
     run: >
-      dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random --color &&
+      dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random --color
+      &&
       format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib -b MELOS_PACKAGE_PATH
     packageFilters:
       flutter: false
@@ -115,7 +151,7 @@ scripts:
     exec:
       concurrency: 1
       orderDependents: true
-  t.f:
+  test.flutter:
     description: Test a Flutter package
     run: flutter test -x ci-only --coverage -r expanded --test-randomize-ordering-seed random
     packageFilters:
@@ -127,18 +163,25 @@ scripts:
     exec:
       concurrency: 1
       orderDependents: true
-  T:
+  test.all:
     description: Test all packages
     run: >
-      melos run t.d --no-select &&
-      melos run t.f --no-select
-  M:
+      melos run test.dart --no-select
+      &&
+      melos run test.flutter --no-select
+  test.ci:
+    description: Test all packages (CI)
+    run: >
+      melos exec -c 1 --fail-fast --no-flutter --depends-on=test --dir-exists=test -- "dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random && format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib -b MELOS_PACKAGE_PATH"
+      &&
+      melos exec --fail-fast --flutter --depends-on=flutter_test --dir-exists=test -- "flutter test -x ci-only --coverage -r expanded --test-randomize-ordering-seed random"
+  coverage.merge:
     description: Merge all coverage reports
     run: >
-      coverde rm MELOS_ROOT_PATH/coverage/filtered.lcov.info &&
+      coverde rm MELOS_ROOT_PATH/coverage/filtered.lcov.info
+      &&
       melos exec -c 1 --file-exists=coverage/lcov.info -- "coverde filter --input ./coverage/lcov.info --output MELOS_ROOT_PATH/coverage/filtered.lcov.info --paths-parent MELOS_PACKAGE_PATH  --filters \.drift\.dart,\.freezed\.dart,\.g\.dart,\.gr\.dart"
-
-  C:
+  coverage.check:
     description: Check coverage
     run: >
       coverde check -i MELOS_ROOT_PATH/coverage/filtered.lcov.info 100
