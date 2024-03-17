@@ -1,16 +1,6 @@
 name: generate_template
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - .github/workflows/generate_template.yml
-      - packages/brick/.gitignore
-      - packages/brick_generator/**
-      - packages/reference_app/**
-      - melos.yaml
-      - pubspec.yaml
   workflow_dispatch: {}
 
 jobs:
