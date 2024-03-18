@@ -17,6 +17,7 @@ packages:
   - ./packages/reference_app/packages/tasks_storage/_conditional_dir___use_sembast_database___tasks_sembast_storage/
   - ./packages/reference_app/packages/tasks_storage/_conditional_dir___use_sqlite_database___tasks_sqlite_storage/
   - ./packages/reference_app/packages/tasks_storage/tasks_storage/
+  - ./tools/brick_generator/
 
 command:
   bootstrap:
@@ -186,6 +187,15 @@ scripts:
       coverde check -i MELOS_ROOT_PATH/coverage/filtered.lcov.info 100
 
   # Brick management
+  brick.gen.new:
+    description: Generate brick
+    run: >
+      dart run MELOS_ROOT_PATH/tools/brick_generator/lib/main.dart MELOS_PACKAGE_PATH
+    exec:
+      concurrency: 1
+    packageFilters:
+      fileExists:
+        - brick-gen.json
   brick.gen:
     description: Generate brick
     run: dart run MELOS_ROOT_PATH/packages/brick_generator/lib/main.dart

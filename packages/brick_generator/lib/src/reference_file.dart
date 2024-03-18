@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:brick_generator/src/placeholders.dart';
 import 'package:meta/meta.dart';
+import 'package:old_brick_generator/src/placeholders.dart';
 import 'package:path/path.dart' as p;
 
 /// Regexp patterns to parametrize the template.
