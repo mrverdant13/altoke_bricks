@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:brick_generator/src/placeholders.dart';
-import 'package:brick_generator/src/reference_file.dart';
-import 'package:brick_generator/src/shell.dart';
+import 'package:old_brick_generator/src/placeholders.dart';
+import 'package:old_brick_generator/src/reference_file.dart';
+import 'package:old_brick_generator/src/shell.dart';
 import 'package:path/path.dart' as path;
 
 /// Path to the reference app.
