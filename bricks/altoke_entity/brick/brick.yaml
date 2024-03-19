@@ -1,0 +1,26 @@
+name: altoke_entity
+description: A template for an entity.
+version: 0.0.1
+
+environment:
+  mason: ">=0.1.0-dev.50 <0.1.0"
+
+vars:
+  entity_singular:
+    type: string
+    description: The name of the entity (singular).
+    default: "my entity"
+    prompt: "What is the readable name of the entity (singular)?"
+  package_description:
+    type: string
+    description: A description for the package.
+    prompt: "What is the description of the package?"
+  value_equality_approach:
+    type: enum
+    values:
+      - dart_mappable
+      - equatable
+      - freezed
+    description: The approach to use for value equality.
+    default: dart_mappable
+    prompt: "What approach to use for value equality?"

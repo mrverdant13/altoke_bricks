@@ -1,0 +1,20 @@
+#{{^use_equatable}}#
+targets:
+  $default:
+    builders:
+      #*w 1v 6> w*#
+      #{{#use_dart_mappable}}#
+      dart_mappable_builder:
+        generate_for:
+          - lib/src/_cf___use_dart_mappable___altoke_entity.dart
+      #{{/use_dart_mappable}}#
+      #{{#use_freezed}}#
+      freezed:
+        generate_for:
+          - lib/src/_cf___use_freezed___altoke_entity.dart
+        options:
+          map: false
+          when: false
+      #{{/use_freezed}}#
+#{{/use_equatable}}#
+#*w 1v w*#
