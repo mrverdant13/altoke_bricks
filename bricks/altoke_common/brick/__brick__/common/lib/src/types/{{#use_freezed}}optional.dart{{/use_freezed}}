@@ -1,0 +1,21 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'optional.freezed.dart';
+
+/// {@template common.optional}
+/// A representation of an optional value.
+/// {@endtemplate}
+@freezed
+class Optional<T extends Object?> with _$Optional<T> {
+  /// {@macro common.optional}
+  const Optional._();
+
+  /// Creates an [Optional] with a present value.
+  const factory Optional.some(
+    /// The underlying value.
+    T some,
+  ) = FSome<T>;
+
+  /// Creates an [Optional] with an absent value.
+  const factory Optional.none() = FNone<T>;
+}

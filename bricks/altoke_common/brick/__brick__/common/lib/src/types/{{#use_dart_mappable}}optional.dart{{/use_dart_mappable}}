@@ -1,0 +1,39 @@
+import 'package:dart_mappable/dart_mappable.dart';
+
+part 'optional.mapper.dart';
+
+/// {@template common.optional}
+/// A representation of an optional value.
+/// {@endtemplate}
+@MappableClass()
+sealed class Optional<T extends Object?> with OptionalMappable<T> {
+  /// {@macro common.optional}
+  const Optional();
+
+  /// Creates an [Optional] with a present value.
+  const factory Optional.some(T value) = DmSome<T>;
+
+  /// Creates an [Optional] with an absent value.
+  const factory Optional.none() = DmNone<T>;
+}
+
+/// {@template common.some}
+/// A representation of a present value.
+/// {@endtemplate}
+@MappableClass()
+class DmSome<T extends Object?> extends Optional<T> with DmSomeMappable<T> {
+  /// {@macro common.some}
+  const DmSome(this.value);
+
+  /// The underlying value.
+  final T value;
+}
+
+/// {@template common.none}
+/// A representation of an absent value.
+/// {@endtemplate}
+@MappableClass()
+class DmNone<T extends Object?> extends Optional<T> with DmNoneMappable<T> {
+  /// {@macro common.none}
+  const DmNone();
+}
