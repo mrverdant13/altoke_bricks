@@ -1,0 +1,52 @@
+import 'package:common/common.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part '{{entity_singular.snakeCase()}}.freezed.dart';
+
+/// {@template {{entity_singular.snakeCase()}}.{{entity_singular.snakeCase()}}}
+/// {{entity_singular.sentenceCase()}}.
+/// {@endtemplate}
+@freezed
+class {{entity_singular.pascalCase()}} with _${{entity_singular.pascalCase()}} {
+  /// {@macro {{entity_singular.snakeCase()}}.{{entity_singular.snakeCase()}}}
+  const factory {{entity_singular.pascalCase()}}({
+    /// The ID of this {{entity_singular.lowerCase()}}.
+    required int id,
+
+    /// The name of this {{entity_singular.lowerCase()}}.
+    required String name,
+
+    /// The description of this {{entity_singular.lowerCase()}}.
+    required String description,
+  }) = _{{entity_singular.pascalCase()}};
+}
+
+/// {@template {{entity_singular.snakeCase()}}.new_{{entity_singular.snakeCase()}}}
+/// A new {{entity_singular.lowerCase()}}.
+/// {@endtemplate}
+@freezed
+class New{{entity_singular.pascalCase()}} with _$New{{entity_singular.pascalCase()}} {
+  /// {@macro {{entity_singular.snakeCase()}}.new_{{entity_singular.snakeCase()}}}
+  const factory New{{entity_singular.pascalCase()}}({
+    /// The name of the new {{entity_singular.lowerCase()}}.
+    required String title,
+
+    /// The description of the new {{entity_singular.lowerCase()}}.
+    required String description,
+  }) = _New{{entity_singular.pascalCase()}};
+}
+
+/// {@template {{entity_singular.snakeCase()}}.partial_{{entity_singular.snakeCase()}}}
+/// A partial {{entity_singular.lowerCase()}}.
+/// {@endtemplate}
+@freezed
+class Partial{{entity_singular.pascalCase()}} with _$Partial{{entity_singular.pascalCase()}} {
+  /// {@macro {{entity_singular.snakeCase()}}.partial_{{entity_singular.snakeCase()}}}
+  const factory Partial{{entity_singular.pascalCase()}}({
+    /// The optional name for the {{entity_singular.lowerCase()}}.
+    @Default(Optional<String>.none()) Optional<String> name,
+
+    /// The optional description for the {{entity_singular.lowerCase()}}.
+    @Default(Optional<String>.none()) Optional<String> description,
+  }) = _Partial{{entity_singular.pascalCase()}};
+}

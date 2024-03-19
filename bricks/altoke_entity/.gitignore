@@ -1,0 +1,4 @@
+# Generated source files
+/**/__brick__/**/brick-gen.json
+/**/__brick__/**/*.freezed.dart
+/**/__brick__/**/*.mapper.dart
