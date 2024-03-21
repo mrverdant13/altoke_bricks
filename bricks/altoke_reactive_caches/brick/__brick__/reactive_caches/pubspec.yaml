@@ -1,0 +1,18 @@
+name: reactive_caches
+description: In-memory reactive caches.
+version: 0.0.1+1
+publish_to: none
+
+environment:
+  sdk: ">=3.3.1 <4.0.0"
+
+dependencies:
+  collection: ^1.18.0
+  common:
+    path: ../common/
+  meta: ^1.11.0
+  rxdart: ^0.27.7
+
+dev_dependencies:
+  test: ^1.25.2
+  very_good_analysis: ^5.1.0
