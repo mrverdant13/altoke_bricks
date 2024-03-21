@@ -1,0 +1,9 @@
+{
+  "targetRelativePath": "../brick/__brick__/reactive_caches",
+  "replacements": [
+    {
+      "from": "altoke_reactive_caches",
+      "to": "reactive_caches"
+    }
+  ]
+}
