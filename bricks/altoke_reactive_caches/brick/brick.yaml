@@ -1,0 +1,6 @@
+name: altoke_reactive_caches
+description: A set of commonly used reactive caches.
+version: 0.0.1
+
+environment:
+  mason: ">=0.1.0-dev.50 <0.1.0"
