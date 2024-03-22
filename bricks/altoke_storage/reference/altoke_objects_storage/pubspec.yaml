@@ -1,0 +1,19 @@
+name: altoke_objects_storage
+description: An interface for a persistent storage of Altoke Objects.
+version: 0.0.1+1
+publish_to: none
+
+environment:
+  sdk: ">=3.3.1 <4.0.0"
+
+#*remove-start*#
+# TODO(mrverdant13): Import an instance
+# dependencies:
+#   tasks:
+#     path: ../../tasks/
+#*remove-end*#
+#*w 2v w*#
+
+dev_dependencies:
+  test: ^1.25.2
+  very_good_analysis: ^5.1.0
