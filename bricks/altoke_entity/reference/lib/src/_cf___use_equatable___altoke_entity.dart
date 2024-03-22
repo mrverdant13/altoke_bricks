@@ -1,4 +1,4 @@
-import 'package:common/common.dart';
+import 'package:altoke_common/common.dart';
 import 'package:equatable/equatable.dart';
 
 /// {@template altoke_entity.altoke_entity}

@@ -7,7 +7,7 @@ environment:
   sdk: ">=3.3.1 <4.0.0"
 
 dependencies:
-  common:
+  altoke_common:
     #*w 1v 4> w*#
     #*replace-start*#
     path: ../../altoke_common/reference/

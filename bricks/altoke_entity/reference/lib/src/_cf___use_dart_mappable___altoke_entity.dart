@@ -1,4 +1,4 @@
-import 'package:common/common.dart';
+import 'package:altoke_common/common.dart';
 import 'package:dart_mappable/dart_mappable.dart';
 
 part '_cf___use_dart_mappable___altoke_entity.mapper.dart';

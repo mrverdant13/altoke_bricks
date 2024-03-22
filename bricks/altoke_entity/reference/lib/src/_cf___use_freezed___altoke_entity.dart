@@ -1,4 +1,4 @@
-import 'package:common/common.dart';
+import 'package:altoke_common/common.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part '_cf___use_freezed___altoke_entity.freezed.dart';

@@ -8,7 +8,7 @@ environment:
 
 dependencies:
   collection: ^1.18.0
-  common:
+  altoke_common:
     #*w 1v 4> w*#
     #*replace-start*#
     path: ../../altoke_common/reference/
@@ -22,3 +22,7 @@ dependencies:
 dev_dependencies:
   test: ^1.25.2
   very_good_analysis: ^5.1.0
+#*w 1v w*#
+#*drop*#
+# TODO(mrverdant13): Implement portal comment for code fragment relocation.
+# ignore_for_file: sort_pub_dependencies
