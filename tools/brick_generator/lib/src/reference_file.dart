@@ -17,13 +17,13 @@ abstract class AltokeRegexp {
 
   /// Regexp to identify a conditional file to be resolved within its path.
   static final conditionalFileRegexp = RegExp(
-    r'_cf___([^;\s]*)___([^;\s]*)',
+    r'_cf(n?)___([^;\s]*)___([^;\s]*)',
     dotAll: true,
   );
 
   /// Regexp to identify a conditional directory to be resolved within its path.
   static final conditionalDirRegexp = RegExp(
-    r'_cd___([^;\s]*)___([^;\s]*)',
+    r'_cd(n?)___([^;\s]*)___([^;\s]*)',
     dotAll: true,
   );
 
@@ -210,16 +210,20 @@ String transformReplacementMatchForFileContents(Match match) {
 /// filename, in the path of a file.
 @visibleForTesting
 String transformConditionalFileMatchForFilePath(Match match) {
-  final variable = match.group(1);
-  final pathSegment = match.group(2);
-  return '{{#$variable}}$pathSegment{{${p.separator}$variable}}';
+  final logicCharacter = switch (match.group(1)) {
+    'n' => '^',
+    _ => '#',
+  };
+  final variable = match.group(2);
+  final pathSegment = match.group(3);
+  return '{{$logicCharacter$variable}}$pathSegment{{${p.separator}$variable}}';
 }
 
 /// Transforms a conditional file match into an filename, in the contents of a
 /// file.
 @visibleForTesting
 String transformConditionalFileMatchForFileContents(Match match) {
-  final pathSegment = match.group(2);
+  final pathSegment = match.group(3);
   return '$pathSegment';
 }
 
@@ -227,16 +231,20 @@ String transformConditionalFileMatchForFileContents(Match match) {
 /// directory path segment, in the path of a file.
 @visibleForTesting
 String transformConditionalDirMatchForFilePath(Match match) {
-  final variable = match.group(1);
-  final pathSegment = match.group(2);
-  return '{{#$variable}}$pathSegment{{${p.separator}$variable}}';
+  final logicCharacter = switch (match.group(1)) {
+    'n' => '^',
+    _ => '#',
+  };
+  final variable = match.group(2);
+  final pathSegment = match.group(3);
+  return '{{$logicCharacter$variable}}$pathSegment{{${p.separator}$variable}}';
 }
 
 /// Transforms a conditional directory match into an directory path segment, in
 /// the contents of a file.
 @visibleForTesting
 String transformConditionalDirMatchForFileContents(Match match) {
-  final pathSegment = match.group(2);
+  final pathSegment = match.group(3);
   return '$pathSegment';
 }
 
