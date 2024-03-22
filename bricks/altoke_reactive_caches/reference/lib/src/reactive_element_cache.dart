@@ -1,4 +1,4 @@
-import 'package:common/common.dart';
+import 'package:altoke_common/common.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 

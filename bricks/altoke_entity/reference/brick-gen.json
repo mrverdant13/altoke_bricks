@@ -2,6 +2,10 @@
   "targetRelativePath": "../brick/__brick__/{{entity_singular.snakeCase()}}",
   "replacements": [
     {
+      "from": "altoke_common",
+      "to": "common"
+    },
+    {
       "from": "Representation of different altoke entity variants.",
       "to": "{{package_description}}"
     },

@@ -1,5 +1,5 @@
+import 'package:altoke_common/common.dart';
 import 'package:altoke_entity/altoke_entity.dart';
-import 'package:common/common.dart';
 import 'package:test/test.dart';
 
 void main() {

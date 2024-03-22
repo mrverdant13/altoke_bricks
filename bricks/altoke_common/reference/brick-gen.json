@@ -2,6 +2,10 @@
   "targetRelativePath": "../brick/__brick__/common",
   "replacements": [
     {
+      "from": "altoke_common",
+      "to": "common"
+    },
+    {
       "from": "(DmOptional)|(EOptional)|(FOptional)",
       "to": "Optional"
     }
