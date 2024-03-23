@@ -1,4 +1,4 @@
-#{{^use_equatable}}#
+#{{#use_code_generation}}#
 targets:
   $default:
     builders:
@@ -20,5 +20,5 @@ targets:
           map: false
           when: false
       #{{/use_freezed}}#
-#{{/use_equatable}}#
+#{{/use_code_generation}}#
 #*w 1v w*#
