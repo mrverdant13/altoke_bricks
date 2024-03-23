@@ -9,10 +9,12 @@ environment:
 dependencies:
   common:
     path: ../common/
-  {{#use_dart_mappable}}dart_mappable: ^4.2.1{{/use_dart_mappable}}{{#use_equatable}}equatable: ^2.0.5{{/use_equatable}}{{#use_freezed}}freezed_annotation: ^2.4.1{{/use_freezed}}
+  {{#use_dart_mappable}}dart_mappable: ^4.2.1{{/use_dart_mappable}}{{#use_equatable}}equatable: ^2.0.5{{/use_equatable}}{{#use_freezed}}freezed_annotation: ^2.4.1{{/use_freezed}}{{#use_overrides}}
+  meta: ^1.12.0
+  #{{/use_overrides}}
 
-dev_dependencies:{{^use_equatable}}
+dev_dependencies:{{#use_code_generation}}
   build_runner: ^2.4.8
-  {{/use_equatable}}{{#use_dart_mappable}}dart_mappable_builder: ^4.2.1{{/use_dart_mappable}}{{#use_freezed}}freezed: ^2.4.7{{/use_freezed}}
+  {{/use_code_generation}}{{#use_dart_mappable}}dart_mappable_builder: ^4.2.1{{/use_dart_mappable}}{{#use_freezed}}freezed: ^2.4.7{{/use_freezed}}
   test: ^1.25.2
   very_good_analysis: ^5.1.0

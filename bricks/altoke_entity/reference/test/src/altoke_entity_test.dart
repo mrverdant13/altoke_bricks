@@ -52,6 +52,19 @@ THEN an instance of the altoke entity is returned
         /*{{/use_equatable}}*/
         /*remove-start*/
       }
+      {
+        /*remove-end*/
+        /*{{#use_overrides}}*/
+        const altokeEntity = AltokeEntity(
+          id: 37,
+          name: 'name',
+          description: 'description',
+        );
+        expect(altokeEntity, isNotNull);
+        expect(altokeEntity, isA<AltokeEntity>());
+        /*{{/use_overrides}}*/
+        /*remove-start*/
+      }
       /*remove-end*/
       /*w 1v w*/
     },
@@ -103,6 +116,18 @@ THEN an instance of the new altoke entity is returned
         /*{{/use_equatable}}*/
         /*remove-start*/
       }
+      {
+        /*remove-end*/
+        /*{{#use_overrides}}*/
+        const newAltokeEntity = NewAltokeEntity(
+          title: 'title',
+          description: 'description',
+        );
+        expect(newAltokeEntity, isNotNull);
+        expect(newAltokeEntity, isA<NewAltokeEntity>());
+        /*{{/use_overrides}}*/
+        /*remove-start*/
+      }
       /*remove-end*/
       /*w 1v w*/
     },
@@ -152,6 +177,18 @@ THEN an instance of the partial altoke entity is returned
         expect(partialAltokeEntity, isNotNull);
         expect(partialAltokeEntity, isA<FPartialAltokeEntity>());
         /*{{/use_equatable}}*/
+        /*remove-start*/
+      }
+      {
+        /*remove-end*/
+        /*{{#use_overrides}}*/
+        const partialAltokeEntity = PartialAltokeEntity(
+          name: Optional.some('name'),
+          description: Optional.some('description'),
+        );
+        expect(partialAltokeEntity, isNotNull);
+        expect(partialAltokeEntity, isA<PartialAltokeEntity>());
+        /*{{/use_overrides}}*/
         /*remove-start*/
       }
       /*remove-end*/

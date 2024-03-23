@@ -21,6 +21,7 @@ vars:
       - dart_mappable
       - equatable
       - freezed
+      - overrides
     description: The approach to use for value equality.
     default: dart_mappable
     prompt: "What approach to use for value equality?"
