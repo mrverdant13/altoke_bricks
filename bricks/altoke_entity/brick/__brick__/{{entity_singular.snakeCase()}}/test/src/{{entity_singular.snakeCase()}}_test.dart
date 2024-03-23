@@ -29,7 +29,13 @@ THEN an instance of the {{entity_singular.lowerCase()}} is returned
           description: 'description',
         );
         expect({{entity_singular.camelCase()}}, isNotNull);
-        expect({{entity_singular.camelCase()}}, isA<{{entity_singular.pascalCase()}}>());{{/use_equatable}}
+        expect({{entity_singular.camelCase()}}, isA<{{entity_singular.pascalCase()}}>());{{/use_equatable}}{{#use_overrides}}const {{entity_singular.camelCase()}} = {{entity_singular.pascalCase()}}(
+          id: 37,
+          name: 'name',
+          description: 'description',
+        );
+        expect({{entity_singular.camelCase()}}, isNotNull);
+        expect({{entity_singular.camelCase()}}, isA<{{entity_singular.pascalCase()}}>());{{/use_overrides}}
 },
   );
 
@@ -56,7 +62,12 @@ THEN an instance of the new {{entity_singular.lowerCase()}} is returned
           description: 'description',
         );
         expect(new{{entity_singular.pascalCase()}}, isNotNull);
-        expect(new{{entity_singular.pascalCase()}}, isA<New{{entity_singular.pascalCase()}}>());{{/use_equatable}}
+        expect(new{{entity_singular.pascalCase()}}, isA<New{{entity_singular.pascalCase()}}>());{{/use_equatable}}{{#use_overrides}}const new{{entity_singular.pascalCase()}} = New{{entity_singular.pascalCase()}}(
+          title: 'title',
+          description: 'description',
+        );
+        expect(new{{entity_singular.pascalCase()}}, isNotNull);
+        expect(new{{entity_singular.pascalCase()}}, isA<New{{entity_singular.pascalCase()}}>());{{/use_overrides}}
 },
   );
 
@@ -83,7 +94,12 @@ THEN an instance of the partial {{entity_singular.lowerCase()}} is returned
           description: Optional.some('description'),
         );
         expect(partial{{entity_singular.pascalCase()}}, isNotNull);
-        expect(partial{{entity_singular.pascalCase()}}, isA<Partial{{entity_singular.pascalCase()}}>());{{/use_equatable}}
+        expect(partial{{entity_singular.pascalCase()}}, isA<Partial{{entity_singular.pascalCase()}}>());{{/use_equatable}}{{#use_overrides}}const partial{{entity_singular.pascalCase()}} = Partial{{entity_singular.pascalCase()}}(
+          name: Optional.some('name'),
+          description: Optional.some('description'),
+        );
+        expect(partial{{entity_singular.pascalCase()}}, isNotNull);
+        expect(partial{{entity_singular.pascalCase()}}, isA<Partial{{entity_singular.pascalCase()}}>());{{/use_overrides}}
 },
   );
 }
