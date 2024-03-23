@@ -1,4 +1,4 @@
-#{{^use_equatable}}#
+#{{#use_code_generation}}#
 targets:
   $default:
     builders:
@@ -7,6 +7,10 @@ targets:
       dart_mappable_builder:
         generate_for:
           - lib/src/types/_cf___use_dart_mappable___optional.dart
+        options:
+          generateMethods:
+            - equals
+            - stringify
       #{{/use_dart_mappable}}#
       #{{#use_freezed}}#
       freezed:
@@ -16,5 +20,5 @@ targets:
           map: false
           when: false
       #{{/use_freezed}}#
-#{{/use_equatable}}#
+#{{/use_code_generation}}#
 #*w 1v w*#

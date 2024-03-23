@@ -4,6 +4,7 @@ enum ValueEqualityApproach {
   dartMappable('dart_mappable'),
   equatable('equatable'),
   freezed('freezed'),
+  overrides('overrides'),
   ;
 
   const ValueEqualityApproach(this.varIdentifier);

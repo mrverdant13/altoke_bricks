@@ -23,7 +23,7 @@ mixin _$FAltokeEntity {
   String get name => throw _privateConstructorUsedError;
 
   /// The description of this altoke entity.
-  String get description => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FAltokeEntityCopyWith<FAltokeEntity> get copyWith =>
@@ -36,7 +36,7 @@ abstract class $FAltokeEntityCopyWith<$Res> {
           FAltokeEntity value, $Res Function(FAltokeEntity) then) =
       _$FAltokeEntityCopyWithImpl<$Res, FAltokeEntity>;
   @useResult
-  $Res call({int id, String name, String description});
+  $Res call({int id, String name, String? description});
 }
 
 /// @nodoc
@@ -54,7 +54,7 @@ class _$FAltokeEntityCopyWithImpl<$Res, $Val extends FAltokeEntity>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? description = null,
+    Object? description = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -65,10 +65,10 @@ class _$FAltokeEntityCopyWithImpl<$Res, $Val extends FAltokeEntity>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -81,7 +81,7 @@ abstract class _$$FAltokeEntityImplCopyWith<$Res>
       __$$FAltokeEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name, String description});
+  $Res call({int id, String name, String? description});
 }
 
 /// @nodoc
@@ -97,7 +97,7 @@ class __$$FAltokeEntityImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? description = null,
+    Object? description = freezed,
   }) {
     return _then(_$FAltokeEntityImpl(
       id: null == id
@@ -108,10 +108,10 @@ class __$$FAltokeEntityImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -120,7 +120,7 @@ class __$$FAltokeEntityImplCopyWithImpl<$Res>
 
 class _$FAltokeEntityImpl implements _FAltokeEntity {
   const _$FAltokeEntityImpl(
-      {required this.id, required this.name, required this.description});
+      {required this.id, required this.name, this.description});
 
   /// The ID of this altoke entity.
   @override
@@ -132,7 +132,7 @@ class _$FAltokeEntityImpl implements _FAltokeEntity {
 
   /// The description of this altoke entity.
   @override
-  final String description;
+  final String? description;
 
   @override
   String toString() {
@@ -164,7 +164,7 @@ abstract class _FAltokeEntity implements FAltokeEntity {
   const factory _FAltokeEntity(
       {required final int id,
       required final String name,
-      required final String description}) = _$FAltokeEntityImpl;
+      final String? description}) = _$FAltokeEntityImpl;
 
   @override
 
@@ -177,7 +177,7 @@ abstract class _FAltokeEntity implements FAltokeEntity {
   @override
 
   /// The description of this altoke entity.
-  String get description;
+  String? get description;
   @override
   @JsonKey(ignore: true)
   _$$FAltokeEntityImplCopyWith<_$FAltokeEntityImpl> get copyWith =>
@@ -187,10 +187,10 @@ abstract class _FAltokeEntity implements FAltokeEntity {
 /// @nodoc
 mixin _$FNewAltokeEntity {
   /// The name of the new altoke entity.
-  String get title => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
 
   /// The description of the new altoke entity.
-  String get description => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FNewAltokeEntityCopyWith<FNewAltokeEntity> get copyWith =>
@@ -203,7 +203,7 @@ abstract class $FNewAltokeEntityCopyWith<$Res> {
           FNewAltokeEntity value, $Res Function(FNewAltokeEntity) then) =
       _$FNewAltokeEntityCopyWithImpl<$Res, FNewAltokeEntity>;
   @useResult
-  $Res call({String title, String description});
+  $Res call({String name, String? description});
 }
 
 /// @nodoc
@@ -219,18 +219,18 @@ class _$FNewAltokeEntityCopyWithImpl<$Res, $Val extends FNewAltokeEntity>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = null,
-    Object? description = null,
+    Object? name = null,
+    Object? description = freezed,
   }) {
     return _then(_value.copyWith(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -243,7 +243,7 @@ abstract class _$$FNewAltokeEntityImplCopyWith<$Res>
       __$$FNewAltokeEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, String description});
+  $Res call({String name, String? description});
 }
 
 /// @nodoc
@@ -257,18 +257,18 @@ class __$$FNewAltokeEntityImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? title = null,
-    Object? description = null,
+    Object? name = null,
+    Object? description = freezed,
   }) {
     return _then(_$FNewAltokeEntityImpl(
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -276,20 +276,19 @@ class __$$FNewAltokeEntityImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FNewAltokeEntityImpl implements _FNewAltokeEntity {
-  const _$FNewAltokeEntityImpl(
-      {required this.title, required this.description});
+  const _$FNewAltokeEntityImpl({required this.name, this.description});
 
   /// The name of the new altoke entity.
   @override
-  final String title;
+  final String name;
 
   /// The description of the new altoke entity.
   @override
-  final String description;
+  final String? description;
 
   @override
   String toString() {
-    return 'FNewAltokeEntity(title: $title, description: $description)';
+    return 'FNewAltokeEntity(name: $name, description: $description)';
   }
 
   @override
@@ -297,13 +296,13 @@ class _$FNewAltokeEntityImpl implements _FNewAltokeEntity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FNewAltokeEntityImpl &&
-            (identical(other.title, title) || other.title == title) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, title, description);
+  int get hashCode => Object.hash(runtimeType, name, description);
 
   @JsonKey(ignore: true)
   @override
@@ -315,17 +314,17 @@ class _$FNewAltokeEntityImpl implements _FNewAltokeEntity {
 
 abstract class _FNewAltokeEntity implements FNewAltokeEntity {
   const factory _FNewAltokeEntity(
-      {required final String title,
-      required final String description}) = _$FNewAltokeEntityImpl;
+      {required final String name,
+      final String? description}) = _$FNewAltokeEntityImpl;
 
   @override
 
   /// The name of the new altoke entity.
-  String get title;
+  String get name;
   @override
 
   /// The description of the new altoke entity.
-  String get description;
+  String? get description;
   @override
   @JsonKey(ignore: true)
   _$$FNewAltokeEntityImplCopyWith<_$FNewAltokeEntityImpl> get copyWith =>
@@ -338,7 +337,7 @@ mixin _$FPartialAltokeEntity {
   FOptional<String> get name => throw _privateConstructorUsedError;
 
   /// The optional description for the altoke entity.
-  FOptional<String> get description => throw _privateConstructorUsedError;
+  FOptional<String?> get description => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FPartialAltokeEntityCopyWith<FPartialAltokeEntity> get copyWith =>
@@ -351,10 +350,10 @@ abstract class $FPartialAltokeEntityCopyWith<$Res> {
           $Res Function(FPartialAltokeEntity) then) =
       _$FPartialAltokeEntityCopyWithImpl<$Res, FPartialAltokeEntity>;
   @useResult
-  $Res call({FOptional<String> name, FOptional<String> description});
+  $Res call({FOptional<String> name, FOptional<String?> description});
 
   $FOptionalCopyWith<String, $Res> get name;
-  $FOptionalCopyWith<String, $Res> get description;
+  $FOptionalCopyWith<String?, $Res> get description;
 }
 
 /// @nodoc
@@ -382,7 +381,7 @@ class _$FPartialAltokeEntityCopyWithImpl<$Res,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as FOptional<String>,
+              as FOptional<String?>,
     ) as $Val);
   }
 
@@ -396,8 +395,8 @@ class _$FPartialAltokeEntityCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $FOptionalCopyWith<String, $Res> get description {
-    return $FOptionalCopyWith<String, $Res>(_value.description, (value) {
+  $FOptionalCopyWith<String?, $Res> get description {
+    return $FOptionalCopyWith<String?, $Res>(_value.description, (value) {
       return _then(_value.copyWith(description: value) as $Val);
     });
   }
@@ -411,12 +410,12 @@ abstract class _$$FPartialAltokeEntityImplCopyWith<$Res>
       __$$FPartialAltokeEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({FOptional<String> name, FOptional<String> description});
+  $Res call({FOptional<String> name, FOptional<String?> description});
 
   @override
   $FOptionalCopyWith<String, $Res> get name;
   @override
-  $FOptionalCopyWith<String, $Res> get description;
+  $FOptionalCopyWith<String?, $Res> get description;
 }
 
 /// @nodoc
@@ -441,7 +440,7 @@ class __$$FPartialAltokeEntityImplCopyWithImpl<$Res>
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as FOptional<String>,
+              as FOptional<String?>,
     ));
   }
 }
@@ -451,7 +450,7 @@ class __$$FPartialAltokeEntityImplCopyWithImpl<$Res>
 class _$FPartialAltokeEntityImpl implements _FPartialAltokeEntity {
   const _$FPartialAltokeEntityImpl(
       {this.name = const FOptional<String>.none(),
-      this.description = const FOptional<String>.none()});
+      this.description = const FOptional<String?>.none()});
 
   /// The optional name for the altoke entity.
   @override
@@ -461,7 +460,7 @@ class _$FPartialAltokeEntityImpl implements _FPartialAltokeEntity {
   /// The optional description for the altoke entity.
   @override
   @JsonKey()
-  final FOptional<String> description;
+  final FOptional<String?> description;
 
   @override
   String toString() {
@@ -493,7 +492,7 @@ class _$FPartialAltokeEntityImpl implements _FPartialAltokeEntity {
 abstract class _FPartialAltokeEntity implements FPartialAltokeEntity {
   const factory _FPartialAltokeEntity(
       {final FOptional<String> name,
-      final FOptional<String> description}) = _$FPartialAltokeEntityImpl;
+      final FOptional<String?> description}) = _$FPartialAltokeEntityImpl;
 
   @override
 
@@ -502,7 +501,7 @@ abstract class _FPartialAltokeEntity implements FPartialAltokeEntity {
   @override
 
   /// The optional description for the altoke entity.
-  FOptional<String> get description;
+  FOptional<String?> get description;
   @override
   @JsonKey(ignore: true)
   _$$FPartialAltokeEntityImplCopyWith<_$FPartialAltokeEntityImpl>

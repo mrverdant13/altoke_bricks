@@ -9,7 +9,7 @@ class EAltokeEntity extends Equatable {
   const EAltokeEntity({
     required this.id,
     required this.name,
-    required this.description,
+    this.description,
   });
 
   /// The ID of this altoke entity.
@@ -19,10 +19,10 @@ class EAltokeEntity extends Equatable {
   final String name;
 
   /// The description of this altoke entity.
-  final String description;
+  final String? description;
 
   @override
-  List<Object> get props => [id, name, description];
+  List<Object?> get props => [id, name, description];
 }
 
 /// {@template altoke_entity.new_altoke_entity}
@@ -31,18 +31,18 @@ class EAltokeEntity extends Equatable {
 class ENewAltokeEntity extends Equatable {
   /// {@macro altoke_entity.new_altoke_entity}
   const ENewAltokeEntity({
-    required this.title,
-    required this.description,
+    required this.name,
+    this.description,
   });
 
   /// The name of the new altoke entity.
-  final String title;
+  final String name;
 
   /// The description of the new altoke entity.
-  final String description;
+  final String? description;
 
   @override
-  List<Object> get props => [title, description];
+  List<Object?> get props => [name, description];
 }
 
 /// {@template altoke_entity.partial_altoke_entity}
@@ -59,7 +59,7 @@ class EPartialAltokeEntity extends Equatable {
   final EOptional<String> name;
 
   /// The optional description for the altoke entity.
-  final EOptional<String> description;
+  final EOptional<String?> description;
 
   @override
   List<Object> get props => [name, description];

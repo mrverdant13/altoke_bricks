@@ -7,6 +7,10 @@ targets:
       dart_mappable_builder:
         generate_for:
           - lib/src/_cf___use_dart_mappable___altoke_entity.dart
+        options:
+          generateMethods:
+            - equals
+            - stringify
       #{{/use_dart_mappable}}#
       #{{#use_freezed}}#
       freezed:
