@@ -12,7 +12,7 @@ class DmAltokeEntity with DmAltokeEntityMappable {
   const DmAltokeEntity({
     required this.id,
     required this.name,
-    required this.description,
+    this.description,
   });
 
   /// The ID of this altoke entity.
@@ -22,7 +22,7 @@ class DmAltokeEntity with DmAltokeEntityMappable {
   final String name;
 
   /// The description of this altoke entity.
-  final String description;
+  final String? description;
 }
 
 /// {@template altoke_entity.new_altoke_entity}
@@ -32,15 +32,15 @@ class DmAltokeEntity with DmAltokeEntityMappable {
 class DmNewAltokeEntity with DmNewAltokeEntityMappable {
   /// {@macro altoke_entity.new_altoke_entity}
   const DmNewAltokeEntity({
-    required this.title,
-    required this.description,
+    required this.name,
+    this.description,
   });
 
   /// The name of the new altoke entity.
-  final String title;
+  final String name;
 
   /// The description of the new altoke entity.
-  final String description;
+  final String? description;
 }
 
 /// {@template altoke_entity.partial_altoke_entity}
@@ -58,5 +58,5 @@ class DmPartialAltokeEntity with DmPartialAltokeEntityMappable {
   final DmOptional<String> name;
 
   /// The optional description for the altoke entity.
-  final DmOptional<String> description;
+  final DmOptional<String?> description;
 }

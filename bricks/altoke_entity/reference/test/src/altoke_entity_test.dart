@@ -71,7 +71,7 @@ THEN an instance of the new altoke entity is returned
         /*remove-end*/
         /*{{#use_dart_mappable}}*/
         const newAltokeEntity = DmNewAltokeEntity(
-          title: 'title',
+          name: 'name',
           description: 'description',
         );
         expect(newAltokeEntity, isNotNull);
@@ -83,7 +83,7 @@ THEN an instance of the new altoke entity is returned
         /*remove-end*/
         /*{{#use_freezed}}*/
         const newAltokeEntity = ENewAltokeEntity(
-          title: 'title',
+          name: 'name',
           description: 'description',
         );
         expect(newAltokeEntity, isNotNull);
@@ -95,7 +95,7 @@ THEN an instance of the new altoke entity is returned
         /*remove-end*/
         /*{{#use_equatable}}*/
         const newAltokeEntity = FNewAltokeEntity(
-          title: 'title',
+          name: 'name',
           description: 'description',
         );
         expect(newAltokeEntity, isNotNull);

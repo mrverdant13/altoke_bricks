@@ -17,7 +17,7 @@ class FAltokeEntity with _$FAltokeEntity {
     required String name,
 
     /// The description of this altoke entity.
-    required String description,
+    String? description,
   }) = _FAltokeEntity;
 }
 
@@ -29,10 +29,10 @@ class FNewAltokeEntity with _$FNewAltokeEntity {
   /// {@macro altoke_entity.new_altoke_entity}
   const factory FNewAltokeEntity({
     /// The name of the new altoke entity.
-    required String title,
+    required String name,
 
     /// The description of the new altoke entity.
-    required String description,
+    String? description,
   }) = _FNewAltokeEntity;
 }
 
@@ -47,6 +47,6 @@ class FPartialAltokeEntity with _$FPartialAltokeEntity {
     @Default(FOptional<String>.none()) FOptional<String> name,
 
     /// The optional description for the altoke entity.
-    @Default(FOptional<String>.none()) FOptional<String> description,
+    @Default(FOptional<String?>.none()) FOptional<String?> description,
   }) = _FPartialAltokeEntity;
 }
