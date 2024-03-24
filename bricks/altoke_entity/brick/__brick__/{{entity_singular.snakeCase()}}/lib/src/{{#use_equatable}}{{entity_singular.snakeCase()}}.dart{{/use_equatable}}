@@ -23,6 +23,20 @@ class {{entity_singular.pascalCase()}} extends Equatable {
 
   @override
   List<Object?> get props => [id, name, description];
+
+  /// Returns a copy of this [{{entity_singular.pascalCase()}}] with the given fields replaced by
+  /// the new values.
+  {{entity_singular.pascalCase()}} copyWith({
+    int? id,
+    String? name,
+    String? Function()? description,
+  }) {
+    return {{entity_singular.pascalCase()}}(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      description: (description ?? () => this.description)(),
+    );
+  }
 }
 
 /// {@template {{entity_singular.snakeCase()}}.new_{{entity_singular.snakeCase()}}}
@@ -43,6 +57,18 @@ class New{{entity_singular.pascalCase()}} extends Equatable {
 
   @override
   List<Object?> get props => [name, description];
+
+  /// Returns a copy of this [New{{entity_singular.pascalCase()}}] with the given fields replaced
+  /// by the new values.
+  New{{entity_singular.pascalCase()}} copyWith({
+    String? name,
+    String? Function()? description,
+  }) {
+    return New{{entity_singular.pascalCase()}}(
+      name: name ?? this.name,
+      description: (description ?? () => this.description)(),
+    );
+  }
 }
 
 /// {@template {{entity_singular.snakeCase()}}.partial_{{entity_singular.snakeCase()}}}
@@ -63,4 +89,16 @@ class Partial{{entity_singular.pascalCase()}} extends Equatable {
 
   @override
   List<Object> get props => [name, description];
+
+  /// Returns a copy of this [Partial{{entity_singular.pascalCase()}}] with the given fields
+  /// replaced by the new values.
+  Partial{{entity_singular.pascalCase()}} copyWith({
+    Optional<String>? name,
+    Optional<String?>? description,
+  }) {
+    return Partial{{entity_singular.pascalCase()}}(
+      name: name ?? this.name,
+      description: description ?? this.description,
+    );
+  }
 }

@@ -37,6 +37,20 @@ class AltokeEntity {
   @override
   int get hashCode =>
       runtimeType.hashCode ^ id.hashCode ^ name.hashCode ^ description.hashCode;
+
+  /// Returns a copy of this [AltokeEntity] with the given fields replaced by
+  /// the new values.
+  AltokeEntity copyWith({
+    int? id,
+    String? name,
+    String? Function()? description,
+  }) {
+    return AltokeEntity(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      description: (description ?? () => this.description)(),
+    );
+  }
 }
 
 /// {@template altoke_entity.new_altoke_entity}
@@ -69,6 +83,18 @@ class NewAltokeEntity {
   @override
   int get hashCode =>
       runtimeType.hashCode ^ name.hashCode ^ description.hashCode;
+
+  /// Returns a copy of this [NewAltokeEntity] with the given fields replaced
+  /// by the new values.
+  NewAltokeEntity copyWith({
+    String? name,
+    String? Function()? description,
+  }) {
+    return NewAltokeEntity(
+      name: name ?? this.name,
+      description: (description ?? () => this.description)(),
+    );
+  }
 }
 
 /// {@template altoke_entity.partial_altoke_entity}
@@ -101,4 +127,16 @@ class PartialAltokeEntity {
   @override
   int get hashCode =>
       runtimeType.hashCode ^ name.hashCode ^ description.hashCode;
+
+  /// Returns a copy of this [PartialAltokeEntity] with the given fields
+  /// replaced by the new values.
+  PartialAltokeEntity copyWith({
+    Optional<String>? name,
+    Optional<String?>? description,
+  }) {
+    return PartialAltokeEntity(
+      name: name ?? this.name,
+      description: description ?? this.description,
+    );
+  }
 }

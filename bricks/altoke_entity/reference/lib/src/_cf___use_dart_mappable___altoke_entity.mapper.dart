@@ -47,6 +47,9 @@ class DmAltokeEntityMapper extends ClassMapperBase<DmAltokeEntity> {
 }
 
 mixin DmAltokeEntityMappable {
+  DmAltokeEntityCopyWith<DmAltokeEntity, DmAltokeEntity, DmAltokeEntity>
+      get copyWith => _DmAltokeEntityCopyWithImpl(
+          this as DmAltokeEntity, $identity, $identity);
   @override
   String toString() {
     return DmAltokeEntityMapper.ensureInitialized()
@@ -66,6 +69,46 @@ mixin DmAltokeEntityMappable {
     return DmAltokeEntityMapper.ensureInitialized()
         .hashValue(this as DmAltokeEntity);
   }
+}
+
+extension DmAltokeEntityValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, DmAltokeEntity, $Out> {
+  DmAltokeEntityCopyWith<$R, DmAltokeEntity, $Out> get $asDmAltokeEntity =>
+      $base.as((v, t, t2) => _DmAltokeEntityCopyWithImpl(v, t, t2));
+}
+
+abstract class DmAltokeEntityCopyWith<$R, $In extends DmAltokeEntity, $Out>
+    implements ClassCopyWith<$R, $In, $Out> {
+  $R call({int? id, String? name, String? description});
+  DmAltokeEntityCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+      Then<$Out2, $R2> t);
+}
+
+class _DmAltokeEntityCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, DmAltokeEntity, $Out>
+    implements DmAltokeEntityCopyWith<$R, DmAltokeEntity, $Out> {
+  _DmAltokeEntityCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<DmAltokeEntity> $mapper =
+      DmAltokeEntityMapper.ensureInitialized();
+  @override
+  $R call({int? id, String? name, Object? description = $none}) =>
+      $apply(FieldCopyWithData({
+        if (id != null) #id: id,
+        if (name != null) #name: name,
+        if (description != $none) #description: description
+      }));
+  @override
+  DmAltokeEntity $make(CopyWithData data) => DmAltokeEntity(
+      id: data.get(#id, or: $value.id),
+      name: data.get(#name, or: $value.name),
+      description: data.get(#description, or: $value.description));
+
+  @override
+  DmAltokeEntityCopyWith<$R2, DmAltokeEntity, $Out2> $chain<$R2, $Out2>(
+          Then<$Out2, $R2> t) =>
+      _DmAltokeEntityCopyWithImpl($value, $cast, t);
 }
 
 class DmNewAltokeEntityMapper extends ClassMapperBase<DmNewAltokeEntity> {
@@ -104,6 +147,10 @@ class DmNewAltokeEntityMapper extends ClassMapperBase<DmNewAltokeEntity> {
 }
 
 mixin DmNewAltokeEntityMappable {
+  DmNewAltokeEntityCopyWith<DmNewAltokeEntity, DmNewAltokeEntity,
+          DmNewAltokeEntity>
+      get copyWith => _DmNewAltokeEntityCopyWithImpl(
+          this as DmNewAltokeEntity, $identity, $identity);
   @override
   String toString() {
     return DmNewAltokeEntityMapper.ensureInitialized()
@@ -123,6 +170,45 @@ mixin DmNewAltokeEntityMappable {
     return DmNewAltokeEntityMapper.ensureInitialized()
         .hashValue(this as DmNewAltokeEntity);
   }
+}
+
+extension DmNewAltokeEntityValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, DmNewAltokeEntity, $Out> {
+  DmNewAltokeEntityCopyWith<$R, DmNewAltokeEntity, $Out>
+      get $asDmNewAltokeEntity =>
+          $base.as((v, t, t2) => _DmNewAltokeEntityCopyWithImpl(v, t, t2));
+}
+
+abstract class DmNewAltokeEntityCopyWith<$R, $In extends DmNewAltokeEntity,
+    $Out> implements ClassCopyWith<$R, $In, $Out> {
+  $R call({String? name, String? description});
+  DmNewAltokeEntityCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+      Then<$Out2, $R2> t);
+}
+
+class _DmNewAltokeEntityCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, DmNewAltokeEntity, $Out>
+    implements DmNewAltokeEntityCopyWith<$R, DmNewAltokeEntity, $Out> {
+  _DmNewAltokeEntityCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<DmNewAltokeEntity> $mapper =
+      DmNewAltokeEntityMapper.ensureInitialized();
+  @override
+  $R call({String? name, Object? description = $none}) =>
+      $apply(FieldCopyWithData({
+        if (name != null) #name: name,
+        if (description != $none) #description: description
+      }));
+  @override
+  DmNewAltokeEntity $make(CopyWithData data) => DmNewAltokeEntity(
+      name: data.get(#name, or: $value.name),
+      description: data.get(#description, or: $value.description));
+
+  @override
+  DmNewAltokeEntityCopyWith<$R2, DmNewAltokeEntity, $Out2> $chain<$R2, $Out2>(
+          Then<$Out2, $R2> t) =>
+      _DmNewAltokeEntityCopyWithImpl($value, $cast, t);
 }
 
 class DmPartialAltokeEntityMapper
@@ -166,6 +252,10 @@ class DmPartialAltokeEntityMapper
 }
 
 mixin DmPartialAltokeEntityMappable {
+  DmPartialAltokeEntityCopyWith<DmPartialAltokeEntity, DmPartialAltokeEntity,
+          DmPartialAltokeEntity>
+      get copyWith => _DmPartialAltokeEntityCopyWithImpl(
+          this as DmPartialAltokeEntity, $identity, $identity);
   @override
   String toString() {
     return DmPartialAltokeEntityMapper.ensureInitialized()
@@ -185,4 +275,45 @@ mixin DmPartialAltokeEntityMappable {
     return DmPartialAltokeEntityMapper.ensureInitialized()
         .hashValue(this as DmPartialAltokeEntity);
   }
+}
+
+extension DmPartialAltokeEntityValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, DmPartialAltokeEntity, $Out> {
+  DmPartialAltokeEntityCopyWith<$R, DmPartialAltokeEntity, $Out>
+      get $asDmPartialAltokeEntity =>
+          $base.as((v, t, t2) => _DmPartialAltokeEntityCopyWithImpl(v, t, t2));
+}
+
+abstract class DmPartialAltokeEntityCopyWith<
+    $R,
+    $In extends DmPartialAltokeEntity,
+    $Out> implements ClassCopyWith<$R, $In, $Out> {
+  $R call({DmOptional<String>? name, DmOptional<String?>? description});
+  DmPartialAltokeEntityCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+      Then<$Out2, $R2> t);
+}
+
+class _DmPartialAltokeEntityCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, DmPartialAltokeEntity, $Out>
+    implements DmPartialAltokeEntityCopyWith<$R, DmPartialAltokeEntity, $Out> {
+  _DmPartialAltokeEntityCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<DmPartialAltokeEntity> $mapper =
+      DmPartialAltokeEntityMapper.ensureInitialized();
+  @override
+  $R call({DmOptional<String>? name, DmOptional<String?>? description}) =>
+      $apply(FieldCopyWithData({
+        if (name != null) #name: name,
+        if (description != null) #description: description
+      }));
+  @override
+  DmPartialAltokeEntity $make(CopyWithData data) => DmPartialAltokeEntity(
+      name: data.get(#name, or: $value.name),
+      description: data.get(#description, or: $value.description));
+
+  @override
+  DmPartialAltokeEntityCopyWith<$R2, DmPartialAltokeEntity, $Out2>
+      $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
+          _DmPartialAltokeEntityCopyWithImpl($value, $cast, t);
 }
