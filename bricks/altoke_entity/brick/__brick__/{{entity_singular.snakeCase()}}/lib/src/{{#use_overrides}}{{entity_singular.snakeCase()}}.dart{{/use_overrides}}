@@ -10,7 +10,7 @@ class {{entity_singular.pascalCase()}} {
   const {{entity_singular.pascalCase()}}({
     required this.id,
     required this.name,
-    required this.description,
+    this.description,
   });
 
   /// The ID of this {{entity_singular.lowerCase()}}.
@@ -20,7 +20,7 @@ class {{entity_singular.pascalCase()}} {
   final String name;
 
   /// The description of this {{entity_singular.lowerCase()}}.
-  final String description;
+  final String? description;
 
   @override
   String toString() =>
@@ -46,29 +46,29 @@ class {{entity_singular.pascalCase()}} {
 class New{{entity_singular.pascalCase()}} {
   /// {@macro {{entity_singular.snakeCase()}}.new_{{entity_singular.snakeCase()}}}
   const New{{entity_singular.pascalCase()}}({
-    required this.title,
-    required this.description,
+    required this.name,
+    this.description,
   });
 
   /// The name of the new {{entity_singular.lowerCase()}}.
-  final String title;
+  final String name;
 
   /// The description of the new {{entity_singular.lowerCase()}}.
-  final String description;
+  final String? description;
 
   @override
   String toString() =>
-      'New{{entity_singular.pascalCase()}}(title: $title, description: $description)';
+      'New{{entity_singular.pascalCase()}}(name: $name, description: $description)';
 
   @override
   bool operator ==(covariant New{{entity_singular.pascalCase()}} other) {
     if (identical(this, other)) return true;
-    return other.title == title && other.description == description;
+    return other.name == name && other.description == description;
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ title.hashCode ^ description.hashCode;
+      runtimeType.hashCode ^ name.hashCode ^ description.hashCode;
 }
 
 /// {@template {{entity_singular.snakeCase()}}.partial_{{entity_singular.snakeCase()}}}
@@ -86,7 +86,7 @@ class Partial{{entity_singular.pascalCase()}} {
   final Optional<String> name;
 
   /// The optional description for the {{entity_singular.lowerCase()}}.
-  final Optional<String> description;
+  final Optional<String?> description;
 
   @override
   String toString() =>

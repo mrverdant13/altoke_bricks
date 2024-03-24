@@ -17,7 +17,7 @@ class {{entity_singular.pascalCase()}} with _${{entity_singular.pascalCase()}} {
     required String name,
 
     /// The description of this {{entity_singular.lowerCase()}}.
-    required String description,
+    String? description,
   }) = _{{entity_singular.pascalCase()}};
 }
 
@@ -29,10 +29,10 @@ class New{{entity_singular.pascalCase()}} with _$New{{entity_singular.pascalCase
   /// {@macro {{entity_singular.snakeCase()}}.new_{{entity_singular.snakeCase()}}}
   const factory New{{entity_singular.pascalCase()}}({
     /// The name of the new {{entity_singular.lowerCase()}}.
-    required String title,
+    required String name,
 
     /// The description of the new {{entity_singular.lowerCase()}}.
-    required String description,
+    String? description,
   }) = _New{{entity_singular.pascalCase()}};
 }
 
@@ -47,6 +47,6 @@ class Partial{{entity_singular.pascalCase()}} with _$Partial{{entity_singular.pa
     @Default(Optional<String>.none()) Optional<String> name,
 
     /// The optional description for the {{entity_singular.lowerCase()}}.
-    @Default(Optional<String>.none()) Optional<String> description,
+    @Default(Optional<String?>.none()) Optional<String?> description,
   }) = _Partial{{entity_singular.pascalCase()}};
 }

@@ -9,7 +9,7 @@ class {{entity_singular.pascalCase()}} extends Equatable {
   const {{entity_singular.pascalCase()}}({
     required this.id,
     required this.name,
-    required this.description,
+    this.description,
   });
 
   /// The ID of this {{entity_singular.lowerCase()}}.
@@ -19,10 +19,10 @@ class {{entity_singular.pascalCase()}} extends Equatable {
   final String name;
 
   /// The description of this {{entity_singular.lowerCase()}}.
-  final String description;
+  final String? description;
 
   @override
-  List<Object> get props => [id, name, description];
+  List<Object?> get props => [id, name, description];
 }
 
 /// {@template {{entity_singular.snakeCase()}}.new_{{entity_singular.snakeCase()}}}
@@ -31,18 +31,18 @@ class {{entity_singular.pascalCase()}} extends Equatable {
 class New{{entity_singular.pascalCase()}} extends Equatable {
   /// {@macro {{entity_singular.snakeCase()}}.new_{{entity_singular.snakeCase()}}}
   const New{{entity_singular.pascalCase()}}({
-    required this.title,
-    required this.description,
+    required this.name,
+    this.description,
   });
 
   /// The name of the new {{entity_singular.lowerCase()}}.
-  final String title;
+  final String name;
 
   /// The description of the new {{entity_singular.lowerCase()}}.
-  final String description;
+  final String? description;
 
   @override
-  List<Object> get props => [title, description];
+  List<Object?> get props => [name, description];
 }
 
 /// {@template {{entity_singular.snakeCase()}}.partial_{{entity_singular.snakeCase()}}}
@@ -59,7 +59,7 @@ class Partial{{entity_singular.pascalCase()}} extends Equatable {
   final Optional<String> name;
 
   /// The optional description for the {{entity_singular.lowerCase()}}.
-  final Optional<String> description;
+  final Optional<String?> description;
 
   @override
   List<Object> get props => [name, description];
