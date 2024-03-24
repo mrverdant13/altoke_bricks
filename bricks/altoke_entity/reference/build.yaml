@@ -9,6 +9,7 @@ targets:
           - lib/src/_cf___use_dart_mappable___altoke_entity.dart
         options:
           generateMethods:
+            - copy
             - equals
             - stringify
       #{{/use_dart_mappable}}#

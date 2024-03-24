@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:altoke_common/common.dart';
 import 'package:meta/meta.dart';
 
@@ -37,6 +38,18 @@ class AltokeEntity {
   @override
   int get hashCode =>
       runtimeType.hashCode ^ id.hashCode ^ name.hashCode ^ description.hashCode;
+
+  AltokeEntity copyWith({
+    int? id,
+    String? name,
+    String? Function()? description,
+  }) {
+    return AltokeEntity(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      description: (description ?? () => this.description)(),
+    );
+  }
 }
 
 /// {@template altoke_entity.new_altoke_entity}
@@ -69,6 +82,16 @@ class NewAltokeEntity {
   @override
   int get hashCode =>
       runtimeType.hashCode ^ name.hashCode ^ description.hashCode;
+
+  NewAltokeEntity copyWith({
+    String? name,
+    String? Function()? description,
+  }) {
+    return NewAltokeEntity(
+      name: name ?? this.name,
+      description: (description ?? () => this.description)(),
+    );
+  }
 }
 
 /// {@template altoke_entity.partial_altoke_entity}
@@ -101,4 +124,14 @@ class PartialAltokeEntity {
   @override
   int get hashCode =>
       runtimeType.hashCode ^ name.hashCode ^ description.hashCode;
+
+  PartialAltokeEntity copyWith({
+    Optional<String>? name,
+    Optional<String?>? description,
+  }) {
+    return PartialAltokeEntity(
+      name: name ?? this.name,
+      description: description ?? this.description,
+    );
+  }
 }

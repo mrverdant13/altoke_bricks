@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:altoke_common/common.dart';
 import 'package:equatable/equatable.dart';
 
@@ -23,6 +24,18 @@ class EAltokeEntity extends Equatable {
 
   @override
   List<Object?> get props => [id, name, description];
+
+  EAltokeEntity copyWith({
+    int? id,
+    String? name,
+    String? Function()? description,
+  }) {
+    return EAltokeEntity(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      description: (description ?? () => this.description)(),
+    );
+  }
 }
 
 /// {@template altoke_entity.new_altoke_entity}
@@ -43,6 +56,16 @@ class ENewAltokeEntity extends Equatable {
 
   @override
   List<Object?> get props => [name, description];
+
+  ENewAltokeEntity copyWith({
+    String? name,
+    String? Function()? description,
+  }) {
+    return ENewAltokeEntity(
+      name: name ?? this.name,
+      description: (description ?? () => this.description)(),
+    );
+  }
 }
 
 /// {@template altoke_entity.partial_altoke_entity}
@@ -63,4 +86,14 @@ class EPartialAltokeEntity extends Equatable {
 
   @override
   List<Object> get props => [name, description];
+
+  EPartialAltokeEntity copyWith({
+    EOptional<String>? name,
+    EOptional<String?>? description,
+  }) {
+    return EPartialAltokeEntity(
+      name: name ?? this.name,
+      description: description ?? this.description,
+    );
+  }
 }
