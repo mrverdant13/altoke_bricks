@@ -17,6 +17,7 @@ targets:
         generate_for:
           - lib/src/types/_cf___use_freezed___optional.dart
         options:
+          copy_with: false
           map: false
           when: false
       #{{/use_freezed}}#
