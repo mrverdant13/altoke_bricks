@@ -4,17 +4,6 @@ import 'package:altoke_entity/altoke_entity.dart';
 import 'package:collection/collection.dart';
 import 'package:hive/hive.dart';
 
-/// An altoke entity entry.
-typedef AltokeEntityEntry = MapEntry<dynamic, Map<dynamic, dynamic>>;
-
-/// An extension on [AltokeEntityEntry] to add mapping capabilities.
-extension ExtendedAltokeEntityEntry on AltokeEntityEntry {
-  /// Converts this [AltokeEntityEntry] to a [AltokeEntity].
-  AltokeEntity toAltokeEntity() {
-    return HiveAltokeEntity.fromJson(value).toEntityWithId(key as int);
-  }
-}
-
 /// The box for Altoke Entities.
 typedef AltokeEntitiesBox = Box<Map<dynamic, dynamic>>;
 
@@ -27,19 +16,19 @@ extension ExtendedAltokeEntitiesBox on AltokeEntitiesBox {
 
   /// Saves the [newAltokeEntity] to the box with an auto-generated ID.
   Future<int> addNewAltokeEntity(NewAltokeEntity newAltokeEntity) async {
-    return add(newAltokeEntity.toHive().toJson());
+    return add(newAltokeEntity.toHiveJson());
   }
 
   /// Saves the [altokeEntity] to the box.
   Future<void> putAltokeEntity(AltokeEntity altokeEntity) async {
-    return put(altokeEntity.id, altokeEntity.toHive().toJson());
+    return put(altokeEntity.id, altokeEntity.toHiveJson());
   }
 
   /// Retrieves the altoke entity with the given [id].
   AltokeEntity? getAltokeEntityById(int id) {
     final rawAltokeEntity = get(id);
     if (rawAltokeEntity == null) return null;
-    return HiveAltokeEntity.fromJson(rawAltokeEntity).toEntityWithId(id);
+    return HiveAltokeEntity.fromJson(rawAltokeEntity).toAltokeEntityWithId(id);
   }
 
   /// Returns the altoke entities that match the given [where] filter.
@@ -68,12 +57,11 @@ extension ExtendedAltokeEntitiesBox on AltokeEntitiesBox {
   }) async {
     final rawAltokeEntity = get(id);
     if (rawAltokeEntity == null) return;
+    final altokeEntity = HiveAltokeEntity.fromJson(rawAltokeEntity)
+        .copyWithAppliedPartial(partialAltokeEntity);
     await put(
       id,
-      {
-        ...rawAltokeEntity,
-        ...partialAltokeEntity.toHive().toJson(),
-      },
+      altokeEntity.toJson(),
     );
   }
 
@@ -82,17 +70,84 @@ extension ExtendedAltokeEntitiesBox on AltokeEntitiesBox {
     final rawAltokeEntity = get(id);
     if (rawAltokeEntity == null) return null;
     await delete(id);
-    return HiveAltokeEntity.fromJson(rawAltokeEntity).toEntityWithId(id);
+    return HiveAltokeEntity.fromJson(rawAltokeEntity).toAltokeEntityWithId(id);
   }
 
   /// Deletes all the altoke entities that match the given [where] filter.
   Future<void> deleteAllAltokeEntities({
     required WhereCallback<AltokeEntity> where,
   }) async {
-    final keysToDelete = altokeEntities
-        .where(where)
-        .map((altokeEntity) => altokeEntity.id)
-        .toList();
+    final keysToDelete =
+        altokeEntities.where(where).map((altokeEntity) => altokeEntity.id);
     await deleteAll(keysToDelete);
+  }
+}
+
+/// An extension on [WhereCallback]<[AltokeEntity]> to add filtering
+/// capabilities.
+extension AltokeEntitiesFilter on WhereCallback<AltokeEntity> {
+  /// A filter to match the given [partialAltokeEntity].
+  static WhereCallback<AltokeEntity>? matchesPartial(
+    PartialAltokeEntity? partialAltokeEntity,
+  ) {
+    if (partialAltokeEntity == null) return null;
+    final PartialAltokeEntity(:name, :description) = partialAltokeEntity;
+    final nameMatches = switch (name) {
+      None() => noFilter,
+      Some(value: final nameFragment) => nameContains(nameFragment),
+    };
+    final descriptionMatches = switch (description) {
+      None() => noFilter,
+      Some(value: final descriptionFragment) => switch (
+            descriptionFragment?.trim()) {
+          null => descriptionIsNull(),
+          final descriptionFragment => descriptionContains(descriptionFragment),
+        },
+    };
+    return (altokeEntity) =>
+        nameMatches(altokeEntity) && descriptionMatches(altokeEntity);
+  }
+
+  /// A filter to match the given [name] against the [AltokeEntity.name].
+  static WhereCallback<AltokeEntity> nameContains(String name) {
+    return switch (name.trim()) {
+      String(:final isEmpty) when isEmpty => noFilter,
+      final searchTerm => (altokeEntity) =>
+          altokeEntity.name.contains(searchTerm),
+    };
+  }
+
+  /// A filter to match `null` [AltokeEntity.description]s.
+  static WhereCallback<AltokeEntity> descriptionIsNull() {
+    return (altokeEntity) => altokeEntity.description == null;
+  }
+
+  /// A filter to match non-`null` [AltokeEntity.description]s.
+  static WhereCallback<AltokeEntity> descriptionIsNotNull() {
+    return (altokeEntity) => altokeEntity.description != null;
+  }
+
+  /// A filter to match the given [description] against the
+  /// [AltokeEntity.description].
+  static WhereCallback<AltokeEntity> descriptionContains(String description) {
+    return switch (description.trim()) {
+      String(:final isEmpty) when isEmpty => descriptionIsNotNull(),
+      final descriptionFragment => (altokeEntity) =>
+          altokeEntity.description?.contains(descriptionFragment) ?? false,
+    };
+  }
+
+  /// A filter to match the given [content] against the [AltokeEntity.name] and
+  /// [AltokeEntity.description].
+  static WhereCallback<AltokeEntity> matchesContent(
+    String? content,
+  ) {
+    return switch (content?.trim()) {
+      null => noFilter,
+      String(:final isEmpty) when isEmpty => noFilter,
+      final searchTerm => (altokeEntity) =>
+          altokeEntity.name.contains(searchTerm) ||
+          (altokeEntity.description?.contains(searchTerm) ?? false),
+    };
   }
 }

@@ -55,7 +55,7 @@ class AltokeEntitiesHiveStorage implements AltokeEntitiesStorage {
   Stream<Iterable<AltokeEntity>> watch({
     String? searchTerm,
   }) async* {
-    final dbFilter = searchTermToHiveFilter(searchTerm);
+    final dbFilter = AltokeEntitiesFilter.matchesContent(searchTerm);
     final altokeEntitiesBox = await asyncAltokeEntitiesBox;
     yield* () async* {
       yield altokeEntitiesBox.getAltokeEntities(where: dbFilter);
@@ -70,7 +70,7 @@ class AltokeEntitiesHiveStorage implements AltokeEntitiesStorage {
   Stream<int> watchCount({
     String? searchTerm,
   }) async* {
-    final dbFilter = searchTermToHiveFilter(searchTerm);
+    final dbFilter = AltokeEntitiesFilter.matchesContent(searchTerm);
     final altokeEntitiesBox = await asyncAltokeEntitiesBox;
     yield* () async* {
       yield altokeEntitiesBox.getCount(where: dbFilter);
@@ -111,7 +111,7 @@ class AltokeEntitiesHiveStorage implements AltokeEntitiesStorage {
     PartialAltokeEntity? referenceAltokeEntity,
   }) async {
     final altokeEntitiesBox = await asyncAltokeEntitiesBox;
-    final filter = referenceAltokeEntity?.toHive().toFilter();
+    final filter = AltokeEntitiesFilter.matchesPartial(referenceAltokeEntity);
     if (filter == null) {
       await altokeEntitiesBox.clear();
       return;
@@ -124,19 +124,4 @@ class AltokeEntitiesHiveStorage implements AltokeEntitiesStorage {
     final altokeEntitiesBox = await asyncAltokeEntitiesBox;
     await altokeEntitiesBox.close();
   }
-}
-
-/// Converts a [nullableSearchTerm] to a [WhereCallback] that can be used to
-/// filter a list of [AltokeEntity]s.
-@visibleForTesting
-WhereCallback<AltokeEntity> searchTermToHiveFilter(
-  String? nullableSearchTerm,
-) {
-  return switch (nullableSearchTerm?.trim()) {
-    null => (_) => true,
-    String(:final isEmpty) when isEmpty => (_) => true,
-    final searchTerm => (altokeEntity) =>
-        altokeEntity.name.contains(searchTerm) ||
-        (altokeEntity.description?.contains(searchTerm) ?? false),
-  };
 }

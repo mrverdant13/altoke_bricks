@@ -34,15 +34,39 @@ class HiveAltokeEntity {
   final String? description;
 
   /// Converts this [HiveAltokeEntity] to its JSON representation.
-  Map<String, dynamic> toJson() => _$HiveAltokeEntityToJson(this);
+  Json toJson() => _$HiveAltokeEntityToJson(this);
 
   /// Converts this [HiveAltokeEntity] to a [AltokeEntity].
-  AltokeEntity toEntityWithId(int id) {
+  AltokeEntity toAltokeEntityWithId(int id) {
     return AltokeEntity(
       id: id,
       name: name,
       description: description,
     );
+  }
+
+  /// Applies the [partialAltokeEntity] to this [HiveAltokeEntity].
+  HiveAltokeEntity copyWithAppliedPartial(
+    PartialAltokeEntity partialAltokeEntity,
+  ) {
+    var hiveAltokeEntity = this;
+    if (partialAltokeEntity.name case Some(value: final name)) {
+      hiveAltokeEntity = HiveAltokeEntity(
+        name: name.trim(),
+        description: hiveAltokeEntity.description,
+      );
+    }
+    if (partialAltokeEntity.description case Some(value: final description)) {
+      hiveAltokeEntity = HiveAltokeEntity(
+        name: hiveAltokeEntity.name,
+        description: switch (description?.trim()) {
+          null => null,
+          String(:final isEmpty) when isEmpty => null,
+          final description => description.trim(),
+        },
+      );
+    }
+    return hiveAltokeEntity;
   }
 }
 
@@ -57,6 +81,13 @@ extension MappableAltokeEntity on AltokeEntity {
       description: description,
     );
   }
+
+  /// Converts this [AltokeEntity] to its Hive JSON representation.
+  ///
+  /// **NOTE:** The [id] is ignored in the conversion.
+  Json toHiveJson() {
+    return toHive().toJson();
+  }
 }
 
 /// An extension on [NewAltokeEntity] to add mapping capabilities.
@@ -68,6 +99,20 @@ extension MappableNewAltokeEntity on NewAltokeEntity {
       description: description,
     );
   }
+
+  /// Converts this [NewAltokeEntity] to its Hive JSON representation.
+  Json toHiveJson() {
+    return toHive().toJson();
+  }
+}
+
+/// An extension on [PartialAltokeEntity] to add mapping capabilities.
+extension MappablePartialAltokeEntity on PartialAltokeEntity {
+  /// Converts this [PartialAltokeEntity] to a [HivePartialAltokeEntity].
+  HivePartialAltokeEntity toHive() => HivePartialAltokeEntity.fromEntity(this);
+
+  /// Converts this [PartialAltokeEntity] to its Hive JSON representation.
+  Json toHiveJson() => toHive().toJson();
 }
 
 /// {@template altoke_entities_hive_storage.hive_partial_altoke_entity}
@@ -104,39 +149,15 @@ class HivePartialAltokeEntity {
         HiveAltokeEntity.descriptionJsonKey: value,
     };
   }
-
-  /// Converts this [HivePartialAltokeEntity] to a filter callback for Hive.
-  WhereCallback<AltokeEntity> toFilter() {
-    final nameMatches = switch (name) {
-      None() => (_) => true,
-      Some(value: final nameFragment) => switch (nameFragment.trim()) {
-          String(:final isEmpty) when isEmpty => (_) => true,
-          final nameFragment => (AltokeEntity altokeEntity) =>
-              altokeEntity.name.contains(nameFragment),
-        },
-    };
-    final descriptionMatches = switch (description) {
-      None() => (_) => true,
-      Some(value: final descriptionFragment) => switch (
-            descriptionFragment?.trim()) {
-          null => (AltokeEntity altokeEntity) =>
-              altokeEntity.description == null,
-          String(:final isEmpty) when isEmpty => (AltokeEntity altokeEntity) =>
-              altokeEntity.description != null,
-          final descriptionFragment => (AltokeEntity altokeEntity) =>
-              switch (altokeEntity.description) {
-                null => false,
-                final description => description.contains(descriptionFragment),
-              },
-        },
-    };
-    return (altokeEntity) =>
-        nameMatches(altokeEntity) && descriptionMatches(altokeEntity);
-  }
 }
 
-/// An extension on [PartialAltokeEntity] to add mapping capabilities.
-extension MappablePartialAltokeEntity on PartialAltokeEntity {
-  /// Converts this [PartialAltokeEntity] to a [HivePartialAltokeEntity].
-  HivePartialAltokeEntity toHive() => HivePartialAltokeEntity.fromEntity(this);
+/// An altoke entity entry.
+typedef AltokeEntityEntry = MapEntry<dynamic, Map<dynamic, dynamic>>;
+
+/// An extension on [AltokeEntityEntry] to add mapping capabilities.
+extension ExtendedAltokeEntityEntry on AltokeEntityEntry {
+  /// Converts this [AltokeEntityEntry] to a [AltokeEntity].
+  AltokeEntity toAltokeEntity() {
+    return HiveAltokeEntity.fromJson(value).toAltokeEntityWithId(key as int);
+  }
 }
