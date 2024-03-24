@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:altoke_common/common.dart';
 import 'package:meta/meta.dart';
 
@@ -39,6 +38,8 @@ class AltokeEntity {
   int get hashCode =>
       runtimeType.hashCode ^ id.hashCode ^ name.hashCode ^ description.hashCode;
 
+  /// Returns a copy of this [AltokeEntity] with the given fields replaced by
+  /// the new values.
   AltokeEntity copyWith({
     int? id,
     String? name,
@@ -83,6 +84,8 @@ class NewAltokeEntity {
   int get hashCode =>
       runtimeType.hashCode ^ name.hashCode ^ description.hashCode;
 
+  /// Returns a copy of this [NewAltokeEntity] with the given fields replaced
+  /// by the new values.
   NewAltokeEntity copyWith({
     String? name,
     String? Function()? description,
@@ -125,6 +128,8 @@ class PartialAltokeEntity {
   int get hashCode =>
       runtimeType.hashCode ^ name.hashCode ^ description.hashCode;
 
+  /// Returns a copy of this [PartialAltokeEntity] with the given fields
+  /// replaced by the new values.
   PartialAltokeEntity copyWith({
     Optional<String>? name,
     Optional<String?>? description,
