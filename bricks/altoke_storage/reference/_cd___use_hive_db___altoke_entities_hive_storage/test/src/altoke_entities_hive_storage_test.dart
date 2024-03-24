@@ -5,6 +5,7 @@ import 'package:altoke_common/common.dart';
 import 'package:altoke_entities_hive_storage/altoke_entities_hive_storage.dart';
 import 'package:altoke_entities_storage/altoke_entities_storage.dart';
 import 'package:altoke_entity/altoke_entity.dart';
+import 'package:collection/collection.dart';
 import 'package:hive/hive.dart';
 import 'package:test/test.dart';
 
@@ -93,19 +94,17 @@ WHEN the altoke entity is created
 THEN a altoke entity record is registered
 ''',
         () async {
-          const existingAltokeEntityId = 13;
           const existingAltokeEntity = NewAltokeEntity(
-            name: 'name',
+            name: 'existing',
             description: 'description',
           );
-          await box.put(
-            existingAltokeEntityId,
-            existingAltokeEntity.toHive().toJson(),
+          await box.add(
+            existingAltokeEntity.toHiveJson(),
           );
           final initialAltokeEntitiesCount = box.length;
           expect(initialAltokeEntitiesCount, 1);
           const newAltokeEntity = NewAltokeEntity(
-            name: 'name',
+            name: 'new',
             description: 'description',
           );
           await storage.create(newAltokeEntity: newAltokeEntity);
@@ -116,10 +115,7 @@ THEN a altoke entity record is registered
                   newAltokeEntity.description;
           final resultingMatchingAltokeEntitiesCount =
               box.values.where(filter).length;
-          expect(
-            resultingMatchingAltokeEntitiesCount,
-            initialAltokeEntitiesCount + 1,
-          );
+          expect(resultingMatchingAltokeEntitiesCount, 1);
         },
       );
 
@@ -151,7 +147,7 @@ AND no altoke entity record is registered
         '''
 
 ├─ THAT has altoke entity records
-AND the ID of a registered task
+AND the ID of a registered altoke entity
 WHEN the altoke entity is deleted
 THEN the altoke entity record is dropped
 AND the deleted altoke entity is returned
@@ -160,7 +156,7 @@ AND the deleted altoke entity is returned
           const altokeEntityId = 13;
           const newAltokeEntity =
               NewAltokeEntity(name: 'name', description: 'description');
-          await box.put(altokeEntityId, newAltokeEntity.toHive().toJson());
+          await box.put(altokeEntityId, newAltokeEntity.toHiveJson());
           bool filter(dynamic key) => key == altokeEntityId;
           final initialMatchingAltokeEntitiesCount =
               box.keys.where(filter).length;
@@ -178,7 +174,7 @@ AND the deleted altoke entity is returned
         '''
 
 ├─ THAT has altoke entity records
-AND the ID of an unregistered task
+AND the ID of an unregistered altoke entity
 WHEN the altoke entity is deleted
 THEN no altoke entity record is dropped
 AND null is returned
@@ -187,18 +183,19 @@ AND null is returned
           const altokeEntityId = 17;
           const newAltokeEntity =
               NewAltokeEntity(name: 'name', description: 'description');
-          await box.add(newAltokeEntity.toHive().toJson());
+          await box.add(newAltokeEntity.toHiveJson());
           final initialAltokeEntityEntries = box.toMap().entries;
           expect(initialAltokeEntityEntries, hasLength(1));
           final initialAltokeEntityEntry = initialAltokeEntityEntries.single;
           expect(initialAltokeEntityEntry.key, isNot(altokeEntityId));
           final deletedAltokeEntity = await storage.deleteById(altokeEntityId);
           expect(deletedAltokeEntity, isNull);
-          final resultingTaskEntries = box.toMap().entries;
-          expect(resultingTaskEntries, hasLength(1));
-          final resultingTaskEntry = resultingTaskEntries.single;
+          final resultingAltokeEntityEntries = box.toMap().entries;
+          expect(resultingAltokeEntityEntries, hasLength(1));
+          final resultingAltokeEntityEntry =
+              resultingAltokeEntityEntries.single;
           expect(
-            resultingTaskEntry.toAltokeEntity(),
+            resultingAltokeEntityEntry.toAltokeEntity(),
             initialAltokeEntityEntry.toAltokeEntity(),
           );
         },
@@ -208,11 +205,10 @@ AND null is returned
         '''
 
 ├─ THAT has several altoke entity records
-AND a reference task
+AND a reference altoke entity
 ├─ THAT includes a non-null name matcher
-├─ AND includes a non-null status matcher
 ├─ AND includes a non-null description matcher
-WHEN a delete operation is performed with the reference task
+WHEN a delete operation is performed with the reference altoke entity
 THEN the altoke entity records matching the reference altoke entity are dropped
 AND the altoke entity records not matching the reference altoke entity are kept
 ''',
@@ -227,7 +223,6 @@ AND the altoke entity records not matching the reference altoke entity are kept
               id: 1,
               name: 'name 1 matching-pattern',
               description: 'description 1',
-              // ignore: avoid_redundant_argument_values
             ),
             const AltokeEntity(
               id: 2,
@@ -347,11 +342,10 @@ AND the altoke entity records not matching the reference altoke entity are kept
         '''
 
 ├─ THAT has several altoke entity records
-AND a reference task
-├─ THAT includes a null name matcher
-├─ AND includes a non-null status matcher
+AND a reference altoke entity
+├─ THAT does not include a name matcher
 ├─ AND includes a non-null description matcher
-WHEN a delete operation is performed with the reference task
+WHEN a delete operation is performed with the reference altoke entity
 THEN the altoke entity records matching the reference altoke entity are dropped
 AND the altoke entity records not matching the reference altoke entity are kept
 ''',
@@ -366,7 +360,6 @@ AND the altoke entity records not matching the reference altoke entity are kept
               id: 1,
               name: 'name 1 matching-pattern',
               description: 'description 1',
-              // ignore: avoid_redundant_argument_values
             ),
             const AltokeEntity(
               id: 2,
@@ -483,11 +476,10 @@ AND the altoke entity records not matching the reference altoke entity are kept
         '''
 
 ├─ THAT has several altoke entity records
-AND a reference task
+AND a reference altoke entity
 ├─ THAT includes a non-null name matcher
-├─ AND includes a null status matcher
-├─ AND includes a non-null description matcher
-WHEN a delete operation is performed with the reference task
+├─ AND includes a null description matcher
+WHEN a delete operation is performed with the reference altoke entity
 THEN the altoke entity records matching the reference altoke entity are dropped
 AND the altoke entity records not matching the reference altoke entity are kept
 ''',
@@ -502,7 +494,6 @@ AND the altoke entity records not matching the reference altoke entity are kept
               id: 1,
               name: 'name 1 matching-pattern',
               description: 'description 1',
-              // ignore: avoid_redundant_argument_values
             ),
             const AltokeEntity(
               id: 2,
@@ -583,7 +574,7 @@ AND the altoke entity records not matching the reference altoke entity are kept
           expect(initialAltokeEntitiesCount, altokeEntities.length);
           const referenceAltokeEntity = PartialAltokeEntity(
             name: Some('matching-pattern'),
-            description: Some('matching-pattern'),
+            description: Some(null),
           );
           await storage.deleteAll(referenceAltokeEntity: referenceAltokeEntity);
           final resultingAltokeEntityRecordEntries = box.toMap().entries;
@@ -592,10 +583,7 @@ AND the altoke entity records not matching the reference altoke entity are kept
             final AltokeEntity(:name, :description) = altokeEntity;
             final noMatchInTitle = !name.contains('matching-pattern');
             if (noMatchInTitle) return true;
-            if (description == null) return true;
-            final noMatchInDescription =
-                !description.contains('matching-pattern');
-            return noMatchInDescription;
+            return description != null;
           }
 
           final expectedResultingAltokeEntities = [
@@ -622,145 +610,10 @@ AND the altoke entity records not matching the reference altoke entity are kept
         '''
 
 ├─ THAT has several altoke entity records
-AND a reference task
+AND a reference altoke entity
 ├─ THAT includes a non-null name matcher
-├─ AND includes a non-null status matcher
-├─ AND includes a null description matcher
-WHEN a delete operation is performed with the reference task
-THEN the altoke entity records matching the reference altoke entity are dropped
-AND the altoke entity records not matching the reference altoke entity are kept
-''',
-        () async {
-          final altokeEntities = [
-            const AltokeEntity(
-              id: 0,
-              name: 'name 0',
-              description: 'description 0',
-            ),
-            const AltokeEntity(
-              id: 1,
-              name: 'name 1 matching-pattern',
-              description: 'description 1',
-              // ignore: avoid_redundant_argument_values
-            ),
-            const AltokeEntity(
-              id: 2,
-              name: 'name 2',
-              description: 'description 2 matching-pattern',
-            ),
-            const AltokeEntity(
-              id: 3,
-              name: 'name 3 matching-pattern',
-              description: 'description 3 matching-pattern',
-            ),
-            const AltokeEntity(
-              id: 4,
-              name: 'name 4',
-              description: 'description 4',
-            ),
-            const AltokeEntity(
-              id: 5,
-              name: 'name 5 matching-pattern',
-              description: 'description 5',
-            ),
-            const AltokeEntity(
-              id: 6,
-              name: 'name 6',
-              description: 'description 6 matching-pattern',
-            ),
-            const AltokeEntity(
-              id: 7,
-              name: 'name 7 matching-pattern',
-              description: 'description 7 matching-pattern',
-            ),
-            const AltokeEntity(
-              id: 8,
-              name: 'name 8',
-              description: 'description 8',
-            ),
-            const AltokeEntity(
-              id: 9,
-              name: 'name 9 matching-pattern',
-              description: 'description 9',
-            ),
-            const AltokeEntity(
-              id: 10,
-              name: 'name 10',
-              description: 'description 10 matching-pattern',
-            ),
-            const AltokeEntity(
-              id: 11,
-              name: 'name 11 matching-pattern',
-              description: 'description 11 matching-pattern',
-            ),
-            const AltokeEntity(
-              id: 12,
-              name: 'name 12',
-              description: 'description 12',
-            ),
-            const AltokeEntity(
-              id: 13,
-              name: 'name 13 matching-pattern',
-              description: 'description 13',
-            ),
-            const AltokeEntity(
-              id: 14,
-              name: 'name 14',
-              description: 'description 14 matching-pattern',
-            ),
-            const AltokeEntity(
-              id: 15,
-              name: 'name 15 matching-pattern',
-              description: 'description 15 matching-pattern',
-            ),
-          ];
-          await box.putAll({
-            for (final altokeEntity in altokeEntities)
-              altokeEntity.id: altokeEntity.toHive().toJson(),
-          });
-          final initialAltokeEntitiesCount = box.length;
-          expect(initialAltokeEntitiesCount, altokeEntities.length);
-          const referenceAltokeEntity = PartialAltokeEntity(
-            name: Some('matching-pattern'),
-          );
-          await storage.deleteAll(referenceAltokeEntity: referenceAltokeEntity);
-          final resultingAltokeEntityRecordEntries = box.toMap().entries;
-
-          bool shouldBeKept(AltokeEntity altokeEntity) {
-            final AltokeEntity(:name) = altokeEntity;
-            final noMatchInTitle = !name.contains('matching-pattern');
-            return noMatchInTitle;
-          }
-
-          final expectedResultingAltokeEntities = [
-            for (final altokeEntity in altokeEntities)
-              if (shouldBeKept(altokeEntity)) altokeEntity,
-          ];
-          expect(
-            resultingAltokeEntityRecordEntries,
-            hasLength(expectedResultingAltokeEntities.length),
-          );
-          final resultingAltokeEntities = [
-            for (final altokeEntityRecordEntry
-                in resultingAltokeEntityRecordEntries)
-              altokeEntityRecordEntry.toAltokeEntity(),
-          ];
-          expect(
-            resultingAltokeEntities,
-            unorderedEquals(expectedResultingAltokeEntities),
-          );
-        },
-      );
-
-      test(
-        '''
-
-├─ THAT has several altoke entity records
-AND a reference task
-├─ THAT includes a non-null name matcher
-├─ AND includes a non-null status matcher
 ├─ AND includes a non-null empty description matcher
-WHEN a delete operation is performed with the reference task
+WHEN a delete operation is performed with the reference altoke entity
 THEN the altoke entity records matching the reference altoke entity are dropped
 AND the altoke entity records not matching the reference altoke entity are kept
 ''',
@@ -775,7 +628,6 @@ AND the altoke entity records not matching the reference altoke entity are kept
               id: 1,
               name: 'name 1 matching-pattern',
               description: 'description 1',
-              // ignore: avoid_redundant_argument_values
             ),
             const AltokeEntity(
               id: 2,
@@ -891,9 +743,9 @@ AND the altoke entity records not matching the reference altoke entity are kept
         '''
 
 ├─ THAT has several altoke entity records
-AND a reference task
+AND a reference altoke entity
 ├─ THAT includes an empty description matcher
-WHEN a delete operation is performed with the reference task
+WHEN a delete operation is performed with the reference altoke entity
 THEN the altoke entity records matching the reference altoke entity are dropped
 AND the altoke entity records not matching the reference altoke entity are kept
 ''',
@@ -908,7 +760,6 @@ AND the altoke entity records not matching the reference altoke entity are kept
               id: 1,
               name: 'name 1 matching-pattern',
               description: 'description 1',
-              // ignore: avoid_redundant_argument_values
             ),
             const AltokeEntity(
               id: 2,
@@ -1000,7 +851,7 @@ AND the altoke entity records not matching the reference altoke entity are kept
             description: Some(null),
           );
           await storage.deleteAll(referenceAltokeEntity: referenceAltokeEntity);
-          final resultingTasksRecordEntries = box.toMap().entries;
+          final resultingAltokeEntitiesRecordEntries = box.toMap().entries;
 
           bool shouldBeKept(AltokeEntity altokeEntity) {
             final AltokeEntity(:name, :description) = altokeEntity;
@@ -1016,11 +867,12 @@ AND the altoke entity records not matching the reference altoke entity are kept
               if (shouldBeKept(altokeEntity)) altokeEntity,
           ];
           expect(
-            resultingTasksRecordEntries,
+            resultingAltokeEntitiesRecordEntries,
             hasLength(expectedResultingAltokeEntities.length),
           );
           final resultingAltokeEntities = [
-            for (final altokeEntityRecordEntry in resultingTasksRecordEntries)
+            for (final altokeEntityRecordEntry
+                in resultingAltokeEntitiesRecordEntries)
               altokeEntityRecordEntry.toAltokeEntity(),
           ];
           expect(
@@ -1034,7 +886,7 @@ AND the altoke entity records not matching the reference altoke entity are kept
         '''
 
 ├─ THAT has several altoke entity records
-WHEN a delete operation is performed with no reference task
+WHEN a delete operation is performed with no reference altoke entity
 THEN all altoke entity records are dropped
 ''',
         () async {
@@ -1048,7 +900,7 @@ THEN all altoke entity records are dropped
           );
           await box.putAll({
             for (final altokeEntity in altokeEntities)
-              altokeEntity.id: altokeEntity.toHive().toJson(),
+              altokeEntity.id: altokeEntity.toHiveJson(),
           });
           final initialAltokeEntitiesCount = box.length;
           expect(initialAltokeEntitiesCount, altokeEntities.length);
@@ -1061,7 +913,7 @@ THEN all altoke entity records are dropped
       test(
         '''
 
-AND a task
+AND an altoke entity
 WHEN the altoke entity is inserted
 THEN a altoke entity record is registered
 ''',
@@ -1088,7 +940,7 @@ THEN a altoke entity record is registered
       test(
         '''
 
-AND the ID of a registered task
+AND the ID of a registered altoke entity
 AND the valid partial altoke entity data
 WHEN the altoke entity is updated
 THEN a altoke entity record is updated
@@ -1155,7 +1007,7 @@ AND no altoke entity record is registered
       test(
         '''
 
-AND the ID of a registered task
+AND the ID of a registered altoke entity
 AND the invalid partial altoke entity data
 WHEN the altoke entity is updated
 THEN an exception is thrown
@@ -1167,7 +1019,7 @@ AND no altoke entity record is updated
             name: 'name',
             description: 'description',
           );
-          await box.put(altokeEntity.id, altokeEntity.toHive().toJson());
+          await box.put(altokeEntity.id, altokeEntity.toHiveJson());
           final existingAltokeEntitiesCount = box.length;
           expect(existingAltokeEntitiesCount, 1);
           const newName = '';
@@ -1200,7 +1052,7 @@ AND no altoke entity record is updated
         '''
 
 ├─ THAT has altoke entity records
-AND the ID of a registered task
+AND the ID of a registered altoke entity
 WHEN the altoke entity is requested
 THEN the altoke entity is returned
 ''',
@@ -1216,9 +1068,9 @@ THEN the altoke entity is returned
           final initialMatchingAltokeEntitiesCount =
               box.keys.where(filter).length;
           expect(initialMatchingAltokeEntitiesCount, 1);
-          final retrievedTask = await storage.getById(altokeEntityId);
-          expect(retrievedTask, isNotNull);
-          expect(retrievedTask, altokeEntity);
+          final retrievedAltokeEntity = await storage.getById(altokeEntityId);
+          expect(retrievedAltokeEntity, isNotNull);
+          expect(retrievedAltokeEntity, altokeEntity);
         },
       );
 
@@ -1226,7 +1078,7 @@ THEN the altoke entity is returned
         '''
 
 ├─ THAT has altoke entity records
-AND the ID of an unregistered task
+AND the ID of an unregistered altoke entity
 WHEN the altoke entity is requested
 THEN null is returned
 ''',
@@ -1236,8 +1088,8 @@ THEN null is returned
           final initialMatchingAltokeEntitiesCount =
               box.keys.where(filter).length;
           expect(initialMatchingAltokeEntitiesCount, isZero);
-          final retrievedTask = await storage.getById(altokeEntityId);
-          expect(retrievedTask, isNull);
+          final retrievedAltokeEntity = await storage.getById(altokeEntityId);
+          expect(retrievedAltokeEntity, isNull);
         },
       );
 
@@ -1269,6 +1121,8 @@ THEN the altoke entities are continuously emitted as they change
               description: 'description 02',
             ),
           ];
+          final sortedAltokeEntitiesForStage00 = [...altokeEntitiesForStage00]
+            ..sort((tA, tB) => tA.name.compareTo(tB.name));
 
           // Stage 01
           const newAltokeEntityInStage01 = AltokeEntity(
@@ -1279,12 +1133,16 @@ THEN the altoke entities are continuously emitted as they change
             ...altokeEntitiesForStage00,
             newAltokeEntityInStage01,
           ];
+          final sortedAltokeEntitiesForStage01 = [...altokeEntitiesForStage01]
+            ..sort((tA, tB) => tA.name.compareTo(tB.name));
 
           // Stage 02
           final altokeEntitiesForStage02 = <AltokeEntity>[
             for (final altokeEntity in altokeEntitiesForStage01)
               if (!altokeEntity.name.contains('01')) altokeEntity,
           ];
+          final sortedAltokeEntitiesForStage02 = [...altokeEntitiesForStage02]
+            ..sort((tA, tB) => tA.name.compareTo(tB.name));
 
           // Stage 03
           final altokeEntitiesForStage03 = <AltokeEntity>[
@@ -1298,15 +1156,17 @@ THEN the altoke entities are continuously emitted as they change
               else
                 altokeEntity,
           ];
+          final sortedAltokeEntitiesForStage03 = [...altokeEntitiesForStage03]
+            ..sort((tA, tB) => tA.name.compareTo(tB.name));
 
           unawaited(
             expectLater(
               stream,
               emitsInOrder([
-                orderedEquals(altokeEntitiesForStage00),
-                orderedEquals(altokeEntitiesForStage01),
-                orderedEquals(altokeEntitiesForStage02),
-                orderedEquals(altokeEntitiesForStage03),
+                orderedEquals(sortedAltokeEntitiesForStage00),
+                orderedEquals(sortedAltokeEntitiesForStage01),
+                orderedEquals(sortedAltokeEntitiesForStage02),
+                orderedEquals(sortedAltokeEntitiesForStage03),
               ]),
             ),
           );
@@ -1339,7 +1199,7 @@ THEN the altoke entities are continuously emitted as they change
 
           // Stage 03
           {
-            final updatedTaskRecordEntries = box
+            final updatedAltokeEntityRecordEntries = box
                 .toMap()
                 .entries
                 .where(
@@ -1351,7 +1211,7 @@ THEN the altoke entities are continuously emitted as they change
                     ..value[HiveAltokeEntity.descriptionJsonKey] =
                         'updated description',
                 );
-            await box.putAll(Map.fromEntries(updatedTaskRecordEntries));
+            await box.putAll(Map.fromEntries(updatedAltokeEntityRecordEntries));
           }
         },
       );
@@ -1365,10 +1225,10 @@ WHEN the altoke entities are watched
 THEN the altoke entities are continuously emitted as they change
 ''',
         () async {
-          final stream = storage.watch(searchTerm: 'asdf');
+          final stream = storage.watch(searchTerm: 'matching-pattern');
           bool match(AltokeEntity altokeEntity) =>
-              altokeEntity.name.contains('asdf') ||
-              (altokeEntity.description?.contains('asdf') ?? false);
+              altokeEntity.name.contains('matching-pattern') ||
+              (altokeEntity.description?.contains('matching-pattern') ?? false);
 
           // Stage 00
           final altokeEntitiesForStage00 = <AltokeEntity>[
@@ -1378,36 +1238,39 @@ THEN the altoke entities are continuously emitted as they change
             ),
             const AltokeEntity(
               id: 1,
-              name: 'name 01 asdf',
+              name: 'name 01 matching-pattern',
             ),
             const AltokeEntity(
               id: 2,
               name: 'name 02',
-              description: 'description 02 asdf',
+              description: 'description 02 matching-pattern',
             ),
           ];
-          final expectedAltokeEntitiesForStage00 =
-              altokeEntitiesForStage00.where(match);
+          final expectedAltokeEntitiesForStage00 = altokeEntitiesForStage00
+              .where(match)
+              .sorted((tA, tB) => tA.name.compareTo(tB.name));
 
           // Stage 01
           const newAltokeEntityInStage01 = AltokeEntity(
             id: 3,
-            name: 'name 03 asdf',
+            name: 'name 03 matching-pattern',
           );
           final altokeEntitiesForStage01 = <AltokeEntity>[
             ...altokeEntitiesForStage00,
             newAltokeEntityInStage01,
           ];
-          final expectedAltokeEntitiesForStage01 =
-              altokeEntitiesForStage01.where(match);
+          final expectedAltokeEntitiesForStage01 = altokeEntitiesForStage01
+              .where(match)
+              .sorted((tA, tB) => tA.name.compareTo(tB.name));
 
           // Stage 02
           final altokeEntitiesForStage02 = <AltokeEntity>[
             for (final altokeEntity in altokeEntitiesForStage01)
               if (!altokeEntity.name.contains('01')) altokeEntity,
           ];
-          final expectedAltokeEntitiesForStage02 =
-              altokeEntitiesForStage02.where(match);
+          final expectedAltokeEntitiesForStage02 = altokeEntitiesForStage02
+              .where(match)
+              .sorted((tA, tB) => tA.name.compareTo(tB.name));
 
           // Stage 03
           final altokeEntitiesForStage03 = <AltokeEntity>[
@@ -1416,13 +1279,14 @@ THEN the altoke entities are continuously emitted as they change
                 AltokeEntity(
                   id: altokeEntity.id,
                   name: altokeEntity.name,
-                  description: 'updated description asdf',
+                  description: 'updated description matching-pattern',
                 )
               else
                 altokeEntity,
           ];
-          final expectedAltokeEntitiesForStage03 =
-              altokeEntitiesForStage03.where(match);
+          final expectedAltokeEntitiesForStage03 = altokeEntitiesForStage03
+              .where(match)
+              .sorted((tA, tB) => tA.name.compareTo(tB.name));
 
           unawaited(
             expectLater(
@@ -1464,7 +1328,7 @@ THEN the altoke entities are continuously emitted as they change
 
           // Stage 03
           {
-            final updatedTaskRecordEntries = box
+            final updatedAltokeEntityRecordEntries = box
                 .toMap()
                 .entries
                 .where(
@@ -1474,9 +1338,9 @@ THEN the altoke entities are continuously emitted as they change
                 .map(
                   (entry) => entry
                     ..value[HiveAltokeEntity.descriptionJsonKey] =
-                        'updated description asdf',
+                        'updated description matching-pattern',
                 );
-            await box.putAll(Map.fromEntries(updatedTaskRecordEntries));
+            await box.putAll(Map.fromEntries(updatedAltokeEntityRecordEntries));
           }
         },
       );
@@ -1581,7 +1445,7 @@ THEN the quantity of altoke entities is continuously emitted as it changes
 
           // Stage 03
           {
-            final updatedTaskRecordEntries = box
+            final updatedAltokeEntityRecordEntries = box
                 .toMap()
                 .entries
                 .where(
@@ -1593,7 +1457,7 @@ THEN the quantity of altoke entities is continuously emitted as it changes
                     ..value[HiveAltokeEntity.descriptionJsonKey] =
                         'updated description',
                 );
-            await box.putAll(Map.fromEntries(updatedTaskRecordEntries));
+            await box.putAll(Map.fromEntries(updatedAltokeEntityRecordEntries));
           }
         },
       );
@@ -1604,13 +1468,13 @@ THEN the quantity of altoke entities is continuously emitted as it changes
 ├─ THAT has altoke entity records
 WHEN the altoke entities count is watched
 ├─ THAT are filtered by their content
-THEN the quantity of altoke entities is continuously emitted as it changes
+THEN the quantity of persisted altoke entities that match the conditions is continuously emitted as it changes
 ''',
         () async {
-          final stream = storage.watchCount(searchTerm: 'asdf');
+          final stream = storage.watchCount(searchTerm: 'matching-pattern');
           bool match(AltokeEntity altokeEntity) =>
-              altokeEntity.name.contains('asdf') ||
-              (altokeEntity.description?.contains('asdf') ?? false);
+              altokeEntity.name.contains('matching-pattern') ||
+              (altokeEntity.description?.contains('matching-pattern') ?? false);
 
           // Stage 00
           final altokeEntitiesForStage00 = <AltokeEntity>[
@@ -1620,12 +1484,12 @@ THEN the quantity of altoke entities is continuously emitted as it changes
             ),
             const AltokeEntity(
               id: 1,
-              name: 'name 01 asdf',
+              name: 'name 01 matching-pattern',
             ),
             const AltokeEntity(
               id: 2,
               name: 'name 02',
-              description: 'description 02 asdf',
+              description: 'description 02 matching-pattern',
             ),
           ];
           final expectedAltokeEntitiesForStage00 =
@@ -1634,7 +1498,7 @@ THEN the quantity of altoke entities is continuously emitted as it changes
           // Stage 01
           const newAltokeEntityInStage01 = AltokeEntity(
             id: 3,
-            name: 'name 03 asdf',
+            name: 'name 03 matching-pattern',
           );
           final altokeEntitiesForStage01 = <AltokeEntity>[
             ...altokeEntitiesForStage00,
@@ -1658,7 +1522,7 @@ THEN the quantity of altoke entities is continuously emitted as it changes
           //       AltokeEntity(
           //         id: altokeEntity.id,
           //         name: altokeEntity.name,
-          //         description: 'updated description asdf',
+          //         description: 'updated description matching-pattern',
           //       )
           //     else
           //       altokeEntity,
@@ -1683,13 +1547,13 @@ THEN the quantity of altoke entities is continuously emitted as it changes
           // Stage 00
           await box.putAll({
             for (final altokeEntity in altokeEntitiesForStage00)
-              altokeEntity.id: altokeEntity.toHive().toJson(),
+              altokeEntity.id: altokeEntity.toHiveJson(),
           });
 
           // Stage 01
           await box.put(
             newAltokeEntityInStage01.id,
-            newAltokeEntityInStage01.toHive().toJson(),
+            newAltokeEntityInStage01.toHiveJson(),
           );
 
           // Stage 02
@@ -1708,7 +1572,7 @@ THEN the quantity of altoke entities is continuously emitted as it changes
 
           // Stage 03
           {
-            final updatedTaskRecordEntries = box
+            final updatedAltokeEntityRecordEntries = box
                 .toMap()
                 .entries
                 .where(
@@ -1718,9 +1582,9 @@ THEN the quantity of altoke entities is continuously emitted as it changes
                 .map(
                   (entry) => entry
                     ..value[HiveAltokeEntity.descriptionJsonKey] =
-                        'updated description asdf',
+                        'updated description matching-pattern',
                 );
-            await box.putAll(Map.fromEntries(updatedTaskRecordEntries));
+            await box.putAll(Map.fromEntries(updatedAltokeEntityRecordEntries));
           }
         },
       );
