@@ -48,22 +48,22 @@ THEN an instance of the new {{entity_singular.lowerCase()}} is returned
 ''',
     () {
 {{#use_dart_mappable}}const new{{entity_singular.pascalCase()}} = New{{entity_singular.pascalCase()}}(
-          title: 'title',
+          name: 'name',
           description: 'description',
         );
         expect(new{{entity_singular.pascalCase()}}, isNotNull);
         expect(new{{entity_singular.pascalCase()}}, isA<New{{entity_singular.pascalCase()}}>());{{/use_dart_mappable}}{{#use_freezed}}const new{{entity_singular.pascalCase()}} = New{{entity_singular.pascalCase()}}(
-          title: 'title',
+          name: 'name',
           description: 'description',
         );
         expect(new{{entity_singular.pascalCase()}}, isNotNull);
         expect(new{{entity_singular.pascalCase()}}, isA<New{{entity_singular.pascalCase()}}>());{{/use_freezed}}{{#use_equatable}}const new{{entity_singular.pascalCase()}} = New{{entity_singular.pascalCase()}}(
-          title: 'title',
+          name: 'name',
           description: 'description',
         );
         expect(new{{entity_singular.pascalCase()}}, isNotNull);
         expect(new{{entity_singular.pascalCase()}}, isA<New{{entity_singular.pascalCase()}}>());{{/use_equatable}}{{#use_overrides}}const new{{entity_singular.pascalCase()}} = New{{entity_singular.pascalCase()}}(
-          title: 'title',
+          name: 'name',
           description: 'description',
         );
         expect(new{{entity_singular.pascalCase()}}, isNotNull);

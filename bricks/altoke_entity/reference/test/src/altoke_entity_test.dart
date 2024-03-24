@@ -120,7 +120,7 @@ THEN an instance of the new altoke entity is returned
         /*remove-end*/
         /*{{#use_overrides}}*/
         const newAltokeEntity = NewAltokeEntity(
-          title: 'title',
+          name: 'name',
           description: 'description',
         );
         expect(newAltokeEntity, isNotNull);

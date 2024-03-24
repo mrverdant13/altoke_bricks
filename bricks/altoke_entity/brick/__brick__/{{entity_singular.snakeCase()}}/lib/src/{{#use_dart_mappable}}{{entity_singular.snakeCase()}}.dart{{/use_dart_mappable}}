@@ -12,7 +12,7 @@ class {{entity_singular.pascalCase()}} with {{entity_singular.pascalCase()}}Mapp
   const {{entity_singular.pascalCase()}}({
     required this.id,
     required this.name,
-    required this.description,
+    this.description,
   });
 
   /// The ID of this {{entity_singular.lowerCase()}}.
@@ -22,7 +22,7 @@ class {{entity_singular.pascalCase()}} with {{entity_singular.pascalCase()}}Mapp
   final String name;
 
   /// The description of this {{entity_singular.lowerCase()}}.
-  final String description;
+  final String? description;
 }
 
 /// {@template {{entity_singular.snakeCase()}}.new_{{entity_singular.snakeCase()}}}
@@ -32,15 +32,15 @@ class {{entity_singular.pascalCase()}} with {{entity_singular.pascalCase()}}Mapp
 class New{{entity_singular.pascalCase()}} with New{{entity_singular.pascalCase()}}Mappable {
   /// {@macro {{entity_singular.snakeCase()}}.new_{{entity_singular.snakeCase()}}}
   const New{{entity_singular.pascalCase()}}({
-    required this.title,
-    required this.description,
+    required this.name,
+    this.description,
   });
 
   /// The name of the new {{entity_singular.lowerCase()}}.
-  final String title;
+  final String name;
 
   /// The description of the new {{entity_singular.lowerCase()}}.
-  final String description;
+  final String? description;
 }
 
 /// {@template {{entity_singular.snakeCase()}}.partial_{{entity_singular.snakeCase()}}}
@@ -58,5 +58,5 @@ class Partial{{entity_singular.pascalCase()}} with Partial{{entity_singular.pasc
   final Optional<String> name;
 
   /// The optional description for the {{entity_singular.lowerCase()}}.
-  final Optional<String> description;
+  final Optional<String?> description;
 }
