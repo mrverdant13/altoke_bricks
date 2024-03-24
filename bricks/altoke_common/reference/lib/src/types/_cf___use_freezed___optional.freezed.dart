@@ -18,55 +18,6 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$FOptional<T extends Object?> {}
 
 /// @nodoc
-abstract class $FOptionalCopyWith<T extends Object?, $Res> {
-  factory $FOptionalCopyWith(
-          FOptional<T> value, $Res Function(FOptional<T>) then) =
-      _$FOptionalCopyWithImpl<T, $Res, FOptional<T>>;
-}
-
-/// @nodoc
-class _$FOptionalCopyWithImpl<T extends Object?, $Res,
-    $Val extends FOptional<T>> implements $FOptionalCopyWith<T, $Res> {
-  _$FOptionalCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$FSomeImplCopyWith<T extends Object?, $Res> {
-  factory _$$FSomeImplCopyWith(
-          _$FSomeImpl<T> value, $Res Function(_$FSomeImpl<T>) then) =
-      __$$FSomeImplCopyWithImpl<T, $Res>;
-  @useResult
-  $Res call({T some});
-}
-
-/// @nodoc
-class __$$FSomeImplCopyWithImpl<T extends Object?, $Res>
-    extends _$FOptionalCopyWithImpl<T, $Res, _$FSomeImpl<T>>
-    implements _$$FSomeImplCopyWith<T, $Res> {
-  __$$FSomeImplCopyWithImpl(
-      _$FSomeImpl<T> _value, $Res Function(_$FSomeImpl<T>) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? some = freezed,
-  }) {
-    return _then(_$FSomeImpl<T>(
-      freezed == some
-          ? _value.some
-          : some // ignore: cast_nullable_to_non_nullable
-              as T,
-    ));
-  }
-}
-
-/// @nodoc
 
 class _$FSomeImpl<T extends Object?> extends FSome<T> {
   const _$FSomeImpl(this.some) : super._();
@@ -91,12 +42,6 @@ class _$FSomeImpl<T extends Object?> extends FSome<T> {
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(some));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$FSomeImplCopyWith<T, _$FSomeImpl<T>> get copyWith =>
-      __$$FSomeImplCopyWithImpl<T, _$FSomeImpl<T>>(this, _$identity);
 }
 
 abstract class FSome<T extends Object?> extends FOptional<T> {
@@ -105,25 +50,6 @@ abstract class FSome<T extends Object?> extends FOptional<T> {
 
   /// The underlying value.
   T get some;
-  @JsonKey(ignore: true)
-  _$$FSomeImplCopyWith<T, _$FSomeImpl<T>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$FNoneImplCopyWith<T extends Object?, $Res> {
-  factory _$$FNoneImplCopyWith(
-          _$FNoneImpl<T> value, $Res Function(_$FNoneImpl<T>) then) =
-      __$$FNoneImplCopyWithImpl<T, $Res>;
-}
-
-/// @nodoc
-class __$$FNoneImplCopyWithImpl<T extends Object?, $Res>
-    extends _$FOptionalCopyWithImpl<T, $Res, _$FNoneImpl<T>>
-    implements _$$FNoneImplCopyWith<T, $Res> {
-  __$$FNoneImplCopyWithImpl(
-      _$FNoneImpl<T> _value, $Res Function(_$FNoneImpl<T>) _then)
-      : super(_value, _then);
 }
 
 /// @nodoc
