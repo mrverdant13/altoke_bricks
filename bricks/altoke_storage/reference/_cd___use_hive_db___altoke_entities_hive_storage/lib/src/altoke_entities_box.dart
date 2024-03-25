@@ -83,9 +83,8 @@ extension ExtendedAltokeEntitiesBox on AltokeEntitiesBox {
   }
 }
 
-/// An extension on [WhereCallback]<[AltokeEntity]> to add filtering
-/// capabilities.
-extension AltokeEntitiesFilter on WhereCallback<AltokeEntity> {
+/// A set of filters to apply on [AltokeEntity]s
+abstract class AltokeEntitiesFilter {
   /// A filter to match the given [partialAltokeEntity].
   static WhereCallback<AltokeEntity>? matchesPartial(
     PartialAltokeEntity? partialAltokeEntity,
@@ -104,8 +103,7 @@ extension AltokeEntitiesFilter on WhereCallback<AltokeEntity> {
           final descriptionFragment => descriptionContains(descriptionFragment),
         },
     };
-    return (altokeEntity) =>
-        nameMatches(altokeEntity) && descriptionMatches(altokeEntity);
+    return andAll([nameMatches, descriptionMatches]);
   }
 
   /// A filter to match the given [name] against the [AltokeEntity.name].
@@ -145,9 +143,29 @@ extension AltokeEntitiesFilter on WhereCallback<AltokeEntity> {
     return switch (content?.trim()) {
       null => noFilter,
       String(:final isEmpty) when isEmpty => noFilter,
-      final searchTerm => (altokeEntity) =>
-          altokeEntity.name.contains(searchTerm) ||
-          (altokeEntity.description?.contains(searchTerm) ?? false),
+      final searchTerm => orAll([
+          nameContains(searchTerm),
+          descriptionContains(searchTerm),
+        ])
     };
+  }
+
+  /// A filter that combines the given [filters] to match all of them.
+  static WhereCallback<AltokeEntity> andAll(
+    Iterable<WhereCallback<AltokeEntity>?> filters,
+  ) {
+    final validFilters = filters.whereNotNull();
+    if (validFilters.isEmpty) return noFilter;
+    return (altokeEntity) =>
+        validFilters.every((filter) => filter(altokeEntity));
+  }
+
+  /// A filter that combines the given [filters] to match any of them.
+  static WhereCallback<AltokeEntity> orAll(
+    Iterable<WhereCallback<AltokeEntity>?> filters,
+  ) {
+    final validFilters = filters.whereNotNull();
+    if (validFilters.isEmpty) return noFilter;
+    return (altokeEntity) => validFilters.any((filter) => filter(altokeEntity));
   }
 }
