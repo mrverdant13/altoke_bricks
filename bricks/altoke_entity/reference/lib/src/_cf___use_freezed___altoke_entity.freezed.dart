@@ -351,9 +351,6 @@ abstract class $FPartialAltokeEntityCopyWith<$Res> {
       _$FPartialAltokeEntityCopyWithImpl<$Res, FPartialAltokeEntity>;
   @useResult
   $Res call({FOptional<String> name, FOptional<String?> description});
-
-  $FOptionalCopyWith<String, $Res> get name;
-  $FOptionalCopyWith<String?, $Res> get description;
 }
 
 /// @nodoc
@@ -384,22 +381,6 @@ class _$FPartialAltokeEntityCopyWithImpl<$Res,
               as FOptional<String?>,
     ) as $Val);
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $FOptionalCopyWith<String, $Res> get name {
-    return $FOptionalCopyWith<String, $Res>(_value.name, (value) {
-      return _then(_value.copyWith(name: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $FOptionalCopyWith<String?, $Res> get description {
-    return $FOptionalCopyWith<String?, $Res>(_value.description, (value) {
-      return _then(_value.copyWith(description: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -411,11 +392,6 @@ abstract class _$$FPartialAltokeEntityImplCopyWith<$Res>
   @override
   @useResult
   $Res call({FOptional<String> name, FOptional<String?> description});
-
-  @override
-  $FOptionalCopyWith<String, $Res> get name;
-  @override
-  $FOptionalCopyWith<String?, $Res> get description;
 }
 
 /// @nodoc
