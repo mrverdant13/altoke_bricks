@@ -2,6 +2,7 @@ import 'package:altoke_common/common.dart';
 import 'package:altoke_entities_isar_storage/altoke_entities_isar_storage.dart';
 import 'package:altoke_entities_storage/altoke_entities_storage.dart';
 import 'package:altoke_entity/altoke_entity.dart';
+import 'package:collection/collection.dart';
 import 'package:isar/isar.dart';
 import 'package:meta/meta.dart';
 
@@ -22,6 +23,10 @@ class AltokeEntitiesIsarStorage implements AltokeEntitiesStorage {
   @visibleForTesting
   IsarAltokeEntitiesCollection get altokeEntitiesCollection =>
       database.isarAltokeEntities;
+
+  /// Equality checker for [AltokeEntity]s.
+  @visibleForTesting
+  static const altokeEntitiesEqualityChecker = IterableEquality<AltokeEntity>();
 
   @override
   Future<void> create({
@@ -62,22 +67,10 @@ class AltokeEntitiesIsarStorage implements AltokeEntitiesStorage {
         .filter()
         .contentMatches(searchTerm)
         .sortByName();
-
-    bool tasksListsAreEqual(
-      Iterable<AltokeEntity> previous,
-      Iterable<AltokeEntity> next,
-    ) {
-      if (previous.length != next.length) return false;
-      for (var i = 0; i < previous.length; i++) {
-        if (previous.elementAt(i) != next.elementAt(i)) return false;
-      }
-      return true;
-    }
-
     return query
         .watch(fireImmediately: true)
-        .map(tasksFromIsarTasks)
-        .distinct(tasksListsAreEqual);
+        .map(altokeEntitiesFromIsarAltokeEntities)
+        .distinct(altokeEntitiesEqualityChecker.equals);
   }
 
   @override
