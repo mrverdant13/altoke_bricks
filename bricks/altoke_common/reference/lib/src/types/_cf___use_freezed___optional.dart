@@ -5,7 +5,7 @@ part '_cf___use_freezed___optional.freezed.dart';
 /// {@template common.optional}
 /// A representation of an optional value.
 /// {@endtemplate}
-@freezed
+@Freezed(copyWith: false)
 class FOptional<T extends Object?> with _$FOptional<T> {
   /// {@macro common.optional}
   const FOptional._();
