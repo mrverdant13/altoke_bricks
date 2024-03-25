@@ -22,6 +22,7 @@ class AltokeEntitiesHiveStorage implements AltokeEntitiesStorage {
       Hive.openBox(altokeEntitiesBoxName);
 
   /// Equality checker for [AltokeEntity]s.
+  @visibleForTesting
   static const altokeEntitiesEqualityChecker = IterableEquality<AltokeEntity>();
 
   @override
