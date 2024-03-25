@@ -809,6 +809,7 @@ AND the altoke entity records not matching the reference altoke entity are kept
 
 │  ├─ THAT has several altoke entity records
 AND a reference altoke entity
+├─ THAT includes a non-null name matcher
 ├─ THAT includes an empty description matcher
 WHEN a delete operation is performed with the reference altoke entity
 THEN the altoke entity records matching the reference altoke entity are dropped
