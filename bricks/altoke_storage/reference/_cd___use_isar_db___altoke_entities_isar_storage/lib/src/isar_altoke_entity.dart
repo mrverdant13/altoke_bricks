@@ -69,11 +69,15 @@ extension MappableNewAltokeEntity on NewAltokeEntity {
 typedef IsarTasksIterable = Iterable<IsarAltokeEntity>;
 
 /// Converts an [IsarAltokeEntity] to a [AltokeEntity]s.
-AltokeEntity altokeEntityFromIsarTask(IsarAltokeEntity isarAltokeEntity) {
+AltokeEntity altokeEntityFromIsarAltokeEntity(
+  IsarAltokeEntity isarAltokeEntity,
+) {
   return isarAltokeEntity.toAltokeEntity();
 }
 
 /// Converts an [IsarTasksIterable] to a list of [AltokeEntity]s.
-List<AltokeEntity> tasksFromIsarTasks(IsarTasksIterable isarAltokeEntities) {
-  return isarAltokeEntities.map(altokeEntityFromIsarTask).toList();
+List<AltokeEntity> altokeEntitiesFromIsarAltokeEntities(
+  IsarTasksIterable isarAltokeEntities,
+) {
+  return isarAltokeEntities.map(altokeEntityFromIsarAltokeEntity).toList();
 }
