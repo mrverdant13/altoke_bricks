@@ -58,10 +58,8 @@ mixin DmAltokeEntityMappable {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (runtimeType == other.runtimeType &&
-            DmAltokeEntityMapper.ensureInitialized()
-                .isValueEqual(this as DmAltokeEntity, other));
+    return DmAltokeEntityMapper.ensureInitialized()
+        .equalsValue(this as DmAltokeEntity, other);
   }
 
   @override
@@ -159,10 +157,8 @@ mixin DmNewAltokeEntityMappable {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (runtimeType == other.runtimeType &&
-            DmNewAltokeEntityMapper.ensureInitialized()
-                .isValueEqual(this as DmNewAltokeEntity, other));
+    return DmNewAltokeEntityMapper.ensureInitialized()
+        .equalsValue(this as DmNewAltokeEntity, other);
   }
 
   @override
@@ -264,10 +260,8 @@ mixin DmPartialAltokeEntityMappable {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (runtimeType == other.runtimeType &&
-            DmPartialAltokeEntityMapper.ensureInitialized()
-                .isValueEqual(this as DmPartialAltokeEntity, other));
+    return DmPartialAltokeEntityMapper.ensureInitialized()
+        .equalsValue(this as DmPartialAltokeEntity, other);
   }
 
   @override
