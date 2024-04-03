@@ -50,6 +50,7 @@ Create an entity, **_al toque_** (_quickly_).
     - [`dart_mappable`][pub_package_dart_mappable] with code generation.
     - [`equatable`][pub_package_equatable] without code generation.
     - [`freezed`][pub_package_freezed] with code generation.
+    <!-- TODO(mrverdant13): Include overrides approach -->
 
 - **Strict lint rules:**\
   Enforced by [`very_good_analysis`][pub_package_very_good_analysis] for [native Dart & Flutter rules][docs_dart_and_flutter_linter_rules_link].
