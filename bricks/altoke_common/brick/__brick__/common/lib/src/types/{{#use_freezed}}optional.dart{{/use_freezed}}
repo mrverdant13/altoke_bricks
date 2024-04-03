@@ -13,7 +13,7 @@ class Optional<T extends Object?> with _$Optional<T> {
   /// Creates an [Optional] with a present value.
   const factory Optional.some(
     /// The underlying value.
-    T some,
+    T value,
   ) = FSome<T>;
 
   /// Creates an [Optional] with an absent value.
