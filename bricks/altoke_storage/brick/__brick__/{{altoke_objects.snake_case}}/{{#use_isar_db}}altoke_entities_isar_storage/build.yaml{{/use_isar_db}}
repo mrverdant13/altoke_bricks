@@ -1,0 +1,4 @@
+targets:
+  $default:
+    builders:
+      isar_generator:isar_generator: {}
