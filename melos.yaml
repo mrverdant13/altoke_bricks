@@ -196,8 +196,8 @@ scripts:
     exec:
       concurrency: 1
     packageFilters:
-      fileExists:
-        - brick-gen.json
+      scope:
+        - "*_brick_scope"
   brick.gen:
     description: Generate brick
     run: dart run MELOS_ROOT_PATH/packages/brick_generator/lib/main.dart
