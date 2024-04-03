@@ -3,20 +3,22 @@ name: monorepo
 repository: https://github.com/mrverdant13/altoke_app
 
 packages:
-  - ./packages/brick/hooks/
-  - ./packages/brick_e2e/
-  - ./packages/brick_generator/
-  - ./packages/reference_app/packages/app/
-  - ./packages/reference_app/packages/common/
-  - ./packages/reference_app/packages/element_in_memory_cache/
-  - ./packages/reference_app/packages/tasks/
-  - ./packages/reference_app/packages/tasks_repository/
-  - ./packages/reference_app/packages/tasks_storage/_conditional_dir___use_isar_database___tasks_isar_storage/
-  - ./packages/reference_app/packages/tasks_storage/_conditional_dir___use_hive_database___tasks_hive_storage/
-  - ./packages/reference_app/packages/tasks_storage/_conditional_dir___use_realm_database___tasks_realm_storage/
-  - ./packages/reference_app/packages/tasks_storage/_conditional_dir___use_sembast_database___tasks_sembast_storage/
-  - ./packages/reference_app/packages/tasks_storage/_conditional_dir___use_sqlite_database___tasks_sqlite_storage/
-  - ./packages/reference_app/packages/tasks_storage/tasks_storage/
+  - ./bricks/altoke_common/
+  - ./bricks/altoke_common/reference/
+  - ./bricks/altoke_common/brick/hooks/
+  - ./bricks/altoke_entity/
+  - ./bricks/altoke_entity/reference/
+  - ./bricks/altoke_entity/brick/hooks/
+  - ./bricks/altoke_reactive_caches/
+  - ./bricks/altoke_reactive_caches/reference/
+  - ./bricks/altoke_reactive_caches/brick/hooks/
+  - ./bricks/altoke_storage/
+  - ./bricks/altoke_storage/reference/_cd___use_hive_db___altoke_entities_hive_storage/
+  - ./bricks/altoke_storage/reference/_cd___use_isar_db___altoke_entities_isar_storage/
+  - ./bricks/altoke_storage/reference/_cd___use_realm_db___altoke_entities_realm_storage/
+  - ./bricks/altoke_storage/reference/_cd___use_sembast_db___altoke_entities_sembast_storage/
+  - ./bricks/altoke_storage/reference/_cd___use_sqlite_db___altoke_entities_sqlite_storage/
+  - ./bricks/altoke_storage/reference/altoke_entities_storage/
   - ./tools/brick_generator/
 
 command:
@@ -88,12 +90,15 @@ scripts:
     run: dart format .
     exec:
       concurrency: 1
+    packageFilters:
+      ignore:
+        - "*_brick_scope"
   format.all:
     description: Format all packages
     run: melos run format --no-select
   format.ci:
     description: Format all packages (CI)
-    run: melos exec --fail-fast -- "dart format --set-exit-if-changed ."
+    run: melos exec --ignore="*_brick_scope" --fail-fast -- "dart format --set-exit-if-changed ."
 
   # Analyzing
   analyze.dart:
@@ -101,6 +106,8 @@ scripts:
     run: dart analyze --fatal-infos --fatal-warnings
     packageFilters:
       flutter: false
+      ignore:
+        - "*_brick_scope"
     exec:
       concurrency: 1
       orderDependents: true
@@ -108,6 +115,8 @@ scripts:
     description: Analyze a Flutter package
     run: flutter analyze --fatal-infos --fatal-warnings
     packageFilters:
+      ignore:
+        - "*_brick_scope"
       flutter: true
     exec:
       concurrency: 1
@@ -116,6 +125,8 @@ scripts:
     description: Analyze a package with custom lint rules
     run: dart run custom_lint
     packageFilters:
+      ignore:
+        - "*_brick_scope"
       dependsOn:
         - custom_lint
     exec:
@@ -130,9 +141,9 @@ scripts:
   analyze.ci:
     description: Analyze all packages (CI)
     run: >
-      melos exec --fail-fast --order-dependents --no-flutter -- "dart analyze --fatal-infos --fatal-warnings" &&
-      melos exec --fail-fast --order-dependents --flutter -- "flutter analyze --fatal-infos --fatal-warnings --no-pub --no-congratulate --no-preamble" &&
-      melos exec --fail-fast --order-dependents --depends-on=custom_lint -- "dart run custom_lint --fatal-infos --fatal-warnings"
+      melos exec --ignore="*_brick_scope" --fail-fast --order-dependents --no-flutter -- "dart analyze --fatal-infos --fatal-warnings" &&
+      melos exec --ignore="*_brick_scope" --fail-fast --order-dependents --flutter -- "flutter analyze --fatal-infos --fatal-warnings --no-pub --no-congratulate --no-preamble" &&
+      melos exec --ignore="*_brick_scope" --fail-fast --order-dependents --depends-on=custom_lint -- "dart run custom_lint --fatal-infos --fatal-warnings"
 
   # Testing & Coverage
   test.dart:
