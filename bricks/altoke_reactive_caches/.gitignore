@@ -1,2 +1,11 @@
-# Generated source files
-/**/__brick__/**/brick-gen.json
+# See https://www.dartlang.org/guides/libraries/private-files
+
+# Files and directories created by pub
+/.dart_tool/
+/.packages
+/build/
+/pubspec.lock
+
+# Testing
+/coverage/
+

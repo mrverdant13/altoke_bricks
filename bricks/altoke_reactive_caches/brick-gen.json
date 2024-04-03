@@ -1,5 +1,5 @@
 {
-  "targetRelativePath": "../brick/__brick__/reactive_caches",
+  "targetRelativePath": "brick/__brick__/reactive_caches",
   "replacements": [
     {
       "from": "altoke_common",
