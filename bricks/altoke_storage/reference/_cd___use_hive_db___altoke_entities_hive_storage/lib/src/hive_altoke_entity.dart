@@ -106,51 +106,6 @@ extension MappableNewAltokeEntity on NewAltokeEntity {
   }
 }
 
-/// An extension on [PartialAltokeEntity] to add mapping capabilities.
-extension MappablePartialAltokeEntity on PartialAltokeEntity {
-  /// Converts this [PartialAltokeEntity] to a [HivePartialAltokeEntity].
-  HivePartialAltokeEntity toHive() => HivePartialAltokeEntity.fromEntity(this);
-
-  /// Converts this [PartialAltokeEntity] to its Hive JSON representation.
-  Json toHiveJson() => toHive().toJson();
-}
-
-/// {@template altoke_entities_hive_storage.hive_partial_altoke_entity}
-/// A Hive representation of a partial Altoke Entity.
-/// {@endtemplate}
-class HivePartialAltokeEntity {
-  /// {@macro altoke_entities_hive_storage.hive_partial_altoke_entity}
-  const HivePartialAltokeEntity({
-    this.name = const Optional.none(),
-    this.description = const Optional.none(),
-  });
-
-  /// Creates a [HivePartialAltokeEntity] from a [PartialAltokeEntity].
-  factory HivePartialAltokeEntity.fromEntity(
-    PartialAltokeEntity partialAltokeEntity,
-  ) {
-    return HivePartialAltokeEntity(
-      name: partialAltokeEntity.name,
-      description: partialAltokeEntity.description,
-    );
-  }
-
-  /// The name for the altoke entity.
-  final Optional<String> name;
-
-  /// The description for the altoke entity.
-  final Optional<String?> description;
-
-  /// Converts this [HivePartialAltokeEntity] to its JSON representation.
-  Json toJson() {
-    return {
-      if (name case Some(:final value)) HiveAltokeEntity.nameJsonKey: value,
-      if (description case Some(:final value))
-        HiveAltokeEntity.descriptionJsonKey: value,
-    };
-  }
-}
-
 /// An altoke entity entry.
 typedef AltokeEntityEntry = MapEntry<dynamic, Map<dynamic, dynamic>>;
 

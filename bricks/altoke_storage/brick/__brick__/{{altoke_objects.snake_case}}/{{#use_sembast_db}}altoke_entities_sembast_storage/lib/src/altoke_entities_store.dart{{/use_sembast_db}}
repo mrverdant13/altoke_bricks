@@ -184,13 +184,4 @@ abstract class AltokeEntitiesFilter {
     if (validFilters.isEmpty) return noFilter;
     return Filter.and([...validFilters]);
   }
-
-  /// A filter that combines the given [filters] to match any of them.
-  static Filter orAll(
-    Iterable<Filter> filters,
-  ) {
-    final validFilters = filters.whereNotNull();
-    if (validFilters.isEmpty) return noFilter;
-    return Filter.or([...validFilters]);
-  }
 }
