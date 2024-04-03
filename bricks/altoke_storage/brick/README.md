@@ -1,4 +1,4 @@
-# Altoke Entity
+# Altoke Storage
 
 <p align="center">
   <p align="center">
@@ -39,18 +39,19 @@
 
 ---
 
-## Altoke Entity
+## Altoke Storage
 
-Create an entity, **_al toque_** (_quickly_).
+Create a storage, **_al toque_** (_quickly_).
 
 ## Features
 
-- **Value equality:**\
+- **Data persistence:**\
   Supported with one of the following packages:
-    - [`dart_mappable`][pub_package_dart_mappable] with code generation.
-    - [`equatable`][pub_package_equatable] without code generation.
-    - [`freezed`][pub_package_freezed] with code generation.
-    <!-- TODO(mrverdant13): Include overrides approach -->
+    - [`hive`][pub_package_hive]
+    - [`isar`][pub_package_isar]
+    - [`realm`][pub_package_realm]
+    - [`sembast`][pub_package_sembast]
+    - [`drift`][pub_package_drift]
 
 - **Strict lint rules:**\
   Enforced by [`very_good_analysis`][pub_package_very_good_analysis] for [native Dart & Flutter rules][docs_dart_and_flutter_linter_rules_link].
@@ -61,7 +62,9 @@ Create an entity, **_al toque_** (_quickly_).
 <!-- LINKS -->
 
 [docs_dart_and_flutter_linter_rules_link]: https://dart.dev/tools/linter-rules
-[pub_package_dart_mappable]: https://pub.dev/packages/dart_mappable
-[pub_package_equatable]: https://pub.dev/packages/equatable
-[pub_package_freezed]: https://pub.dev/packages/freezed
+[pub_package_hive]: https://pub.dev/packages/hive
+[pub_package_isar]: https://pub.dev/packages/isar
+[pub_package_realm]: https://pub.dev/packages/realm
+[pub_package_sembast]: https://pub.dev/packages/sembast
+[pub_package_drift]: https://pub.dev/packages/drift
 [pub_package_very_good_analysis]: https://pub.dev/packages/very_good_analysis

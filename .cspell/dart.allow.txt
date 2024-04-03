@@ -2,7 +2,6 @@
 autoincrement
 endtemplate
 insertable
-isar
 mocktail
 nodoc
 rxdart

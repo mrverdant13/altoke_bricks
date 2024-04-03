@@ -3,6 +3,7 @@ altoke
 ansi
 coverde
 github
+isar
 lcov
 linux
 melos
