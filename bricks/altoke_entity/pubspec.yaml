@@ -1,0 +1,7 @@
+name: altoke_entity_brick_scope
+description: Altoke Entity Brick Scope
+version: 0.0.1+1
+publish_to: none
+
+environment:
+  sdk: ">=3.3.1 <4.0.0"

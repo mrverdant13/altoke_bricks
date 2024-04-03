@@ -10,35 +10,50 @@ import 'package:path/path.dart' as path;
 Future<void> main(List<String> args) async {
   if (args.isEmpty) {
     throw Exception(
-      'Reference path not found. '
+      'Brick scope path not found. '
       'Provide it as the first argument.',
     );
   }
-  final referenceDir = Directory(args.first);
-  if (!referenceDir.existsSync()) {
-    throw Exception(
-      'Reference directory not found.',
-    );
-  }
+  final scopeDir = Directory(args.first);
   final brickGenDataFile = File(
     path.join(
-      referenceDir.path,
+      scopeDir.path,
       'brick-gen.json',
     ),
   );
   if (!brickGenDataFile.existsSync()) {
     throw Exception(
-      'Invalid reference directory. '
+      'Invalid brick scope directory. '
       'Brick generation data file not found. ',
     );
   }
-  final rawBrickGenData = await brickGenDataFile.readAsString();
-  final brickGenDataJson = jsonDecode(rawBrickGenData) as Map<String, dynamic>;
-  final brickGenOptions = BrickGenOptions.fromJson(brickGenDataJson);
+  late final BrickGenOptions brickGenOptions;
+  try {
+    final rawBrickGenData = await brickGenDataFile.readAsString();
+    final brickGenDataJson =
+        jsonDecode(rawBrickGenData) as Map<String, dynamic>;
+    brickGenOptions = BrickGenOptions.fromJson(brickGenDataJson);
+  } catch (e) {
+    throw Exception(
+      'Invalid brick generation data file. '
+      'Error: $e',
+    );
+  }
+  final referenceDir = Directory(
+    path.joinAll([
+      scopeDir.path,
+      'reference',
+    ]),
+  );
+  if (!referenceDir.existsSync()) {
+    throw Exception(
+      'Reference directory not found.',
+    );
+  }
   final brickTemplateDir = Directory(
     path.normalize(
       path.joinAll([
-        referenceDir.path,
+        scopeDir.path,
         brickGenOptions.targetRelativePath,
       ]),
     ),
