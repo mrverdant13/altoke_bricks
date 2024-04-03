@@ -20,15 +20,15 @@ mixin _$FOptional<T extends Object?> {}
 /// @nodoc
 
 class _$FSomeImpl<T extends Object?> extends FSome<T> {
-  const _$FSomeImpl(this.some) : super._();
+  const _$FSomeImpl(this.value) : super._();
 
   /// The underlying value.
   @override
-  final T some;
+  final T value;
 
   @override
   String toString() {
-    return 'FOptional<$T>.some(some: $some)';
+    return 'FOptional<$T>.some(value: $value)';
   }
 
   @override
@@ -36,20 +36,20 @@ class _$FSomeImpl<T extends Object?> extends FSome<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FSomeImpl<T> &&
-            const DeepCollectionEquality().equals(other.some, some));
+            const DeepCollectionEquality().equals(other.value, value));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(some));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(value));
 }
 
 abstract class FSome<T extends Object?> extends FOptional<T> {
-  const factory FSome(final T some) = _$FSomeImpl<T>;
+  const factory FSome(final T value) = _$FSomeImpl<T>;
   const FSome._() : super._();
 
   /// The underlying value.
-  T get some;
+  T get value;
 }
 
 /// @nodoc
