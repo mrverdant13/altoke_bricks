@@ -13,7 +13,7 @@ class FOptional<T extends Object?> with _$FOptional<T> {
   /// Creates an [FOptional] with a present value.
   const factory FOptional.some(
     /// The underlying value.
-    T some,
+    T value,
   ) = FSome<T>;
 
   /// Creates an [FOptional] with an absent value.

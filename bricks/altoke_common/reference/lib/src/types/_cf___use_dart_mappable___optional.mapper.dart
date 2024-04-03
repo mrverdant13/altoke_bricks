@@ -82,10 +82,8 @@ mixin DmSomeMappable<T extends Object?> {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (runtimeType == other.runtimeType &&
-            DmSomeMapper.ensureInitialized()
-                .isValueEqual(this as DmSome<T>, other));
+    return DmSomeMapper.ensureInitialized()
+        .equalsValue(this as DmSome<T>, other);
   }
 
   @override
@@ -131,10 +129,8 @@ mixin DmNoneMappable<T extends Object?> {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) ||
-        (runtimeType == other.runtimeType &&
-            DmNoneMapper.ensureInitialized()
-                .isValueEqual(this as DmNone<T>, other));
+    return DmNoneMapper.ensureInitialized()
+        .equalsValue(this as DmNone<T>, other);
   }
 
   @override
