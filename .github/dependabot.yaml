@@ -38,15 +38,6 @@ updates:
       - p:brick
       - test
   - package-ecosystem: pub
-    directory: /packages/brick_generator/
-    schedule:
-      interval: daily
-    reviewers:
-      - mrverdant13
-    labels:
-      - build
-      - p:bg
-  - package-ecosystem: pub
     directory: /packages/reference_app/
     schedule:
       interval: daily
@@ -154,3 +145,13 @@ updates:
     labels:
       - build
       - p:ref
+  # Tools
+  - package-ecosystem: pub
+    directory: /tools/brick_generator/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - t:brick-gen
