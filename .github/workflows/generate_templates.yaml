@@ -24,7 +24,7 @@ jobs:
         id: identify-brick-scopes
         run: echo "scopes=$(melos list --scope='*_brick_scope' --json | tr -d '\n')" >> "$GITHUB_OUTPUT"
       - name: List identified scopes
-        run: echo "${{ steps.identify-brick-scopes.outputs.scopes.*.name }}"
+        run: echo "${{ join(steps.identify-brick-scopes.outputs.scopes.*.name, ', ') }}"
   generate-templates:
     name: Generate templates for the identified scopes
     runs-on: ubuntu-latest
@@ -62,14 +62,14 @@ jobs:
           base: main
           add-paths: |
             ./bricks/${{ steps.build-brick-name.outputs.brick-name }}/brick/__brick__/**
-          branch: chore/${{ steps.build-brick-name.outputs.brick-tag-name }}/update-template
-          commit-message: 'chore(b-${{ steps.build-brick-name.outputs.brick-tag-name }}): update template'
-          title: 'chore(b-${{ steps.build-brick-name.outputs.brick-tag-name }}): update template'
+          branch: chore/${{ steps.build-brick-tag-name.outputs.brick-tag-name }}/update-template
+          commit-message: 'chore(b-${{ steps.build-brick-tag-name.outputs.brick-tag-name }}): update template'
+          title: 'chore(b-${{ steps.build-brick-tag-name.outputs.brick-tag-name }}): update template'
           body: Update template.
           delete-branch: true
           labels: |
             bot
-            b: ${{ steps.build-brick-name.outputs.brick-tag-name }}
+            b:${{ steps.build-brick-tag-name.outputs.brick-tag-name }}
           author: Altoke Bot <altoke.bot@users.noreply.github.com>
           committer: Altoke Bot <altoke.bot@users.noreply.github.com>
           assignees: mrverdant13
