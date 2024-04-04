@@ -22,7 +22,7 @@ jobs:
         run: melos bs
       - name: Identify brick scopes
         id: identify-brick-scopes
-        run: echo "scopes=$(melos list --scope='*_brick_scope' --json)" >> "$GITHUB_OUTPUT"
+        run: echo "scopes=$(melos list --scope='*_brick_scope' --json | tr -d '\n')" >> "$GITHUB_OUTPUT"
   generate-templates:
     name: Generate templates for the identified scopes
     runs-on: ubuntu-latest
