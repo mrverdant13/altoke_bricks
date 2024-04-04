@@ -201,7 +201,7 @@ scripts:
       coverde check -i MELOS_ROOT_PATH/coverage/filtered.lcov.info 100
 
   # Brick management
-  brick.gen.new:
+  brick.gen:
     description: Generate brick
     run: >
       dart run MELOS_ROOT_PATH/tools/brick_generator/lib/main.dart MELOS_PACKAGE_PATH
@@ -210,9 +210,6 @@ scripts:
     packageFilters:
       scope:
         - "*_brick_scope"
-  brick.gen:
-    description: Generate brick
-    run: dart run MELOS_ROOT_PATH/packages/brick_generator/lib/main.dart
   brick.install:
     description: Add brick globally
     run: mason add -g altoke_app --path MELOS_ROOT_PATH/packages/brick/

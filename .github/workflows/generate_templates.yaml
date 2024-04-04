@@ -1,0 +1,74 @@
+name: generate_templates
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  identify-brick-scopes:
+    name: Identify brick scopes
+    runs-on: ubuntu-latest
+    outputs:
+      scopes: ${{ steps.identify-brick-scopes.outputs.scopes }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.19.3
+      - name: Install melos
+        run: dart pub global activate melos 4.1.0
+      - name: Initialize melos
+        run: melos bs
+      - name: Identify brick scopes
+        id: identify-brick-scopes
+        run: echo "scopes=$(melos list --scope='*_brick_scope' --json)" >> "$GITHUB_OUTPUT"
+  generate-templates:
+    name: Generate templates for the identified scopes
+    runs-on: ubuntu-latest
+    needs: identify-brick-scopes
+    strategy:
+      matrix:
+        scope: ${{fromJson(needs.identify-brick-scopes.outputs.scopes)}}
+    steps:
+      - name: Build brick scope name
+        id: build-brick-scope-name
+        run: echo "brick-scope-name=$(echo ${{ matrix.scope.name }})" >> "$GITHUB_OUTPUT"
+      - name: Build brick name
+        id: build-brick-name
+        run: echo "brick-name=$(echo ${{ steps.build-brick-scope-name.outputs.brick-scope-name }} | sed 's/_brick_scope//g')" >> "$GITHUB_OUTPUT"
+      - name: Build brick tag name
+        id: build-brick-tag-name
+        run: echo "brick-tag-name=$(echo ${{ steps.build-brick-name.outputs.brick-name }} | sed 's/_/-/g')" >> "$GITHUB_OUTPUT"
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.19.3
+      - name: Install melos
+        run: dart pub global activate melos 4.1.0
+      - name: Set relevant packages
+        run: echo "MELOS_PACKAGES='brick_generator,${{ steps.build-brick-scope-name.outputs.brick-scope-name }}'" >> "$GITHUB_ENV"
+      - name: Initialize melos
+        run: melos bs
+      - name: Generate template
+        run: melos run brick.gen
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v5
+        with:
+          base: main
+          add-paths: |
+            ./bricks/${{ steps.build-brick-name.outputs.brick-name }}/brick/__brick__/**
+          branch: chore/${{ steps.build-brick-name.outputs.brick-tag-name }}/update-template
+          commit-message: 'chore(b-${{ steps.build-brick-name.outputs.brick-tag-name }}): update template'
+          title: 'chore(b-${{ steps.build-brick-name.outputs.brick-tag-name }}): update template'
+          body: Update template.
+          delete-branch: true
+          labels: |
+            bot
+            b: ${{ steps.build-brick-name.outputs.brick-tag-name }}
+          author: Altoke Bot <altoke.bot@users.noreply.github.com>
+          committer: Altoke Bot <altoke.bot@users.noreply.github.com>
+          assignees: mrverdant13
+          reviewers: mrverdant13
