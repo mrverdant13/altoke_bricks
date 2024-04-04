@@ -1,0 +1,36 @@
+name: altoke_entities_sqlite_storage
+description: A persistent storage for Altoke Entities built on top of SQLite.
+version: 0.0.1+1
+publish_to: none
+
+environment:
+  sdk: ">=3.3.1 <4.0.0"
+
+dependencies:
+  altoke_common:
+    #*w 1v 4> w*#
+    #*replace-start*#
+    path: ../../../altoke_common/reference/
+    #*with*#
+    # path: ../../common/
+    #*replace-end*#
+  #*w 1v 2> w*#
+  altoke_entities_storage:
+    path: ../altoke_entities_storage/
+  altoke_entity:
+    #*w 1v 4> w*#
+    #*replace-start*#
+    path: ../../../altoke_entity/reference/
+    #*with*#
+    # path: ../../altoke_entity/
+    #*replace-end*#
+  #*w 1v 2> w*#
+  collection: ^1.18.0
+  drift: ^2.16.0
+  meta: ^1.11.0
+
+dev_dependencies:
+  build_runner: ^2.4.8
+  drift_dev: ^2.16.0
+  test: ^1.25.2
+  very_good_analysis: ^5.1.0

@@ -1,0 +1,7 @@
+name: altoke_reactive_caches_brick_scope
+description: Altoke Reactive Caches Brick Scope
+version: 0.0.1+1
+publish_to: none
+
+environment:
+  sdk: ">=3.3.1 <4.0.0"
