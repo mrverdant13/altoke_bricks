@@ -51,7 +51,7 @@ jobs:
       - name: Install melos
         run: dart pub global activate melos 5.3.0
       - name: Set relevant packages
-        run: echo "MELOS_PACKAGES='brick_generator,${{ steps.build-brick-scope-name.outputs.brick-scope-name }}'" >> "$GITHUB_ENV"
+        run: echo "MELOS_PACKAGES=brick_generator,${{ steps.build-brick-scope-name.outputs.brick-scope-name }}" >> "$GITHUB_ENV"
       - name: Initialize melos
         run: melos bs
       - name: Generate template
