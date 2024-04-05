@@ -1,0 +1,57 @@
+{
+  "targetRelativePath": "brick/__brick__/{{altoke_objects.snake_case}}",
+  "replacements": [
+    {
+      "from": "altoke_entity",
+      "to": "altoke_object"
+    },
+    {
+      "from": "altokeObject",
+      "to": "{{object.camelCase()}}"
+    },
+    {
+      "from": "altoke object",
+      "to": "{{object.lowerCase()}}"
+    },
+    {
+      "from": "AltokeObject",
+      "to": "{{object.pascalCase()}}"
+    },
+    {
+      "from": "Altoke object",
+      "to": "{{object.sentenceCase()}}"
+    },
+    {
+      "from": "altoke_object",
+      "to": "{{object.snakeCase()}}"
+    },
+    {
+      "from": "Altoke Object",
+      "to": "{{object.titleCase()}}"
+    },
+    {
+      "from": "altokeObjects",
+      "to": "{{objects.camelCase()}}"
+    },
+    {
+      "from": "altoke objects",
+      "to": "{{objects.lowerCase()}}"
+    },
+    {
+      "from": "AltokeObjects",
+      "to": "{{objects.pascalCase()}}"
+    },
+    {
+      "from": "Altoke objects",
+      "to": "{{objects.sentenceCase()}}"
+    },
+    {
+      "from": "altoke_objects",
+      "to": "{{objects.snakeCase()}}"
+    },
+    {
+      "from": "Altoke Objects",
+      "to": "{{objects.titleCase()}}"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+name: altoke_common
+description: A set of common elements used across projects.
+version: 0.0.1
+
+environment:
+  mason: ">=0.1.0-dev.50 <0.1.0"
+
+vars:
+  value_equality_approach:
+    type: enum
+    values:
+      - dart_mappable
+      - equatable
+      - freezed
+      - overrides
+    description: The approach to use for value equality.
+    default: dart_mappable
+    prompt: "What approach to use for value equality?"

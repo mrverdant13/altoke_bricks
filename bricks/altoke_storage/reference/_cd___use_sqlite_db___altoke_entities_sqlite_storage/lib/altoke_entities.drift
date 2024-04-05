@@ -1,0 +1,10 @@
+CREATE TABLE altoke_entities (
+    id INT NOT NULL PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    description TEXT
+);
+
+add: INSERT INTO altoke_entities (name, description) VALUES (:name, :description);
+deleteById: DELETE FROM altoke_entities WHERE id = :id;
+insert: INSERT INTO altoke_entities (id, name, description) VALUES (:id, :name, :description);
+getById: SELECT * FROM altoke_entities WHERE id = :id;

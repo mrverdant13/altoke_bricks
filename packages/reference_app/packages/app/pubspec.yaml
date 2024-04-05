@@ -4,8 +4,8 @@ publish_to: none
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.2.6 <4.0.0"
-  flutter: ^3.16.9
+  sdk: ">=3.3.1 <4.0.0"
+  flutter: ">=3.19.3 <4.0.0"
 
 dependencies:
   #*w 1v 2> w*#
@@ -17,7 +17,7 @@ dependencies:
     path: ../common/
   #*w 1v 2> w*#
   #{{#use_sqlite_database}}#
-  drift: ^2.15.0
+  drift: ^2.16.0
   #*w 1v 2> w*#
   #{{/use_sqlite_database}}#
   element_in_memory_cache:
@@ -29,7 +29,7 @@ dependencies:
   flutter_riverpod: ^2.4.10
   #*w 1v 2> w*#
   #{{#use_go_router_router}}#
-  go_router: ^13.1.0
+  go_router: ^13.2.0
   #*w 1v 2> w*#
   #{{/use_go_router_router}}#
   #{{#use_hive_database}}#
@@ -44,7 +44,7 @@ dependencies:
   #*w 1v 2> w*#
   #{{/use_isar_database}}#
   json_annotation: ^4.8.1
-  meta: ^1.10.0
+  meta: ^1.11.0
   path: ^1.8.3
   path_provider: ^2.1.2
   reactive_forms: ^16.1.1
@@ -61,7 +61,7 @@ dependencies:
   #*w 1v 2> w*#
   #{{/use_sembast_database}}#
   #{{#use_sqlite_database}}#
-  sqlite3: ^2.3.0
+  sqlite3: ^2.4.0
   sqlite3_flutter_libs: ^0.5.20
   #*w 1v 2> w*#
   #{{/use_sqlite_database}}#
@@ -107,10 +107,10 @@ dev_dependencies:
   #*w 1v 2> w*#
   #{{/use_auto_route_router}}#
   build_runner: ^2.4.8
-  custom_lint: ^0.6.0
+  custom_lint: ^0.6.2
   #*w 1v 2> w*#
   #{{#use_sqlite_database}}#
-  drift_dev: ^2.15.0
+  drift_dev: ^2.16.0
   #*w 1v 2> w*#
   #{{/use_sqlite_database}}#
   flutter_test:

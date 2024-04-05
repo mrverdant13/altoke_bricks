@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:altoke_app/app/app.dart';
 import 'package:altoke_app/external/external.dart';
 import 'package:altoke_app/routing/routing.dart';
+/*{{#use_hive_database}}*/
 import 'package:altoke_app/tasks/tasks.dart';
+/*{{/use_hive_database}}*/
 /*{{#use_sqlite_database}}*/
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';

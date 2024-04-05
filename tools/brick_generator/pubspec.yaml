@@ -1,0 +1,13 @@
+name: brick_generator
+description: A generator for bricks.
+publish_to: none
+
+environment:
+  sdk: ">=3.3.1 <4.0.0"
+
+dependencies:
+  meta: ^1.11.0
+  path: ^1.9.0
+
+dev_dependencies:
+  very_good_analysis: ^5.1.0

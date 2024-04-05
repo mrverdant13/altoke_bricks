@@ -180,8 +180,25 @@ ${description.trim()}
           directoryGeneratorTarget.dir.path,
           projectName,
         );
+        final analyzeResult = await runCommand(
+          'melos run analyze.ci',
+          projectPath: applicationPath,
+          prefix: '🔍',
+          startMessage: 'Analyzing project.',
+          successMessage: 'Project analysis complete!',
+          failureMessage: 'Project analysis failed!',
+        );
+        expect(
+          analyzeResult,
+          isSuccessfulProcessResult,
+          reason: [
+            'Project analysis failed',
+            '${analyzeResult.stdout}',
+            '${analyzeResult.stderr}',
+          ].join('\n'),
+        );
         final testResult = await runCommand(
-          'melos run T',
+          'melos run test.ci',
           projectPath: applicationPath,
           prefix: '🧪 ',
           startMessage: 'Running tests.',
@@ -191,10 +208,14 @@ ${description.trim()}
         expect(
           testResult,
           isSuccessfulProcessResult,
-          reason: 'Tests failed\n${testResult.stdout}',
+          reason: [
+            'Tests failed',
+            '${testResult.stdout}',
+            '${testResult.stderr}',
+          ].join('\n'),
         );
         final coverageMergingResult = await runCommand(
-          'melos run M',
+          'melos run coverage.merge',
           projectPath: applicationPath,
           prefix: '📃 ',
           startMessage: 'Gathering test coverage.',
@@ -207,7 +228,7 @@ ${description.trim()}
           reason: 'Coverage gathering failed',
         );
         final coverageCheckResult = await runCommand(
-          'melos run C',
+          'melos run coverage.check',
           projectPath: applicationPath,
           prefix: '🕵🏻 ',
           startMessage: 'Checking test coverage.',

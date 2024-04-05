@@ -1,0 +1,62 @@
+import 'package:common/common.dart';
+import 'package:dart_mappable/dart_mappable.dart';
+
+part '{{entity_singular.snakeCase()}}.mapper.dart';
+
+/// {@template {{entity_singular.snakeCase()}}.{{entity_singular.snakeCase()}}}
+/// {{entity_singular.sentenceCase()}}.
+/// {@endtemplate}
+@MappableClass()
+class {{entity_singular.pascalCase()}} with {{entity_singular.pascalCase()}}Mappable {
+  /// {@macro {{entity_singular.snakeCase()}}.{{entity_singular.snakeCase()}}}
+  const {{entity_singular.pascalCase()}}({
+    required this.id,
+    required this.name,
+    this.description,
+  });
+
+  /// The ID of this {{entity_singular.lowerCase()}}.
+  final int id;
+
+  /// The name of this {{entity_singular.lowerCase()}}.
+  final String name;
+
+  /// The description of this {{entity_singular.lowerCase()}}.
+  final String? description;
+}
+
+/// {@template {{entity_singular.snakeCase()}}.new_{{entity_singular.snakeCase()}}}
+/// A new {{entity_singular.lowerCase()}}.
+/// {@endtemplate}
+@MappableClass()
+class New{{entity_singular.pascalCase()}} with New{{entity_singular.pascalCase()}}Mappable {
+  /// {@macro {{entity_singular.snakeCase()}}.new_{{entity_singular.snakeCase()}}}
+  const New{{entity_singular.pascalCase()}}({
+    required this.name,
+    this.description,
+  });
+
+  /// The name of the new {{entity_singular.lowerCase()}}.
+  final String name;
+
+  /// The description of the new {{entity_singular.lowerCase()}}.
+  final String? description;
+}
+
+/// {@template {{entity_singular.snakeCase()}}.partial_{{entity_singular.snakeCase()}}}
+/// A partial {{entity_singular.lowerCase()}}.
+/// {@endtemplate}
+@MappableClass()
+class Partial{{entity_singular.pascalCase()}} with Partial{{entity_singular.pascalCase()}}Mappable {
+  /// {@macro {{entity_singular.snakeCase()}}.partial_{{entity_singular.snakeCase()}}}
+  const Partial{{entity_singular.pascalCase()}}({
+    this.name = const Optional.none(),
+    this.description = const Optional.none(),
+  });
+
+  /// The optional name for the {{entity_singular.lowerCase()}}.
+  final Optional<String> name;
+
+  /// The optional description for the {{entity_singular.lowerCase()}}.
+  final Optional<String?> description;
+}

@@ -4,12 +4,12 @@ version: 0.0.1+1
 publish_to: none
 
 environment:
-  sdk: ">=3.2.6 <4.0.0"
+  sdk: ">=3.3.1 <4.0.0"
 
 dependencies:
   common:
     path: ../../common/
-  meta: ^1.10.0
+  meta: ^1.11.0
   sembast: ^3.6.0
   tasks:
     path: ../../tasks/

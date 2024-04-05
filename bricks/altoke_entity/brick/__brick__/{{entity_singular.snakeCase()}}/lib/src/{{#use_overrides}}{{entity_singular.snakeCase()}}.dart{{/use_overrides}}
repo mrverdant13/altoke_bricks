@@ -1,0 +1,142 @@
+import 'package:common/common.dart';
+import 'package:meta/meta.dart';
+
+/// {@template {{entity_singular.snakeCase()}}.{{entity_singular.snakeCase()}}}
+/// {{entity_singular.sentenceCase()}}.
+/// {@endtemplate}
+@immutable
+class {{entity_singular.pascalCase()}} {
+  /// {@macro {{entity_singular.snakeCase()}}.{{entity_singular.snakeCase()}}}
+  const {{entity_singular.pascalCase()}}({
+    required this.id,
+    required this.name,
+    this.description,
+  });
+
+  /// The ID of this {{entity_singular.lowerCase()}}.
+  final int id;
+
+  /// The name of this {{entity_singular.lowerCase()}}.
+  final String name;
+
+  /// The description of this {{entity_singular.lowerCase()}}.
+  final String? description;
+
+  @override
+  String toString() =>
+      '{{entity_singular.pascalCase()}}(id: $id, name: $name, description: $description)';
+
+  @override
+  bool operator ==(covariant {{entity_singular.pascalCase()}} other) {
+    if (identical(this, other)) return true;
+    return other.id == id &&
+        other.name == name &&
+        other.description == description;
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ id.hashCode ^ name.hashCode ^ description.hashCode;
+
+  /// Returns a copy of this [{{entity_singular.pascalCase()}}] with the given fields replaced by
+  /// the new values.
+  {{entity_singular.pascalCase()}} copyWith({
+    int? id,
+    String? name,
+    String? Function()? description,
+  }) {
+    return {{entity_singular.pascalCase()}}(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      description: (description ?? () => this.description)(),
+    );
+  }
+}
+
+/// {@template {{entity_singular.snakeCase()}}.new_{{entity_singular.snakeCase()}}}
+/// A new {{entity_singular.lowerCase()}}.
+/// {@endtemplate}
+@immutable
+class New{{entity_singular.pascalCase()}} {
+  /// {@macro {{entity_singular.snakeCase()}}.new_{{entity_singular.snakeCase()}}}
+  const New{{entity_singular.pascalCase()}}({
+    required this.name,
+    this.description,
+  });
+
+  /// The name of the new {{entity_singular.lowerCase()}}.
+  final String name;
+
+  /// The description of the new {{entity_singular.lowerCase()}}.
+  final String? description;
+
+  @override
+  String toString() =>
+      'New{{entity_singular.pascalCase()}}(name: $name, description: $description)';
+
+  @override
+  bool operator ==(covariant New{{entity_singular.pascalCase()}} other) {
+    if (identical(this, other)) return true;
+    return other.name == name && other.description == description;
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ name.hashCode ^ description.hashCode;
+
+  /// Returns a copy of this [New{{entity_singular.pascalCase()}}] with the given fields replaced
+  /// by the new values.
+  New{{entity_singular.pascalCase()}} copyWith({
+    String? name,
+    String? Function()? description,
+  }) {
+    return New{{entity_singular.pascalCase()}}(
+      name: name ?? this.name,
+      description: (description ?? () => this.description)(),
+    );
+  }
+}
+
+/// {@template {{entity_singular.snakeCase()}}.partial_{{entity_singular.snakeCase()}}}
+/// A partial {{entity_singular.lowerCase()}}.
+/// {@endtemplate}
+@immutable
+class Partial{{entity_singular.pascalCase()}} {
+  /// {@macro {{entity_singular.snakeCase()}}.partial_{{entity_singular.snakeCase()}}}
+  const Partial{{entity_singular.pascalCase()}}({
+    this.name = const Optional.none(),
+    this.description = const Optional.none(),
+  });
+
+  /// The optional name for the {{entity_singular.lowerCase()}}.
+  final Optional<String> name;
+
+  /// The optional description for the {{entity_singular.lowerCase()}}.
+  final Optional<String?> description;
+
+  @override
+  String toString() =>
+      'Partial{{entity_singular.pascalCase()}}(name: $name, description: $description)';
+
+  @override
+  bool operator ==(covariant Partial{{entity_singular.pascalCase()}} other) {
+    if (identical(this, other)) return true;
+    return other.name == name && other.description == description;
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ name.hashCode ^ description.hashCode;
+
+  /// Returns a copy of this [Partial{{entity_singular.pascalCase()}}] with the given fields
+  /// replaced by the new values.
+  Partial{{entity_singular.pascalCase()}} copyWith({
+    Optional<String>? name,
+    Optional<String?>? description,
+  }) {
+    return Partial{{entity_singular.pascalCase()}}(
+      name: name ?? this.name,
+      description: description ?? this.description,
+    );
+  }
+}

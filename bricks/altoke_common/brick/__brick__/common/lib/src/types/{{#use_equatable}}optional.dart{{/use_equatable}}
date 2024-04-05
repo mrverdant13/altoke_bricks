@@ -1,0 +1,43 @@
+import 'package:dart_mappable/dart_mappable.dart';
+import 'package:equatable/equatable.dart';
+
+/// {@template common.optional}
+/// A representation of an optional value.
+/// {@endtemplate}
+sealed class Optional<T extends Object?> extends Equatable {
+  /// {@macro common.optional}
+  const Optional();
+
+  /// Creates an [Optional] with a present value.
+  const factory Optional.some(T value) = ESome<T>;
+
+  /// Creates an [Optional] with an absent value.
+  const factory Optional.none() = ENone<T>;
+}
+
+/// {@template common.some}
+/// A representation of a present value.
+/// {@endtemplate}
+@MappableClass()
+class ESome<T extends Object?> extends Optional<T> {
+  /// {@macro common.some}
+  const ESome(this.value);
+
+  /// The underlying value.
+  final T value;
+
+  @override
+  List<Object?> get props => [value];
+}
+
+/// {@template common.none}
+/// A representation of an absent value.
+/// {@endtemplate}
+@MappableClass()
+class ENone<T extends Object?> extends Optional<T> {
+  /// {@macro common.none}
+  const ENone();
+
+  @override
+  List<Object?> get props => [];
+}
