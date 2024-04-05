@@ -10,11 +10,12 @@ import 'package:path/path.dart' as path;
 Future<void> main(List<String> args) async {
   if (args.isEmpty) {
     throw Exception(
-      'Brick scope path not found. '
+      'The brick scope path is required. '
       'Provide it as the first argument.',
     );
   }
   final scopeDir = Directory(args.first);
+  stdout.writeln('Brick scope path: ${scopeDir.path}');
   final brickGenDataFile = File(
     path.join(
       scopeDir.path,
@@ -24,9 +25,10 @@ Future<void> main(List<String> args) async {
   if (!brickGenDataFile.existsSync()) {
     throw Exception(
       'Invalid brick scope directory. '
-      'Brick generation data file not found. ',
+      'Brick generation data file not found (${brickGenDataFile.path}). ',
     );
   }
+  stdout.writeln('Brick generation data file: ${brickGenDataFile.path}');
   late final BrickGenOptions brickGenOptions;
   try {
     final rawBrickGenData = await brickGenDataFile.readAsString();
@@ -47,9 +49,10 @@ Future<void> main(List<String> args) async {
   );
   if (!referenceDir.existsSync()) {
     throw Exception(
-      'Reference directory not found.',
+      'Reference directory not found (${referenceDir.path}).',
     );
   }
+  stdout.writeln('Reference directory: ${referenceDir.path}');
   final brickTemplateDir = Directory(
     path.normalize(
       path.joinAll([
@@ -58,15 +61,13 @@ Future<void> main(List<String> args) async {
       ]),
     ),
   );
+  stdout.writeln('Brick template directory: ${brickTemplateDir.path}');
   final brickGenData = BrickGenData.fromOptions(
     referenceAbsolutePath: referenceDir.path,
     targetAbsolutePath: brickTemplateDir.path,
     options: brickGenOptions,
   );
-  stdout
-    ..writeln('Generating brick template...')
-    ..writeln('Reference path: ${brickGenData.referenceAbsolutePath}')
-    ..writeln('Brick path: ${brickGenData.targetAbsolutePath}');
+  stdout.writeln('Generating brick template...');
 
   // Remove target directory.
   if (brickTemplateDir.existsSync()) {
