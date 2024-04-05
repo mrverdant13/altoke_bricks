@@ -211,6 +211,8 @@ scripts:
     exec:
       concurrency: 1
     packageFilters:
+      ignore:
+        - brick_generator
       scope:
         - "*_brick_scope"
   brick.install:
