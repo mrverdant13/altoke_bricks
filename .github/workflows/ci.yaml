@@ -4,13 +4,15 @@ on:
   pull_request:
     branches:
       - main
-    paths-ignore:
-      - 'packages/brick/*.md'
+    paths:
+      - '!.github/**'
+      - '.github/workflows/ci.yaml'
   push:
     branches:
       - main
-    paths-ignore:
-      - 'packages/brick/*.md'
+    paths:
+      - '!.github/**'
+      - '.github/workflows/ci.yaml'
 
 jobs:
   min-conditions:
