@@ -4,13 +4,13 @@ on:
   pull_request:
     branches:
       - main
-    paths-ignore:
-      - 'packages/brick/*.md'
+    paths:
+      - '!.github/**'
   push:
     branches:
       - main
-    paths-ignore:
-      - 'packages/brick/*.md'
+    paths:
+      - '!.github/**'
 
 jobs:
   min-conditions:
