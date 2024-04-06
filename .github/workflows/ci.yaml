@@ -6,11 +6,13 @@ on:
       - main
     paths:
       - '!.github/**'
+      - '.github/workflows/ci.yaml'
   push:
     branches:
       - main
     paths:
       - '!.github/**'
+      - '.github/workflows/ci.yaml'
 
 jobs:
   min-conditions:
