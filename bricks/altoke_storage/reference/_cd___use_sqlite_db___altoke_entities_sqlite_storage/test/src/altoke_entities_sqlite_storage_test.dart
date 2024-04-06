@@ -13,7 +13,8 @@ import 'package:test/test.dart';
 class FakeDatabase extends GeneratedDatabase {
   FakeDatabase(super.executor);
 
-  late final DriftAltokeEntitiesTable tasks = DriftAltokeEntitiesTable(this);
+  late final DriftAltokeEntitiesTable altokeEntities =
+      DriftAltokeEntitiesTable(this);
 
   @override
   Iterable<TableInfo<Table, dynamic>> get allTables =>
@@ -21,7 +22,7 @@ class FakeDatabase extends GeneratedDatabase {
 
   @override
   Iterable<DatabaseSchemaEntity> get allSchemaEntities => [
-        tasks,
+        altokeEntities,
       ];
 
   @override

@@ -150,7 +150,7 @@ class AltokeEntitiesSqliteStorage implements AltokeEntitiesStorage {
       return;
     }
     await altokeEntitiesTable.deleteWhere(
-      (tasks) => tasks.matchesPartial(referenceAltokeEntity),
+      (altokeEntities) => altokeEntities.matchesPartial(referenceAltokeEntity),
     );
   }
 }
