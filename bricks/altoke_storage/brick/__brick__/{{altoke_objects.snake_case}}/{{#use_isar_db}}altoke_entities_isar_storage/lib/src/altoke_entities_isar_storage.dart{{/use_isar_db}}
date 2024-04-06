@@ -6,20 +6,20 @@ import 'package:collection/collection.dart';
 import 'package:isar/isar.dart';
 import 'package:meta/meta.dart';
 
-/// {@template tasks_isar_storage}
+/// {@template altoke_entities_isar_storage}
 /// A persistent [AltokeEntitiesStorage] implementation using Isar.
 /// {@endtemplate}
 class AltokeEntitiesIsarStorage implements AltokeEntitiesStorage {
-  /// {@macro tasks_isar_storage}
+  /// {@macro altoke_entities_isar_storage}
   const AltokeEntitiesIsarStorage({
     required this.database,
   });
 
-  /// Box for the tasks.
+  /// Box for the altoke entities.
   @visibleForTesting
   final Isar database;
 
-  /// The tasks collection.
+  /// The altoke entities collection.
   @visibleForTesting
   IsarAltokeEntitiesCollection get altokeEntitiesCollection =>
       database.isarAltokeEntities;
@@ -81,7 +81,7 @@ class AltokeEntitiesIsarStorage implements AltokeEntitiesStorage {
         .filter()
         .contentMatches(searchTerm)
         .watch(fireImmediately: true)
-        .map((tasks) => tasks.length);
+        .map((altokeEntities) => altokeEntities.length);
   }
 
   @override
