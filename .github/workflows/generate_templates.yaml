@@ -2,6 +2,13 @@ name: generate_templates
 
 on:
   workflow_dispatch: {}
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/generate_templates.yaml
+      - bricks/**/reference/**
+      - tools/brick_generator/**
 
 jobs:
   identify-brick-scopes:
