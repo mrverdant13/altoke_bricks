@@ -66,7 +66,7 @@ extension MappableNewAltokeEntity on NewAltokeEntity {
 }
 
 /// An [Iterable] of [IsarAltokeEntity]s.
-typedef IsarTasksIterable = Iterable<IsarAltokeEntity>;
+typedef IsarAltokeEntitiesIterable = Iterable<IsarAltokeEntity>;
 
 /// Converts an [IsarAltokeEntity] to a [AltokeEntity]s.
 AltokeEntity altokeEntityFromIsarAltokeEntity(
@@ -75,9 +75,9 @@ AltokeEntity altokeEntityFromIsarAltokeEntity(
   return isarAltokeEntity.toAltokeEntity();
 }
 
-/// Converts an [IsarTasksIterable] to a list of [AltokeEntity]s.
+/// Converts an [IsarAltokeEntitiesIterable] to a list of [AltokeEntity]s.
 List<AltokeEntity> altokeEntitiesFromIsarAltokeEntities(
-  IsarTasksIterable isarAltokeEntities,
+  IsarAltokeEntitiesIterable isarAltokeEntities,
 ) {
   return isarAltokeEntities.map(altokeEntityFromIsarAltokeEntity).toList();
 }

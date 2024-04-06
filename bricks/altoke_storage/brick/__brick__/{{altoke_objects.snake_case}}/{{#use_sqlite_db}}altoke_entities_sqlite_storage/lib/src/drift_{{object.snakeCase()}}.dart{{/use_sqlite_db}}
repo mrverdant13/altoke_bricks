@@ -18,7 +18,7 @@ extension MappableDriftAltokeEntity on DriftAltokeEntity {
 }
 
 /// An [Iterable] of [DriftAltokeEntity]s.
-typedef DriftTasksIterable = Iterable<DriftAltokeEntity>;
+typedef DriftAltokeEntitiesIterable = Iterable<DriftAltokeEntity>;
 
 /// Converts an [DriftAltokeEntity] to a [AltokeEntity]s.
 AltokeEntity altokeEntityFromDriftAltokeEntity(
@@ -27,9 +27,9 @@ AltokeEntity altokeEntityFromDriftAltokeEntity(
   return driftAltokeEntity.toAltokeEntity();
 }
 
-/// Converts an [DriftTasksIterable] to a list of [AltokeEntity]s.
+/// Converts an [DriftAltokeEntitiesIterable] to a list of [AltokeEntity]s.
 List<AltokeEntity> altokeEntitiesFromDriftAltokeEntities(
-  DriftTasksIterable driftAltokeEntities,
+  DriftAltokeEntitiesIterable driftAltokeEntities,
 ) {
   return driftAltokeEntities.map(altokeEntityFromDriftAltokeEntity).toList();
 }
