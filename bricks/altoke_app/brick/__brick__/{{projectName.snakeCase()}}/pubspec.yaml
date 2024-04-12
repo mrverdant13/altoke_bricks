@@ -1,0 +1,10 @@
+name: {{projectName.snakeCase()}}_monorepo
+publish_to: none
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.1 <4.0.0"
+  flutter: ">=3.19.3 <4.0.0"
+
+dev_dependencies:
+  melos: ^5.3.0
