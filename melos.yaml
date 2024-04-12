@@ -3,6 +3,10 @@ name: monorepo
 repository: https://github.com/mrverdant13/altoke_app
 
 packages:
+  - ./bricks/altoke_app/
+  - ./bricks/altoke_app/brick/hooks/
+  - ./bricks/altoke_app/reference/
+  - ./bricks/altoke_app/reference/packages/app/
   - ./bricks/altoke_common/
   - ./bricks/altoke_common/reference/
   - ./bricks/altoke_common/brick/hooks/
