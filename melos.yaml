@@ -57,8 +57,8 @@ scripts:
       dependsOn:
         - build_runner
     exec:
-      failFast: true
       concurrency: 1
+      failFast: true
       orderDependents: true
   gen.realm:
     description: Generate code for a package with Realm
@@ -69,8 +69,8 @@ scripts:
       ignore:
         - altoke_app
     exec:
-      failFast: true
       concurrency: 1
+      failFast: true
       orderDependents: true
   gen.all:
     description: Generate code for all packages
@@ -80,8 +80,8 @@ scripts:
   gen.all.fast:
     description: Generate code for all packages (multi-threaded)
     steps:
-      - melos exec --depends-on=build_runner -- "dart run build_runner build -d"
-      - melos exec --depends-on=realm --ignore=altoke_app -- "dart run realm generate"
+      - melos exec --depends-on=build_runner --order-dependents -- "dart run build_runner build -d"
+      - melos exec --depends-on=realm --order-dependents --ignore=altoke_app -- "dart run realm generate"
 
   # Spell checking
   spellcheck:
@@ -99,15 +99,16 @@ scripts:
         - "*_brick_scope"
   format.all:
     description: Format all packages
-    run: melos run format --no-select
+    steps:
+      - format
   format.ci:
     description: Format all packages (CI)
-    run: melos exec --ignore="*_brick_scope" --fail-fast -- "dart format --set-exit-if-changed ."
+    run: melos exec --ignore="*_brick_scope" --order-dependents --fail-fast -- "dart format --set-exit-if-changed ."
 
   # Analyzing
   analyze.dart:
     description: Analyze a Dart package
-    run: dart analyze --fatal-infos --fatal-warnings
+    run: dart analyze
     packageFilters:
       flutter: false
       ignore:
@@ -117,7 +118,7 @@ scripts:
       orderDependents: true
   analyze.flutter:
     description: Analyze a Flutter package
-    run: flutter analyze --fatal-infos --fatal-warnings
+    run: flutter analyze --no-pub
     packageFilters:
       ignore:
         - "*_brick_scope"
@@ -145,19 +146,22 @@ scripts:
   analyze.ci:
     description: Analyze all packages (CI)
     steps:
-      - melos exec --ignore="*_brick_scope" --fail-fast --order-dependents --no-flutter -- "dart analyze --fatal-infos --fatal-warnings"
-      - melos exec --ignore="*_brick_scope" --fail-fast --order-dependents --flutter -- "flutter analyze --fatal-infos --fatal-warnings --no-pub --no-congratulate --no-preamble"
-      - melos exec --ignore="*_brick_scope" --fail-fast --order-dependents --depends-on=custom_lint -- "dart run custom_lint --fatal-infos --fatal-warnings"
+      - melos exec --ignore="*_brick_scope" --order-dependents --fail-fast --no-flutter -- "dart analyze --fatal-infos --fatal-warnings"
+      - melos exec --ignore="*_brick_scope" --order-dependents --fail-fast --flutter -- "flutter analyze --fatal-infos --fatal-warnings --no-pub --no-congratulate --no-preamble"
+      - melos exec --ignore="*_brick_scope" --order-dependents --fail-fast --depends-on=custom_lint -- "dart run custom_lint --fatal-infos --fatal-warnings"
 
   # Testing & Coverage
   test.dart:
     description: Test a Dart package
     run: >
-      dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random --color &&
+      dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random --color
+      &&
       format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib -b MELOS_PACKAGE_PATH
     packageFilters:
       flutter: false
       dirExists:
+        - test
+      dependsOn:
         - test
     exec:
       concurrency: 1
@@ -169,6 +173,8 @@ scripts:
       flutter: true
       dirExists:
         - test
+      dependsOn:
+        - flutter_test
     exec:
       concurrency: 1
       orderDependents: true
@@ -193,8 +199,8 @@ scripts:
   test.ci:
     description: Test all packages (CI)
     steps:
-      - melos exec --fail-fast --order-dependents --no-flutter --dir-exists="test" -- "dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random && format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib -b MELOS_PACKAGE_PATH"
-      - melos exec --fail-fast --order-dependents --flutter --dir-exists="test" -- "flutter test -x ci-only --coverage -r expanded --test-randomize-ordering-seed random"
+      - melos exec --order-dependents --fail-fast --no-flutter --dir-exists="test" --depends-on=test -- "dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random && format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib -b MELOS_PACKAGE_PATH"
+      - melos exec --order-dependents --fail-fast --flutter --dir-exists="test" --depends-on=flutter_test -- "flutter test -x ci-only --coverage -r expanded --test-randomize-ordering-seed random"
   coverage.merge:
     description: Merge all packages coverage trace files ignoring data related to generated files
     steps:
