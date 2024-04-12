@@ -1,0 +1,52 @@
+name: altoke_app
+description: An Altoke App.
+publish_to: none
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.1 <4.0.0"
+  flutter: ">=3.19.3 <4.0.0"
+
+dependencies:
+  #*w 1v 2> w*#
+  #{{#use_auto_route_router}}#
+  auto_route: ^7.8.4
+  #*w 1v 2> w*#
+  #{{/use_auto_route_router}}#
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_riverpod: ^2.4.10
+  #*w 1v 2> w*#
+  #{{#use_go_router_router}}#
+  go_router: ^13.2.0
+  #*w 1v 2> w*#
+  #{{/use_go_router_router}}#
+  intl: ^0.18.1
+  riverpod_annotation: ^2.3.4
+
+dev_dependencies:
+  #*w 1v 2> w*#
+  #{{#use_auto_route_router}}#
+  auto_route_generator: ^7.3.2
+  #*w 1v 2> w*#
+  #{{/use_auto_route_router}}#
+  build_runner: ^2.4.8
+  custom_lint: ^0.6.2
+  flutter_test:
+    sdk: flutter
+  #*w 1v 2> w*#
+  #{{#use_go_router_router}}#
+  go_router_builder: ^2.4.1
+  #*w 1v 2> w*#
+  #{{/use_go_router_router}}#
+  meta: ^1.11.0
+  mocktail: ^1.0.3
+  riverpod_generator: ^2.3.11
+  riverpod_lint: ^2.3.9
+  very_good_analysis: ^5.1.0
+
+flutter:
+  generate: true
+  uses-material-design: true

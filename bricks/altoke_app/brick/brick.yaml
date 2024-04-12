@@ -1,0 +1,24 @@
+name: altoke_app
+description: An opinionated template for Flutter apps.
+version: 0.0.1
+
+environment:
+  mason: ">=0.1.0-dev.50 <0.1.0"
+
+vars:
+  projectName:
+    type: string
+    description: The name of the project.
+    prompt: What is the name of the project?
+  projectDescription:
+    type: string
+    description: A description of the project.
+    prompt: What is the description of the project?
+  appRouter:
+    type: enum
+    values:
+      - auto_route
+      - go_router
+    description: The package to use for routing.
+    default: auto_route
+    prompt: What router to use?

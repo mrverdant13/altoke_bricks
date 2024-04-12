@@ -1,0 +1,14 @@
+include: package:very_good_analysis/analysis_options.yaml
+analyzer:
+  exclude:
+    - lib/**.g.dart
+    #*w 1v 4> w*#
+    #{{#use_auto_route_router}}#
+    - lib/**.gr.dart
+    #{{/use_auto_route_router}}#
+    #*w 1v 2> w*#
+  plugins:
+    - custom_lint
+linter:
+  rules:
+    public_member_api_docs: false

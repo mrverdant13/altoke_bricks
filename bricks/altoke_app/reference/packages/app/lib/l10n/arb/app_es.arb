@@ -1,0 +1,29 @@
+{
+  "@@locale": "es",
+  "appTitle": "Altoke App",
+  "@appTitle": {
+    "description": "Título de la aplicación"
+  },
+  "counterAppBarTitle": "Contador",
+  "@counterAppBarTitle": {
+    "description": "Título de la cabecera de la pantalla del contador"
+  },
+  "counterPushTimesMessage": "{pushTimes, plural, =0{Aún no has pulsado el botón} =1{Has pulsado el botón una vez} other{Has pulsado el botón {pushTimes} veces}}.",
+  "@counterPushTimesMessage": {
+    "description": "Mensaje con el número de veces que se ha pulsado el botón",
+    "placeholders": {
+      "pushTimes": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
+  "counterIncrementButtonTooltip": "Incrementar",
+  "@counterIncrementButtonTooltip": {
+    "description": "Tooltip del botón de incrementar"
+  },
+  "counterResetButtonTooltip": "Reiniciar",
+  "@counterResetButtonTooltip": {
+    "description": "Tooltip del botón de reiniciar"
+  }
+}

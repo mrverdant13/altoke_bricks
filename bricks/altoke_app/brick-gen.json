@@ -1,0 +1,21 @@
+{
+  "targetRelativePath": "brick/__brick__/{{projectName.snakeCase()}}",
+  "replacements": [
+    {
+      "from": "altoke-app",
+      "to": "{{projectName.kebabCase()}}"
+    },
+    {
+      "from": "altoke_app",
+      "to": "{{projectName.snakeCase()}}"
+    },
+    {
+      "from": "Altoke App",
+      "to": "{{projectName.titleCase()}}"
+    },
+    {
+      "from": "An Altoke App.",
+      "to": "{{projectDescription}}"
+    }
+  ]
+}
