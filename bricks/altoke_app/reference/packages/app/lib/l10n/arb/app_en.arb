@@ -1,0 +1,29 @@
+{
+  "@@locale": "en",
+  "appTitle": "Altoke App",
+  "@appTitle": {
+    "description": "App title"
+  },
+  "counterAppBarTitle": "Counter",
+  "@counterAppBarTitle": {
+    "description": "App bar title for the counter screen"
+  },
+  "counterPushTimesMessage": "You have {pushTimes, plural, =0{not pushed the button yet} =1{pushed the button one time} other{pushed the button {pushTimes} times}}.",
+  "@counterPushTimesMessage": {
+    "description": "Message with the number of times the button has been pushed",
+    "placeholders": {
+      "pushTimes": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
+  "counterIncrementButtonTooltip": "Increment",
+  "@counterIncrementButtonTooltip": {
+    "description": "Tooltip for the increment button"
+  },
+  "counterResetButtonTooltip": "Reset",
+  "@counterResetButtonTooltip": {
+    "description": "Tooltip for the reset button"
+  }
+}
