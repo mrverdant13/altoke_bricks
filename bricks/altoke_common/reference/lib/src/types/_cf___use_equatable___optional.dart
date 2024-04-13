@@ -1,4 +1,3 @@
-import 'package:dart_mappable/dart_mappable.dart';
 import 'package:equatable/equatable.dart';
 
 /// {@template common.optional}
@@ -18,7 +17,6 @@ sealed class EOptional<T extends Object?> extends Equatable {
 /// {@template common.some}
 /// A representation of a present value.
 /// {@endtemplate}
-@MappableClass()
 class ESome<T extends Object?> extends EOptional<T> {
   /// {@macro common.some}
   const ESome(this.value);
@@ -33,7 +31,6 @@ class ESome<T extends Object?> extends EOptional<T> {
 /// {@template common.none}
 /// A representation of an absent value.
 /// {@endtemplate}
-@MappableClass()
 class ENone<T extends Object?> extends EOptional<T> {
   /// {@macro common.none}
   const ENone();
