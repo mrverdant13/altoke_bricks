@@ -46,11 +46,11 @@ Create an entity, **_al toque_** (_quickly_).
 ## Features
 
 - **Value equality:**\
-  Supported with one of the following packages:
+  Supported with one of the following approaches:
     - [`dart_mappable`][pub_package_dart_mappable] with code generation.
     - [`equatable`][pub_package_equatable] without code generation.
     - [`freezed`][pub_package_freezed] with code generation.
-    <!-- TODO(mrverdant13): Include overrides approach -->
+    - Manual `==` operator and `hashCode` overrides.
 
 - **Strict lint rules:**\
   Enforced by [`very_good_analysis`][pub_package_very_good_analysis] for [native Dart & Flutter rules][docs_dart_and_flutter_linter_rules_link].
