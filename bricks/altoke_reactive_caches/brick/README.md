@@ -43,7 +43,7 @@
 
 Create a package that provides general-purpose caches, **_al toque_** (_quickly_).
 
-## Features
+### Features
 
 - **Flexibility:**\
   The package contains a single-element cache and a list cache, including methods that are often used in the context of caching.
