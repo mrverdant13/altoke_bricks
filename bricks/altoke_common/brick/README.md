@@ -55,6 +55,9 @@ Create a package with a set of common elements used across projects, **_al toque
 - **Strict lint rules:**\
   Enforced by [`very_good_analysis`][pub_package_very_good_analysis] for [native Dart & Flutter rules][docs_dart_and_flutter_linter_rules_link].
 
+- **Testing:**\
+  Tests with 100% coverage.
+
 <!-- LINKS -->
 
 [docs_dart_and_flutter_linter_rules_link]: https://dart.dev/tools/linter-rules
