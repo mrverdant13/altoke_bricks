@@ -43,7 +43,7 @@
 
 Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
 
-## Features
+### Features
 
 - **Mono-repo setup:**\
   Supported with [Melos][docs_melos_link], with pre-configured scripts for common tasks.
