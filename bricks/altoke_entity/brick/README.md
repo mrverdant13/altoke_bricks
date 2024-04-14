@@ -43,7 +43,7 @@
 
 Create an entity, **_al toque_** (_quickly_).
 
-## Features
+### Features
 
 - **Value equality:**\
   Supported with one of the following approaches:
