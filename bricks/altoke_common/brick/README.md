@@ -43,7 +43,7 @@
 
 Create a package with a set of common elements used across projects, **_al toque_** (_quickly_).
 
-## Features
+### Features
 
 - **Value equality:**\
   Supported with one of the following approaches:
