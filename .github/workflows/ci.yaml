@@ -7,12 +7,14 @@ on:
     paths:
       - '!.github/**'
       - '.github/workflows/ci.yaml'
+      - 'bricks/**'
   push:
     branches:
       - main
     paths:
       - '!.github/**'
       - '.github/workflows/ci.yaml'
+      - 'bricks/**'
 
 jobs:
   min-conditions:
