@@ -1,5 +1,4 @@
 name: e2e
-#TODO(mrverdant13): Use new E2E testing strategy
 
 concurrency:
   cancel-in-progress: true
@@ -43,7 +42,4 @@ jobs:
       - name: Install dependencies
         run: dart pub get
       - name: Run E2E tests
-        # HACK: E2E tests cannot be run with Melos
-        # Check the root melos.yaml for more details
-        # run: melos run t.e2e.d
-        run: dart test e2e --run-skipped -t e2e -j 1 -r expanded --verbose-trace --chain-stack-traces --test-randomize-ordering-seed=random
+        run: melos run test.e2e.all

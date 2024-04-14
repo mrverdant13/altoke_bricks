@@ -198,9 +198,12 @@ scripts:
     exec:
       concurrency: 1
       orderDependents: true
+  test.e2e.all:
+    description: Run E2E tests for all packages
+    steps:
+      - test.e2e
   test.all:
     description: Test all packages
-    # run: melos run test.dart --no-select && melos run test.flutter --no-select
     steps:
       - test.dart
       - test.flutter
