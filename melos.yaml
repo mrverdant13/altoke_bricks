@@ -5,25 +5,30 @@ repository: https://github.com/mrverdant13/altoke_app
 packages:
   - ./bricks/altoke_app/
   - ./bricks/altoke_app/brick/hooks/
+  - ./bricks/altoke_app/e2e/
   - ./bricks/altoke_app/reference/
   - ./bricks/altoke_app/reference/packages/app/
   - ./bricks/altoke_common/
-  - ./bricks/altoke_common/reference/
   - ./bricks/altoke_common/brick/hooks/
+  - ./bricks/altoke_common/e2e/
+  - ./bricks/altoke_common/reference/
   - ./bricks/altoke_entity/
-  - ./bricks/altoke_entity/reference/
   - ./bricks/altoke_entity/brick/hooks/
+  - ./bricks/altoke_entity/e2e/
+  - ./bricks/altoke_entity/reference/
   - ./bricks/altoke_reactive_caches/
-  - ./bricks/altoke_reactive_caches/reference/
   - ./bricks/altoke_reactive_caches/brick/hooks/
+  - ./bricks/altoke_reactive_caches/e2e/
+  - ./bricks/altoke_reactive_caches/reference/
   - ./bricks/altoke_storage/
+  - ./bricks/altoke_storage/brick/hooks/
+  - ./bricks/altoke_storage/e2e/
   - ./bricks/altoke_storage/reference/_cd___use_hive_db___altoke_entities_hive_storage/
   - ./bricks/altoke_storage/reference/_cd___use_isar_db___altoke_entities_isar_storage/
   - ./bricks/altoke_storage/reference/_cd___use_realm_db___altoke_entities_realm_storage/
   - ./bricks/altoke_storage/reference/_cd___use_sembast_db___altoke_entities_sembast_storage/
   - ./bricks/altoke_storage/reference/_cd___use_sqlite_db___altoke_entities_sqlite_storage/
   - ./bricks/altoke_storage/reference/altoke_entities_storage/
-  - ./bricks/altoke_storage/brick/hooks/
   - ./tools/brick_generator/
 
 command:
@@ -35,6 +40,7 @@ command:
       meta: ^1.11.0
     dev_dependencies:
       melos: ^5.3.0
+      test: ^1.25.2
     hooks:
       post:
         run: >
@@ -182,18 +188,16 @@ scripts:
     exec:
       concurrency: 1
       orderDependents: true
-  # HACK: E2E tests cannot be run with Melos
-  # This is because Melos does not support running scripts for other Melos mono-repos.
-  # test.e2e:
-  #   description: Run E2E tests
-  #   run: dart test e2e --run-skipped -t e2e
-  #   packageFilters:
-  #     flutter: false
-  #     dirExists:
-  #       - e2e
-  #   exec:
-  #     concurrency: 1
-  #     orderDependents: true
+  test.e2e:
+    description: Run E2E tests
+    run: dart test e2e --run-skipped -t e2e
+    packageFilters:
+      flutter: false
+      fileExists:
+        - e2e/brick_e2e_test.dart
+    exec:
+      concurrency: 1
+      orderDependents: true
   test.all:
     description: Test all packages
     # run: melos run test.dart --no-select && melos run test.flutter --no-select
