@@ -43,7 +43,7 @@
 
 Create a storage, **_al toque_** (_quickly_).
 
-## Features
+### Features
 
 - **Data persistence:**\
   Supported with one of the following packages:
