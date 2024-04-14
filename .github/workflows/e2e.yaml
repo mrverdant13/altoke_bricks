@@ -1,4 +1,5 @@
 name: e2e
+#TODO(mrverdant13): Use new E2E testing strategy
 
 concurrency:
   cancel-in-progress: true

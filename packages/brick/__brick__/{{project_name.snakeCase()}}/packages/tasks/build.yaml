@@ -1,6 +1,0 @@
-targets:
-  $default:
-    builders:
-      freezed:
-        generate_for:
-          - lib/src/task.dart
