@@ -12,12 +12,6 @@ import 'package:test/test.dart';
 
 import 'fake_common.dart';
 
-class MockLogger extends Mock implements Logger {}
-
-class MockStdin extends Mock implements Stdin {}
-
-class MockStdout extends Mock implements Stdout {}
-
 Future<MasonGenerator> asyncGenerator = Future(() async {
   final e2eTestsPath = Platform.environment['MELOS_PACKAGE_PATH'] ?? '';
   if (e2eTestsPath.isEmpty) {
