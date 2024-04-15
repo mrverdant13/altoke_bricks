@@ -30,6 +30,7 @@ packages:
   - ./bricks/altoke_storage/reference/_cd___use_sqlite_db___altoke_entities_sqlite_storage/
   - ./bricks/altoke_storage/reference/altoke_entities_storage/
   - ./tools/brick_generator/
+  - ./tools/readme_unifier/
 
 command:
   bootstrap:
@@ -223,6 +224,11 @@ scripts:
       - coverde check -i MELOS_ROOT_PATH/coverage/filtered.lcov.info 100
 
   # Brick management
+  brick.docs:
+    description: Generate root documentation
+    steps:
+      - dart run MELOS_ROOT_PATH/tools/readme_unifier/lib/clear_brick_details_from_root_readme.dart
+      - melos exec -c 1 --scope=*_brick_scope -- "dart run MELOS_ROOT_PATH/tools/readme_unifier/lib/append_brick_details_to_root_readme.dart"
   brick.gen:
     description: Generate brick
     run: >
