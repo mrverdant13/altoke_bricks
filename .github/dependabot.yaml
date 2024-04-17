@@ -21,6 +21,51 @@ updates:
 
   # Bricks
   - package-ecosystem: pub
+    directory: /bricks/altoke_app/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - b:altoke-app
+  - package-ecosystem: pub
+    directory: /bricks/altoke_app/brick/hooks/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - b:altoke-app
+  - package-ecosystem: pub
+    directory: /bricks/altoke_app/e2e/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - b:altoke-app
+  - package-ecosystem: pub
+    directory: /bricks/altoke_app/reference/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - b:altoke-app
+  - package-ecosystem: pub
+    directory: /bricks/altoke_app/reference/packages/app/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - b:altoke-app
+  - package-ecosystem: pub
     directory: /bricks/altoke_common/brick/hooks/
     schedule:
       interval: daily
