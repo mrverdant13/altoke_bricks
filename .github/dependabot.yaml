@@ -108,6 +108,16 @@ updates:
       - reference
       - b:altoke-common
   - package-ecosystem: pub
+    directory: /bricks/altoke_entity/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - chore
+      - b:altoke-entity
+  - package-ecosystem: pub
     directory: /bricks/altoke_entity/brick/hooks/
     schedule:
       interval: daily
@@ -115,6 +125,18 @@ updates:
       - mrverdant13
     labels:
       - build
+      - hooks
+      - b:altoke-entity
+  - package-ecosystem: pub
+    directory: /bricks/altoke_entity/e2e/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - test
+      - e2e
       - b:altoke-entity
   - package-ecosystem: pub
     directory: /bricks/altoke_entity/reference/
@@ -123,7 +145,9 @@ updates:
     reviewers:
       - mrverdant13
     labels:
+      - build
       - feat
+      - reference
       - b:altoke-entity
   - package-ecosystem: pub
     directory: /bricks/altoke_reactive_caches/brick/hooks/
