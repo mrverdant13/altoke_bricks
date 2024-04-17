@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "dart-code.flutter",
+    "google.arb-editor",
+    "blaugold.melos-code",
+    "streetsidesoftware.code-spell-checker",
+    "felixangelov.mason",
+    "github.vscode-github-actions",
+    "redhat.vscode-yaml",
+  ],
+}
