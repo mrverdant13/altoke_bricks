@@ -150,6 +150,16 @@ updates:
       - reference
       - b:altoke-entity
   - package-ecosystem: pub
+    directory: /bricks/altoke_reactive_caches/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - chore
+      - b:altoke-reactive-caches
+  - package-ecosystem: pub
     directory: /bricks/altoke_reactive_caches/brick/hooks/
     schedule:
       interval: daily
@@ -157,6 +167,18 @@ updates:
       - mrverdant13
     labels:
       - build
+      - hooks
+      - b:altoke-reactive-caches
+  - package-ecosystem: pub
+    directory: /bricks/altoke_reactive_caches/e2e/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - test
+      - e2e
       - b:altoke-reactive-caches
   - package-ecosystem: pub
     directory: /bricks/altoke_reactive_caches/reference/
@@ -165,7 +187,9 @@ updates:
     reviewers:
       - mrverdant13
     labels:
+      - build
       - feat
+      - reference
       - b:altoke-reactive-caches
   - package-ecosystem: pub
     directory: /bricks/altoke_storage/brick/hooks/
