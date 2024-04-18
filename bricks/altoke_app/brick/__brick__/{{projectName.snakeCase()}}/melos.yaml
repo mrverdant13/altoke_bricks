@@ -43,6 +43,11 @@ scripts:
     steps:
       - melos exec --depends-on=build_runner --order-dependents -- "dart run build_runner build --delete-conflicting-outputs"
 
+  # Spell checking
+  spellcheck:
+    description: Run spell checking for the entire project
+    run: cspell lint --no-progress -c ./.cspell/cspell.yaml MELOS_ROOT_PATH/**
+
   # Formatting
   format:
     description: Format a package
