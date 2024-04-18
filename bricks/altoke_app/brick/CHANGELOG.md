@@ -7,3 +7,4 @@
 - **FEAT**: Custom lint rules with `custom_lint`.
 - **FEAT**: State management with `flutter_riverpod`.
 - **FEAT**: 100% test coverage.
+- **FEAT**: Spell checking with CSpell.
