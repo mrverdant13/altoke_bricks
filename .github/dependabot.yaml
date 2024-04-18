@@ -300,3 +300,12 @@ updates:
     labels:
       - build
       - t:brick-gen
+  - package-ecosystem: pub
+    directory: /tools/readme_unifier/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - t:brick-gen
