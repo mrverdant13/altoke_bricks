@@ -1,0 +1,4 @@
+# Globally allowed words
+/*w 1v w*/
+/*drop*/
+altoke
