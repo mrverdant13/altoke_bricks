@@ -10,7 +10,7 @@ environment:
 dependencies:
   #*w 1v 2> w*#
   #{{#use_auto_route_router}}#
-  auto_route: ^7.8.4
+  auto_route: ^8.0.3
   #*w 1v 2> w*#
   #{{/use_auto_route_router}}#
   flutter:
@@ -29,7 +29,7 @@ dependencies:
 dev_dependencies:
   #*w 1v 2> w*#
   #{{#use_auto_route_router}}#
-  auto_route_generator: ^7.3.2
+  auto_route_generator: ^8.0.0
   #*w 1v 2> w*#
   #{{/use_auto_route_router}}#
   build_runner: ^2.4.8
