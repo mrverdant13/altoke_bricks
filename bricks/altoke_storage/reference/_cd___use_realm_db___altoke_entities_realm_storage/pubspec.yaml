@@ -27,7 +27,7 @@ dependencies:
   #*w 1v 2> w*#
   collection: ^1.18.0
   meta: ^1.11.0
-  realm: ^1.9.0
+  realm: ^2.1.0
 
 dev_dependencies:
   test: ^1.25.2

@@ -13,6 +13,7 @@ ignorePaths:
   - "**/*.freezed.dart"
   - "**/*.g.dart"
   - "**/*.gr.dart"
+  - "**/*.realm.dart"
 enableGlobDot: true
 dictionaryDefinitions:
   - name: global-allow
