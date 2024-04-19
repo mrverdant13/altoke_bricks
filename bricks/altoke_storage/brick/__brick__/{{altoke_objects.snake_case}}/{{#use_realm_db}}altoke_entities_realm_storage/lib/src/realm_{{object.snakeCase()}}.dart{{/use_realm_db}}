@@ -2,7 +2,7 @@ import 'package:altoke_common/common.dart';
 import 'package:{{object.snakeCase()}}/{{object.snakeCase()}}.dart';
 import 'package:realm/realm.dart';
 
-part 'realm_{{object.snakeCase()}}.g.dart';
+part 'realm_{{object.snakeCase()}}.realm.dart';
 
 /// Realm schema for Altoke Entities.
 // ignore: non_constant_identifier_names
