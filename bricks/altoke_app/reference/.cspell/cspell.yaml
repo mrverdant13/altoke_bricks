@@ -1,19 +1,19 @@
+# cspell:ignore pubspec
 version: "0.2"
 $schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
 language: en
 ignorePaths:
-  - "**/__brick__/**"
   - "**/.cspell/*.txt"
   - "**/.git/**"
   - "**/.gitignore"
   - "**/pubspec.lock"
   - "**/*.arb"
-  - "**/*.fakes.*"
-  - "**/*.drift.dart"
-  - "**/*.freezed.dart"
   - "**/*.g.dart"
+  #*w 1v 2> w*#
+  #{{#use_auto_route_router}}#
   - "**/*.gr.dart"
-  - "**/*.realm.dart"
+  #{{/use_auto_route_router}}#
+  #*w 1v w*#
 enableGlobDot: true
 dictionaryDefinitions:
   - name: global-allow
@@ -22,18 +22,10 @@ dictionaryDefinitions:
   - name: dart-allow
     path: ./dart.allow.txt
     addWords: true
-  - name: ci-allow
-    path: ./ci.allow.txt
-    addWords: true
 dictionaries:
   - global-allow
 useGitignore: true
 overrides:
-  - filename: "**/{*.dart,pubspec.yaml,.metadata,build.yaml,melos.yaml,*.drift}"
+  - filename: "**/{*.dart,pubspec.yaml,.metadata,build.yaml,melos.yaml}"
     dictionaries:
       - dart-allow
-  - filename: "**/.github/**/*"
-    dictionaries:
-      - ci-allow
-enableFiletypes:
-  - github-actions-workflow

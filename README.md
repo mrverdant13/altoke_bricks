@@ -60,6 +60,10 @@ Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
 - **Internationalization:**\
   Supported by following the [official internationalization guide for Flutter][flutter_docs_internationalization_link].
 
+- **Spell checking:**\
+  Supported with [CSpell][docs_cspell_link].\
+  VSCode integration with the [Code Spell Checker extension][docs_vsc_spell_checker_link].
+
 - **State management:**\
   Supported with [`flutter_riverpod`][pub_package_flutter_riverpod].
 
@@ -75,7 +79,9 @@ Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
 <!-- LINKS -->
 
 [dart_and_flutter_linter_rules_link]: https://dart.dev/tools/linter-rules
+[docs_cspell_link]: https://cspell.org/
 [docs_melos_link]: https://melos.invertase.dev/
+[docs_vsc_spell_checker_link]: https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker
 [flutter_docs_internationalization_link]: https://docs.flutter.dev/ui/accessibility-and-localization/internationalization
 [flutter_web_link]: https://flutter.dev/
 [pub_package_auto_route]: https://pub.dev/packages/auto_route

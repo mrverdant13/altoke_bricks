@@ -66,6 +66,16 @@ updates:
       - build
       - b:altoke-app
   - package-ecosystem: pub
+    directory: /bricks/altoke_common/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - chore
+      - b:altoke-common
+  - package-ecosystem: pub
     directory: /bricks/altoke_common/brick/hooks/
     schedule:
       interval: daily
@@ -73,6 +83,18 @@ updates:
       - mrverdant13
     labels:
       - build
+      - hooks
+      - b:altoke-common
+  - package-ecosystem: pub
+    directory: /bricks/altoke_common/e2e/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - test
+      - e2e
       - b:altoke-common
   - package-ecosystem: pub
     directory: /bricks/altoke_common/reference/
@@ -81,8 +103,20 @@ updates:
     reviewers:
       - mrverdant13
     labels:
+      - build
       - feat
+      - reference
       - b:altoke-common
+  - package-ecosystem: pub
+    directory: /bricks/altoke_entity/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - chore
+      - b:altoke-entity
   - package-ecosystem: pub
     directory: /bricks/altoke_entity/brick/hooks/
     schedule:
@@ -91,6 +125,18 @@ updates:
       - mrverdant13
     labels:
       - build
+      - hooks
+      - b:altoke-entity
+  - package-ecosystem: pub
+    directory: /bricks/altoke_entity/e2e/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - test
+      - e2e
       - b:altoke-entity
   - package-ecosystem: pub
     directory: /bricks/altoke_entity/reference/
@@ -99,8 +145,20 @@ updates:
     reviewers:
       - mrverdant13
     labels:
+      - build
       - feat
+      - reference
       - b:altoke-entity
+  - package-ecosystem: pub
+    directory: /bricks/altoke_reactive_caches/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - chore
+      - b:altoke-reactive-caches
   - package-ecosystem: pub
     directory: /bricks/altoke_reactive_caches/brick/hooks/
     schedule:
@@ -109,6 +167,18 @@ updates:
       - mrverdant13
     labels:
       - build
+      - hooks
+      - b:altoke-reactive-caches
+  - package-ecosystem: pub
+    directory: /bricks/altoke_reactive_caches/e2e/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - test
+      - e2e
       - b:altoke-reactive-caches
   - package-ecosystem: pub
     directory: /bricks/altoke_reactive_caches/reference/
@@ -117,8 +187,21 @@ updates:
     reviewers:
       - mrverdant13
     labels:
+      - build
       - feat
+      - reference
       - b:altoke-reactive-caches
+
+  - package-ecosystem: pub
+    directory: /bricks/altoke_storage/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - chore
+      - b:altoke-storage
   - package-ecosystem: pub
     directory: /bricks/altoke_storage/brick/hooks/
     schedule:
@@ -127,6 +210,73 @@ updates:
       - mrverdant13
     labels:
       - build
+      - hooks
+      - b:altoke-storage
+  - package-ecosystem: pub
+    directory: /bricks/altoke_storage/e2e/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - test
+      - e2e
+      - b:altoke-storage
+  - package-ecosystem: pub
+    directory: /bricks/altoke_storage/reference/_cd___use_hive_db___altoke_entities_hive_storage/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - feat
+      - reference
+      - b:altoke-storage
+  - package-ecosystem: pub
+    directory: /bricks/altoke_storage/reference/_cd___use_isar_db___altoke_entities_isar_storage/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - feat
+      - reference
+      - b:altoke-storage
+  - package-ecosystem: pub
+    directory: /bricks/altoke_storage/reference/_cd___use_realm_db___altoke_entities_realm_storage/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - feat
+      - reference
+      - b:altoke-storage
+  - package-ecosystem: pub
+    directory: /bricks/altoke_storage/reference/_cd___use_sembast_db___altoke_entities_sembast_storage/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - feat
+      - reference
+      - b:altoke-storage
+  - package-ecosystem: pub
+    directory: /bricks/altoke_storage/reference/_cd___use_sqlite_db___altoke_entities_sqlite_storage/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - feat
+      - reference
       - b:altoke-storage
   - package-ecosystem: pub
     directory: /bricks/altoke_storage/reference/altoke_entities_storage/
@@ -135,57 +285,23 @@ updates:
     reviewers:
       - mrverdant13
     labels:
+      - build
       - feat
-      - b:altoke-altoke-storage
-  - package-ecosystem: pub
-    directory: /bricks/altoke_storage/reference/altoke_entities_hive_storage/
-    schedule:
-      interval: daily
-    reviewers:
-      - mrverdant13
-    labels:
-      - feat
-      - b:altoke-altoke-storage
-  - package-ecosystem: pub
-    directory: /bricks/altoke_storage/reference/altoke_entities_isar_storage/
-    schedule:
-      interval: daily
-    reviewers:
-      - mrverdant13
-    labels:
-      - feat
-      - b:altoke-altoke-storage
-  - package-ecosystem: pub
-    directory: /bricks/altoke_storage/reference/altoke_entities_realm_storage/
-    schedule:
-      interval: daily
-    reviewers:
-      - mrverdant13
-    labels:
-      - feat
-      - b:altoke-altoke-storage
-  - package-ecosystem: pub
-    directory: /bricks/altoke_storage/reference/altoke_entities_sembast_storage/
-    schedule:
-      interval: daily
-    reviewers:
-      - mrverdant13
-    labels:
-      - feat
-      - b:altoke-altoke-storage
-  - package-ecosystem: pub
-    directory: /bricks/altoke_storage/reference/altoke_entities_sqlite_storage/
-    schedule:
-      interval: daily
-    reviewers:
-      - mrverdant13
-    labels:
-      - feat
-      - b:altoke-altoke-storage
+      - reference
+      - b:altoke-storage
 
   # Tools
   - package-ecosystem: pub
     directory: /tools/brick_generator/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - t:brick-gen
+  - package-ecosystem: pub
+    directory: /tools/readme_unifier/
     schedule:
       interval: daily
     reviewers:
