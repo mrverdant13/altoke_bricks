@@ -2,7 +2,7 @@ import 'package:altoke_common/common.dart';
 import 'package:altoke_entity/altoke_entity.dart';
 import 'package:realm/realm.dart';
 
-part 'realm_altoke_entity.g.dart';
+part 'realm_altoke_entity.realm.dart';
 
 /// Realm schema for Altoke Entities.
 // ignore: non_constant_identifier_names
