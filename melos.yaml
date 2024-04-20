@@ -1,6 +1,6 @@
-name: monorepo
+name: altoke_bricks_monorepo
 
-repository: https://github.com/mrverdant13/altoke_app
+repository: https://github.com/mrverdant13/altoke_bricks
 
 packages:
   - ./bricks/altoke_app/
