@@ -66,6 +66,11 @@ Create a package with a set of common elements used across projects, **_al toque
 
 <!-- DO NOT EDIT - THIS IS AUTOMATICALLY GENERATED -->
 <!-- VARIABLES -->
+### Variables
+
+| Variable | Description | Default | Type |
+| -------- | ----------- | ------- | ---- |
+| `value_equality_approach` | The approach to use for value equality. | dart_mappable | Enumeration |
 <!-- VARIABLES -->
 
 <!-- EDITABLE -->
