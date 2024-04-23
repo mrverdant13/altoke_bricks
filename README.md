@@ -81,21 +81,6 @@ Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
 - **Testing:**\
   Tests with 100% coverage.
 
-<!-- LINKS -->
-
-[dart_and_flutter_linter_rules_link]: https://dart.dev/tools/linter-rules
-[docs_cspell_link]: https://cspell.org/
-[docs_melos_link]: https://melos.invertase.dev/
-[docs_vsc_spell_checker_link]: https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker
-[flutter_docs_internationalization_link]: https://docs.flutter.dev/ui/accessibility-and-localization/internationalization
-[flutter_web_link]: https://flutter.dev/
-[pub_package_auto_route]: https://pub.dev/packages/auto_route
-[pub_package_custom_lint]: https://pub.dev/packages/custom_lint
-[pub_package_flutter_riverpod]: https://pub.dev/packages/flutter_riverpod
-[pub_package_go_router]: https://pub.dev/packages/go_router
-[pub_package_riverpod_lint]: https://pub.dev/packages/riverpod_lint
-[pub_package_very_good_analysis]: https://pub.dev/packages/very_good_analysis
-
 ### Altoke Common
 
 Create a package with a set of common elements used across projects, **_al toque_** (_quickly_).
@@ -114,14 +99,6 @@ Create a package with a set of common elements used across projects, **_al toque
 
 - **Testing:**\
   Tests with 100% coverage.
-
-<!-- LINKS -->
-
-[docs_dart_and_flutter_linter_rules_link]: https://dart.dev/tools/linter-rules
-[pub_package_dart_mappable]: https://pub.dev/packages/dart_mappable
-[pub_package_equatable]: https://pub.dev/packages/equatable
-[pub_package_freezed]: https://pub.dev/packages/freezed
-[pub_package_very_good_analysis]: https://pub.dev/packages/very_good_analysis
 
 ### Altoke Entity
 
@@ -142,14 +119,6 @@ Create an entity, **_al toque_** (_quickly_).
 - **Testing:**\
   Tests with 100% coverage.
 
-<!-- LINKS -->
-
-[docs_dart_and_flutter_linter_rules_link]: https://dart.dev/tools/linter-rules
-[pub_package_dart_mappable]: https://pub.dev/packages/dart_mappable
-[pub_package_equatable]: https://pub.dev/packages/equatable
-[pub_package_freezed]: https://pub.dev/packages/freezed
-[pub_package_very_good_analysis]: https://pub.dev/packages/very_good_analysis
-
 ### Altoke Reactive Caches
 
 Create a package that provides general-purpose caches, **_al toque_** (_quickly_).
@@ -164,11 +133,6 @@ Create a package that provides general-purpose caches, **_al toque_** (_quickly_
 
 - **Testing:**\
   Tests with 100% coverage.
-
-<!-- LINKS -->
-
-[docs_dart_and_flutter_linter_rules_link]: https://dart.dev/tools/linter-rules
-[pub_package_very_good_analysis]: https://pub.dev/packages/very_good_analysis
 
 ### Altoke Storage
 
@@ -193,6 +157,27 @@ Create a storage, **_al toque_** (_quickly_).
 
 <!-- DO NOT EDIT - THIS IS AUTOMATICALLY GENERATED -->
 <!-- BRICK LINKS -->
+[dart_and_flutter_linter_rules_link]: https://dart.dev/tools/linter-rules
+[docs_cspell_link]: https://cspell.org/
+[docs_melos_link]: https://melos.invertase.dev/
+[docs_vsc_spell_checker_link]: https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker
+[flutter_docs_internationalization_link]: https://docs.flutter.dev/ui/accessibility-and-localization/internationalization
+[flutter_web_link]: https://flutter.dev/
+[pub_package_auto_route]: https://pub.dev/packages/auto_route
+[pub_package_custom_lint]: https://pub.dev/packages/custom_lint
+[pub_package_flutter_riverpod]: https://pub.dev/packages/flutter_riverpod
+[pub_package_go_router]: https://pub.dev/packages/go_router
+[pub_package_riverpod_lint]: https://pub.dev/packages/riverpod_lint
+[pub_package_very_good_analysis]: https://pub.dev/packages/very_good_analysis
+[docs_dart_and_flutter_linter_rules_link]: https://dart.dev/tools/linter-rules
+[pub_package_dart_mappable]: https://pub.dev/packages/dart_mappable
+[pub_package_equatable]: https://pub.dev/packages/equatable
+[pub_package_freezed]: https://pub.dev/packages/freezed
+[pub_package_hive]: https://pub.dev/packages/hive
+[pub_package_isar]: https://pub.dev/packages/isar
+[pub_package_realm]: https://pub.dev/packages/realm
+[pub_package_sembast]: https://pub.dev/packages/sembast
+[pub_package_drift]: https://pub.dev/packages/drift
 <!-- BRICK LINKS -->
 
 <!-- EDITABLE -->
