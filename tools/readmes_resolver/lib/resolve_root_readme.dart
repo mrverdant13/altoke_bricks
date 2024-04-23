@@ -57,7 +57,15 @@ void main(List<String> args) {
         ..writeln(
           brickFeatures.replaceAllMapped(
             headlineRegex,
-            (match) => '#${match.group(0)}',
+            (match) {
+              final buf = StringBuffer();
+              final current = match.group(0) ?? '';
+              buf
+                ..write('#')
+                ..write(current);
+              if (current.trim().length == 2) buf.write('🧱 ');
+              return buf.toString();
+            },
           ),
         )
         ..writeln(featuresToken);
