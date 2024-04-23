@@ -67,6 +67,13 @@ Create a storage, **_al toque_** (_quickly_).
 
 <!-- DO NOT EDIT - THIS IS AUTOMATICALLY GENERATED -->
 <!-- VARIABLES -->
+### Variables
+
+| Variable | Description | Default | Type |
+| -------- | ----------- | ------- | ---- |
+| `object` | The name of a persisted object (singular). | my object | String |
+| `objects` | The name of the persisted objects (plural). | my objects | String |
+| `data_persistence_approach` | The approach to use for data persistence. | hive | Enumeration |
 <!-- VARIABLES -->
 
 <!-- EDITABLE -->
