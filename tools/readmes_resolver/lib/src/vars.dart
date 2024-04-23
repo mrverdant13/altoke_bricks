@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:path/path.dart' as path;
-import 'package:readme_unifier/src/exceptions.dart';
+import 'package:readmes_resolver/src/exceptions.dart';
 
 abstract final class Vars {
   static final _notInMonoRepoError = StateError(

@@ -139,3 +139,9 @@ class BrickReadmeNotFoundError extends InvalidBrickDirError {
     required String readmePath,
   }) : super('Brick README file not found ($readmePath).');
 }
+
+class BrickManifestNotFoundError extends InvalidBrickDirError {
+  const BrickManifestNotFoundError({
+    required String manifestPath,
+  }) : super('Brick manifest file not found ($manifestPath).');
+}

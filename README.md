@@ -1,5 +1,7 @@
 # Altoke Bricks
 
+<!-- EDITABLE -->
+<!-- BANNERS HEADER -->
 <p align="center">
   <p align="center">
     <a href="https://github.com/mrverdant13/altoke_bricks/actions/workflows/ci.yaml">
@@ -36,6 +38,7 @@
     </a>
   </p>
 </p>
+<!-- BANNERS HEADER -->
 
 ---
 
@@ -43,6 +46,8 @@ Create different Dart and Flutter projects, **_al toque_** (_quickly_), with out
 
 ## Bricks
 
+<!-- DO NOT EDIT - THIS IS AUTOMATICALLY GENERATED -->
+<!-- FEATURES -->
 ### Altoke App
 
 Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
@@ -184,13 +189,12 @@ Create a storage, **_al toque_** (_quickly_).
 
 - **Testing:**\
   Tests with 100% coverage.
+<!-- FEATURES -->
 
-<!-- LINKS -->
+<!-- DO NOT EDIT - THIS IS AUTOMATICALLY GENERATED -->
+<!-- BRICK LINKS -->
+<!-- BRICK LINKS -->
 
-[docs_dart_and_flutter_linter_rules_link]: https://dart.dev/tools/linter-rules
-[pub_package_hive]: https://pub.dev/packages/hive
-[pub_package_isar]: https://pub.dev/packages/isar
-[pub_package_realm]: https://pub.dev/packages/realm
-[pub_package_sembast]: https://pub.dev/packages/sembast
-[pub_package_drift]: https://pub.dev/packages/drift
-[pub_package_very_good_analysis]: https://pub.dev/packages/very_good_analysis
+<!-- EDITABLE -->
+<!-- ROOT LINKS -->
+<!-- ROOT LINKS -->

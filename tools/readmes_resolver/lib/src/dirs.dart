@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:readme_unifier/src/exceptions.dart';
-import 'package:readme_unifier/src/vars.dart';
+import 'package:readmes_resolver/src/exceptions.dart';
+import 'package:readmes_resolver/src/vars.dart';
 
 abstract final class Dirs {
   static final root = () {

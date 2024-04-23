@@ -1,5 +1,7 @@
 # Altoke App
 
+<!-- DO NOT EDIT - THIS IS AUTOMATICALLY GENERATED -->
+<!-- BANNERS HEADER -->
 <p align="center">
   <p align="center">
     <a href="https://github.com/mrverdant13/altoke_bricks/actions/workflows/ci.yaml">
@@ -36,9 +38,12 @@
     </a>
   </p>
 </p>
+<!-- BANNERS HEADER -->
 
 ---
 
+<!-- EDITABLE -->
+<!-- FEATURES -->
 ## Altoke App
 
 Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
@@ -71,9 +76,14 @@ Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
 
 - **Testing:**\
   Tests with 100% coverage.
+<!-- FEATURES -->
 
-<!-- LINKS -->
+<!-- DO NOT EDIT - THIS IS AUTOMATICALLY GENERATED -->
+<!-- VARIABLES -->
+<!-- VARIABLES -->
 
+<!-- EDITABLE -->
+<!-- BRICK LINKS -->
 [dart_and_flutter_linter_rules_link]: https://dart.dev/tools/linter-rules
 [docs_cspell_link]: https://cspell.org/
 [docs_melos_link]: https://melos.invertase.dev/
@@ -86,3 +96,4 @@ Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
 [pub_package_go_router]: https://pub.dev/packages/go_router
 [pub_package_riverpod_lint]: https://pub.dev/packages/riverpod_lint
 [pub_package_very_good_analysis]: https://pub.dev/packages/very_good_analysis
+<!-- BRICK LINKS -->

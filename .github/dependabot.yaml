@@ -301,11 +301,11 @@ updates:
       - build
       - t:brick-gen
   - package-ecosystem: pub
-    directory: /tools/readme_unifier/
+    directory: /tools/readmes_resolver/
     schedule:
       interval: daily
     reviewers:
       - mrverdant13
     labels:
       - build
-      - t:brick-gen
+      - t:readmes-resolver
