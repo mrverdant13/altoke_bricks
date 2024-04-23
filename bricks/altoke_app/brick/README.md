@@ -80,6 +80,13 @@ Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
 
 <!-- DO NOT EDIT - THIS IS AUTOMATICALLY GENERATED -->
 <!-- VARIABLES -->
+### Variables
+
+| Variable | Description | Default | Type |
+| -------- | ----------- | ------- | ---- |
+| `projectName` | The name of the project. | _None_ | String |
+| `projectDescription` | A description of the project. | _None_ | String |
+| `appRouter` | The package to use for routing. | auto_route | Enumeration |
 <!-- VARIABLES -->
 
 <!-- EDITABLE -->
