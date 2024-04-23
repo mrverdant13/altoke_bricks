@@ -66,6 +66,13 @@ Create an entity, **_al toque_** (_quickly_).
 
 <!-- DO NOT EDIT - THIS IS AUTOMATICALLY GENERATED -->
 <!-- VARIABLES -->
+### Variables
+
+| Variable | Description | Default | Type |
+| -------- | ----------- | ------- | ---- |
+| `entity_singular` | The name of the entity (singular). | my entity | String |
+| `package_description` | A description for the package. | _None_ | String |
+| `value_equality_approach` | The approach to use for value equality. | dart_mappable | Enumeration |
 <!-- VARIABLES -->
 
 <!-- EDITABLE -->
