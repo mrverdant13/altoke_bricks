@@ -1,11 +1,13 @@
-name: readme_unifier
-description: A tool to unify README brick files.
+name: readmes_resolver
+description: A tool to resolve README files.
 publish_to: none
 
 environment:
   sdk: ">=3.3.1 <4.0.0"
 
 dependencies:
+  checked_yaml: ^2.0.3
+  mason: ^0.1.0-dev.53
   path: ^1.9.0
 
 dev_dependencies:

@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:path/path.dart' as path;
-import 'package:readme_unifier/src/exceptions.dart';
-import 'package:readme_unifier/src/vars.dart';
+import 'package:readmes_resolver/src/exceptions.dart';
+import 'package:readmes_resolver/src/vars.dart';
 
 abstract final class Files {
   static final rootReadme = () {
@@ -38,6 +38,21 @@ abstract final class Files {
     if (!file.existsSync()) {
       throw BrickReadmeNotFoundError(
         readmePath: file.path,
+      );
+    }
+    return file;
+  }();
+
+  static final brickManifest = () {
+    final file = File(
+      path.join(
+        Vars.brickPath,
+        'brick.yaml',
+      ),
+    );
+    if (!file.existsSync()) {
+      throw BrickManifestNotFoundError(
+        manifestPath: file.path,
       );
     }
     return file;

@@ -1,5 +1,7 @@
 # Altoke Reactive Caches
 
+<!-- DO NOT EDIT - THIS IS AUTOMATICALLY GENERATED -->
+<!-- BANNERS HEADER -->
 <p align="center">
   <p align="center">
     <a href="https://github.com/mrverdant13/altoke_bricks/actions/workflows/ci.yaml">
@@ -36,9 +38,12 @@
     </a>
   </p>
 </p>
+<!-- BANNERS HEADER -->
 
 ---
 
+<!-- EDITABLE -->
+<!-- FEATURES -->
 ## Altoke Reactive Caches
 
 Create a package that provides general-purpose caches, **_al toque_** (_quickly_).
@@ -53,8 +58,14 @@ Create a package that provides general-purpose caches, **_al toque_** (_quickly_
 
 - **Testing:**\
   Tests with 100% coverage.
+<!-- FEATURES -->
 
-<!-- LINKS -->
+<!-- DO NOT EDIT - THIS IS AUTOMATICALLY GENERATED -->
+<!-- VARIABLES -->
+<!-- VARIABLES -->
 
+<!-- EDITABLE -->
+<!-- BRICK LINKS -->
 [docs_dart_and_flutter_linter_rules_link]: https://dart.dev/tools/linter-rules
 [pub_package_very_good_analysis]: https://pub.dev/packages/very_good_analysis
+<!-- BRICK LINKS -->

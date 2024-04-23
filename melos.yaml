@@ -30,7 +30,7 @@ packages:
   - ./bricks/altoke_storage/reference/_cd___use_sqlite_db___altoke_entities_sqlite_storage/
   - ./bricks/altoke_storage/reference/altoke_entities_storage/
   - ./tools/brick_generator/
-  - ./tools/readme_unifier/
+  - ./tools/readmes_resolver/
 
 command:
   bootstrap:
@@ -219,12 +219,23 @@ scripts:
     steps:
       - coverde check -i MELOS_ROOT_PATH/coverage/filtered.lcov.info 100
 
-  # Brick management
-  brick.docs:
-    description: Generate root documentation
+  # Documentation
+  docs.root:
+    description: Resolve root README file
     steps:
-      - dart run MELOS_ROOT_PATH/tools/readme_unifier/lib/clear_brick_details_from_root_readme.dart
-      - melos exec -c 1 --scope=*_brick_scope -- "dart run MELOS_ROOT_PATH/tools/readme_unifier/lib/append_brick_details_to_root_readme.dart"
+      - dart run MELOS_ROOT_PATH/tools/readmes_resolver/lib/reset_root_readme.dart
+      - melos exec -c 1 --scope=*_brick_scope -- "dart run MELOS_ROOT_PATH/tools/readmes_resolver/lib/resolve_root_readme.dart"
+  docs.brick:
+    description: Resolve brick README files
+    steps:
+      - melos exec -c 1 --scope=*_brick_scope -- "dart run MELOS_ROOT_PATH/tools/readmes_resolver/lib/resolve_brick_readme.dart"
+  docs.all:
+    description: Resolve all README files
+    steps:
+      - docs.root
+      - docs.brick
+
+  # Brick management
   brick.gen:
     description: Generate brick
     run: >
