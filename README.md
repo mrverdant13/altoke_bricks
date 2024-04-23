@@ -48,7 +48,7 @@ Create different Dart and Flutter projects, **_al toque_** (_quickly_), with out
 
 <!-- DO NOT EDIT - THIS IS AUTOMATICALLY GENERATED -->
 <!-- FEATURES -->
-### Altoke App
+### 🧱 Altoke App
 
 Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
 
@@ -81,7 +81,7 @@ Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
 - **Testing:**\
   Tests with 100% coverage.
 
-### Altoke Common
+### 🧱 Altoke Common
 
 Create a package with a set of common elements used across projects, **_al toque_** (_quickly_).
 
@@ -100,7 +100,7 @@ Create a package with a set of common elements used across projects, **_al toque
 - **Testing:**\
   Tests with 100% coverage.
 
-### Altoke Entity
+### 🧱 Altoke Entity
 
 Create an entity, **_al toque_** (_quickly_).
 
@@ -119,7 +119,7 @@ Create an entity, **_al toque_** (_quickly_).
 - **Testing:**\
   Tests with 100% coverage.
 
-### Altoke Reactive Caches
+### 🧱 Altoke Reactive Caches
 
 Create a package that provides general-purpose caches, **_al toque_** (_quickly_).
 
@@ -134,7 +134,7 @@ Create a package that provides general-purpose caches, **_al toque_** (_quickly_
 - **Testing:**\
   Tests with 100% coverage.
 
-### Altoke Storage
+### 🧱 Altoke Storage
 
 Create a storage, **_al toque_** (_quickly_).
 
