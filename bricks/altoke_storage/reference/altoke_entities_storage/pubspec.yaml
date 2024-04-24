@@ -14,7 +14,7 @@ dependencies:
     #*with*#
     # path: ../../altoke_entity/
     #*replace-end*#
-  #*w 1v 2> w*#
+  #*w 2v w*#
 
 dev_dependencies:
   test: ^1.25.2
