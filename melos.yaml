@@ -29,6 +29,7 @@ packages:
   - ./bricks/altoke_storage/reference/_cd___use_sembast_db___altoke_entities_sembast_storage/
   - ./bricks/altoke_storage/reference/_cd___use_sqlite_db___altoke_entities_sqlite_storage/
   - ./bricks/altoke_storage/reference/altoke_entities_storage/
+  - ./tools/altoke_monorepo_environment/
   - ./tools/brick_generator/
   - ./tools/readmes_resolver/
 
