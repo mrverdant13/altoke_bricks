@@ -1,8 +1,8 @@
-import 'package:altoke_entities_sqlite_storage/altoke_entities.drift.dart'
+import 'package:altoke_entities_drift_storage/altoke_entities.drift.dart'
     as drift;
 import 'package:altoke_entity/altoke_entity.dart';
 
-/// A SQLite data class for Altoke Entities.
+/// A Drift (SQLite) data class for Altoke Entities.
 typedef DriftAltokeEntity = drift.AltokeEntity;
 
 /// An extension on [DriftAltokeEntity] to add mapping capabilities.

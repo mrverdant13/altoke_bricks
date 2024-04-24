@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:altoke_common/common.dart';
-import 'package:altoke_entities_sqlite_storage/altoke_entities_sqlite_storage.dart';
-import 'package:altoke_entities_sqlite_storage/src/drift_altoke_entity.dart';
+import 'package:altoke_entities_drift_storage/altoke_entities_drift_storage.dart';
+import 'package:altoke_entities_drift_storage/src/drift_altoke_entity.dart';
 import 'package:altoke_entities_storage/altoke_entities_storage.dart';
 import 'package:altoke_entity/altoke_entity.dart';
 import 'package:collection/collection.dart';
@@ -34,7 +34,7 @@ void main() {
     '''
 
 GIVEN a constructor for a altoke entities storage
-├─ THAT uses an SQLite database
+├─ THAT uses a Drift (SQLite) database
 WHEN the constructor is called
 THEN an instance of the storage is returned
 ''',
@@ -43,7 +43,7 @@ THEN an instance of the storage is returned
         NativeDatabase.memory(),
       );
       final altokeEntitiesDao = DriftAltokeEntitiesDao(database);
-      final storage = AltokeEntitiesSqliteStorage(
+      final storage = AltokeEntitiesDriftStorage(
         altokeEntitiesDao: altokeEntitiesDao,
       );
       expect(storage, isNotNull);
@@ -55,12 +55,12 @@ THEN an instance of the storage is returned
     '''
 
 GIVEN an altoke entities storage
-├─ THAT uses an SQLite database''',
+├─ THAT uses a Drift (SQLite) database''',
     () {
       late GeneratedDatabase database;
       late DriftAltokeEntitiesDao altokeEntitiesDao;
       late DriftAltokeEntitiesTable altokeEntitiesTable;
-      late AltokeEntitiesSqliteStorage storage;
+      late AltokeEntitiesDriftStorage storage;
 
       setUp(() async {
         database = FakeDatabase(
@@ -68,7 +68,7 @@ GIVEN an altoke entities storage
         );
         altokeEntitiesDao = DriftAltokeEntitiesDao(database);
         altokeEntitiesTable = altokeEntitiesDao.altokeEntities;
-        storage = AltokeEntitiesSqliteStorage(
+        storage = AltokeEntitiesDriftStorage(
           altokeEntitiesDao: altokeEntitiesDao,
         );
       });
@@ -122,7 +122,7 @@ THEN a altoke entity record is registered
             name: 'existing',
             description: 'description',
           );
-          await altokeEntitiesTable.insertOne(existingAltokeEntity.toSqlite());
+          await altokeEntitiesTable.insertOne(existingAltokeEntity.toDrift());
           final initialAltokeEntitiesCount =
               await altokeEntitiesTable.count().getSingle();
           expect(initialAltokeEntitiesCount, 1);
@@ -185,7 +185,7 @@ AND the deleted altoke entity is returned
             name: 'name',
             description: 'description',
           );
-          await altokeEntitiesTable.insertOne(newAltokeEntity.toSqlite());
+          await altokeEntitiesTable.insertOne(newAltokeEntity.toDrift());
           final initialMatchingAltokeEntitiesCount = await altokeEntitiesTable
               .count(where: (table) => table.id.equals(altokeEntityId))
               .getSingle();
@@ -215,7 +215,7 @@ AND null is returned
             name: 'name',
             description: 'description',
           );
-          await altokeEntitiesTable.insertOne(newAltokeEntity.toSqlite());
+          await altokeEntitiesTable.insertOne(newAltokeEntity.toDrift());
           final initialAltokeEntities =
               await altokeEntitiesTable.select().get();
           expect(initialAltokeEntities, hasLength(1));
@@ -329,7 +329,7 @@ AND the altoke entity records not matching the reference altoke entity are kept
             ),
           ];
           await altokeEntitiesTable.insertAll(
-            altokeEntities.map((altokeEntity) => altokeEntity.toSqlite()),
+            altokeEntities.map((altokeEntity) => altokeEntity.toDrift()),
           );
           final initialAltokeEntitiesCount =
               await altokeEntitiesTable.count().getSingle();
@@ -466,7 +466,7 @@ AND the altoke entity records not matching the reference altoke entity are kept
             ),
           ];
           await altokeEntitiesTable.insertAll(
-            altokeEntities.map((altokeEntity) => altokeEntity.toSqlite()),
+            altokeEntities.map((altokeEntity) => altokeEntity.toDrift()),
           );
           final initialAltokeEntitiesCount =
               await altokeEntitiesTable.count().getSingle();
@@ -600,7 +600,7 @@ AND the altoke entity records not matching the reference altoke entity are kept
             ),
           ];
           await altokeEntitiesTable.insertAll(
-            altokeEntities.map((altokeEntity) => altokeEntity.toSqlite()),
+            altokeEntities.map((altokeEntity) => altokeEntity.toDrift()),
           );
           final initialAltokeEntitiesCount =
               await altokeEntitiesTable.count().getSingle();
@@ -734,7 +734,7 @@ AND the altoke entity records not matching the reference altoke entity are kept
             ),
           ];
           await altokeEntitiesTable.insertAll(
-            altokeEntities.map((altokeEntity) => altokeEntity.toSqlite()),
+            altokeEntities.map((altokeEntity) => altokeEntity.toDrift()),
           );
           final initialAltokeEntitiesCount =
               await altokeEntitiesTable.count().getSingle();
@@ -875,7 +875,7 @@ AND the altoke entity records not matching the reference altoke entity are kept
             ),
           ];
           await altokeEntitiesTable.insertAll(
-            altokeEntities.map((altokeEntity) => altokeEntity.toSqlite()),
+            altokeEntities.map((altokeEntity) => altokeEntity.toDrift()),
           );
           final initialAltokeEntitiesCount =
               await altokeEntitiesTable.count().getSingle();
@@ -933,7 +933,7 @@ THEN all altoke entity records are dropped
             ),
           );
           await altokeEntitiesTable.insertAll(
-            altokeEntities.map((altokeEntity) => altokeEntity.toSqlite()),
+            altokeEntities.map((altokeEntity) => altokeEntity.toDrift()),
           );
           final initialAltokeEntitiesCount =
               await altokeEntitiesTable.count().getSingle();
@@ -985,7 +985,7 @@ THEN a altoke entity record is updated
             name: 'name',
             description: 'description',
           );
-          await altokeEntitiesTable.insertOne(altokeEntity.toSqlite());
+          await altokeEntitiesTable.insertOne(altokeEntity.toDrift());
           final existingAltokeEntitiesCount =
               await altokeEntitiesTable.count().getSingle();
           expect(existingAltokeEntitiesCount, 1);
@@ -1058,7 +1058,7 @@ AND no altoke entity record is updated
             name: 'name',
             description: 'description',
           );
-          await altokeEntitiesTable.insertOne(altokeEntity.toSqlite());
+          await altokeEntitiesTable.insertOne(altokeEntity.toDrift());
           final existingAltokeEntitiesCount =
               await altokeEntitiesTable.count().getSingle();
           expect(existingAltokeEntitiesCount, 1);
@@ -1105,7 +1105,7 @@ THEN the altoke entity is returned
             name: 'name',
             description: 'description',
           );
-          await altokeEntitiesTable.insertOne(altokeEntity.toSqlite());
+          await altokeEntitiesTable.insertOne(altokeEntity.toDrift());
           final initialMatchingAltokeEntitiesCount = await altokeEntitiesTable
               .count(where: (table) => table.id.equals(altokeEntityId))
               .getSingle();
@@ -1219,7 +1219,7 @@ THEN the altoke entities are continuously emitted as they change
           await database.transaction(
             () async => altokeEntitiesTable.insertAll(
               altokeEntitiesForStage00.map(
-                (altokeEntity) => altokeEntity.toSqlite(),
+                (altokeEntity) => altokeEntity.toDrift(),
               ),
             ),
           );
@@ -1227,7 +1227,7 @@ THEN the altoke entities are continuously emitted as they change
           // Stage 01
           await database.transaction(
             () async => altokeEntitiesTable.insertOne(
-              newAltokeEntityInStage01.toSqlite(),
+              newAltokeEntityInStage01.toDrift(),
             ),
           );
 
@@ -1340,7 +1340,7 @@ THEN the altoke entities are continuously emitted as they change
           await database.transaction(
             () async => altokeEntitiesTable.insertAll(
               altokeEntitiesForStage00.map(
-                (altokeEntity) => altokeEntity.toSqlite(),
+                (altokeEntity) => altokeEntity.toDrift(),
               ),
             ),
           );
@@ -1348,7 +1348,7 @@ THEN the altoke entities are continuously emitted as they change
           // Stage 01
           await database.transaction(
             () async => altokeEntitiesTable.insertOne(
-              newAltokeEntityInStage01.toSqlite(),
+              newAltokeEntityInStage01.toDrift(),
             ),
           );
 
@@ -1449,7 +1449,7 @@ THEN the quantity of persisted altoke entities are continuously emitted as it ch
           await database.transaction(
             () async => altokeEntitiesTable.insertAll(
               altokeEntitiesForStage00.map(
-                (altokeEntity) => altokeEntity.toSqlite(),
+                (altokeEntity) => altokeEntity.toDrift(),
               ),
             ),
           );
@@ -1457,7 +1457,7 @@ THEN the quantity of persisted altoke entities are continuously emitted as it ch
           // Stage 01
           await database.transaction(
             () async => altokeEntitiesTable.insertOne(
-              newAltokeEntityInStage01.toSqlite(),
+              newAltokeEntityInStage01.toDrift(),
             ),
           );
 
@@ -1571,7 +1571,7 @@ THEN the quantity of persisted altoke entities that match the conditions is cont
           await database.transaction(
             () async => altokeEntitiesTable.insertAll(
               altokeEntitiesForStage00.map(
-                (altokeEntity) => altokeEntity.toSqlite(),
+                (altokeEntity) => altokeEntity.toDrift(),
               ),
             ),
           );
@@ -1579,7 +1579,7 @@ THEN the quantity of persisted altoke entities that match the conditions is cont
           // Stage 01
           await database.transaction(
             () async => altokeEntitiesTable.insertOne(
-              newAltokeEntityInStage01.toSqlite(),
+              newAltokeEntityInStage01.toDrift(),
             ),
           );
 
@@ -1607,7 +1607,7 @@ THEN the quantity of persisted altoke entities that match the conditions is cont
 }
 
 extension on NewAltokeEntity {
-  Insertable<DriftAltokeEntity> toSqlite() {
+  Insertable<DriftAltokeEntity> toDrift() {
     return DriftAltokeEntitiesCompanion.insert(
       name: name,
       description: Value.absentIfNull(description),
@@ -1616,7 +1616,7 @@ extension on NewAltokeEntity {
 }
 
 extension on AltokeEntity {
-  Insertable<DriftAltokeEntity> toSqlite() {
+  Insertable<DriftAltokeEntity> toDrift() {
     return DriftAltokeEntity(
       id: id,
       name: name,
