@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:altoke_monorepo_environment/altoke_monorepo_environment.dart';
 import 'package:brick_generator/src/brick_gen_data.dart';
 import 'package:brick_generator/src/brick_gen_options.dart';
 import 'package:brick_generator/src/reference_file.dart';
@@ -8,26 +9,7 @@ import 'package:brick_generator/src/shell.dart';
 import 'package:path/path.dart' as path;
 
 Future<void> main(List<String> args) async {
-  if (args.isEmpty) {
-    throw Exception(
-      'The brick scope path is required. '
-      'Provide it as the first argument.',
-    );
-  }
-  final scopeDir = Directory(args.first);
-  stdout.writeln('Brick scope path: ${scopeDir.path}');
-  final brickGenDataFile = File(
-    path.join(
-      scopeDir.path,
-      'brick-gen.json',
-    ),
-  );
-  if (!brickGenDataFile.existsSync()) {
-    throw Exception(
-      'Invalid brick scope directory. '
-      'Brick generation data file not found (${brickGenDataFile.path}). ',
-    );
-  }
+  final brickGenDataFile = Files.brickGenData;
   stdout.writeln('Brick generation data file: ${brickGenDataFile.path}');
   late final BrickGenOptions brickGenOptions;
   try {
@@ -41,6 +23,7 @@ Future<void> main(List<String> args) async {
       'Error: $e',
     );
   }
+  final scopeDir = Dirs.scope;
   final referenceDir = Directory(
     path.joinAll([
       scopeDir.path,
