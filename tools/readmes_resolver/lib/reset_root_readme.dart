@@ -1,4 +1,4 @@
-import 'package:readmes_resolver/src/files.dart';
+import 'package:altoke_monorepo_environment/altoke_monorepo_environment.dart';
 
 Future<void> main(List<String> args) async {
   final rootReadmeFile = Files.rootReadme;

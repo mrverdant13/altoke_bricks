@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:readmes_resolver/src/files.dart';
+import 'package:altoke_monorepo_environment/altoke_monorepo_environment.dart';
 
 void main(List<String> args) {
   final rootReadmeFile = Files.rootReadme;
