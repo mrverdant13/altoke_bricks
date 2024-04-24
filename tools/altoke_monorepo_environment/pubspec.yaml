@@ -1,0 +1,12 @@
+name: altoke_monorepo_environment
+description: A set of instances and utilities related to an Altoke Bricks monorepo.
+publish_to: none
+
+environment:
+  sdk: ">=3.3.1 <4.0.0"
+
+dependencies:
+  path: ^1.9.0
+
+dev_dependencies:
+  very_good_analysis: ^5.1.0
