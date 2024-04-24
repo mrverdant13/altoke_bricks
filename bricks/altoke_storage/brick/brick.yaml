@@ -19,11 +19,11 @@ vars:
   data_persistence_approach:
     type: enum
     values:
+      - drift
       - hive
       - isar
       - realm
       - sembast
-      - drift
     description: The approach to use for data persistence.
     default: hive
     prompt: What approach to use for data persistence?
