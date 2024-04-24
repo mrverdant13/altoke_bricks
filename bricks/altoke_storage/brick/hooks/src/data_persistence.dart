@@ -1,11 +1,11 @@
 import 'package:mason/mason.dart';
 
 enum DataPersistenceApproach {
+  drift('drift'),
   hive('hive'),
   isar('isar'),
   realm('realm'),
   sembast('sembast'),
-  drift('drift'),
   ;
 
   const DataPersistenceApproach(this.varIdentifier);
