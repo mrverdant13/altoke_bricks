@@ -1,0 +1,10 @@
+CREATE TABLE {{objects.snakeCase()}} (
+    id INT NOT NULL PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    description TEXT
+);
+
+add: INSERT INTO {{objects.snakeCase()}} (name, description) VALUES (:name, :description);
+deleteById: DELETE FROM {{objects.snakeCase()}} WHERE id = :id;
+insert: INSERT INTO {{objects.snakeCase()}} (id, name, description) VALUES (:id, :name, :description);
+getById: SELECT * FROM {{objects.snakeCase()}} WHERE id = :id;

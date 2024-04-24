@@ -1,0 +1,25 @@
+name: {{objects.snakeCase()}}_hive_storage
+description: A persistent storage for {{objects.titleCase()}} built on top of Hive.
+version: 0.0.1+1
+publish_to: none
+
+environment:
+  sdk: ">=3.3.1 <4.0.0"
+
+dependencies:
+  common:
+    path: ../../common/
+  {{objects.snakeCase()}}_storage:
+    path: ../{{objects.snakeCase()}}_storage/
+  {{object.snakeCase()}}:
+    path: ../../{{object.snakeCase()}}/
+  collection: ^1.18.0
+  hive: ^2.2.3
+  json_annotation: ^4.8.1
+  meta: ^1.11.0
+
+dev_dependencies:
+  build_runner: ^2.4.8
+  json_serializable: ^6.7.1
+  test: ^1.25.2
+  very_good_analysis: ^5.1.0
