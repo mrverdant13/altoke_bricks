@@ -1,7 +1,6 @@
 // ignore_for_file: type=lint
 import 'package:drift/drift.dart' as i0;
-import 'package:altoke_entities_drift_storage/altoke_entities.drift.dart'
-    as i1;
+import 'package:altoke_entities_drift_storage/altoke_entities.drift.dart' as i1;
 import 'package:drift/internal/modular.dart' as i2;
 
 class AltokeEntities extends i0.Table
