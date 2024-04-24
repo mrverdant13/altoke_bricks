@@ -23,11 +23,11 @@ packages:
   - ./bricks/altoke_storage/
   - ./bricks/altoke_storage/brick/hooks/
   - ./bricks/altoke_storage/e2e/
-  - ./bricks/altoke_storage/reference/_cd___use_hive_db___altoke_entities_hive_storage/
-  - ./bricks/altoke_storage/reference/_cd___use_isar_db___altoke_entities_isar_storage/
-  - ./bricks/altoke_storage/reference/_cd___use_realm_db___altoke_entities_realm_storage/
-  - ./bricks/altoke_storage/reference/_cd___use_sembast_db___altoke_entities_sembast_storage/
-  - ./bricks/altoke_storage/reference/_cd___use_sqlite_db___altoke_entities_sqlite_storage/
+  - ./bricks/altoke_storage/reference/_cd___use_drift___altoke_entities_drift_storage/
+  - ./bricks/altoke_storage/reference/_cd___use_hive___altoke_entities_hive_storage/
+  - ./bricks/altoke_storage/reference/_cd___use_isar___altoke_entities_isar_storage/
+  - ./bricks/altoke_storage/reference/_cd___use_realm___altoke_entities_realm_storage/
+  - ./bricks/altoke_storage/reference/_cd___use_sembast___altoke_entities_sembast_storage/
   - ./bricks/altoke_storage/reference/altoke_entities_storage/
   - ./tools/altoke_monorepo_environment/
   - ./tools/brick_generator/
