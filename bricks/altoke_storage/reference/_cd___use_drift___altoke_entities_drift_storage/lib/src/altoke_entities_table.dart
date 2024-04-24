@@ -1,10 +1,10 @@
 import 'package:altoke_common/common.dart';
-import 'package:altoke_entities_sqlite_storage/altoke_entities.drift.dart'
+import 'package:altoke_entities_drift_storage/altoke_entities.drift.dart'
     as drift;
 import 'package:altoke_entity/altoke_entity.dart';
 import 'package:drift/drift.dart';
 
-/// A SQLite table for Altoke Entities.
+/// A Drift (SQLite) table for Altoke Entities.
 typedef DriftAltokeEntitiesTable = drift.AltokeEntities;
 
 /// An extension on [DriftAltokeEntitiesTable] to add filtering capabilities.

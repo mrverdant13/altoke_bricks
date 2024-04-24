@@ -1,18 +1,18 @@
 import 'package:altoke_common/common.dart';
-import 'package:altoke_entities_sqlite_storage/altoke_entities_sqlite_storage.dart';
-import 'package:altoke_entities_sqlite_storage/src/drift_altoke_entity.dart';
+import 'package:altoke_entities_drift_storage/altoke_entities_drift_storage.dart';
+import 'package:altoke_entities_drift_storage/src/drift_altoke_entity.dart';
 import 'package:altoke_entities_storage/altoke_entities_storage.dart';
 import 'package:altoke_entity/altoke_entity.dart';
 import 'package:collection/collection.dart';
 import 'package:drift/drift.dart';
 import 'package:meta/meta.dart';
 
-/// {@template altoke_entities_sqlite_storage}
-/// A persistent [AltokeEntitiesStorage] implementation using SQLite.
+/// {@template altoke_entities_drift_storage}
+/// A persistent [AltokeEntitiesStorage] implementation using Drift (SQLite).
 /// {@endtemplate}
-class AltokeEntitiesSqliteStorage implements AltokeEntitiesStorage {
-  /// {@macro altoke_entities_sqlite_storage}
-  AltokeEntitiesSqliteStorage({
+class AltokeEntitiesDriftStorage implements AltokeEntitiesStorage {
+  /// {@macro altoke_entities_drift_storage}
+  AltokeEntitiesDriftStorage({
     required this.altokeEntitiesDao,
   });
 

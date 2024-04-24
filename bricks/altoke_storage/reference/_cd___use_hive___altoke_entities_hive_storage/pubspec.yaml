@@ -1,5 +1,5 @@
-name: altoke_entities_realm_storage
-description: A persistent storage for Altoke Entities built on top of Realm.
+name: altoke_entities_hive_storage
+description: A persistent storage for Altoke Entities built on top of Hive.
 version: 0.0.1+1
 publish_to: none
 
@@ -7,13 +7,14 @@ environment:
   sdk: ">=3.3.1 <4.0.0"
 
 dependencies:
+  #*w 1v 2> w*#
+  #*replace-start*#
   altoke_common:
-    #*w 1v 4> w*#
-    #*replace-start*#
     path: ../../../altoke_common/reference/
-    #*with*#
-    # path: ../../common/
-    #*replace-end*#
+  #*with i2*#
+  # common:
+  #   path: ../../common/
+  #*replace-end*#
   #*w 1v 2> w*#
   altoke_entities_storage:
     path: ../altoke_entities_storage/
@@ -26,9 +27,12 @@ dependencies:
     #*replace-end*#
   #*w 1v 2> w*#
   collection: ^1.18.0
+  hive: ^2.2.3
+  json_annotation: ^4.8.1
   meta: ^1.11.0
-  realm: ^2.1.0
 
 dev_dependencies:
+  build_runner: ^2.4.8
+  json_serializable: ^6.7.1
   test: ^1.25.2
   very_good_analysis: ^5.1.0
