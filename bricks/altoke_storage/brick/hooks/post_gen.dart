@@ -50,16 +50,20 @@ Future<void> run(HookContext context) async {
     );
   }
 
-  final interfaceProjectPath = path.join(
+  final umbrellaPath = path.join(
     Directory.current.path,
-    '${context.vars['objects'] as String}_storage',
+    '${(context.vars['objects'] as String).snakeCase}_storage',
+  );
+  final interfaceProjectPath = path.join(
+    umbrellaPath,
+    '${(context.vars['objects'] as String).snakeCase}_storage',
   );
   await runCommands(
     projectPath: interfaceProjectPath,
     runCodeGeneration: false,
   );
   final implementationProjectPath = path.join(
-    Directory.current.path,
+    umbrellaPath,
     '''${(context.vars['objects'] as String).snakeCase}_${selectedApproach.varIdentifier}_storage''',
   );
   await runCommands(
