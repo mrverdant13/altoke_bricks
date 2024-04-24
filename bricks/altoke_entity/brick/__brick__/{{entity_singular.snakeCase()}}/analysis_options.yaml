@@ -1,3 +1,5 @@
-include: package:very_good_analysis/analysis_options.yaml{{#use_code_generation}}analyzer:
+include: package:very_good_analysis/analysis_options.yaml
+{{#use_code_generation}}analyzer:
   exclude:
-    {{#use_dart_mappable}}- lib/**.mapper.dart{{/use_dart_mappable}}{{#use_freezed}}- lib/**.freezed.dart{{/use_freezed}}{{/use_code_generation}}
+    {{#use_dart_mappable}}- lib/**.mapper.dart{{/use_dart_mappable}}{{#use_freezed}}- lib/**.freezed.dart{{/use_freezed}}
+{{/use_code_generation}}
