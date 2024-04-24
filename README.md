@@ -142,11 +142,11 @@ Create a storage, **_al toque_** (_quickly_).
 
 - **Data persistence:**\
   Supported with one of the following packages:
+    - [`drift`][pub_package_drift]
     - [`hive`][pub_package_hive]
     - [`isar`][pub_package_isar]
     - [`realm`][pub_package_realm]
     - [`sembast`][pub_package_sembast]
-    - [`drift`][pub_package_drift]
 
 - **Strict lint rules:**\
   Enforced by [`very_good_analysis`][pub_package_very_good_analysis] for [native Dart & Flutter rules][docs_dart_and_flutter_linter_rules_link].
