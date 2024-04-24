@@ -28,7 +28,7 @@ THEN an instance of the altoke entity is returned
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*{{#use_equatable}}*/
         const altokeEntity = EAltokeEntity(
           id: 37,
           name: 'name',
@@ -36,12 +36,12 @@ THEN an instance of the altoke entity is returned
         );
         expect(altokeEntity, isNotNull);
         expect(altokeEntity, isA<EAltokeEntity>());
-        /*{{/use_freezed}}*/
+        /*{{/use_equatable}}*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*{{#use_freezed}}*/
         const altokeEntity = FAltokeEntity(
           id: 37,
           name: 'name',
@@ -49,7 +49,7 @@ THEN an instance of the altoke entity is returned
         );
         expect(altokeEntity, isNotNull);
         expect(altokeEntity, isA<FAltokeEntity>());
-        /*{{/use_equatable}}*/
+        /*{{/use_freezed}}*/
         /*remove-start*/
       }
       {
@@ -109,7 +109,7 @@ AND their hash codes are equal if they have the same values
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*{{#use_equatable}}*/
         const altokeEntity = EAltokeEntity(
           id: 37,
           name: 'name',
@@ -129,12 +129,12 @@ AND their hash codes are equal if they have the same values
         expect(altokeEntity, isNot(differentAltokeEntity));
         expect(altokeEntity.hashCode, sameAltokeEntity.hashCode);
         expect(altokeEntity.hashCode, isNot(differentAltokeEntity.hashCode));
-        /*{{/use_freezed}}*/
+        /*{{/use_equatable}}*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*{{#use_freezed}}*/
         const altokeEntity = FAltokeEntity(
           id: 37,
           name: 'name',
@@ -154,7 +154,7 @@ AND their hash codes are equal if they have the same values
         expect(altokeEntity, isNot(differentAltokeEntity));
         expect(altokeEntity.hashCode, sameAltokeEntity.hashCode);
         expect(altokeEntity.hashCode, isNot(differentAltokeEntity.hashCode));
-        /*{{/use_equatable}}*/
+        /*{{/use_freezed}}*/
         /*remove-start*/
       }
       {
@@ -214,7 +214,7 @@ THEN a string representation of the altoke entity is returned
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*{{#use_equatable}}*/
         const altokeEntity = EAltokeEntity(
           id: 37,
           name: 'name',
@@ -224,12 +224,12 @@ THEN a string representation of the altoke entity is returned
           altokeEntity.toString(),
           'EAltokeEntity(37, name, description)',
         );
-        /*{{/use_freezed}}*/
+        /*{{/use_equatable}}*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*{{#use_freezed}}*/
         const altokeEntity = FAltokeEntity(
           id: 37,
           name: 'name',
@@ -239,7 +239,7 @@ THEN a string representation of the altoke entity is returned
           altokeEntity.toString(),
           'FAltokeEntity(id: 37, name: name, description: description)',
         );
-        /*{{/use_equatable}}*/
+        /*{{/use_freezed}}*/
         /*remove-start*/
       }
       {
@@ -305,7 +305,7 @@ THEN an new instance of the altoke entity is returned
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*{{#use_equatable}}*/
         const altokeEntity = EAltokeEntity(
           id: 37,
           name: 'name',
@@ -330,12 +330,12 @@ THEN an new instance of the altoke entity is returned
           noopCopiedAltokeEntity,
           altokeEntity,
         );
-        /*{{/use_freezed}}*/
+        /*{{/use_equatable}}*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*{{#use_freezed}}*/
         const altokeEntity = FAltokeEntity(
           id: 37,
           name: 'name',
@@ -360,7 +360,7 @@ THEN an new instance of the altoke entity is returned
           noopCopiedAltokeEntity,
           altokeEntity,
         );
-        /*{{/use_equatable}}*/
+        /*{{/use_freezed}}*/
         /*remove-start*/
       }
       {
@@ -422,26 +422,26 @@ THEN an instance of the new altoke entity is returned
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*{{#use_equatable}}*/
         const newAltokeEntity = ENewAltokeEntity(
           name: 'name',
           description: 'description',
         );
         expect(newAltokeEntity, isNotNull);
         expect(newAltokeEntity, isA<ENewAltokeEntity>());
-        /*{{/use_freezed}}*/
+        /*{{/use_equatable}}*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*{{#use_freezed}}*/
         const newAltokeEntity = FNewAltokeEntity(
           name: 'name',
           description: 'description',
         );
         expect(newAltokeEntity, isNotNull);
         expect(newAltokeEntity, isA<FNewAltokeEntity>());
-        /*{{/use_equatable}}*/
+        /*{{/use_freezed}}*/
         /*remove-start*/
       }
       {
@@ -500,7 +500,7 @@ AND their hash codes are equal if they have the same values
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*{{#use_equatable}}*/
         const newAltokeEntity = ENewAltokeEntity(
           name: 'name',
           description: 'description',
@@ -520,12 +520,12 @@ AND their hash codes are equal if they have the same values
           newAltokeEntity.hashCode,
           isNot(differentNewAltokeEntity.hashCode),
         );
-        /*{{/use_freezed}}*/
+        /*{{/use_equatable}}*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*{{#use_freezed}}*/
         const newAltokeEntity = FNewAltokeEntity(
           name: 'name',
           description: 'description',
@@ -545,7 +545,7 @@ AND their hash codes are equal if they have the same values
           newAltokeEntity.hashCode,
           isNot(differentNewAltokeEntity.hashCode),
         );
-        /*{{/use_equatable}}*/
+        /*{{/use_freezed}}*/
         /*remove-start*/
       }
       {
@@ -604,7 +604,7 @@ THEN a string representation of the new altoke entity is returned
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*{{#use_equatable}}*/
         const newAltokeEntity = ENewAltokeEntity(
           name: 'name',
           description: 'description',
@@ -613,12 +613,12 @@ THEN a string representation of the new altoke entity is returned
           newAltokeEntity.toString(),
           'ENewAltokeEntity(name, description)',
         );
-        /*{{/use_freezed}}*/
+        /*{{/use_equatable}}*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*{{#use_freezed}}*/
         const newAltokeEntity = FNewAltokeEntity(
           name: 'name',
           description: 'description',
@@ -627,7 +627,7 @@ THEN a string representation of the new altoke entity is returned
           newAltokeEntity.toString(),
           'FNewAltokeEntity(name: name, description: description)',
         );
-        /*{{/use_equatable}}*/
+        /*{{/use_freezed}}*/
         /*remove-start*/
       }
       {
@@ -689,7 +689,7 @@ THEN an new instance of the new altoke entity is returned
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*{{#use_equatable}}*/
         const newAltokeEntity = ENewAltokeEntity(
           name: 'name',
           description: 'description',
@@ -711,12 +711,12 @@ THEN an new instance of the new altoke entity is returned
           noopCopiedNewAltokeEntity,
           newAltokeEntity,
         );
-        /*{{/use_freezed}}*/
+        /*{{/use_equatable}}*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*{{#use_freezed}}*/
         const newAltokeEntity = FNewAltokeEntity(
           name: 'name',
           description: 'description',
@@ -738,7 +738,7 @@ THEN an new instance of the new altoke entity is returned
           noopCopiedNewAltokeEntity,
           newAltokeEntity,
         );
-        /*{{/use_equatable}}*/
+        /*{{/use_freezed}}*/
         /*remove-start*/
       }
       {
@@ -797,26 +797,26 @@ THEN an instance of the partial altoke entity is returned
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*{{#use_equatable}}*/
         const partialAltokeEntity = EPartialAltokeEntity(
           name: EOptional.some('name'),
           description: EOptional.some('description'),
         );
         expect(partialAltokeEntity, isNotNull);
         expect(partialAltokeEntity, isA<EPartialAltokeEntity>());
-        /*{{/use_freezed}}*/
+        /*{{/use_equatable}}*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*{{#use_freezed}}*/
         const partialAltokeEntity = FPartialAltokeEntity(
           name: FOptional.some('name'),
           description: FOptional.some('description'),
         );
         expect(partialAltokeEntity, isNotNull);
         expect(partialAltokeEntity, isA<FPartialAltokeEntity>());
-        /*{{/use_equatable}}*/
+        /*{{/use_freezed}}*/
         /*remove-start*/
       }
       {
@@ -875,7 +875,7 @@ AND their hash codes are equal if they have the same values
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*{{#use_equatable}}*/
         const partialAltokeEntity = EPartialAltokeEntity(
           name: EOptional.some('name'),
           description: EOptional.some('description'),
@@ -895,12 +895,12 @@ AND their hash codes are equal if they have the same values
           partialAltokeEntity.hashCode,
           isNot(differentPartialAltokeEntity.hashCode),
         );
-        /*{{/use_freezed}}*/
+        /*{{/use_equatable}}*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*{{#use_freezed}}*/
         const partialAltokeEntity = FPartialAltokeEntity(
           name: FOptional.some('name'),
           description: FOptional.some('description'),
@@ -920,7 +920,7 @@ AND their hash codes are equal if they have the same values
           partialAltokeEntity.hashCode,
           isNot(differentPartialAltokeEntity.hashCode),
         );
-        /*{{/use_equatable}}*/
+        /*{{/use_freezed}}*/
         /*remove-start*/
       }
       {
@@ -979,7 +979,7 @@ THEN a string representation of the partial altoke entity is returned
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*{{#use_equatable}}*/
         const partialAltokeEntity = EPartialAltokeEntity(
           name: EOptional.some('name'),
           description: EOptional.some('description'),
@@ -988,12 +988,12 @@ THEN a string representation of the partial altoke entity is returned
           partialAltokeEntity.toString(),
           '''EPartialAltokeEntity(ESome<String>(name), ESome<String?>(description))''',
         );
-        /*{{/use_freezed}}*/
+        /*{{/use_equatable}}*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*{{#use_freezed}}*/
         const partialAltokeEntity = FPartialAltokeEntity(
           name: FOptional.some('name'),
           description: FOptional.some('description'),
@@ -1002,7 +1002,7 @@ THEN a string representation of the partial altoke entity is returned
           partialAltokeEntity.toString(),
           '''FPartialAltokeEntity(name: FOptional<String>.some(value: name), description: FOptional<String?>.some(value: description))''',
         );
-        /*{{/use_equatable}}*/
+        /*{{/use_freezed}}*/
         /*remove-start*/
       }
       {
@@ -1072,7 +1072,7 @@ THEN an new instance of the partial altoke entity is returned
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*{{#use_equatable}}*/
         const partialAltokeEntity = EPartialAltokeEntity(
           name: EOptional.some('name'),
           description: EOptional.some('description'),
@@ -1102,12 +1102,12 @@ THEN an new instance of the partial altoke entity is returned
           noopCopiedPartialAltokeEntity,
           partialAltokeEntity,
         );
-        /*{{/use_freezed}}*/
+        /*{{/use_equatable}}*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*{{#use_freezed}}*/
         const partialAltokeEntity = FPartialAltokeEntity(
           name: FOptional.some('name'),
           description: FOptional.some('description'),
@@ -1137,7 +1137,7 @@ THEN an new instance of the partial altoke entity is returned
           noopCopiedPartialAltokeEntity,
           partialAltokeEntity,
         );
-        /*{{/use_equatable}}*/
+        /*{{/use_freezed}}*/
         /*remove-start*/
       }
       {
