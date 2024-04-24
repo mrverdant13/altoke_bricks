@@ -23,7 +23,7 @@ abstract class AltokeRegexp {
 
   /// Regexp to identify a conditional directory to be resolved within its path.
   static final conditionalDirRegexp = RegExp(
-    r'_cd(n?)___([^;\s]*)___([^;\s]*)',
+    r'_cd(n?)___([^;\s\\\/]*)___([^;\s\\\/]*)',
     dotAll: true,
   );
 
