@@ -32,6 +32,7 @@ packages:
   - ./tools/brick_generator/
   - ./tools/monorepo_elements/
   - ./tools/readmes_resolver/
+  - ./tools/shell/
 
 command:
   bootstrap:
