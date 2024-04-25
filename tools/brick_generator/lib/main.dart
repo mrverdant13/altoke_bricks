@@ -5,8 +5,8 @@ import 'package:altoke_monorepo_environment/altoke_monorepo_environment.dart';
 import 'package:brick_generator/src/brick_gen_data.dart';
 import 'package:brick_generator/src/brick_gen_options.dart';
 import 'package:brick_generator/src/reference_file.dart';
-import 'package:brick_generator/src/shell.dart';
 import 'package:path/path.dart' as path;
+import 'package:shell/shell.dart';
 
 Future<void> main(List<String> args) async {
   final brickGenDataFile = Files.brickGenData;
