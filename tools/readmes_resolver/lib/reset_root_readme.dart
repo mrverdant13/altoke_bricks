@@ -1,4 +1,4 @@
-import 'package:altoke_monorepo_environment/altoke_monorepo_environment.dart';
+import 'package:monorepo_elements/monorepo_elements.dart';
 
 Future<void> main(List<String> args) async {
   final rootReadmeFile = Files.rootReadme;
