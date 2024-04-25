@@ -1,6 +1,6 @@
-import 'package:altoke_monorepo_environment/altoke_monorepo_environment.dart';
 import 'package:checked_yaml/checked_yaml.dart';
 import 'package:mason/mason.dart';
+import 'package:monorepo_elements/monorepo_elements.dart';
 
 void main(List<String> args) {
   final rootReadmeFile = Files.rootReadme;
