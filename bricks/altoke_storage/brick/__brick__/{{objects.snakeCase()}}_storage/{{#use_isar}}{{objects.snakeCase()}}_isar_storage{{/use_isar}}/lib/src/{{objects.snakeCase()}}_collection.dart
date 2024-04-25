@@ -1,4 +1,4 @@
-import 'package:altoke_common/common.dart';
+import 'package:common/common.dart';
 import 'package:{{objects.snakeCase()}}_isar_storage/{{objects.snakeCase()}}_isar_storage.dart';
 import 'package:{{object.snakeCase()}}/{{object.snakeCase()}}.dart';
 import 'package:isar/isar.dart';

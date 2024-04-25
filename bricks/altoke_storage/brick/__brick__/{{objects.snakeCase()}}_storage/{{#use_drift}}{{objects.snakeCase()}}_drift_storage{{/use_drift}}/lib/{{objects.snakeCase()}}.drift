@@ -2,7 +2,7 @@ CREATE TABLE {{objects.snakeCase()}} (
     id INT NOT NULL PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     description TEXT
-);
+) as {{object.pascalCase()}};
 
 add: INSERT INTO {{objects.snakeCase()}} (name, description) VALUES (:name, :description);
 deleteById: DELETE FROM {{objects.snakeCase()}} WHERE id = :id;
