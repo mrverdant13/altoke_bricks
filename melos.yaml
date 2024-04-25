@@ -29,8 +29,8 @@ packages:
   - ./bricks/altoke_storage/reference/_cd___use_realm___altoke_entities_realm_storage/
   - ./bricks/altoke_storage/reference/_cd___use_sembast___altoke_entities_sembast_storage/
   - ./bricks/altoke_storage/reference/altoke_entities_storage/
-  - ./tools/altoke_monorepo_environment/
   - ./tools/brick_generator/
+  - ./tools/monorepo_elements/
   - ./tools/readmes_resolver/
 
 command:
