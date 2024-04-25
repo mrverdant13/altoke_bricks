@@ -1,4 +1,4 @@
-import 'package:altoke_common/common.dart';
+import 'package:common/common.dart';
 import 'package:{{objects.snakeCase()}}_realm_storage/src/{{objects.snakeCase()}}_filter.dart';
 import 'package:{{objects.snakeCase()}}_realm_storage/src/realm_{{object.snakeCase()}}.dart';
 import 'package:{{objects.snakeCase()}}_storage/{{objects.snakeCase()}}_storage.dart';

@@ -1,4 +1,4 @@
-import 'package:altoke_common/common.dart';
+import 'package:common/common.dart';
 import 'package:{{objects.snakeCase()}}_drift_storage/{{objects.snakeCase()}}.drift.dart'
     as drift;
 import 'package:{{object.snakeCase()}}/{{object.snakeCase()}}.dart';

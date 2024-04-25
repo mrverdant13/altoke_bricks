@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:altoke_common/common.dart';
+import 'package:common/common.dart';
 import 'package:{{objects.snakeCase()}}_drift_storage/{{objects.snakeCase()}}_drift_storage.dart';
 import 'package:{{objects.snakeCase()}}_drift_storage/src/drift_{{object.snakeCase()}}.dart';
 import 'package:{{objects.snakeCase()}}_storage/{{objects.snakeCase()}}_storage.dart';
