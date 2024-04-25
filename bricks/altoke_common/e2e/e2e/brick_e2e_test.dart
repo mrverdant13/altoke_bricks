@@ -7,24 +7,12 @@ import 'dart:io';
 
 import 'package:mason/mason.dart';
 import 'package:meta/meta.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:monorepo_elements/monorepo_elements.dart';
 import 'package:path/path.dart' as path;
+import 'package:shell/shell.dart';
 import 'package:test/test.dart';
 
 import 'value_equality.dart';
-
-Future<MasonGenerator> asyncGenerator = Future(() async {
-  final e2eTestsPath = Platform.environment['MELOS_PACKAGE_PATH'] ?? '';
-  if (e2eTestsPath.isEmpty) {
-    throw StateError(
-      'This test must be under a mono-repo managed by melos',
-    );
-  }
-  final scopeDir = Directory(e2eTestsPath).parent;
-  final brickPath = path.joinAll([scopeDir.path, 'brick']);
-  final brick = Brick.path(brickPath);
-  return MasonGenerator.fromBrick(brick);
-});
 
 Future<void> main() async {
   await testGeneration(
@@ -60,46 +48,27 @@ ${description.trim()}
     test(
       composedDescription,
       () async {
-        registerFallbackValue(systemEncoding);
-        final masonGenerator = await asyncGenerator;
         final tempDirectory = Directory.systemTemp.createTempSync(
           'altoke-common-e2e-test-${valueEqualityApproach.varIdentifier}-',
         );
         addTearDown(() => tempDirectory.deleteSync(recursive: true));
         final directoryGeneratorTarget =
             DirectoryGeneratorTarget(tempDirectory);
-        final vars = <String, dynamic>{
+        final altokeCommonVars = <String, dynamic>{
           ValueEqualityApproach.varKey: valueEqualityApproach.varIdentifier,
         };
-        await masonGenerator.hooks.preGen(
-          workingDirectory: directoryGeneratorTarget.dir.path,
-          vars: vars,
-          onVarsChanged: (updatedVars) {
-            vars
-              ..clear()
-              ..addAll(updatedVars);
-          },
-        );
-        await masonGenerator.generate(
-          directoryGeneratorTarget,
-          vars: vars,
-        );
-        await masonGenerator.hooks.postGen(
-          workingDirectory: directoryGeneratorTarget.dir.path,
-          vars: vars,
-          onVarsChanged: (updatedVars) {
-            vars
-              ..clear()
-              ..addAll(updatedVars);
-          },
+        await BrickGenerator.common.runFullGeneration(
+          target: directoryGeneratorTarget,
+          vars: altokeCommonVars,
         );
         final outputPath = path.join(
           directoryGeneratorTarget.dir.path,
           'common',
         );
-        final formatResult = await runCommand(
+        final formatResult = await Shell.run(
           'dart format --set-exit-if-changed .',
-          projectPath: outputPath,
+          workingDir: outputPath,
+          throwOnError: false,
         );
         expect(
           formatResult,
@@ -110,9 +79,10 @@ ${description.trim()}
             '${formatResult.stderr}',
           ].join('\n'),
         );
-        final analyzeResult = await runCommand(
+        final analyzeResult = await Shell.run(
           'dart analyze --fatal-infos --fatal-warnings .',
-          projectPath: outputPath,
+          workingDir: outputPath,
+          throwOnError: false,
         );
         expect(
           analyzeResult,
@@ -123,9 +93,10 @@ ${description.trim()}
             '${analyzeResult.stderr}',
           ].join('\n'),
         );
-        final testResult = await runCommand(
+        final testResult = await Shell.run(
           '''dart test --coverage=coverage -r expanded --test-randomize-ordering-seed random''',
-          projectPath: outputPath,
+          workingDir: outputPath,
+          throwOnError: false,
         );
         expect(
           testResult,
@@ -136,9 +107,10 @@ ${description.trim()}
             '${testResult.stderr}',
           ].join('\n'),
         );
-        final formatCoverageResult = await runCommand(
+        final formatCoverageResult = await Shell.run(
           '''format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib''',
-          projectPath: outputPath,
+          workingDir: outputPath,
+          throwOnError: false,
         );
         expect(
           formatCoverageResult,
@@ -149,9 +121,10 @@ ${description.trim()}
             '${formatCoverageResult.stderr}',
           ].join('\n'),
         );
-        final coverageFilterResult = await runCommand(
+        final coverageFilterResult = await Shell.run(
           r'''coverde filter --input ./coverage/lcov.info --output ./coverage/filtered.lcov.info --filters \.freezed\.dart,\.g\.dart,\.mapper\.dart''',
-          projectPath: outputPath,
+          workingDir: outputPath,
+          throwOnError: false,
         );
         expect(
           coverageFilterResult,
@@ -162,9 +135,10 @@ ${description.trim()}
             '${coverageFilterResult.stderr}',
           ].join('\n'),
         );
-        final coverageCheckResult = await runCommand(
+        final coverageCheckResult = await Shell.run(
           'coverde check -i coverage/filtered.lcov.info 100',
-          projectPath: outputPath,
+          workingDir: outputPath,
+          throwOnError: false,
         );
         expect(
           coverageCheckResult,
@@ -202,17 +176,3 @@ final isSuccessfulProcessResult = isA<ProcessResult>().having(
   'exitCode',
   isZero,
 );
-
-Future<ProcessResult> runCommand(
-  String fullCommand, {
-  required String projectPath,
-}) async {
-  final [command, ...args] = fullCommand.split(' ');
-  final result = await Process.run(
-    command,
-    args,
-    workingDirectory: projectPath,
-    runInShell: true,
-  );
-  return result;
-}
