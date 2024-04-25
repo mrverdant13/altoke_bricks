@@ -7,6 +7,7 @@ on:
       - main
     paths:
       - .github/workflows/generate_templates.yaml
+      - bricks/**/brick-gen.json
       - bricks/**/reference/**
       - tools/brick_generator/**
 
