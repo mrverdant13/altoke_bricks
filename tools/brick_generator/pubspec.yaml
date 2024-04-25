@@ -10,6 +10,8 @@ dependencies:
     path: ../altoke_monorepo_environment/
   meta: ^1.11.0
   path: ^1.9.0
+  shell:
+    path: ../shell/
 
 dev_dependencies:
   very_good_analysis: ^5.1.0
