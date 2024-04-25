@@ -292,15 +292,6 @@ updates:
 
   # Tools
   - package-ecosystem: pub
-    directory: /tools/altoke_monorepo_environment/
-    schedule:
-      interval: daily
-    reviewers:
-      - mrverdant13
-    labels:
-      - build
-      - t:monorepo-env
-  - package-ecosystem: pub
     directory: /tools/brick_generator/
     schedule:
       interval: daily
@@ -309,6 +300,15 @@ updates:
     labels:
       - build
       - t:brick-gen
+  - package-ecosystem: pub
+    directory: /tools/monorepo_elements/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - t:monorepo-elements
   - package-ecosystem: pub
     directory: /tools/readmes_resolver/
     schedule:
