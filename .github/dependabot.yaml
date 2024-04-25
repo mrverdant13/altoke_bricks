@@ -318,3 +318,12 @@ updates:
     labels:
       - build
       - t:readmes-resolver
+  - package-ecosystem: pub
+    directory: /tools/shell/
+    schedule:
+      interval: daily
+    reviewers:
+      - mrverdant13
+    labels:
+      - build
+      - t:shell
