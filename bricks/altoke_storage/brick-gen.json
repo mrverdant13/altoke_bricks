@@ -2,6 +2,10 @@
   "targetRelativePath": "brick/__brick__/{{objects.snakeCase()}}_storage",
   "replacements": [
     {
+      "from": "altoke_common",
+      "to": "common"
+    },
+    {
       "from": "altokeEntities",
       "to": "altokeObjects"
     },
