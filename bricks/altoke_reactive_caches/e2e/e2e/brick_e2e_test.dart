@@ -6,24 +6,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:mason/mason.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:monorepo_elements/monorepo_elements.dart';
 import 'package:path/path.dart' as path;
+import 'package:shell/shell.dart';
 import 'package:test/test.dart';
-
-import 'fake_common.dart';
-
-Future<MasonGenerator> asyncGenerator = Future(() async {
-  final e2eTestsPath = Platform.environment['MELOS_PACKAGE_PATH'] ?? '';
-  if (e2eTestsPath.isEmpty) {
-    throw StateError(
-      'This test must be under a mono-repo managed by melos',
-    );
-  }
-  final scopeDir = Directory(e2eTestsPath).parent;
-  final brickPath = path.joinAll([scopeDir.path, 'brick']);
-  final brick = Brick.path(brickPath);
-  return MasonGenerator.fromBrick(brick);
-});
 
 Future<void> main() async {
   test(
@@ -34,46 +20,28 @@ WHEN the generation is run
 THEN the generated outputs should be valid and testable
 ''',
     () async {
-      registerFallbackValue(systemEncoding);
-      final masonGenerator = await asyncGenerator;
       final tempDir = Directory.systemTemp.createTempSync(
         'altoke-reactive-caches-e2e-test-',
       );
       addTearDown(() => tempDir.deleteSync(recursive: true));
       final directoryGeneratorTarget = DirectoryGeneratorTarget(tempDir);
+      final altokeCommonVars = <String, dynamic>{
+        'value_equality_approach': 'overrides',
+      };
+      await BrickGenerator.common.runFullGeneration(
+        target: directoryGeneratorTarget,
+        vars: altokeCommonVars,
+      );
+      final altokeReactiveCachesVars = <String, dynamic>{};
+      await BrickGenerator.reactiveCaches.runFullGeneration(
+        target: directoryGeneratorTarget,
+        vars: altokeReactiveCachesVars,
+      );
       final outputPath = path.join(tempDir.path, 'reactive_caches');
-      for (final MapEntry(key: filePath, value: fileContents)
-          in fakeCommonPackageFiles.entries) {
-        File(path.join(tempDir.path, filePath))
-          ..createSync(recursive: true)
-          ..writeAsStringSync(fileContents);
-      }
-      final vars = <String, dynamic>{};
-      await masonGenerator.hooks.preGen(
-        workingDirectory: directoryGeneratorTarget.dir.path,
-        vars: vars,
-        onVarsChanged: (updatedVars) {
-          vars
-            ..clear()
-            ..addAll(updatedVars);
-        },
-      );
-      await masonGenerator.generate(
-        directoryGeneratorTarget,
-        vars: vars,
-      );
-      await masonGenerator.hooks.postGen(
-        workingDirectory: directoryGeneratorTarget.dir.path,
-        vars: vars,
-        onVarsChanged: (updatedVars) {
-          vars
-            ..clear()
-            ..addAll(updatedVars);
-        },
-      );
-      final formatResult = await runCommand(
+      final formatResult = await Shell.run(
         'dart format --set-exit-if-changed .',
-        projectPath: outputPath,
+        workingDir: outputPath,
+        throwOnError: false,
       );
       expect(
         formatResult,
@@ -84,9 +52,10 @@ THEN the generated outputs should be valid and testable
           '${formatResult.stderr}',
         ].join('\n'),
       );
-      final analyzeResult = await runCommand(
+      final analyzeResult = await Shell.run(
         'dart analyze --fatal-infos --fatal-warnings .',
-        projectPath: outputPath,
+        workingDir: outputPath,
+        throwOnError: false,
       );
       expect(
         analyzeResult,
@@ -97,9 +66,10 @@ THEN the generated outputs should be valid and testable
           '${analyzeResult.stderr}',
         ].join('\n'),
       );
-      final testResult = await runCommand(
+      final testResult = await Shell.run(
         '''dart test --coverage=coverage -r expanded --test-randomize-ordering-seed random''',
-        projectPath: outputPath,
+        workingDir: outputPath,
+        throwOnError: false,
       );
       expect(
         testResult,
@@ -110,9 +80,10 @@ THEN the generated outputs should be valid and testable
           '${testResult.stderr}',
         ].join('\n'),
       );
-      final formatCoverageResult = await runCommand(
+      final formatCoverageResult = await Shell.run(
         '''format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib''',
-        projectPath: outputPath,
+        workingDir: outputPath,
+        throwOnError: false,
       );
       expect(
         formatCoverageResult,
@@ -123,9 +94,10 @@ THEN the generated outputs should be valid and testable
           '${formatCoverageResult.stderr}',
         ].join('\n'),
       );
-      final coverageCheckResult = await runCommand(
+      final coverageCheckResult = await Shell.run(
         'coverde check -i coverage/lcov.info 100',
-        projectPath: outputPath,
+        workingDir: outputPath,
+        throwOnError: false,
       );
       expect(
         coverageCheckResult,
@@ -162,17 +134,3 @@ final isSuccessfulProcessResult = isA<ProcessResult>().having(
   'exitCode',
   isZero,
 );
-
-Future<ProcessResult> runCommand(
-  String fullCommand, {
-  required String projectPath,
-}) async {
-  final [command, ...args] = fullCommand.split(' ');
-  final result = await Process.run(
-    command,
-    args,
-    workingDirectory: projectPath,
-    runInShell: true,
-  );
-  return result;
-}
