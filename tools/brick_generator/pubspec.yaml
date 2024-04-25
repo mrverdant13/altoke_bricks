@@ -6,9 +6,9 @@ environment:
   sdk: ">=3.3.1 <4.0.0"
 
 dependencies:
-  altoke_monorepo_environment:
-    path: ../altoke_monorepo_environment/
   meta: ^1.11.0
+  monorepo_elements:
+    path: ../../tools/monorepo_elements/
   path: ^1.9.0
   shell:
     path: ../shell/
