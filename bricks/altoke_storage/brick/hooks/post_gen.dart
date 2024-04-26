@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:mason/mason.dart';
 import 'package:path/path.dart' as path;
-import 'package:pubspec_sorter/pubspec_sorter.dart';
+import 'package:pubspec_deps_sorter/pubspec_deps_sorter.dart';
 
 import 'src/data_persistence.dart';
 
