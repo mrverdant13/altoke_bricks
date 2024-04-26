@@ -20,7 +20,7 @@ dependencies:
   flutter_riverpod: ^2.4.10
   #*w 1v 2> w*#
   #{{#use_go_router_router}}#
-  go_router: ^13.2.0
+  go_router: ^14.0.1
   #*w 1v 2> w*#
   #{{/use_go_router_router}}#
   intl: ^0.18.1
