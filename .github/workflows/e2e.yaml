@@ -23,9 +23,6 @@ jobs:
           # The issue is that the coverage gathering step, on Windows, uses a relative path
           # that assumes the Dart SDK is installed in the same drive as the project.
           # - windows-latest
-    defaults:
-      run:
-        working-directory: packages/brick_e2e
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
