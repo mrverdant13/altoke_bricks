@@ -7,6 +7,11 @@ environment:
 dependencies:
   mason: ^0.1.0-dev.52
   path: ^1.9.0
+  pubspec_sorter:
+    git:
+      url: https://github.com/mrverdant13/altoke_bricks.git
+      ref: b281e794604458a480764ff1cd08fc781ce58e54
+      path: ./tools/pubspec_sorter/
 
 dev_dependencies:
   very_good_analysis: ^5.1.0
