@@ -322,7 +322,7 @@ updates:
       - build
       - t:monorepo-elements
   - package-ecosystem: pub
-    directory: /tools/pubspec_sorter/
+    directory: /tools/pubspec_deps_sorter/
     schedule:
       interval: daily
     reviewers:
