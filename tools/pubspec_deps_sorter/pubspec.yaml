@@ -1,5 +1,5 @@
-name: pubspec_sorter
-description: A tool to sort pubspec.yaml files.
+name: pubspec_deps_sorter
+description: A tool to sort dependencies in pubspec.yaml files.
 publish_to: none
 
 environment:

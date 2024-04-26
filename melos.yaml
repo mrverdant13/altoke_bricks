@@ -31,7 +31,7 @@ packages:
   - ./bricks/altoke_storage/reference/altoke_entities_storage/
   - ./tools/brick_generator/
   - ./tools/monorepo_elements/
-  - ./tools/pubspec_sorter/
+  - ./tools/pubspec_deps_sorter/
   - ./tools/readmes_resolver/
   - ./tools/shell/
 
