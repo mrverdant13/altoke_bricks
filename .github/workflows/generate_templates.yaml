@@ -25,7 +25,7 @@ jobs:
         with:
           flutter-version: 3.19.3
       - name: Install melos
-        run: dart pub global activate melos 5.3.0
+        run: dart pub global activate melos 6.0.0
       - name: Initialize melos
         run: melos bs
       - name: Identify brick scopes
@@ -57,7 +57,7 @@ jobs:
         with:
           flutter-version: 3.19.3
       - name: Install melos
-        run: dart pub global activate melos 5.3.0
+        run: dart pub global activate melos 6.0.0
       - name: Set relevant packages
         run: echo "MELOS_PACKAGES=brick_generator,${{ steps.build-brick-scope-name.outputs.brick-scope-name }}" >> "$GITHUB_ENV"
       - name: Initialize melos
