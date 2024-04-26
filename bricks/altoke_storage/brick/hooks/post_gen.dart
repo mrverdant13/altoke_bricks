@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:mason/mason.dart';
 import 'package:path/path.dart' as path;
+import 'package:pubspec_sorter/pubspec_sorter.dart';
 
 import 'src/data_persistence.dart';
 
@@ -14,6 +15,7 @@ Future<void> run(HookContext context) async {
     required String projectPath,
     required bool runCodeGeneration,
   }) async {
+    sortPubspecDependencies(projectPath);
     await runCommand(
       'dart pub get',
       projectPath: projectPath,
