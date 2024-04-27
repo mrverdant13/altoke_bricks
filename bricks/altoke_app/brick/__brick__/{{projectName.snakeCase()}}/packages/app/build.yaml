@@ -1,7 +1,7 @@
 targets:
   $default:
     builders:
-      {{#use_auto_route_router}}auto_route_generator:auto_route_generator:
+      {{#use_auto_route}}auto_route_generator:auto_route_generator:
         options:
           enable_cached_builds: true
         generate_for:
@@ -10,9 +10,9 @@ targets:
         options:
           enable_cached_builds: true
         generate_for:
-          - lib/routing/router.dart{{/use_auto_route_router}}{{#use_go_router_router}}go_router_builder:
+          - lib/routing/router.dart{{/use_auto_route}}{{#use_go_router}}go_router_builder:
         generate_for:
-          - lib/routing/router.dart{{/use_go_router_router}}
+          - lib/routing/router.dart{{/use_go_router}}
       riverpod_generator:
         options:
           provider_name_suffix: Pod

@@ -27,7 +27,7 @@ You can check the available scripts in the `melos.yaml` file, located in the roo
 
 **Note:** Don't forget to run `melos bootstrap` first.
 
-{{#use_auto_route_router}}## Deep linking
+{{#use_auto_route}}## Deep linking
 
 This project uses the [`auto_route` package][pub_package_auto_route] to support deep linking.
 
@@ -37,7 +37,7 @@ This project uses the [`auto_route` package][pub_package_auto_route] to support 
 2. Register the new route in the `AppRouter` class, within the `lib/routing/router.dart` file, according to the desired routing structure.
 3. Update the actual routing setup with code generation.
 
-_For more information, see the [`auto_route` package][pub_package_auto_route] documentation._{{/use_auto_route_router}}{{#use_go_router_router}}## Deep linking
+_For more information, see the [`auto_route` package][pub_package_auto_route] documentation._{{/use_auto_route}}{{#use_go_router}}## Deep linking
 
 This project uses the [`go_router` package][pub_package_go_router] to support deep linking.
 
@@ -47,7 +47,7 @@ This project uses the [`go_router` package][pub_package_go_router] to support de
 2. Register the new route in the `lib/routing/router.dart` file, according to the desired routing structure.
 3. Update the actual routing setup with code generation.
 
-_For more information, see the [`go_router` package][pub_package_go_router] documentation._{{/use_go_router_router}}
+_For more information, see the [`go_router` package][pub_package_go_router] documentation._{{/use_go_router}}
 
 ## Internationalization
 
@@ -134,7 +134,7 @@ Widget build(BuildContext context) {
 
 [docs_melos_link]: https://melos.invertase.dev/
 [flutter_docs_internationalization_link]: https://docs.flutter.dev/ui/accessibility-and-localization/internationalization
-{{#use_auto_route_router}}[pub_package_auto_route]: https://pub.dev/packages/auto_route
-{{/use_auto_route_router}}[pub_package_flutter_localizations]: https://api.flutter.dev/flutter/flutter_localizations/flutter_localizations-library.html
-{{#use_go_router_router}}[pub_package_go_router]: https://pub.dev/packages/go_router
-{{/use_go_router_router}}[pub_package_intl]: https://pub.dev/packages/intl
+{{#use_auto_route}}[pub_package_auto_route]: https://pub.dev/packages/auto_route
+{{/use_auto_route}}[pub_package_flutter_localizations]: https://api.flutter.dev/flutter/flutter_localizations/flutter_localizations-library.html
+{{#use_go_router}}[pub_package_go_router]: https://pub.dev/packages/go_router
+{{/use_go_router}}[pub_package_intl]: https://pub.dev/packages/intl

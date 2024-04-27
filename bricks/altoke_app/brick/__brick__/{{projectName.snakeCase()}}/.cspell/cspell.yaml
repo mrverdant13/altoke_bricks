@@ -9,7 +9,7 @@ ignorePaths:
   - "**/pubspec.lock"
   - "**/*.arb"
   - "**/*.g.dart"
-  {{#use_auto_route_router}}- "**/*.gr.dart"{{/use_auto_route_router}}
+  {{#use_auto_route}}- "**/*.gr.dart"{{/use_auto_route}}
 enableGlobDot: true
 dictionaryDefinitions:
   - name: global-allow

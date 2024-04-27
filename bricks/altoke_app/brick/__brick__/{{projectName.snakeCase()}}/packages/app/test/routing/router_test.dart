@@ -1,8 +1,8 @@
-import 'package:{{projectName.snakeCase()}}/routing/routing.dart';{{#use_auto_route_router}}import 'package:auto_route/auto_route.dart';{{/use_auto_route_router}}import 'package:flutter/material.dart';
+import 'package:{{projectName.snakeCase()}}/routing/routing.dart';{{#use_auto_route}}import 'package:auto_route/auto_route.dart';{{/use_auto_route}}import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_test/flutter_test.dart';{{#use_go_router_router}}import 'package:go_router/go_router.dart';{{/use_go_router_router}}void main() {
+import 'package:flutter_test/flutter_test.dart';{{#use_go_router}}import 'package:go_router/go_router.dart';{{/use_go_router}}void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-{{#use_auto_route_router}}test(
+{{#use_auto_route}}test(
     '''
 
 GIVEN a router config pod
@@ -28,7 +28,7 @@ THEN the router uses an adaptive route type
       final router = AppRouter();
       expect(router.defaultRouteType, isA<AdaptiveRouteType>());
     },
-  );{{/use_auto_route_router}}{{#use_go_router_router}}test(
+  );{{/use_auto_route}}{{#use_go_router}}test(
     '''
 
 GIVEN a router config pod
@@ -41,5 +41,5 @@ THEN the config is injected
       final routerConfig = container.read(routerConfigPod);
       expect(routerConfig, isA<GoRouter>());
     },
-  );{{/use_go_router_router}}
+  );{{/use_go_router}}
 }

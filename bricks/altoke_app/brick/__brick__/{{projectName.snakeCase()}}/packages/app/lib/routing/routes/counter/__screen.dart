@@ -1,8 +1,8 @@
 import 'dart:math' as math;
 
-import 'package:{{projectName.snakeCase()}}/counter/counter.dart';{{#use_auto_route_router}}import 'package:auto_route/auto_route.dart';{{/use_auto_route_router}}import 'package:flutter/material.dart';{{#use_auto_route_router}}@RoutePage(
+import 'package:{{projectName.snakeCase()}}/counter/counter.dart';{{#use_auto_route}}import 'package:auto_route/auto_route.dart';{{/use_auto_route}}import 'package:flutter/material.dart';{{#use_auto_route}}@RoutePage(
   name: 'CounterRoute',
-){{/use_auto_route_router}}class CounterScreen extends StatelessWidget {
+){{/use_auto_route}}class CounterScreen extends StatelessWidget {
   const CounterScreen({
     super.key,
   });
