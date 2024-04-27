@@ -30,7 +30,7 @@ Future<void> run(HookContext context) async {
   // TODO(mrverdant13): Remove this when the issue is fixed.
   const dartFixCommand = 'dart fix --apply --code=directives_ordering';
   await runCommand(
-    '$dartFixCommand lib && $dartFixCommand test',
+    '$dartFixCommand lib',
     projectPath: actualAppPath,
     logger: logger,
     prefix: '🔧 ',
@@ -38,7 +38,15 @@ Future<void> run(HookContext context) async {
     completeMessage: 'Fixes applied!',
   );
   await runCommand(
-    'melos run format.all.fast',
+    '$dartFixCommand test',
+    projectPath: actualAppPath,
+    logger: logger,
+    prefix: '🔧 ',
+    startMessage: 'Applying fixes.',
+    completeMessage: 'Fixes applied!',
+  );
+  await runCommand(
+    'melos run format.all',
     projectPath: projectPath,
     logger: logger,
     prefix: '🪄  ',
