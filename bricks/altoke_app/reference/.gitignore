@@ -1,7 +1,7 @@
 /.DS_Store
 /.atom/
 /.idea/
-/.vscode/
+/.vscode/*
 
 # Files and directories created by pub
 /.dart_tool/
@@ -23,6 +23,10 @@
 
 
 # =============== EXCEPTIONS ===============
+!/.vscode/dummy-yaml-schema.json
+!/.vscode/extensions.json
+!/.vscode/launch.json
+!/.vscode/settings.json
 
 # Included in the git repo as per requirement of `melos`.
 # See: https://melos.invertase.dev/getting-started#configure-the-workspace
