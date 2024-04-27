@@ -42,7 +42,7 @@ RouterConfig<Object> routerConfig(RouterConfigRef ref) {final routerConfig ={{#u
 
   void logCurrentUri() {
     if (!kDebugMode) return;
-    final currentUri ={{#use_auto_route}}delegate.currentConfiguration!.uri{{/use_auto_route}}{{#use_go_router}}delegate.currentConfiguration.uri{{/use_go_router}}};
+    final currentUri ={{#use_auto_route}}delegate.currentConfiguration!.uri{{/use_auto_route}}{{#use_go_router}}delegate.currentConfiguration.uri{{/use_go_router}};
     log(
       'path: <$currentUri>',
       name: 'Navigation',
