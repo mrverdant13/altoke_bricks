@@ -13,9 +13,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 export 'routes/routes.dart';
 
-/*{{#use_go_router}}*/
 part 'router.g.dart';
-/*{{/use_go_router}}*/
 
 /*{{#use_auto_route}}*/
 @AutoRouterConfig(
