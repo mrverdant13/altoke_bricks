@@ -100,8 +100,9 @@ RouterConfig<Object> routerConfig(RouterConfigRef ref) {
       // coverage:ignore-start
       _ => throw UnimplementedError(),
       // coverage:ignore-end
-      /*remove-end*/
-    };
+    }
+        /*remove-end*/
+        ;
     log(
       'path: <$currentUri>',
       name: 'Navigation',
