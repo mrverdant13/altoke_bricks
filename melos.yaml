@@ -30,6 +30,7 @@ packages:
   - ./bricks/altoke_storage/reference/_cd___use_sembast___altoke_entities_sembast_storage/
   - ./bricks/altoke_storage/reference/altoke_entities_storage/
   - ./tools/brick_generator/
+  - ./tools/local_brick_installer/
   - ./tools/monorepo_elements/
   - ./tools/pubspec_deps_sorter/
   - ./tools/readmes_resolver/
@@ -252,8 +253,13 @@ scripts:
         - "*_brick_scope"
   brick.install:
     description: Add brick globally
-    steps:
-      - mason add -g altoke_app --path MELOS_ROOT_PATH/packages/brick/
+    run: dart run MELOS_ROOT_PATH/tools/local_brick_installer/lib/install_local_brick.dart
+    exec:
+      concurrency: 1
+      failFast: true
+    packageFilters:
+      scope:
+        - "*_brick_scope"
   brick.all:
     description: Generate brick and add it globally
     steps:

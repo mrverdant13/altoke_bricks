@@ -1,23 +1,23 @@
 import 'dart:developer';
 
 import 'package:altoke_app/routing/routing.dart';
-/*{{#use_auto_route_router}}*/
+/*{{#use_auto_route}}*/
 import 'package:auto_route/auto_route.dart';
-/*{{/use_auto_route_router}}*/
+/*{{/use_auto_route}}*/
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-/*{{#use_go_router_router}}*/
+/*{{#use_go_router}}*/
 import 'package:go_router/go_router.dart';
-/*{{/use_go_router_router}}*/
+/*{{/use_go_router}}*/
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 export 'routes/routes.dart';
 
-/*{{#use_go_router_router}}*/
+/*{{#use_go_router}}*/
 part 'router.g.dart';
-/*{{/use_go_router_router}}*/
+/*{{/use_go_router}}*/
 
-/*{{#use_auto_route_router}}*/
+/*{{#use_auto_route}}*/
 @AutoRouterConfig(
   generateForDir: ['lib/routing/'],
 )
@@ -35,9 +35,9 @@ class AppRouter extends $AppRouter {
     ),
   ];
 }
-/*{{/use_auto_route_router}}*/
+/*{{/use_auto_route}}*/
 
-/*{{#use_go_router_router}}*/
+/*{{#use_go_router}}*/
 @TypedGoRoute<CounterRouteData>(
   path: '/counter',
   name: 'CounterRoute',
@@ -50,7 +50,7 @@ class CounterRouteData extends GoRouteData {
     return const CounterScreen();
   }
 }
-/*{{/use_go_router_router}}*/
+/*{{/use_go_router}}*/
 
 @Riverpod(
   dependencies: [
@@ -66,18 +66,18 @@ RouterConfig<Object> routerConfig(RouterConfigRef ref) {
   final routerConfig = /*remove-start*/ switch (routerPackage) {
     RouterPackage.autoRoute =>
       /*remove-end*/
-      /*{{#use_auto_route_router}}*/
+      /*{{#use_auto_route}}*/
       AppRouter().config()
-    /*{{/use_auto_route_router}}*/
+    /*{{/use_auto_route}}*/
     /*remove-start*/,
     RouterPackage.goRouter => /*remove-end*/
-      /*{{#use_go_router_router}}*/
+      /*{{#use_go_router}}*/
       GoRouter(
         routes: $appRoutes,
         debugLogDiagnostics: kDebugMode,
         initialLocation: const CounterRouteData().location,
       )
-    /*{{/use_go_router_router}}*/
+    /*{{/use_go_router}}*/
     /*remove-start*/,
   } as RouterConfig<Object> /*remove-end*/;
   final delegate = routerConfig.routerDelegate;
@@ -88,14 +88,14 @@ RouterConfig<Object> routerConfig(RouterConfigRef ref) {
         switch (delegate) {
       RouterDelegate<UrlState>() =>
         /*remove-end*/
-        /*{{#use_auto_route_router}}*/
+        /*{{#use_auto_route}}*/
         delegate.currentConfiguration!.uri
-      /*{{/use_auto_route_router}}*/
+      /*{{/use_auto_route}}*/
       /*remove-start*/,
       GoRouterDelegate() => /*remove-end*/
-        /*{{#use_go_router_router}}*/
+        /*{{#use_go_router}}*/
         delegate.currentConfiguration.uri
-      /*{{/use_go_router_router}}*/
+      /*{{/use_go_router}}*/
       /*remove-start*/,
       // coverage:ignore-start
       _ => throw UnimplementedError(),

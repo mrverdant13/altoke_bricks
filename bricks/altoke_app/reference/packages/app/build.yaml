@@ -2,7 +2,7 @@ targets:
   $default:
     builders:
       #*w 1v 6> w*#
-      #{{#use_auto_route_router}}#
+      #{{#use_auto_route}}#
       auto_route_generator:auto_route_generator:
         options:
           enable_cached_builds: true
@@ -13,12 +13,12 @@ targets:
           enable_cached_builds: true
         generate_for:
           - lib/routing/router.dart
-      #{{/use_auto_route_router}}#
-      #{{#use_go_router_router}}#
+      #{{/use_auto_route}}#
+      #{{#use_go_router}}#
       go_router_builder:
         generate_for:
           - lib/routing/router.dart
-      #{{/use_go_router_router}}#
+      #{{/use_go_router}}#
       #*w 1v 6> w*#
       riverpod_generator:
         options:

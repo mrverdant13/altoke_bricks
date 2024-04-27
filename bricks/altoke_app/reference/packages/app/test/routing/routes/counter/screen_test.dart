@@ -1,17 +1,17 @@
 import 'package:altoke_app/app/app.dart';
 import 'package:altoke_app/routing/routing.dart';
-/*{{#use_auto_route_router}}*/
+/*{{#use_auto_route}}*/
 import 'package:auto_route/auto_route.dart';
-/*{{/use_auto_route_router}}*/
+/*{{/use_auto_route}}*/
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-/*{{#use_go_router_router}}*/
+/*{{#use_go_router}}*/
 import 'package:go_router/go_router.dart';
-/*{{/use_go_router_router}}*/
+/*{{/use_go_router}}*/
 
 void main() {
 /*w 1v w*/
-/*{{#use_auto_route_router}}*/
+/*{{#use_auto_route}}*/
   testWidgets(
     '''
 
@@ -38,9 +38,9 @@ THEN the counter screen should be shown
       expect(counterScreenFinder, findsOneWidget);
     },
   );
-/*{{/use_auto_route_router}}*/
+/*{{/use_auto_route}}*/
 
-/*{{#use_go_router_router}}*/
+/*{{#use_go_router}}*/
   testWidgets(
     '''
 
@@ -68,6 +68,6 @@ THEN the counter screen should be shown
       expect(counterScreenFinder, findsOneWidget);
     },
   );
-/*{{/use_go_router_router}}*/
+/*{{/use_go_router}}*/
 /*w 1v w*/
 }

@@ -87,6 +87,9 @@ abstract final class Vars {
     } catch (_) {}
     throw const AbsentBrickReferencePaths();
   }();
+
+  /// Name of a brick managed by the monorepo.
+  static final brickName = path.basename(path.dirname(brickPath));
 }
 
 extension on String {
