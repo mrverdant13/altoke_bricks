@@ -1,0 +1,10 @@
+// cspell:ignore blaugold
+{
+  "recommendations": [
+    "dart-code.flutter",
+    "google.arb-editor",
+    "blaugold.melos-code",
+    "streetsidesoftware.code-spell-checker",
+    "redhat.vscode-yaml",
+  ],
+}
