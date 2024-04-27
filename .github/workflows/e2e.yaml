@@ -31,7 +31,7 @@ jobs:
         with:
           flutter-version: 3.19.3
       - name: Install melos
-        run: dart pub global activate melos 5.3.0
+        run: dart pub global activate melos 6.0.0
       - name: Install coverage
         run: dart pub global activate coverage 1.7.2
       - name: Install coverde
