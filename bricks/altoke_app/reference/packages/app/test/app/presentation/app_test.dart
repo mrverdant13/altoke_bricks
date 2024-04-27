@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
 /*w 1v w*/
-/*{{#use_auto_route_router}}*/
+/*{{#use_auto_route}}*/
   testWidgets(
     '''
 
@@ -30,9 +30,9 @@ THEN the counter screen should be shown
       expect(homeScreenFinder, findsOneWidget);
     },
   );
-/*{{/use_auto_route_router}}*/
+/*{{/use_auto_route}}*/
 
-/*{{#use_go_router_router}}*/
+/*{{#use_go_router}}*/
   testWidgets(
     '''
 
@@ -57,6 +57,6 @@ THEN the counter screen should be shown
       expect(homeScreenFinder, findsOneWidget);
     },
   );
-/*{{/use_go_router_router}}*/
+/*{{/use_go_router}}*/
 /*w 1v w*/
 }

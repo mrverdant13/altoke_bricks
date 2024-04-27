@@ -3,9 +3,9 @@ analyzer:
   exclude:
     - lib/**.g.dart
     #*w 1v 4> w*#
-    #{{#use_auto_route_router}}#
+    #{{#use_auto_route}}#
     - lib/**.gr.dart
-    #{{/use_auto_route_router}}#
+    #{{/use_auto_route}}#
     #*w 1v 2> w*#
   plugins:
     - custom_lint
