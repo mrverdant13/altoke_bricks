@@ -1,11 +1,10 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:data_persistence_approach/data_persistence_approach.dart';
 import 'package:mason/mason.dart';
 import 'package:path/path.dart' as path;
 import 'package:pubspec_deps_sorter/pubspec_deps_sorter.dart';
-
-import 'src/data_persistence.dart';
 
 Future<void> run(HookContext context) async {
   final selectedApproach = DataPersistenceApproach.getSelectedApproach(context);

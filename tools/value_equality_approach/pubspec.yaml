@@ -1,0 +1,13 @@
+name: value_equality_approach
+description: Value equality approach.
+version: 0.0.1+1
+publish_to: none
+
+environment:
+  sdk: ">=3.3.1 <4.0.0"
+
+dependencies:
+  mason: ^0.1.0-dev.52
+
+dev_dependencies:
+  very_good_analysis: ^5.1.0

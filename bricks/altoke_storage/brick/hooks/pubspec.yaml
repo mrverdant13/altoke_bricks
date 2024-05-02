@@ -5,6 +5,11 @@ environment:
   sdk: ">=3.3.1 <4.0.0"
 
 dependencies:
+  data_persistence_approach:
+    git:
+      url: https://github.com/mrverdant13/altoke_bricks.git
+      ref: 5af3383f89e9e43fcbdd2d705b859b2c4468503f
+      path: ./tools/data_persistence_approach/
   mason: ^0.1.0-dev.52
   path: ^1.9.0
   pubspec_deps_sorter:

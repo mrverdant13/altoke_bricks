@@ -30,11 +30,13 @@ packages:
   - ./bricks/altoke_storage/reference/_cd___use_sembast___altoke_entities_sembast_storage/
   - ./bricks/altoke_storage/reference/altoke_entities_storage/
   - ./tools/brick_generator/
+  - ./tools/data_persistence_approach/
   - ./tools/local_brick_installer/
   - ./tools/monorepo_elements/
   - ./tools/pubspec_deps_sorter/
   - ./tools/readmes_resolver/
   - ./tools/shell/
+  - ./tools/value_equality_approach/
 
 command:
   bootstrap:

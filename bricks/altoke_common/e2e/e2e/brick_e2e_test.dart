@@ -11,8 +11,7 @@ import 'package:monorepo_elements/monorepo_elements.dart';
 import 'package:path/path.dart' as path;
 import 'package:shell/shell.dart';
 import 'package:test/test.dart';
-
-import 'value_equality.dart';
+import 'package:value_equality_approach/value_equality_approach.dart';
 
 Future<void> main() async {
   await testGeneration(

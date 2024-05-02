@@ -5,6 +5,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:data_persistence_approach/data_persistence_approach.dart';
 import 'package:mason/mason.dart';
 import 'package:meta/meta.dart';
 import 'package:mocktail/mocktail.dart';
@@ -12,8 +13,6 @@ import 'package:monorepo_elements/monorepo_elements.dart';
 import 'package:path/path.dart' as path;
 import 'package:shell/shell.dart';
 import 'package:test/test.dart';
-
-import 'data_persistence.dart';
 
 Future<void> main() async {
   // FIXME: Test Realm approach once it is testable.
