@@ -35,6 +35,7 @@ packages:
   - ./tools/pubspec_deps_sorter/
   - ./tools/readmes_resolver/
   - ./tools/shell/
+  - ./tools/value_equality_approach/
 
 command:
   bootstrap:
