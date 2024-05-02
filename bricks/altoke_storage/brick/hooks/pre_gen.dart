@@ -1,6 +1,5 @@
+import 'package:data_persistence_approach/data_persistence_approach.dart';
 import 'package:mason/mason.dart';
-
-import 'src/data_persistence.dart';
 
 void run(HookContext context) {
   context.vars = {
