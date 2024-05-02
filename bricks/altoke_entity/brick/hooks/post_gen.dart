@@ -3,8 +3,7 @@ import 'dart:io';
 
 import 'package:mason/mason.dart';
 import 'package:path/path.dart' as path;
-
-import 'src/value_equality.dart';
+import 'package:value_equality_approach/value_equality_approach.dart';
 
 Future<void> run(HookContext context) async {
   final projectPath = path.join(
