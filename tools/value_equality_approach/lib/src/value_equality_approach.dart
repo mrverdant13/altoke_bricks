@@ -3,19 +3,25 @@ import 'package:mason/mason.dart';
 /// Value equality approach.
 enum ValueEqualityApproach {
   /// Use `dart_mappable` for value equality.
-  dartMappable('dart_mappable'),
+  dartMappable('`dart_mappable`', 'dart_mappable'),
 
   /// Use `equatable` for value equality.
-  equatable('equatable'),
+  equatable('`equatable`', 'equatable'),
 
   /// Use `freezed` for value equality.
-  freezed('freezed'),
+  freezed('`freezed`', 'freezed'),
 
   /// Use `overrides` for value equality.
-  overrides('overrides'),
+  overrides('Overrides', 'overrides'),
+
+  /// No value equality approach.
+  none('None', 'none'),
   ;
 
-  const ValueEqualityApproach(this.varIdentifier);
+  const ValueEqualityApproach(this.readableName, this.varIdentifier);
+
+  /// The variable readable name.
+  final String readableName;
 
   /// The variable identifier.
   final String varIdentifier;
@@ -37,7 +43,10 @@ enum ValueEqualityApproach {
   static ValueEqualityApproach getSelectedApproach(HookContext context) {
     final selectedApproach = context.vars[varKey]! as String;
     return ValueEqualityApproach.values.firstWhere(
-      (approach) => approach.varIdentifier == selectedApproach,
+      (approach) => approach.readableName == selectedApproach,
+      orElse: () => throw ArgumentError(
+        'Invalid value equality approach: $selectedApproach',
+      ),
     );
   }
 
