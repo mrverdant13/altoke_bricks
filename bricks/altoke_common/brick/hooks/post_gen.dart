@@ -19,7 +19,7 @@ Future<void> run(HookContext context) async {
     startMessage: 'Installing dependencies.',
     completeMessage: 'Dependencies installed!',
   );
-  if (ValueEqualityApproach.getSelectedApproach(context).usesCodeGeneration) {
+  if (context.valueEqualityUsesCodeGeneration) {
     await runCommand(
       'dart run build_runner build --delete-conflicting-outputs',
       projectPath: projectPath,

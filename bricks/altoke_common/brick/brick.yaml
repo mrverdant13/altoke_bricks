@@ -8,11 +8,11 @@ environment:
 vars:
   value_equality_approach:
     type: enum
-    values:
-      - dart_mappable
-      - equatable
-      - freezed
-      - overrides
     description: The approach to use for value equality.
+    prompt: What approach to use for value equality?
+    values:
+      - "`dart_mappable`"
+      - "`equatable`"
+      - "`freezed`"
+      - "Overrides"
     default: dart_mappable
-    prompt: "What approach to use for value equality?"

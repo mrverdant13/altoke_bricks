@@ -22,7 +22,8 @@ WHEN the generation is run
 THEN the generated outputs should be valid and testable
 ''',
     generationCases: {
-      for (final valueEqualityApproach in ValueEqualityApproach.values)
+      for (final valueEqualityApproach in ValueEqualityApproach.values
+          .where((approach) => approach != ValueEqualityApproach.none))
         (valueEqualityApproach: valueEqualityApproach),
     },
   );
@@ -42,7 +43,7 @@ Future<void> testGeneration(
     final composedDescription = '''
 
 ${description.trim()}
-=> with `${valueEqualityApproach.varIdentifier}`
+=> with ${valueEqualityApproach.readableName}
 ''';
     test(
       composedDescription,
@@ -54,7 +55,7 @@ ${description.trim()}
         final directoryGeneratorTarget =
             DirectoryGeneratorTarget(tempDirectory);
         final altokeCommonVars = <String, dynamic>{
-          ValueEqualityApproach.varKey: valueEqualityApproach.varIdentifier,
+          ValueEqualityApproach.varKey: valueEqualityApproach.readableName,
         };
         await BrickGenerator.common.runFullGeneration(
           target: directoryGeneratorTarget,

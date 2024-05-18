@@ -4,9 +4,8 @@ import 'package:value_equality_approach/value_equality_approach.dart';
 void run(HookContext context) {
   context.vars = {
     ...context.vars,
-    ...ValueEqualityApproach.getSelectionMap(context),
-    'use_code_generation':
-        ValueEqualityApproach.getSelectedApproach(context).usesCodeGeneration,
+    ...context.valueEqualitySelectionMap,
+    'use_code_generation': context.valueEqualityUsesCodeGeneration,
     'using_hooks': true,
   };
 }
