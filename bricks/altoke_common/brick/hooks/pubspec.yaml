@@ -10,7 +10,7 @@ dependencies:
   value_equality_approach:
     git:
       url: https://github.com/mrverdant13/altoke_bricks.git
-      ref: 6f14bd7c5463720153868613f2cfd8a8b4134892
+      ref: d1107caac51f877cc41d1a5df593df2eb8f2ea49
       path: ./tools/value_equality_approach/
 
 dev_dependencies:
