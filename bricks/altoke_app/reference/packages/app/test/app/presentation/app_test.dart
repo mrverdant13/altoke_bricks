@@ -16,13 +16,19 @@ THEN the counter screen should be shown
 ''',
     (tester) async {
       await tester.pumpWidget(
+        /*remove-start*/ // /*remove-end*/ const
+        /*w 1v w*/
         ProviderScope(
           /*remove-start*/
           overrides: [
             routerPackagePod.overrideWithValue(RouterPackage.autoRoute),
           ],
           /*remove-end*/
-          child: const MyApp(),
+          child:
+              /*remove-start*/
+              const
+              /*remove-end*/
+              MyApp(),
         ),
       );
       await tester.pumpAndSettle();
@@ -43,13 +49,19 @@ THEN the counter screen should be shown
 ''',
     (tester) async {
       await tester.pumpWidget(
+        /*remove-start*/ // /*remove-end*/ const
+        /*w 1v w*/
         ProviderScope(
           /*remove-start*/
           overrides: [
             routerPackagePod.overrideWithValue(RouterPackage.goRouter),
           ],
           /*remove-end*/
-          child: const MyApp(),
+          child:
+              /*remove-start*/
+              const
+              /*remove-end*/
+              MyApp(),
         ),
       );
       await tester.pumpAndSettle();
