@@ -8,6 +8,7 @@
     "body": [
       "/// {@template ${1:package_name}.${2:template_name}}",
       "/// ${3}",
+      // cspell: disable-next-line
       "/// {@endtemplate}",
     ],
   },
