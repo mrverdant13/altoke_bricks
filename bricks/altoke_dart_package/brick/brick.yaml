@@ -1,0 +1,23 @@
+name: altoke_dart_package
+description: Create a Dart package, al toque (quickly).
+version: 0.0.1
+
+environment:
+  mason: ">=0.1.0-dev.50 <0.1.0"
+
+vars:
+  package_name:
+    type: string
+    description: The name of the package.
+    prompt: What is the name of the package?
+    default: altoke_package
+  package_description:
+    type: string
+    description: The description for the package.
+    prompt: What is the description of the package?
+    default: An Altoke Dart package.
+  use_code_generation:
+    type: boolean
+    description: Whether to use code generation.
+    prompt: Do you want to use code generation?
+    default: false
