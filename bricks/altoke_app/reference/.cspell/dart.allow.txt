@@ -4,6 +4,6 @@ endtemplate
 lcov
 melos
 mocktail
-pubspec
 riverpod
+unfocus
 unmanaged
