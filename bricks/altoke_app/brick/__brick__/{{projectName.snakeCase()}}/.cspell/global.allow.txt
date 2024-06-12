@@ -1,1 +1,2 @@
 # Globally allowed words
+pubspec
