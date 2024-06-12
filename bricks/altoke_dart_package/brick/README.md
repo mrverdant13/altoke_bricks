@@ -63,11 +63,11 @@ Create a Dart package, **_al toque_** (_quickly_).
 <!-- VARIABLES -->
 ### Variables
 
-| Variable                  | Description                             | Default       | Type        |
-| ------------------------- | --------------------------------------- | ------------- | ----------- |
-| `entity_singular`         | The name of the entity (singular).      | my entity     | String      |
-| `package_description`     | A description for the package.          | _None_        | String      |
-| `value_equality_approach` | The approach to use for value equality. | dart_mappable | Enumeration |
+| Variable | Description | Default | Type |
+| -------- | ----------- | ------- | ---- |
+| `package_name` | The name of the package. | altoke_package | String |
+| `package_description` | The description for the package. | An Altoke Dart package. | String |
+| `use_code_generation` | Whether to use code generation. | false | Boolean |
 <!-- VARIABLES -->
 
 <!-- EDITABLE -->
