@@ -35,7 +35,7 @@ class SembastAltokeEntity {
   final String? description;
 
   /// Converts this [SembastAltokeEntity] to its JSON representation.
-  Json toJson() => _$SembastAltokeEntityToJson(this);
+  Map<String, Object?> toJson() => _$SembastAltokeEntityToJson(this);
 
   /// Converts this [SembastAltokeEntity] to a [AltokeEntity].
   AltokeEntity toAltokeEntityWithId(int id) {
@@ -62,7 +62,7 @@ extension MappableAltokeEntity on AltokeEntity {
   /// Converts this [AltokeEntity] to its Sembast JSON representation.
   ///
   /// **NOTE:** The [id] is ignored in the conversion.
-  Json toSembastJson() {
+  Map<String, Object?> toSembastJson() {
     return toSembast().toJson();
   }
 }
@@ -78,7 +78,7 @@ extension MappableNewAltokeEntity on NewAltokeEntity {
   }
 
   /// Converts this [NewAltokeEntity] to its Sembast JSON representation.
-  Json toSembastJson() {
+  Map<String, Object?> toSembastJson() {
     return toSembast().toJson();
   }
 }
@@ -90,7 +90,7 @@ extension MappablePartialAltokeEntity on PartialAltokeEntity {
       SembastPartialAltokeEntity.fromEntity(this);
 
   /// Converts this [PartialAltokeEntity] to its Sembast JSON representation.
-  Json toSembastJson() => toSembast().toJson();
+  Map<String, Object?> toSembastJson() => toSembast().toJson();
 }
 
 /// {@template altoke_entities_sembast_storage.sembast_partial_altoke_entity}
@@ -120,7 +120,7 @@ class SembastPartialAltokeEntity {
   final Optional<String?> description;
 
   /// Converts this [SembastPartialAltokeEntity] to its JSON representation.
-  Json toJson() {
+  Map<String, Object?> toJson() {
     return {
       if (name case Some(:final value)) SembastAltokeEntity.nameJsonKey: value,
       if (description case Some(:final value))
@@ -130,7 +130,7 @@ class SembastPartialAltokeEntity {
 }
 
 /// A snapshot that represents an altoke entity.
-typedef AltokeEntitySnapshot = RecordSnapshot<int, Json>;
+typedef AltokeEntitySnapshot = RecordSnapshot<int, Map<String, Object?>>;
 
 /// An extension on [AltokeEntitySnapshot] to add mapping capabilities.
 extension ExtendedAltokeEntitySnapshot on AltokeEntitySnapshot {

@@ -35,7 +35,7 @@ class Sembast{{object.pascalCase()}} {
   final String? description;
 
   /// Converts this [Sembast{{object.pascalCase()}}] to its JSON representation.
-  Json toJson() => _$Sembast{{object.pascalCase()}}ToJson(this);
+  Map<String, Object?> toJson() => _$Sembast{{object.pascalCase()}}ToJson(this);
 
   /// Converts this [Sembast{{object.pascalCase()}}] to a [{{object.pascalCase()}}].
   {{object.pascalCase()}} to{{object.pascalCase()}}WithId(int id) {
@@ -62,7 +62,7 @@ extension Mappable{{object.pascalCase()}} on {{object.pascalCase()}} {
   /// Converts this [{{object.pascalCase()}}] to its Sembast JSON representation.
   ///
   /// **NOTE:** The [id] is ignored in the conversion.
-  Json toSembastJson() {
+  Map<String, Object?> toSembastJson() {
     return toSembast().toJson();
   }
 }
@@ -78,7 +78,7 @@ extension MappableNew{{object.pascalCase()}} on New{{object.pascalCase()}} {
   }
 
   /// Converts this [New{{object.pascalCase()}}] to its Sembast JSON representation.
-  Json toSembastJson() {
+  Map<String, Object?> toSembastJson() {
     return toSembast().toJson();
   }
 }
@@ -90,7 +90,7 @@ extension MappablePartial{{object.pascalCase()}} on Partial{{object.pascalCase()
       SembastPartial{{object.pascalCase()}}.fromEntity(this);
 
   /// Converts this [Partial{{object.pascalCase()}}] to its Sembast JSON representation.
-  Json toSembastJson() => toSembast().toJson();
+  Map<String, Object?> toSembastJson() => toSembast().toJson();
 }
 
 /// {@template {{objects.snakeCase()}}_sembast_storage.sembast_partial_{{object.snakeCase()}}}
@@ -120,7 +120,7 @@ class SembastPartial{{object.pascalCase()}} {
   final Optional<String?> description;
 
   /// Converts this [SembastPartial{{object.pascalCase()}}] to its JSON representation.
-  Json toJson() {
+  Map<String, Object?> toJson() {
     return {
       if (name case Some(:final value)) Sembast{{object.pascalCase()}}.nameJsonKey: value,
       if (description case Some(:final value))
@@ -130,7 +130,7 @@ class SembastPartial{{object.pascalCase()}} {
 }
 
 /// A snapshot that represents an {{object.lowerCase()}}.
-typedef {{object.pascalCase()}}Snapshot = RecordSnapshot<int, Json>;
+typedef {{object.pascalCase()}}Snapshot = RecordSnapshot<int, Map<String, Object?>>;
 
 /// An extension on [{{object.pascalCase()}}Snapshot] to add mapping capabilities.
 extension Extended{{object.pascalCase()}}Snapshot on {{object.pascalCase()}}Snapshot {
