@@ -34,7 +34,7 @@ class HiveAltokeEntity {
   final String? description;
 
   /// Converts this [HiveAltokeEntity] to its JSON representation.
-  Json toJson() => _$HiveAltokeEntityToJson(this);
+  Map<String, Object?> toJson() => _$HiveAltokeEntityToJson(this);
 
   /// Converts this [HiveAltokeEntity] to a [AltokeEntity].
   AltokeEntity toAltokeEntityWithId(int id) {
@@ -85,7 +85,7 @@ extension MappableAltokeEntity on AltokeEntity {
   /// Converts this [AltokeEntity] to its Hive JSON representation.
   ///
   /// **NOTE:** The [id] is ignored in the conversion.
-  Json toHiveJson() {
+  Map<String, Object?> toHiveJson() {
     return toHive().toJson();
   }
 }
@@ -101,7 +101,7 @@ extension MappableNewAltokeEntity on NewAltokeEntity {
   }
 
   /// Converts this [NewAltokeEntity] to its Hive JSON representation.
-  Json toHiveJson() {
+  Map<String, Object?> toHiveJson() {
     return toHive().toJson();
   }
 }

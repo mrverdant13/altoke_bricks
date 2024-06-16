@@ -5,7 +5,7 @@ import 'package:collection/collection.dart';
 import 'package:sembast/sembast.dart';
 
 /// A reference to a raw altoke entities store.
-typedef AltokeEntitiesStoreRef = StoreRef<int, Json>;
+typedef AltokeEntitiesStoreRef = StoreRef<int, Map<String, Object?>>;
 
 /// An extension on [AltokeEntitiesStoreRef] to add functionality.
 extension ExtendedAltokeEntitiesBox on AltokeEntitiesStoreRef {
