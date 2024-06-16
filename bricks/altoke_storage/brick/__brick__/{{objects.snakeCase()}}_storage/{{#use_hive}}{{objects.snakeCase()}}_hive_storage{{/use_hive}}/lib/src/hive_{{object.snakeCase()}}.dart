@@ -34,7 +34,7 @@ class Hive{{object.pascalCase()}} {
   final String? description;
 
   /// Converts this [Hive{{object.pascalCase()}}] to its JSON representation.
-  Json toJson() => _$Hive{{object.pascalCase()}}ToJson(this);
+  Map<String, Object?> toJson() => _$Hive{{object.pascalCase()}}ToJson(this);
 
   /// Converts this [Hive{{object.pascalCase()}}] to a [{{object.pascalCase()}}].
   {{object.pascalCase()}} to{{object.pascalCase()}}WithId(int id) {
@@ -85,7 +85,7 @@ extension Mappable{{object.pascalCase()}} on {{object.pascalCase()}} {
   /// Converts this [{{object.pascalCase()}}] to its Hive JSON representation.
   ///
   /// **NOTE:** The [id] is ignored in the conversion.
-  Json toHiveJson() {
+  Map<String, Object?> toHiveJson() {
     return toHive().toJson();
   }
 }
@@ -101,7 +101,7 @@ extension MappableNew{{object.pascalCase()}} on New{{object.pascalCase()}} {
   }
 
   /// Converts this [New{{object.pascalCase()}}] to its Hive JSON representation.
-  Json toHiveJson() {
+  Map<String, Object?> toHiveJson() {
     return toHive().toJson();
   }
 }
