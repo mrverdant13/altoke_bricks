@@ -1,0 +1,16 @@
+name: altoke_dart_package
+description: An altoke Dart package.
+version: 0.0.1+1
+publish_to: none
+
+environment:
+  sdk: ">=3.3.1 <4.0.0"
+
+dev_dependencies:
+  #*w 1v 2> w*#
+  #{{#use_code_generation}}#
+  build_runner: ^2.4.8
+  #*w 1v 2> w*#
+  #{{/use_code_generation}}#
+  test: ^1.25.2
+  very_good_analysis: ^5.1.0

@@ -1,0 +1,25 @@
+{
+  "docs-template": {
+    "scope": "dart",
+    "prefix": [
+      "docsTemplate",
+    ],
+    "description": "A documentation template.",
+    "body": [
+      "/// {@template ${1:package_name}.${2:template_name}}",
+      "/// ${3}",
+      // cspell: disable-next-line
+      "/// {@endtemplate}",
+    ],
+  },
+  "docs-macro": {
+    "scope": "dart",
+    "prefix": [
+      "docsMacro",
+    ],
+    "description": "A documentation macro.",
+    "body": [
+      "/// {@macro ${1:package_name}.${2:macro_name}}",
+    ],
+  },
+}

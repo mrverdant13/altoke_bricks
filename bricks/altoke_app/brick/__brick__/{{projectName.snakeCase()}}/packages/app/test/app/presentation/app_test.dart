@@ -13,8 +13,8 @@ WHEN the app is built
 THEN the counter screen should be shown
 ''',
     (tester) async {
-      await tester.pumpWidget(
-        ProviderScope(child: const MyApp(),
+      await tester.pumpWidget(const
+ProviderScope(child:MyApp(),
         ),
       );
       await tester.pumpAndSettle();
@@ -30,8 +30,8 @@ WHEN the app is built
 THEN the counter screen should be shown
 ''',
     (tester) async {
-      await tester.pumpWidget(
-        ProviderScope(child: const MyApp(),
+      await tester.pumpWidget(const
+ProviderScope(child:MyApp(),
         ),
       );
       await tester.pumpAndSettle();

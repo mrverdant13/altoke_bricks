@@ -1,4 +1,5 @@
 # Globally allowed words
+pubspec
 /*w 1v w*/
 /*drop*/
 altoke

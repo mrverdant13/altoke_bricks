@@ -5,7 +5,7 @@ import 'package:collection/collection.dart';
 import 'package:sembast/sembast.dart';
 
 /// A reference to a raw {{objects.lowerCase()}} store.
-typedef {{objects.pascalCase()}}StoreRef = StoreRef<int, Json>;
+typedef {{objects.pascalCase()}}StoreRef = StoreRef<int, Map<String, Object?>>;
 
 /// An extension on [{{objects.pascalCase()}}StoreRef] to add functionality.
 extension Extended{{objects.pascalCase()}}Box on {{objects.pascalCase()}}StoreRef {

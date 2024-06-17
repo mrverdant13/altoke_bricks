@@ -8,6 +8,10 @@ packages:
   - ./bricks/altoke_app/e2e/
   - ./bricks/altoke_app/reference/
   - ./bricks/altoke_app/reference/packages/app/
+  - ./bricks/altoke_dart_package/
+  - ./bricks/altoke_dart_package/brick/hooks/
+  - ./bricks/altoke_dart_package/e2e/
+  - ./bricks/altoke_dart_package/reference/
   - ./bricks/altoke_common/
   - ./bricks/altoke_common/brick/hooks/
   - ./bricks/altoke_common/e2e/

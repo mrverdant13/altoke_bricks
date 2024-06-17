@@ -100,6 +100,20 @@ Create a package with a set of common elements used across projects, **_al toque
 - **Testing:**\
   Tests with 100% coverage.
 
+### 🧱 Altoke Dart Package
+
+Create a Dart package, **_al toque_** (_quickly_).
+
+#### Features
+
+- **Optional Code Generation Setup**
+
+- **Strict lint rules:**\
+  Enforced by [`very_good_analysis`][pub_package_very_good_analysis] for [native Dart & Flutter rules][docs_dart_and_flutter_linter_rules_link].
+
+- **Testing:**\
+  Tests with 100% coverage.
+
 ### 🧱 Altoke Entity
 
 Create an entity, **_al toque_** (_quickly_).
