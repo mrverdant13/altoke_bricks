@@ -28,7 +28,15 @@ GIVEN a reactive cache for a list of elements''',
 
       setUp(
         () {
-          cache = ReactiveElementsListCache<String?>();
+          cache = ReactiveElementsListCache<String?>(
+            equalityChecker: (a, b) {
+              if (a.length != b.length) return false;
+              for (var i = 0; i < a.length; i++) {
+                if (a[i]?.trim() != b[i]?.trim()) return false;
+              }
+              return true;
+            },
+          );
         },
       );
 
@@ -337,14 +345,24 @@ THEN the filtered cached list is continuously emitted as it changes
             [],
             ['value 1', 'value 2', null, 'value 3', null],
             ['value 1'],
+            ['value 1   '],
             ['value 1', null, 'value 2'],
+            [null, 'value 1', 'value 2'],
             [null, 'value 1', null, null, 'value 2', 'value 3', 'value 4'],
+          ];
+          final expectedValues = <List<String?>>[
+            [],
+            ['value 1', 'value 2', 'value 3'],
+            ['value 1'],
+            ['value 1', 'value 2'],
+            ['value 1', 'value 2', 'value 3', 'value 4'],
           ];
           unawaited(
             expectLater(
               stream,
               emitsInOrder([
-                for (final value in values) orderedEquals(value.whereNotNull()),
+                for (final value in expectedValues)
+                  orderedEquals(value.whereNotNull()),
               ]),
             ),
           );

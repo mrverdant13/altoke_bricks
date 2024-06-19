@@ -3,12 +3,30 @@ import 'dart:async';
 import 'package:altoke_common/common.dart';
 import 'package:meta/meta.dart';
 
+/// Callback signature for comparing elements.
+typedef ElementEqualityChecker<E extends Object?> = bool Function(
+  E a,
+  E b,
+);
+
 /// {@template reactive_caches.reactive_element_cache}
 /// A reactive cache for a single element of type [E].
 /// {@endtemplate}
 class ReactiveElementCache<E extends Object> {
   /// {@macro reactive_caches.reactive_element_cache}
-  ReactiveElementCache();
+  ///
+  /// If [equalityChecker] is `null`, the [defaultEqualityChecker] is used.
+  ReactiveElementCache({
+    ElementEqualityChecker<E?>? equalityChecker,
+  }) : equalityChecker = equalityChecker ?? defaultEqualityChecker;
+
+  /// The default equality checker for an element of type [E].
+  @visibleForTesting
+  static bool defaultEqualityChecker<E extends Object?>(E a, E b) => a == b;
+
+  /// The equality checker for the cached element.
+  @visibleForTesting
+  final ElementEqualityChecker<E?> equalityChecker;
 
   /// The cached element.
   @visibleForTesting
@@ -51,7 +69,7 @@ class ReactiveElementCache<E extends Object> {
       onListen: onListen,
       onCancel: onCancel,
     );
-    return streamController!.stream.distinct();
+    return streamController!.stream.distinct(equalityChecker);
   }
 
   /// Updates the cached element by applying the provided [update] callback.
