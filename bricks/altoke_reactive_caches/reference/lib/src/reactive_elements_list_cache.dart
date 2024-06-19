@@ -4,12 +4,31 @@ import 'package:altoke_common/common.dart';
 import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
 
+/// Callback signature for comparing lists of elements.
+typedef ElementsListEqualityChecker<E extends Object?> = bool Function(
+  List<E> a,
+  List<E> b,
+);
+
 /// {@template reactive_caches.reactive_elements_list_cache}
 /// A reactive cache for a [List] of elements of type [E].
 /// {@endtemplate}
 class ReactiveElementsListCache<E extends Object?> {
   /// {@macro reactive_caches.reactive_elements_list_cache}
-  ReactiveElementsListCache();
+  ///
+  /// If [equalityChecker] is `null`, the [defaultEqualityChecker] is used.
+  ReactiveElementsListCache({
+    ElementsListEqualityChecker<E>? equalityChecker,
+  }) : equalityChecker = equalityChecker ?? defaultEqualityChecker;
+
+  /// The default equality checker for lists of elements of type [E].
+  @visibleForTesting
+  static bool defaultEqualityChecker<E extends Object?>(List<E> a, List<E> b) =>
+      ListEquality<E>().equals(a, b);
+
+  /// The equality checker for the cached list of elements.
+  @visibleForTesting
+  final ElementsListEqualityChecker<E> equalityChecker;
 
   /// The cached elements.
   @visibleForTesting
@@ -18,10 +37,6 @@ class ReactiveElementsListCache<E extends Object?> {
   /// The stream controller for the cached elements.
   @visibleForTesting
   StreamController<List<E>>? streamController;
-
-  /// Equality checker for lists.
-  @visibleForTesting
-  final listEqualityChecker = ListEquality<E>();
 
   /// Performs side effects when the first listener is added to the stream.
   Future<void> onListen() async {
@@ -72,7 +87,7 @@ class ReactiveElementsListCache<E extends Object?> {
     );
     return streamController!.stream
         .map((list) => list.where(where).toList())
-        .distinct(listEqualityChecker.equals);
+        .distinct(equalityChecker);
   }
 
   /// Inserts the provided [elements] at the provided [index] in the cached
