@@ -27,7 +27,9 @@ GIVEN a reactive cache for a single element''',
 
       setUp(
         () {
-          cache = ReactiveElementCache<String>();
+          cache = ReactiveElementCache<String>(
+            equalityChecker: (a, b) => a?.trim() == b?.trim(),
+          );
         },
       );
 
@@ -114,12 +116,21 @@ THEN the cached value is continuously emitted as it changes
           final stream = cache.watch();
           final values = <String?>[
             null,
+            'value 1   ',
             'value 1',
+            'value 2',
+            '   value 2',
+            null,
+            'value 3',
+          ];
+          final expectedValues = <String?>[
+            null,
+            'value 1   ',
             'value 2',
             null,
             'value 3',
           ];
-          unawaited(expectLater(stream, emitsInOrder(values)));
+          unawaited(expectLater(stream, emitsInOrder(expectedValues)));
           expect(cache.streamController, isNotNull);
           values.forEach(cache.set);
         },
