@@ -14,7 +14,6 @@ THEN an instance of the cache is returned
 ''',
     () {
       final cache = ReactiveElementsListCache<String?>();
-      addTearDown(() => cache.dispose);
       expect(cache, isNotNull);
       expect(cache, isA<ReactiveElementsListCache<String?>>());
     },
@@ -25,19 +24,11 @@ THEN an instance of the cache is returned
 
 GIVEN a reactive cache for a list of elements''',
     () {
-      var calledDispose = false;
       late ReactiveElementsListCache<String?> cache;
 
       setUp(
         () {
           cache = ReactiveElementsListCache<String?>();
-        },
-      );
-
-      tearDown(
-        () {
-          if (calledDispose) return;
-          cache.dispose();
         },
       );
 
@@ -49,12 +40,12 @@ WHEN another list is cached
 THEN the cached list is the new list
 ''',
         () {
-          cache.streamController.add([
+          cache.elements = [
             'original value 1',
             'original value 2',
-          ]);
+          ];
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               'original value 1',
               'original value 2',
@@ -69,7 +60,7 @@ THEN the cached list is the new list
             null,
           ]);
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               'new value 1',
               'new value 2',
@@ -90,12 +81,12 @@ WHEN another list is appended
 THEN the cached list is updated with the appended list
 ''',
         () {
-          cache.streamController.add([
+          cache.elements = [
             'original value 1',
             'original value 2',
-          ]);
+          ];
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               'original value 1',
               'original value 2',
@@ -113,7 +104,7 @@ THEN the cached list is updated with the appended list
             null,
           ]);
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               'original value 1',
               'original value 2',
@@ -139,15 +130,15 @@ WHEN another list is prepended
 THEN the cached list is updated with the prepended list
 ''',
         () {
-          cache.streamController.add([
+          cache.elements = [
             null,
             null,
             'original value 4',
             null,
             'original value 5',
-          ]);
+          ];
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               null,
               null,
@@ -167,7 +158,7 @@ THEN the cached list is updated with the prepended list
             null,
           ]);
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               'new value 1',
               'new value 2',
@@ -195,16 +186,16 @@ WHEN the cached list is requested without a filter
 THEN the complete cached list is returned
 ''',
         () {
-          cache.streamController.add([
+          cache.elements = [
             'value 1',
             'value 2',
             null,
             'value 3',
             null,
             'value 4',
-          ]);
+          ];
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               'value 1',
               'value 2',
@@ -237,16 +228,16 @@ WHEN the cached list is requested with a filter
 THEN the filtered cached list is returned
 ''',
         () {
-          cache.streamController.add([
+          cache.elements = [
             'value 1',
             'value 2',
             null,
             'value 3',
             null,
             'value 4',
-          ]);
+          ];
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               'value 1',
               'value 2',
@@ -277,7 +268,7 @@ THEN the filtered cached list is returned
 WHEN the cached list is watched without a filter
 THEN the complete cached list is continuously emitted as it changes
 ''',
-        () {
+        () async {
           final stream = cache.watch();
           final values = <List<String?>>[
             [],
@@ -294,9 +285,41 @@ THEN the complete cached list is continuously emitted as it changes
               ]),
             ),
           );
-          for (final value in values) {
-            cache.streamController.add(value);
-          }
+          expect(cache.streamController, isNotNull);
+          values.forEach(cache.set);
+        },
+      );
+
+      test(
+        '''
+
+WHEN the cached list is listened (without filters) multiple times
+THEN the complete cached list is continuously emitted as it changes
+WHEN all listeners are canceled
+THEN the stream controller is closed
+''',
+        () async {
+          expect(cache.streamController, isNull);
+          final stream1 = cache.watch();
+          expect(stream1.isBroadcast, isTrue);
+          final sub1a = stream1.listen((value) {});
+          expect(cache.streamController, isNotNull);
+          final sub1b = stream1.listen((value) {});
+          expect(cache.streamController, isNotNull);
+          await sub1a.cancel();
+          expect(cache.streamController, isNotNull);
+          await sub1b.cancel();
+          expect(cache.streamController, isNull);
+          final stream2 = cache.watch();
+          expect(stream2.isBroadcast, isTrue);
+          final sub2a = stream2.listen((value) {});
+          expect(cache.streamController, isNotNull);
+          final sub2b = stream2.listen((value) {});
+          expect(cache.streamController, isNotNull);
+          await sub2a.cancel();
+          expect(cache.streamController, isNotNull);
+          await sub2b.cancel();
+          expect(cache.streamController, isNull);
         },
       );
 
@@ -306,7 +329,7 @@ THEN the complete cached list is continuously emitted as it changes
 WHEN the cached list is watched with a filter
 THEN the filtered cached list is continuously emitted as it changes
 ''',
-        () {
+        () async {
           final stream = cache.watch(
             where: (element) => element != null,
           );
@@ -325,9 +348,41 @@ THEN the filtered cached list is continuously emitted as it changes
               ]),
             ),
           );
-          for (final value in values) {
-            cache.streamController.add(value);
-          }
+          expect(cache.streamController, isNotNull);
+          values.forEach(cache.set);
+        },
+      );
+
+      test(
+        '''
+
+WHEN the cached list is listened (with a filter) multiple times
+THEN the complete cached list is continuously emitted as it changes
+WHEN all listeners are canceled
+THEN the stream controller is closed
+''',
+        () async {
+          expect(cache.streamController, isNull);
+          final stream1 = cache.watch(where: (element) => element != null);
+          expect(stream1.isBroadcast, isTrue);
+          final sub1a = stream1.listen((value) {});
+          expect(cache.streamController, isNotNull);
+          final sub1b = stream1.listen((value) {});
+          expect(cache.streamController, isNotNull);
+          await sub1a.cancel();
+          expect(cache.streamController, isNotNull);
+          await sub1b.cancel();
+          expect(cache.streamController, isNull);
+          final stream2 = cache.watch(where: (element) => element != null);
+          expect(stream2.isBroadcast, isTrue);
+          final sub2a = stream2.listen((value) {});
+          expect(cache.streamController, isNotNull);
+          final sub2b = stream2.listen((value) {});
+          expect(cache.streamController, isNotNull);
+          await sub2a.cancel();
+          expect(cache.streamController, isNotNull);
+          await sub2b.cancel();
+          expect(cache.streamController, isNull);
         },
       );
 
@@ -339,7 +394,7 @@ WHEN another list is inserted
 THEN the cached list is updated with the inserted list
 ''',
         () {
-          cache.streamController.add([
+          cache.elements = [
             null,
             'original value 1',
             null,
@@ -352,9 +407,9 @@ THEN the cached list is updated with the inserted list
             null,
             null,
             'original value 7',
-          ]);
+          ];
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               null,
               'original value 1',
@@ -384,7 +439,7 @@ THEN the cached list is updated with the inserted list
             index: 5,
           );
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               null,
               'original value 1',
@@ -419,7 +474,7 @@ WHEN another collection of indexed elements is requested to be placed (append gr
 THEN the cached list is updated with the placed indexed elements
 ''',
         () {
-          cache.streamController.add([
+          cache.elements = [
             '0',
             '1',
             '2',
@@ -427,9 +482,9 @@ THEN the cached list is updated with the placed indexed elements
             '4',
             '5',
             '6',
-          ]);
+          ];
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               '0',
               '1',
@@ -449,7 +504,7 @@ THEN the cached list is updated with the placed indexed elements
             mode: PlacementMode.appendGroup,
           );
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               '0',
               '1',
@@ -474,7 +529,7 @@ WHEN another collection of indexed elements is requested to be placed (append fi
 THEN the cached list is updated with the placed indexed elements
 ''',
         () {
-          cache.streamController.add([
+          cache.elements = [
             '0',
             '1',
             '2',
@@ -482,9 +537,9 @@ THEN the cached list is updated with the placed indexed elements
             '4',
             '5',
             '6',
-          ]);
+          ];
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               '0',
               '1',
@@ -504,7 +559,7 @@ THEN the cached list is updated with the placed indexed elements
             mode: PlacementMode.appendFirst,
           );
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               '0',
               '1',
@@ -528,7 +583,7 @@ WHEN another collection of indexed elements is requested to be placed (append la
 THEN the cached list is updated with the placed indexed elements
 ''',
         () {
-          cache.streamController.add([
+          cache.elements = [
             '0',
             '1',
             '2',
@@ -536,9 +591,9 @@ THEN the cached list is updated with the placed indexed elements
             '4',
             '5',
             '6',
-          ]);
+          ];
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               '0',
               '1',
@@ -558,7 +613,7 @@ THEN the cached list is updated with the placed indexed elements
             mode: PlacementMode.appendLast,
           );
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               '0',
               '1',
@@ -582,7 +637,7 @@ WHEN another collection of indexed elements is requested to be placed (prepend g
 THEN the cached list is updated with the placed indexed elements
 ''',
         () {
-          cache.streamController.add([
+          cache.elements = [
             '0',
             '1',
             '2',
@@ -590,9 +645,9 @@ THEN the cached list is updated with the placed indexed elements
             '4',
             '5',
             '6',
-          ]);
+          ];
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               '0',
               '1',
@@ -612,7 +667,7 @@ THEN the cached list is updated with the placed indexed elements
             mode: PlacementMode.prependGroup,
           );
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               '0',
               '1',
@@ -637,7 +692,7 @@ WHEN another collection of indexed elements is requested to be placed (prepend f
 THEN the cached list is updated with the placed indexed elements
 ''',
         () {
-          cache.streamController.add([
+          cache.elements = [
             '0',
             '1',
             '2',
@@ -645,9 +700,9 @@ THEN the cached list is updated with the placed indexed elements
             '4',
             '5',
             '6',
-          ]);
+          ];
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               '0',
               '1',
@@ -667,7 +722,7 @@ THEN the cached list is updated with the placed indexed elements
             mode: PlacementMode.prependFirst,
           );
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               '0',
               '1',
@@ -691,7 +746,7 @@ WHEN another collection of indexed elements is requested to be placed (prepend l
 THEN the cached list is updated with the placed indexed elements
 ''',
         () {
-          cache.streamController.add([
+          cache.elements = [
             '0',
             '1',
             '2',
@@ -699,9 +754,9 @@ THEN the cached list is updated with the placed indexed elements
             '4',
             '5',
             '6',
-          ]);
+          ];
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               '0',
               '1',
@@ -721,7 +776,7 @@ THEN the cached list is updated with the placed indexed elements
             mode: PlacementMode.prependLast,
           );
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               '0',
               '1',
@@ -745,7 +800,7 @@ WHEN another collection of indexed elements is requested to be placed (replace w
 THEN the cached list is updated with the placed indexed elements
 ''',
         () {
-          cache.streamController.add([
+          cache.elements = [
             '0',
             '1',
             '2',
@@ -753,9 +808,9 @@ THEN the cached list is updated with the placed indexed elements
             '4',
             '5',
             '6',
-          ]);
+          ];
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               '0',
               '1',
@@ -775,7 +830,7 @@ THEN the cached list is updated with the placed indexed elements
             mode: PlacementMode.replaceWithGroup,
           );
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               '0',
               '1',
@@ -798,7 +853,7 @@ WHEN another collection of indexed elements is requested to be placed (replace w
 THEN the cached list is updated with the placed indexed elements
 ''',
         () {
-          cache.streamController.add([
+          cache.elements = [
             '0',
             '1',
             '2',
@@ -806,9 +861,9 @@ THEN the cached list is updated with the placed indexed elements
             '4',
             '5',
             '6',
-          ]);
+          ];
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               '0',
               '1',
@@ -828,7 +883,7 @@ THEN the cached list is updated with the placed indexed elements
             mode: PlacementMode.replaceWithFirst,
           );
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               '0',
               '1',
@@ -850,7 +905,7 @@ WHEN another collection of indexed elements is requested to be placed (replace w
 THEN the cached list is updated with the placed indexed elements
 ''',
         () {
-          cache.streamController.add([
+          cache.elements = [
             '0',
             '1',
             '2',
@@ -858,9 +913,9 @@ THEN the cached list is updated with the placed indexed elements
             '4',
             '5',
             '6',
-          ]);
+          ];
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               '0',
               '1',
@@ -880,7 +935,7 @@ THEN the cached list is updated with the placed indexed elements
             mode: PlacementMode.replaceWithLast,
           );
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               '0',
               '1',
@@ -902,16 +957,16 @@ WHEN the cached list is updated
 THEN the cached list is updated list
 ''',
         () {
-          cache.streamController.add([
+          cache.elements = [
             'value 1',
             'value 2',
             null,
             'value 3',
             null,
             'value 4',
-          ]);
+          ];
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               'value 1',
               'value 2',
@@ -929,7 +984,7 @@ THEN the cached list is updated list
             update: (element) => element?.replaceAll('value', 'updated'),
           );
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               'updated 1',
               'value 2',
@@ -950,16 +1005,16 @@ WHEN some elements of the cached list are requested to be removed
 THEN the cached list is updated without the removed elements
 ''',
         () {
-          cache.streamController.add([
+          cache.elements = [
             'value 1',
             'value 2',
             null,
             'value 3',
             null,
             'value 4',
-          ]);
+          ];
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               'value 1',
               'value 2',
@@ -973,7 +1028,7 @@ THEN the cached list is updated without the removed elements
             where: (_, element) => element == null,
           );
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               'value 1',
               'value 2',
@@ -992,16 +1047,16 @@ WHEN a trailing group of elements is requested to be removed
 THEN the cached list is updated without the removed elements
 ''',
         () {
-          cache.streamController.add([
+          cache.elements = [
             'value 1',
             'value 2',
             null,
             'value 3',
             null,
             'value 4',
-          ]);
+          ];
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               'value 1',
               'value 2',
@@ -1013,7 +1068,7 @@ THEN the cached list is updated without the removed elements
           );
           cache.removeLast(2);
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               'value 1',
               'value 2',
@@ -1032,16 +1087,16 @@ WHEN a leading group of elements is requested to be removed
 THEN the cached list is updated without the removed elements
 ''',
         () {
-          cache.streamController.add([
+          cache.elements = [
             'value 1',
             'value 2',
             null,
             'value 3',
             null,
             'value 4',
-          ]);
+          ];
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               'value 1',
               'value 2',
@@ -1053,7 +1108,7 @@ THEN the cached list is updated without the removed elements
           );
           cache.removeFirst(2);
           expect(
-            cache.streamController.value,
+            cache.elements,
             orderedEquals([
               null,
               'value 3',
@@ -1061,21 +1116,6 @@ THEN the cached list is updated without the removed elements
               'value 4',
             ]),
           );
-        },
-      );
-
-      test(
-        '''
-
-WHEN the cache is disposed
-THEN the internal stream is closed
-''',
-        () async {
-          expect(cache.streamController.isClosed, isFalse);
-          await cache.dispose();
-          calledDispose = true;
-          expect(cache.streamController.value, isEmpty);
-          expect(cache.streamController.isClosed, isTrue);
         },
       );
     },
