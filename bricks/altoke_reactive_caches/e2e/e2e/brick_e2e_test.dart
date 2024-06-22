@@ -2,7 +2,6 @@
 library brick_e2e_test;
 
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:mason/mason.dart';
@@ -26,7 +25,7 @@ THEN the generated outputs should be valid and testable
       addTearDown(() => tempDir.deleteSync(recursive: true));
       final directoryGeneratorTarget = DirectoryGeneratorTarget(tempDir);
       final altokeCommonVars = <String, dynamic>{
-        'value_equality_approach': 'overrides',
+        'value_equality_approach': 'Overrides',
       };
       await BrickGenerator.common.runFullGeneration(
         target: directoryGeneratorTarget,
@@ -37,100 +36,51 @@ THEN the generated outputs should be valid and testable
         target: directoryGeneratorTarget,
         vars: altokeReactiveCachesVars,
       );
-      final outputPath = path.join(tempDir.path, 'reactive_caches');
-      final formatResult = await Shell.run(
-        'dart format --set-exit-if-changed .',
-        workingDir: outputPath,
-        throwOnError: false,
+      final outputPath = path.join(
+        directoryGeneratorTarget.dir.path,
+        'reactive_caches',
       );
-      expect(
-        formatResult,
-        isSuccessfulProcessResult,
-        reason: [
-          'Project format check failed',
-          '${formatResult.stdout}',
-          '${formatResult.stderr}',
-        ].join('\n'),
+      final outputDir = Directory(outputPath);
+      final coverageDir = Directory(path.join(outputPath, 'coverage'));
+      final baseLcovFile = File(path.join(coverageDir.path, 'lcov.info'));
+      await expectLater(
+        Shell.dartFormat(
+          outputDir,
+          failOnChanges: true,
+        ),
+        completes,
       );
-      final analyzeResult = await Shell.run(
-        'dart analyze --fatal-infos --fatal-warnings .',
-        workingDir: outputPath,
-        throwOnError: false,
+      await expectLater(
+        Shell.dartAnalyze(
+          outputDir,
+          fatalInfos: true,
+          fatalWarnings: true,
+        ),
+        completes,
       );
-      expect(
-        analyzeResult,
-        isSuccessfulProcessResult,
-        reason: [
-          'Project analysis check failed',
-          '${analyzeResult.stdout}',
-          '${analyzeResult.stderr}',
-        ].join('\n'),
+      await expectLater(
+        Shell.dartTest(
+          outputDir,
+          coverageDirectory: coverageDir,
+        ),
+        completes,
       );
-      final testResult = await Shell.run(
-        '''dart test --coverage=coverage -r expanded --test-randomize-ordering-seed random''',
-        workingDir: outputPath,
-        throwOnError: false,
+      await expectLater(
+        Shell.formatCoverageAsLcov(
+          input: coverageDir,
+          output: baseLcovFile,
+          reportOn: Directory(path.join(outputPath, 'lib')),
+        ),
+        completes,
       );
-      expect(
-        testResult,
-        isSuccessfulProcessResult,
-        reason: [
-          'Tests failed',
-          '${testResult.stdout}',
-          '${testResult.stderr}',
-        ].join('\n'),
-      );
-      final formatCoverageResult = await Shell.run(
-        '''format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib''',
-        workingDir: outputPath,
-        throwOnError: false,
-      );
-      expect(
-        formatCoverageResult,
-        isSuccessfulProcessResult,
-        reason: [
-          'Coverage format failed',
-          '${formatCoverageResult.stdout}',
-          '${formatCoverageResult.stderr}',
-        ].join('\n'),
-      );
-      final coverageCheckResult = await Shell.run(
-        'coverde check -i coverage/lcov.info 100',
-        workingDir: outputPath,
-        throwOnError: false,
-      );
-      expect(
-        coverageCheckResult,
-        isSuccessfulProcessResult,
-        reason: 'Coverage check failed',
+      await expectLater(
+        Shell.checkCoverage(
+          inputLcov: baseLcovFile,
+          threshold: 100,
+        ),
+        completes,
       );
     },
     timeout: const Timeout(Duration(minutes: 2)),
   );
 }
-
-final isSuccessfulProcessResult = isA<ProcessResult>().having(
-  (processResult) {
-    final rawLines = LineSplitter.split(processResult.stderr.toString());
-    final sanitizedLines = rawLines.where(
-      (rawLine) {
-        final line = rawLine.trim().lowerCase;
-        if (line.isEmpty) return false;
-        final kernelLoadErrorFragment = 'load Kernel binary'.lowerCase;
-        return !line.contains(kernelLoadErrorFragment);
-      },
-    );
-    final buf = StringBuffer();
-    for (final line in sanitizedLines) {
-      buf.writeln(line);
-    }
-    final sanitizedStderr = buf.toString().trim();
-    return sanitizedStderr;
-  },
-  'stderr',
-  isEmpty,
-).having(
-  (processResult) => processResult.exitCode,
-  'exitCode',
-  isZero,
-);

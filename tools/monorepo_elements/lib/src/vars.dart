@@ -11,6 +11,9 @@ abstract final class Vars {
   /// Suffix of a brick hooks name.
   static const hooksNameSuffix = '_brick_hooks';
 
+  /// Suffix of a brick E2E test name.
+  static const e2eTestNameSuffix = '_e2e';
+
   /// Path to the root directory of the monorepo.
   static final rootPath = () {
     final rootPath = Platform.environment['MELOS_ROOT_PATH'] ?? '';
@@ -77,6 +80,25 @@ abstract final class Vars {
     return packagePath;
   }();
 
+  /// Name of a brick E2E test managed by the monorepo.
+  static final e2eTestName = () {
+    final e2eTestName = packageName;
+    if (!e2eTestName.endsWith(e2eTestNameSuffix)) {
+      throw InvalidBrickE2eNameError(
+        description: 'The package name must end with '
+            '"$e2eTestNameSuffix" ($e2eTestName).',
+      );
+    }
+    return e2eTestName;
+  }();
+
+  /// Path to the directory of a brick E2E test managed by the monorepo.
+  static final e2eTestPath = () {
+    // ignore: unnecessary_statements
+    e2eTestName; // Ensure the E2E test name is valid.
+    return packagePath;
+  }();
+
   /// Path to the brick directory of a brick managed by the monorepo.
   static final brickPath = () {
     try {
@@ -84,6 +106,9 @@ abstract final class Vars {
     } catch (_) {}
     try {
       return path.normalize(path.join(hooksPath, '..'));
+    } catch (_) {}
+    try {
+      return path.normalize(path.join(e2eTestPath, '..', 'brick'));
     } catch (_) {}
     throw const AbsentBrickReferencePaths();
   }();
