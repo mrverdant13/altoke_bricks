@@ -9,7 +9,10 @@ dependencies:
   checked_yaml: ^2.0.3
   mason: ^0.1.0-dev.53
   monorepo_elements:
-    path: ../monorepo_elements/
+    git:
+      url: https://github.com/mrverdant13/altoke_bricks.git
+      ref: c21ad2087476e3164f4adbf3488daf15fa958be6
+      path: ./tools/monorepo_elements/
   path: ^1.9.0
 
 dev_dependencies:
