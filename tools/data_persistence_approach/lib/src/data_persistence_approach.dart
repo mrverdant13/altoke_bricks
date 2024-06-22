@@ -20,6 +20,15 @@ enum DataPersistenceApproach {
 
   const DataPersistenceApproach(this.varIdentifier);
 
+  factory DataPersistenceApproach.fromVarIdentifier(String varIdentifier) {
+    return DataPersistenceApproach.values.firstWhere(
+      (approach) => approach.varIdentifier == varIdentifier,
+      orElse: () => throw ArgumentError(
+        'Invalid data persistence approach: $varIdentifier',
+      ),
+    );
+  }
+
   /// The variable identifier.
   final String varIdentifier;
 
@@ -39,9 +48,7 @@ enum DataPersistenceApproach {
   /// Returns the selected data persistence approach.
   static DataPersistenceApproach getSelectedApproach(HookContext context) {
     final selectedApproach = context.vars[varKey]! as String;
-    return DataPersistenceApproach.values.firstWhere(
-      (approach) => approach.varIdentifier == selectedApproach,
-    );
+    return DataPersistenceApproach.fromVarIdentifier(selectedApproach);
   }
 
   /// Returns the code generation command for the data persistence approach.
