@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:brick_generator/src/brick_gen_data.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
+import 'package:shell/git.dart';
 
 /// Regexp patterns to parametrize the template.
 @visibleForTesting
@@ -65,7 +66,7 @@ extension ReferenceFile on File {
     required BrickGenData brickGenData,
   }) async {
     try {
-      if (isGitIgnored) {
+      if (await isGitIgnored) {
         await delete(recursive: true);
         return;
       }
@@ -84,12 +85,13 @@ extension ReferenceFile on File {
 
   /// Checks if the reference file is git ignored.
   @visibleForTesting
-  bool get isGitIgnored {
-    final result = Process.runSync(
-      'git',
-      ['check-ignore', path, '--quiet'],
-    );
-    return result.exitCode == 0;
+  Future<bool> get isGitIgnored async {
+    try {
+      await Git.ignores(this);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   /// Resolves the parametrized contents of the reference [File].

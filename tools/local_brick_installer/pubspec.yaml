@@ -6,11 +6,7 @@ environment:
   sdk: ">=3.3.1 <4.0.0"
 
 dependencies:
-  monorepo_elements:
-    git:
-      url: https://github.com/mrverdant13/altoke_bricks.git
-      ref: c21ad2087476e3164f4adbf3488daf15fa958be6
-      path: ./tools/monorepo_elements/
+  monorepo_elements: any
 
 dev_dependencies:
   very_good_analysis: ^5.1.0
