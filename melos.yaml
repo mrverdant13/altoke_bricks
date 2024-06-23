@@ -3,44 +3,25 @@ name: altoke_bricks_monorepo
 repository: https://github.com/mrverdant13/altoke_bricks
 
 packages:
-  - ./bricks/altoke_app/
-  - ./bricks/altoke_app/brick/hooks/
-  - ./bricks/altoke_app/e2e/
-  - ./bricks/altoke_app/reference/
-  - ./bricks/altoke_app/reference/packages/app/
-  - ./bricks/altoke_dart_package/
-  - ./bricks/altoke_dart_package/brick/hooks/
-  - ./bricks/altoke_dart_package/e2e/
-  - ./bricks/altoke_dart_package/reference/
-  - ./bricks/altoke_common/
-  - ./bricks/altoke_common/brick/hooks/
-  - ./bricks/altoke_common/e2e/
-  - ./bricks/altoke_common/reference/
-  - ./bricks/altoke_entity/
-  - ./bricks/altoke_entity/brick/hooks/
-  - ./bricks/altoke_entity/e2e/
-  - ./bricks/altoke_entity/reference/
-  - ./bricks/altoke_reactive_caches/
-  - ./bricks/altoke_reactive_caches/brick/hooks/
-  - ./bricks/altoke_reactive_caches/e2e/
-  - ./bricks/altoke_reactive_caches/reference/
-  - ./bricks/altoke_storage/
-  - ./bricks/altoke_storage/brick/hooks/
-  - ./bricks/altoke_storage/e2e/
-  - ./bricks/altoke_storage/reference/_cd___use_drift___altoke_entities_drift_storage/
-  - ./bricks/altoke_storage/reference/_cd___use_hive___altoke_entities_hive_storage/
-  - ./bricks/altoke_storage/reference/_cd___use_isar___altoke_entities_isar_storage/
-  - ./bricks/altoke_storage/reference/_cd___use_realm___altoke_entities_realm_storage/
-  - ./bricks/altoke_storage/reference/_cd___use_sembast___altoke_entities_sembast_storage/
-  - ./bricks/altoke_storage/reference/altoke_entities_storage/
-  - ./tools/brick_generator/
-  - ./tools/data_persistence_approach/
-  - ./tools/local_brick_installer/
-  - ./tools/monorepo_elements/
-  - ./tools/pubspec_deps_sorter/
-  - ./tools/readmes_resolver/
-  - ./tools/shell/
-  - ./tools/value_equality_approach/
+  - bricks/*
+  - bricks/**/brick/hooks
+  - bricks/**/e2e
+  - bricks/**/reference
+  - bricks/**/reference/**
+  - tools/*
+
+categories:
+  e2e:
+    - bricks/**/e2e
+  hooks:
+    - bricks/**/brick/hooks
+  references:
+    - bricks/**/reference
+    - bricks/**/reference/**
+  scopes:
+    - bricks/*
+  tools:
+    - tools/*
 
 command:
   bootstrap:
@@ -200,6 +181,8 @@ scripts:
     run: dart test e2e --run-skipped -t e2e
     packageFilters:
       flutter: false
+      category:
+        - e2e
       fileExists:
         - e2e/brick_e2e_test.dart
     exec:
@@ -234,11 +217,16 @@ scripts:
     description: Resolve root README file
     steps:
       - dart run MELOS_ROOT_PATH/tools/readmes_resolver/lib/reset_root_readme.dart
-      - melos exec -c 1 --scope=*_brick_scope -- "dart run MELOS_ROOT_PATH/tools/readmes_resolver/lib/resolve_root_readme.dart"
+      - melos exec -c 1 --category=scopes -- "dart run MELOS_ROOT_PATH/tools/readmes_resolver/lib/resolve_root_readme.dart"
   docs.brick:
     description: Resolve brick README files
-    steps:
-      - melos exec -c 1 --scope=*_brick_scope -- "dart run MELOS_ROOT_PATH/tools/readmes_resolver/lib/resolve_brick_readme.dart"
+    run: >
+      dart run MELOS_ROOT_PATH/tools/readmes_resolver/lib/resolve_brick_readme.dart
+    exec:
+      concurrency: 1
+    packageFilters:
+      category:
+        - scopes
   docs.all:
     description: Resolve all README files
     steps:
@@ -249,14 +237,12 @@ scripts:
   brick.gen:
     description: Generate brick
     run: >
-      dart run MELOS_ROOT_PATH/tools/brick_generator/lib/main.dart MELOS_PACKAGE_PATH
+      dart run MELOS_ROOT_PATH/tools/brick_generator/lib/main.dart
     exec:
       concurrency: 1
     packageFilters:
-      ignore:
-        - brick_generator
-      scope:
-        - "*_brick_scope"
+      category:
+        - scopes
   brick.install:
     description: Add brick globally
     run: dart run MELOS_ROOT_PATH/tools/local_brick_installer/lib/install_local_brick.dart
@@ -264,8 +250,8 @@ scripts:
       concurrency: 1
       failFast: true
     packageFilters:
-      scope:
-        - "*_brick_scope"
+      category:
+        - scopes
   brick.all:
     description: Generate brick and add it globally
     steps:

@@ -25,8 +25,8 @@ jobs:
           flutter-version: 3.19.3
       - name: Install melos
         run: dart pub global activate melos 6.1.0
-      - name: Initialize melos
-        run: melos bs
+      - name: Initialize READMEs resolver
+        run: melos bs --scope=readmes_resolver
       - name: Resolve root README file
         run: melos run docs.root
       - name: Create PR
@@ -61,11 +61,9 @@ jobs:
           flutter-version: 3.19.3
       - name: Install melos
         run: dart pub global activate melos 6.1.0
-      - name: Initialize melos
-        run: melos bs
       - name: Identify brick scopes
         id: identify-brick-scopes
-        run: echo "scopes=$(melos list --scope='*_brick_scope' --json | tr -d '\n')" >> "$GITHUB_OUTPUT"
+        run: echo "scopes=$(melos list --category=scopes --json | tr -d '\n')" >> "$GITHUB_OUTPUT"
       - name: List identified scopes
         run: echo "${{ join(steps.identify-brick-scopes.outputs.scopes.*.name, ', ') }}"
   resolve-brick-readme:
@@ -93,10 +91,10 @@ jobs:
           flutter-version: 3.19.3
       - name: Install melos
         run: dart pub global activate melos 6.1.0
+      - name: Initialize READMEs resolver
+        run: melos bs --scope=readmes_resolver
       - name: Set relevant packages
-        run: echo "MELOS_PACKAGES=readmes_resolver,${{ steps.build-brick-scope-name.outputs.brick-scope-name }}" >> "$GITHUB_ENV"
-      - name: Initialize melos
-        run: melos bs
+        run: echo "MELOS_PACKAGES=${{ steps.build-brick-scope-name.outputs.brick-scope-name }}" >> "$GITHUB_ENV"
       - name: Generate template
         run: melos run docs.brick
       - name: Create PR
