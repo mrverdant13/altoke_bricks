@@ -6,8 +6,7 @@ environment:
   sdk: ">=3.3.1 <4.0.0"
 
 dependencies:
-  monorepo_elements:
-    path: ../monorepo_elements/
+  monorepo_elements: any
 
 dev_dependencies:
   very_good_analysis: ^5.1.0
