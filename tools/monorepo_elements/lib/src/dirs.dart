@@ -48,6 +48,17 @@ abstract final class Dirs {
     return dir;
   }();
 
+  /// Directory of a brick E2E test managed by the monorepo.
+  static final e2eTest = () {
+    final dir = Directory(Vars.e2eTestPath);
+    if (!dir.existsSync()) {
+      throw BrickE2eDirNotFoundError(
+        e2ePath: dir.path,
+      );
+    }
+    return dir;
+  }();
+
   /// Directory of a brick managed by the monorepo.
   static final brick = () {
     final dir = Directory(Vars.brickPath);

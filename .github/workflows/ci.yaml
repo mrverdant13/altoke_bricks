@@ -1,3 +1,4 @@
+# cspell:ignore longpaths
 name: ci
 
 on:
@@ -50,6 +51,10 @@ jobs:
           - ubuntu-latest
           - windows-latest
     steps:
+      - name: Support long paths on Windows
+        if: matrix.os == 'windows-latest'
+        run: |
+          git config --system core.longpaths true
       - name: Check out repository
         uses: actions/checkout@v4
       - name: Install Flutter

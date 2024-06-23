@@ -20,6 +20,15 @@ enum ValueEqualityApproach {
 
   const ValueEqualityApproach(this.readableName, this.varIdentifier);
 
+  factory ValueEqualityApproach.fromReadableName(String readableName) {
+    return ValueEqualityApproach.values.firstWhere(
+      (approach) => approach.readableName == readableName,
+      orElse: () => throw ArgumentError(
+        'Invalid value equality approach: $readableName',
+      ),
+    );
+  }
+
   /// The variable readable name.
   final String readableName;
 
@@ -42,12 +51,7 @@ enum ValueEqualityApproach {
   /// Returns the selected value equality approach.
   static ValueEqualityApproach getSelectedApproach(HookContext context) {
     final selectedApproach = context.vars[varKey]! as String;
-    return ValueEqualityApproach.values.firstWhere(
-      (approach) => approach.readableName == selectedApproach,
-      orElse: () => throw ArgumentError(
-        'Invalid value equality approach: $selectedApproach',
-      ),
-    );
+    return ValueEqualityApproach.fromReadableName(selectedApproach);
   }
 
   /// Returns whether the value equality approach uses code generation.

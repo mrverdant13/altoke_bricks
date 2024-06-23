@@ -17,7 +17,6 @@ dependencies:
     #*replace-end*#
   #*w 1v 2> w*#
   meta: ^1.11.0
-  rxdart: ^0.28.0
 
 dev_dependencies:
   test: ^1.25.2

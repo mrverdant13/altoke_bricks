@@ -2,18 +2,29 @@
 library brick_e2e_test;
 
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
+import 'package:checked_yaml/checked_yaml.dart';
 import 'package:mason/mason.dart';
 import 'package:meta/meta.dart';
 import 'package:monorepo_elements/monorepo_elements.dart';
 import 'package:path/path.dart' as path;
-import 'package:shell/shell.dart';
+import 'package:shell/coverage.dart';
+import 'package:shell/dart.dart';
 import 'package:test/test.dart';
 import 'package:value_equality_approach/value_equality_approach.dart';
 
 Future<void> main() async {
+  final brickManifestFile = Files.brickManifest;
+  final brickManifestContent = brickManifestFile.readAsStringSync();
+  final brickManifest = checkedYamlDecode(
+    brickManifestContent,
+    (m) => BrickYaml.fromJson(m!),
+  );
+  final vars = brickManifest.vars;
+  final rawValueEqualityApproaches = vars[ValueEqualityApproach.varKey]!;
+  final valueEqualityApproaches = rawValueEqualityApproaches.values!
+      .map(ValueEqualityApproach.fromReadableName);
   await testGeneration(
     '''
 
@@ -22,8 +33,7 @@ WHEN the generation is run
 THEN the generated outputs should be valid and testable
 ''',
     generationCases: {
-      for (final valueEqualityApproach in ValueEqualityApproach.values
-          .where((approach) => approach != ValueEqualityApproach.none))
+      for (final valueEqualityApproach in valueEqualityApproaches)
         (valueEqualityApproach: valueEqualityApproach),
     },
   );
@@ -65,114 +75,62 @@ ${description.trim()}
           directoryGeneratorTarget.dir.path,
           'common',
         );
-        final formatResult = await Shell.run(
-          'dart format --set-exit-if-changed .',
-          workingDir: outputPath,
-          throwOnError: false,
+        final outputDir = Directory(outputPath);
+        final coverageDir = Directory(path.join(outputPath, 'coverage'));
+        final baseLcovFile = File(path.join(coverageDir.path, 'lcov.info'));
+        final filteredLcovFile =
+            File(path.join(coverageDir.path, 'filtered.lcov.info'));
+        await expectLater(
+          Dart.format(
+            outputDir,
+            failIfChanged: true,
+          ),
+          completes,
         );
-        expect(
-          formatResult,
-          isSuccessfulProcessResult,
-          reason: [
-            'Project format failed',
-            '${formatResult.stdout}',
-            '${formatResult.stderr}',
-          ].join('\n'),
+        await expectLater(
+          Dart.analyze(
+            outputDir,
+            fatalInfos: true,
+            fatalWarnings: true,
+          ),
+          completes,
         );
-        final analyzeResult = await Shell.run(
-          'dart analyze --fatal-infos --fatal-warnings .',
-          workingDir: outputPath,
-          throwOnError: false,
+        await expectLater(
+          Dart.test(
+            outputDir,
+            coverageDirectory: coverageDir,
+          ),
+          completes,
         );
-        expect(
-          analyzeResult,
-          isSuccessfulProcessResult,
-          reason: [
-            'Project analysis failed',
-            '${analyzeResult.stdout}',
-            '${analyzeResult.stderr}',
-          ].join('\n'),
+        await expectLater(
+          Coverage.formatAsLcov(
+            input: coverageDir,
+            output: baseLcovFile,
+            reportOn: Directory(path.join(outputPath, 'lib')),
+          ),
+          completes,
         );
-        final testResult = await Shell.run(
-          '''dart test --coverage=coverage -r expanded --test-randomize-ordering-seed random''',
-          workingDir: outputPath,
-          throwOnError: false,
+        await expectLater(
+          Coverage.filter(
+            inputLcov: baseLcovFile,
+            outputLcov: filteredLcovFile,
+            filters: [
+              r'\.freezed\.dart',
+              r'\.g\.dart',
+              r'\.mapper\.dart',
+            ],
+          ),
+          completes,
         );
-        expect(
-          testResult,
-          isSuccessfulProcessResult,
-          reason: [
-            'Tests failed',
-            '${testResult.stdout}',
-            '${testResult.stderr}',
-          ].join('\n'),
-        );
-        final formatCoverageResult = await Shell.run(
-          '''format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib''',
-          workingDir: outputPath,
-          throwOnError: false,
-        );
-        expect(
-          formatCoverageResult,
-          isSuccessfulProcessResult,
-          reason: [
-            'Coverage format failed',
-            '${formatCoverageResult.stdout}',
-            '${formatCoverageResult.stderr}',
-          ].join('\n'),
-        );
-        final coverageFilterResult = await Shell.run(
-          r'''coverde filter --input ./coverage/lcov.info --output ./coverage/filtered.lcov.info --filters \.freezed\.dart,\.g\.dart,\.mapper\.dart''',
-          workingDir: outputPath,
-          throwOnError: false,
-        );
-        expect(
-          coverageFilterResult,
-          isSuccessfulProcessResult,
-          reason: [
-            'Coverage filter failed',
-            '${coverageFilterResult.stdout}',
-            '${coverageFilterResult.stderr}',
-          ].join('\n'),
-        );
-        final coverageCheckResult = await Shell.run(
-          'coverde check -i coverage/filtered.lcov.info 100',
-          workingDir: outputPath,
-          throwOnError: false,
-        );
-        expect(
-          coverageCheckResult,
-          isSuccessfulProcessResult,
-          reason: 'Coverage check failed',
+        await expectLater(
+          Coverage.check(
+            inputLcov: filteredLcovFile,
+            threshold: 100,
+          ),
+          completes,
         );
       },
       timeout: const Timeout(Duration(minutes: 5)),
     );
   }
 }
-
-final isSuccessfulProcessResult = isA<ProcessResult>().having(
-  (processResult) {
-    final rawLines = LineSplitter.split(processResult.stderr.toString());
-    final sanitizedLines = rawLines.where(
-      (rawLine) {
-        final line = rawLine.trim().lowerCase;
-        if (line.isEmpty) return false;
-        final kernelLoadErrorFragment = 'load Kernel binary'.lowerCase;
-        return !line.contains(kernelLoadErrorFragment);
-      },
-    );
-    final buf = StringBuffer();
-    for (final line in sanitizedLines) {
-      buf.writeln(line);
-    }
-    final sanitizedStderr = buf.toString().trim();
-    return sanitizedStderr;
-  },
-  'stderr',
-  isEmpty,
-).having(
-  (processResult) => processResult.exitCode,
-  'exitCode',
-  isZero,
-);

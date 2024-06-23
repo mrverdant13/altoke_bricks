@@ -7,11 +7,9 @@ environment:
 
 dependencies:
   meta: ^1.11.0
-  monorepo_elements:
-    path: ../../tools/monorepo_elements/
+  monorepo_elements: any
   path: ^1.9.0
-  shell:
-    path: ../shell/
+  shell: any
 
 dev_dependencies:
   very_good_analysis: ^5.1.0
