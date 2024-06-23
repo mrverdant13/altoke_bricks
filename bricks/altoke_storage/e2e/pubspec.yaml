@@ -6,24 +6,12 @@ environment:
 
 dev_dependencies:
   checked_yaml: ^2.0.3
-  data_persistence_approach:
-    git:
-      url: https://github.com/mrverdant13/altoke_bricks.git
-      ref: 5af3383f89e9e43fcbdd2d705b859b2c4468503f
-      path: ./tools/data_persistence_approach/
+  data_persistence_approach: any
   mason: ^0.1.0-dev.52
   meta: ^1.12.0
   mocktail: ^1.0.3
-  monorepo_elements:
-    git:
-      url: https://github.com/mrverdant13/altoke_bricks.git
-      ref: c21ad2087476e3164f4adbf3488daf15fa958be6
-      path: ./tools/monorepo_elements/
+  monorepo_elements: any
   path: ^1.9.0
-  shell:
-    git:
-      url: https://github.com/mrverdant13/altoke_bricks.git
-      ref: 1004669066d2eae47de8696387e3179f4b09061f
-      path: ./tools/shell/
+  shell: any
   test: ^1.25.2
   very_good_analysis: ^5.1.0
