@@ -7,7 +7,6 @@ environment:
   sdk: ">=3.3.1 <4.0.0"
 
 dependencies:
-  collection: ^1.18.0
   altoke_common:
     #*w 1v 4> w*#
     #*replace-start*#
@@ -16,12 +15,10 @@ dependencies:
     # path: ../common/
     #*replace-end*#
   #*w 1v 2> w*#
+  collection: ^1.18.0
   meta: ^1.11.0
 
 dev_dependencies:
   test: ^1.25.2
   very_good_analysis: ^5.1.0
 #*w 1v w*#
-#*drop*#
-# TODO(mrverdant13): Implement portal comment for code fragment relocation.
-# ignore_for_file: sort_pub_dependencies

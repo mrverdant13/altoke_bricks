@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:mason/mason.dart';
 import 'package:path/path.dart' as path;
+import 'package:pubspec_deps_sorter/pubspec_deps_sorter.dart';
 import 'package:shell/dart.dart';
 import 'package:shell/shell.dart';
 
@@ -45,6 +46,7 @@ Future<void> run(HookContext context) async {
     };
   }
 
+  sortPubspecDependencies(projectDir.path);
   await Dart.getPackages(
     projectDir,
     onStart: onStart('📦 Installing dependencies'),
