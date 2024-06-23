@@ -36,7 +36,7 @@ jobs:
         run: dart pub global activate coverage 1.7.2
       - name: Install coverde
         run: dart pub global activate coverde 0.2.0+2
-      - name: Install dependencies
-        run: dart pub get
+      - name: Initialize E2E tests
+        run: melos bs --category=e2e
       - name: Run E2E tests
         run: melos run test.e2e.all
