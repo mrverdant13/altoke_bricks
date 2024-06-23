@@ -7,7 +7,8 @@ import 'dart:io';
 import 'package:mason/mason.dart';
 import 'package:monorepo_elements/monorepo_elements.dart';
 import 'package:path/path.dart' as path;
-import 'package:shell/shell.dart';
+import 'package:shell/coverage.dart';
+import 'package:shell/dart.dart';
 import 'package:test/test.dart';
 
 Future<void> main() async {
@@ -44,14 +45,14 @@ THEN the generated outputs should be valid and testable
       final coverageDir = Directory(path.join(outputPath, 'coverage'));
       final baseLcovFile = File(path.join(coverageDir.path, 'lcov.info'));
       await expectLater(
-        Shell.dartFormat(
+        Dart.format(
           outputDir,
-          failOnChanges: true,
+          failIfChanged: true,
         ),
         completes,
       );
       await expectLater(
-        Shell.dartAnalyze(
+        Dart.analyze(
           outputDir,
           fatalInfos: true,
           fatalWarnings: true,
@@ -59,14 +60,14 @@ THEN the generated outputs should be valid and testable
         completes,
       );
       await expectLater(
-        Shell.dartTest(
+        Dart.test(
           outputDir,
           coverageDirectory: coverageDir,
         ),
         completes,
       );
       await expectLater(
-        Shell.formatCoverageAsLcov(
+        Coverage.formatAsLcov(
           input: coverageDir,
           output: baseLcovFile,
           reportOn: Directory(path.join(outputPath, 'lib')),
@@ -74,7 +75,7 @@ THEN the generated outputs should be valid and testable
         completes,
       );
       await expectLater(
-        Shell.checkCoverage(
+        Coverage.check(
           inputLcov: baseLcovFile,
           threshold: 100,
         ),

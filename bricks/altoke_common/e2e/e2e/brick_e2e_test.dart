@@ -9,7 +9,8 @@ import 'package:mason/mason.dart';
 import 'package:meta/meta.dart';
 import 'package:monorepo_elements/monorepo_elements.dart';
 import 'package:path/path.dart' as path;
-import 'package:shell/shell.dart';
+import 'package:shell/coverage.dart';
+import 'package:shell/dart.dart';
 import 'package:test/test.dart';
 import 'package:value_equality_approach/value_equality_approach.dart';
 
@@ -80,14 +81,14 @@ ${description.trim()}
         final filteredLcovFile =
             File(path.join(coverageDir.path, 'filtered.lcov.info'));
         await expectLater(
-          Shell.dartFormat(
+          Dart.format(
             outputDir,
-            failOnChanges: true,
+            failIfChanged: true,
           ),
           completes,
         );
         await expectLater(
-          Shell.dartAnalyze(
+          Dart.analyze(
             outputDir,
             fatalInfos: true,
             fatalWarnings: true,
@@ -95,14 +96,14 @@ ${description.trim()}
           completes,
         );
         await expectLater(
-          Shell.dartTest(
+          Dart.test(
             outputDir,
             coverageDirectory: coverageDir,
           ),
           completes,
         );
         await expectLater(
-          Shell.formatCoverageAsLcov(
+          Coverage.formatAsLcov(
             input: coverageDir,
             output: baseLcovFile,
             reportOn: Directory(path.join(outputPath, 'lib')),
@@ -110,7 +111,7 @@ ${description.trim()}
           completes,
         );
         await expectLater(
-          Shell.filterCoverage(
+          Coverage.filter(
             inputLcov: baseLcovFile,
             outputLcov: filteredLcovFile,
             filters: [
@@ -122,7 +123,7 @@ ${description.trim()}
           completes,
         );
         await expectLater(
-          Shell.checkCoverage(
+          Coverage.check(
             inputLcov: filteredLcovFile,
             threshold: 100,
           ),
