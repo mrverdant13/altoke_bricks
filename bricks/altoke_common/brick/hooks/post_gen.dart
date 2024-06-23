@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:mason/mason.dart';
 import 'package:path/path.dart' as path;
+import 'package:shell/dart.dart';
+import 'package:shell/shell.dart';
 import 'package:value_equality_approach/value_equality_approach.dart';
 
 Future<void> run(HookContext context) async {
@@ -10,81 +12,65 @@ Future<void> run(HookContext context) async {
     Directory.current.path,
     'common',
   );
+  final projectDir = Directory(projectPath);
   final logger = context.logger;
-  await runCommand(
-    'dart pub get',
-    projectPath: projectPath,
-    logger: logger,
-    prefix: '📦 ',
-    startMessage: 'Installing dependencies.',
-    completeMessage: 'Dependencies installed!',
+  Progress? progress;
+  Timer? progressTimer;
+
+  AsyncVoidCallback onStart(String message) {
+    return () async {
+      progress = logger.progress(message);
+      progressTimer = Timer.periodic(
+        const Duration(milliseconds: 100),
+        (timer) {
+          progress?.update(message);
+        },
+      );
+    };
+  }
+
+  AsyncVoidCallback onSuccess(String message) {
+    return () async {
+      progressTimer?.cancel();
+      progress?.complete(message);
+    };
+  }
+
+  AsyncVoidHandlerCallback<ExceptionDetails> onError(String message) {
+    return (details) async {
+      progressTimer?.cancel();
+      progress?.fail(message);
+      logger
+        ..err(details.exception.toString())
+        ..err(details.stackTrace.toString());
+    };
+  }
+
+  await Dart.getPackages(
+    projectDir,
+    onStart: onStart('📦 Installing dependencies'),
+    onSuccess: onSuccess('📦 Dependencies installed!'),
+    onError: onError('📦 Failed to install dependencies'),
   );
   if (context.valueEqualityUsesCodeGeneration) {
-    await runCommand(
-      'dart run build_runner build --delete-conflicting-outputs',
-      projectPath: projectPath,
-      logger: logger,
-      prefix: '🏭 ',
-      startMessage: 'Running code generation.',
-      completeMessage: 'Code generation complete!',
+    await Dart.generateCode(
+      projectDir,
+      onStart: onStart('🏭 Running code generation'),
+      onSuccess: onSuccess('🏭 Code generation complete!'),
+      onError: onError('🏭 Failed to run code generation'),
     );
   }
-  await runCommand(
-    'dart fix --apply --code=directives_ordering',
-    projectPath: projectPath,
-    logger: logger,
-    prefix: '🔧 ',
-    startMessage: 'Applying fixes.',
-    completeMessage: 'Fixes applied!',
+  await Dart.applyFixes(
+    projectDir,
+    codes: ['directives_ordering'],
+    onStart: onStart('🔧 Applying fixes'),
+    onSuccess: onSuccess('🔧 Fixes applied!'),
+    onError: onError('🔧 Failed to apply fixes'),
   );
-  await runCommand(
-    'dart format .',
-    projectPath: projectPath,
-    logger: logger,
-    prefix: '🪄  ',
-    startMessage: 'Formatting code.',
-    completeMessage: 'Code formatted!',
+  await Dart.format(
+    projectDir,
+    onStart: onStart('🪄 Formatting code'),
+    onSuccess: onSuccess('🪄 Code formatted!'),
+    onError: onError('🪄 Failed to format code'),
   );
-}
-
-Future<ProcessResult> runCommand(
-  String fullCommand, {
-  required String projectPath,
-  required Logger logger,
-  required String prefix,
-  required String startMessage,
-  required String completeMessage,
-}) async {
-  final [command, ...args] = fullCommand.split(' ');
-  const progressMessages = [
-    'This may take a while',
-    'Still working',
-    'Almost there',
-    'Just a little longer',
-  ];
-  final progress = logger.progress('$prefix$startMessage');
-  final progressTimer = Timer.periodic(
-    const Duration(milliseconds: 100),
-    (timer) {
-      final messageIndex = (timer.tick ~/ 50) % progressMessages.length;
-      final message = progressMessages[messageIndex];
-      progress.update('$prefix$startMessage $message');
-    },
-  );
-  final result = await Process.run(
-    command,
-    args,
-    workingDirectory: projectPath,
-    runInShell: true,
-  );
-  progressTimer.cancel();
-  switch (result.exitCode) {
-    case 0:
-      progress.complete('$prefix$completeMessage');
-    case _:
-      final errorDetails = result.stderr?.toString();
-      progress.fail('$prefix${errorDetails == null ? '' : '\n$errorDetails'}');
-      exit(result.exitCode);
-  }
-  return result;
 }

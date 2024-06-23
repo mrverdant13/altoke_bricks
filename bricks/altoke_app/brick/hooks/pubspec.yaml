@@ -8,6 +8,14 @@ dependencies:
   collection: ^1.18.0
   mason: ^0.1.0-dev.52
   path: ^1.9.0
+  shell: any
 
 dev_dependencies:
   very_good_analysis: ^5.1.0
+
+dependency_overrides:
+  shell:
+    git:
+      url: https://github.com/mrverdant13/altoke_bricks.git
+      ref: 62801c371f7ac323ea651d24a194d301f1723412
+      path: ./tools/shell/

@@ -5,18 +5,28 @@ environment:
   sdk: ">=3.3.1 <4.0.0"
 
 dependencies:
+  data_persistence_approach: any
+  mason: ^0.1.0-dev.52
+  path: ^1.9.0
+  pubspec_deps_sorter: any
+  shell: any
+
+dev_dependencies:
+  very_good_analysis: ^5.1.0
+
+dependency_overrides:
   data_persistence_approach:
     git:
       url: https://github.com/mrverdant13/altoke_bricks.git
       ref: 5af3383f89e9e43fcbdd2d705b859b2c4468503f
       path: ./tools/data_persistence_approach/
-  mason: ^0.1.0-dev.52
-  path: ^1.9.0
   pubspec_deps_sorter:
     git:
       url: https://github.com/mrverdant13/altoke_bricks.git
       ref: 63c80e3d14f2844bbef5d135b04338da6859a31f
       path: ./tools/pubspec_deps_sorter/
-
-dev_dependencies:
-  very_good_analysis: ^5.1.0
+  shell:
+    git:
+      url: https://github.com/mrverdant13/altoke_bricks.git
+      ref: 62801c371f7ac323ea651d24a194d301f1723412
+      path: ./tools/shell/
