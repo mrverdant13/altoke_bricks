@@ -6,6 +6,7 @@ import 'package:brick_generator/src/brick_gen_options.dart';
 import 'package:brick_generator/src/reference_file.dart';
 import 'package:monorepo_elements/monorepo_elements.dart';
 import 'package:path/path.dart' as path;
+import 'package:shell/git.dart';
 import 'package:shell/shell.dart';
 
 Future<void> main(List<String> args) async {
@@ -58,7 +59,7 @@ Future<void> main(List<String> args) async {
   }
 
   // Remove untracked files from reference directory.
-  await Shell.gitCleanDirectory(referenceDir);
+  await Git.cleanDirectory(referenceDir);
 
   // Copy reference project.
   await Shell.copyDirectory(
@@ -67,7 +68,7 @@ Future<void> main(List<String> args) async {
   );
 
   // Remove untracked files from brick directory.
-  await Shell.gitCleanDirectory(brickTemplateDir);
+  await Git.cleanDirectory(brickTemplateDir);
 
   // Parametrize template
   final fsEntities = brickTemplateDir.listSync(recursive: true);
