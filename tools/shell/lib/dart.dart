@@ -5,6 +5,58 @@ import 'package:shell/shell.dart';
 
 /// Dart utilities.
 abstract class Dart {
+  /// Adds packages to a project located in [directory].
+  static Future<void> addPackages(
+    Directory directory,
+    List<String> packageDetails, {
+    Stdin? stdin,
+    Stdout? stdout,
+    Stdout? stderr,
+    AsyncVoidCallback? onStart,
+    AsyncVoidCallback? onSuccess,
+    AsyncVoidHandlerCallback<ExceptionDetails>? onError,
+  }) async {
+    await Shell.run(
+      [
+        'dart pub add',
+        packageDetails.join(' '),
+      ].join(' '),
+      workingDir: directory.path,
+      stdin: stdin,
+      stdout: stdout,
+      stderr: stderr,
+      onStart: onStart,
+      onSuccess: onSuccess,
+      onError: onError,
+    );
+  }
+
+  /// Removes packages from a project located in [directory].
+  static Future<void> removePackages(
+    Directory directory,
+    List<String> packageDetails, {
+    Stdin? stdin,
+    Stdout? stdout,
+    Stdout? stderr,
+    AsyncVoidCallback? onStart,
+    AsyncVoidCallback? onSuccess,
+    AsyncVoidHandlerCallback<ExceptionDetails>? onError,
+  }) async {
+    await Shell.run(
+      [
+        'dart pub remove',
+        packageDetails.join(' '),
+      ].join(' '),
+      workingDir: directory.path,
+      stdin: stdin,
+      stdout: stdout,
+      stderr: stderr,
+      onStart: onStart,
+      onSuccess: onSuccess,
+      onError: onError,
+    );
+  }
+
   /// Gets the packages for a project located in [directory].
   static Future<void> getPackages(
     Directory directory, {
