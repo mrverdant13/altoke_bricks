@@ -312,17 +312,6 @@ updates:
       - b:altoke-storage
       - s:reference
   - package-ecosystem: pub
-    directory: /bricks/altoke_storage/reference/_cd___use_realm___altoke_entities_realm_storage/
-    schedule:
-      interval: daily
-    reviewers:
-      - mrverdant13
-    labels:
-      - build
-      - feat
-      - b:altoke-storage
-      - s:reference
-  - package-ecosystem: pub
     directory: /bricks/altoke_storage/reference/_cd___use_sembast___altoke_entities_sembast_storage/
     schedule:
       interval: daily

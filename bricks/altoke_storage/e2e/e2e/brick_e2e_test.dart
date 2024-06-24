@@ -26,11 +26,6 @@ Future<void> main() async {
   final rawDataPersistenceApproach = vars[DataPersistenceApproach.varKey]!;
   final dataPersistenceApproaches = rawDataPersistenceApproach.values!
       .map(DataPersistenceApproach.fromVarIdentifier);
-  // FIXME: Test Realm approach once it is testable.
-  // Ref: https://github.com/realm/realm-dart/issues/1619
-  final testableApproaches = dataPersistenceApproaches.where(
-    (approach) => approach != DataPersistenceApproach.realm,
-  );
   await testGeneration(
     '''
 
@@ -39,7 +34,7 @@ WHEN the generation is run
 THEN the generated outputs should be valid and testable
 ''',
     generationCases: {
-      for (final dataPersistenceApproach in testableApproaches)
+      for (final dataPersistenceApproach in dataPersistenceApproaches)
         (dataPersistenceApproach: dataPersistenceApproach),
     },
   );
