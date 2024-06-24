@@ -22,5 +22,5 @@ dependency_overrides:
   shell:
     git:
       url: https://github.com/mrverdant13/altoke_bricks.git
-      ref: 62801c371f7ac323ea651d24a194d301f1723412
+      ref: b071442ea80006c2b9de19c2f69fe36ee4b102ce
       path: ./tools/shell/
