@@ -18,7 +18,7 @@ dependency_overrides:
   data_persistence_approach:
     git:
       url: https://github.com/mrverdant13/altoke_bricks.git
-      ref: 5af3383f89e9e43fcbdd2d705b859b2c4468503f
+      ref: 245860315d4f94226c4d6372401e440e8cc1bb6a
       path: ./tools/data_persistence_approach/
   pubspec_deps_sorter:
     git:
