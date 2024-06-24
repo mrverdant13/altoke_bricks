@@ -22,7 +22,6 @@ vars:
       - drift
       - hive
       - isar
-      - realm
       - sembast
     description: The approach to use for data persistence.
     default: hive

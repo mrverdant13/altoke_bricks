@@ -45,7 +45,7 @@ Future<void> run(HookContext context) async {
 
   Future<void> runCommands({
     required Directory projectDir,
-    String? codeGenerationCommand,
+    required bool runCodeGeneration,
   }) async {
     sortPubspecDependencies(projectDir.path);
     await Dart.getPackages(
@@ -54,10 +54,9 @@ Future<void> run(HookContext context) async {
       onSuccess: onSuccess('📦 Dependencies installed!'),
       onError: onError('📦 Failed to install dependencies'),
     );
-    if (codeGenerationCommand != null) {
-      await Shell.run(
-        codeGenerationCommand,
-        workingDir: projectDir.path,
+    if (runCodeGeneration) {
+      await Dart.generateCode(
+        projectDir,
         onStart: onStart('🏭 Running code generation'),
         onSuccess: onSuccess('🏭 Code generation complete!'),
         onError: onError('🏭 Failed to run code generation'),
@@ -88,6 +87,7 @@ Future<void> run(HookContext context) async {
   );
   await runCommands(
     projectDir: Directory(interfaceProjectPath),
+    runCodeGeneration: false,
   );
   final implementationProjectPath = path.join(
     umbrellaPath,
@@ -95,6 +95,6 @@ Future<void> run(HookContext context) async {
   );
   await runCommands(
     projectDir: Directory(implementationProjectPath),
-    codeGenerationCommand: selectedApproach.codeGenerationCommand,
+    runCodeGeneration: true,
   );
 }

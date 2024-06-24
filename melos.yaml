@@ -58,28 +58,14 @@ scripts:
       concurrency: 1
       failFast: true
       orderDependents: true
-  gen.realm:
-    description: Generate code for a package with Realm
-    run: dart run realm generate
-    packageFilters:
-      dependsOn:
-        - realm
-      ignore:
-        - altoke_app
-    exec:
-      concurrency: 1
-      failFast: true
-      orderDependents: true
   gen.all:
     description: Generate code for all packages
     steps:
       - gen
-      - gen.realm
   gen.all.fast:
     description: Generate code for all packages (multi-threaded)
     steps:
       - melos exec --depends-on=build_runner --order-dependents -- "dart run build_runner build -d"
-      - melos exec --depends-on=realm --order-dependents --ignore=altoke_app -- "dart run realm generate"
 
   # Spell checking
   spellcheck:
@@ -206,7 +192,7 @@ scripts:
     description: Merge all packages coverage trace files ignoring data related to generated files
     steps:
       - coverde rm MELOS_ROOT_PATH/coverage/filtered.lcov.info
-      - melos exec -c 1 --file-exists=coverage/lcov.info -- "coverde filter --input ./coverage/lcov.info --output MELOS_ROOT_PATH/coverage/filtered.lcov.info --paths-parent MELOS_PACKAGE_PATH  --filters \.drift\.dart,\.freezed\.dart,\.g\.dart,\.gr\.dart,\.mapper\.dart,\.realm\.dart"
+      - melos exec -c 1 --file-exists=coverage/lcov.info -- "coverde filter --input ./coverage/lcov.info --output MELOS_ROOT_PATH/coverage/filtered.lcov.info --paths-parent MELOS_PACKAGE_PATH  --filters \.drift\.dart,\.freezed\.dart,\.g\.dart,\.gr\.dart,\.mapper\.dart"
   coverage.check:
     description: Check test coverage
     steps:

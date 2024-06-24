@@ -11,9 +11,6 @@ enum DataPersistenceApproach {
   /// Use `isar` for data persistence.
   isar('isar'),
 
-  /// Use `realm` for data persistence.
-  realm('realm'),
-
   /// Use `sembast` for data persistence.
   sembast('sembast'),
   ;
@@ -50,10 +47,4 @@ enum DataPersistenceApproach {
     final selectedApproach = context.vars[varKey]! as String;
     return DataPersistenceApproach.fromVarIdentifier(selectedApproach);
   }
-
-  /// Returns the code generation command for the data persistence approach.
-  String get codeGenerationCommand => switch (this) {
-        DataPersistenceApproach.realm => 'dart run realm generate',
-        _ => 'dart run build_runner build --delete-conflicting-outputs',
-      };
 }
