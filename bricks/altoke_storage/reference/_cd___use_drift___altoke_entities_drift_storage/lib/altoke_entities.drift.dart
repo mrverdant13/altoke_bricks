@@ -224,6 +224,111 @@ class AltokeEntitiesCompanion extends i0.UpdateCompanion<i1.AltokeEntity> {
   }
 }
 
+typedef $AltokeEntitiesInsertCompanionBuilder = i1.AltokeEntitiesCompanion
+    Function({
+  i0.Value<int> id,
+  required String name,
+  i0.Value<String?> description,
+});
+typedef $AltokeEntitiesUpdateCompanionBuilder = i1.AltokeEntitiesCompanion
+    Function({
+  i0.Value<int> id,
+  i0.Value<String> name,
+  i0.Value<String?> description,
+});
+
+class $AltokeEntitiesTableManager extends i0.RootTableManager<
+    i0.GeneratedDatabase,
+    i1.AltokeEntities,
+    i1.AltokeEntity,
+    i1.$AltokeEntitiesFilterComposer,
+    i1.$AltokeEntitiesOrderingComposer,
+    $AltokeEntitiesProcessedTableManager,
+    $AltokeEntitiesInsertCompanionBuilder,
+    $AltokeEntitiesUpdateCompanionBuilder> {
+  $AltokeEntitiesTableManager(i0.GeneratedDatabase db, i1.AltokeEntities table)
+      : super(i0.TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              i1.$AltokeEntitiesFilterComposer(i0.ComposerState(db, table)),
+          orderingComposer:
+              i1.$AltokeEntitiesOrderingComposer(i0.ComposerState(db, table)),
+          getChildManagerBuilder: (p) =>
+              $AltokeEntitiesProcessedTableManager(p),
+          getUpdateCompanionBuilder: ({
+            i0.Value<int> id = const i0.Value.absent(),
+            i0.Value<String> name = const i0.Value.absent(),
+            i0.Value<String?> description = const i0.Value.absent(),
+          }) =>
+              i1.AltokeEntitiesCompanion(
+            id: id,
+            name: name,
+            description: description,
+          ),
+          getInsertCompanionBuilder: ({
+            i0.Value<int> id = const i0.Value.absent(),
+            required String name,
+            i0.Value<String?> description = const i0.Value.absent(),
+          }) =>
+              i1.AltokeEntitiesCompanion.insert(
+            id: id,
+            name: name,
+            description: description,
+          ),
+        ));
+}
+
+class $AltokeEntitiesProcessedTableManager extends i0.ProcessedTableManager<
+    i0.GeneratedDatabase,
+    i1.AltokeEntities,
+    i1.AltokeEntity,
+    i1.$AltokeEntitiesFilterComposer,
+    i1.$AltokeEntitiesOrderingComposer,
+    $AltokeEntitiesProcessedTableManager,
+    $AltokeEntitiesInsertCompanionBuilder,
+    $AltokeEntitiesUpdateCompanionBuilder> {
+  $AltokeEntitiesProcessedTableManager(super.$state);
+}
+
+class $AltokeEntitiesFilterComposer
+    extends i0.FilterComposer<i0.GeneratedDatabase, i1.AltokeEntities> {
+  $AltokeEntitiesFilterComposer(super.$state);
+  i0.ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          i0.ColumnFilters(column, joinBuilders: joinBuilders));
+
+  i0.ColumnFilters<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          i0.ColumnFilters(column, joinBuilders: joinBuilders));
+
+  i0.ColumnFilters<String> get description => $state.composableBuilder(
+      column: $state.table.description,
+      builder: (column, joinBuilders) =>
+          i0.ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $AltokeEntitiesOrderingComposer
+    extends i0.OrderingComposer<i0.GeneratedDatabase, i1.AltokeEntities> {
+  $AltokeEntitiesOrderingComposer(super.$state);
+  i0.ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          i0.ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  i0.ColumnOrderings<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          i0.ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  i0.ColumnOrderings<String> get description => $state.composableBuilder(
+      column: $state.table.description,
+      builder: (column, joinBuilders) =>
+          i0.ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
 class AltokeEntitiesDrift extends i2.ModularAccessor {
   AltokeEntitiesDrift(i0.GeneratedDatabase db) : super(db);
   Future<int> add(String name, String? description) {
