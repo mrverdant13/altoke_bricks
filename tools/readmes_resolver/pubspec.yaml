@@ -3,7 +3,7 @@ description: A tool to resolve README files.
 publish_to: none
 
 environment:
-  sdk: ">=3.3.1 <4.0.0"
+  sdk: ">=3.4.4 <4.0.0"
 
 dependencies:
   checked_yaml: ^2.0.3

@@ -3,7 +3,7 @@ description: A generator for bricks.
 publish_to: none
 
 environment:
-  sdk: ">=3.3.1 <4.0.0"
+  sdk: ">=3.4.4 <4.0.0"
 
 dependencies:
   meta: ^1.11.0
