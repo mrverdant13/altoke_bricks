@@ -22,7 +22,7 @@ jobs:
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.19.3
+          flutter-version: 3.22.3
       - name: Install melos
         run: dart pub global activate melos 6.1.0
       - name: Initialize READMEs resolver
@@ -58,7 +58,7 @@ jobs:
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.19.3
+          flutter-version: 3.22.3
       - name: Install melos
         run: dart pub global activate melos 6.1.0
       - name: Initialize brick scopes
@@ -90,7 +90,7 @@ jobs:
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.19.3
+          flutter-version: 3.22.3
       - name: Install melos
         run: dart pub global activate melos 6.1.0
       - name: Initialize READMEs resolver
