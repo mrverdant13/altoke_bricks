@@ -224,6 +224,111 @@ class {{objects.pascalCase()}}Companion extends i0.UpdateCompanion<i1.{{object.p
   }
 }
 
+typedef ${{objects.pascalCase()}}InsertCompanionBuilder = i1.{{objects.pascalCase()}}Companion
+    Function({
+  i0.Value<int> id,
+  required String name,
+  i0.Value<String?> description,
+});
+typedef ${{objects.pascalCase()}}UpdateCompanionBuilder = i1.{{objects.pascalCase()}}Companion
+    Function({
+  i0.Value<int> id,
+  i0.Value<String> name,
+  i0.Value<String?> description,
+});
+
+class ${{objects.pascalCase()}}TableManager extends i0.RootTableManager<
+    i0.GeneratedDatabase,
+    i1.{{objects.pascalCase()}},
+    i1.{{object.pascalCase()}},
+    i1.${{objects.pascalCase()}}FilterComposer,
+    i1.${{objects.pascalCase()}}OrderingComposer,
+    ${{objects.pascalCase()}}ProcessedTableManager,
+    ${{objects.pascalCase()}}InsertCompanionBuilder,
+    ${{objects.pascalCase()}}UpdateCompanionBuilder> {
+  ${{objects.pascalCase()}}TableManager(i0.GeneratedDatabase db, i1.{{objects.pascalCase()}} table)
+      : super(i0.TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              i1.${{objects.pascalCase()}}FilterComposer(i0.ComposerState(db, table)),
+          orderingComposer:
+              i1.${{objects.pascalCase()}}OrderingComposer(i0.ComposerState(db, table)),
+          getChildManagerBuilder: (p) =>
+              ${{objects.pascalCase()}}ProcessedTableManager(p),
+          getUpdateCompanionBuilder: ({
+            i0.Value<int> id = const i0.Value.absent(),
+            i0.Value<String> name = const i0.Value.absent(),
+            i0.Value<String?> description = const i0.Value.absent(),
+          }) =>
+              i1.{{objects.pascalCase()}}Companion(
+            id: id,
+            name: name,
+            description: description,
+          ),
+          getInsertCompanionBuilder: ({
+            i0.Value<int> id = const i0.Value.absent(),
+            required String name,
+            i0.Value<String?> description = const i0.Value.absent(),
+          }) =>
+              i1.{{objects.pascalCase()}}Companion.insert(
+            id: id,
+            name: name,
+            description: description,
+          ),
+        ));
+}
+
+class ${{objects.pascalCase()}}ProcessedTableManager extends i0.ProcessedTableManager<
+    i0.GeneratedDatabase,
+    i1.{{objects.pascalCase()}},
+    i1.{{object.pascalCase()}},
+    i1.${{objects.pascalCase()}}FilterComposer,
+    i1.${{objects.pascalCase()}}OrderingComposer,
+    ${{objects.pascalCase()}}ProcessedTableManager,
+    ${{objects.pascalCase()}}InsertCompanionBuilder,
+    ${{objects.pascalCase()}}UpdateCompanionBuilder> {
+  ${{objects.pascalCase()}}ProcessedTableManager(super.$state);
+}
+
+class ${{objects.pascalCase()}}FilterComposer
+    extends i0.FilterComposer<i0.GeneratedDatabase, i1.{{objects.pascalCase()}}> {
+  ${{objects.pascalCase()}}FilterComposer(super.$state);
+  i0.ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          i0.ColumnFilters(column, joinBuilders: joinBuilders));
+
+  i0.ColumnFilters<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          i0.ColumnFilters(column, joinBuilders: joinBuilders));
+
+  i0.ColumnFilters<String> get description => $state.composableBuilder(
+      column: $state.table.description,
+      builder: (column, joinBuilders) =>
+          i0.ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class ${{objects.pascalCase()}}OrderingComposer
+    extends i0.OrderingComposer<i0.GeneratedDatabase, i1.{{objects.pascalCase()}}> {
+  ${{objects.pascalCase()}}OrderingComposer(super.$state);
+  i0.ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          i0.ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  i0.ColumnOrderings<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          i0.ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  i0.ColumnOrderings<String> get description => $state.composableBuilder(
+      column: $state.table.description,
+      builder: (column, joinBuilders) =>
+          i0.ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
 class {{objects.pascalCase()}}Drift extends i2.ModularAccessor {
   {{objects.pascalCase()}}Drift(i0.GeneratedDatabase db) : super(db);
   Future<int> add(String name, String? description) {
