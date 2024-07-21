@@ -6,8 +6,8 @@ packages:
 command:
   bootstrap:
     environment:
-      sdk: ">=3.3.1 <4.0.0"
-      flutter: ">=3.19.3 <4.0.0"
+      sdk: ">=3.4.4 <4.0.0"
+      flutter: ">=3.22.3 <4.0.0"
     dependencies:
       meta: ^1.11.0
   clean:
