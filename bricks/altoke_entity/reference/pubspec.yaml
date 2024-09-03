@@ -4,7 +4,7 @@ version: 0.0.1+1
 publish_to: none
 
 environment:
-  sdk: ">=3.4.4 <4.0.0"
+  sdk: ">=3.5.1 <4.0.0"
 
 dependencies:
   altoke_common:
@@ -16,31 +16,31 @@ dependencies:
     #*replace-end*#
   #*w 1v 2> w*#
   #{{#use_dart_mappable}}#
-  dart_mappable: ^4.2.1
+  dart_mappable: ^4.2.2
   #{{/use_dart_mappable}}#
   #{{#use_equatable}}#
   equatable: ^2.0.5
   #{{/use_equatable}}#
   #{{#use_freezed}}#
-  freezed_annotation: ^2.4.1
+  freezed_annotation: ^2.4.4
   #{{/use_freezed}}#
   #{{#use_overrides}}
-  meta: ^1.11.0
+  meta: ^1.15.0
   #{{/use_overrides}}#
 #*w 2v w*#
 
 dev_dependencies:
   #{{#use_code_generation}}#
   #*w 1v 2> w*#
-  build_runner: ^2.4.8
+  build_runner: ^2.4.12
   #*w 1v 2> w*#
   #{{/use_code_generation}}#
   #{{#use_dart_mappable}}#
-  dart_mappable_builder: ^4.2.1
+  dart_mappable_builder: ^4.2.3
   #{{/use_dart_mappable}}#
   #{{#use_freezed}}#
-  freezed: ^2.4.7
+  freezed: ^2.5.7
   #{{/use_freezed}}#
   #*w 1v 2> w*#
-  test: ^1.25.2
+  test: ^1.25.8
   very_good_analysis: ^6.0.0

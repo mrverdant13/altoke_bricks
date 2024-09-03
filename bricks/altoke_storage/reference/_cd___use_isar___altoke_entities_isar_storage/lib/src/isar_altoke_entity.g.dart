@@ -39,7 +39,7 @@ const IsarAltokeEntitySchema = CollectionSchema(
   getId: _isarAltokeEntityGetId,
   getLinks: _isarAltokeEntityGetLinks,
   attach: _isarAltokeEntityAttach,
-  version: '3.1.0+1',
+  version: '3.1.8',
 );
 
 int _isarAltokeEntityEstimateSize(

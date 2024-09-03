@@ -154,7 +154,7 @@ abstract class {{objects.pascalCase()}}Filter {
   static WhereCallback<{{object.pascalCase()}}> andAll(
     Iterable<WhereCallback<{{object.pascalCase()}}>?> filters,
   ) {
-    final validFilters = filters.whereNotNull();
+    final validFilters = filters.nonNulls;
     if (validFilters.isEmpty) return noFilter;
     return ({{object.camelCase()}}) =>
         validFilters.every((filter) => filter({{object.camelCase()}}));
@@ -164,7 +164,7 @@ abstract class {{objects.pascalCase()}}Filter {
   static WhereCallback<{{object.pascalCase()}}> orAll(
     Iterable<WhereCallback<{{object.pascalCase()}}>?> filters,
   ) {
-    final validFilters = filters.whereNotNull();
+    final validFilters = filters.nonNulls;
     if (validFilters.isEmpty) return noFilter;
     return ({{object.camelCase()}}) => validFilters.any((filter) => filter({{object.camelCase()}}));
   }

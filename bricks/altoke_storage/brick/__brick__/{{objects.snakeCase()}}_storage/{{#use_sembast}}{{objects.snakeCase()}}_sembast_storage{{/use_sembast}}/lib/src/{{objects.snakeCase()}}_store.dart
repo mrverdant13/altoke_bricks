@@ -1,7 +1,6 @@
 import 'package:common/common.dart';
 import 'package:{{objects.snakeCase()}}_sembast_storage/{{objects.snakeCase()}}_sembast_storage.dart';
 import 'package:{{object.snakeCase()}}/{{object.snakeCase()}}.dart';
-import 'package:collection/collection.dart';
 import 'package:sembast/sembast.dart';
 
 /// A reference to a raw {{objects.lowerCase()}} store.
@@ -180,7 +179,7 @@ abstract class {{objects.pascalCase()}}Filter {
   static Filter andAll(
     Iterable<Filter> filters,
   ) {
-    final validFilters = filters.whereNotNull();
+    final validFilters = filters.nonNulls;
     if (validFilters.isEmpty) return noFilter;
     return Filter.and([...validFilters]);
   }

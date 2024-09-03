@@ -154,7 +154,7 @@ abstract class AltokeEntitiesFilter {
   static WhereCallback<AltokeEntity> andAll(
     Iterable<WhereCallback<AltokeEntity>?> filters,
   ) {
-    final validFilters = filters.whereNotNull();
+    final validFilters = filters.nonNulls;
     if (validFilters.isEmpty) return noFilter;
     return (altokeEntity) =>
         validFilters.every((filter) => filter(altokeEntity));
@@ -164,7 +164,7 @@ abstract class AltokeEntitiesFilter {
   static WhereCallback<AltokeEntity> orAll(
     Iterable<WhereCallback<AltokeEntity>?> filters,
   ) {
-    final validFilters = filters.whereNotNull();
+    final validFilters = filters.nonNulls;
     if (validFilters.isEmpty) return noFilter;
     return (altokeEntity) => validFilters.any((filter) => filter(altokeEntity));
   }

@@ -3,10 +3,11 @@ description: A tool to install bricks managed by a local monorepo.
 publish_to: none
 
 environment:
-  sdk: ">=3.4.4 <4.0.0"
+  sdk: ">=3.5.1 <4.0.0"
 
 dependencies:
-  monorepo_elements: any
+  monorepo_elements:
+    path: ../monorepo_elements
 
 dev_dependencies:
-  very_good_analysis: ^5.1.0
+  very_good_analysis: ^6.0.0

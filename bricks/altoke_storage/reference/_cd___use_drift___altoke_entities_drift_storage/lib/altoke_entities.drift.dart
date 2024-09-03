@@ -140,6 +140,15 @@ class AltokeEntity extends i0.DataClass
         name: name ?? this.name,
         description: description.present ? description.value : this.description,
       );
+  AltokeEntity copyWithCompanion(i1.AltokeEntitiesCompanion data) {
+    return AltokeEntity(
+      id: data.id.present ? data.id.value : this.id,
+      name: data.name.present ? data.name.value : this.name,
+      description:
+          data.description.present ? data.description.value : this.description,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('AltokeEntity(')
@@ -224,7 +233,7 @@ class AltokeEntitiesCompanion extends i0.UpdateCompanion<i1.AltokeEntity> {
   }
 }
 
-typedef $AltokeEntitiesInsertCompanionBuilder = i1.AltokeEntitiesCompanion
+typedef $AltokeEntitiesCreateCompanionBuilder = i1.AltokeEntitiesCompanion
     Function({
   i0.Value<int> id,
   required String name,
@@ -236,60 +245,6 @@ typedef $AltokeEntitiesUpdateCompanionBuilder = i1.AltokeEntitiesCompanion
   i0.Value<String> name,
   i0.Value<String?> description,
 });
-
-class $AltokeEntitiesTableManager extends i0.RootTableManager<
-    i0.GeneratedDatabase,
-    i1.AltokeEntities,
-    i1.AltokeEntity,
-    i1.$AltokeEntitiesFilterComposer,
-    i1.$AltokeEntitiesOrderingComposer,
-    $AltokeEntitiesProcessedTableManager,
-    $AltokeEntitiesInsertCompanionBuilder,
-    $AltokeEntitiesUpdateCompanionBuilder> {
-  $AltokeEntitiesTableManager(i0.GeneratedDatabase db, i1.AltokeEntities table)
-      : super(i0.TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer:
-              i1.$AltokeEntitiesFilterComposer(i0.ComposerState(db, table)),
-          orderingComposer:
-              i1.$AltokeEntitiesOrderingComposer(i0.ComposerState(db, table)),
-          getChildManagerBuilder: (p) =>
-              $AltokeEntitiesProcessedTableManager(p),
-          getUpdateCompanionBuilder: ({
-            i0.Value<int> id = const i0.Value.absent(),
-            i0.Value<String> name = const i0.Value.absent(),
-            i0.Value<String?> description = const i0.Value.absent(),
-          }) =>
-              i1.AltokeEntitiesCompanion(
-            id: id,
-            name: name,
-            description: description,
-          ),
-          getInsertCompanionBuilder: ({
-            i0.Value<int> id = const i0.Value.absent(),
-            required String name,
-            i0.Value<String?> description = const i0.Value.absent(),
-          }) =>
-              i1.AltokeEntitiesCompanion.insert(
-            id: id,
-            name: name,
-            description: description,
-          ),
-        ));
-}
-
-class $AltokeEntitiesProcessedTableManager extends i0.ProcessedTableManager<
-    i0.GeneratedDatabase,
-    i1.AltokeEntities,
-    i1.AltokeEntity,
-    i1.$AltokeEntitiesFilterComposer,
-    i1.$AltokeEntitiesOrderingComposer,
-    $AltokeEntitiesProcessedTableManager,
-    $AltokeEntitiesInsertCompanionBuilder,
-    $AltokeEntitiesUpdateCompanionBuilder> {
-  $AltokeEntitiesProcessedTableManager(super.$state);
-}
 
 class $AltokeEntitiesFilterComposer
     extends i0.FilterComposer<i0.GeneratedDatabase, i1.AltokeEntities> {
@@ -328,6 +283,72 @@ class $AltokeEntitiesOrderingComposer
       builder: (column, joinBuilders) =>
           i0.ColumnOrderings(column, joinBuilders: joinBuilders));
 }
+
+class $AltokeEntitiesTableManager extends i0.RootTableManager<
+    i0.GeneratedDatabase,
+    i1.AltokeEntities,
+    i1.AltokeEntity,
+    i1.$AltokeEntitiesFilterComposer,
+    i1.$AltokeEntitiesOrderingComposer,
+    $AltokeEntitiesCreateCompanionBuilder,
+    $AltokeEntitiesUpdateCompanionBuilder,
+    (
+      i1.AltokeEntity,
+      i0
+      .BaseReferences<i0.GeneratedDatabase, i1.AltokeEntities, i1.AltokeEntity>
+    ),
+    i1.AltokeEntity,
+    i0.PrefetchHooks Function()> {
+  $AltokeEntitiesTableManager(i0.GeneratedDatabase db, i1.AltokeEntities table)
+      : super(i0.TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              i1.$AltokeEntitiesFilterComposer(i0.ComposerState(db, table)),
+          orderingComposer:
+              i1.$AltokeEntitiesOrderingComposer(i0.ComposerState(db, table)),
+          updateCompanionCallback: ({
+            i0.Value<int> id = const i0.Value.absent(),
+            i0.Value<String> name = const i0.Value.absent(),
+            i0.Value<String?> description = const i0.Value.absent(),
+          }) =>
+              i1.AltokeEntitiesCompanion(
+            id: id,
+            name: name,
+            description: description,
+          ),
+          createCompanionCallback: ({
+            i0.Value<int> id = const i0.Value.absent(),
+            required String name,
+            i0.Value<String?> description = const i0.Value.absent(),
+          }) =>
+              i1.AltokeEntitiesCompanion.insert(
+            id: id,
+            name: name,
+            description: description,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), i0.BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $AltokeEntitiesProcessedTableManager = i0.ProcessedTableManager<
+    i0.GeneratedDatabase,
+    i1.AltokeEntities,
+    i1.AltokeEntity,
+    i1.$AltokeEntitiesFilterComposer,
+    i1.$AltokeEntitiesOrderingComposer,
+    $AltokeEntitiesCreateCompanionBuilder,
+    $AltokeEntitiesUpdateCompanionBuilder,
+    (
+      i1.AltokeEntity,
+      i0
+      .BaseReferences<i0.GeneratedDatabase, i1.AltokeEntities, i1.AltokeEntity>
+    ),
+    i1.AltokeEntity,
+    i0.PrefetchHooks Function()>;
 
 class AltokeEntitiesDrift extends i2.ModularAccessor {
   AltokeEntitiesDrift(i0.GeneratedDatabase db) : super(db);
@@ -371,5 +392,6 @@ class AltokeEntitiesDrift extends i2.ModularAccessor {
   }
 
   i1.AltokeEntities get altokeEntities =>
-      this.resultSet<i1.AltokeEntities>('altoke_entities');
+      i2.ReadDatabaseContainer(attachedDatabase)
+          .resultSet<i1.AltokeEntities>('altoke_entities');
 }

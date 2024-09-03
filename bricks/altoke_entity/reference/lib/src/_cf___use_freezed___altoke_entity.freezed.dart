@@ -25,7 +25,9 @@ mixin _$FAltokeEntity {
   /// The description of this altoke entity.
   String? get description => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FAltokeEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FAltokeEntityCopyWith<FAltokeEntity> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +51,8 @@ class _$FAltokeEntityCopyWithImpl<$Res, $Val extends FAltokeEntity>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of FAltokeEntity
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,6 +96,8 @@ class __$$FAltokeEntityImplCopyWithImpl<$Res>
       _$FAltokeEntityImpl _value, $Res Function(_$FAltokeEntityImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of FAltokeEntity
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -153,7 +159,9 @@ class _$FAltokeEntityImpl implements _FAltokeEntity {
   @override
   int get hashCode => Object.hash(runtimeType, id, name, description);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FAltokeEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FAltokeEntityImplCopyWith<_$FAltokeEntityImpl> get copyWith =>
@@ -166,20 +174,22 @@ abstract class _FAltokeEntity implements FAltokeEntity {
       required final String name,
       final String? description}) = _$FAltokeEntityImpl;
 
-  @override
-
   /// The ID of this altoke entity.
-  int get id;
   @override
+  int get id;
 
   /// The name of this altoke entity.
-  String get name;
   @override
+  String get name;
 
   /// The description of this altoke entity.
-  String? get description;
   @override
-  @JsonKey(ignore: true)
+  String? get description;
+
+  /// Create a copy of FAltokeEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FAltokeEntityImplCopyWith<_$FAltokeEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -192,7 +202,9 @@ mixin _$FNewAltokeEntity {
   /// The description of the new altoke entity.
   String? get description => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FNewAltokeEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FNewAltokeEntityCopyWith<FNewAltokeEntity> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -216,6 +228,8 @@ class _$FNewAltokeEntityCopyWithImpl<$Res, $Val extends FNewAltokeEntity>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of FNewAltokeEntity
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -254,6 +268,8 @@ class __$$FNewAltokeEntityImplCopyWithImpl<$Res>
       $Res Function(_$FNewAltokeEntityImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of FNewAltokeEntity
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -304,7 +320,9 @@ class _$FNewAltokeEntityImpl implements _FNewAltokeEntity {
   @override
   int get hashCode => Object.hash(runtimeType, name, description);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FNewAltokeEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FNewAltokeEntityImplCopyWith<_$FNewAltokeEntityImpl> get copyWith =>
@@ -317,16 +335,18 @@ abstract class _FNewAltokeEntity implements FNewAltokeEntity {
       {required final String name,
       final String? description}) = _$FNewAltokeEntityImpl;
 
-  @override
-
   /// The name of the new altoke entity.
-  String get name;
   @override
+  String get name;
 
   /// The description of the new altoke entity.
-  String? get description;
   @override
-  @JsonKey(ignore: true)
+  String? get description;
+
+  /// Create a copy of FNewAltokeEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FNewAltokeEntityImplCopyWith<_$FNewAltokeEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -339,7 +359,9 @@ mixin _$FPartialAltokeEntity {
   /// The optional description for the altoke entity.
   FOptional<String?> get description => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FPartialAltokeEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FPartialAltokeEntityCopyWith<FPartialAltokeEntity> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -364,6 +386,8 @@ class _$FPartialAltokeEntityCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of FPartialAltokeEntity
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -402,6 +426,8 @@ class __$$FPartialAltokeEntityImplCopyWithImpl<$Res>
       $Res Function(_$FPartialAltokeEntityImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of FPartialAltokeEntity
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -456,7 +482,9 @@ class _$FPartialAltokeEntityImpl implements _FPartialAltokeEntity {
   @override
   int get hashCode => Object.hash(runtimeType, name, description);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FPartialAltokeEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FPartialAltokeEntityImplCopyWith<_$FPartialAltokeEntityImpl>
@@ -470,16 +498,18 @@ abstract class _FPartialAltokeEntity implements FPartialAltokeEntity {
       {final FOptional<String> name,
       final FOptional<String?> description}) = _$FPartialAltokeEntityImpl;
 
-  @override
-
   /// The optional name for the altoke entity.
-  FOptional<String> get name;
   @override
+  FOptional<String> get name;
 
   /// The optional description for the altoke entity.
-  FOptional<String?> get description;
   @override
-  @JsonKey(ignore: true)
+  FOptional<String?> get description;
+
+  /// Create a copy of FPartialAltokeEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FPartialAltokeEntityImplCopyWith<_$FPartialAltokeEntityImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
