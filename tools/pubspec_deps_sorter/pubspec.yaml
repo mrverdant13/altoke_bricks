@@ -3,7 +3,7 @@ description: A tool to sort dependencies in pubspec.yaml files.
 publish_to: none
 
 environment:
-  sdk: ">=3.4.4 <4.0.0"
+  sdk: ">=3.5.1 <4.0.0"
 
 dependencies:
   path: ^1.9.0

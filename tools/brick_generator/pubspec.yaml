@@ -3,13 +3,15 @@ description: A generator for bricks.
 publish_to: none
 
 environment:
-  sdk: ">=3.4.4 <4.0.0"
+  sdk: ">=3.5.1 <4.0.0"
 
 dependencies:
-  meta: ^1.11.0
-  monorepo_elements: any
+  meta: ^1.15.0
+  monorepo_elements:
+    path: ../monorepo_elements
   path: ^1.9.0
-  shell: any
+  shell:
+    path: ../shell
 
 dev_dependencies:
-  very_good_analysis: ^5.1.0
+  very_good_analysis: ^6.0.0

@@ -1,9 +1,10 @@
 name: shell
 description: A shell for running commands.
+version: 0.0.1+1
 publish_to: none
 
 environment:
-  sdk: ">=3.4.4 <4.0.0"
+  sdk: ">=3.5.1 <4.0.0"
 
 dev_dependencies:
   very_good_analysis: ^6.0.0

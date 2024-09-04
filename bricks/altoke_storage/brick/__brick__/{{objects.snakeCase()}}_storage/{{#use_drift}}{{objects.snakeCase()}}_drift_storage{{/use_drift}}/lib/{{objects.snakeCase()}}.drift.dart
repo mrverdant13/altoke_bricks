@@ -140,6 +140,15 @@ class {{object.pascalCase()}} extends i0.DataClass
         name: name ?? this.name,
         description: description.present ? description.value : this.description,
       );
+  {{object.pascalCase()}} copyWithCompanion(i1.{{objects.pascalCase()}}Companion data) {
+    return {{object.pascalCase()}}(
+      id: data.id.present ? data.id.value : this.id,
+      name: data.name.present ? data.name.value : this.name,
+      description:
+          data.description.present ? data.description.value : this.description,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('{{object.pascalCase()}}(')
@@ -224,7 +233,7 @@ class {{objects.pascalCase()}}Companion extends i0.UpdateCompanion<i1.{{object.p
   }
 }
 
-typedef ${{objects.pascalCase()}}InsertCompanionBuilder = i1.{{objects.pascalCase()}}Companion
+typedef ${{objects.pascalCase()}}CreateCompanionBuilder = i1.{{objects.pascalCase()}}Companion
     Function({
   i0.Value<int> id,
   required String name,
@@ -236,60 +245,6 @@ typedef ${{objects.pascalCase()}}UpdateCompanionBuilder = i1.{{objects.pascalCas
   i0.Value<String> name,
   i0.Value<String?> description,
 });
-
-class ${{objects.pascalCase()}}TableManager extends i0.RootTableManager<
-    i0.GeneratedDatabase,
-    i1.{{objects.pascalCase()}},
-    i1.{{object.pascalCase()}},
-    i1.${{objects.pascalCase()}}FilterComposer,
-    i1.${{objects.pascalCase()}}OrderingComposer,
-    ${{objects.pascalCase()}}ProcessedTableManager,
-    ${{objects.pascalCase()}}InsertCompanionBuilder,
-    ${{objects.pascalCase()}}UpdateCompanionBuilder> {
-  ${{objects.pascalCase()}}TableManager(i0.GeneratedDatabase db, i1.{{objects.pascalCase()}} table)
-      : super(i0.TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer:
-              i1.${{objects.pascalCase()}}FilterComposer(i0.ComposerState(db, table)),
-          orderingComposer:
-              i1.${{objects.pascalCase()}}OrderingComposer(i0.ComposerState(db, table)),
-          getChildManagerBuilder: (p) =>
-              ${{objects.pascalCase()}}ProcessedTableManager(p),
-          getUpdateCompanionBuilder: ({
-            i0.Value<int> id = const i0.Value.absent(),
-            i0.Value<String> name = const i0.Value.absent(),
-            i0.Value<String?> description = const i0.Value.absent(),
-          }) =>
-              i1.{{objects.pascalCase()}}Companion(
-            id: id,
-            name: name,
-            description: description,
-          ),
-          getInsertCompanionBuilder: ({
-            i0.Value<int> id = const i0.Value.absent(),
-            required String name,
-            i0.Value<String?> description = const i0.Value.absent(),
-          }) =>
-              i1.{{objects.pascalCase()}}Companion.insert(
-            id: id,
-            name: name,
-            description: description,
-          ),
-        ));
-}
-
-class ${{objects.pascalCase()}}ProcessedTableManager extends i0.ProcessedTableManager<
-    i0.GeneratedDatabase,
-    i1.{{objects.pascalCase()}},
-    i1.{{object.pascalCase()}},
-    i1.${{objects.pascalCase()}}FilterComposer,
-    i1.${{objects.pascalCase()}}OrderingComposer,
-    ${{objects.pascalCase()}}ProcessedTableManager,
-    ${{objects.pascalCase()}}InsertCompanionBuilder,
-    ${{objects.pascalCase()}}UpdateCompanionBuilder> {
-  ${{objects.pascalCase()}}ProcessedTableManager(super.$state);
-}
 
 class ${{objects.pascalCase()}}FilterComposer
     extends i0.FilterComposer<i0.GeneratedDatabase, i1.{{objects.pascalCase()}}> {
@@ -328,6 +283,72 @@ class ${{objects.pascalCase()}}OrderingComposer
       builder: (column, joinBuilders) =>
           i0.ColumnOrderings(column, joinBuilders: joinBuilders));
 }
+
+class ${{objects.pascalCase()}}TableManager extends i0.RootTableManager<
+    i0.GeneratedDatabase,
+    i1.{{objects.pascalCase()}},
+    i1.{{object.pascalCase()}},
+    i1.${{objects.pascalCase()}}FilterComposer,
+    i1.${{objects.pascalCase()}}OrderingComposer,
+    ${{objects.pascalCase()}}CreateCompanionBuilder,
+    ${{objects.pascalCase()}}UpdateCompanionBuilder,
+    (
+      i1.{{object.pascalCase()}},
+      i0
+      .BaseReferences<i0.GeneratedDatabase, i1.{{objects.pascalCase()}}, i1.{{object.pascalCase()}}>
+    ),
+    i1.{{object.pascalCase()}},
+    i0.PrefetchHooks Function()> {
+  ${{objects.pascalCase()}}TableManager(i0.GeneratedDatabase db, i1.{{objects.pascalCase()}} table)
+      : super(i0.TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              i1.${{objects.pascalCase()}}FilterComposer(i0.ComposerState(db, table)),
+          orderingComposer:
+              i1.${{objects.pascalCase()}}OrderingComposer(i0.ComposerState(db, table)),
+          updateCompanionCallback: ({
+            i0.Value<int> id = const i0.Value.absent(),
+            i0.Value<String> name = const i0.Value.absent(),
+            i0.Value<String?> description = const i0.Value.absent(),
+          }) =>
+              i1.{{objects.pascalCase()}}Companion(
+            id: id,
+            name: name,
+            description: description,
+          ),
+          createCompanionCallback: ({
+            i0.Value<int> id = const i0.Value.absent(),
+            required String name,
+            i0.Value<String?> description = const i0.Value.absent(),
+          }) =>
+              i1.{{objects.pascalCase()}}Companion.insert(
+            id: id,
+            name: name,
+            description: description,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), i0.BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef ${{objects.pascalCase()}}ProcessedTableManager = i0.ProcessedTableManager<
+    i0.GeneratedDatabase,
+    i1.{{objects.pascalCase()}},
+    i1.{{object.pascalCase()}},
+    i1.${{objects.pascalCase()}}FilterComposer,
+    i1.${{objects.pascalCase()}}OrderingComposer,
+    ${{objects.pascalCase()}}CreateCompanionBuilder,
+    ${{objects.pascalCase()}}UpdateCompanionBuilder,
+    (
+      i1.{{object.pascalCase()}},
+      i0
+      .BaseReferences<i0.GeneratedDatabase, i1.{{objects.pascalCase()}}, i1.{{object.pascalCase()}}>
+    ),
+    i1.{{object.pascalCase()}},
+    i0.PrefetchHooks Function()>;
 
 class {{objects.pascalCase()}}Drift extends i2.ModularAccessor {
   {{objects.pascalCase()}}Drift(i0.GeneratedDatabase db) : super(db);
@@ -371,5 +392,6 @@ class {{objects.pascalCase()}}Drift extends i2.ModularAccessor {
   }
 
   i1.{{objects.pascalCase()}} get {{objects.camelCase()}} =>
-      this.resultSet<i1.{{objects.pascalCase()}}>('{{objects.snakeCase()}}');
+      i2.ReadDatabaseContainer(attachedDatabase)
+          .resultSet<i1.{{objects.pascalCase()}}>('{{objects.snakeCase()}}');
 }

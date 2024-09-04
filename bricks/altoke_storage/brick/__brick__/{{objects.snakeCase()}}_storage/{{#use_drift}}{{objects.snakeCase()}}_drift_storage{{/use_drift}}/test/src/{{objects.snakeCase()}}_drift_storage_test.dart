@@ -30,6 +30,11 @@ class FakeDatabase extends GeneratedDatabase {
 }
 
 void main() {
+  setUpAll(() {
+    // cspell:disable-next-line
+    driftRuntimeOptions.dontWarnAboutMultipleDatabases = true;
+  });
+
   test(
     '''
 
@@ -1145,6 +1150,7 @@ THEN the {{objects.lowerCase()}} are continuously emitted as they change
 ''',
         () async {
           final stream = storage.watch();
+          await database.transaction(() async {});
 
           // Stage 00
           final {{objects.camelCase()}}ForStage00 = <{{object.pascalCase()}}>[
@@ -1261,6 +1267,8 @@ THEN the {{objects.lowerCase()}} are continuously emitted as they change
 ''',
         () async {
           final stream = storage.watch(searchTerm: 'matching-pattern');
+          await database.transaction(() async {});
+
           bool match({{object.pascalCase()}} {{object.camelCase()}}) =>
               {{object.camelCase()}}.name.contains('matching-pattern') ||
               ({{object.camelCase()}}.description?.contains('matching-pattern') ?? false);
@@ -1382,6 +1390,7 @@ THEN the quantity of persisted {{objects.lowerCase()}} are continuously emitted 
 ''',
         () async {
           final stream = storage.watchCount();
+          await database.transaction(() async {});
 
           // Stage 00
           final {{objects.camelCase()}}ForStage00 = <{{object.pascalCase()}}>[
@@ -1491,6 +1500,8 @@ THEN the quantity of persisted {{objects.lowerCase()}} that match the conditions
 ''',
         () async {
           final stream = storage.watchCount(searchTerm: 'matching-pattern');
+          await database.transaction(() async {});
+
           bool match({{object.pascalCase()}} {{object.camelCase()}}) =>
               {{object.camelCase()}}.name.contains('matching-pattern') ||
               ({{object.camelCase()}}.description?.contains('matching-pattern') ?? false);

@@ -3,13 +3,14 @@ description: A tool to resolve README files.
 publish_to: none
 
 environment:
-  sdk: ">=3.4.4 <4.0.0"
+  sdk: ">=3.5.1 <4.0.0"
 
 dependencies:
   checked_yaml: ^2.0.3
-  mason: ^0.1.0-dev.53
-  monorepo_elements: any
+  mason: ^0.1.0-dev.59
+  monorepo_elements:
+    path: ../monorepo_elements
   path: ^1.9.0
 
 dev_dependencies:
-  very_good_analysis: ^5.1.0
+  very_good_analysis: ^6.0.0
