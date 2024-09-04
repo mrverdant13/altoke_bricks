@@ -30,7 +30,7 @@ jobs:
       - name: Resolve root README file
         run: melos run docs.root
       - name: Create PR
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
           base: main
           add-paths: |
@@ -100,7 +100,7 @@ jobs:
       - name: Generate template
         run: melos run docs.brick
       - name: Create PR
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
           base: main
           add-paths: |
