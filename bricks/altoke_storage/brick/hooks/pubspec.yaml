@@ -26,7 +26,7 @@ dependency_overrides:
   pubspec_deps_sorter:
     git:
       url: https://github.com/mrverdant13/altoke_bricks.git
-      ref: 63c80e3d14f2844bbef5d135b04338da6859a31f
+      ref: 0a1c19cb9a3e3b089993ab245c97ef13c6257a36
       path: ./tools/pubspec_deps_sorter/
   shell:
     git:
