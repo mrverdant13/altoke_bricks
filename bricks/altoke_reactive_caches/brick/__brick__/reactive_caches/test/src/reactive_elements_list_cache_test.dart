@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:reactive_caches/reactive_caches.dart';
-import 'package:collection/collection.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -362,7 +361,7 @@ THEN the filtered cached list is continuously emitted as it changes
               stream,
               emitsInOrder([
                 for (final value in expectedValues)
-                  orderedEquals(value.whereNotNull()),
+                  orderedEquals(value.nonNulls),
               ]),
             ),
           );

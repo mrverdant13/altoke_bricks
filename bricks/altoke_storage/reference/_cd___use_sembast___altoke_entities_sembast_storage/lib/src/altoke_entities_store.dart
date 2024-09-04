@@ -1,7 +1,6 @@
 import 'package:altoke_common/common.dart';
 import 'package:altoke_entities_sembast_storage/altoke_entities_sembast_storage.dart';
 import 'package:altoke_entity/altoke_entity.dart';
-import 'package:collection/collection.dart';
 import 'package:sembast/sembast.dart';
 
 /// A reference to a raw altoke entities store.
@@ -180,7 +179,7 @@ abstract class AltokeEntitiesFilter {
   static Filter andAll(
     Iterable<Filter> filters,
   ) {
-    final validFilters = filters.whereNotNull();
+    final validFilters = filters.nonNulls;
     if (validFilters.isEmpty) return noFilter;
     return Filter.and([...validFilters]);
   }

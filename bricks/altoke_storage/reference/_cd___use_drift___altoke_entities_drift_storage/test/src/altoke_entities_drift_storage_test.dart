@@ -30,6 +30,11 @@ class FakeDatabase extends GeneratedDatabase {
 }
 
 void main() {
+  setUpAll(() {
+    // cspell:disable-next-line
+    driftRuntimeOptions.dontWarnAboutMultipleDatabases = true;
+  });
+
   test(
     '''
 
@@ -1145,6 +1150,7 @@ THEN the altoke entities are continuously emitted as they change
 ''',
         () async {
           final stream = storage.watch();
+          await database.transaction(() async {});
 
           // Stage 00
           final altokeEntitiesForStage00 = <AltokeEntity>[
@@ -1261,6 +1267,8 @@ THEN the altoke entities are continuously emitted as they change
 ''',
         () async {
           final stream = storage.watch(searchTerm: 'matching-pattern');
+          await database.transaction(() async {});
+
           bool match(AltokeEntity altokeEntity) =>
               altokeEntity.name.contains('matching-pattern') ||
               (altokeEntity.description?.contains('matching-pattern') ?? false);
@@ -1382,6 +1390,7 @@ THEN the quantity of persisted altoke entities are continuously emitted as it ch
 ''',
         () async {
           final stream = storage.watchCount();
+          await database.transaction(() async {});
 
           // Stage 00
           final altokeEntitiesForStage00 = <AltokeEntity>[
@@ -1491,6 +1500,8 @@ THEN the quantity of persisted altoke entities that match the conditions is cont
 ''',
         () async {
           final stream = storage.watchCount(searchTerm: 'matching-pattern');
+          await database.transaction(() async {});
+
           bool match(AltokeEntity altokeEntity) =>
               altokeEntity.name.contains('matching-pattern') ||
               (altokeEntity.description?.contains('matching-pattern') ?? false);

@@ -26,13 +26,20 @@ categories:
 command:
   bootstrap:
     environment:
-      sdk: ">=3.4.4 <4.0.0"
-      flutter: ">=3.22.3 <4.0.0"
+      sdk: ">=3.5.1 <4.0.0"
+      flutter: ">=3.24.1 <4.0.0"
     dependencies:
-      meta: ^1.11.0
+      collection: ^1.19.0
+      mason: ^0.1.0-dev.59
+      meta: ^1.15.0
     dev_dependencies:
+      build_runner: ^2.4.12
+      mason: ^0.1.0-dev.59
       melos: ^6.1.0
-      test: ^1.25.2
+      meta: ^1.15.0
+      mocktail: ^1.0.4
+      test: ^1.25.8
+      very_good_analysis: ^6.0.0
   clean:
     hooks:
       pre:
@@ -126,7 +133,8 @@ scripts:
     steps:
       - analyze.dart
       - analyze.flutter
-      - analyze.custom
+      # HACK: Avoid issue https://github.com/invertase/dart_custom_lint/issues/268
+      # - analyze.custom
   analyze.ci:
     description: Analyze all packages (CI)
     steps:

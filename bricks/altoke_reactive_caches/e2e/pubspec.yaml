@@ -2,13 +2,15 @@ name: altoke_reactive_caches_e2e
 publish_to: none
 
 environment:
-  sdk: ">=3.4.4 <4.0.0"
+  sdk: ">=3.5.1 <4.0.0"
 
 dev_dependencies:
-  mason: ^0.1.0-dev.52
-  mocktail: ^1.0.3
-  monorepo_elements: any
+  mason: ^0.1.0-dev.59
+  mocktail: ^1.0.4
+  monorepo_elements:
+    path: ../../../tools/monorepo_elements
   path: ^1.9.0
-  shell: any
-  test: ^1.25.2
-  very_good_analysis: ^5.1.0
+  shell:
+    path: ../../../tools/shell
+  test: ^1.25.8
+  very_good_analysis: ^6.0.0

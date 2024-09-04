@@ -39,7 +39,7 @@ const Isar{{object.pascalCase()}}Schema = CollectionSchema(
   getId: _isar{{object.pascalCase()}}GetId,
   getLinks: _isar{{object.pascalCase()}}GetLinks,
   attach: _isar{{object.pascalCase()}}Attach,
-  version: '3.1.0+1',
+  version: '3.1.8',
 );
 
 int _isar{{object.pascalCase()}}EstimateSize(

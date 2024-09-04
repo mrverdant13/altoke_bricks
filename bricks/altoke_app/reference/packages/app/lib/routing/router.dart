@@ -19,13 +19,13 @@ part 'router.g.dart';
 @AutoRouterConfig(
   generateForDir: ['lib/routing/'],
 )
-class AppRouter extends $AppRouter {
+class AppRouter extends RootStackRouter {
   @override
   RouteType get defaultRouteType => const RouteType.adaptive();
 
   @override
   final List<AutoRoute> routes = [
-    AdaptiveRoute(
+    AdaptiveRoute<void>(
       initial: true,
       path: '/counter',
       title: (context, data) => 'Counter',
