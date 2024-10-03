@@ -4,6 +4,18 @@
   "@appTitle": {
     "description": "Título de la aplicación"
   },
+  "homeAppBarTitle": "Ejemplos",
+  "@homeAppBarTitle": {
+    "type": "text",
+    "description": "Título de la cabecera de la pantalla de ejemplos",
+    "placeholders": {}
+  },
+  "counterExampleListTileTitle": "Contador",
+  "@counterExampleListTileTitle": {
+    "type": "text",
+    "description": "Título de la tarjeta de ejemplo del contador",
+    "placeholders": {}
+  },
   "counterAppBarTitle": "Contador",
   "@counterAppBarTitle": {
     "description": "Título de la cabecera de la pantalla del contador"

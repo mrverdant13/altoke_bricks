@@ -16,15 +16,33 @@ class AppRouter extends RootStackRouter {
   final List<AutoRoute> routes = [
     AdaptiveRoute<void>(
       initial: true,
+      path: '/',
+      page: HomeRoute.page,
+    ),
+    AdaptiveRoute<void>(
       path: '/counter',
-      title: (context, data) => 'Counter',
       page: CounterRoute.page,
     ),
   ];
-}{{/use_auto_route}}{{#use_go_router}}@TypedGoRoute<CounterRouteData>(
-  path: '/counter',
-  name: 'CounterRoute',
+}{{/use_auto_route}}{{#use_go_router}}@TypedGoRoute<HomeRouteData>(
+  path: '/',
+  name: 'HomeRoute',
+  routes: [
+    TypedGoRoute<CounterRouteData>(
+      path: 'counter',
+      name: 'CounterRoute',
+    ),
+  ],
 )
+class HomeRouteData extends GoRouteData {
+  const HomeRouteData();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const HomeScreen();
+  }
+}
+
 class CounterRouteData extends GoRouteData {
   const CounterRouteData();
 
@@ -38,7 +56,7 @@ class CounterRouteData extends GoRouteData {
 RouterConfig<Object> routerConfig(RouterConfigRef ref) {final routerConfig ={{#use_auto_route}}AppRouter().config(){{/use_auto_route}}{{#use_go_router}}GoRouter(
         routes: $appRoutes,
         debugLogDiagnostics: kDebugMode,
-        initialLocation: const CounterRouteData().location,
+        initialLocation: const HomeRouteData().location,
       ){{/use_go_router}};
   final delegate = routerConfig.routerDelegate;
 
