@@ -7,14 +7,38 @@ part of 'router.dart';
 // **************************************************************************
 
 List<RouteBase> get $appRoutes => [
-      $counterRouteData,
+      $homeRouteData,
     ];
 
-RouteBase get $counterRouteData => GoRouteData.$route(
-      path: '/counter',
-      name: 'CounterRoute',
-      factory: $CounterRouteDataExtension._fromState,
+RouteBase get $homeRouteData => GoRouteData.$route(
+      path: '/',
+      name: 'HomeRoute',
+      factory: $HomeRouteDataExtension._fromState,
+      routes: [
+        GoRouteData.$route(
+          path: 'counter',
+          name: 'CounterRoute',
+          factory: $CounterRouteDataExtension._fromState,
+        ),
+      ],
     );
+
+extension $HomeRouteDataExtension on HomeRouteData {
+  static HomeRouteData _fromState(GoRouterState state) => const HomeRouteData();
+
+  String get location => GoRouteData.$location(
+        '/',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
 
 extension $CounterRouteDataExtension on CounterRouteData {
   static CounterRouteData _fromState(GoRouterState state) =>
@@ -38,7 +62,7 @@ extension $CounterRouteDataExtension on CounterRouteData {
 // RiverpodGenerator
 // **************************************************************************
 
-String _$routerConfigHash() => r'a419152c10fed59bffc329a8ed36f59184143fa2';
+String _$routerConfigHash() => r'c81f3d972d49250e598afb91d7278f68da3e59bb';
 
 /// See also [routerConfig].
 @ProviderFor(routerConfig)

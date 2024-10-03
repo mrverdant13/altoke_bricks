@@ -4,6 +4,18 @@
   "@appTitle": {
     "description": "App title"
   },
+  "homeAppBarTitle": "Examples",
+  "@homeAppBarTitle": {
+    "type": "text",
+    "description": "Title for the home screen app bar",
+    "placeholders": {}
+  },
+  "counterExampleListTileTitle": "Counter",
+  "@counterExampleListTileTitle": {
+    "type": "text",
+    "description": "Title for the counter example list tile",
+    "placeholders": {}
+  },
   "counterAppBarTitle": "Counter",
   "@counterAppBarTitle": {
     "description": "App bar title for the counter screen"

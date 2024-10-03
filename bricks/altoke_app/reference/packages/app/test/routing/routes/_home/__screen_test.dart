@@ -1,7 +1,13 @@
 import 'package:altoke_app/app/app.dart';
 import 'package:altoke_app/routing/routing.dart';
+/*{{#use_auto_route}}*/
+import 'package:auto_route/auto_route.dart';
+/*{{/use_auto_route}}*/
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+/*{{#use_go_router}}*/
+import 'package:go_router/go_router.dart';
+/*{{/use_go_router}}*/
 
 void main() {
 /*w 1v w*/
@@ -9,26 +15,23 @@ void main() {
   testWidgets(
     '''
 
-GIVEN an app
-AND an app router
-WHEN the app is built
-THEN the counter screen should be shown
+GIVEN a routed app
+├─ THAT starts with the home path
+WHEN the app starts
+THEN the home screen should be shown
 ''',
     (tester) async {
       await tester.pumpWidget(
-        /*remove-start*/ // /*remove-end*/ const
-        /*w 1v w*/
         ProviderScope(
-          /*remove-start*/
           overrides: [
-            routerPackagePod.overrideWithValue(RouterPackage.autoRoute),
+            routerConfigPod.overrideWithValue(
+              AppRouter().config(
+                // ignore: use_named_constants
+                deepLinkBuilder: (_) => const DeepLink.path('/'),
+              ),
+            ),
           ],
-          /*remove-end*/
-          child:
-              /*remove-start*/
-              const
-              /*remove-end*/
-              MyApp(),
+          child: const MyApp(),
         ),
       );
       await tester.pumpAndSettle();
@@ -42,26 +45,23 @@ THEN the counter screen should be shown
   testWidgets(
     '''
 
-GIVEN an app
-AND an app router
-WHEN the app is built
-THEN the counter screen should be shown
+GIVEN a routed app
+├─ THAT starts with the home path
+WHEN the app starts
+THEN the home screen should be shown
 ''',
     (tester) async {
       await tester.pumpWidget(
-        /*remove-start*/ // /*remove-end*/ const
-        /*w 1v w*/
         ProviderScope(
-          /*remove-start*/
           overrides: [
-            routerPackagePod.overrideWithValue(RouterPackage.goRouter),
+            routerConfigPod.overrideWithValue(
+              GoRouter(
+                routes: $appRoutes,
+                initialLocation: '/',
+              ),
+            ),
           ],
-          /*remove-end*/
-          child:
-              /*remove-start*/
-              const
-              /*remove-end*/
-              MyApp(),
+          child: const MyApp(),
         ),
       );
       await tester.pumpAndSettle();
