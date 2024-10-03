@@ -20,19 +20,19 @@ class CounterExampleListTile extends ConsumerWidget {
         /*remove-start*/
         switch (ref.read(routerPackagePod)) {
           case RouterPackage.autoRoute:
-            /*remove-start*/
+            /*remove-end*/
             /*{{#use_auto_route}}*/
             const CounterRoute().navigate(context);
           /*{{/use_auto_route}}*/
           /*remove-start*/
           case RouterPackage.goRouter:
-            /*remove-start*/
+            /*remove-end*/
             /*{{#use_go_router}}*/
             const CounterRouteData().go(context);
           /*{{/use_go_router}}*/
           /*remove-start*/
         }
-        /*remove-start*/
+        /*remove-end*/
         /*w 1v w*/
       },
     );
