@@ -18,7 +18,7 @@ ProviderScope(child:MyApp(),
         ),
       );
       await tester.pumpAndSettle();
-      final homeScreenFinder = find.byType(CounterScreen);
+      final homeScreenFinder = find.byType(HomeScreen);
       expect(homeScreenFinder, findsOneWidget);
     },
   );{{/use_auto_route}}{{#use_go_router}}testWidgets(
@@ -35,7 +35,7 @@ ProviderScope(child:MyApp(),
         ),
       );
       await tester.pumpAndSettle();
-      final homeScreenFinder = find.byType(CounterScreen);
+      final homeScreenFinder = find.byType(HomeScreen);
       expect(homeScreenFinder, findsOneWidget);
     },
   );{{/use_go_router}}
