@@ -1,0 +1,21 @@
+targets:
+  $default:
+    builders:
+      drift_dev:
+        enabled: false
+      drift_dev:analyzer:
+        enabled: true
+        options: &options
+          named_parameters: true
+          apply_converters_on_variables: true
+          sql:
+            dialect: sqlite
+        generate_for: &generate_for
+          - lib/src/type_converters/type_converters.dart
+          - lib/src/internal.dart
+          - lib/src/local_database.dart
+          - lib/src/tasks.drift
+      drift_dev:modular:
+        enabled: true
+        options: *options
+        generate_for: *generate_for
