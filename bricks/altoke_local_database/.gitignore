@@ -8,3 +8,7 @@
 
 # Testing
 /coverage/
+
+# Generated source files
+/**/__brick__/**/*.drift.dart
+/**/__brick__/**/*.g.dart
