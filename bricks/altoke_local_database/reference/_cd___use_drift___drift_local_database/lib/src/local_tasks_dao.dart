@@ -1,13 +1,13 @@
 import 'package:altoke_common/common.dart';
-import 'package:altoke_drift_local_database/src/tasks.drift.dart';
-import 'package:altoke_local_database/altoke_local_database.dart';
 import 'package:drift/drift.dart';
+import 'package:drift_local_database/src/tasks.drift.dart';
+import 'package:local_database/local_database.dart';
 
-/// {@template altoke_drift_local_database.local_tasks_dao}
+/// {@template drift_local_database.local_tasks_dao}
 /// A DAO that manages tasks in a Drift local database.
 /// {@endtemplate}
 class LocalTasksDriftDao implements LocalTasksDao {
-  /// {@macro altoke_drift_local_database.local_tasks_dao}
+  /// {@macro drift_local_database.local_tasks_dao}
   LocalTasksDriftDao({
     required this.tasksDrift,
   });

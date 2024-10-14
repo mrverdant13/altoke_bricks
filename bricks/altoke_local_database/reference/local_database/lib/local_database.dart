@@ -1,5 +1,5 @@
 /// An interface for a persistent local database.
-library altoke_local_database;
+library local_database;
 
 export 'src/failures/failures.dart';
 export 'src/local_tasks_dao.dart';

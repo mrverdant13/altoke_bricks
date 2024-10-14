@@ -1,3 +1,3 @@
-# Altoke Local Database
+# Local Database
 
 An interface for a persistent local database.

@@ -1,11 +1,11 @@
-import 'package:altoke_local_database/altoke_local_database.dart';
 import 'package:drift/drift.dart';
+import 'package:local_database/local_database.dart';
 
-/// {@template altoke_drift_local_database.task_priority_converter}
+/// {@template drift_local_database.task_priority_converter}
 /// A type converter for [TaskPriority].
 /// {@endtemplate}
 class TaskPriorityConverter extends TypeConverter<TaskPriority, String> {
-  /// {@macro altoke_drift_local_database.task_priority_converter}
+  /// {@macro drift_local_database.task_priority_converter}
   const TaskPriorityConverter();
 
   static const _map = {

@@ -1,15 +1,15 @@
 import 'package:altoke_common/common.dart';
-import 'package:altoke_isar_local_database/src/helpers.dart';
-import 'package:altoke_isar_local_database/src/task.dart' as isar;
-import 'package:altoke_local_database/altoke_local_database.dart';
 import 'package:isar/isar.dart';
+import 'package:isar_local_database/src/helpers.dart';
+import 'package:isar_local_database/src/task.dart' as isar;
+import 'package:local_database/local_database.dart';
 import 'package:meta/meta.dart';
 
-/// {@template altoke_isar_local_database.local_tasks_dao}
+/// {@template isar_local_database.local_tasks_dao}
 /// A DAO that manages tasks in an Isar local database.
 /// {@endtemplate}
 class LocalTasksIsarDao implements LocalTasksDao {
-  /// {@macro altoke_isar_local_database.local_tasks_dao}
+  /// {@macro isar_local_database.local_tasks_dao}
   LocalTasksIsarDao({
     required this.database,
   });

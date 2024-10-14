@@ -1,18 +1,18 @@
-import 'package:altoke_local_database/altoke_local_database.dart';
+import 'package:local_database/local_database.dart';
 
-/// {@template altoke_local_database.update_task_failure}
+/// {@template local_database.update_task_failure}
 /// An exception that is thrown when a task update fails.
 /// {@endtemplate}
 sealed class UpdateTaskFailure implements Exception {
-  /// {@macro altoke_local_database.update_task_failure}
+  /// {@macro local_database.update_task_failure}
   const UpdateTaskFailure();
 }
 
-/// {@template altoke_local_database.update_task_failure_not_found}
+/// {@template local_database.update_task_failure_not_found}
 /// An exception that is thrown when the task to update is not found.
 /// {@endtemplate}
 class UpdateTaskFailureNotFound extends UpdateTaskFailure {
-  /// {@macro altoke_local_database.update_task_failure_not_found}
+  /// {@macro local_database.update_task_failure_not_found}
   const UpdateTaskFailureNotFound({
     required this.taskId,
   });
@@ -26,12 +26,12 @@ class UpdateTaskFailureNotFound extends UpdateTaskFailure {
   }
 }
 
-/// {@template altoke_local_database.update_task_failure_invalid_data}
+/// {@template local_database.update_task_failure_invalid_data}
 /// An exception that is thrown when the data provided for task update is
 /// invalid.
 /// {@endtemplate}
 class UpdateTaskFailureInvalidData extends UpdateTaskFailure {
-  /// {@macro altoke_local_database.update_task_failure_invalid_data}
+  /// {@macro local_database.update_task_failure_invalid_data}
   const UpdateTaskFailureInvalidData({
     required this.titleValidationErrors,
     required this.complexValidationErrors,

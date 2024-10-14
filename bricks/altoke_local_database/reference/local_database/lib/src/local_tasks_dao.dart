@@ -1,10 +1,10 @@
-import 'package:altoke_local_database/altoke_local_database.dart';
+import 'package:local_database/local_database.dart';
 
-/// {@template altoke_local_database.local_tasks_dao}
+/// {@template local_database.local_tasks_dao}
 /// An interface for a DAO that manages tasks in a local database.
 /// {@endtemplate}
 abstract interface class LocalTasksDao {
-  /// {@macro altoke_local_database.local_tasks_dao}
+  /// {@macro local_database.local_tasks_dao}
   const LocalTasksDao();
 
   /// Creates a new task.
