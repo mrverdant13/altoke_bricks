@@ -2,6 +2,42 @@
 
 <!-- DO NOT EDIT - THIS IS AUTOMATICALLY GENERATED -->
 <!-- BANNERS HEADER -->
+<p align="center">
+  <p align="center">
+    <a href="https://github.com/mrverdant13/altoke_bricks/actions/workflows/ci.yaml">
+      <img
+        src="https://github.com/mrverdant13/altoke_bricks/actions/workflows/ci.yaml/badge.svg?branch=main"
+        alt="GH Actions - CI workflow"
+      />
+    </a>
+    <a href="https://github.com/mrverdant13/altoke_bricks/actions/workflows/e2e.yaml">
+      <img
+        src="https://github.com/mrverdant13/altoke_bricks/actions/workflows/e2e.yaml/badge.svg?branch=main"
+        alt="GH Actions - E2E workflow"
+      />
+    </a>
+  </p>
+  <p align="center">
+    <a href="https://pub.dev/packages/very_good_analysis">
+      <img
+        src="https://img.shields.io/badge/style-very_good_analysis-B22C89.svg"
+        alt="Very Good Analysis"
+      />
+    </a>
+    <a href="https://melos.invertase.dev/">
+      <img
+        src="https://img.shields.io/badge/maintained%20with-melos-f700ff.svg"
+        alt="Melos monorepo management tool"
+      />
+    </a>
+    <a href="https://docs.brickhub.dev/">
+      <img
+        src="https://img.shields.io/endpoint?url=https%3A%2F%2Ftinyurl.com%2Fmason-badge"
+        alt="Mason documentation"
+      />
+    </a>
+  </p>
+</p>
 <!-- BANNERS HEADER -->
 
 ---
@@ -29,6 +65,11 @@ Create a local database, **_al toque_** (_quickly_).
 
 <!-- DO NOT EDIT - THIS IS AUTOMATICALLY GENERATED -->
 <!-- VARIABLES -->
+### Variables
+
+| Variable | Description | Default | Type |
+| -------- | ----------- | ------- | ---- |
+| `local_database_alternative` | The local database alternative. | drift | Enumeration |
 <!-- VARIABLES -->
 
 <!-- EDITABLE -->
