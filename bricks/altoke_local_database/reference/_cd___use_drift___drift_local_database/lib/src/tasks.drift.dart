@@ -1,11 +1,175 @@
 // ignore_for_file: type=lint
 import 'package:drift/drift.dart' as i0;
-import 'package:altoke_local_database/src/models/task.dart' as i1;
-import 'package:altoke_local_database/src/models/task_priority.dart' as i2;
-import 'package:altoke_drift_local_database/src/tasks.drift.dart' as i3;
-import 'package:altoke_drift_local_database/src/type_converters/task_priority_converter.dart'
+import 'package:local_database/src/models/task.dart' as i1;
+import 'package:local_database/src/models/task_priority.dart' as i2;
+import 'package:drift_local_database/src/tasks.drift.dart' as i3;
+import 'package:drift_local_database/src/type_converters/task_priority_converter.dart'
     as i4;
 import 'package:drift/internal/modular.dart' as i5;
+
+typedef $TasksCreateCompanionBuilder = i3.TasksCompanion Function({
+  i0.Value<int> id,
+  required String title,
+  required i2.TaskPriority priority,
+  i0.Value<bool> completed,
+  i0.Value<String?> description,
+});
+typedef $TasksUpdateCompanionBuilder = i3.TasksCompanion Function({
+  i0.Value<int> id,
+  i0.Value<String> title,
+  i0.Value<i2.TaskPriority> priority,
+  i0.Value<bool> completed,
+  i0.Value<String?> description,
+});
+
+class $TasksFilterComposer extends i0.Composer<i0.GeneratedDatabase, i3.Tasks> {
+  $TasksFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  i0.ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => i0.ColumnFilters(column));
+
+  i0.ColumnFilters<String> get title => $composableBuilder(
+      column: $table.title, builder: (column) => i0.ColumnFilters(column));
+
+  i0.ColumnWithTypeConverterFilters<i2.TaskPriority, i2.TaskPriority, String>
+      get priority => $composableBuilder(
+          column: $table.priority,
+          builder: (column) => i0.ColumnWithTypeConverterFilters(column));
+
+  i0.ColumnFilters<bool> get completed => $composableBuilder(
+      column: $table.completed, builder: (column) => i0.ColumnFilters(column));
+
+  i0.ColumnFilters<String> get description => $composableBuilder(
+      column: $table.description,
+      builder: (column) => i0.ColumnFilters(column));
+}
+
+class $TasksOrderingComposer
+    extends i0.Composer<i0.GeneratedDatabase, i3.Tasks> {
+  $TasksOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  i0.ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => i0.ColumnOrderings(column));
+
+  i0.ColumnOrderings<String> get title => $composableBuilder(
+      column: $table.title, builder: (column) => i0.ColumnOrderings(column));
+
+  i0.ColumnOrderings<String> get priority => $composableBuilder(
+      column: $table.priority, builder: (column) => i0.ColumnOrderings(column));
+
+  i0.ColumnOrderings<bool> get completed => $composableBuilder(
+      column: $table.completed,
+      builder: (column) => i0.ColumnOrderings(column));
+
+  i0.ColumnOrderings<String> get description => $composableBuilder(
+      column: $table.description,
+      builder: (column) => i0.ColumnOrderings(column));
+}
+
+class $TasksAnnotationComposer
+    extends i0.Composer<i0.GeneratedDatabase, i3.Tasks> {
+  $TasksAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  i0.GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  i0.GeneratedColumn<String> get title =>
+      $composableBuilder(column: $table.title, builder: (column) => column);
+
+  i0.GeneratedColumnWithTypeConverter<i2.TaskPriority, String> get priority =>
+      $composableBuilder(column: $table.priority, builder: (column) => column);
+
+  i0.GeneratedColumn<bool> get completed =>
+      $composableBuilder(column: $table.completed, builder: (column) => column);
+
+  i0.GeneratedColumn<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => column);
+}
+
+class $TasksTableManager extends i0.RootTableManager<
+    i0.GeneratedDatabase,
+    i3.Tasks,
+    i1.Task,
+    i3.$TasksFilterComposer,
+    i3.$TasksOrderingComposer,
+    i3.$TasksAnnotationComposer,
+    $TasksCreateCompanionBuilder,
+    $TasksUpdateCompanionBuilder,
+    (i1.Task, i0.BaseReferences<i0.GeneratedDatabase, i3.Tasks, i1.Task>),
+    i1.Task,
+    i0.PrefetchHooks Function()> {
+  $TasksTableManager(i0.GeneratedDatabase db, i3.Tasks table)
+      : super(i0.TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              i3.$TasksFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              i3.$TasksOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              i3.$TasksAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            i0.Value<int> id = const i0.Value.absent(),
+            i0.Value<String> title = const i0.Value.absent(),
+            i0.Value<i2.TaskPriority> priority = const i0.Value.absent(),
+            i0.Value<bool> completed = const i0.Value.absent(),
+            i0.Value<String?> description = const i0.Value.absent(),
+          }) =>
+              i3.TasksCompanion(
+            id: id,
+            title: title,
+            priority: priority,
+            completed: completed,
+            description: description,
+          ),
+          createCompanionCallback: ({
+            i0.Value<int> id = const i0.Value.absent(),
+            required String title,
+            required i2.TaskPriority priority,
+            i0.Value<bool> completed = const i0.Value.absent(),
+            i0.Value<String?> description = const i0.Value.absent(),
+          }) =>
+              i3.TasksCompanion.insert(
+            id: id,
+            title: title,
+            priority: priority,
+            completed: completed,
+            description: description,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), i0.BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $TasksProcessedTableManager = i0.ProcessedTableManager<
+    i0.GeneratedDatabase,
+    i3.Tasks,
+    i1.Task,
+    i3.$TasksFilterComposer,
+    i3.$TasksOrderingComposer,
+    i3.$TasksAnnotationComposer,
+    $TasksCreateCompanionBuilder,
+    $TasksUpdateCompanionBuilder,
+    (i1.Task, i0.BaseReferences<i0.GeneratedDatabase, i3.Tasks, i1.Task>),
+    i1.Task,
+    i0.PrefetchHooks Function()>;
 
 class Tasks extends i0.Table with i0.TableInfo<Tasks, i1.Task> {
   @override
@@ -201,147 +365,6 @@ class TasksCompanion extends i0.UpdateCompanion<i1.Task> {
         .toString();
   }
 }
-
-typedef $TasksCreateCompanionBuilder = i3.TasksCompanion Function({
-  i0.Value<int> id,
-  required String title,
-  required i2.TaskPriority priority,
-  i0.Value<bool> completed,
-  i0.Value<String?> description,
-});
-typedef $TasksUpdateCompanionBuilder = i3.TasksCompanion Function({
-  i0.Value<int> id,
-  i0.Value<String> title,
-  i0.Value<i2.TaskPriority> priority,
-  i0.Value<bool> completed,
-  i0.Value<String?> description,
-});
-
-class $TasksFilterComposer
-    extends i0.FilterComposer<i0.GeneratedDatabase, i3.Tasks> {
-  $TasksFilterComposer(super.$state);
-  i0.ColumnFilters<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          i0.ColumnFilters(column, joinBuilders: joinBuilders));
-
-  i0.ColumnFilters<String> get title => $state.composableBuilder(
-      column: $state.table.title,
-      builder: (column, joinBuilders) =>
-          i0.ColumnFilters(column, joinBuilders: joinBuilders));
-
-  i0.ColumnWithTypeConverterFilters<i2.TaskPriority, i2.TaskPriority, String>
-      get priority => $state.composableBuilder(
-          column: $state.table.priority,
-          builder: (column, joinBuilders) => i0.ColumnWithTypeConverterFilters(
-              column,
-              joinBuilders: joinBuilders));
-
-  i0.ColumnFilters<bool> get completed => $state.composableBuilder(
-      column: $state.table.completed,
-      builder: (column, joinBuilders) =>
-          i0.ColumnFilters(column, joinBuilders: joinBuilders));
-
-  i0.ColumnFilters<String> get description => $state.composableBuilder(
-      column: $state.table.description,
-      builder: (column, joinBuilders) =>
-          i0.ColumnFilters(column, joinBuilders: joinBuilders));
-}
-
-class $TasksOrderingComposer
-    extends i0.OrderingComposer<i0.GeneratedDatabase, i3.Tasks> {
-  $TasksOrderingComposer(super.$state);
-  i0.ColumnOrderings<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          i0.ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  i0.ColumnOrderings<String> get title => $state.composableBuilder(
-      column: $state.table.title,
-      builder: (column, joinBuilders) =>
-          i0.ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  i0.ColumnOrderings<String> get priority => $state.composableBuilder(
-      column: $state.table.priority,
-      builder: (column, joinBuilders) =>
-          i0.ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  i0.ColumnOrderings<bool> get completed => $state.composableBuilder(
-      column: $state.table.completed,
-      builder: (column, joinBuilders) =>
-          i0.ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  i0.ColumnOrderings<String> get description => $state.composableBuilder(
-      column: $state.table.description,
-      builder: (column, joinBuilders) =>
-          i0.ColumnOrderings(column, joinBuilders: joinBuilders));
-}
-
-class $TasksTableManager extends i0.RootTableManager<
-    i0.GeneratedDatabase,
-    i3.Tasks,
-    i1.Task,
-    i3.$TasksFilterComposer,
-    i3.$TasksOrderingComposer,
-    $TasksCreateCompanionBuilder,
-    $TasksUpdateCompanionBuilder,
-    (i1.Task, i0.BaseReferences<i0.GeneratedDatabase, i3.Tasks, i1.Task>),
-    i1.Task,
-    i0.PrefetchHooks Function()> {
-  $TasksTableManager(i0.GeneratedDatabase db, i3.Tasks table)
-      : super(i0.TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer:
-              i3.$TasksFilterComposer(i0.ComposerState(db, table)),
-          orderingComposer:
-              i3.$TasksOrderingComposer(i0.ComposerState(db, table)),
-          updateCompanionCallback: ({
-            i0.Value<int> id = const i0.Value.absent(),
-            i0.Value<String> title = const i0.Value.absent(),
-            i0.Value<i2.TaskPriority> priority = const i0.Value.absent(),
-            i0.Value<bool> completed = const i0.Value.absent(),
-            i0.Value<String?> description = const i0.Value.absent(),
-          }) =>
-              i3.TasksCompanion(
-            id: id,
-            title: title,
-            priority: priority,
-            completed: completed,
-            description: description,
-          ),
-          createCompanionCallback: ({
-            i0.Value<int> id = const i0.Value.absent(),
-            required String title,
-            required i2.TaskPriority priority,
-            i0.Value<bool> completed = const i0.Value.absent(),
-            i0.Value<String?> description = const i0.Value.absent(),
-          }) =>
-              i3.TasksCompanion.insert(
-            id: id,
-            title: title,
-            priority: priority,
-            completed: completed,
-            description: description,
-          ),
-          withReferenceMapper: (p0) => p0
-              .map((e) => (e.readTable(table), i0.BaseReferences(db, table, e)))
-              .toList(),
-          prefetchHooksCallback: null,
-        ));
-}
-
-typedef $TasksProcessedTableManager = i0.ProcessedTableManager<
-    i0.GeneratedDatabase,
-    i3.Tasks,
-    i1.Task,
-    i3.$TasksFilterComposer,
-    i3.$TasksOrderingComposer,
-    $TasksCreateCompanionBuilder,
-    $TasksUpdateCompanionBuilder,
-    (i1.Task, i0.BaseReferences<i0.GeneratedDatabase, i3.Tasks, i1.Task>),
-    i1.Task,
-    i0.PrefetchHooks Function()>;
 
 class TasksDrift extends i5.ModularAccessor {
   TasksDrift(i0.GeneratedDatabase db) : super(db);

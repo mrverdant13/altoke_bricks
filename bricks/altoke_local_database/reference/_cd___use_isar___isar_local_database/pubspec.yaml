@@ -16,12 +16,12 @@ dependencies:
   #   path: ../../common/
   #*replace-end*#
   #*w 1v 2> w*#
-  local_database:
-    path: ../local_database/
   collection: ^1.19.0
   isar:
     hosted: https://pub.isar-community.dev/
     version: 3.1.8
+  local_database:
+    path: ../local_database/
   meta: ^1.15.0
 
 dev_dependencies:

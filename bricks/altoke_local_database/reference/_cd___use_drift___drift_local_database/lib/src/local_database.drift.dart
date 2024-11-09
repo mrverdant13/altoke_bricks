@@ -1,6 +1,6 @@
 // ignore_for_file: type=lint
 import 'package:drift/drift.dart' as i0;
-import 'package:altoke_drift_local_database/src/tasks.drift.dart' as i1;
+import 'package:drift_local_database/src/tasks.drift.dart' as i1;
 import 'package:drift/internal/modular.dart' as i2;
 
 abstract class $LocalDatabase extends i0.GeneratedDatabase {
