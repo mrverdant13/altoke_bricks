@@ -1,0 +1,83 @@
+{
+  "Remove Start": {
+    "description": "Openning token for a fragment removal",
+    "prefix": [
+      "removestart",
+      "rmstart",
+      "rms",
+    ],
+    "body": [
+      "${1|/,#|}*remove-start*${1|/,#|}",
+    ]
+  },
+  "Remove End": {
+    "description": "Closing token for a fragment removal",
+    "prefix": [
+      "removeend",
+      "rmend",
+      "rme",
+    ],
+    "body": [
+      "${1|/,#|}*remove-end*${1|/,#|}",
+    ]
+  },
+  "Remove Selection": {
+    "description": "Enclosing tokens for the removal of an optionally selected fragment",
+    "prefix": [
+      "removeselection",
+      "rmselection",
+      "rm",
+    ],
+    "body": [
+      "${1|/,#|}*remove-start*${1|/,#|}",
+      "$TM_SELECTED_TEXT",
+      "${1|/,#|}*remove-end*${1|/,#|}",
+    ]
+  },
+  "Variable Start": {
+    "description": "Openning token for a fragment parameterization",
+    "prefix": [
+      "variablestart",
+      "varstart",
+      "vs",
+    ],
+    "body": [
+      "${1|/,#|}*{{#${2:mason variable}}}*${1|/,#|}",
+    ]
+  },
+  "Variable End": {
+    "description": "Closing token for a fragment parameterization",
+    "prefix": [
+      "variableend",
+      "varend",
+      "ve",
+    ],
+    "body": [
+      "${1|/,#|}*{{/${2:mason variable}}}*${1|/,#|}",
+    ]
+  },
+  "Variable Selection": {
+    "description": "Enclosing tokens for the parameterization of an optionally selected fragment",
+    "prefix": [
+      "variableselection",
+      "varselection",
+      "var",
+    ],
+    "body": [
+      "${1|/,#|}*{{#${2:mason variable}}}*${1|/,#|}",
+      "$TM_SELECTED_TEXT",
+      "${1|/,#|}*{{/${2:mason variable}}}*${1|/,#|}",
+    ]
+  },
+  "Spacing": {
+    "description": "Inserts a spacing pattern token",
+    "prefix": [
+      "spacing",
+      "space",
+      "sp",
+    ],
+    "body": [
+      "/*w $1 w*/",
+    ]
+  },
+}
