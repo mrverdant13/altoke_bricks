@@ -42,6 +42,7 @@
 !/.vscode/extensions.json
 !/.vscode/settings.json
 !/.vscode/dummy-yaml-schema.json
+!/.vscode/*.code-snippets
 
 # Included in the git repo as per requirement of `melos`.
 # See: https://melos.invertase.dev/getting-started#configure-the-workspace

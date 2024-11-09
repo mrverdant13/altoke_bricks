@@ -1,0 +1,28 @@
+{
+  "Docs template": {
+    "description": "Comment block for a documentation template",
+    "prefix": [
+      "doctemplate",
+      "doct",
+      "dt",
+    ],
+    "scope": "dart",
+    "body": [
+      "/// {@template ${1:template_name}}",
+      "/// ${2:template_description}",
+      "/// {@endtemplate}",
+    ]
+  },
+  "Docs macro": {
+    "description": "Comment block for a documentation macro",
+    "prefix": [
+      "docmacro",
+      "docm",
+      "dm",
+    ],
+    "scope": "dart",
+    "body": [
+      "/// {@macro ${1:teamplate_name}}",
+    ]
+  },
+}
