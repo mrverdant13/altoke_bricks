@@ -1,4 +1,5 @@
 # Allowed words for Dart files
+autofocus
 autoincrement
 endtemplate
 insertable
