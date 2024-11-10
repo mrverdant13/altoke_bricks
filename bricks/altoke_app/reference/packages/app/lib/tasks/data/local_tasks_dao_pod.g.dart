@@ -1,30 +1,29 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'async_initialization_pod.dart';
+part of 'local_tasks_dao_pod.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$asyncInitializationHash() =>
-    r'6293cf7731f61da174fc2c30a95b77dcfe929353';
+String _$localTasksDaoHash() => r'b6a4eb629b3bd53bfe763f3c9f5141a7d418737c';
 
-/// See also [asyncInitialization].
-@ProviderFor(asyncInitialization)
-final asyncInitializationPod = AutoDisposeFutureProvider<void>.internal(
-  asyncInitialization,
-  name: r'asyncInitializationPod',
+/// See also [localTasksDao].
+@ProviderFor(localTasksDao)
+final localTasksDaoPod = AutoDisposeProvider<LocalTasksDao>.internal(
+  localTasksDao,
+  name: r'localTasksDaoPod',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$asyncInitializationHash,
+      : _$localTasksDaoHash,
   dependencies: <ProviderOrFamily>[
-    asyncApplicationDocumentsDirectoryPod,
+    selectedLocalDatabasePackagePod,
     asyncDriftLocalDatabasePod,
     asyncIsarPod
   ],
   allTransitiveDependencies: <ProviderOrFamily>{
-    asyncApplicationDocumentsDirectoryPod,
-    ...?asyncApplicationDocumentsDirectoryPod.allTransitiveDependencies,
+    selectedLocalDatabasePackagePod,
+    ...?selectedLocalDatabasePackagePod.allTransitiveDependencies,
     asyncDriftLocalDatabasePod,
     ...?asyncDriftLocalDatabasePod.allTransitiveDependencies,
     asyncIsarPod,
@@ -34,6 +33,6 @@ final asyncInitializationPod = AutoDisposeFutureProvider<void>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef AsyncInitializationRef = AutoDisposeFutureProviderRef<void>;
+typedef LocalTasksDaoRef = AutoDisposeProviderRef<LocalTasksDao>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

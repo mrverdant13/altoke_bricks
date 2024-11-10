@@ -1,4 +1,5 @@
 import 'package:altoke_app/counter/counter.dart';
+import 'package:altoke_app/tasks/tasks.dart';
 import 'package:flutter/material.dart';
 
 class HomeBody extends StatelessWidget {
@@ -11,6 +12,7 @@ class HomeBody extends StatelessWidget {
     return ListView(
       children: const [
         CounterExampleListTile(),
+        TasksExampleListTile(),
       ],
     );
   }
