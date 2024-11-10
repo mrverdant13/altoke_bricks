@@ -7,7 +7,7 @@ part of 'async_initialization_pod.dart';
 // **************************************************************************
 
 String _$asyncInitializationHash() =>
-    r'6293cf7731f61da174fc2c30a95b77dcfe929353';
+    r'93487d1f495c19d075beee627edda6f6918fa396';
 
 /// See also [asyncInitialization].
 @ProviderFor(asyncInitialization)
