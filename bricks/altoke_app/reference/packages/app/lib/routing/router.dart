@@ -35,10 +35,13 @@ class AppRouter extends RootStackRouter {
       path: '/counter',
       page: CounterRoute.page,
     ),
+    /*remove-start*/
     AdaptiveRoute<void>(
       path: '/tasks',
       page: TasksRoute.page,
     ),
+    /*remove-end*/
+    /*w 1v 2> w*/
   ];
 }
 /*{{/use_auto_route}}*/
@@ -52,10 +55,13 @@ class AppRouter extends RootStackRouter {
       path: 'counter',
       name: 'CounterRoute',
     ),
+    /*remove-start*/
     TypedGoRoute<TasksRouteData>(
       path: 'tasks',
       name: 'TasksRoute',
     ),
+    /*remove-end*/
+    /*w 1v 2> w*/
   ],
 )
 class HomeRouteData extends GoRouteData {
@@ -76,6 +82,7 @@ class CounterRouteData extends GoRouteData {
   }
 }
 
+/*remove-start*/
 class TasksRouteData extends GoRouteData {
   const TasksRouteData();
 
@@ -84,6 +91,7 @@ class TasksRouteData extends GoRouteData {
     return const TasksScreen();
   }
 }
+/*remove-end*/
 /*{{/use_go_router}}*/
 
 @Riverpod(

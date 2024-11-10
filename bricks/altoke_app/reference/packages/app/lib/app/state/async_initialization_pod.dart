@@ -1,4 +1,6 @@
+/*remove-start*/
 import 'package:altoke_app/external/external.dart';
+/*remove-end*/
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -6,25 +8,20 @@ part 'async_initialization_pod.g.dart';
 
 @Riverpod(
   dependencies: [
-    /*{{#use_drift}}*/
+    /*remove-start*/
     asyncApplicationDocumentsDirectory,
     asyncDriftLocalDatabase,
-    /*{{/use_drift}}*/
-    /*{{#use_isar}}*/
-    asyncApplicationDocumentsDirectory,
     asyncIsar,
-    /*{{/use_isar}}*/
+    /*remove-end*/
   ],
 )
 Future<void> asyncInitialization(Ref ref) async {
   // Run async initialization.
-  /*{{#use_drift}}*/
+  /*remove-start*/
   await ref.watch(asyncApplicationDocumentsDirectoryPod.future);
   await ref.watch(asyncDriftLocalDatabasePod.future);
-  /*{{/use_drift}}*/
-  /*{{#use_isar}}*/
   await ref.watch(asyncApplicationDocumentsDirectoryPod.future);
   await ref.watch(asyncIsarPod.future);
-  /*{{/use_isar}}*/
+  /*remove-end*/
   /*w 1v w*/
 }
