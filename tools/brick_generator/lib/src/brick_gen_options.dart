@@ -1,3 +1,4 @@
+import 'package:brick_generator/src/line_deletions.dart';
 import 'package:brick_generator/src/replacement.dart';
 import 'package:meta/meta.dart';
 
@@ -10,6 +11,7 @@ class BrickGenOptions {
   const BrickGenOptions({
     required this.targetRelativePath,
     required this.replacements,
+    required this.lineDeletions,
   });
 
   /// Creates a [BrickGenOptions] from a [json] map.
@@ -17,9 +19,12 @@ class BrickGenOptions {
     final targetRelativePath = json['targetRelativePath'] as String;
     final rawReplacements = json['replacements'] as List<dynamic>? ?? [];
     final replacements = ReplacementsIterable.fromJson(rawReplacements);
+    final rawLineDeletions = json['lineDeletions'] as List<dynamic>? ?? [];
+    final lineDeletions = LineDeletionsIterable.fromJson(rawLineDeletions);
     return BrickGenOptions(
       targetRelativePath: targetRelativePath,
       replacements: replacements,
+      lineDeletions: lineDeletions,
     );
   }
 
@@ -29,4 +34,7 @@ class BrickGenOptions {
   /// The replacements to be applied to the reference folder to generate the
   /// target brick.
   final ReplacementsIterable replacements;
+
+  /// The lines to be dropped from files within the target brick.
+  final LineDeletionsIterable lineDeletions;
 }
