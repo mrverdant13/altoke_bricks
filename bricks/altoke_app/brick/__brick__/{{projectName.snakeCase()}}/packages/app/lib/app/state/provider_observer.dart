@@ -42,8 +42,9 @@ class LoggerProviderObserver extends ProviderObserver {
     ProviderContainer container,
   ) {
     final message = '''
+${DateTime.now()}
 Provider added
-$value
+Initial:  $value
 '''
         .trim();
     log(
@@ -60,6 +61,7 @@ $value
     ProviderContainer container,
   ) {
     final message = '''
+${DateTime.now()}
 Provider failed
 $error
 '''
@@ -80,9 +82,10 @@ $error
     ProviderContainer container,
   ) {
     final message = '''
+${DateTime.now()}
 Provider updated
 Previous: $previousValue
-New: $newValue
+New:      $newValue
 '''
         .trim();
     log(
@@ -97,6 +100,7 @@ New: $newValue
     ProviderContainer container,
   ) {
     final message = '''
+${DateTime.now()}
 Provider disposed
 '''
         .trim();
