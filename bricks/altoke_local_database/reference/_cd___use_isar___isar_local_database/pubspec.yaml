@@ -16,7 +16,7 @@ dependencies:
   #   path: ../../common/
   #*replace-end*#
   #*w 1v 2> w*#
-  collection: ^1.19.0
+  collection: ^1.18.0
   isar:
     hosted: https://pub.isar-community.dev/
     version: 3.1.8
