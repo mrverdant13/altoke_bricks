@@ -5,7 +5,6 @@ import 'package:{{objects.snakeCase()}}_sembast_storage/{{objects.snakeCase()}}_
 import 'package:{{objects.snakeCase()}}_storage/{{objects.snakeCase()}}_storage.dart';
 import 'package:{{object.snakeCase()}}/{{object.snakeCase()}}.dart';
 import 'package:collection/collection.dart';
-import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_memory.dart';
 import 'package:test/test.dart';
 
