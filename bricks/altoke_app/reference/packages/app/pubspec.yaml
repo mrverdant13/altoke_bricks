@@ -8,11 +8,21 @@ environment:
   flutter: ">=3.24.1 <4.0.0"
 
 dependencies:
+  #*remove-start*#
+  altoke_common:
+    path: ../../../../altoke_common/reference/
+  #*remove-end*#
   #*w 1v 2> w*#
   #{{#use_auto_route}}#
   auto_route: ^9.2.2
   #*w 1v 2> w*#
   #{{/use_auto_route}}#
+  #*remove-start*#
+  drift: ^2.21.0
+  drift_flutter: ^0.2.1
+  drift_local_database:
+    path: ../../../../altoke_local_database/reference/_cd___use_drift___drift_local_database/
+  #*remove-end*#
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -24,6 +34,21 @@ dependencies:
   #*w 1v 2> w*#
   #{{/use_go_router}}#
   intl: ^0.19.0
+  #*remove-start*#
+  isar:
+    version: 3.1.8
+    hosted: https://pub.isar-community.dev/
+  isar_flutter_libs:
+    version: 3.1.8
+    hosted: https://pub.isar-community.dev/
+  isar_local_database:
+    path: ../../../../altoke_local_database/reference/_cd___use_isar___isar_local_database/
+  local_database:
+    path: ../../../../altoke_local_database/reference/local_database/
+  path: ^1.9.0
+  path_provider: ^2.1.5
+  #*remove-end*#
+  #*w 1v 2> w*#
   riverpod_annotation: ^2.6.1
 
 dev_dependencies:
@@ -46,6 +71,9 @@ dev_dependencies:
   riverpod_generator: ^2.6.2
   riverpod_lint: ^2.6.2
   very_good_analysis: ^6.0.0
+
+dependency_overrides:
+  collection: ^1.19.1
 
 flutter:
   generate: true
