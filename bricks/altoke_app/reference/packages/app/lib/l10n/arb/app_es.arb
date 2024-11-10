@@ -4,6 +4,18 @@
   "@appTitle": {
     "description": "Título de la aplicación"
   },
+  "genericRetryButtonLabel": "Reintentar",
+  "@genericRetryButtonLabel": {
+    "type": "text",
+    "description": "Etiqueta para un botón genérico de reintento",
+    "placeholders": {}
+  },
+  "appInitializationErrorMessage": "Hubo un problema al intentar lanzar la aplicación",
+  "@appInitializationErrorMessage": {
+    "type": "text",
+    "description": "Mensaje mostrado cuando falla la inicialización de la aplicación",
+    "placeholders": {}
+  },
   "homeAppBarTitle": "Ejemplos",
   "@homeAppBarTitle": {
     "type": "text",
