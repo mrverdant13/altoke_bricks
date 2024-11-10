@@ -1,0 +1,13 @@
+import 'type_converters/type_converters.dart';
+import 'internal.dart';
+
+CREATE TABLE tasks (
+    id INT NOT NULL PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    priority TEXT NOT NULL MAPPED BY `const TaskPriorityConverter()`,
+    completed BOOLEAN NOT NULL DEFAULT FALSE,
+    description TEXT
+) WITH Task;
+
+createTask: INSERT INTO tasks (title, priority, description) VALUES (:title, :priority, :description);
+getTaskById: SELECT * FROM tasks WHERE id = :id;

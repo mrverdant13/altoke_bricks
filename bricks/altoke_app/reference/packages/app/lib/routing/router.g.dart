@@ -20,6 +20,11 @@ RouteBase get $homeRouteData => GoRouteData.$route(
           name: 'CounterRoute',
           factory: $CounterRouteDataExtension._fromState,
         ),
+        GoRouteData.$route(
+          path: 'tasks',
+          name: 'TasksRoute',
+          factory: $TasksRouteDataExtension._fromState,
+        ),
       ],
     );
 
@@ -46,6 +51,24 @@ extension $CounterRouteDataExtension on CounterRouteData {
 
   String get location => GoRouteData.$location(
         '/counter',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $TasksRouteDataExtension on TasksRouteData {
+  static TasksRouteData _fromState(GoRouterState state) =>
+      const TasksRouteData();
+
+  String get location => GoRouteData.$location(
+        '/tasks',
       );
 
   void go(BuildContext context) => context.go(location);

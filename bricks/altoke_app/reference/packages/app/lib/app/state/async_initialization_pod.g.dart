@@ -7,7 +7,7 @@ part of 'async_initialization_pod.dart';
 // **************************************************************************
 
 String _$asyncInitializationHash() =>
-    r'899efc9a3939ab8aa4962cd512ea5008dd9550b6';
+    r'6293cf7731f61da174fc2c30a95b77dcfe929353';
 
 /// See also [asyncInitialization].
 @ProviderFor(asyncInitialization)
@@ -17,8 +17,19 @@ final asyncInitializationPod = AutoDisposeFutureProvider<void>.internal(
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$asyncInitializationHash,
-  dependencies: const <ProviderOrFamily>[],
-  allTransitiveDependencies: const <ProviderOrFamily>{},
+  dependencies: <ProviderOrFamily>[
+    asyncApplicationDocumentsDirectoryPod,
+    asyncDriftLocalDatabasePod,
+    asyncIsarPod
+  ],
+  allTransitiveDependencies: <ProviderOrFamily>{
+    asyncApplicationDocumentsDirectoryPod,
+    ...?asyncApplicationDocumentsDirectoryPod.allTransitiveDependencies,
+    asyncDriftLocalDatabasePod,
+    ...?asyncDriftLocalDatabasePod.allTransitiveDependencies,
+    asyncIsarPod,
+    ...?asyncIsarPod.allTransitiveDependencies
+  },
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')

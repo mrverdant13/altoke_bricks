@@ -29,7 +29,7 @@ command:
       sdk: ">=3.5.1 <4.0.0"
       flutter: ">=3.24.1 <4.0.0"
     dependencies:
-      collection: ^1.19.0
+      collection: ^1.18.0
       mason: ^0.1.0-dev.59
       meta: ^1.15.0
     dev_dependencies:

@@ -25,5 +25,8 @@ targets:
           provider_name_suffix: Pod
           provider_family_name_suffix: Pod
         generate_for:
-          - lib/**/state/**_pod.dart
+          - lib/**/**_pod.dart
+          - lib/**/**_pods.dart
+          - lib/**/pod.dart
+          - lib/**/pods.dart
           - lib/routing/router.dart

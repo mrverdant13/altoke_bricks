@@ -15,7 +15,7 @@ dependencies:
     # path: ../common/
     #*replace-end*#
   #*w 1v 2> w*#
-  collection: ^1.19.0
+  collection: ^1.18.0
   meta: ^1.15.0
 
 dev_dependencies:
