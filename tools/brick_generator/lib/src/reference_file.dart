@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:brick_generator/src/brick_gen_data.dart';
+import 'package:brick_generator/src/line_deletions.dart';
+import 'package:brick_generator/src/replacement.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
 import 'package:shell/git.dart';
@@ -99,8 +101,14 @@ extension ReferenceFile on File {
   Future<void> resolveContents({
     required BrickGenData brickGenData,
   }) async {
-    final resolvedContents = brickGenData.replacements
-        .apply(await readAsString())
+    final BrickGenData(:replacements, :lineDeletions) = brickGenData;
+    final referenceContent = await readAsString();
+    final resolvedContents = referenceContent
+        .applyLineDeletions(
+          filePath: path,
+          lineDeletions: lineDeletions,
+        )
+        .applyReplacements(replacements)
         .replaceAll(
           AltokeRegexp.remotionRegexp,
           '',
