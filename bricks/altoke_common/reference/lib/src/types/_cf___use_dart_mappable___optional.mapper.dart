@@ -79,17 +79,6 @@ mixin DmSomeMappable<T extends Object?> {
   String toString() {
     return DmSomeMapper.ensureInitialized().stringifyValue(this as DmSome<T>);
   }
-
-  @override
-  bool operator ==(Object other) {
-    return DmSomeMapper.ensureInitialized()
-        .equalsValue(this as DmSome<T>, other);
-  }
-
-  @override
-  int get hashCode {
-    return DmSomeMapper.ensureInitialized().hashValue(this as DmSome<T>);
-  }
 }
 
 class DmNoneMapper extends ClassMapperBase<DmNone> {
@@ -125,16 +114,5 @@ mixin DmNoneMappable<T extends Object?> {
   @override
   String toString() {
     return DmNoneMapper.ensureInitialized().stringifyValue(this as DmNone<T>);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return DmNoneMapper.ensureInitialized()
-        .equalsValue(this as DmNone<T>, other);
-  }
-
-  @override
-  int get hashCode {
-    return DmNoneMapper.ensureInitialized().hashValue(this as DmNone<T>);
   }
 }

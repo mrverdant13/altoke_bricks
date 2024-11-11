@@ -32,7 +32,8 @@ class Some<T extends Object?> extends Optional<T> {
   String toString() => 'Some<$T>(value: $value)';
 
   @override
-  bool operator ==(covariant Some<T> other) {
+  bool operator ==(covariant Optional<T> other) {
+    if (other is! Some<T>) return false;
     if (identical(this, other)) return true;
     return other.value == value;
   }
@@ -53,7 +54,8 @@ class None<T extends Object?> extends Optional<T> {
   String toString() => 'None<$T>()';
 
   @override
-  bool operator ==(covariant None<T> other) {
+  bool operator ==(covariant Optional<T> other) {
+    if (other is! None<T>) return false;
     return identical(this, other);
   }
 
