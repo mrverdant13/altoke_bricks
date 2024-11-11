@@ -1,4 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:meta/meta.dart';
 
 part 'optional.mapper.dart';
 
@@ -21,19 +22,44 @@ sealed class Optional<T extends Object?> with OptionalMappable<T> {
 /// A representation of a present value.
 /// {@endtemplate}
 @MappableClass()
+@immutable
 class DmSome<T extends Object?> extends Optional<T> with DmSomeMappable<T> {
   /// {@macro common.some}
   const DmSome(this.value);
 
   /// The underlying value.
   final T value;
+
+  // HACK: Manual override required to avoid edge cases.
+  @override
+  bool operator ==(covariant Optional<T> other) {
+    if (other is! DmSome<T>) return false;
+    if (identical(this, other)) return true;
+    return other.value == value;
+  }
+
+  // HACK: Manual override required to avoid edge cases.
+  @override
+  int get hashCode => runtimeType.hashCode ^ value.hashCode;
 }
 
 /// {@template common.none}
 /// A representation of an absent value.
 /// {@endtemplate}
 @MappableClass()
+@immutable
 class DmNone<T extends Object?> extends Optional<T> with DmNoneMappable<T> {
   /// {@macro common.none}
   const DmNone();
+
+  // HACK: Manual override required to avoid edge cases.
+  @override
+  bool operator ==(covariant Optional<T> other) {
+    if (other is! DmNone<T>) return false;
+    return identical(this, other);
+  }
+
+  // HACK: Manual override required to avoid edge cases.
+  @override
+  int get hashCode => runtimeType.hashCode;
 }
