@@ -3,6 +3,148 @@ import 'package:drift/drift.dart' as i0;
 import 'package:altoke_entities_drift_storage/altoke_entities.drift.dart' as i1;
 import 'package:drift/internal/modular.dart' as i2;
 
+typedef $AltokeEntitiesCreateCompanionBuilder = i1.AltokeEntitiesCompanion
+    Function({
+  i0.Value<int> id,
+  required String name,
+  i0.Value<String?> description,
+});
+typedef $AltokeEntitiesUpdateCompanionBuilder = i1.AltokeEntitiesCompanion
+    Function({
+  i0.Value<int> id,
+  i0.Value<String> name,
+  i0.Value<String?> description,
+});
+
+class $AltokeEntitiesFilterComposer
+    extends i0.Composer<i0.GeneratedDatabase, i1.AltokeEntities> {
+  $AltokeEntitiesFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  i0.ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => i0.ColumnFilters(column));
+
+  i0.ColumnFilters<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => i0.ColumnFilters(column));
+
+  i0.ColumnFilters<String> get description => $composableBuilder(
+      column: $table.description,
+      builder: (column) => i0.ColumnFilters(column));
+}
+
+class $AltokeEntitiesOrderingComposer
+    extends i0.Composer<i0.GeneratedDatabase, i1.AltokeEntities> {
+  $AltokeEntitiesOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  i0.ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => i0.ColumnOrderings(column));
+
+  i0.ColumnOrderings<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => i0.ColumnOrderings(column));
+
+  i0.ColumnOrderings<String> get description => $composableBuilder(
+      column: $table.description,
+      builder: (column) => i0.ColumnOrderings(column));
+}
+
+class $AltokeEntitiesAnnotationComposer
+    extends i0.Composer<i0.GeneratedDatabase, i1.AltokeEntities> {
+  $AltokeEntitiesAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  i0.GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  i0.GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  i0.GeneratedColumn<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => column);
+}
+
+class $AltokeEntitiesTableManager extends i0.RootTableManager<
+    i0.GeneratedDatabase,
+    i1.AltokeEntities,
+    i1.AltokeEntity,
+    i1.$AltokeEntitiesFilterComposer,
+    i1.$AltokeEntitiesOrderingComposer,
+    i1.$AltokeEntitiesAnnotationComposer,
+    $AltokeEntitiesCreateCompanionBuilder,
+    $AltokeEntitiesUpdateCompanionBuilder,
+    (
+      i1.AltokeEntity,
+      i0
+      .BaseReferences<i0.GeneratedDatabase, i1.AltokeEntities, i1.AltokeEntity>
+    ),
+    i1.AltokeEntity,
+    i0.PrefetchHooks Function()> {
+  $AltokeEntitiesTableManager(i0.GeneratedDatabase db, i1.AltokeEntities table)
+      : super(i0.TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              i1.$AltokeEntitiesFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              i1.$AltokeEntitiesOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              i1.$AltokeEntitiesAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            i0.Value<int> id = const i0.Value.absent(),
+            i0.Value<String> name = const i0.Value.absent(),
+            i0.Value<String?> description = const i0.Value.absent(),
+          }) =>
+              i1.AltokeEntitiesCompanion(
+            id: id,
+            name: name,
+            description: description,
+          ),
+          createCompanionCallback: ({
+            i0.Value<int> id = const i0.Value.absent(),
+            required String name,
+            i0.Value<String?> description = const i0.Value.absent(),
+          }) =>
+              i1.AltokeEntitiesCompanion.insert(
+            id: id,
+            name: name,
+            description: description,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), i0.BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $AltokeEntitiesProcessedTableManager = i0.ProcessedTableManager<
+    i0.GeneratedDatabase,
+    i1.AltokeEntities,
+    i1.AltokeEntity,
+    i1.$AltokeEntitiesFilterComposer,
+    i1.$AltokeEntitiesOrderingComposer,
+    i1.$AltokeEntitiesAnnotationComposer,
+    $AltokeEntitiesCreateCompanionBuilder,
+    $AltokeEntitiesUpdateCompanionBuilder,
+    (
+      i1.AltokeEntity,
+      i0
+      .BaseReferences<i0.GeneratedDatabase, i1.AltokeEntities, i1.AltokeEntity>
+    ),
+    i1.AltokeEntity,
+    i0.PrefetchHooks Function()>;
+
 class AltokeEntities extends i0.Table
     with i0.TableInfo<AltokeEntities, i1.AltokeEntity> {
   @override
@@ -232,123 +374,6 @@ class AltokeEntitiesCompanion extends i0.UpdateCompanion<i1.AltokeEntity> {
         .toString();
   }
 }
-
-typedef $AltokeEntitiesCreateCompanionBuilder = i1.AltokeEntitiesCompanion
-    Function({
-  i0.Value<int> id,
-  required String name,
-  i0.Value<String?> description,
-});
-typedef $AltokeEntitiesUpdateCompanionBuilder = i1.AltokeEntitiesCompanion
-    Function({
-  i0.Value<int> id,
-  i0.Value<String> name,
-  i0.Value<String?> description,
-});
-
-class $AltokeEntitiesFilterComposer
-    extends i0.FilterComposer<i0.GeneratedDatabase, i1.AltokeEntities> {
-  $AltokeEntitiesFilterComposer(super.$state);
-  i0.ColumnFilters<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          i0.ColumnFilters(column, joinBuilders: joinBuilders));
-
-  i0.ColumnFilters<String> get name => $state.composableBuilder(
-      column: $state.table.name,
-      builder: (column, joinBuilders) =>
-          i0.ColumnFilters(column, joinBuilders: joinBuilders));
-
-  i0.ColumnFilters<String> get description => $state.composableBuilder(
-      column: $state.table.description,
-      builder: (column, joinBuilders) =>
-          i0.ColumnFilters(column, joinBuilders: joinBuilders));
-}
-
-class $AltokeEntitiesOrderingComposer
-    extends i0.OrderingComposer<i0.GeneratedDatabase, i1.AltokeEntities> {
-  $AltokeEntitiesOrderingComposer(super.$state);
-  i0.ColumnOrderings<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          i0.ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  i0.ColumnOrderings<String> get name => $state.composableBuilder(
-      column: $state.table.name,
-      builder: (column, joinBuilders) =>
-          i0.ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  i0.ColumnOrderings<String> get description => $state.composableBuilder(
-      column: $state.table.description,
-      builder: (column, joinBuilders) =>
-          i0.ColumnOrderings(column, joinBuilders: joinBuilders));
-}
-
-class $AltokeEntitiesTableManager extends i0.RootTableManager<
-    i0.GeneratedDatabase,
-    i1.AltokeEntities,
-    i1.AltokeEntity,
-    i1.$AltokeEntitiesFilterComposer,
-    i1.$AltokeEntitiesOrderingComposer,
-    $AltokeEntitiesCreateCompanionBuilder,
-    $AltokeEntitiesUpdateCompanionBuilder,
-    (
-      i1.AltokeEntity,
-      i0
-      .BaseReferences<i0.GeneratedDatabase, i1.AltokeEntities, i1.AltokeEntity>
-    ),
-    i1.AltokeEntity,
-    i0.PrefetchHooks Function()> {
-  $AltokeEntitiesTableManager(i0.GeneratedDatabase db, i1.AltokeEntities table)
-      : super(i0.TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer:
-              i1.$AltokeEntitiesFilterComposer(i0.ComposerState(db, table)),
-          orderingComposer:
-              i1.$AltokeEntitiesOrderingComposer(i0.ComposerState(db, table)),
-          updateCompanionCallback: ({
-            i0.Value<int> id = const i0.Value.absent(),
-            i0.Value<String> name = const i0.Value.absent(),
-            i0.Value<String?> description = const i0.Value.absent(),
-          }) =>
-              i1.AltokeEntitiesCompanion(
-            id: id,
-            name: name,
-            description: description,
-          ),
-          createCompanionCallback: ({
-            i0.Value<int> id = const i0.Value.absent(),
-            required String name,
-            i0.Value<String?> description = const i0.Value.absent(),
-          }) =>
-              i1.AltokeEntitiesCompanion.insert(
-            id: id,
-            name: name,
-            description: description,
-          ),
-          withReferenceMapper: (p0) => p0
-              .map((e) => (e.readTable(table), i0.BaseReferences(db, table, e)))
-              .toList(),
-          prefetchHooksCallback: null,
-        ));
-}
-
-typedef $AltokeEntitiesProcessedTableManager = i0.ProcessedTableManager<
-    i0.GeneratedDatabase,
-    i1.AltokeEntities,
-    i1.AltokeEntity,
-    i1.$AltokeEntitiesFilterComposer,
-    i1.$AltokeEntitiesOrderingComposer,
-    $AltokeEntitiesCreateCompanionBuilder,
-    $AltokeEntitiesUpdateCompanionBuilder,
-    (
-      i1.AltokeEntity,
-      i0
-      .BaseReferences<i0.GeneratedDatabase, i1.AltokeEntities, i1.AltokeEntity>
-    ),
-    i1.AltokeEntity,
-    i0.PrefetchHooks Function()>;
 
 class AltokeEntitiesDrift extends i2.ModularAccessor {
   AltokeEntitiesDrift(i0.GeneratedDatabase db) : super(db);
