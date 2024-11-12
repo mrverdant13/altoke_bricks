@@ -32,7 +32,7 @@ class DmSome<T extends Object?> extends DmOptional<T> with DmSomeMappable<T> {
 
   // HACK: Manual override required to avoid edge cases.
   @override
-  bool operator ==(covariant DmOptional<T> other) {
+  bool operator ==(Object other) {
     if (other is! DmSome<T>) return false;
     if (identical(this, other)) return true;
     return other.value == value;
@@ -54,7 +54,7 @@ class DmNone<T extends Object?> extends DmOptional<T> with DmNoneMappable<T> {
 
   // HACK: Manual override required to avoid edge cases.
   @override
-  bool operator ==(covariant DmOptional<T> other) {
+  bool operator ==(Object other) {
     if (other is! DmNone<T>) return false;
     return identical(this, other);
   }
