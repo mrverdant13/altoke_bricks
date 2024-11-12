@@ -15,7 +15,8 @@ dependencies:
   # common:
   #   path: ../../common/
   #*replace-end*#
-  #*w 2v w*#
+  #*w 1v 2> w*#
+  meta: ^1.15.0
 
 dev_dependencies:
   test: ^1.25.8
