@@ -62,8 +62,10 @@ class LocalTasksDriftDao implements LocalTasksDao {
         TaskTitleValidationError.empty,
     };
     final complexValidationErrors = {
-      if (priority == const Some(TaskPriority.high) && description is None)
-        TaskComplexValidationError.highPriorityWithNoDescription,
+      if (priority == const Some(TaskPriority.high))
+        if (description case Some(value: final description)
+            when (description ?? '').trim().isEmpty)
+          TaskComplexValidationError.highPriorityWithNoDescription,
     };
     if (titleValidationErrors.isNotEmpty ||
         complexValidationErrors.isNotEmpty) {

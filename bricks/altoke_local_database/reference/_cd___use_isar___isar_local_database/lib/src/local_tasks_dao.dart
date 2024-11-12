@@ -79,8 +79,10 @@ class LocalTasksIsarDao implements LocalTasksDao {
         TaskTitleValidationError.empty,
     };
     final complexValidationErrors = {
-      if (priority == const Some(TaskPriority.high) && description is None)
-        TaskComplexValidationError.highPriorityWithNoDescription,
+      if (priority == const Some(TaskPriority.high))
+        if (description case Some(value: final description)
+            when (description ?? '').trim().isEmpty)
+          TaskComplexValidationError.highPriorityWithNoDescription,
     };
     if (titleValidationErrors.isNotEmpty ||
         complexValidationErrors.isNotEmpty) {
@@ -135,19 +137,25 @@ extension on List<isar.Task> {
       );
 }
 
-extension on TaskPriority {
-  String get identifier => switch (this) {
-        TaskPriority.low => 'low',
-        TaskPriority.medium => 'medium',
-        TaskPriority.high => 'high',
-      };
+const _identifiableTaskPriorityMap = {
+  'low': TaskPriority.low,
+  'medium': TaskPriority.medium,
+  'high': TaskPriority.high,
+};
+
+/// An extension on [TaskPriority] to make it identifiable for the Isar
+/// database.
+@visibleForTesting
+extension IdentifiableTaskPriority on TaskPriority {
+  /// The priority internal identifier.
+  String get identifier => _identifiableTaskPriorityMap.entries
+      .firstWhere((entry) => entry.value == this)
+      .key;
 }
 
-extension on String {
-  TaskPriority toTaskPriority() => switch (this) {
-        'low' => TaskPriority.low,
-        'medium' => TaskPriority.medium,
-        'high' => TaskPriority.high,
-        _ => throw ArgumentError('Invalid TaskPriority identifier: $this'),
-      };
+/// An extension on a [String] that represents a [TaskPriority] identifier.
+@visibleForTesting
+extension TaskPriorityIdentifier on String {
+  /// Returns the corresponding [TaskPriority].
+  TaskPriority toTaskPriority() => _identifiableTaskPriorityMap[this]!;
 }
