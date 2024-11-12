@@ -1,5 +1,6 @@
 import 'package:altoke_common/common.dart';
 import 'package:local_database/local_database.dart';
+import 'package:meta/meta.dart';
 
 /// {@template local_database.new_task}
 /// A new task data.
@@ -25,6 +26,7 @@ class NewTask {
 /// {@template local_database.task}
 /// A task.
 /// {@endtemplate}
+@immutable
 class Task {
   /// {@macro local_database.task}
   const Task({
@@ -57,6 +59,36 @@ class Task {
   /// The task description.
   /// {@endtemplate}
   final String? description;
+
+  @override
+  String toString() {
+    return 'Task('
+        'id: $id, '
+        'title: $title, '
+        'priority: $priority, '
+        'completed: $completed, '
+        'description: $description'
+        ')';
+  }
+
+  @override
+  bool operator ==(covariant Task other) {
+    if (identical(this, other)) return true;
+    return other.id == id &&
+        other.title == title &&
+        other.priority == priority &&
+        other.completed == completed &&
+        other.description == description;
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      id.hashCode ^
+      title.hashCode ^
+      priority.hashCode ^
+      completed.hashCode ^
+      description.hashCode;
 }
 
 /// {@template local_database.partial_task}
