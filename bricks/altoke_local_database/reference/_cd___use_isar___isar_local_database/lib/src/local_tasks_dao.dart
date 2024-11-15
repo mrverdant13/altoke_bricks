@@ -46,7 +46,7 @@ class LocalTasksIsarDao implements LocalTasksDao {
             ..title = title.trim()
             ..priority = priority.identifier
             ..description =
-                (description ?? '').trim().isEmpty ? null : description
+                (description ?? '').trim().isEmpty ? null : description?.trim()
             ..completed = false,
         );
         return tasksCollection.get(taskId);
