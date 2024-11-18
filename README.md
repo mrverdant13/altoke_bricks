@@ -142,7 +142,7 @@ Create a local database, **_al toque_** (_quickly_).
 - **Data persistence:**\
   Supported with one of the following alternatives:
     - [`drift` (SQLite)][pub_package_drift]
-    <!-- TODO(mrverdant13): Add Hive support -->
+    - [`hive`][pub_package_hive]
     - [`isar`][pub_package_isar]
     <!-- TODO(mrverdant13): Add Sembast support -->
 
@@ -204,6 +204,7 @@ Create a storage, **_al toque_** (_quickly_).
 [pub_package_dart_mappable]: https://pub.dev/packages/dart_mappable
 [pub_package_equatable]: https://pub.dev/packages/equatable
 [pub_package_freezed]: https://pub.dev/packages/freezed
+[pub_package_hive]: https://pub.dev/packages/hive
 [pub_package_isar]: https://pub.dev/packages/isar
 [pub_package_drift]: https://pub.dev/packages/drift
 [pub_package_hive]: https://pub.dev/packages/hive

@@ -7,7 +7,10 @@ enum LocalDatabaseAlternative {
   /// SQL database.
   drift('drift'),
 
-  // TODO(mrverdant13): Support Hive.
+  /// Hive.
+  ///
+  /// NoSQL database.
+  hive('hive'),
 
   /// Isar.
   ///

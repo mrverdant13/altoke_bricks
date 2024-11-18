@@ -53,7 +53,7 @@ Create a local database, **_al toque_** (_quickly_).
 - **Data persistence:**\
   Supported with one of the following alternatives:
     - [`drift` (SQLite)][pub_package_drift]
-    <!-- TODO(mrverdant13): Add Hive support -->
+    - [`hive`][pub_package_hive]
     - [`isar`][pub_package_isar]
     <!-- TODO(mrverdant13): Add Sembast support -->
 
@@ -75,6 +75,7 @@ Create a local database, **_al toque_** (_quickly_).
 <!-- EDITABLE -->
 <!-- BRICK LINKS -->
 [docs_dart_and_flutter_linter_rules_link]: https://dart.dev/tools/linter-rules
+[pub_package_hive]: https://pub.dev/packages/hive
 [pub_package_isar]: https://pub.dev/packages/isar
 [pub_package_drift]: https://pub.dev/packages/drift
 [pub_package_very_good_analysis]: https://pub.dev/packages/very_good_analysis

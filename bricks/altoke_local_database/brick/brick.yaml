@@ -10,7 +10,7 @@ vars:
     type: enum
     values:
       - drift
-      # TODO(mrverdant13): Add support for hive.
+      - hive
       - isar
       # TODO(mrverdant13): Add support for sembast.
     description: The local database alternative.
