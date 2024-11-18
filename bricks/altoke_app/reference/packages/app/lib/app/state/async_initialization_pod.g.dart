@@ -7,7 +7,7 @@ part of 'async_initialization_pod.dart';
 // **************************************************************************
 
 String _$asyncInitializationHash() =>
-    r'93487d1f495c19d075beee627edda6f6918fa396';
+    r'1b3c857b2d2fc4b3c2ac6d0ebc9e720521e427e8';
 
 /// See also [asyncInitialization].
 @ProviderFor(asyncInitialization)
@@ -17,16 +17,19 @@ final asyncInitializationPod = AutoDisposeFutureProvider<void>.internal(
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$asyncInitializationHash,
-  dependencies: <ProviderOrFamily>[
+  dependencies: <ProviderOrFamily>{
     asyncApplicationDocumentsDirectoryPod,
     asyncDriftLocalDatabasePod,
+    asyncHiveInitializationPod,
     asyncIsarPod
-  ],
+  },
   allTransitiveDependencies: <ProviderOrFamily>{
     asyncApplicationDocumentsDirectoryPod,
     ...?asyncApplicationDocumentsDirectoryPod.allTransitiveDependencies,
     asyncDriftLocalDatabasePod,
     ...?asyncDriftLocalDatabasePod.allTransitiveDependencies,
+    asyncHiveInitializationPod,
+    ...?asyncHiveInitializationPod.allTransitiveDependencies,
     asyncIsarPod,
     ...?asyncIsarPod.allTransitiveDependencies
   },

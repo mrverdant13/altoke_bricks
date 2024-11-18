@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:altoke_app/external/external.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 import 'package:drift_local_database/drift_local_database.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive/hive.dart';
 import 'package:isar/isar.dart';
 import 'package:isar_local_database/isar_local_database.dart';
 import 'package:path/path.dart' as path;
@@ -45,6 +47,31 @@ Future<LocalDatabase> asyncDriftLocalDatabase(Ref ref) async {
     asyncApplicationDocumentsDirectory,
   ],
 )
+Future<void> asyncHiveInitialization(Ref ref) async {
+  if (!kIsWeb) {
+    const dbName = 'app_db';
+    final databasePath = ref.watch(
+      asyncApplicationDocumentsDirectoryPod.select(
+        (asyncDir) => path.joinAll([
+          asyncDir.requireValue.path,
+          'hive_database',
+          dbName,
+        ]),
+      ),
+    );
+    final databaseDir = Directory(databasePath);
+    if (!databaseDir.existsSync()) {
+      await databaseDir.create(recursive: true);
+    }
+    Hive.init(databasePath);
+  }
+}
+
+@Riverpod(
+  dependencies: [
+    asyncApplicationDocumentsDirectory,
+  ],
+)
 Future<Isar> asyncIsar(Ref ref) async {
   const dbName = 'app_db';
   final databasePath = ref.watch(
@@ -73,6 +100,7 @@ Future<Isar> asyncIsar(Ref ref) async {
 // coverage:ignore-start
 enum LocalDatabasePackage {
   drift('drift', 'Drift (SQLite)'),
+  hive('hive', 'Hive'),
   isar('isar', 'Isar'),
   ;
 

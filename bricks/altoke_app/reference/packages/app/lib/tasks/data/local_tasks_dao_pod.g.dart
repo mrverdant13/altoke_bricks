@@ -6,7 +6,7 @@ part of 'local_tasks_dao_pod.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$localTasksDaoHash() => r'b6a4eb629b3bd53bfe763f3c9f5141a7d418737c';
+String _$localTasksDaoHash() => r'6d4d5f65ccb88fd60953774f7a1f002a220d8c65';
 
 /// See also [localTasksDao].
 @ProviderFor(localTasksDao)

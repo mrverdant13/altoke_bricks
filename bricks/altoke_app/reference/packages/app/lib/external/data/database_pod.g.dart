@@ -29,6 +29,27 @@ final asyncDriftLocalDatabasePod =
 // ignore: unused_element
 typedef AsyncDriftLocalDatabaseRef
     = AutoDisposeFutureProviderRef<LocalDatabase>;
+String _$asyncHiveInitializationHash() =>
+    r'a73dd6f3d1f37f5bee2b68d48d4ed0dd50bf16b3';
+
+/// See also [asyncHiveInitialization].
+@ProviderFor(asyncHiveInitialization)
+final asyncHiveInitializationPod = AutoDisposeFutureProvider<void>.internal(
+  asyncHiveInitialization,
+  name: r'asyncHiveInitializationPod',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$asyncHiveInitializationHash,
+  dependencies: <ProviderOrFamily>[asyncApplicationDocumentsDirectoryPod],
+  allTransitiveDependencies: <ProviderOrFamily>{
+    asyncApplicationDocumentsDirectoryPod,
+    ...?asyncApplicationDocumentsDirectoryPod.allTransitiveDependencies
+  },
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef AsyncHiveInitializationRef = AutoDisposeFutureProviderRef<void>;
 String _$asyncIsarHash() => r'ed4e3f359a22f34c3f7b283b034721c22fe59c9d';
 
 /// See also [asyncIsar].

@@ -11,6 +11,7 @@ part 'async_initialization_pod.g.dart';
     /*remove-start*/
     asyncApplicationDocumentsDirectory,
     asyncDriftLocalDatabase,
+    asyncHiveInitialization,
     asyncIsar,
     /*remove-end*/
   ],
@@ -20,6 +21,8 @@ Future<void> asyncInitialization(Ref ref) async {
   /*remove-start*/
   await ref.watch(asyncApplicationDocumentsDirectoryPod.future);
   await ref.watch(asyncDriftLocalDatabasePod.future);
+  await ref.watch(asyncApplicationDocumentsDirectoryPod.future);
+  await ref.watch(asyncHiveInitializationPod.future);
   await ref.watch(asyncApplicationDocumentsDirectoryPod.future);
   await ref.watch(asyncIsarPod.future);
   /*remove-end*/
