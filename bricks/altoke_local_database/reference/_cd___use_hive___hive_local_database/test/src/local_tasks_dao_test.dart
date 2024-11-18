@@ -23,6 +23,7 @@ THEN an instance of $LocalTasksHiveDao is returned
       final dao = LocalTasksHiveDao();
       expect(dao, isA<LocalTasksHiveDao>());
       expect(dao, isA<LocalTasksDao>());
+      expect(await dao.asyncTasksBox, isNotNull);
       await Hive.close();
       await dbDir.delete(recursive: true);
     },
