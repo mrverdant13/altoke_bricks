@@ -207,7 +207,6 @@ Create a storage, **_al toque_** (_quickly_).
 [pub_package_hive]: https://pub.dev/packages/hive
 [pub_package_isar]: https://pub.dev/packages/isar
 [pub_package_drift]: https://pub.dev/packages/drift
-[pub_package_hive]: https://pub.dev/packages/hive
 [pub_package_sembast]: https://pub.dev/packages/sembast
 <!-- BRICK LINKS -->
 
