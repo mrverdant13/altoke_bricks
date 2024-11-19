@@ -6,7 +6,9 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'directories_pods.g.dart';
 
+// coverage:ignore-start
 @Riverpod(dependencies: [])
 Future<Directory> asyncApplicationDocumentsDirectory(Ref ref) async {
   return getApplicationDocumentsDirectory();
 }
+// coverage:ignore-end

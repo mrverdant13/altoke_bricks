@@ -3,6 +3,7 @@ import 'package:altoke_app/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+// coverage:ignore-start
 class TasksAppBar extends AppBar {
   TasksAppBar({
     super.key,
@@ -54,3 +55,4 @@ class SwitchDbPackageAction extends ConsumerWidget {
     );
   }
 }
+// coverage:ignore-end

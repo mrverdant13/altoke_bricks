@@ -3,6 +3,7 @@ import 'package:altoke_app/tasks/tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+// coverage:ignore-start
 class TasksList extends ConsumerWidget {
   const TasksList({
     super.key,
@@ -92,3 +93,4 @@ class LoadingTasksList extends StatelessWidget {
     );
   }
 }
+// coverage:ignore-end

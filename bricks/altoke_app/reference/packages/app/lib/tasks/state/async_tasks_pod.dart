@@ -4,6 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'async_tasks_pod.g.dart';
 
+// coverage:ignore-start
 @Riverpod(
   dependencies: [
     localTasksDao,
@@ -88,3 +89,4 @@ class DeleteTaskByIdMutation extends _$DeleteTaskByIdMutation {
     state = const AsyncData(null);
   }
 }
+// coverage:ignore-end

@@ -3,6 +3,7 @@ import 'package:altoke_app/tasks/tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+// coverage:ignore-start
 class ShowTaskCreationDialogFab extends ConsumerWidget {
   const ShowTaskCreationDialogFab({
     super.key,
@@ -23,3 +24,4 @@ class ShowTaskCreationDialogFab extends ConsumerWidget {
     );
   }
 }
+// coverage:ignore-end

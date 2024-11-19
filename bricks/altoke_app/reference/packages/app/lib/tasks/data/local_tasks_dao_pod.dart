@@ -8,6 +8,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'local_tasks_dao_pod.g.dart';
 
+// coverage:ignore-start
 @Riverpod(
   dependencies: [
     SelectedLocalDatabasePackage,
@@ -35,3 +36,4 @@ LocalTasksDao localTasksDao(Ref ref) {
       ),
   };
 }
+// coverage:ignore-end

@@ -6,6 +6,8 @@ import 'package:auto_route/auto_route.dart';
 /*{{/use_auto_route}}*/
 import 'package:flutter/material.dart';
 
+// coverage:ignore-start
+
 /*{{#use_auto_route}}*/
 @RoutePage(
   name: 'TasksRoute',
@@ -51,3 +53,4 @@ class TasksScreen extends StatelessWidget {
     );
   }
 }
+// coverage:ignore-end

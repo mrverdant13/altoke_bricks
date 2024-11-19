@@ -25,6 +25,49 @@ void main() {
       );
       expect(task, isA<Task>());
     });
+
+    test('has a string representation', () {
+      const task = Task(
+        id: 1,
+        title: 'title',
+        priority: TaskPriority.low,
+        completed: false,
+        description: 'description',
+      );
+      expect(
+        task.toString(),
+        '''Task(id: 1, title: title, priority: TaskPriority.low, completed: false, description: description)''',
+      );
+    });
+
+    test('can be compared and has a consistent hash code', () {
+      // ignore: prefer_const_constructors
+      final task = Task(
+        id: 1,
+        title: 'title',
+        priority: TaskPriority.low,
+        completed: false,
+        description: 'description',
+      );
+      const sameTask = Task(
+        id: 1,
+        title: 'title',
+        priority: TaskPriority.low,
+        completed: false,
+        description: 'description',
+      );
+      const differentTask = Task(
+        id: 2,
+        title: 'other title',
+        priority: TaskPriority.medium,
+        completed: true,
+        description: 'other description',
+      );
+      expect(task, equals(sameTask));
+      expect(task.hashCode, equals(sameTask.hashCode));
+      expect(task, isNot(equals(differentTask)));
+      expect(task.hashCode, isNot(equals(differentTask.hashCode)));
+    });
   });
 
   group('$PartialTask', () {

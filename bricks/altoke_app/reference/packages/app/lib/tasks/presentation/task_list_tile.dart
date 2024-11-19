@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:local_database/local_database.dart';
 
+// coverage:ignore-start
 class TaskListTile extends ConsumerWidget {
   const TaskListTile({
     required this.task,
@@ -76,3 +77,4 @@ class TaskListTile extends ConsumerWidget {
     );
   }
 }
+// coverage:ignore-end

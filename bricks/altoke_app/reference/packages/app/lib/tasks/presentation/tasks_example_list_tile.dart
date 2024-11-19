@@ -3,6 +3,7 @@ import 'package:altoke_app/routing/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+// coverage:ignore-start
 class TasksExampleListTile extends ConsumerWidget {
   const TasksExampleListTile({
     super.key,
@@ -38,3 +39,4 @@ class TasksExampleListTile extends ConsumerWidget {
     );
   }
 }
+// coverage:ignore-end

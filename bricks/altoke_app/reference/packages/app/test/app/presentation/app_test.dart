@@ -19,11 +19,12 @@ THEN the counter screen should be shown
         /*remove-start*/ // /*remove-end*/ const
         /*w 1v w*/
         ProviderScope(
-          /*remove-start*/
           overrides: [
+            asyncInitializationPod.overrideWith((_) async {}),
+            /*remove-start*/
             routerPackagePod.overrideWithValue(RouterPackage.autoRoute),
+            /*remove-end*/
           ],
-          /*remove-end*/
           child:
               /*remove-start*/
               const
@@ -52,11 +53,12 @@ THEN the counter screen should be shown
         /*remove-start*/ // /*remove-end*/ const
         /*w 1v w*/
         ProviderScope(
-          /*remove-start*/
           overrides: [
+            asyncInitializationPod.overrideWith((_) async {}),
+            /*remove-start*/
             routerPackagePod.overrideWithValue(RouterPackage.goRouter),
+            /*remove-end*/
           ],
-          /*remove-end*/
           child:
               /*remove-start*/
               const
