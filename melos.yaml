@@ -35,7 +35,7 @@ command:
     dev_dependencies:
       build_runner: ^2.4.12
       mason: ^0.1.0-dev.59
-      melos: ^6.1.0
+      melos: ^6.2.0
       meta: ^1.15.0
       mocktail: ^1.0.4
       test: ^1.25.8
@@ -133,8 +133,7 @@ scripts:
     steps:
       - analyze.dart
       - analyze.flutter
-      # HACK: Avoid issue https://github.com/invertase/dart_custom_lint/issues/268
-      # - analyze.custom
+      - analyze.custom
   analyze.ci:
     description: Analyze all packages (CI)
     steps:
@@ -203,8 +202,8 @@ scripts:
       - melos exec -c 1 --file-exists=coverage/lcov.info -- "coverde filter --input ./coverage/lcov.info --output MELOS_ROOT_PATH/coverage/filtered.lcov.info --paths-parent MELOS_PACKAGE_PATH  --filters \.drift\.dart,\.freezed\.dart,\.g\.dart,\.gr\.dart,\.mapper\.dart"
   coverage.check:
     description: Check test coverage
-    steps:
-      - coverde check -i MELOS_ROOT_PATH/coverage/filtered.lcov.info 100
+    run: >
+      coverde check -i MELOS_ROOT_PATH/coverage/filtered.lcov.info 100
 
   # Documentation
   docs.root:
