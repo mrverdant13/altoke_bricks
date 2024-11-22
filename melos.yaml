@@ -71,8 +71,8 @@ scripts:
       - gen
   gen.all.fast:
     description: Generate code for all packages (multi-threaded)
-    steps:
-      - melos exec --depends-on=build_runner --order-dependents -- "dart run build_runner build -d"
+    run: >
+      melos exec --depends-on=build_runner --order-dependents -- "dart run build_runner build -d"
 
   # Spell checking
   spellcheck:
@@ -136,10 +136,12 @@ scripts:
       - analyze.custom
   analyze.ci:
     description: Analyze all packages (CI)
-    steps:
-      - melos exec --ignore="*_brick_scope" --order-dependents --fail-fast --no-flutter -- "dart analyze --fatal-infos --fatal-warnings"
-      - melos exec --ignore="*_brick_scope" --order-dependents --fail-fast --flutter -- "flutter analyze --fatal-infos --fatal-warnings --no-pub --no-congratulate --no-preamble"
-      - melos exec --ignore="*_brick_scope" --order-dependents --fail-fast --depends-on=custom_lint -- "dart run custom_lint --fatal-infos --fatal-warnings"
+    run: >
+      melos exec --ignore="*_brick_scope" --order-dependents --fail-fast --no-flutter -- "dart analyze --fatal-infos --fatal-warnings"
+      &&
+      melos exec --ignore="*_brick_scope" --order-dependents --fail-fast --flutter -- "flutter analyze --fatal-infos --fatal-warnings --no-pub --no-congratulate --no-preamble"
+      &&
+      melos exec --ignore="*_brick_scope" --order-dependents --fail-fast --depends-on=custom_lint -- "dart run custom_lint --fatal-infos --fatal-warnings"
 
   # Testing & Coverage
   test.dart:
@@ -210,9 +212,10 @@ scripts:
   # Documentation
   docs.root:
     description: Resolve root README file
-    steps:
-      - dart run MELOS_ROOT_PATH/tools/readmes_resolver/lib/reset_root_readme.dart
-      - melos exec -c 1 --category=scopes -- "dart run MELOS_ROOT_PATH/tools/readmes_resolver/lib/resolve_root_readme.dart"
+    run: >
+      dart run MELOS_ROOT_PATH/tools/readmes_resolver/lib/reset_root_readme.dart
+      &&
+      melos exec -c 1 --category=scopes -- "dart run MELOS_ROOT_PATH/tools/readmes_resolver/lib/resolve_root_readme.dart"
   docs.brick:
     description: Resolve brick README files
     run: >
