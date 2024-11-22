@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 
 /*{{#use_auto_route}}*/
-class MockRoutingController extends Mock implements RoutingController {}
+class MockStackRouter extends Mock implements StackRouter {}
 /*{{/use_auto_route}}*/
 
 /*{{#use_go_router}}*/
