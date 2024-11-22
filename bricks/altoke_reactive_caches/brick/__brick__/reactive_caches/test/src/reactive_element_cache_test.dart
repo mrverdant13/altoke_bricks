@@ -10,11 +10,15 @@ void main() {
 GIVEN a constructor for a reactive cache for a single element
 WHEN the constructor is called
 THEN an instance of the cache is returned
+├─ THAT has a default equality checker
 ''',
     () {
       final cache = ReactiveElementCache<String>();
       expect(cache, isNotNull);
       expect(cache, isA<ReactiveElementCache>());
+      expect(cache.equalityChecker('', ''), isTrue);
+      expect(cache.equalityChecker('string', 'string'), isTrue);
+      expect(cache.equalityChecker('string', 'other string'), isFalse);
     },
   );
 
