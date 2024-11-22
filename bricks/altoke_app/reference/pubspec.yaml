@@ -7,4 +7,4 @@ environment:
   flutter: ">=3.24.1 <4.0.0"
 
 dev_dependencies:
-  melos: ^6.1.0
+  melos: ^6.2.0
