@@ -192,9 +192,10 @@ scripts:
       - test.flutter
   test.ci:
     description: Test all packages (CI)
-    steps:
-      - melos exec --order-dependents --fail-fast --no-flutter --dir-exists="test" --depends-on=test -- "dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random && format_coverage --lcov --in=./coverage/ --out=./coverage/lcov.info --report-on=lib -b MELOS_PACKAGE_PATH"
-      - melos exec --order-dependents --fail-fast --flutter --dir-exists="test" --depends-on=flutter_test -- "flutter test -x ci-only --coverage -r expanded --test-randomize-ordering-seed random"
+    run: >
+      melos exec --order-dependents --fail-fast --no-flutter --dir-exists="test" --depends-on=test -- "dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random && format_coverage --lcov --in=./coverage/ --out=./coverage/lcov.info --report-on=lib -b MELOS_PACKAGE_PATH"
+      &&
+      melos exec --order-dependents --fail-fast --flutter --dir-exists="test" --depends-on=flutter_test -- "flutter test -x ci-only --coverage -r expanded --test-randomize-ordering-seed random"
   coverage.merge:
     description: Merge all packages coverage trace files ignoring data related to generated files
     steps:
