@@ -3,6 +3,148 @@ import 'package:drift/drift.dart' as i0;
 import 'package:{{objects.snakeCase()}}_drift_storage/{{objects.snakeCase()}}.drift.dart' as i1;
 import 'package:drift/internal/modular.dart' as i2;
 
+typedef ${{objects.pascalCase()}}CreateCompanionBuilder = i1.{{objects.pascalCase()}}Companion
+    Function({
+  i0.Value<int> id,
+  required String name,
+  i0.Value<String?> description,
+});
+typedef ${{objects.pascalCase()}}UpdateCompanionBuilder = i1.{{objects.pascalCase()}}Companion
+    Function({
+  i0.Value<int> id,
+  i0.Value<String> name,
+  i0.Value<String?> description,
+});
+
+class ${{objects.pascalCase()}}FilterComposer
+    extends i0.Composer<i0.GeneratedDatabase, i1.{{objects.pascalCase()}}> {
+  ${{objects.pascalCase()}}FilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  i0.ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => i0.ColumnFilters(column));
+
+  i0.ColumnFilters<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => i0.ColumnFilters(column));
+
+  i0.ColumnFilters<String> get description => $composableBuilder(
+      column: $table.description,
+      builder: (column) => i0.ColumnFilters(column));
+}
+
+class ${{objects.pascalCase()}}OrderingComposer
+    extends i0.Composer<i0.GeneratedDatabase, i1.{{objects.pascalCase()}}> {
+  ${{objects.pascalCase()}}OrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  i0.ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => i0.ColumnOrderings(column));
+
+  i0.ColumnOrderings<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => i0.ColumnOrderings(column));
+
+  i0.ColumnOrderings<String> get description => $composableBuilder(
+      column: $table.description,
+      builder: (column) => i0.ColumnOrderings(column));
+}
+
+class ${{objects.pascalCase()}}AnnotationComposer
+    extends i0.Composer<i0.GeneratedDatabase, i1.{{objects.pascalCase()}}> {
+  ${{objects.pascalCase()}}AnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  i0.GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  i0.GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  i0.GeneratedColumn<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => column);
+}
+
+class ${{objects.pascalCase()}}TableManager extends i0.RootTableManager<
+    i0.GeneratedDatabase,
+    i1.{{objects.pascalCase()}},
+    i1.{{object.pascalCase()}},
+    i1.${{objects.pascalCase()}}FilterComposer,
+    i1.${{objects.pascalCase()}}OrderingComposer,
+    i1.${{objects.pascalCase()}}AnnotationComposer,
+    ${{objects.pascalCase()}}CreateCompanionBuilder,
+    ${{objects.pascalCase()}}UpdateCompanionBuilder,
+    (
+      i1.{{object.pascalCase()}},
+      i0
+      .BaseReferences<i0.GeneratedDatabase, i1.{{objects.pascalCase()}}, i1.{{object.pascalCase()}}>
+    ),
+    i1.{{object.pascalCase()}},
+    i0.PrefetchHooks Function()> {
+  ${{objects.pascalCase()}}TableManager(i0.GeneratedDatabase db, i1.{{objects.pascalCase()}} table)
+      : super(i0.TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              i1.${{objects.pascalCase()}}FilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              i1.${{objects.pascalCase()}}OrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              i1.${{objects.pascalCase()}}AnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            i0.Value<int> id = const i0.Value.absent(),
+            i0.Value<String> name = const i0.Value.absent(),
+            i0.Value<String?> description = const i0.Value.absent(),
+          }) =>
+              i1.{{objects.pascalCase()}}Companion(
+            id: id,
+            name: name,
+            description: description,
+          ),
+          createCompanionCallback: ({
+            i0.Value<int> id = const i0.Value.absent(),
+            required String name,
+            i0.Value<String?> description = const i0.Value.absent(),
+          }) =>
+              i1.{{objects.pascalCase()}}Companion.insert(
+            id: id,
+            name: name,
+            description: description,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), i0.BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef ${{objects.pascalCase()}}ProcessedTableManager = i0.ProcessedTableManager<
+    i0.GeneratedDatabase,
+    i1.{{objects.pascalCase()}},
+    i1.{{object.pascalCase()}},
+    i1.${{objects.pascalCase()}}FilterComposer,
+    i1.${{objects.pascalCase()}}OrderingComposer,
+    i1.${{objects.pascalCase()}}AnnotationComposer,
+    ${{objects.pascalCase()}}CreateCompanionBuilder,
+    ${{objects.pascalCase()}}UpdateCompanionBuilder,
+    (
+      i1.{{object.pascalCase()}},
+      i0
+      .BaseReferences<i0.GeneratedDatabase, i1.{{objects.pascalCase()}}, i1.{{object.pascalCase()}}>
+    ),
+    i1.{{object.pascalCase()}},
+    i0.PrefetchHooks Function()>;
+
 class {{objects.pascalCase()}} extends i0.Table
     with i0.TableInfo<{{objects.pascalCase()}}, i1.{{object.pascalCase()}}> {
   @override
@@ -232,123 +374,6 @@ class {{objects.pascalCase()}}Companion extends i0.UpdateCompanion<i1.{{object.p
         .toString();
   }
 }
-
-typedef ${{objects.pascalCase()}}CreateCompanionBuilder = i1.{{objects.pascalCase()}}Companion
-    Function({
-  i0.Value<int> id,
-  required String name,
-  i0.Value<String?> description,
-});
-typedef ${{objects.pascalCase()}}UpdateCompanionBuilder = i1.{{objects.pascalCase()}}Companion
-    Function({
-  i0.Value<int> id,
-  i0.Value<String> name,
-  i0.Value<String?> description,
-});
-
-class ${{objects.pascalCase()}}FilterComposer
-    extends i0.FilterComposer<i0.GeneratedDatabase, i1.{{objects.pascalCase()}}> {
-  ${{objects.pascalCase()}}FilterComposer(super.$state);
-  i0.ColumnFilters<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          i0.ColumnFilters(column, joinBuilders: joinBuilders));
-
-  i0.ColumnFilters<String> get name => $state.composableBuilder(
-      column: $state.table.name,
-      builder: (column, joinBuilders) =>
-          i0.ColumnFilters(column, joinBuilders: joinBuilders));
-
-  i0.ColumnFilters<String> get description => $state.composableBuilder(
-      column: $state.table.description,
-      builder: (column, joinBuilders) =>
-          i0.ColumnFilters(column, joinBuilders: joinBuilders));
-}
-
-class ${{objects.pascalCase()}}OrderingComposer
-    extends i0.OrderingComposer<i0.GeneratedDatabase, i1.{{objects.pascalCase()}}> {
-  ${{objects.pascalCase()}}OrderingComposer(super.$state);
-  i0.ColumnOrderings<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          i0.ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  i0.ColumnOrderings<String> get name => $state.composableBuilder(
-      column: $state.table.name,
-      builder: (column, joinBuilders) =>
-          i0.ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  i0.ColumnOrderings<String> get description => $state.composableBuilder(
-      column: $state.table.description,
-      builder: (column, joinBuilders) =>
-          i0.ColumnOrderings(column, joinBuilders: joinBuilders));
-}
-
-class ${{objects.pascalCase()}}TableManager extends i0.RootTableManager<
-    i0.GeneratedDatabase,
-    i1.{{objects.pascalCase()}},
-    i1.{{object.pascalCase()}},
-    i1.${{objects.pascalCase()}}FilterComposer,
-    i1.${{objects.pascalCase()}}OrderingComposer,
-    ${{objects.pascalCase()}}CreateCompanionBuilder,
-    ${{objects.pascalCase()}}UpdateCompanionBuilder,
-    (
-      i1.{{object.pascalCase()}},
-      i0
-      .BaseReferences<i0.GeneratedDatabase, i1.{{objects.pascalCase()}}, i1.{{object.pascalCase()}}>
-    ),
-    i1.{{object.pascalCase()}},
-    i0.PrefetchHooks Function()> {
-  ${{objects.pascalCase()}}TableManager(i0.GeneratedDatabase db, i1.{{objects.pascalCase()}} table)
-      : super(i0.TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer:
-              i1.${{objects.pascalCase()}}FilterComposer(i0.ComposerState(db, table)),
-          orderingComposer:
-              i1.${{objects.pascalCase()}}OrderingComposer(i0.ComposerState(db, table)),
-          updateCompanionCallback: ({
-            i0.Value<int> id = const i0.Value.absent(),
-            i0.Value<String> name = const i0.Value.absent(),
-            i0.Value<String?> description = const i0.Value.absent(),
-          }) =>
-              i1.{{objects.pascalCase()}}Companion(
-            id: id,
-            name: name,
-            description: description,
-          ),
-          createCompanionCallback: ({
-            i0.Value<int> id = const i0.Value.absent(),
-            required String name,
-            i0.Value<String?> description = const i0.Value.absent(),
-          }) =>
-              i1.{{objects.pascalCase()}}Companion.insert(
-            id: id,
-            name: name,
-            description: description,
-          ),
-          withReferenceMapper: (p0) => p0
-              .map((e) => (e.readTable(table), i0.BaseReferences(db, table, e)))
-              .toList(),
-          prefetchHooksCallback: null,
-        ));
-}
-
-typedef ${{objects.pascalCase()}}ProcessedTableManager = i0.ProcessedTableManager<
-    i0.GeneratedDatabase,
-    i1.{{objects.pascalCase()}},
-    i1.{{object.pascalCase()}},
-    i1.${{objects.pascalCase()}}FilterComposer,
-    i1.${{objects.pascalCase()}}OrderingComposer,
-    ${{objects.pascalCase()}}CreateCompanionBuilder,
-    ${{objects.pascalCase()}}UpdateCompanionBuilder,
-    (
-      i1.{{object.pascalCase()}},
-      i0
-      .BaseReferences<i0.GeneratedDatabase, i1.{{objects.pascalCase()}}, i1.{{object.pascalCase()}}>
-    ),
-    i1.{{object.pascalCase()}},
-    i0.PrefetchHooks Function()>;
 
 class {{objects.pascalCase()}}Drift extends i2.ModularAccessor {
   {{objects.pascalCase()}}Drift(i0.GeneratedDatabase db) : super(db);
