@@ -83,6 +83,7 @@ class CounterRouteData extends GoRouteData {
 }
 
 /*remove-start*/
+// coverage:ignore-start
 class TasksRouteData extends GoRouteData {
   const TasksRouteData();
 
@@ -91,6 +92,7 @@ class TasksRouteData extends GoRouteData {
     return const TasksScreen();
   }
 }
+// coverage:ignore-end
 /*remove-end*/
 /*{{/use_go_router}}*/
 

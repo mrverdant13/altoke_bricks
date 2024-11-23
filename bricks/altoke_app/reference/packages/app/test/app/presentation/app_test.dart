@@ -17,19 +17,14 @@ THEN the initialized app should be shown
 ''',
     (tester) async {
       await tester.pumpWidget(
-        /*remove-start*/ // /*remove-end*/ const
-        /*w 1v w*/
         ProviderScope(
-          /*remove-start*/
           overrides: [
+            asyncInitializationPod.overrideWith((_) async {}),
+            /*remove-start*/
             routerPackagePod.overrideWithValue(RouterPackage.autoRoute),
+            /*remove-end*/
           ],
-          /*remove-end*/
-          child:
-              /*remove-start*/
-              const
-              /*remove-end*/
-              MyApp(),
+          child: const MyApp(),
         ),
       );
       expect(find.byType(AppInitializing), findsOneWidget);
@@ -128,19 +123,14 @@ THEN the initialized app should be shown
 ''',
     (tester) async {
       await tester.pumpWidget(
-        /*remove-start*/ // /*remove-end*/ const
-        /*w 1v w*/
         ProviderScope(
-          /*remove-start*/
           overrides: [
+            asyncInitializationPod.overrideWith((_) async {}),
+            /*remove-start*/
             routerPackagePod.overrideWithValue(RouterPackage.goRouter),
+            /*remove-end*/
           ],
-          /*remove-end*/
-          child:
-              /*remove-start*/
-              const
-              /*remove-end*/
-              MyApp(),
+          child: const MyApp(),
         ),
       );
       expect(find.byType(AppInitializing), findsOneWidget);

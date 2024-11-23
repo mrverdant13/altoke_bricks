@@ -39,8 +39,8 @@ class LocalTasksHiveDao implements LocalTasksDao {
     final id = await tasksBox.add({
       hive.Task.titleJsonKey: title,
       hive.Task.priorityJsonKey: priority.identifier,
-      if ((description ?? '').trim().isNotEmpty)
-        hive.Task.descriptionJsonKey: description?.trim(),
+      hive.Task.descriptionJsonKey:
+          ((description ?? '').trim().isEmpty) ? null : description?.trim(),
       hive.Task.completedJsonKey: false,
     });
     return newTask.toTaskWithId(id);
