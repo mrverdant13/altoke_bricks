@@ -1,22 +1,29 @@
 import 'package:altoke_common/common.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_local_database/src/helpers.dart' as hive;
 import 'package:local_database/local_database.dart';
 import 'package:meta/meta.dart';
+import 'package:sembast/sembast.dart';
+import 'package:sembast_local_database/src/helpers.dart' as sembast;
 
-/// {@template hive_local_database.local_tasks_dao}
-/// A DAO that manages tasks in an Hive local database.
+/// {@template sembast_local_database.local_tasks_dao}
+/// A DAO that manages tasks in an Sembast local database.
 /// {@endtemplate}
-class LocalTasksHiveDao implements LocalTasksDao {
-  /// {@macro hive_local_database.local_tasks_dao}
-  LocalTasksHiveDao();
+class LocalTasksSembastDao implements LocalTasksDao {
+  /// {@macro sembast_local_database.local_tasks_dao}
+  LocalTasksSembastDao({
+    required this.database,
+  });
 
-  /// Name for the tasks tasksBox.
-  static const tasksBoxName = '.tasks-hive-box.';
-
-  /// Box for the tasks.
+  /// The internal Sembast database.
   @visibleForTesting
-  final Future<hive.TasksBox> asyncTasksBox = Hive.openBox(tasksBoxName);
+  final Database database;
+
+  /// Name for the tasks store.
+  @visibleForTesting
+  static const tasksStoreName = '<tasks-sembast-storage>';
+
+  /// Reference for the tasks store.
+  @visibleForTesting
+  late final sembast.TasksStoreRef tasksStore = StoreRef(tasksStoreName);
 
   @override
   Future<Task> createOne(NewTask newTask) async {
@@ -35,29 +42,23 @@ class LocalTasksHiveDao implements LocalTasksDao {
         complexValidationErrors: complexValidationErrors,
       );
     }
-    final tasksBox = await asyncTasksBox;
-    final id = await tasksBox.add({
-      hive.Task.titleJsonKey: title,
-      hive.Task.priorityJsonKey: priority.identifier,
-      hive.Task.descriptionJsonKey:
+
+    final id = await tasksStore.add(database, {
+      sembast.Task.titleJsonKey: title,
+      sembast.Task.priorityJsonKey: priority.identifier,
+      sembast.Task.descriptionJsonKey:
           ((description ?? '').trim().isEmpty) ? null : description?.trim(),
-      hive.Task.completedJsonKey: false,
+      sembast.Task.completedJsonKey: false,
     });
     return newTask.toTaskWithId(id);
   }
 
   @override
-  Stream<Iterable<Task>> watchAll() async* {
-    final tasksBox = await asyncTasksBox;
-
-    Iterable<Task> getTasks() {
-      return tasksBox.toMap().entries.toTasks();
-    }
-
-    yield* () async* {
-      yield getTasks();
-      yield* tasksBox.watch().map((_) => getTasks());
-    }();
+  Stream<Iterable<Task>> watchAll() {
+    return tasksStore
+        .query()
+        .onSnapshots(database)
+        .map((tasks) => tasks.toTasks());
   }
 
   @override
@@ -65,9 +66,8 @@ class LocalTasksHiveDao implements LocalTasksDao {
     required int taskId,
     required PartialTask task,
   }) async {
-    final tasksBox = await asyncTasksBox;
-    final rawTask = tasksBox.get(taskId);
-    if (rawTask == null) {
+    final taskExists = await tasksStore.record(taskId).exists(database);
+    if (!taskExists) {
       throw UpdateTaskFailureNotFound(taskId: taskId);
     }
     final PartialTask(:title, :priority, :completed, :description) = task;
@@ -88,28 +88,28 @@ class LocalTasksHiveDao implements LocalTasksDao {
         complexValidationErrors: complexValidationErrors,
       );
     }
+    final taskPatch = <String, Object?>{};
     if (title case Some(value: final title)) {
-      rawTask[hive.Task.titleJsonKey] = title.trim();
+      taskPatch[sembast.Task.titleJsonKey] = title.trim();
     }
     if (priority case Some(value: final priority)) {
-      rawTask[hive.Task.priorityJsonKey] = priority.identifier;
+      taskPatch[sembast.Task.priorityJsonKey] = priority.identifier;
     }
     if (completed case Some(value: final completed)) {
-      rawTask[hive.Task.completedJsonKey] = completed;
+      taskPatch[sembast.Task.completedJsonKey] = completed;
     }
     if (description case Some(value: final description)) {
-      rawTask[hive.Task.descriptionJsonKey] =
+      taskPatch[sembast.Task.descriptionJsonKey] =
           (description ?? '').trim().isEmpty ? null : description?.trim();
     }
-    await tasksBox.put(taskId, rawTask);
+    await tasksStore.record(taskId).put(database, taskPatch, merge: true);
   }
 
   @override
   Future<void> deleteOneById(
     int taskId,
   ) async {
-    final tasksBox = await asyncTasksBox;
-    return tasksBox.delete(taskId);
+    await tasksStore.record(taskId).delete(database);
   }
 }
 
@@ -123,17 +123,17 @@ extension on NewTask {
       );
 }
 
-extension on Iterable<MapEntry<dynamic, Map<dynamic, dynamic>>> {
+extension on Iterable<RecordSnapshot<int, Map<String, Object?>>> {
   Iterable<Task> toTasks() => map(
-        (entry) {
-          final MapEntry(key: id, value: rawData) = entry;
+        (snapshot) {
+          final RecordSnapshot(key: id, value: rawData) = snapshot;
           return Task(
-            id: id as int,
-            title: rawData[hive.Task.titleJsonKey] as String,
-            priority:
-                (rawData[hive.Task.priorityJsonKey] as String).toTaskPriority(),
-            completed: rawData[hive.Task.completedJsonKey] as bool,
-            description: rawData[hive.Task.descriptionJsonKey] as String?,
+            id: id,
+            title: rawData[sembast.Task.titleJsonKey]! as String,
+            priority: (rawData[sembast.Task.priorityJsonKey]! as String)
+                .toTaskPriority(),
+            completed: rawData[sembast.Task.completedJsonKey]! as bool,
+            description: rawData[sembast.Task.descriptionJsonKey] as String?,
           );
         },
       );
@@ -145,7 +145,7 @@ const _identifiableTaskPriorityMap = {
   'high': TaskPriority.high,
 };
 
-/// An extension on [TaskPriority] to make it identifiable for the Hive
+/// An extension on [TaskPriority] to make it identifiable for the Sembast
 /// database.
 @visibleForTesting
 extension IdentifiableTaskPriority on TaskPriority {
