@@ -4,6 +4,18 @@
   "@appTitle": {
     "description": "App title"
   },
+  "genericRetryButtonLabel": "Retry",
+  "@genericRetryButtonLabel": {
+    "type": "text",
+    "description": "Label for a generic retry button",
+    "placeholders": {}
+  },
+  "appInitializationErrorMessage": "There was an issue while trying to launch the app",
+  "@appInitializationErrorMessage": {
+    "type": "text",
+    "description": "Message displayed when the app fails to initialize",
+    "placeholders": {}
+  },
   "homeAppBarTitle": "Examples",
   "@homeAppBarTitle": {
     "type": "text",

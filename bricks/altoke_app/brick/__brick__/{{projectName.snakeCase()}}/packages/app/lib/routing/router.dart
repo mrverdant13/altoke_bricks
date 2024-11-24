@@ -1,7 +1,8 @@
 import 'dart:developer';
 
 import 'package:{{projectName.snakeCase()}}/routing/routing.dart';{{#use_auto_route}}import 'package:auto_route/auto_route.dart';{{/use_auto_route}}import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';{{#use_go_router}}import 'package:go_router/go_router.dart';{{/use_go_router}}import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';{{#use_go_router}}import 'package:go_router/go_router.dart';{{/use_go_router}}import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 export 'routes/routes.dart';
 
@@ -53,7 +54,7 @@ class CounterRouteData extends GoRouteData {
 }{{/use_go_router}}@Riverpod(
   dependencies: [],
 )
-RouterConfig<Object> routerConfig(RouterConfigRef ref) {final routerConfig ={{#use_auto_route}}AppRouter().config(){{/use_auto_route}}{{#use_go_router}}GoRouter(
+RouterConfig<Object> routerConfig(Ref ref) {final routerConfig ={{#use_auto_route}}AppRouter().config(){{/use_auto_route}}{{#use_go_router}}GoRouter(
         routes: $appRoutes,
         debugLogDiagnostics: kDebugMode,
         initialLocation: const HomeRouteData().location,

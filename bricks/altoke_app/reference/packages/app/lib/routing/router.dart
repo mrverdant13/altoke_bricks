@@ -6,6 +6,7 @@ import 'package:auto_route/auto_route.dart';
 /*{{/use_auto_route}}*/
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 /*{{#use_go_router}}*/
 import 'package:go_router/go_router.dart';
 /*{{/use_go_router}}*/
@@ -76,7 +77,7 @@ class CounterRouteData extends GoRouteData {
     /*remove-end*/
   ],
 )
-RouterConfig<Object> routerConfig(RouterConfigRef ref) {
+RouterConfig<Object> routerConfig(Ref ref) {
   /*remove-start*/
   final routerPackage = ref.watch(routerPackagePod);
   /*remove-end*/
@@ -154,5 +155,5 @@ const routerIdentifier = String.fromEnvironment('ALTOKE_APP_ROUTER');
 @Riverpod(
   dependencies: [],
 )
-RouterPackage routerPackage(RouterPackageRef ref) => RouterPackage.fromEnv;
+RouterPackage routerPackage(Ref ref) => RouterPackage.fromEnv;
 // coverage:ignore-end

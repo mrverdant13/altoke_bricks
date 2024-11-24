@@ -129,11 +129,17 @@ AND their hash codes are equal if they have the same values
         /*{{#use_dart_mappable}}*/
         const presentValue = DmOptional.some('some-value');
         const sameOptional = DmSome('some-value');
-        const differentOptional = DmSome('other-value');
+        const differentOptional1 = DmSome('other-value');
+        const differentOptional2 = DmSome<int>(42);
+        const differentOptional3 = DmNone<double>();
         expect(presentValue, sameOptional);
-        expect(presentValue, isNot(differentOptional));
+        expect(presentValue, isNot(differentOptional1));
+        expect(presentValue, isNot(differentOptional2));
+        expect(presentValue, isNot(differentOptional3));
         expect(presentValue.hashCode, sameOptional.hashCode);
-        expect(presentValue.hashCode, isNot(differentOptional.hashCode));
+        expect(presentValue.hashCode, isNot(differentOptional1.hashCode));
+        expect(presentValue.hashCode, isNot(differentOptional2.hashCode));
+        expect(presentValue.hashCode, isNot(differentOptional3.hashCode));
         /*{{/use_dart_mappable}}*/
         /*remove-start*/
       }
@@ -142,11 +148,17 @@ AND their hash codes are equal if they have the same values
         /*{{#use_equatable}}*/
         const presentValue = EOptional.some('some-value');
         const sameOptional = ESome('some-value');
-        const differentOptional = ESome('other-value');
+        const differentOptional1 = ESome('other-value');
+        const differentOptional2 = ESome<int>(42);
+        const differentOptional3 = ENone<double>();
         expect(presentValue, sameOptional);
-        expect(presentValue, isNot(differentOptional));
+        expect(presentValue, isNot(differentOptional1));
+        expect(presentValue, isNot(differentOptional2));
+        expect(presentValue, isNot(differentOptional3));
         expect(presentValue.hashCode, sameOptional.hashCode);
-        expect(presentValue.hashCode, isNot(differentOptional.hashCode));
+        expect(presentValue.hashCode, isNot(differentOptional1.hashCode));
+        expect(presentValue.hashCode, isNot(differentOptional2.hashCode));
+        expect(presentValue.hashCode, isNot(differentOptional3.hashCode));
         /*{{/use_equatable}}*/
         /*remove-start*/
       }
@@ -155,10 +167,17 @@ AND their hash codes are equal if they have the same values
         /*{{#use_freezed}}*/
         const presentValue = FOptional.some('some-value');
         const sameOptional = FSome('some-value');
-        const differentOptional = FSome('other-value');
+        const differentOptional1 = FSome('other-value');
+        const differentOptional2 = FSome<int>(42);
+        const differentOptional3 = FNone<double>();
         expect(presentValue, sameOptional);
-        expect(presentValue, isNot(differentOptional));
+        expect(presentValue, isNot(differentOptional1));
+        expect(presentValue, isNot(differentOptional2));
+        expect(presentValue, isNot(differentOptional3));
         expect(presentValue.hashCode, sameOptional.hashCode);
+        expect(presentValue.hashCode, isNot(differentOptional1.hashCode));
+        expect(presentValue.hashCode, isNot(differentOptional2.hashCode));
+        expect(presentValue.hashCode, isNot(differentOptional3.hashCode));
         /*{{/use_freezed}}*/
         /*remove-start*/
       }
@@ -167,11 +186,17 @@ AND their hash codes are equal if they have the same values
         /*{{#use_overrides}}*/
         const presentValue = Optional.some('some-value');
         const sameOptional = Some('some-value');
-        const differentOptional = Some('other-value');
+        const differentOptional1 = Some('other-value');
+        const differentOptional2 = Some<int>(42);
+        const differentOptional3 = None<double>();
         expect(presentValue, sameOptional);
-        expect(presentValue, isNot(differentOptional));
+        expect(presentValue, isNot(differentOptional1));
+        expect(presentValue, isNot(differentOptional2));
+        expect(presentValue, isNot(differentOptional3));
         expect(presentValue.hashCode, sameOptional.hashCode);
-        expect(presentValue.hashCode, isNot(differentOptional.hashCode));
+        expect(presentValue.hashCode, isNot(differentOptional1.hashCode));
+        expect(presentValue.hashCode, isNot(differentOptional2.hashCode));
+        expect(presentValue.hashCode, isNot(differentOptional3.hashCode));
         /*{{/use_overrides}}*/
         /*remove-start*/
       }
@@ -197,19 +222,17 @@ AND their hash codes are equal if they have the same values
         /*{{#use_dart_mappable}}*/
         const absentValue = DmOptional<String>.none();
         const sameOptional = DmNone<String>();
-        /*remove-start*/
-        // const differentOptional = DmNone<int>();
-        /*remove-end*/
+        const differentOptional1 = DmNone<int>();
+        const differentOptional2 = DmNone<double>();
+        const differentOptional3 = DmSome<int>(42);
         expect(absentValue, sameOptional);
-        /*remove-start*/
-        // HACK: Equality should consider the type parameter.
-        // expect(absentValue, isNot(differentOptional));
-        /*remove-end*/
+        expect(absentValue, isNot(differentOptional1));
+        expect(absentValue, isNot(differentOptional2));
+        expect(absentValue, isNot(differentOptional3));
         expect(absentValue.hashCode, sameOptional.hashCode);
-        /*remove-start*/
-        // HACK: Hashes should consider the type parameter.
-        // expect(absentValue.hashCode, isNot(differentOptional.hashCode));
-        /*remove-end*/
+        expect(absentValue.hashCode, isNot(differentOptional1.hashCode));
+        expect(absentValue.hashCode, isNot(differentOptional2.hashCode));
+        expect(absentValue.hashCode, isNot(differentOptional3.hashCode));
         /*{{/use_dart_mappable}}*/
         /*remove-start*/
       }
@@ -218,11 +241,17 @@ AND their hash codes are equal if they have the same values
         /*{{#use_equatable}}*/
         const absentValue = EOptional<String>.none();
         const sameOptional = ENone<String>();
-        const differentOptional = ENone<int>();
+        const differentOptional1 = ENone<int>();
+        const differentOptional2 = ENone<double>();
+        const differentOptional3 = ESome<int>(42);
         expect(absentValue, sameOptional);
-        expect(absentValue, isNot(differentOptional));
+        expect(absentValue, isNot(differentOptional1));
+        expect(absentValue, isNot(differentOptional2));
+        expect(absentValue, isNot(differentOptional3));
         expect(absentValue.hashCode, sameOptional.hashCode);
-        expect(absentValue.hashCode, isNot(differentOptional.hashCode));
+        expect(absentValue.hashCode, isNot(differentOptional1.hashCode));
+        expect(absentValue.hashCode, isNot(differentOptional2.hashCode));
+        expect(absentValue.hashCode, isNot(differentOptional3.hashCode));
         /*{{/use_equatable}}*/
         /*remove-start*/
       }
@@ -231,10 +260,17 @@ AND their hash codes are equal if they have the same values
         /*{{#use_freezed}}*/
         const absentValue = FOptional<String>.none();
         const sameOptional = FNone<String>();
-        const differentOptional = FNone<int>();
+        const differentOptional1 = FNone<int>();
+        const differentOptional2 = FNone<double>();
+        const differentOptional3 = FSome<int>(42);
         expect(absentValue, sameOptional);
-        expect(absentValue, isNot(differentOptional));
+        expect(absentValue, isNot(differentOptional1));
+        expect(absentValue, isNot(differentOptional2));
+        expect(absentValue, isNot(differentOptional3));
         expect(absentValue.hashCode, sameOptional.hashCode);
+        expect(absentValue.hashCode, isNot(differentOptional1.hashCode));
+        expect(absentValue.hashCode, isNot(differentOptional2.hashCode));
+        expect(absentValue.hashCode, isNot(differentOptional3.hashCode));
         /*{{/use_freezed}}*/
         /*remove-start*/
       }
@@ -243,11 +279,17 @@ AND their hash codes are equal if they have the same values
         /*{{#use_overrides}}*/
         const absentValue = Optional<String>.none();
         const sameOptional = None<String>();
-        const differentOptional = None<int>();
+        const differentOptional1 = None<int>();
+        const differentOptional2 = None<double>();
+        const differentOptional3 = Some<int>(42);
         expect(absentValue, sameOptional);
-        expect(absentValue, isNot(differentOptional));
+        expect(absentValue, isNot(differentOptional1));
+        expect(absentValue, isNot(differentOptional2));
+        expect(absentValue, isNot(differentOptional3));
         expect(absentValue.hashCode, sameOptional.hashCode);
-        expect(absentValue.hashCode, isNot(differentOptional.hashCode));
+        expect(absentValue.hashCode, isNot(differentOptional1.hashCode));
+        expect(absentValue.hashCode, isNot(differentOptional2.hashCode));
+        expect(absentValue.hashCode, isNot(differentOptional3.hashCode));
         /*{{/use_overrides}}*/
         /*remove-start*/
       }

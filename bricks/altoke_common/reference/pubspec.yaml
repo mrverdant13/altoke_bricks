@@ -9,7 +9,7 @@ environment:
 dependencies:
   #*w 1v 2> w*#
   #{{#use_dart_mappable}}#
-  dart_mappable: ^4.2.2
+  dart_mappable: ^4.3.0
   #{{/use_dart_mappable}}#
   #{{#use_equatable}}#
   equatable: ^2.0.5
@@ -29,7 +29,7 @@ dev_dependencies:
   #*w 1v 2> w*#
   #{{/use_code_generation}}#
   #{{#use_dart_mappable}}#
-  dart_mappable_builder: ^4.2.3
+  dart_mappable_builder: ^4.3.0
   #{{/use_dart_mappable}}#
   #{{#use_freezed}}#
   freezed: ^2.5.7

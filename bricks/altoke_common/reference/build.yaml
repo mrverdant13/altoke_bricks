@@ -9,7 +9,6 @@ targets:
           - lib/src/types/_cf___use_dart_mappable___optional.dart
         options:
           generateMethods:
-            - equals
             - stringify
       #{{/use_dart_mappable}}#
       #{{#use_freezed}}#

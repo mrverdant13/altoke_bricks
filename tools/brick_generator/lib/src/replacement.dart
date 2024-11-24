@@ -49,3 +49,10 @@ extension type ReplacementsIterable(Iterable<Replacement> _root)
         (resolved, replacement) => replacement.apply(resolved),
       );
 }
+
+/// An extension to apply [ReplacementsIterable] to a [String].
+extension FileContentWithReplacements on String {
+  /// Applies the [replacements].
+  String applyReplacements(ReplacementsIterable replacements) =>
+      replacements.apply(this);
+}

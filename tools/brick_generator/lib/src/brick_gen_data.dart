@@ -13,6 +13,7 @@ class BrickGenData extends BrickGenOptions {
     required this.targetAbsolutePath,
     required super.targetRelativePath,
     required super.replacements,
+    required super.lineDeletions,
   });
 
   /// Creates a [BrickGenData] from existing [BrickGenOptions],
@@ -27,6 +28,7 @@ class BrickGenData extends BrickGenOptions {
       targetAbsolutePath: targetAbsolutePath,
       targetRelativePath: options.targetRelativePath,
       replacements: options.replacements,
+      lineDeletions: options.lineDeletions,
     );
   }
 

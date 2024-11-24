@@ -5,7 +5,6 @@ import 'package:altoke_entities_sembast_storage/altoke_entities_sembast_storage.
 import 'package:altoke_entities_storage/altoke_entities_storage.dart';
 import 'package:altoke_entity/altoke_entity.dart';
 import 'package:collection/collection.dart';
-import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_memory.dart';
 import 'package:test/test.dart';
 

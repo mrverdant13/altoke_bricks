@@ -62,7 +62,7 @@ extension $CounterRouteDataExtension on CounterRouteData {
 // RiverpodGenerator
 // **************************************************************************
 
-String _$routerConfigHash() => r'c81f3d972d49250e598afb91d7278f68da3e59bb';
+String _$routerConfigHash() => r'def697bc6181727eabea0f95172ae86422a39a79';
 
 /// See also [routerConfig].
 @ProviderFor(routerConfig)
@@ -78,8 +78,10 @@ final routerConfigPod = AutoDisposeProvider<RouterConfig<Object>>.internal(
   },
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef RouterConfigRef = AutoDisposeProviderRef<RouterConfig<Object>>;
-String _$routerPackageHash() => r'462f30517db605ee3e598a947c6c5fe98564b1c0';
+String _$routerPackageHash() => r'33d0056f7095601d17e81ca2ce4eac2fca1d5fd5';
 
 /// See also [routerPackage].
 @ProviderFor(routerPackage)
@@ -93,6 +95,8 @@ final routerPackagePod = AutoDisposeProvider<RouterPackage>.internal(
   allTransitiveDependencies: const <ProviderOrFamily>{},
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef RouterPackageRef = AutoDisposeProviderRef<RouterPackage>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
