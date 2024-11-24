@@ -58,8 +58,7 @@ jobs:
       - name: Install SQLite on Windows
         if: matrix.os == 'windows-latest'
         run: |
-          choco install sqlite
-          where sqlite3.dll
+          choco install sqlite && where sqlite3.dll
       - name: Check out repository
         uses: actions/checkout@v4
       - name: Install Flutter
