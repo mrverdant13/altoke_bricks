@@ -1,4 +1,4 @@
-# cspell:ignore longpaths
+# cspell:ignore choco,longpaths
 name: ci
 
 on:
