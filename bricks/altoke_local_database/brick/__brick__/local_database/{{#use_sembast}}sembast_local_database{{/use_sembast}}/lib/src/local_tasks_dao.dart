@@ -19,7 +19,7 @@ class LocalTasksSembastDao implements LocalTasksDao {
 
   /// Name for the tasks store.
   @visibleForTesting
-  static const tasksStoreName = '<tasks-sembast-storage>';
+  static const tasksStoreName = '<tasks>';
 
   /// Reference for the tasks store.
   @visibleForTesting
