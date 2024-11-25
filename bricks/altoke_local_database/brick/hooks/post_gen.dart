@@ -92,7 +92,7 @@ Future<void> run(HookContext context) async {
   );
   final implementationProjectPath = path.join(
     umbrellaPath,
-    'local_${selectedAlternative.varIdentifier}_database',
+    '${selectedAlternative.varIdentifier}_local_database',
   );
   await runCommands(
     projectDir: Directory(implementationProjectPath),
