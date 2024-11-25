@@ -9,7 +9,7 @@ environment:
 dependencies:
   common:
     path: ../common/
-  collection: ^1.19.0
+  collection: ^1.18.0
   meta: ^1.15.0
 
 dev_dependencies:
