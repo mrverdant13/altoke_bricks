@@ -73,7 +73,7 @@ THEN the counter should be reset
           ),
         ),
       );
-      counterNotifier.state = Random().nextInt(100);
+      counterNotifier.state = Random().nextInt(100) + 1;
       expect(container.read(counterPod), isNot(isZero));
       await tester.pumpAndSettle();
       final resetButtonFinder = find.byType(ResetCounterIconButton);
