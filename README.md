@@ -166,25 +166,6 @@ Create a package that provides general-purpose caches, **_al toque_** (_quickly_
 
 - **Testing:**\
   Tests with 100% coverage.
-
-### 🧱 Altoke Storage
-
-Create a storage, **_al toque_** (_quickly_).
-
-#### Features
-
-- **Data persistence:**\
-  Supported with one of the following packages:
-    - [`drift`][pub_package_drift]
-    - [`hive`][pub_package_hive]
-    - [`isar`][pub_package_isar]
-    - [`sembast`][pub_package_sembast]
-
-- **Strict lint rules:**\
-  Enforced by [`very_good_analysis`][pub_package_very_good_analysis] for [native Dart & Flutter rules][docs_dart_and_flutter_linter_rules_link].
-
-- **Testing:**\
-  Tests with 100% coverage.
 <!-- FEATURES -->
 
 <!-- DO NOT EDIT - THIS IS AUTOMATICALLY GENERATED -->
