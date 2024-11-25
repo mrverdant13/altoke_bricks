@@ -6,10 +6,12 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'async_initialization_pod.g.dart';
 
+/*w 2v w*/
 /*remove-start*/
 // coverage:ignore-start
 /*remove-end*/
 @Riverpod(
+/*w 1v 2> w*/
 /*remove-start*/
 // coverage:ignore-end
 /*remove-end*/

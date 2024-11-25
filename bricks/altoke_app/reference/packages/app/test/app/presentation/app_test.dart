@@ -23,6 +23,7 @@ THEN the initialized app should be shown
             /*remove-start*/
             routerPackagePod.overrideWithValue(RouterPackage.autoRoute),
             /*remove-end*/
+            /*w 1v 10> w*/
           ],
           child: const MyApp(),
         ),
@@ -44,8 +45,7 @@ THEN the uninitialized errored app should be shown
 ''',
     (tester) async {
       await tester.pumpWidget(
-        /*remove-start*/ // /*remove-end*/ const
-        /*w 1v w*/
+        /*w 1v 8> w*/
         ProviderScope(
           overrides: [
             asyncInitializationPod.overrideWith(
@@ -56,15 +56,12 @@ THEN the uninitialized errored app should be shown
                 }
               },
             ),
+            /*w 1v 10> w*/
             /*remove-start*/
             routerPackagePod.overrideWithValue(RouterPackage.autoRoute),
             /*remove-end*/
           ],
-          child:
-              /*remove-start*/
-              const
-              /*remove-end*/
-              MyApp(),
+          child: const MyApp(),
         ),
       );
       expect(find.byType(AppInitializing), findsOneWidget);
@@ -88,20 +85,16 @@ THEN the counter screen should be shown
 ''',
     (tester) async {
       await tester.pumpWidget(
-        /*remove-start*/ // /*remove-end*/ const
-        /*w 1v w*/
+        /*w 1v 8> w*/
         ProviderScope(
           overrides: [
             asyncInitializationPod.overrideWith((_) async {}),
             /*remove-start*/
             routerPackagePod.overrideWithValue(RouterPackage.autoRoute),
             /*remove-end*/
+            /*w 1v 10> w*/
           ],
-          child:
-              /*remove-start*/
-              const
-              /*remove-end*/
-              MyApp(),
+          child: const MyApp(),
         ),
       );
       await tester.pumpAndSettle();
@@ -129,6 +122,7 @@ THEN the initialized app should be shown
             /*remove-start*/
             routerPackagePod.overrideWithValue(RouterPackage.goRouter),
             /*remove-end*/
+            /*w 1v 10> w*/
           ],
           child: const MyApp(),
         ),
@@ -150,8 +144,6 @@ THEN the uninitialized errored app should be shown
 ''',
     (tester) async {
       await tester.pumpWidget(
-        /*remove-start*/ // /*remove-end*/ const
-        /*w 1v w*/
         ProviderScope(
           overrides: [
             asyncInitializationPod.overrideWith(
@@ -165,12 +157,9 @@ THEN the uninitialized errored app should be shown
             /*remove-start*/
             routerPackagePod.overrideWithValue(RouterPackage.goRouter),
             /*remove-end*/
+            /*w 1v 10> w*/
           ],
-          child:
-              /*remove-start*/
-              const
-              /*remove-end*/
-              MyApp(),
+          child: const MyApp(),
         ),
       );
       expect(find.byType(AppInitializing), findsOneWidget);
@@ -194,20 +183,15 @@ THEN the counter screen should be shown
 ''',
     (tester) async {
       await tester.pumpWidget(
-        /*remove-start*/ // /*remove-end*/ const
-        /*w 1v w*/
         ProviderScope(
           overrides: [
             asyncInitializationPod.overrideWith((_) async {}),
             /*remove-start*/
             routerPackagePod.overrideWithValue(RouterPackage.goRouter),
             /*remove-end*/
+            /*w 1v 10> w*/
           ],
-          child:
-              /*remove-start*/
-              const
-              /*remove-end*/
-              MyApp(),
+          child: const MyApp(),
         ),
       );
       await tester.pumpAndSettle();

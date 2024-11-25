@@ -13,6 +13,7 @@ THEN the home screen should be shown
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            asyncInitializationPod.overrideWith((_) async {}),
             routerConfigPod.overrideWithValue(
               AppRouter().config(
                 // ignore: use_named_constants
@@ -39,6 +40,7 @@ THEN the home screen should be shown
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            asyncInitializationPod.overrideWith((_) async {}),
             routerConfigPod.overrideWithValue(
               GoRouter(
                 routes: $appRoutes,
