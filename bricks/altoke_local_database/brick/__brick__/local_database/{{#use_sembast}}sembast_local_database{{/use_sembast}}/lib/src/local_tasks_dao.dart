@@ -1,26 +1,29 @@
 import 'package:altoke_common/common.dart';
-import 'package:isar/isar.dart';
-import 'package:isar_local_database/src/helpers.dart';
-import 'package:isar_local_database/src/task.dart' as isar;
 import 'package:local_database/local_database.dart';
 import 'package:meta/meta.dart';
+import 'package:sembast/sembast.dart';
+import 'package:sembast_local_database/src/helpers.dart' as sembast;
 
-/// {@template isar_local_database.local_tasks_dao}
-/// A DAO that manages tasks in an Isar local database.
+/// {@template sembast_local_database.local_tasks_dao}
+/// A DAO that manages tasks in an Sembast local database.
 /// {@endtemplate}
-class LocalTasksIsarDao implements LocalTasksDao {
-  /// {@macro isar_local_database.local_tasks_dao}
-  LocalTasksIsarDao({
+class LocalTasksSembastDao implements LocalTasksDao {
+  /// {@macro sembast_local_database.local_tasks_dao}
+  LocalTasksSembastDao({
     required this.database,
   });
 
-  /// The internal Isar database.
+  /// The internal Sembast database.
   @visibleForTesting
-  final Isar database;
+  final Database database;
 
-  /// The internal Isar collection for tasks.
+  /// Name for the tasks store.
   @visibleForTesting
-  IsarCollection<isar.Task> get tasksCollection => database.tasks;
+  static const tasksStoreName = '<tasks-sembast-storage>';
+
+  /// Reference for the tasks store.
+  @visibleForTesting
+  late final sembast.TasksStoreRef tasksStore = StoreRef(tasksStoreName);
 
   @override
   Future<Task> createOne(NewTask newTask) async {
@@ -39,28 +42,22 @@ class LocalTasksIsarDao implements LocalTasksDao {
         complexValidationErrors: complexValidationErrors,
       );
     }
-    final rawTask = await database.writeTxn(
-      () async {
-        final taskId = await tasksCollection.put(
-          isar.Task()
-            ..title = title.trim()
-            ..priority = priority.identifier
-            ..description =
-                (description ?? '').trim().isEmpty ? null : description?.trim()
-            ..completed = false,
-        );
-        return tasksCollection.get(taskId);
-      },
-    );
-    return rawTask!.toTask();
+
+    final id = await tasksStore.add(database, {
+      sembast.Task.titleJsonKey: title,
+      sembast.Task.priorityJsonKey: priority.identifier,
+      sembast.Task.descriptionJsonKey:
+          ((description ?? '').trim().isEmpty) ? null : description?.trim(),
+      sembast.Task.completedJsonKey: false,
+    });
+    return newTask.toTaskWithId(id);
   }
 
   @override
   Stream<Iterable<Task>> watchAll() {
-    return tasksCollection
-        .filter()
-        .noop()
-        .watch(fireImmediately: true)
+    return tasksStore
+        .query()
+        .onSnapshots(database)
         .map((tasks) => tasks.toTasks());
   }
 
@@ -69,8 +66,8 @@ class LocalTasksIsarDao implements LocalTasksDao {
     required int taskId,
     required PartialTask task,
   }) async {
-    final rawTask = await tasksCollection.get(taskId);
-    if (rawTask == null) {
+    final taskExists = await tasksStore.record(taskId).exists(database);
+    if (!taskExists) {
       throw UpdateTaskFailureNotFound(taskId: taskId);
     }
     final PartialTask(:title, :priority, :completed, :description) = task;
@@ -91,49 +88,54 @@ class LocalTasksIsarDao implements LocalTasksDao {
         complexValidationErrors: complexValidationErrors,
       );
     }
+    final taskPatch = <String, Object?>{};
     if (title case Some(value: final title)) {
-      rawTask.title = title.trim();
+      taskPatch[sembast.Task.titleJsonKey] = title.trim();
     }
     if (priority case Some(value: final priority)) {
-      rawTask.priority = priority.identifier;
+      taskPatch[sembast.Task.priorityJsonKey] = priority.identifier;
     }
     if (completed case Some(value: final completed)) {
-      rawTask.completed = completed;
+      taskPatch[sembast.Task.completedJsonKey] = completed;
     }
     if (description case Some(value: final description)) {
-      rawTask.description =
+      taskPatch[sembast.Task.descriptionJsonKey] =
           (description ?? '').trim().isEmpty ? null : description?.trim();
     }
-    await database.writeTxn(
-      () async {
-        await tasksCollection.put(rawTask);
-      },
-    );
+    await tasksStore.record(taskId).put(database, taskPatch, merge: true);
   }
 
   @override
   Future<void> deleteOneById(
     int taskId,
   ) async {
-    await database.writeTxn(
-      () async => tasksCollection.delete(taskId),
-    );
+    await tasksStore.record(taskId).delete(database);
   }
 }
 
-extension on isar.Task {
-  Task toTask() => Task(
+extension on NewTask {
+  Task toTaskWithId(int id) => Task(
         id: id,
         title: title,
-        priority: priority.toTaskPriority(),
-        completed: completed,
+        priority: priority,
+        completed: false,
         description: description,
       );
 }
 
-extension on List<isar.Task> {
+extension on Iterable<RecordSnapshot<int, Map<String, Object?>>> {
   Iterable<Task> toTasks() => map(
-        (result) => result.toTask(),
+        (snapshot) {
+          final RecordSnapshot(key: id, value: rawData) = snapshot;
+          return Task(
+            id: id,
+            title: rawData[sembast.Task.titleJsonKey]! as String,
+            priority: (rawData[sembast.Task.priorityJsonKey]! as String)
+                .toTaskPriority(),
+            completed: rawData[sembast.Task.completedJsonKey]! as bool,
+            description: rawData[sembast.Task.descriptionJsonKey] as String?,
+          );
+        },
       );
 }
 
@@ -143,7 +145,7 @@ const _identifiableTaskPriorityMap = {
   'high': TaskPriority.high,
 };
 
-/// An extension on [TaskPriority] to make it identifiable for the Isar
+/// An extension on [TaskPriority] to make it identifiable for the Sembast
 /// database.
 @visibleForTesting
 extension IdentifiableTaskPriority on TaskPriority {

@@ -1,26 +1,22 @@
 import 'package:altoke_common/common.dart';
-import 'package:isar/isar.dart';
-import 'package:isar_local_database/src/helpers.dart';
-import 'package:isar_local_database/src/task.dart' as isar;
+import 'package:hive/hive.dart';
+import 'package:hive_local_database/src/helpers.dart' as hive;
 import 'package:local_database/local_database.dart';
 import 'package:meta/meta.dart';
 
-/// {@template isar_local_database.local_tasks_dao}
-/// A DAO that manages tasks in an Isar local database.
+/// {@template hive_local_database.local_tasks_dao}
+/// A DAO that manages tasks in an Hive local database.
 /// {@endtemplate}
-class LocalTasksIsarDao implements LocalTasksDao {
-  /// {@macro isar_local_database.local_tasks_dao}
-  LocalTasksIsarDao({
-    required this.database,
-  });
+class LocalTasksHiveDao implements LocalTasksDao {
+  /// {@macro hive_local_database.local_tasks_dao}
+  LocalTasksHiveDao();
 
-  /// The internal Isar database.
-  @visibleForTesting
-  final Isar database;
+  /// Name for the tasks tasksBox.
+  static const tasksBoxName = '.tasks-hive-box.';
 
-  /// The internal Isar collection for tasks.
+  /// Box for the tasks.
   @visibleForTesting
-  IsarCollection<isar.Task> get tasksCollection => database.tasks;
+  final Future<hive.TasksBox> asyncTasksBox = Hive.openBox(tasksBoxName);
 
   @override
   Future<Task> createOne(NewTask newTask) async {
@@ -39,29 +35,29 @@ class LocalTasksIsarDao implements LocalTasksDao {
         complexValidationErrors: complexValidationErrors,
       );
     }
-    final rawTask = await database.writeTxn(
-      () async {
-        final taskId = await tasksCollection.put(
-          isar.Task()
-            ..title = title.trim()
-            ..priority = priority.identifier
-            ..description =
-                (description ?? '').trim().isEmpty ? null : description?.trim()
-            ..completed = false,
-        );
-        return tasksCollection.get(taskId);
-      },
-    );
-    return rawTask!.toTask();
+    final tasksBox = await asyncTasksBox;
+    final id = await tasksBox.add({
+      hive.Task.titleJsonKey: title,
+      hive.Task.priorityJsonKey: priority.identifier,
+      hive.Task.descriptionJsonKey:
+          ((description ?? '').trim().isEmpty) ? null : description?.trim(),
+      hive.Task.completedJsonKey: false,
+    });
+    return newTask.toTaskWithId(id);
   }
 
   @override
-  Stream<Iterable<Task>> watchAll() {
-    return tasksCollection
-        .filter()
-        .noop()
-        .watch(fireImmediately: true)
-        .map((tasks) => tasks.toTasks());
+  Stream<Iterable<Task>> watchAll() async* {
+    final tasksBox = await asyncTasksBox;
+
+    Iterable<Task> getTasks() {
+      return tasksBox.toMap().entries.toTasks();
+    }
+
+    yield* () async* {
+      yield getTasks();
+      yield* tasksBox.watch().map((_) => getTasks());
+    }();
   }
 
   @override
@@ -69,7 +65,8 @@ class LocalTasksIsarDao implements LocalTasksDao {
     required int taskId,
     required PartialTask task,
   }) async {
-    final rawTask = await tasksCollection.get(taskId);
+    final tasksBox = await asyncTasksBox;
+    final rawTask = tasksBox.get(taskId);
     if (rawTask == null) {
       throw UpdateTaskFailureNotFound(taskId: taskId);
     }
@@ -92,48 +89,53 @@ class LocalTasksIsarDao implements LocalTasksDao {
       );
     }
     if (title case Some(value: final title)) {
-      rawTask.title = title.trim();
+      rawTask[hive.Task.titleJsonKey] = title.trim();
     }
     if (priority case Some(value: final priority)) {
-      rawTask.priority = priority.identifier;
+      rawTask[hive.Task.priorityJsonKey] = priority.identifier;
     }
     if (completed case Some(value: final completed)) {
-      rawTask.completed = completed;
+      rawTask[hive.Task.completedJsonKey] = completed;
     }
     if (description case Some(value: final description)) {
-      rawTask.description =
+      rawTask[hive.Task.descriptionJsonKey] =
           (description ?? '').trim().isEmpty ? null : description?.trim();
     }
-    await database.writeTxn(
-      () async {
-        await tasksCollection.put(rawTask);
-      },
-    );
+    await tasksBox.put(taskId, rawTask);
   }
 
   @override
   Future<void> deleteOneById(
     int taskId,
   ) async {
-    await database.writeTxn(
-      () async => tasksCollection.delete(taskId),
-    );
+    final tasksBox = await asyncTasksBox;
+    return tasksBox.delete(taskId);
   }
 }
 
-extension on isar.Task {
-  Task toTask() => Task(
+extension on NewTask {
+  Task toTaskWithId(int id) => Task(
         id: id,
         title: title,
-        priority: priority.toTaskPriority(),
-        completed: completed,
+        priority: priority,
+        completed: false,
         description: description,
       );
 }
 
-extension on List<isar.Task> {
+extension on Iterable<MapEntry<dynamic, Map<dynamic, dynamic>>> {
   Iterable<Task> toTasks() => map(
-        (result) => result.toTask(),
+        (entry) {
+          final MapEntry(key: id, value: rawData) = entry;
+          return Task(
+            id: id as int,
+            title: rawData[hive.Task.titleJsonKey] as String,
+            priority:
+                (rawData[hive.Task.priorityJsonKey] as String).toTaskPriority(),
+            completed: rawData[hive.Task.completedJsonKey] as bool,
+            description: rawData[hive.Task.descriptionJsonKey] as String?,
+          );
+        },
       );
 }
 
@@ -143,7 +145,7 @@ const _identifiableTaskPriorityMap = {
   'high': TaskPriority.high,
 };
 
-/// An extension on [TaskPriority] to make it identifiable for the Isar
+/// An extension on [TaskPriority] to make it identifiable for the Hive
 /// database.
 @visibleForTesting
 extension IdentifiableTaskPriority on TaskPriority {

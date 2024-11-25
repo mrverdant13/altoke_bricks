@@ -1,5 +1,5 @@
-name: local_database
-description: An interface for a persistent local database.
+name: sembast_local_database
+description: A persistent local database built on top of Sembast.
 version: 0.0.1+1
 publish_to: none
 
@@ -9,7 +9,11 @@ environment:
 dependencies:
   common:
     path: ../../common/
+  collection: ^1.18.0
+  local_database:
+    path: ../local_database/
   meta: ^1.15.0
+  sembast: ^3.7.3+2
 
 dev_dependencies:
   test: ^1.25.8

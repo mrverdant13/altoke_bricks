@@ -4,9 +4,6 @@ import 'package:local_database/local_database.dart';
 /// An interface for a DAO that manages tasks in a local database.
 /// {@endtemplate}
 abstract interface class LocalTasksDao {
-  /// {@macro local_database.local_tasks_dao}
-  const LocalTasksDao();
-
   /// Creates a new task.
   Future<Task> createOne(
     NewTask newTask,
