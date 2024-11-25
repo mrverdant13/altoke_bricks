@@ -17,7 +17,10 @@ enum LocalDatabaseAlternative {
   /// NoSQL database.
   isar('isar'),
 
-  // TODO(mrverdant13): Support Sembast.
+  /// Sembast.
+  ///
+  /// NoSQL database.
+  sembast('sembast'),
   ;
 
   const LocalDatabaseAlternative(this.varIdentifier);

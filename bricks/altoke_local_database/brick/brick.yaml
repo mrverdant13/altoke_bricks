@@ -12,7 +12,7 @@ vars:
       - drift
       - hive
       - isar
-      # TODO(mrverdant13): Add support for sembast.
+      - sembast
     description: The local database alternative.
     default: drift
     prompt: What local database alternative do you want to use?

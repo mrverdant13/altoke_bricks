@@ -3,6 +3,6 @@
 - **FEAT**: Data persistence with `drift`.
 - **FEAT**: Data persistence with `hive`.
 - **FEAT**: Data persistence with `isar`.
-<!-- TODO(mrverdant13): Add Sembast support -->
+- **FEAT**: Data persistence with `sembast`.
 - **FEAT**: Strict lint rules with `very_good_analysis`.
-<!-- TODO(mrverdant13): Add testing -->
+- **FEAT**: 100% test coverage.

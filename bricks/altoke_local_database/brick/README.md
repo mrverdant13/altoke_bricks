@@ -55,12 +55,13 @@ Create a local database, **_al toque_** (_quickly_).
     - [`drift` (SQLite)][pub_package_drift]
     - [`hive`][pub_package_hive]
     - [`isar`][pub_package_isar]
-    <!-- TODO(mrverdant13): Add Sembast support -->
+    - [`sembast`][pub_package_sembast]
 
 - **Strict lint rules:**\
   Enforced by [`very_good_analysis`][pub_package_very_good_analysis] for [native Dart & Flutter rules][docs_dart_and_flutter_linter_rules_link].
 
-<!-- TODO(mrverdant13): Add testing -->
+- **Testing:**\
+  Tests with 100% coverage.
 <!-- FEATURES -->
 
 <!-- DO NOT EDIT - THIS IS AUTOMATICALLY GENERATED -->
@@ -75,8 +76,9 @@ Create a local database, **_al toque_** (_quickly_).
 <!-- EDITABLE -->
 <!-- BRICK LINKS -->
 [docs_dart_and_flutter_linter_rules_link]: https://dart.dev/tools/linter-rules
+[pub_package_drift]: https://pub.dev/packages/drift
 [pub_package_hive]: https://pub.dev/packages/hive
 [pub_package_isar]: https://pub.dev/packages/isar
-[pub_package_drift]: https://pub.dev/packages/drift
+[pub_package_sembast]: https://pub.dev/packages/sembast
 [pub_package_very_good_analysis]: https://pub.dev/packages/very_good_analysis
 <!-- BRICK LINKS -->
