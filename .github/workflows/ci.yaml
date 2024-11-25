@@ -61,6 +61,7 @@ jobs:
           echo "ignore:
             - '**/*drift*'
           " >> ./melos_overrides.yaml
+          type ./melos_overrides.yaml
       - name: Check out repository
         uses: actions/checkout@v4
       - name: Install Flutter
