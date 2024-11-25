@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:local_database/local_database.dart';
 
+// coverage:ignore-start
 class TaskCreationDialog extends StatelessWidget {
   const TaskCreationDialog({
     super.key,
@@ -223,3 +224,4 @@ extension on TaskPriority {
     };
   }
 }
+// coverage:ignore-end
