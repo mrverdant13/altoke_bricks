@@ -96,6 +96,13 @@ Future<void> run(HookContext context) async {
   );
   await runCommands(
     projectDir: Directory(implementationProjectPath),
-    runCodeGeneration: true,
+    runCodeGeneration: selectedAlternative.shouldRunCodeGeneration,
   );
+}
+
+extension on LocalDatabaseAlternative {
+  bool get shouldRunCodeGeneration => [
+        LocalDatabaseAlternative.drift,
+        LocalDatabaseAlternative.isar,
+      ].contains(this);
 }
