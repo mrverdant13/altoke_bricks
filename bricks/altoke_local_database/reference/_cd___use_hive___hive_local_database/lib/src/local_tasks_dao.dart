@@ -12,7 +12,7 @@ class LocalTasksHiveDao implements LocalTasksDao {
   LocalTasksHiveDao();
 
   /// Name for the tasks tasksBox.
-  static const tasksBoxName = '.tasks-hive-box.';
+  static const tasksBoxName = '.tasks.';
 
   /// Box for the tasks.
   @visibleForTesting
