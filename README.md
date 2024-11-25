@@ -133,6 +133,25 @@ Create an entity, **_al toque_** (_quickly_).
 - **Testing:**\
   Tests with 100% coverage.
 
+### 🧱 Altoke Local Database
+
+Create a local database, **_al toque_** (_quickly_).
+
+#### Features
+
+- **Data persistence:**\
+  Supported with one of the following alternatives:
+    - [`drift` (SQLite)][pub_package_drift]
+    - [`hive`][pub_package_hive]
+    - [`isar`][pub_package_isar]
+    - [`sembast`][pub_package_sembast]
+
+- **Strict lint rules:**\
+  Enforced by [`very_good_analysis`][pub_package_very_good_analysis] for [native Dart & Flutter rules][docs_dart_and_flutter_linter_rules_link].
+
+- **Testing:**\
+  Tests with 100% coverage.
+
 ### 🧱 Altoke Reactive Caches
 
 Create a package that provides general-purpose caches, **_al toque_** (_quickly_).
@@ -186,10 +205,10 @@ Create a storage, **_al toque_** (_quickly_).
 [pub_package_dart_mappable]: https://pub.dev/packages/dart_mappable
 [pub_package_equatable]: https://pub.dev/packages/equatable
 [pub_package_freezed]: https://pub.dev/packages/freezed
+[pub_package_drift]: https://pub.dev/packages/drift
 [pub_package_hive]: https://pub.dev/packages/hive
 [pub_package_isar]: https://pub.dev/packages/isar
 [pub_package_sembast]: https://pub.dev/packages/sembast
-[pub_package_drift]: https://pub.dev/packages/drift
 <!-- BRICK LINKS -->
 
 <!-- EDITABLE -->

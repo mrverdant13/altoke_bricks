@@ -37,6 +37,11 @@ extension BrickGenerator on MasonGenerator {
     brickDir: 'altoke_entity',
   );
 
+  /// Altoke Local Database brick generator.
+  static Future<MasonGenerator> localDatabase = _buildAsyncGenerator(
+    brickDir: 'altoke_local_database',
+  );
+
   /// Altoke Reactive Caches brick generator.
   static Future<MasonGenerator> reactiveCaches = _buildAsyncGenerator(
     brickDir: 'altoke_reactive_caches',

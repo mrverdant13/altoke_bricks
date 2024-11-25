@@ -1,0 +1,16 @@
+name: local_database
+description: An interface for a persistent local database.
+version: 0.0.1+1
+publish_to: none
+
+environment:
+  sdk: ">=3.5.1 <4.0.0"
+
+dependencies:
+  common:
+    path: ../../common/
+  meta: ^1.15.0
+
+dev_dependencies:
+  test: ^1.25.8
+  very_good_analysis: ^6.0.0

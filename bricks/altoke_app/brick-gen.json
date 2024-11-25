@@ -17,5 +17,25 @@
       "from": "An Altoke App.",
       "to": "{{projectDescription}}"
     }
+  ],
+  "lineDeletions": [
+    {
+      "filePath": "brick/__brick__/{{projectName.snakeCase()}}/packages/app/lib/l10n/arb/app_en.arb",
+      "ranges": [
+        {
+          "start": 51,
+          "end": 158
+        }
+      ]
+    },
+    {
+      "filePath": "brick/__brick__/{{projectName.snakeCase()}}/packages/app/lib/l10n/arb/app_es.arb",
+      "ranges": [
+        {
+          "start": 51,
+          "end": 158
+        }
+      ]
+    }
   ]
 }

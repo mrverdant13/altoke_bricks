@@ -14,8 +14,12 @@ AND the initialization process is completed
 THEN the initialized app should be shown
 ''',
     (tester) async {
-      await tester.pumpWidget(const
-ProviderScope(child:MyApp(),
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            asyncInitializationPod.overrideWith((_) async {}),
+          ],
+          child: const MyApp(),
         ),
       );
       expect(find.byType(AppInitializing), findsOneWidget);
@@ -34,8 +38,8 @@ THEN the uninitialized errored app should be shown
 ├─ THAT allows the user to retry the initialization process
 ''',
     (tester) async {
-      await tester.pumpWidget(const
-ProviderScope(
+      await tester.pumpWidget(
+        ProviderScope(
           overrides: [
             asyncInitializationPod.overrideWith(
               (ref) async {
@@ -44,8 +48,9 @@ ProviderScope(
                   throw Exception('error');
                 }
               },
-            ),],
-          child:MyApp(),
+            ),
+          ],
+          child: const MyApp(),
         ),
       );
       expect(find.byType(AppInitializing), findsOneWidget);
@@ -68,8 +73,12 @@ WHEN the app is built
 THEN the counter screen should be shown
 ''',
     (tester) async {
-      await tester.pumpWidget(const
-ProviderScope(child:MyApp(),
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            asyncInitializationPod.overrideWith((_) async {}),
+          ],
+          child: const MyApp(),
         ),
       );
       await tester.pumpAndSettle();
@@ -85,8 +94,12 @@ AND the initialization process is completed
 THEN the initialized app should be shown
 ''',
     (tester) async {
-      await tester.pumpWidget(const
-ProviderScope(child:MyApp(),
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            asyncInitializationPod.overrideWith((_) async {}),
+          ],
+          child: const MyApp(),
         ),
       );
       expect(find.byType(AppInitializing), findsOneWidget);
@@ -105,8 +118,8 @@ THEN the uninitialized errored app should be shown
 ├─ THAT allows the user to retry the initialization process
 ''',
     (tester) async {
-      await tester.pumpWidget(const
-ProviderScope(
+      await tester.pumpWidget(
+        ProviderScope(
           overrides: [
             asyncInitializationPod.overrideWith(
               (ref) async {
@@ -115,8 +128,9 @@ ProviderScope(
                   throw Exception('error');
                 }
               },
-            ),],
-          child:MyApp(),
+            ),
+          ],
+          child: const MyApp(),
         ),
       );
       expect(find.byType(AppInitializing), findsOneWidget);
@@ -139,8 +153,12 @@ WHEN the app is built
 THEN the counter screen should be shown
 ''',
     (tester) async {
-      await tester.pumpWidget(const
-ProviderScope(child:MyApp(),
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            asyncInitializationPod.overrideWith((_) async {}),
+          ],
+          child: const MyApp(),
         ),
       );
       await tester.pumpAndSettle();

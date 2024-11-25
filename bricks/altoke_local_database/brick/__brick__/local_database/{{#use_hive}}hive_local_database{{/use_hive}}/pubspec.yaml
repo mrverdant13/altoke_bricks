@@ -1,0 +1,20 @@
+name: hive_local_database
+description: A persistent local database built on top of Hive.
+version: 0.0.1+1
+publish_to: none
+
+environment:
+  sdk: ">=3.5.1 <4.0.0"
+
+dependencies:
+  common:
+    path: ../../common/
+  collection: ^1.18.0
+  hive: ^2.2.3
+  local_database:
+    path: ../local_database/
+  meta: ^1.15.0
+
+dev_dependencies:
+  test: ^1.25.8
+  very_good_analysis: ^6.0.0

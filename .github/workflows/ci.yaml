@@ -1,4 +1,4 @@
-# cspell:ignore longpaths
+# cspell:ignore choco,longpaths
 name: ci
 
 on:
@@ -57,6 +57,13 @@ jobs:
           git config --system core.longpaths true
       - name: Check out repository
         uses: actions/checkout@v4
+      - name: Ignore tests related to SQLite on Windows
+        if: matrix.os == 'windows-latest'
+        run: |
+          echo "ignore:
+            - '**/*drift*'
+          " >> ./melos_overrides.yaml
+          type ./melos_overrides.yaml
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:

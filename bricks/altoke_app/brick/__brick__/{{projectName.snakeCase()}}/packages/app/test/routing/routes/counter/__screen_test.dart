@@ -13,6 +13,7 @@ THEN the counter screen should be shown
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            asyncInitializationPod.overrideWith((_) async {}),
             routerConfigPod.overrideWithValue(
               AppRouter().config(
                 deepLinkBuilder: (_) => const DeepLink.path('/counter'),
@@ -38,6 +39,7 @@ THEN the counter screen should be shown
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
+            asyncInitializationPod.overrideWith((_) async {}),
             routerConfigPod.overrideWithValue(
               GoRouter(
                 routes: $appRoutes,

@@ -13,7 +13,7 @@ dependencies:
     path: ../{{objects.snakeCase()}}_storage/
   {{object.snakeCase()}}:
     path: ../../{{object.snakeCase()}}/
-  collection: ^1.19.0
+  collection: ^1.18.0
   json_annotation: ^4.9.0
   meta: ^1.15.0
   sembast: ^3.7.3+2
