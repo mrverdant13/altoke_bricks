@@ -1,7 +1,0 @@
-name: altoke_storage_brick_scope
-description: Altoke Storage Brick Scope
-version: 0.0.1+1
-publish_to: none
-
-environment:
-  sdk: ">=3.5.1 <4.0.0"

@@ -47,11 +47,6 @@ extension BrickGenerator on MasonGenerator {
     brickDir: 'altoke_reactive_caches',
   );
 
-  /// Altoke Storage brick generator.
-  static Future<MasonGenerator> storage = _buildAsyncGenerator(
-    brickDir: 'altoke_storage',
-  );
-
   /// Run the full generation routine.
   Future<void> runFullGeneration({
     required DirectoryGeneratorTarget target,
