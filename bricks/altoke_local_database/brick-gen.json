@@ -1,4 +1,9 @@
 {
   "targetRelativePath": "brick/__brick__/local_database",
-  "replacements": []
+  "replacements": [
+    {
+      "from": "altoke_common",
+      "to": "common"
+    }
+  ]
 }

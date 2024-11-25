@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:altoke_common/common.dart';
+import 'package:common/common.dart';
 import 'package:collection/collection.dart';
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';

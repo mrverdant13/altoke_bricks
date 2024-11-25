@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:altoke_common/common.dart';
+import 'package:common/common.dart';
 import 'package:collection/collection.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_local_database/hive_local_database.dart';

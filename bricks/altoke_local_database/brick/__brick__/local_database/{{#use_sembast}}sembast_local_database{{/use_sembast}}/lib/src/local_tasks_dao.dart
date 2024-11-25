@@ -1,4 +1,4 @@
-import 'package:altoke_common/common.dart';
+import 'package:common/common.dart';
 import 'package:local_database/local_database.dart';
 import 'package:meta/meta.dart';
 import 'package:sembast/sembast.dart';

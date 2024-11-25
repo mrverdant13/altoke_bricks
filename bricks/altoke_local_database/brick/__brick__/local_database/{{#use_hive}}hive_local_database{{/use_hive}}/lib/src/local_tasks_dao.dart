@@ -1,4 +1,4 @@
-import 'package:altoke_common/common.dart';
+import 'package:common/common.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_local_database/src/helpers.dart' as hive;
 import 'package:local_database/local_database.dart';

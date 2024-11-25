@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:ffi';
 import 'dart:io';
 
-import 'package:altoke_common/common.dart';
+import 'package:common/common.dart';
 import 'package:collection/collection.dart';
 import 'package:isar/isar.dart';
 import 'package:isar_local_database/isar_local_database.dart';

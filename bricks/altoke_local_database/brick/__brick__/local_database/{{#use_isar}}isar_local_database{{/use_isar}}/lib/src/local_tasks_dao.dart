@@ -1,4 +1,4 @@
-import 'package:altoke_common/common.dart';
+import 'package:common/common.dart';
 import 'package:isar/isar.dart';
 import 'package:isar_local_database/src/helpers.dart';
 import 'package:isar_local_database/src/task.dart' as isar;
