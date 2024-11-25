@@ -49,12 +49,18 @@ jobs:
         os:
           - macos-latest
           - ubuntu-latest
-          # - windows-latest # HACK(mrverdant13): Tests using SQLite fail on Windows
+          - windows-latest
     steps:
-      # - name: Support long paths on Windows
-      #   if: matrix.os == 'windows-latest'
-      #   run: |
-      #     git config --system core.longpaths true
+      - name: Support long paths on Windows
+        if: matrix.os == 'windows-latest'
+        run: |
+          git config --system core.longpaths true
+      - name: Ignore tests related to SQLite on Windows # HACK(mrverdant13): SQLite tests fail on Windows
+        if: matrix.os == 'windows-latest'
+        run: |
+          echo "ignore:
+          - 'packages/**/*drift*'
+          " >> ./melos_overrides.yaml
       - name: Check out repository
         uses: actions/checkout@v4
       - name: Install Flutter
