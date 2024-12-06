@@ -7,7 +7,7 @@ environment:
 
 dependencies:
   checked_yaml: ^2.0.3
-  mason: ^0.1.0-dev.59
+  mason: ^0.1.0
   monorepo_elements:
     path: ../monorepo_elements
   path: ^1.9.0
