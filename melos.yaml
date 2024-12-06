@@ -30,11 +30,11 @@ command:
       flutter: ">=3.24.1 <4.0.0"
     dependencies:
       collection: ^1.18.0
-      mason: ^0.1.0-dev.59
+      mason: ^0.1.0
       meta: ^1.15.0
     dev_dependencies:
       build_runner: ^2.4.12
-      mason: ^0.1.0-dev.59
+      mason: ^0.1.0
       melos: ^6.2.0
       meta: ^1.15.0
       mocktail: ^1.0.4
