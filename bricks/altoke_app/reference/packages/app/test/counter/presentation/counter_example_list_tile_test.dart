@@ -1,10 +1,14 @@
 import 'package:altoke_app/counter/counter.dart';
 import 'package:altoke_app/routing/routing.dart';
+/*{{#use_auto_route}}*/
 import 'package:auto_route/auto_route.dart';
+/*{{/use_auto_route}}*/
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+/*{{#use_go_router}}*/
 import 'package:go_router/go_router.dart';
+/*{{/use_go_router}}*/
 import 'package:mocktail/mocktail.dart';
 
 import '../../helpers/helpers.dart';
