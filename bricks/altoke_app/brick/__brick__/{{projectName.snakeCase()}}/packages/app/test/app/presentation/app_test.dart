@@ -22,9 +22,9 @@ THEN the initialized app should be shown
           child: const MyApp(),
         ),
       );
-      expect(find.byType(AppInitializing), findsOneWidget);
+      expect(find.byType(InitializingScreen), findsOneWidget);
       await tester.pumpAndSettle();
-      expect(find.byType(InitializedApp), findsOneWidget);
+      expect(find.byType(HomeScreen), findsOneWidget);
     },
   );
 
@@ -53,14 +53,14 @@ THEN the uninitialized errored app should be shown
           child: const MyApp(),
         ),
       );
-      expect(find.byType(AppInitializing), findsOneWidget);
+      expect(find.byType(InitializingScreen), findsOneWidget);
       await tester.pumpAndSettle();
-      expect(find.byType(AppWithErroredInitialization), findsOneWidget);
+      expect(find.byType(ErroredInitializationScreen), findsOneWidget);
       await tester.tap(find.byType(ElevatedButton));
       await tester.pump();
-      expect(find.byType(AppInitializing), findsOneWidget);
+      expect(find.byType(InitializingScreen), findsOneWidget);
       await tester.pumpAndSettle();
-      expect(find.byType(InitializedApp), findsOneWidget);
+      expect(find.byType(HomeScreen), findsOneWidget);
     },
   );
 
@@ -102,9 +102,9 @@ THEN the initialized app should be shown
           child: const MyApp(),
         ),
       );
-      expect(find.byType(AppInitializing), findsOneWidget);
+      expect(find.byType(InitializingScreen), findsOneWidget);
       await tester.pumpAndSettle();
-      expect(find.byType(InitializedApp), findsOneWidget);
+      expect(find.byType(HomeScreen), findsOneWidget);
     },
   );
 
@@ -133,14 +133,14 @@ THEN the uninitialized errored app should be shown
           child: const MyApp(),
         ),
       );
-      expect(find.byType(AppInitializing), findsOneWidget);
+      expect(find.byType(InitializingScreen), findsOneWidget);
       await tester.pumpAndSettle();
-      expect(find.byType(AppWithErroredInitialization), findsOneWidget);
+      expect(find.byType(ErroredInitializationScreen), findsOneWidget);
       await tester.tap(find.byType(ElevatedButton));
       await tester.pump();
-      expect(find.byType(AppInitializing), findsOneWidget);
+      expect(find.byType(InitializingScreen), findsOneWidget);
       await tester.pumpAndSettle();
-      expect(find.byType(InitializedApp), findsOneWidget);
+      expect(find.byType(HomeScreen), findsOneWidget);
     },
   );
 

@@ -1,11 +1,7 @@
 import 'package:{{projectName.snakeCase()}}/counter/counter.dart';
-import 'package:{{projectName.snakeCase()}}/routing/routing.dart';
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
+import 'package:{{projectName.snakeCase()}}/routing/routing.dart';{{#use_auto_route}}import 'package:auto_route/auto_route.dart';{{/use_auto_route}}import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:flutter_test/flutter_test.dart';{{#use_go_router}}import 'package:go_router/go_router.dart';{{/use_go_router}}import 'package:mocktail/mocktail.dart';
 
 import '../../helpers/helpers.dart';
 
