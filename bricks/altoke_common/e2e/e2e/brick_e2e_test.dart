@@ -1,5 +1,5 @@
 @Tags(['e2e'])
-library brick_e2e_test;
+library;
 
 import 'dart:async';
 import 'dart:io';

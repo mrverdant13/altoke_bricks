@@ -13,16 +13,16 @@ dependencies:
     path: ../../../../tools/value_equality_approach
 
 dev_dependencies:
-  very_good_analysis: ^6.0.0
+  very_good_analysis: ^7.0.0
 
 dependency_overrides:
   shell:
     git:
       url: https://github.com/mrverdant13/altoke_bricks.git
-      ref: b071442ea80006c2b9de19c2f69fe36ee4b102ce
+      ref: 4231e8477f74b3ff53e4b21c13000dabb16392d5
       path: ./tools/shell/
   value_equality_approach:
     git:
       url: https://github.com/mrverdant13/altoke_bricks.git
-      ref: 1004669066d2eae47de8696387e3179f4b09061f
+      ref: 4231e8477f74b3ff53e4b21c13000dabb16392d5
       path: ./tools/value_equality_approach/

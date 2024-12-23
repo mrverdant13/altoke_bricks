@@ -6,6 +6,7 @@ class MockCounter extends CounterBase with Mock implements Counter {
     this.testBuild,
   ]);
 
+  // This is required for the mock only.
   // ignore: avoid_public_notifier_properties
   final int Function()? testBuild;
 

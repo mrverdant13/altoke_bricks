@@ -1,5 +1,5 @@
 /// Representation of different altoke entity variants.
-library altoke_entity;
+library;
 
 /*replace-start*/
 export 'src/_cf___use_dart_mappable___altoke_entity.dart';

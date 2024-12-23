@@ -1,5 +1,5 @@
 /// A set of elements related to the Altoke Bricks monorepo.
-library monorepo_elements;
+library;
 
 export 'src/brick_generator.dart';
 export 'src/dirs.dart';

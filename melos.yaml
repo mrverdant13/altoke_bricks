@@ -39,7 +39,7 @@ command:
       meta: ^1.15.0
       mocktail: ^1.0.4
       test: ^1.25.8
-      very_good_analysis: ^6.0.0
+      very_good_analysis: ^7.0.0
   clean:
     hooks:
       pre:
