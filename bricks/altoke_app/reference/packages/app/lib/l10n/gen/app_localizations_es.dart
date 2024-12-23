@@ -15,7 +15,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get genericRetryButtonLabel => 'Reintentar';
 
   @override
-  String get appInitializationErrorMessage => 'Hubo un problema al intentar lanzar la aplicación';
+  String get appInitializationErrorMessage =>
+      'Hubo un problema al intentar lanzar la aplicación';
 
   @override
   String get homeAppBarTitle => 'Ejemplos';
@@ -30,7 +31,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String counterPushTimesMessage(int pushTimes) {
     final intl.NumberFormat pushTimesNumberFormat = intl.NumberFormat.compact(
       locale: localeName,
-      
     );
     final String pushTimesString = pushTimesNumberFormat.format(pushTimes);
 
@@ -90,7 +90,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get createTaskTitleEmptyError => 'El título no puede estar vacío';
 
   @override
-  String get createTaskDescriptionRequiredForHighPriorityTaskError => 'Una descripción es necesaria para tareas de alta prioridad';
+  String get createTaskDescriptionRequiredForHighPriorityTaskError =>
+      'Una descripción es necesaria para tareas de alta prioridad';
 
   @override
   String get createTaskGenericMessage => 'Error inesperado al crear tarea';
