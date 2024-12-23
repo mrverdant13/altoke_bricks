@@ -301,6 +301,7 @@ THEN the form should show the localized error
     variant: createTaskEmptyTitleErrorMessageL10nVariant,
   );
 
+  // Using a long semantic variable name.
   // ignore: lines_longer_than_80_chars
   final createTaskDescriptionRequiredForHighPriorityTaskErrorMessageL10nVariant =
       LocalizationVariant.withCommonSelector(

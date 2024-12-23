@@ -43,4 +43,4 @@ dev_dependencies:
   #{{/use_freezed}}#
   #*w 1v 2> w*#
   test: ^1.25.8
-  very_good_analysis: ^6.0.0
+  very_good_analysis: ^7.0.0

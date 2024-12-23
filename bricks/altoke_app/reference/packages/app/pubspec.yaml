@@ -81,7 +81,7 @@ dev_dependencies:
   #*w 1v 2> w*#
   riverpod_generator: ^2.6.2
   riverpod_lint: ^2.6.2
-  very_good_analysis: ^6.0.0
+  very_good_analysis: ^7.0.0
 
 flutter:
   generate: true

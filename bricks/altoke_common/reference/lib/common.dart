@@ -1,4 +1,4 @@
 /// A set of common elements used across projects.
-library common;
+library;
 
 export 'src/types/types.dart';

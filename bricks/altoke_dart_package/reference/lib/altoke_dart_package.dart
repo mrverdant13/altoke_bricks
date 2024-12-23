@@ -1,4 +1,4 @@
 /// An altoke Dart package.
-library altoke_dart_package;
+library;
 
 export 'src/altoke_dart_package.dart';

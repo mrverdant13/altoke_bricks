@@ -120,6 +120,7 @@ class SelectedLocalDatabasePackage extends _$SelectedLocalDatabasePackage {
     return LocalDatabasePackage.values.first;
   }
 
+  // No getter is needed as the state should be accessed directly.
   // ignore: avoid_setters_without_getters
   set value(LocalDatabasePackage value) => state = value;
 }

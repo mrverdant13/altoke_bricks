@@ -80,7 +80,7 @@ extension ReferenceFile on File {
         return rename(resolvedPath);
       }();
       await resultingFile.resolveContents(brickGenData: brickGenData);
-    } catch (e) {
+    } on Object catch (e) {
       stderr.writeln(e);
     }
   }
@@ -91,7 +91,7 @@ extension ReferenceFile on File {
     try {
       await Git.ignores(this);
       return true;
-    } catch (e) {
+    } on Object {
       return false;
     }
   }

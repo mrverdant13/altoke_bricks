@@ -49,6 +49,7 @@ abstract final class Vars {
 
   /// Path to the directory of a brick scope managed by the monorepo.
   static final scopePath = () {
+    // Required to ensure the scope name is valid.
     // ignore: unnecessary_statements
     scopeName; // Ensure the scope name is valid.
     return packagePath;
@@ -75,6 +76,7 @@ abstract final class Vars {
 
   /// Path to the directory of a brick hooks managed by the monorepo.
   static final hooksPath = () {
+    // Required to ensure the hooks name is valid.
     // ignore: unnecessary_statements
     hooksName; // Ensure the hooks name is valid.
     return packagePath;
@@ -94,6 +96,7 @@ abstract final class Vars {
 
   /// Path to the directory of a brick E2E test managed by the monorepo.
   static final e2eTestPath = () {
+    // Required to ensure the E2E test name is valid.
     // ignore: unnecessary_statements
     e2eTestName; // Ensure the E2E test name is valid.
     return packagePath;
@@ -103,13 +106,19 @@ abstract final class Vars {
   static final brickPath = () {
     try {
       return path.join(scopePath, 'brick');
-    } catch (_) {}
+    } on Object {
+      // Ignoring the error to continue.
+    }
     try {
       return path.normalize(path.join(hooksPath, '..'));
-    } catch (_) {}
+    } on Object {
+      // Ignoring the error to continue.
+    }
     try {
       return path.normalize(path.join(e2eTestPath, '..', 'brick'));
-    } catch (_) {}
+    } on Object {
+      // Ignoring the error to continue.
+    }
     throw const AbsentBrickReferencePaths();
   }();
 
