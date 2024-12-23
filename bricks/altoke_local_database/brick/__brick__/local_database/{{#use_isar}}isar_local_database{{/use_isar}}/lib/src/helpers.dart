@@ -13,6 +13,7 @@ extension ExtendedUnfilteredQueryBuilderCondition<OBJ, R>
     on UnfilteredQueryBuilderCondition<OBJ, R> {
   /// A no-op query builder.
   FilteredQueryBuilderCondition<OBJ, R> noop() {
+    // Using a query builder that returns the same query without any changes.
     // ignore: invalid_use_of_protected_member
     return QueryBuilder.apply<OBJ, R, QAfterFilterCondition>(
       this,
