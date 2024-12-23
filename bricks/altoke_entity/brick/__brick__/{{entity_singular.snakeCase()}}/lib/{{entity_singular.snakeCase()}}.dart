@@ -1,4 +1,4 @@
 /// {{package_description}}
-library {{entity_singular.snakeCase()}};
+library;
 
 export 'src/{{entity_singular.snakeCase()}}.dart';
