@@ -49,10 +49,11 @@ THEN the app bar should include the localized title
 
 GIVEN a counter app bar
 WHEN it is displayed
-THEN the app bar should include a reset counter icon button
+THEN the app bar should include a title and reset counter icon button
 ''',
     (tester) async {
-      await tester.pumpTestableWidget(CounterAppBar());
+      await tester.pumpAppWithScreen(CounterAppBar());
+      expect(find.byType(CounterAppBarTitle), findsOneWidget);
       expect(find.byType(ResetCounterIconButton), findsOneWidget);
     },
   );

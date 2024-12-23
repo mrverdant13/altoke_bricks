@@ -2,6 +2,7 @@ import 'package:{{projectName.snakeCase()}}/counter/counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 
 import '../../helpers/helpers.dart';
 
@@ -56,26 +57,29 @@ WHEN it is tapped
 THEN the counter should be incremented
 ''',
     (tester) async {
-      final container = ProviderContainer();
+      final counterNotifier = MockCounter(() => 5);
+      final container = ProviderContainer(
+        overrides: [
+          counterPod.overrideWith(
+            () => counterNotifier,
+          ),
+        ],
+      );
       addTearDown(container.dispose);
-      await tester.pumpTestableWidget(
+      final subscription = container.listen(counterPod.notifier, (_, __) {});
+      addTearDown(subscription.close);
+      await tester.pumpAppWithScreen(
         UncontrolledProviderScope(
           container: container,
-          child: Consumer(
-            builder: (context, ref, child) {
-              ref.watch(counterPod);
-              return child!;
-            },
-            child: const IncrementCounterFab(),
-          ),
+          child: const IncrementCounterFab(),
         ),
       );
-      expect(container.read(counterPod), 0);
+      expect(container.read(counterPod), isNonZero);
       await tester.pumpAndSettle();
       final incrementButtonFinder = find.byType(IncrementCounterFab);
       await tester.tap(incrementButtonFinder);
       await tester.pumpAndSettle();
-      expect(container.read(counterPod), 1);
+      verify(counterNotifier.increment).called(1);
     },
   );
 }

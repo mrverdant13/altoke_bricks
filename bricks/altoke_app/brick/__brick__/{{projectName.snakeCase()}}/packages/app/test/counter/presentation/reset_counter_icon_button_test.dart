@@ -58,23 +58,25 @@ WHEN it is tapped
 THEN the counter should be reset
 ''',
     (tester) async {
-      final container = ProviderContainer();
+      final counterNotifier = MockCounter(() => 0);
+      final container = ProviderContainer(
+        overrides: [
+          counterPod.overrideWith(
+            () => counterNotifier,
+          ),
+        ],
+      );
       addTearDown(container.dispose);
-      final counterNotifier = container.read(counterPod.notifier);
-      await tester.pumpTestableWidget(
+      final subscription = container.listen(counterPod.notifier, (_, __) {});
+      addTearDown(subscription.close);
+      await tester.pumpAppWithScreen(
         UncontrolledProviderScope(
           container: container,
-          child: Consumer(
-            builder: (context, ref, child) {
-              ref.watch(counterPod);
-              return child!;
-            },
-            child: const ResetCounterIconButton(),
-          ),
+          child: const ResetCounterIconButton(),
         ),
       );
       counterNotifier.state = Random().nextInt(100) + 1;
-      expect(container.read(counterPod), isNot(isZero));
+      expect(container.read(counterPod), isNonZero);
       await tester.pumpAndSettle();
       final resetButtonFinder = find.byType(ResetCounterIconButton);
       await tester.tap(resetButtonFinder);
