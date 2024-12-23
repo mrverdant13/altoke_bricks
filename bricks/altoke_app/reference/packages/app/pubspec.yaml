@@ -73,6 +73,12 @@ dev_dependencies:
   #{{/use_go_router}}#
   meta: ^1.15.0
   mocktail: ^1.0.4
+  #*replace-start*##*with*#path: ^1.9.0#*replace-end*#
+  #*remove-start*#
+  path_provider_platform_interface: ^2.1.2
+  plugin_platform_interface: ^2.1.8
+  #*remove-end*#
+  #*w 1v 2> w*#
   riverpod_generator: ^2.6.2
   riverpod_lint: ^2.6.2
   very_good_analysis: ^6.0.0

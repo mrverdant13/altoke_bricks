@@ -8,32 +8,39 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'local_tasks_dao_pod.g.dart';
 
-// coverage:ignore-start
 @Riverpod(
   dependencies: [
     SelectedLocalDatabasePackage,
     asyncDriftLocalDatabase,
+    asyncHiveInitialization,
     asyncIsar,
   ],
 )
 LocalTasksDao localTasksDao(Ref ref) {
   final package = ref.watch(selectedLocalDatabasePackagePod);
-  return switch (package) {
-    LocalDatabasePackage.drift => LocalTasksDriftDao(
+  switch (package) {
+    case LocalDatabasePackage.drift:
+      return LocalTasksDriftDao(
         tasksDrift: ref.watch(
           asyncDriftLocalDatabasePod.select(
             (asyncDatabase) => asyncDatabase.requireValue.tasksDrift,
           ),
         ),
-      ),
-    LocalDatabasePackage.hive => LocalTasksHiveDao(),
-    LocalDatabasePackage.isar => LocalTasksIsarDao(
+      );
+    case LocalDatabasePackage.hive:
+      ref.watch(
+        asyncHiveInitializationPod.select(
+          (asyncInitialization) => asyncInitialization.requireValue,
+        ),
+      );
+      return LocalTasksHiveDao();
+    case LocalDatabasePackage.isar:
+      return LocalTasksIsarDao(
         database: ref.watch(
           asyncIsarPod.select(
             (asyncDatabase) => asyncDatabase.requireValue,
           ),
         ),
-      ),
-  };
+      );
+  }
 }
-// coverage:ignore-end

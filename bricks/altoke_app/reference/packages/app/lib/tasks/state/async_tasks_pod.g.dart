@@ -6,13 +6,12 @@ part of 'async_tasks_pod.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$asyncTasksHash() => r'128cb79aff7a40f6b91925eedbed318b3b4cb8ea';
+String _$asyncTasksHash() => r'befe0325d2483f47a0461b813fee3d06fc575009';
 
-/// See also [AsyncTasks].
-@ProviderFor(AsyncTasks)
-final asyncTasksPod =
-    AutoDisposeStreamNotifierProvider<AsyncTasks, Iterable<Task>>.internal(
-  AsyncTasks.new,
+/// See also [asyncTasks].
+@ProviderFor(asyncTasks)
+final asyncTasksPod = AutoDisposeStreamProvider<Iterable<Task>>.internal(
+  asyncTasks,
   name: r'asyncTasksPod',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$asyncTasksHash,
@@ -23,7 +22,9 @@ final asyncTasksPod =
   },
 );
 
-typedef _$AsyncTasks = AutoDisposeStreamNotifier<Iterable<Task>>;
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef AsyncTasksRef = AutoDisposeStreamProviderRef<Iterable<Task>>;
 String _$createTaskMutationHash() =>
     r'c3313eb488815acc2d7499b40aefc7266f14a1e7';
 

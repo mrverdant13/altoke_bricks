@@ -1,4 +1,5 @@
 import 'package:altoke_app/tasks/tasks.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:local_database/local_database.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -10,11 +11,8 @@ part 'async_tasks_pod.g.dart';
     localTasksDao,
   ],
 )
-class AsyncTasks extends _$AsyncTasks {
-  @override
-  Stream<Iterable<Task>> build() {
-    return ref.watch(localTasksDaoPod).watchAll();
-  }
+Stream<Iterable<Task>> asyncTasks(Ref ref) {
+  return ref.watch(localTasksDaoPod).watchAll();
 }
 
 @Riverpod(

@@ -2,23 +2,26 @@ import 'package:altoke_app/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class HomeAppBar extends AppBar {
-  HomeAppBar({
+  HomeAppBar({super.key})
+      : super(
+          title: const HomeAppBarTitle(),
+        );
+}
+
+@visibleForTesting
+class HomeAppBarTitle extends StatelessWidget {
+  const HomeAppBarTitle({
     super.key,
   });
 
-  @override
-  State<AppBar> createState() => _HomeAppBarState();
-}
+  static const textKey = Key('<home::home-app-bar-title::text>');
 
-class _HomeAppBarState extends State<AppBar> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return AppBar(
-      title: Text(
-        l10n.homeAppBarTitle,
-        key: const Key('<home::home-app-bar::title>'),
-      ),
+    return Text(
+      l10n.homeAppBarTitle,
+      key: textKey,
     );
   }
 }
