@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'counter_pod.g.dart';
@@ -9,3 +10,6 @@ class Counter extends _$Counter {
 
   void increment() => state = state + 1;
 }
+
+@visibleForTesting
+typedef CounterBase = _$Counter;

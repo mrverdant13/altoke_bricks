@@ -1,11 +1,7 @@
 import 'package:{{projectName.snakeCase()}}/counter/counter.dart';
-import 'package:{{projectName.snakeCase()}}/routing/routing.dart';
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
+import 'package:{{projectName.snakeCase()}}/routing/routing.dart';{{#use_auto_route}}import 'package:auto_route/auto_route.dart';{{/use_auto_route}}import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:flutter_test/flutter_test.dart';{{#use_go_router}}import 'package:go_router/go_router.dart';{{/use_go_router}}import 'package:mocktail/mocktail.dart';
 
 import '../../helpers/helpers.dart';
 
@@ -60,7 +56,7 @@ THEN the counter screen should be shown
     (tester) async {
       final stackRouter = MockStackRouter();
       when(() => stackRouter.navigate(any())).thenAnswer((_) async {});
-      await tester.pumpTestableWidget(StackRouterScope(
+      await tester.pumpAppWithScreen(StackRouterScope(
             controller: stackRouter,
             stateHash: 0,
             child: const Scaffold(
@@ -82,7 +78,7 @@ THEN the counter screen should be shown
     (tester) async {
       final goRouter = MockGoRouter();
       when(() => goRouter.go(any())).thenAnswer((_) async {});
-      await tester.pumpTestableWidget(InheritedGoRouter(
+      await tester.pumpAppWithScreen(InheritedGoRouter(
             goRouter: goRouter,
             child: const Scaffold(
               body: CounterExampleListTile(),

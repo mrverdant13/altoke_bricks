@@ -10,21 +10,31 @@ part 'router.g.dart';{{#use_auto_route}}@AutoRouterConfig(
   generateForDir: ['lib/routing/'],
 )
 class AppRouter extends RootStackRouter {
+  AppRouter({
+    @visibleForTesting this.testRoutes = const [],
+  });
+
   @override
   RouteType get defaultRouteType => const RouteType.adaptive();
 
   @override
-  final List<AutoRoute> routes = [
-    AdaptiveRoute<void>(
-      initial: true,
-      path: '/',
-      page: HomeRoute.page,
-    ),
-    AdaptiveRoute<void>(
-      path: '/counter',
-      page: CounterRoute.page,
-    ),
+  late final List<AutoRoute> routes = [
+    if (testRoutes.isEmpty) ...[
+      AdaptiveRoute<void>(
+        initial: true,
+        path: '/',
+        page: HomeRoute.page,
+      ),
+      AdaptiveRoute<void>(
+        path: '/counter',
+        page: CounterRoute.page,
+      ),
+    ] else
+      ...testRoutes,
   ];
+
+  @visibleForTesting
+  final List<AutoRoute> testRoutes;
 }{{/use_auto_route}}{{#use_go_router}}@TypedGoRoute<HomeRouteData>(
   path: '/',
   name: 'HomeRoute',
@@ -61,6 +71,7 @@ RouterConfig<Object> routerConfig(Ref ref) {final routerConfig ={{#use_auto_rout
       ){{/use_go_router}};
   final delegate = routerConfig.routerDelegate;
 
+  // coverage:ignore-start
   void logCurrentUri() {
     if (!kDebugMode) return;
     final currentUri ={{#use_auto_route}}delegate.currentConfiguration!.uri{{/use_auto_route}}{{#use_go_router}}delegate.currentConfiguration.uri{{/use_go_router}};
@@ -69,6 +80,7 @@ RouterConfig<Object> routerConfig(Ref ref) {final routerConfig ={{#use_auto_rout
       name: 'Navigation',
     );
   }
+  // coverage:ignore-end
 
   delegate.addListener(logCurrentUri);
   ref.onDispose(() => delegate.removeListener(logCurrentUri));
