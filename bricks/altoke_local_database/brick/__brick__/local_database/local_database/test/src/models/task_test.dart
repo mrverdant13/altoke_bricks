@@ -41,6 +41,7 @@ void main() {
     });
 
     test('can be compared and has a consistent hash code', () {
+      // Using a non-const object to ensure coverage.
       // ignore: prefer_const_constructors
       final task = Task(
         id: 1,
