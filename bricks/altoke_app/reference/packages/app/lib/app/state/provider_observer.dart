@@ -4,6 +4,10 @@ import 'dart:developer' as developer;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+/*w 2v w*/
+/*remove-start*/
+// TODO(mrverdant13): Add tests.
+/*remove-end*/
 // coverage:ignore-start
 class LoggerProviderObserver extends ProviderObserver {
   const LoggerProviderObserver();

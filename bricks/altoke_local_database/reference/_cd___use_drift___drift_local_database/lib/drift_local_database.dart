@@ -3,3 +3,4 @@ library drift_local_database;
 
 export 'src/local_database.dart';
 export 'src/local_tasks_dao.dart';
+export 'src/tasks.drift.dart';

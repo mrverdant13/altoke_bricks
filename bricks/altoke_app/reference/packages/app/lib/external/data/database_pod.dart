@@ -13,7 +13,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'database_pod.g.dart';
 
-// coverage:ignore-start
 @Riverpod(
   dependencies: [
     asyncApplicationDocumentsDirectory,
@@ -96,7 +95,6 @@ Future<Isar> asyncIsar(Ref ref) async {
   ref.onDispose(isar.close);
   return isar;
 }
-// coverage:ignore-end
 
 /*drop*/
 // coverage:ignore-start

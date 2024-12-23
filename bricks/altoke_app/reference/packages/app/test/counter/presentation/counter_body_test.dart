@@ -5,18 +5,18 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../../helpers/helpers.dart';
 
-class _FakeCounter extends Counter {
-  _FakeCounter({
-    required int initialValue,
-  }) : _initialValue = initialValue;
-
-  final int _initialValue;
-
-  @override
-  int build() => _initialValue;
-}
-
 void main() {
+  testWidgets('''
+
+GIVEN a counter body
+WHEN it is displayed
+THEN a count message and a count value should be shown
+''', (tester) async {
+    await tester.pumpAppWithScreen(const CounterBody());
+    expect(find.byType(PushCountMessage), findsOneWidget);
+    expect(find.byType(PushCountValue), findsOneWidget);
+  });
+
   {
     final localizationVariant = LocalizationVariant.withCommonSelector(
       localizedTextSelector: (l10n) => l10n.counterPushTimesMessage(0),
@@ -56,7 +56,7 @@ THEN the body should include the localized message
       ProviderScope(
         overrides: [
           counterPod.overrideWith(
-            () => _FakeCounter(initialValue: 0),
+            () => MockCounter(() => 0),
           ),
         ],
         child: const CounterBody(),
@@ -105,7 +105,7 @@ THEN the body should include the localized message
       ProviderScope(
         overrides: [
           counterPod.overrideWith(
-            () => _FakeCounter(initialValue: 1),
+            () => MockCounter(() => 1),
           ),
         ],
         child: const CounterBody(),
@@ -154,7 +154,7 @@ THEN the body should include the localized message
       ProviderScope(
         overrides: [
           counterPod.overrideWith(
-            () => _FakeCounter(initialValue: 8),
+            () => MockCounter(() => 8),
           ),
         ],
         child: const CounterBody(),

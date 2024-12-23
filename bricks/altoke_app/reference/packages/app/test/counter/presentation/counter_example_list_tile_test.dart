@@ -67,7 +67,7 @@ THEN the counter screen should be shown
     (tester) async {
       final stackRouter = MockStackRouter();
       when(() => stackRouter.navigate(any())).thenAnswer((_) async {});
-      await tester.pumpTestableWidget(
+      await tester.pumpAppWithScreen(
         /*remove-start*/
         ProviderScope(
           overrides: [
@@ -107,7 +107,7 @@ THEN the counter screen should be shown
     (tester) async {
       final goRouter = MockGoRouter();
       when(() => goRouter.go(any())).thenAnswer((_) async {});
-      await tester.pumpTestableWidget(
+      await tester.pumpAppWithScreen(
         /*remove-start*/
         ProviderScope(
           overrides: [

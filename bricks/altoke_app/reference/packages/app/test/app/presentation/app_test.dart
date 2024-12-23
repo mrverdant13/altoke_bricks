@@ -1,8 +1,14 @@
 import 'package:altoke_app/app/app.dart';
 import 'package:altoke_app/routing/routing.dart';
+/*{{#use_auto_route}}*/
+import 'package:auto_route/auto_route.dart';
+/*{{/use_auto_route}}*/
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+/*{{#use_go_router}}*/
+import 'package:go_router/go_router.dart';
+/*{{/use_go_router}}*/
 
 void main() {
 /*w 1v w*/
@@ -13,24 +19,40 @@ void main() {
 GIVEN an app
 WHEN the app is built
 AND the initialization process is completed
-THEN the initialized app should be shown
+THEN the initialized router content should be shown
 ''',
     (tester) async {
+      final router = AppRouter(
+        testRoutes: [
+          AutoRoute(
+            path: '/',
+            page: PageInfo(
+              'FakeRoute',
+              builder: (data) => const Scaffold(
+                body: Center(
+                  child: Text(
+                    'Fake Screen',
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+      addTearDown(router.dispose);
+      final routerConfig = router.config();
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
             asyncInitializationPod.overrideWith((_) async {}),
-            /*remove-start*/
-            routerPackagePod.overrideWithValue(RouterPackage.autoRoute),
-            /*remove-end*/
-            /*w 1v 10> w*/
+            routerConfigPod.overrideWithValue(routerConfig),
           ],
           child: const MyApp(),
         ),
       );
       expect(find.byType(InitializingScreen), findsOneWidget);
       await tester.pumpAndSettle();
-      expect(find.byType(HomeScreen), findsOneWidget);
+      expect(find.text('Fake Screen'), findsOneWidget);
     },
   );
 
@@ -40,12 +62,30 @@ THEN the initialized app should be shown
 GIVEN an app
 WHEN the app is built
 AND the initialization process fails
-THEN the uninitialized errored app should be shown
+THEN the errored initialization screen should be shown
 ├─ THAT allows the user to retry the initialization process
 ''',
     (tester) async {
+      final router = AppRouter(
+        testRoutes: [
+          AutoRoute(
+            path: '/',
+            page: PageInfo(
+              'FakeRoute',
+              builder: (data) => const Scaffold(
+                body: Center(
+                  child: Text(
+                    'Fake Screen',
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+      addTearDown(router.dispose);
+      final routerConfig = router.config();
       await tester.pumpWidget(
-        /*w 1v 8> w*/
         ProviderScope(
           overrides: [
             asyncInitializationPod.overrideWith(
@@ -56,10 +96,7 @@ THEN the uninitialized errored app should be shown
                 }
               },
             ),
-            /*w 1v 10> w*/
-            /*remove-start*/
-            routerPackagePod.overrideWithValue(RouterPackage.autoRoute),
-            /*remove-end*/
+            routerConfigPod.overrideWithValue(routerConfig),
           ],
           child: const MyApp(),
         ),
@@ -71,37 +108,10 @@ THEN the uninitialized errored app should be shown
       await tester.pump();
       expect(find.byType(InitializingScreen), findsOneWidget);
       await tester.pumpAndSettle();
-      expect(find.byType(HomeScreen), findsOneWidget);
+      expect(find.text('Fake Screen'), findsOneWidget);
     },
   );
 
-  testWidgets(
-    '''
-
-GIVEN an app
-AND an app router
-WHEN the app is built
-THEN the counter screen should be shown
-''',
-    (tester) async {
-      await tester.pumpWidget(
-        /*w 1v 8> w*/
-        ProviderScope(
-          overrides: [
-            asyncInitializationPod.overrideWith((_) async {}),
-            /*remove-start*/
-            routerPackagePod.overrideWithValue(RouterPackage.autoRoute),
-            /*remove-end*/
-            /*w 1v 10> w*/
-          ],
-          child: const MyApp(),
-        ),
-      );
-      await tester.pumpAndSettle();
-      final homeScreenFinder = find.byType(HomeScreen);
-      expect(homeScreenFinder, findsOneWidget);
-    },
-  );
 /*{{/use_auto_route}}*/
 
 /*{{#use_go_router}}*/
@@ -112,24 +122,36 @@ THEN the counter screen should be shown
 GIVEN an app
 WHEN the app is built
 AND the initialization process is completed
-THEN the initialized app should be shown
+THEN the initialized router content should be shown
 ''',
     (tester) async {
+      final routerConfig = GoRouter(
+        routes: [
+          GoRoute(
+            path: '/',
+            name: 'FakeRoute',
+            builder: (context, state) => const Scaffold(
+              body: Center(
+                child: Text(
+                  'Fake Screen',
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
             asyncInitializationPod.overrideWith((_) async {}),
-            /*remove-start*/
-            routerPackagePod.overrideWithValue(RouterPackage.goRouter),
-            /*remove-end*/
-            /*w 1v 10> w*/
+            routerConfigPod.overrideWithValue(routerConfig),
           ],
           child: const MyApp(),
         ),
       );
       expect(find.byType(InitializingScreen), findsOneWidget);
       await tester.pumpAndSettle();
-      expect(find.byType(HomeScreen), findsOneWidget);
+      expect(find.text('Fake Screen'), findsOneWidget);
     },
   );
 
@@ -139,10 +161,25 @@ THEN the initialized app should be shown
 GIVEN an app
 WHEN the app is built
 AND the initialization process fails
-THEN the uninitialized errored app should be shown
+THEN the errored initialization screen should be shown
 ├─ THAT allows the user to retry the initialization process
 ''',
     (tester) async {
+      final routerConfig = GoRouter(
+        routes: [
+          GoRoute(
+            path: '/',
+            name: 'FakeRoute',
+            builder: (context, state) => const Scaffold(
+              body: Center(
+                child: Text(
+                  'Fake Screen',
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
@@ -154,10 +191,7 @@ THEN the uninitialized errored app should be shown
                 }
               },
             ),
-            /*remove-start*/
-            routerPackagePod.overrideWithValue(RouterPackage.goRouter),
-            /*remove-end*/
-            /*w 1v 10> w*/
+            routerConfigPod.overrideWithValue(routerConfig),
           ],
           child: const MyApp(),
         ),
@@ -169,34 +203,7 @@ THEN the uninitialized errored app should be shown
       await tester.pump();
       expect(find.byType(InitializingScreen), findsOneWidget);
       await tester.pumpAndSettle();
-      expect(find.byType(HomeScreen), findsOneWidget);
-    },
-  );
-
-  testWidgets(
-    '''
-
-GIVEN an app
-AND an app router
-WHEN the app is built
-THEN the counter screen should be shown
-''',
-    (tester) async {
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            asyncInitializationPod.overrideWith((_) async {}),
-            /*remove-start*/
-            routerPackagePod.overrideWithValue(RouterPackage.goRouter),
-            /*remove-end*/
-            /*w 1v 10> w*/
-          ],
-          child: const MyApp(),
-        ),
-      );
-      await tester.pumpAndSettle();
-      final homeScreenFinder = find.byType(HomeScreen);
-      expect(homeScreenFinder, findsOneWidget);
+      expect(find.text('Fake Screen'), findsOneWidget);
     },
   );
 /*{{/use_go_router}}*/

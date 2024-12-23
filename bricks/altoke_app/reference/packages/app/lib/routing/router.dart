@@ -21,28 +21,38 @@ part 'router.g.dart';
   generateForDir: ['lib/routing/'],
 )
 class AppRouter extends RootStackRouter {
+  AppRouter({
+    @visibleForTesting this.testRoutes = const [],
+  });
+
   @override
   RouteType get defaultRouteType => const RouteType.adaptive();
 
   @override
-  final List<AutoRoute> routes = [
-    AdaptiveRoute<void>(
-      initial: true,
-      path: '/',
-      page: HomeRoute.page,
-    ),
-    AdaptiveRoute<void>(
-      path: '/counter',
-      page: CounterRoute.page,
-    ),
-    /*remove-start*/
-    AdaptiveRoute<void>(
-      path: '/tasks',
-      page: TasksRoute.page,
-    ),
-    /*remove-end*/
-    /*w 1v 2> w*/
+  late final List<AutoRoute> routes = [
+    if (testRoutes.isEmpty) ...[
+      AdaptiveRoute<void>(
+        initial: true,
+        path: '/',
+        page: HomeRoute.page,
+      ),
+      AdaptiveRoute<void>(
+        path: '/counter',
+        page: CounterRoute.page,
+      ),
+      /*remove-start*/
+      AdaptiveRoute<void>(
+        path: '/tasks',
+        page: TasksRoute.page,
+      ),
+      /*remove-end*/
+      /*w 1v 4> w*/
+    ] else
+      ...testRoutes,
   ];
+
+  @visibleForTesting
+  final List<AutoRoute> testRoutes;
 }
 /*{{/use_auto_route}}*/
 
@@ -126,6 +136,7 @@ RouterConfig<Object> routerConfig(Ref ref) {
   } as RouterConfig<Object> /*remove-end*/;
   final delegate = routerConfig.routerDelegate;
 
+  // coverage:ignore-start
   void logCurrentUri() {
     if (!kDebugMode) return;
     final currentUri = /*remove-start*/
@@ -141,9 +152,7 @@ RouterConfig<Object> routerConfig(Ref ref) {
         delegate.currentConfiguration.uri
       /*{{/use_go_router}}*/
       /*remove-start*/,
-      // coverage:ignore-start
       _ => throw UnimplementedError(),
-      // coverage:ignore-end
     }
         /*remove-end*/
         ;
@@ -152,6 +161,7 @@ RouterConfig<Object> routerConfig(Ref ref) {
       name: 'Navigation',
     );
   }
+  // coverage:ignore-end
 
   delegate.addListener(logCurrentUri);
   ref.onDispose(() => delegate.removeListener(logCurrentUri));
