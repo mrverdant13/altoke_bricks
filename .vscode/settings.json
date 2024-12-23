@@ -1,7 +1,8 @@
 {
   "cSpell.import": [
-    "${workspaceFolder}/.cspell/cspell.yaml",
+    "${workspaceRoot}/.cspell/cspell.yaml",
   ],
+  "cSpell.language": "en",
   "yaml.schemas": {
     "https://json.schemastore.org/pubspec.json": [
       "pubspec.yaml",
