@@ -1,3 +1,5 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND // coverage:ignore-file
+
 import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations.dart';

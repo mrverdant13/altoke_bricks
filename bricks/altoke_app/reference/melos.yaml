@@ -143,7 +143,7 @@ scripts:
     description: Merge all coverage trace files ignoring data related to generated files
     steps:
       - coverde rm MELOS_ROOT_PATH/coverage/filtered.lcov.info
-      - melos exec -c 1 --file-exists=coverage/lcov.info -- "coverde filter --input ./coverage/lcov.info --output MELOS_ROOT_PATH/coverage/filtered.lcov.info --paths-parent MELOS_PACKAGE_PATH  --filters \.g\.dart,\.gr\.dart,app_localizations\(_\.*\)?\.dart"
+      - melos exec -c 1 --file-exists=coverage/lcov.info -- "coverde filter --input ./coverage/lcov.info --output MELOS_ROOT_PATH/coverage/filtered.lcov.info --paths-parent MELOS_PACKAGE_PATH  --filters \.g\.dart,\.gr\.dart"
   coverage.check:
     description: Check test coverage
     steps:

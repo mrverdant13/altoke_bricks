@@ -1,3 +1,5 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND // coverage:ignore-file
+
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
