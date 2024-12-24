@@ -47,7 +47,7 @@ class TaskListTile extends ConsumerWidget {
             TaskPriority.medium => Colors.orange,
             TaskPriority.low => Colors.green,
           }
-              .withOpacity(completed ? 0.5 : 1),
+              .withValues(alpha: completed ? 0.5 : 1),
         ),
         title: Text(
           title,

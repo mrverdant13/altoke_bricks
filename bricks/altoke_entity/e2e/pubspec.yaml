@@ -2,7 +2,7 @@ name: altoke_entity_e2e
 publish_to: none
 
 environment:
-  sdk: ">=3.5.1 <4.0.0"
+  sdk: ">=3.6.0 <4.0.0"
 
 dev_dependencies:
   checked_yaml: ^2.0.3
