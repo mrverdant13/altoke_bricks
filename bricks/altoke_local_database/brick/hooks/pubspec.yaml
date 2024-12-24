@@ -2,7 +2,7 @@ name: altoke_local_database_brick_hooks
 publish_to: none
 
 environment:
-  sdk: ">=3.5.1 <4.0.0"
+  sdk: ">=3.6.0 <4.0.0"
 
 dependencies:
   local_database_alternative:

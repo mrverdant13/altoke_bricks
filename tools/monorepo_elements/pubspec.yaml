@@ -3,7 +3,7 @@ description: A set of elements related to the Altoke Bricks monorepo.
 publish_to: none
 
 environment:
-  sdk: ">=3.5.1 <4.0.0"
+  sdk: ">=3.6.0 <4.0.0"
 
 dependencies:
   mason: ^0.1.0
