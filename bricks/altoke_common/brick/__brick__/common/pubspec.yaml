@@ -4,7 +4,7 @@ version: 0.0.1+1
 publish_to: none
 
 environment:
-  sdk: ">=3.5.1 <4.0.0"
+  sdk: ">=3.6.0 <4.0.0"
 
 dependencies:
   {{#use_dart_mappable}}dart_mappable: ^4.3.0{{/use_dart_mappable}}{{#use_equatable}}equatable: ^2.0.5{{/use_equatable}}{{#use_freezed}}freezed_annotation: ^2.4.4{{/use_freezed}}{{#use_overrides}}meta: ^1.15.0{{/use_overrides}}
