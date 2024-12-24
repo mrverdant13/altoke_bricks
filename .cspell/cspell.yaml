@@ -6,6 +6,7 @@ ignorePaths:
   - "**/.cspell/*.txt"
   - "**/.git/**"
   - "**/.gitignore"
+  - "**/app_localizations*.dart"
   - "**/pubspec.lock"
   - "**/*.arb"
   - "**/*.fakes.*"
