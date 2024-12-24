@@ -58,7 +58,7 @@ jobs:
       - name: Install SQLite on Linux
         if: matrix.os == 'ubuntu-latest'
         run: |
-          apt install -y libsqlite3-dev
+          sudo apt install -y libsqlite3-dev
       - name: Check out repository
         uses: actions/checkout@v4
       - name: Ignore tests related to SQLite on Windows
