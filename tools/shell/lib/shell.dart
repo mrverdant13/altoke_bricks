@@ -13,7 +13,7 @@ abstract class Shell {
     AsyncVoidCallback? onStart,
     AsyncVoidCallback? onSuccess,
     AsyncVoidHandlerCallback<ExceptionDetails>? onError,
-  }) {
+  }) async {
     final fullCommand = () {
       if (Platform.isLinux || Platform.isMacOS) {
         return 'cp -r ${source.path} ${destination.path}';
@@ -24,6 +24,9 @@ abstract class Shell {
       }
     }();
     if (fullCommand == null) throw UnsupportedError('Unsupported platform');
+    if (!destination.existsSync()) {
+      await destination.create(recursive: true);
+    }
     return run(
       fullCommand,
       stdin: stdin,
