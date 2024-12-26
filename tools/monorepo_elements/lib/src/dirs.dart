@@ -69,4 +69,11 @@ abstract final class Dirs {
     }
     return dir;
   }();
+
+  /// Directory of a brick template managed by the monorepo.
+  static final brickTemplate = () {
+    final dir = Directory(Vars.brickTemplatePath);
+    if (dir.existsSync()) return dir;
+    throw BrickTemplateDirNotFoundError(templatePath: dir.path);
+  }();
 }

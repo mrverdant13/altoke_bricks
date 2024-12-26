@@ -57,3 +57,13 @@ class BrickManifestNotFoundError extends InvalidBrickDirError {
     required String manifestPath,
   }) : super('Brick manifest file not found ($manifestPath).');
 }
+
+/// {@template brick_template_dir_not_found_error}
+/// Error thrown when the brick template directory is not found.
+/// {@endtemplate}
+class BrickTemplateDirNotFoundError extends InvalidBrickDirError {
+  /// {@macro brick_template_dir_not_found_error}
+  const BrickTemplateDirNotFoundError({
+    required String templatePath,
+  }) : super('Brick template directory not found ($templatePath).');
+}
