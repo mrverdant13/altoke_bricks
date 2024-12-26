@@ -122,6 +122,13 @@ abstract final class Vars {
     throw const AbsentBrickReferencePaths();
   }();
 
+  /// Path to the template directory of a brick managed by the monorepo.
+  static final brickTemplatePath = path.joinAll([
+    scopePath,
+    'brick',
+    '__brick__',
+  ]);
+
   /// Name of a brick managed by the monorepo.
   static final brickName = path.basename(path.dirname(brickPath));
 }
