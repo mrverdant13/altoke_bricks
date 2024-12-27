@@ -16,7 +16,7 @@ abstract class Shell {
   }) async {
     final fullCommand = () {
       if (Platform.isLinux || Platform.isMacOS) {
-        return 'cp -r ${source.path} ${destination.path}';
+        return 'cp -r ${source.path}/ ${destination.path}';
       }
       if (Platform.isWindows) {
         // cspell: disable-next-line
