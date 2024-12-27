@@ -54,8 +54,8 @@ Future<void> main(List<String> args) async {
   stdout.writeln('Generating brick template...');
 
   // Remove target directory.
-  if (brickTemplateDir.existsSync()) {
-    await Shell.removeDirectory(brickTemplateDir);
+  if (Dirs.brickTemplate.existsSync()) {
+    await Shell.removeDirectory(Dirs.brickTemplate);
   }
 
   // Remove untracked files from reference directory.
