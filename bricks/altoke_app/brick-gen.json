@@ -1,5 +1,5 @@
 {
-  "targetRelativePath": "brick/__brick__/{{projectName.snakeCase()}}",
+  "targetRelativePath": "./{{projectName.snakeCase()}}",
   "replacements": [
     {
       "from": "altoke-app",
@@ -20,7 +20,7 @@
   ],
   "lineDeletions": [
     {
-      "filePath": "brick/__brick__/{{projectName.snakeCase()}}/packages/app/lib/l10n/arb/app_en.arb",
+      "filePath": "./{{projectName.snakeCase()}}/packages/app/lib/l10n/arb/app_en.arb",
       "ranges": [
         {
           "start": 51,
@@ -29,7 +29,7 @@
       ]
     },
     {
-      "filePath": "brick/__brick__/{{projectName.snakeCase()}}/packages/app/lib/l10n/arb/app_es.arb",
+      "filePath": "./{{projectName.snakeCase()}}/packages/app/lib/l10n/arb/app_es.arb",
       "ranges": [
         {
           "start": 51,

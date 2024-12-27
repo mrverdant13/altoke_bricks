@@ -1,5 +1,5 @@
 {
-  "targetRelativePath": "brick/__brick__/common",
+  "targetRelativePath": "./common",
   "replacements": [
     {
       "from": "altoke_common",

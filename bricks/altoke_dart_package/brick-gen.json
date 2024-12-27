@@ -1,5 +1,5 @@
 {
-  "targetRelativePath": "brick/__brick__/{{package_name.snakeCase()}}",
+  "targetRelativePath": "./{{package_name.snakeCase()}}",
   "replacements": [
     {
       "from": "An altoke Dart package.",

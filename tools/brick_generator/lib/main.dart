@@ -5,7 +5,6 @@ import 'package:brick_generator/src/brick_gen_data.dart';
 import 'package:brick_generator/src/brick_gen_options.dart';
 import 'package:brick_generator/src/reference_file.dart';
 import 'package:monorepo_elements/monorepo_elements.dart';
-import 'package:path/path.dart' as path;
 import 'package:shell/git.dart';
 import 'package:shell/shell.dart';
 
@@ -25,30 +24,21 @@ Future<void> main(List<String> args) async {
     );
   }
   final scopeDir = Dirs.scope;
-  final referenceDir = Directory(
-    path.joinAll([
-      scopeDir.path,
-      'reference',
-    ]),
-  );
+  final referenceDir = scopeDir.descendantDir('reference');
   if (!referenceDir.existsSync()) {
     throw Exception(
       'Reference directory not found (${referenceDir.path}).',
     );
   }
   stdout.writeln('Reference directory: ${referenceDir.path}');
-  final brickTemplateDir = Directory(
-    path.normalize(
-      path.joinAll([
-        scopeDir.path,
-        brickGenOptions.targetRelativePath,
-      ]),
-    ),
-  );
+  final brickTemplateDir = Dirs.brickTemplate;
   stdout.writeln('Brick template directory: ${brickTemplateDir.path}');
+  final brickTemplateTargetPath =
+      brickTemplateDir.descendantDir(brickGenOptions.targetRelativePath);
+  stdout.writeln('Brick template target path: ${brickTemplateTargetPath.path}');
   final brickGenData = BrickGenData.fromOptions(
     referenceAbsolutePath: referenceDir.path,
-    targetAbsolutePath: brickTemplateDir.path,
+    targetAbsolutePath: brickTemplateTargetPath.path,
     options: brickGenOptions,
   );
   stdout.writeln('Generating brick template...');
@@ -64,7 +54,7 @@ Future<void> main(List<String> args) async {
   // Copy reference project.
   await Shell.copyDirectory(
     source: referenceDir,
-    destination: brickTemplateDir,
+    destination: brickTemplateTargetPath,
   );
 
   // Remove untracked files from brick directory.

@@ -1,5 +1,5 @@
 {
-  "targetRelativePath": "brick/__brick__/{{entity_singular.snakeCase()}}",
+  "targetRelativePath": "./{{entity_singular.snakeCase()}}",
   "replacements": [
     {
       "from": "altoke_common",
