@@ -6,44 +6,50 @@ import 'dart:io';
 
 import 'package:mason/mason.dart';
 import 'package:monorepo_elements/monorepo_elements.dart';
-import 'package:path/path.dart' as path;
 import 'package:shell/coverage.dart';
 import 'package:shell/dart.dart';
 import 'package:test/test.dart';
 
 Future<void> main() async {
+  late Directory tempDir;
+  late DirectoryGeneratorTarget target;
+  late Directory outputDir;
+
+  setUp(() {
+    tempDir = Directory.systemTemp.createTempSync(
+      'altoke-reactive-caches-e2e-test-',
+    );
+    target = DirectoryGeneratorTarget(tempDir);
+    outputDir = target.dir.descendantDir('reactive_caches');
+  });
+
+  tearDown(() {
+    tempDir.deleteSync(recursive: true);
+  });
+
   test(
     '''
 
 GIVEN the Altoke Reactive Caches brick
+AND an existing "common" package
 WHEN the generation is run
 THEN the generated outputs should be valid and testable
 ''',
     () async {
-      final tempDir = Directory.systemTemp.createTempSync(
-        'altoke-reactive-caches-e2e-test-',
-      );
-      addTearDown(() => tempDir.deleteSync(recursive: true));
-      final directoryGeneratorTarget = DirectoryGeneratorTarget(tempDir);
       final altokeCommonVars = <String, dynamic>{
         'value_equality_approach': 'Overrides',
       };
       await BrickGenerator.common.runFullGeneration(
-        target: directoryGeneratorTarget,
+        target: target,
         vars: altokeCommonVars,
       );
       final altokeReactiveCachesVars = <String, dynamic>{};
       await BrickGenerator.reactiveCaches.runFullGeneration(
-        target: directoryGeneratorTarget,
+        target: target,
         vars: altokeReactiveCachesVars,
       );
-      final outputPath = path.join(
-        directoryGeneratorTarget.dir.path,
-        'reactive_caches',
-      );
-      final outputDir = Directory(outputPath);
-      final coverageDir = Directory(path.join(outputPath, 'coverage'));
-      final baseLcovFile = File(path.join(coverageDir.path, 'lcov.info'));
+      final coverageDir = outputDir.descendantDir('coverage');
+      final baseLcovFile = coverageDir.descendantFile('lcov.info');
       await expectLater(
         Dart.format(
           outputDir,
@@ -70,7 +76,7 @@ THEN the generated outputs should be valid and testable
         Coverage.formatAsLcov(
           input: coverageDir,
           output: baseLcovFile,
-          reportOn: Directory(path.join(outputPath, 'lib')),
+          reportOn: outputDir.descendantDir('lib'),
         ),
         completes,
       );
@@ -83,5 +89,23 @@ THEN the generated outputs should be valid and testable
       );
     },
     timeout: const Timeout(Duration(minutes: 2)),
+  );
+
+  test(
+    '''
+
+GIVEN the Altoke Reactive Caches brick
+AND no existing "common" package
+WHEN the generation is run
+THEN not output should be generated
+''',
+    () async {
+      final altokeReactiveCachesVars = <String, dynamic>{};
+      await BrickGenerator.reactiveCaches.runFullGeneration(
+        target: target,
+        vars: altokeReactiveCachesVars,
+      );
+      expect(outputDir.existsSync(), isFalse);
+    },
   );
 }
