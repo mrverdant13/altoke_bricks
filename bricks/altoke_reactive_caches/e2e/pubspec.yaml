@@ -9,7 +9,6 @@ dev_dependencies:
   mocktail: ^1.0.4
   monorepo_elements:
     path: ../../../tools/monorepo_elements
-  path: ^1.9.1
   shell:
     path: ../../../tools/shell
   test: ^1.25.14

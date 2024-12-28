@@ -8,6 +8,7 @@ import 'package:shell/dart.dart';
 import 'package:shell/shell.dart';
 
 Future<void> run(HookContext context) async {
+  if (context.vars['preconditions_met'] != true) return;
   final projectPath = path.join(
     Directory.current.path,
     'reactive_caches',
