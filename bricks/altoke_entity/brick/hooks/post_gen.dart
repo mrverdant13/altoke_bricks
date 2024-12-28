@@ -8,6 +8,7 @@ import 'package:shell/shell.dart';
 import 'package:value_equality_approach/value_equality_approach.dart';
 
 Future<void> run(HookContext context) async {
+  if (context.vars['preconditions_met'] != true) return;
   final projectPath = path.join(
     Directory.current.path,
     (context.vars['entity_singular'] as String).snakeCase,

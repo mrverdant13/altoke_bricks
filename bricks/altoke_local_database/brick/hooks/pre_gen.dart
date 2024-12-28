@@ -48,7 +48,7 @@ Future<void> run(HookContext context) async {
   context.vars = {
     ...context.vars,
     ...LocalDatabaseAlternative.getSelectionMap(context),
-    'using_hooks': true,
     'preconditions_met': preconditionsErrorMessages.isEmpty,
+    'using_hooks': true,
   };
 }
