@@ -1,5 +1,5 @@
 {
-  "targetRelativePath": "./local_database",
+  "targetRelativePath": ".",
   "replacements": [
     {
       "from": "altoke_common",

@@ -1,5 +1,5 @@
-name: hive_local_database
-description: A persistent local database built on top of Hive.
+name: local_database
+description: An interface for a persistent local database.
 version: 0.0.1+1
 publish_to: none
 
@@ -10,16 +10,12 @@ dependencies:
   #*w 1v 2> w*#
   #*replace-start*#
   altoke_common:
-    path: ../../../altoke_common/reference/
+    path: ../../../../altoke_common/reference/
   #*with i2*#
   # common:
   #   path: ../../common/
   #*replace-end*#
   #*w 1v 2> w*#
-  collection: ^1.19.0
-  hive: ^2.2.3
-  local_database:
-    path: ../local_database/
   meta: ^1.15.0
 
 dev_dependencies:
