@@ -10,7 +10,6 @@ import 'package:mason/mason.dart';
 import 'package:meta/meta.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:monorepo_elements/monorepo_elements.dart';
-import 'package:path/path.dart' as path;
 import 'package:shell/coverage.dart';
 import 'package:shell/dart.dart';
 import 'package:test/test.dart';
@@ -24,17 +23,33 @@ Future<void> main() async {
   );
   final vars = brickManifest.vars;
   final rawLocalDatabaseAlternative = vars[LocalDatabaseAlternative.varKey]!;
-  final localDatabaseAlternative = rawLocalDatabaseAlternative.values!
+  final localDatabaseAlternatives = rawLocalDatabaseAlternative.values!
       .map(LocalDatabaseAlternative.fromVarIdentifier);
+
   await testGeneration(
     '''
 
 GIVEN the Altoke Local Database brick
+AND an existing "common" package
 WHEN the generation is run
 THEN the generated outputs should be valid and testable
 ''',
     generationCases: {
-      for (final localDatabaseAlternative in localDatabaseAlternative)
+      for (final localDatabaseAlternative in localDatabaseAlternatives)
+        (localDatabaseAlternative: localDatabaseAlternative),
+    },
+  );
+
+  await testErroredGeneration(
+    '''
+
+GIVEN the Altoke Local Database brick
+AND no existing "common" package
+WHEN the generation is run
+THEN the generated outputs should be valid and testable
+''',
+    generationCases: {
+      for (final localDatabaseAlternative in localDatabaseAlternatives)
         (localDatabaseAlternative: localDatabaseAlternative),
     },
   );
@@ -51,13 +66,11 @@ Future<void> testGeneration(
 }) async {
   for (final generationCase in generationCases) {
     final (:localDatabaseAlternative) = generationCase;
-    final composedDescription = '''
 
-${description.trim()}
-=> with `${localDatabaseAlternative.varIdentifier}`
-''';
     test(
-      composedDescription,
+      '''
+$description=> with `${localDatabaseAlternative.varIdentifier}`
+''',
       () async {
         registerFallbackValue(systemEncoding);
         final tempDir = Directory.systemTemp.createTempSync(
@@ -80,37 +93,30 @@ ${description.trim()}
           target: directoryGeneratorTarget,
           vars: altokeLocalDatabaseVars,
         );
-        final umbrellaPath = path.join(
-          directoryGeneratorTarget.dir.path,
-          'local_database',
-        );
-        final interfaceProjectPath = path.join(
-          umbrellaPath,
-          'local_database',
-        );
-        final implementationProjectPath = path.join(
-          umbrellaPath,
+        final umbrellaDir =
+            directoryGeneratorTarget.dir.descendantDir('local_database');
+        final interfaceProjectDir = umbrellaDir.descendantDir('local_database');
+        final implementationProjectDir = umbrellaDir.descendantDir(
           '${localDatabaseAlternative.varIdentifier}_local_database',
         );
 
         Future<void> runCommands({
-          required String workingDir,
+          required Directory projectDir,
         }) async {
-          final outputDir = Directory(workingDir);
-          final coverageDir = Directory(path.join(workingDir, 'coverage'));
-          final baseLcovFile = File(path.join(coverageDir.path, 'lcov.info'));
+          final coverageDir = projectDir.descendantDir('coverage');
+          final baseLcovFile = coverageDir.descendantFile('lcov.info');
           final filteredLcovFile =
-              File(path.join(coverageDir.path, 'filtered.lcov.info'));
+              coverageDir.descendantFile('filtered.lcov.info');
           await expectLater(
             Dart.format(
-              outputDir,
+              projectDir,
               failIfChanged: true,
             ),
             completes,
           );
           await expectLater(
             Dart.analyze(
-              outputDir,
+              projectDir,
               fatalInfos: true,
               fatalWarnings: true,
             ),
@@ -118,7 +124,7 @@ ${description.trim()}
           );
           await expectLater(
             Dart.test(
-              outputDir,
+              projectDir,
               coverageDirectory: coverageDir,
             ),
             completes,
@@ -127,7 +133,7 @@ ${description.trim()}
             Coverage.formatAsLcov(
               input: coverageDir,
               output: baseLcovFile,
-              reportOn: Directory(path.join(workingDir, 'lib')),
+              reportOn: projectDir.descendantDir('lib'),
             ),
             completes,
           );
@@ -152,10 +158,46 @@ ${description.trim()}
           );
         }
 
-        await runCommands(workingDir: interfaceProjectPath);
-        await runCommands(workingDir: implementationProjectPath);
+        await runCommands(projectDir: interfaceProjectDir);
+        await runCommands(projectDir: implementationProjectDir);
       },
       timeout: const Timeout(Duration(minutes: 5)),
+    );
+  }
+}
+
+@isTest
+Future<void> testErroredGeneration(
+  String description, {
+  required Set<GenerationCase> generationCases,
+}) async {
+  for (final generationCase in generationCases) {
+    final (:localDatabaseAlternative) = generationCase;
+    test(
+      '''
+
+${description.trim()}
+=> with `${localDatabaseAlternative.varIdentifier}`
+''',
+      () async {
+        registerFallbackValue(systemEncoding);
+        final tempDir = Directory.systemTemp.createTempSync(
+          '''altoke-local-database-e2e-test-${localDatabaseAlternative.varIdentifier}-''',
+        );
+        addTearDown(() => tempDir.deleteSync(recursive: true));
+        final directoryGeneratorTarget = DirectoryGeneratorTarget(tempDir);
+        final outputDir =
+            directoryGeneratorTarget.dir.descendantDir('local_database');
+        final altokeLocalDatabaseVars = <String, dynamic>{
+          LocalDatabaseAlternative.varKey:
+              localDatabaseAlternative.varIdentifier,
+        };
+        await BrickGenerator.localDatabase.runFullGeneration(
+          target: directoryGeneratorTarget,
+          vars: altokeLocalDatabaseVars,
+        );
+        expect(outputDir.existsSync(), isFalse);
+      },
     );
   }
 }
