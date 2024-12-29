@@ -7,6 +7,6 @@ void run(HookContext context) {
     ...context.valueEqualitySelectionMap,
     'use_meta': context.valueEqualityUsesMeta,
     'use_code_generation': context.valueEqualityUsesCodeGeneration,
-    'using_hooks': true,
+    'requirements_met': true,
   };
 }

@@ -48,46 +48,53 @@ extension BrickGenerator on MasonGenerator {
   );
 
   /// Run the full generation routine.
-  Future<void> runFullGeneration({
+  Future<void> runGeneration({
     required DirectoryGeneratorTarget target,
     required Map<String, dynamic> vars,
+    required bool runHooks,
   }) async {
-    await hooks.preGen(
-      workingDirectory: target.dir.path,
-      vars: vars,
-      onVarsChanged: (updatedVars) {
-        vars
-          ..clear()
-          ..addAll(updatedVars);
-      },
-    );
+    if (runHooks) {
+      await hooks.preGen(
+        workingDirectory: target.dir.path,
+        vars: vars,
+        onVarsChanged: (updatedVars) {
+          vars
+            ..clear()
+            ..addAll(updatedVars);
+        },
+      );
+    }
     await generate(
       target,
       vars: vars,
     );
-    await hooks.postGen(
-      workingDirectory: target.dir.path,
-      vars: vars,
-      onVarsChanged: (updatedVars) {
-        vars
-          ..clear()
-          ..addAll(updatedVars);
-      },
-    );
+    if (runHooks) {
+      await hooks.postGen(
+        workingDirectory: target.dir.path,
+        vars: vars,
+        onVarsChanged: (updatedVars) {
+          vars
+            ..clear()
+            ..addAll(updatedVars);
+        },
+      );
+    }
   }
 }
 
 /// Async brick generators available in the monorepo environment.
 extension AsyncBrickGenerator on Future<MasonGenerator> {
   /// Run the full generation routine.
-  Future<void> runFullGeneration({
+  Future<void> runGeneration({
     required DirectoryGeneratorTarget target,
     required Map<String, dynamic> vars,
+    required bool runHooks,
   }) async {
     final generator = await this;
-    await generator.runFullGeneration(
+    await generator.runGeneration(
       target: target,
       vars: vars,
+      runHooks: runHooks,
     );
   }
 }

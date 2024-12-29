@@ -9,7 +9,7 @@ import 'package:shell/dart.dart';
 import 'package:shell/shell.dart';
 
 Future<void> run(HookContext context) async {
-  if (context.vars['preconditions_met'] != true) return;
+  if (context.vars['requirements_met'] != true) return;
   final selectedAlternative =
       LocalDatabaseAlternative.getSelectedAlternative(context);
   final logger = context.logger;

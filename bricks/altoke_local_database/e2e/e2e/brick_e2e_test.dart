@@ -26,29 +26,22 @@ Future<void> main() async {
   final localDatabaseAlternatives = rawLocalDatabaseAlternative.values!
       .map(LocalDatabaseAlternative.fromVarIdentifier);
 
-  await testGeneration(
-    '''
-
-GIVEN the Altoke Local Database brick
-AND an existing "common" package
-WHEN the generation is run
-THEN the generated outputs should be valid and testable
-''',
-    generationCases: {
+  await testSuccessfulGeneration(
+    cases: {
       for (final localDatabaseAlternative in localDatabaseAlternatives)
         (localDatabaseAlternative: localDatabaseAlternative),
     },
   );
 
-  await testErroredGeneration(
-    '''
+  await testGenerationWithoutCommonPackage(
+    cases: {
+      for (final localDatabaseAlternative in localDatabaseAlternatives)
+        (localDatabaseAlternative: localDatabaseAlternative),
+    },
+  );
 
-GIVEN the Altoke Local Database brick
-AND no existing "common" package
-WHEN the generation is run
-THEN the generated outputs should be valid and testable
-''',
-    generationCases: {
+  await testGenerationWithoutHooks(
+    cases: {
       for (final localDatabaseAlternative in localDatabaseAlternatives)
         (localDatabaseAlternative: localDatabaseAlternative),
     },
@@ -60,16 +53,21 @@ typedef GenerationCase = ({
 });
 
 @isTest
-Future<void> testGeneration(
-  String description, {
-  required Set<GenerationCase> generationCases,
+Future<void> testSuccessfulGeneration({
+  required Set<GenerationCase> cases,
 }) async {
-  for (final generationCase in generationCases) {
+  for (final generationCase in cases) {
     final (:localDatabaseAlternative) = generationCase;
 
     test(
       '''
-$description=> with `${localDatabaseAlternative.varIdentifier}`
+
+GIVEN the Altoke Local Database brick
+AND hooks enabled
+AND an existing "common" package
+WHEN the generation is run
+THEN the generated outputs should be valid and testable
+=> with `${localDatabaseAlternative.varIdentifier}`
 ''',
       () async {
         registerFallbackValue(systemEncoding);
@@ -81,24 +79,28 @@ $description=> with `${localDatabaseAlternative.varIdentifier}`
         final altokeCommonVars = <String, dynamic>{
           'value_equality_approach': 'Overrides',
         };
-        await BrickGenerator.common.runFullGeneration(
+        await BrickGenerator.common.runGeneration(
           target: directoryGeneratorTarget,
           vars: altokeCommonVars,
+          runHooks: true,
         );
         final altokeLocalDatabaseVars = <String, dynamic>{
           LocalDatabaseAlternative.varKey:
               localDatabaseAlternative.varIdentifier,
         };
-        await BrickGenerator.localDatabase.runFullGeneration(
+        await BrickGenerator.localDatabase.runGeneration(
           target: directoryGeneratorTarget,
           vars: altokeLocalDatabaseVars,
+          runHooks: true,
         );
-        final umbrellaDir =
-            directoryGeneratorTarget.dir.descendantDir('local_database');
-        final interfaceProjectDir = umbrellaDir.descendantDir('local_database');
-        final implementationProjectDir = umbrellaDir.descendantDir(
-          '${localDatabaseAlternative.varIdentifier}_local_database',
-        );
+        final outputDir = directoryGeneratorTarget.outputDir;
+        expect(outputDir.existsSync(), isTrue);
+        final requirementsFile = directoryGeneratorTarget.requirementsFile;
+        expect(requirementsFile.existsSync(), isFalse);
+        final interfaceProjectDir =
+            directoryGeneratorTarget.interfaceProjectDir;
+        final implementationProjectDir = directoryGeneratorTarget
+            .implementationProjectDir(localDatabaseAlternative);
 
         Future<void> runCommands({
           required Directory projectDir,
@@ -167,16 +169,19 @@ $description=> with `${localDatabaseAlternative.varIdentifier}`
 }
 
 @isTest
-Future<void> testErroredGeneration(
-  String description, {
-  required Set<GenerationCase> generationCases,
+Future<void> testGenerationWithoutCommonPackage({
+  required Set<GenerationCase> cases,
 }) async {
-  for (final generationCase in generationCases) {
+  for (final generationCase in cases) {
     final (:localDatabaseAlternative) = generationCase;
     test(
       '''
 
-${description.trim()}
+GIVEN the Altoke Local Database brick
+AND hooks enabled
+AND no existing "common" package
+WHEN the generation is run
+THEN the generated outputs should be valid and testable
 => with `${localDatabaseAlternative.varIdentifier}`
 ''',
       () async {
@@ -186,18 +191,83 @@ ${description.trim()}
         );
         addTearDown(() => tempDir.deleteSync(recursive: true));
         final directoryGeneratorTarget = DirectoryGeneratorTarget(tempDir);
-        final outputDir =
-            directoryGeneratorTarget.dir.descendantDir('local_database');
         final altokeLocalDatabaseVars = <String, dynamic>{
           LocalDatabaseAlternative.varKey:
               localDatabaseAlternative.varIdentifier,
         };
-        await BrickGenerator.localDatabase.runFullGeneration(
+        await BrickGenerator.localDatabase.runGeneration(
           target: directoryGeneratorTarget,
           vars: altokeLocalDatabaseVars,
+          runHooks: true,
         );
+        final outputDir = directoryGeneratorTarget.outputDir;
         expect(outputDir.existsSync(), isFalse);
+        final requirementsFile = directoryGeneratorTarget.requirementsFile;
+        expect(requirementsFile.existsSync(), isTrue);
       },
     );
   }
+}
+
+@isTest
+Future<void> testGenerationWithoutHooks({
+  required Set<GenerationCase> cases,
+}) async {
+  for (final generationCase in cases) {
+    final (:localDatabaseAlternative) = generationCase;
+    test(
+      '''
+
+GIVEN the Altoke Local Database brick
+AND hooks disabled
+AND an existing "common" package
+WHEN the generation is run
+THEN the generated outputs should be valid and testable
+=> with `${localDatabaseAlternative.varIdentifier}`
+''',
+      () async {
+        registerFallbackValue(systemEncoding);
+        final tempDir = Directory.systemTemp.createTempSync(
+          '''altoke-local-database-e2e-test-${localDatabaseAlternative.varIdentifier}-''',
+        );
+        addTearDown(() => tempDir.deleteSync(recursive: true));
+        final directoryGeneratorTarget = DirectoryGeneratorTarget(tempDir);
+        final altokeCommonVars = <String, dynamic>{
+          'value_equality_approach': 'Overrides',
+        };
+        await BrickGenerator.common.runGeneration(
+          target: directoryGeneratorTarget,
+          vars: altokeCommonVars,
+          runHooks: true,
+        );
+        final altokeLocalDatabaseVars = <String, dynamic>{
+          LocalDatabaseAlternative.varKey:
+              localDatabaseAlternative.varIdentifier,
+        };
+        Future<void> action() async =>
+            BrickGenerator.localDatabase.runGeneration(
+              target: directoryGeneratorTarget,
+              vars: altokeLocalDatabaseVars,
+              runHooks: false,
+            );
+        expect(action(), throwsA(isNotNull));
+        final outputDir = directoryGeneratorTarget.outputDir;
+        expect(outputDir.existsSync(), isFalse);
+        final requirementsFile = directoryGeneratorTarget.requirementsFile;
+        expect(requirementsFile.existsSync(), isFalse);
+      },
+    );
+  }
+}
+
+extension on DirectoryGeneratorTarget {
+  Directory get outputDir => dir.descendantDir('local_database');
+  File get requirementsFile => dir.descendantFile('REQUIREMENTS.md');
+
+  Directory get interfaceProjectDir =>
+      outputDir.descendantDir('local_database');
+  Directory implementationProjectDir(LocalDatabaseAlternative alternative) =>
+      outputDir.descendantDir(
+        '${alternative.varIdentifier}_local_database',
+      );
 }

@@ -10,17 +10,17 @@ Future<void> run(HookContext context) async {
   final parentDir = Directory.current;
   final logger = context.logger;
 
-  var preconditionsCheckProgressMessage = 'Checking preconditions';
-  final preconditionsCheckProgress =
-      logger.progress(preconditionsCheckProgressMessage);
-  final preconditionsCheckTimer = Timer.periodic(
+  var requirementsCheckProgressMessage = 'Checking requirements';
+  final requirementsCheckProgress =
+      logger.progress(requirementsCheckProgressMessage);
+  final requirementsCheckTimer = Timer.periodic(
     const Duration(milliseconds: 100),
     (timer) {
-      preconditionsCheckProgress.update(preconditionsCheckProgressMessage);
+      requirementsCheckProgress.update(requirementsCheckProgressMessage);
     },
   );
 
-  preconditionsCheckProgressMessage = 'Looking for the "common" package';
+  requirementsCheckProgressMessage = 'Looking for the "common" package';
   final siblingDirs = parentDir.listSync().whereType<Directory>();
   final commonPackageExistsAsSibling = siblingDirs.any((dir) {
     final pubspecFile = File(path.join(dir.path, 'pubspec.yaml'));
@@ -29,26 +29,26 @@ Future<void> run(HookContext context) async {
     return pubspec.name == 'common';
   });
 
-  preconditionsCheckTimer.cancel();
+  requirementsCheckTimer.cancel();
 
-  final preconditionsErrorMessages = [
+  final requirementsErrorMessages = [
     if (!commonPackageExistsAsSibling)
       '''"common" package not found as sibling. You can create it with the "altoke_common" brick.''',
   ];
-  if (preconditionsErrorMessages.isNotEmpty) {
-    final errorsBuf = StringBuffer()..writeln('Preconditions not met:');
-    for (final errorMessage in preconditionsErrorMessages) {
+  if (requirementsErrorMessages.isNotEmpty) {
+    final errorsBuf = StringBuffer()..writeln('Requirements not met:');
+    for (final errorMessage in requirementsErrorMessages) {
       errorsBuf.writeln('  • $errorMessage');
     }
-    preconditionsCheckProgress.fail(errorsBuf.toString());
+    requirementsCheckProgress.fail(errorsBuf.toString());
   } else {
-    preconditionsCheckProgress.complete('All preconditions are met');
+    requirementsCheckProgress.complete('All requirements are met');
   }
 
   context.vars = {
     ...context.vars,
     ...LocalDatabaseAlternative.getSelectionMap(context),
-    'preconditions_met': preconditionsErrorMessages.isEmpty,
+    'requirements_met': requirementsErrorMessages.isEmpty,
     'using_hooks': true,
   };
 }
