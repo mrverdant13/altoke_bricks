@@ -18,4 +18,9 @@ extension ValueEqualityContext on HookContext {
   bool get valueEqualityUsesCodeGeneration {
     return selectedApproach.usesCodeGeneration;
   }
+
+  /// Returns whether the value equality approach uses the `meta` package.
+  bool get valueEqualityUsesMeta {
+    return selectedApproach.usesMeta;
+  }
 }
