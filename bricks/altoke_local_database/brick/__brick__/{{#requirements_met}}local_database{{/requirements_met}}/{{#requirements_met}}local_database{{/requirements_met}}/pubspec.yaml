@@ -1,0 +1,16 @@
+name: {{#requirements_met}}local_database{{/requirements_met}}
+description: An interface for a persistent local database.
+version: 0.0.1+1
+publish_to: none
+
+environment:
+  sdk: ">=3.6.0 <4.0.0"
+
+dependencies:
+  common:
+    path: ../../common/
+  meta: ^1.15.0
+
+dev_dependencies:
+  test: ^1.25.14
+  very_good_analysis: ^7.0.0
