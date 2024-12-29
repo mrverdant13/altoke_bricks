@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:reactive_caches/reactive_caches.dart';
+import 'package:{{#requirements_met}}reactive_caches{{/requirements_met}}/{{#requirements_met}}reactive_caches{{/requirements_met}}.dart';
 import 'package:test/test.dart';
 
 void main() {
