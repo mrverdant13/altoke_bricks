@@ -26,10 +26,26 @@ Future<void> main() async {
   final rawValueEqualityApproaches = vars[ValueEqualityApproach.varKey]!;
   final valueEqualityApproaches = rawValueEqualityApproaches.values!
       .map(ValueEqualityApproach.fromReadableName);
+
   await testGeneration(
     '''
 
 GIVEN the Altoke Entity brick
+AND an existing "common" package
+WHEN the generation is run
+THEN the generated outputs should be valid and testable
+''',
+    generationCases: {
+      for (final valueEqualityApproach in valueEqualityApproaches)
+        (valueEqualityApproach: valueEqualityApproach),
+    },
+  );
+
+  await testErroredGeneration(
+    '''
+
+GIVEN the Altoke Entity brick
+AND no existing "common" package
 WHEN the generation is run
 THEN the generated outputs should be valid and testable
 ''',
@@ -139,6 +155,45 @@ ${description.trim()}
           ),
           completes,
         );
+      },
+      timeout: const Timeout(Duration(minutes: 5)),
+    );
+  }
+}
+
+@isTest
+Future<void> testErroredGeneration(
+  String description, {
+  required Set<GenerationCase> generationCases,
+}) async {
+  for (final generationCase in generationCases) {
+    final (:valueEqualityApproach) = generationCase;
+    final composedDescription = '''
+
+${description.trim()}
+=> with ${valueEqualityApproach.readableName}
+''';
+    test(
+      composedDescription,
+      () async {
+        registerFallbackValue(systemEncoding);
+        final tempDir = Directory.systemTemp.createTempSync(
+          'altoke-entity-e2e-test-${valueEqualityApproach.varIdentifier}-',
+        );
+        addTearDown(() => tempDir.deleteSync(recursive: true));
+        final directoryGeneratorTarget = DirectoryGeneratorTarget(tempDir);
+        final outputDir =
+            directoryGeneratorTarget.dir.descendantDir('test_entity');
+        final altokeEntityVars = <String, dynamic>{
+          ValueEqualityApproach.varKey: valueEqualityApproach.readableName,
+          'entity_singular': 'test entity',
+          'package_description': 'Test entity.',
+        };
+        await BrickGenerator.entity.runFullGeneration(
+          target: directoryGeneratorTarget,
+          vars: altokeEntityVars,
+        );
+        expect(outputDir.existsSync(), isFalse);
       },
       timeout: const Timeout(Duration(minutes: 5)),
     );
