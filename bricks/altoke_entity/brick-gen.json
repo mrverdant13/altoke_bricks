@@ -1,25 +1,13 @@
 {
-  "targetRelativePath": "./{{#preconditions_met}}{{entity_singular.snakeCase()}}{{/preconditions_met}}",
+  "targetRelativePath": ".",
   "replacements": [
     {
       "from": "altoke_common",
       "to": "common"
     },
     {
-      "from": "\\b(dm_altoke_entity)\\b",
-      "to": "{{#use_dart_mappable}}altoke_entity{{/use_dart_mappable}}"
-    },
-    {
-      "from": "\\b(e_altoke_entity)\\b",
-      "to": "{{#use_equatable}}altoke_entity{{/use_equatable}}"
-    },
-    {
-      "from": "\\b(f_altoke_entity)\\b",
-      "to": "{{#use_freezed}}altoke_entity{{/use_freezed}}"
-    },
-    {
-      "from": "\\b(o_altoke_entity)\\b",
-      "to": "{{#use_overrides}}altoke_entity{{/use_overrides}}"
+      "from": "\\b(REQUIREMENTS.md)\\b",
+      "to": "{{^requirements_met}}REQUIREMENTS.md{{/requirements_met}}"
     },
     {
       "from": "Representation of different altoke entity variants.",
@@ -59,7 +47,7 @@
     },
     {
       "from": "altoke_entity",
-      "to": "{{entity_singular.snakeCase()}}"
+      "to": "{{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}"
     },
     {
       "from": "Altoke Entity",

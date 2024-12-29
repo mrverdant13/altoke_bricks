@@ -1,5 +1,5 @@
 {
-  "targetRelativePath": "./{{#preconditions_met}}local_database{{/preconditions_met}}",
+  "targetRelativePath": ".",
   "replacements": [
     {
       "from": "altoke_common",
@@ -7,7 +7,11 @@
     },
     {
       "from": "\\b(local_database)\\b",
-      "to": "{{#preconditions_met}}local_database{{/preconditions_met}}"
+      "to": "{{#requirements_met}}local_database{{/requirements_met}}"
+    },
+    {
+      "from": "\\b(REQUIREMENTS.md)\\b",
+      "to": "{{^requirements_met}}REQUIREMENTS.md{{/requirements_met}}"
     },
     {
       "from": "\\b(drift_local_database)\\b",

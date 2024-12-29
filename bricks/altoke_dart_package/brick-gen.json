@@ -1,6 +1,10 @@
 {
-  "targetRelativePath": "./{{package_name.snakeCase()}}",
+  "targetRelativePath": ".",
   "replacements": [
+    {
+      "from": "\\b(REQUIREMENTS.md)\\b",
+      "to": "{{^requirements_met}}REQUIREMENTS.md{{/requirements_met}}"
+    },
     {
       "from": "build.yaml",
       "to": "{{#use_code_generation}}build.yaml{{/use_code_generation}}"
@@ -11,7 +15,7 @@
     },
     {
       "from": "altoke_dart_package",
-      "to": "{{package_name.snakeCase()}}"
+      "to": "{{#requirements_met}}{{package_name.snakeCase()}}{{/requirements_met}}"
     },
     {
       "from": "AltokeDartPackage",

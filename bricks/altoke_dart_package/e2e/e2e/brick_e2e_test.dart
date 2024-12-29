@@ -6,41 +6,52 @@ import 'dart:io';
 
 import 'package:mason/mason.dart';
 import 'package:monorepo_elements/monorepo_elements.dart';
-import 'package:path/path.dart' as path;
 import 'package:shell/coverage.dart';
 import 'package:shell/dart.dart';
 import 'package:test/test.dart';
 
 Future<void> main() async {
+  late Directory tempDir;
+  late DirectoryGeneratorTarget target;
+  late Directory outputDir;
+  late File requirementsFile;
+
+  setUp(() {
+    tempDir = Directory.systemTemp.createTempSync(
+      'altoke-dart-package-e2e-test-',
+    );
+    target = DirectoryGeneratorTarget(tempDir);
+    outputDir = target.dir.descendantDir('test_altoke_dart_package');
+    requirementsFile = target.dir.descendantFile('REQUIREMENTS.md');
+  });
+
+  tearDown(() {
+    tempDir.deleteSync(recursive: true);
+  });
+
   test(
     '''
 
 GIVEN the Altoke Dart Package brick
+AND hooks enabled
 WHEN the generation is run
 THEN the generated outputs should be valid and testable
 ''',
     () async {
-      final tempDir = Directory.systemTemp.createTempSync(
-        'altoke-dart-package-e2e-test-',
-      );
-      addTearDown(() => tempDir.deleteSync(recursive: true));
-      final directoryGeneratorTarget = DirectoryGeneratorTarget(tempDir);
       final altokeDartPackageVars = <String, dynamic>{
         'package_name': 'test_altoke_dart_package',
         'package_description': 'A test Altoke Dart package.',
         'use_code_generation': true,
       };
-      await BrickGenerator.dartPackage.runFullGeneration(
-        target: directoryGeneratorTarget,
+      await BrickGenerator.dartPackage.runGeneration(
+        target: target,
         vars: altokeDartPackageVars,
+        runHooks: true,
       );
-      final outputPath = path.join(
-        directoryGeneratorTarget.dir.path,
-        'test_altoke_dart_package',
-      );
-      final outputDir = Directory(outputPath);
-      final coverageDir = Directory(path.join(outputPath, 'coverage'));
-      final lcovFile = File(path.join(coverageDir.path, 'lcov.info'));
+      expect(outputDir.existsSync(), isTrue);
+      expect(requirementsFile.existsSync(), isFalse);
+      final coverageDir = outputDir.descendantDir('coverage');
+      final baseLcovFile = coverageDir.descendantFile('lcov.info');
       await expectLater(
         Dart.format(
           outputDir,
@@ -66,19 +77,44 @@ THEN the generated outputs should be valid and testable
       await expectLater(
         Coverage.formatAsLcov(
           input: coverageDir,
-          output: lcovFile,
+          output: baseLcovFile,
           reportOn: outputDir,
         ),
         completes,
       );
       await expectLater(
         Coverage.check(
-          inputLcov: lcovFile,
+          inputLcov: baseLcovFile,
           threshold: 100,
         ),
         completes,
       );
     },
     timeout: const Timeout(Duration(minutes: 5)),
+  );
+
+  test(
+    '''
+
+GIVEN the Altoke Dart Package brick
+AND hooks disabled
+WHEN the generation is run
+THEN the requirements file should be generated
+''',
+    () async {
+      final altokeDartPackageVars = <String, dynamic>{
+        'package_name': 'test_altoke_dart_package',
+        'package_description': 'A test Altoke Dart package.',
+        'use_code_generation': true,
+      };
+      Future<void> action() async => BrickGenerator.dartPackage.runGeneration(
+            target: target,
+            vars: altokeDartPackageVars,
+            runHooks: false,
+          );
+      expect(action(), throwsA(isNotNull));
+      expect(outputDir.existsSync(), isFalse);
+      expect(requirementsFile.existsSync(), isFalse);
+    },
   );
 }

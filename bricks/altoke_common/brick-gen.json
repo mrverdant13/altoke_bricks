@@ -1,9 +1,17 @@
 {
-  "targetRelativePath": "./common",
+  "targetRelativePath": ".",
   "replacements": [
     {
       "from": "altoke_common",
       "to": "common"
+    },
+    {
+      "from": "\\b(common)\\b",
+      "to": "{{#requirements_met}}common{{/requirements_met}}"
+    },
+    {
+      "from": "\\b(REQUIREMENTS.md)\\b",
+      "to": "{{^requirements_met}}REQUIREMENTS.md{{/requirements_met}}"
     },
     {
       "from": "(DmOptional)|(EOptional)|(FOptional)",
