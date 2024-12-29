@@ -59,4 +59,10 @@ enum ValueEqualityApproach {
         ValueEqualityApproach.dartMappable,
         ValueEqualityApproach.freezed,
       ].contains(this);
+
+  /// Returns whether the value equality approach uses the `meta` package.
+  bool get usesMeta => [
+        ValueEqualityApproach.dartMappable,
+        ValueEqualityApproach.overrides,
+      ].contains(this);
 }
