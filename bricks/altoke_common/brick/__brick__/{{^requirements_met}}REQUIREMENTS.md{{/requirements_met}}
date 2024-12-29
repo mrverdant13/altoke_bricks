@@ -1,0 +1,3 @@
+# Requirements
+
+- Hooks are required.

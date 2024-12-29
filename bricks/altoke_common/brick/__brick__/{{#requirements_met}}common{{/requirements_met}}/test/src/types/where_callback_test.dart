@@ -1,4 +1,4 @@
-import 'package:common/common.dart';
+import 'package:{{#requirements_met}}common{{/requirements_met}}/{{#requirements_met}}common{{/requirements_met}}.dart';
 import 'package:test/test.dart';
 
 void main() {
