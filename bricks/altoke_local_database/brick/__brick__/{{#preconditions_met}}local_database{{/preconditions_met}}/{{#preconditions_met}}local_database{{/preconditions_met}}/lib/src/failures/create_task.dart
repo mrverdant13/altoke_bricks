@@ -1,19 +1,19 @@
-import 'package:local_database/local_database.dart';
+import 'package:{{#preconditions_met}}local_database{{/preconditions_met}}/{{#preconditions_met}}local_database{{/preconditions_met}}.dart';
 
-/// {@template local_database.create_task_failure}
+/// {@template {{#preconditions_met}}local_database{{/preconditions_met}}.create_task_failure}
 /// An exception that is thrown when a task creation fails.
 /// {@endtemplate}
 sealed class CreateTaskFailure implements Exception {
-  /// {@macro local_database.create_task_failure}
+  /// {@macro {{#preconditions_met}}local_database{{/preconditions_met}}.create_task_failure}
   const CreateTaskFailure();
 }
 
-/// {@template local_database.create_task_failure_invalid_data}
+/// {@template {{#preconditions_met}}local_database{{/preconditions_met}}.create_task_failure_invalid_data}
 /// An exception that is thrown when the data provided for task creation is
 /// invalid.
 /// {@endtemplate}
 class CreateTaskFailureInvalidData extends CreateTaskFailure {
-  /// {@macro local_database.create_task_failure_invalid_data}
+  /// {@macro {{#preconditions_met}}local_database{{/preconditions_met}}.create_task_failure_invalid_data}
   const CreateTaskFailureInvalidData({
     required this.titleValidationErrors,
     required this.complexValidationErrors,

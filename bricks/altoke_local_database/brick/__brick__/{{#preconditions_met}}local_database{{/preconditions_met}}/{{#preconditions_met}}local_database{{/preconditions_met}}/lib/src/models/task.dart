@@ -1,34 +1,34 @@
 import 'package:common/common.dart';
-import 'package:local_database/local_database.dart';
+import 'package:{{#preconditions_met}}local_database{{/preconditions_met}}/{{#preconditions_met}}local_database{{/preconditions_met}}.dart';
 import 'package:meta/meta.dart';
 
-/// {@template local_database.new_task}
+/// {@template {{#preconditions_met}}local_database{{/preconditions_met}}.new_task}
 /// A new task data.
 /// {@endtemplate}
 class NewTask {
-  /// {@macro local_database.new_task}
+  /// {@macro {{#preconditions_met}}local_database{{/preconditions_met}}.new_task}
   const NewTask({
     required this.title,
     required this.priority,
     this.description,
   });
 
-  /// {@macro local_database.task.title}
+  /// {@macro {{#preconditions_met}}local_database{{/preconditions_met}}.task.title}
   final String title;
 
-  /// {@macro local_database.task.priority}
+  /// {@macro {{#preconditions_met}}local_database{{/preconditions_met}}.task.priority}
   final TaskPriority priority;
 
-  /// {@macro local_database.task.description}
+  /// {@macro {{#preconditions_met}}local_database{{/preconditions_met}}.task.description}
   final String? description;
 }
 
-/// {@template local_database.task}
+/// {@template {{#preconditions_met}}local_database{{/preconditions_met}}.task}
 /// A task.
 /// {@endtemplate}
 @immutable
 class Task {
-  /// {@macro local_database.task}
+  /// {@macro {{#preconditions_met}}local_database{{/preconditions_met}}.task}
   const Task({
     required this.id,
     required this.title,
@@ -40,22 +40,22 @@ class Task {
   /// The task id.
   final int id;
 
-  /// {@template local_database.task.title}
+  /// {@template {{#preconditions_met}}local_database{{/preconditions_met}}.task.title}
   /// The task title.
   /// {@endtemplate}
   final String title;
 
-  /// {@template local_database.task.priority}
+  /// {@template {{#preconditions_met}}local_database{{/preconditions_met}}.task.priority}
   /// The task priority.
   /// {@endtemplate}
   final TaskPriority priority;
 
-  /// {@template local_database.task.completed}
+  /// {@template {{#preconditions_met}}local_database{{/preconditions_met}}.task.completed}
   /// Whether the task is completed.
   /// {@endtemplate}
   final bool completed;
 
-  /// {@template local_database.task.description}
+  /// {@template {{#preconditions_met}}local_database{{/preconditions_met}}.task.description}
   /// The task description.
   /// {@endtemplate}
   final String? description;
@@ -91,11 +91,11 @@ class Task {
       description.hashCode;
 }
 
-/// {@template local_database.partial_task}
+/// {@template {{#preconditions_met}}local_database{{/preconditions_met}}.partial_task}
 /// A partial task data.
 /// {@endtemplate}
 class PartialTask {
-  /// {@macro local_database.partial_task}
+  /// {@macro {{#preconditions_met}}local_database{{/preconditions_met}}.partial_task}
   const PartialTask({
     this.title = const Optional.none(),
     this.priority = const Optional.none(),
@@ -103,15 +103,15 @@ class PartialTask {
     this.description = const Optional.none(),
   });
 
-  /// {@macro local_database.task.title}
+  /// {@macro {{#preconditions_met}}local_database{{/preconditions_met}}.task.title}
   final Optional<String> title;
 
-  /// {@macro local_database.task.priority}
+  /// {@macro {{#preconditions_met}}local_database{{/preconditions_met}}.task.priority}
   final Optional<TaskPriority> priority;
 
-  /// {@macro local_database.task.completed}
+  /// {@macro {{#preconditions_met}}local_database{{/preconditions_met}}.task.completed}
   final Optional<bool> completed;
 
-  /// {@macro local_database.task.description}
+  /// {@macro {{#preconditions_met}}local_database{{/preconditions_met}}.task.description}
   final Optional<String?> description;
 }

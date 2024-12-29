@@ -1,18 +1,18 @@
-import 'package:local_database/local_database.dart';
+import 'package:{{#preconditions_met}}local_database{{/preconditions_met}}/{{#preconditions_met}}local_database{{/preconditions_met}}.dart';
 
-/// {@template local_database.update_task_failure}
+/// {@template {{#preconditions_met}}local_database{{/preconditions_met}}.update_task_failure}
 /// An exception that is thrown when a task update fails.
 /// {@endtemplate}
 sealed class UpdateTaskFailure implements Exception {
-  /// {@macro local_database.update_task_failure}
+  /// {@macro {{#preconditions_met}}local_database{{/preconditions_met}}.update_task_failure}
   const UpdateTaskFailure();
 }
 
-/// {@template local_database.update_task_failure_not_found}
+/// {@template {{#preconditions_met}}local_database{{/preconditions_met}}.update_task_failure_not_found}
 /// An exception that is thrown when the task to update is not found.
 /// {@endtemplate}
 class UpdateTaskFailureNotFound extends UpdateTaskFailure {
-  /// {@macro local_database.update_task_failure_not_found}
+  /// {@macro {{#preconditions_met}}local_database{{/preconditions_met}}.update_task_failure_not_found}
   const UpdateTaskFailureNotFound({
     required this.taskId,
   });
@@ -26,12 +26,12 @@ class UpdateTaskFailureNotFound extends UpdateTaskFailure {
   }
 }
 
-/// {@template local_database.update_task_failure_invalid_data}
+/// {@template {{#preconditions_met}}local_database{{/preconditions_met}}.update_task_failure_invalid_data}
 /// An exception that is thrown when the data provided for task update is
 /// invalid.
 /// {@endtemplate}
 class UpdateTaskFailureInvalidData extends UpdateTaskFailure {
-  /// {@macro local_database.update_task_failure_invalid_data}
+  /// {@macro {{#preconditions_met}}local_database{{/preconditions_met}}.update_task_failure_invalid_data}
   const UpdateTaskFailureInvalidData({
     required this.titleValidationErrors,
     required this.complexValidationErrors,

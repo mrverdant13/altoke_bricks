@@ -1,53 +1,27 @@
-import 'package:local_database/local_database.dart';
+import 'package:{{#preconditions_met}}local_database{{/preconditions_met}}/{{#preconditions_met}}local_database{{/preconditions_met}}.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('$UpdateTaskFailureNotFound', () {
-    test(
-      'can be instantiated',
-      () {
-        const failure = UpdateTaskFailureNotFound(taskId: 1);
-        expect(failure, isA<UpdateTaskFailureNotFound>());
-      },
-    );
-
-    test(
-      'is a subclass of $UpdateTaskFailure',
-      () {
-        const failure = UpdateTaskFailureNotFound(taskId: 1);
-        expect(failure, isA<UpdateTaskFailure>());
-      },
-    );
-
-    test(
-      'has a readable string representation',
-      () {
-        const failure = UpdateTaskFailureNotFound(taskId: 1);
-        expect(failure.toString(), 'UpdateTaskFailureNotFound(taskId: 1)');
-      },
-    );
-  });
-
-  group('$UpdateTaskFailureInvalidData', () {
+  group('$CreateTaskFailureInvalidData', () {
     test(
       'can be instantiated without validation errors',
       () {
-        const failure = UpdateTaskFailureInvalidData(
+        const failure = CreateTaskFailureInvalidData(
           titleValidationErrors: {},
           complexValidationErrors: {},
         );
-        expect(failure, isA<UpdateTaskFailureInvalidData>());
+        expect(failure, isA<CreateTaskFailureInvalidData>());
       },
     );
 
     test(
-      'is a subclass of $UpdateTaskFailure',
+      'is a subclass of $CreateTaskFailure',
       () {
-        const failure = UpdateTaskFailureInvalidData(
+        const failure = CreateTaskFailureInvalidData(
           titleValidationErrors: {},
           complexValidationErrors: {},
         );
-        expect(failure, isA<UpdateTaskFailure>());
+        expect(failure, isA<CreateTaskFailure>());
       },
     );
 
@@ -60,7 +34,7 @@ void main() {
         const complexValidationErrors = {
           TaskComplexValidationError.highPriorityWithNoDescription,
         };
-        const failure = UpdateTaskFailureInvalidData(
+        const failure = CreateTaskFailureInvalidData(
           titleValidationErrors: titleValidationErrors,
           complexValidationErrors: complexValidationErrors,
         );
@@ -78,13 +52,13 @@ void main() {
         const complexValidationErrors = {
           TaskComplexValidationError.highPriorityWithNoDescription,
         };
-        const failure = UpdateTaskFailureInvalidData(
+        const failure = CreateTaskFailureInvalidData(
           titleValidationErrors: titleValidationErrors,
           complexValidationErrors: complexValidationErrors,
         );
         expect(
           failure.toString(),
-          'UpdateTaskFailureInvalidData('
+          'CreateTaskFailureInvalidData('
           'titleValidationErrors: $titleValidationErrors, '
           'complexValidationErrors: $complexValidationErrors'
           ')',

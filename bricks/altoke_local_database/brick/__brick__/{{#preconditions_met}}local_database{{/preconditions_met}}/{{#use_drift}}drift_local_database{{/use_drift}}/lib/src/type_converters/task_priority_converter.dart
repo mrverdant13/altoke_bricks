@@ -1,11 +1,11 @@
 import 'package:drift/drift.dart';
-import 'package:local_database/local_database.dart';
+import 'package:{{#preconditions_met}}local_database{{/preconditions_met}}/{{#preconditions_met}}local_database{{/preconditions_met}}.dart';
 
-/// {@template drift_local_database.task_priority_converter}
+/// {@template {{#use_drift}}drift_local_database{{/use_drift}}.task_priority_converter}
 /// A type converter for [TaskPriority].
 /// {@endtemplate}
 class TaskPriorityConverter extends TypeConverter<TaskPriority, String> {
-  /// {@macro drift_local_database.task_priority_converter}
+  /// {@macro {{#use_drift}}drift_local_database{{/use_drift}}.task_priority_converter}
   const TaskPriorityConverter();
 
   static const _map = {

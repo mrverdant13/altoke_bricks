@@ -1,4 +1,4 @@
-name: drift_local_database
+name: {{#use_drift}}drift_local_database{{/use_drift}}
 description: A persistent local database built on top of Drift (SQLite).
 version: 0.0.1+1
 publish_to: none
@@ -11,8 +11,8 @@ dependencies:
     path: ../../common/
   collection: ^1.19.0
   drift: ^2.22.1
-  local_database:
-    path: ../local_database/
+  {{#preconditions_met}}local_database{{/preconditions_met}}:
+    path: ../{{#preconditions_met}}local_database{{/preconditions_met}}/
   meta: ^1.15.0
 
 dev_dependencies:

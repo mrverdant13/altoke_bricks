@@ -5,9 +5,9 @@ import 'dart:io';
 import 'package:common/common.dart';
 import 'package:collection/collection.dart';
 import 'package:isar/isar.dart';
-import 'package:isar_local_database/isar_local_database.dart';
-import 'package:isar_local_database/src/task.dart' as isar;
-import 'package:local_database/local_database.dart';
+import 'package:{{#use_isar}}isar_local_database{{/use_isar}}/{{#use_isar}}isar_local_database{{/use_isar}}.dart';
+import 'package:{{#use_isar}}isar_local_database{{/use_isar}}/src/task.dart' as isar;
+import 'package:{{#preconditions_met}}local_database{{/preconditions_met}}/{{#preconditions_met}}local_database{{/preconditions_met}}.dart';
 import 'package:test/test.dart';
 
 Future<Isar> openIsar(Directory dbDir) async {

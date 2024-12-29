@@ -1,4 +1,4 @@
-name: sembast_local_database
+name: {{#use_sembast}}sembast_local_database{{/use_sembast}}
 description: A persistent local database built on top of Sembast.
 version: 0.0.1+1
 publish_to: none
@@ -10,8 +10,8 @@ dependencies:
   common:
     path: ../../common/
   collection: ^1.19.0
-  local_database:
-    path: ../local_database/
+  {{#preconditions_met}}local_database{{/preconditions_met}}:
+    path: ../{{#preconditions_met}}local_database{{/preconditions_met}}/
   meta: ^1.15.0
   sembast: ^3.8.0+1
 

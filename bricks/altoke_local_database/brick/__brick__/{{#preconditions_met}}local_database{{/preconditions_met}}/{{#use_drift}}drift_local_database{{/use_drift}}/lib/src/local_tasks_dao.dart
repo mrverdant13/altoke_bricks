@@ -1,13 +1,13 @@
 import 'package:common/common.dart';
 import 'package:drift/drift.dart';
-import 'package:drift_local_database/src/tasks.drift.dart';
-import 'package:local_database/local_database.dart';
+import 'package:{{#use_drift}}drift_local_database{{/use_drift}}/src/tasks.drift.dart';
+import 'package:{{#preconditions_met}}local_database{{/preconditions_met}}/{{#preconditions_met}}local_database{{/preconditions_met}}.dart';
 
-/// {@template drift_local_database.local_tasks_dao}
+/// {@template {{#use_drift}}drift_local_database{{/use_drift}}.local_tasks_dao}
 /// A DAO that manages tasks in a Drift local database.
 /// {@endtemplate}
 class LocalTasksDriftDao implements LocalTasksDao {
-  /// {@macro drift_local_database.local_tasks_dao}
+  /// {@macro {{#use_drift}}drift_local_database{{/use_drift}}.local_tasks_dao}
   LocalTasksDriftDao({
     required this.tasksDrift,
   });
