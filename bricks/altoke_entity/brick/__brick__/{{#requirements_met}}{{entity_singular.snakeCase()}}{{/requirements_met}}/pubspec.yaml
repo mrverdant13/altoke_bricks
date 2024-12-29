@@ -1,4 +1,4 @@
-name: {{entity_singular.snakeCase()}}
+name: {{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}
 description: {{package_description}}
 version: 0.0.1+1
 publish_to: none

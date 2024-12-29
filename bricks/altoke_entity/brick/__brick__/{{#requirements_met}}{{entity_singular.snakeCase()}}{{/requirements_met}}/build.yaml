@@ -3,14 +3,14 @@
     builders:
       {{#use_dart_mappable}}dart_mappable_builder:
         generate_for:
-          - lib/src/{{entity_singular.snakeCase()}}.dart
+          - lib/src/{{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}.dart
         options:
           generateMethods:
             - copy
             - equals
             - stringify{{/use_dart_mappable}}{{#use_freezed}}freezed:
         generate_for:
-          - lib/src/{{entity_singular.snakeCase()}}.dart
+          - lib/src/{{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}.dart
         options:
           map: false
           when: false{{/use_freezed}}{{/use_equatable}}
