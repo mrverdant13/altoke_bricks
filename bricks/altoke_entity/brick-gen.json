@@ -1,5 +1,5 @@
 {
-  "targetRelativePath": ".",
+  "targetRelativePath": "./{{#preconditions_met}}{{entity_singular.snakeCase()}}{{/preconditions_met}}",
   "replacements": [
     {
       "from": "altoke_common",
