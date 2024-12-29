@@ -1,5 +1,5 @@
 import 'package:common/common.dart';
-import 'package:{{entity_singular.snakeCase()}}/{{entity_singular.snakeCase()}}.dart';
+import 'package:{{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}/{{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}.dart';
 import 'package:test/test.dart';
 
 void main() {
