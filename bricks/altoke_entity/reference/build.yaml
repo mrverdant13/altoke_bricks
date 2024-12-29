@@ -6,7 +6,7 @@ targets:
       #{{#use_dart_mappable}}#
       dart_mappable_builder:
         generate_for:
-          - lib/src/_cf___use_dart_mappable___altoke_entity.dart
+          - lib/src/altoke_entity.dart
         options:
           generateMethods:
             - copy
@@ -16,7 +16,7 @@ targets:
       #{{#use_freezed}}#
       freezed:
         generate_for:
-          - lib/src/_cf___use_freezed___altoke_entity.dart
+          - lib/src/altoke_entity.dart
         options:
           map: false
           when: false

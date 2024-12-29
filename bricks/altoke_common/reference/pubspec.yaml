@@ -17,9 +17,10 @@ dependencies:
   #{{#use_freezed}}#
   freezed_annotation: ^2.4.4
   #{{/use_freezed}}#
-  #{{#use_overrides}}#
+  #{{#use_meta}}#
+  #*w 1v 2> w*#
   meta: ^1.15.0
-  #{{/use_overrides}}#
+  #{{/use_meta}}#
 #*w 2v w*#
 
 dev_dependencies:
