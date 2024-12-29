@@ -1,10 +1,10 @@
-{{#use_dart_mappable}}import 'package:dart_mappable/dart_mappable.dart';{{/use_dart_mappable}}{{#use_equatable}}import 'package:equatable/equatable.dart';{{/use_equatable}}{{#use_freezed}}import 'package:freezed_annotation/freezed_annotation.dart';{{/use_freezed}}{{#use_meta}}import 'package:meta/meta.dart';{{/use_meta}}{{#use_freezed}}part 'optional.freezed.dart';{{/use_freezed}}{{#use_dart_mappable}}part 'optional.mapper.dart';{{/use_dart_mappable}}{{#use_dart_mappable}}/// {@template common.optional}
+{{#use_dart_mappable}}import 'package:dart_mappable/dart_mappable.dart';{{/use_dart_mappable}}{{#use_equatable}}import 'package:equatable/equatable.dart';{{/use_equatable}}{{#use_freezed}}import 'package:freezed_annotation/freezed_annotation.dart';{{/use_freezed}}{{#use_meta}}import 'package:meta/meta.dart';{{/use_meta}}{{#use_freezed}}part 'optional.freezed.dart';{{/use_freezed}}{{#use_dart_mappable}}part 'optional.mapper.dart';{{/use_dart_mappable}}{{#use_dart_mappable}}/// {@template {{#requirements_met}}common{{/requirements_met}}.optional}
 /// A representation of an optional value.
 /// {@endtemplate}
 @MappableClass()
 @immutable
 sealed class Optional<T extends Object?> with OptionalMappable<T> {
-  /// {@macro common.optional}
+  /// {@macro {{#requirements_met}}common{{/requirements_met}}.optional}
   const Optional();
 
   /// Creates an [Optional] with a present value.
@@ -14,13 +14,13 @@ sealed class Optional<T extends Object?> with OptionalMappable<T> {
   const factory Optional.none() = DmNone<T>;
 }
 
-/// {@template common.some}
+/// {@template {{#requirements_met}}common{{/requirements_met}}.some}
 /// A representation of a present value.
 /// {@endtemplate}
 @MappableClass()
 @immutable
 class DmSome<T extends Object?> extends Optional<T> with DmSomeMappable<T> {
-  /// {@macro common.some}
+  /// {@macro {{#requirements_met}}common{{/requirements_met}}.some}
   const DmSome(this.value);
 
   /// The underlying value.
@@ -39,13 +39,13 @@ class DmSome<T extends Object?> extends Optional<T> with DmSomeMappable<T> {
   int get hashCode => runtimeType.hashCode ^ value.hashCode;
 }
 
-/// {@template common.none}
+/// {@template {{#requirements_met}}common{{/requirements_met}}.none}
 /// A representation of an absent value.
 /// {@endtemplate}
 @MappableClass()
 @immutable
 class DmNone<T extends Object?> extends Optional<T> with DmNoneMappable<T> {
-  /// {@macro common.none}
+  /// {@macro {{#requirements_met}}common{{/requirements_met}}.none}
   const DmNone();
 
   // HACK: Manual override required to avoid edge cases.
@@ -58,11 +58,11 @@ class DmNone<T extends Object?> extends Optional<T> with DmNoneMappable<T> {
   // HACK: Manual override required to avoid edge cases.
   @override
   int get hashCode => runtimeType.hashCode;
-}{{/use_dart_mappable}}{{#use_equatable}}/// {@template common.optional}
+}{{/use_dart_mappable}}{{#use_equatable}}/// {@template {{#requirements_met}}common{{/requirements_met}}.optional}
 /// A representation of an optional value.
 /// {@endtemplate}
 sealed class Optional<T extends Object?> extends Equatable {
-  /// {@macro common.optional}
+  /// {@macro {{#requirements_met}}common{{/requirements_met}}.optional}
   const Optional();
 
   /// Creates an [Optional] with a present value.
@@ -72,11 +72,11 @@ sealed class Optional<T extends Object?> extends Equatable {
   const factory Optional.none() = ENone<T>;
 }
 
-/// {@template common.some}
+/// {@template {{#requirements_met}}common{{/requirements_met}}.some}
 /// A representation of a present value.
 /// {@endtemplate}
 class ESome<T extends Object?> extends Optional<T> {
-  /// {@macro common.some}
+  /// {@macro {{#requirements_met}}common{{/requirements_met}}.some}
   const ESome(this.value);
 
   /// The underlying value.
@@ -86,21 +86,21 @@ class ESome<T extends Object?> extends Optional<T> {
   List<Object?> get props => [value];
 }
 
-/// {@template common.none}
+/// {@template {{#requirements_met}}common{{/requirements_met}}.none}
 /// A representation of an absent value.
 /// {@endtemplate}
 class ENone<T extends Object?> extends Optional<T> {
-  /// {@macro common.none}
+  /// {@macro {{#requirements_met}}common{{/requirements_met}}.none}
   const ENone();
 
   @override
   List<Object?> get props => [];
-}{{/use_equatable}}{{#use_freezed}}/// {@template common.optional}
+}{{/use_equatable}}{{#use_freezed}}/// {@template {{#requirements_met}}common{{/requirements_met}}.optional}
 /// A representation of an optional value.
 /// {@endtemplate}
 @Freezed(copyWith: false)
 class Optional<T extends Object?> with _$Optional<T> {
-  /// {@macro common.optional}
+  /// {@macro {{#requirements_met}}common{{/requirements_met}}.optional}
   const Optional._();
 
   /// Creates an [Optional] with a present value.
@@ -111,12 +111,12 @@ class Optional<T extends Object?> with _$Optional<T> {
 
   /// Creates an [Optional] with an absent value.
   const factory Optional.none() = FNone<T>;
-}{{/use_freezed}}{{#use_overrides}}/// {@template common.optional}
+}{{/use_freezed}}{{#use_overrides}}/// {@template {{#requirements_met}}common{{/requirements_met}}.optional}
 /// A representation of an optional value.
 /// {@endtemplate}
 @immutable
 sealed class Optional<T extends Object?> {
-  /// {@macro common.optional}
+  /// {@macro {{#requirements_met}}common{{/requirements_met}}.optional}
   const Optional();
 
   /// Creates an [Optional] with a present value.
@@ -126,12 +126,12 @@ sealed class Optional<T extends Object?> {
   const factory Optional.none() = None<T>;
 }
 
-/// {@template common.some}
+/// {@template {{#requirements_met}}common{{/requirements_met}}.some}
 /// A representation of a present value.
 /// {@endtemplate}
 @immutable
 class Some<T extends Object?> extends Optional<T> {
-  /// {@macro common.some}
+  /// {@macro {{#requirements_met}}common{{/requirements_met}}.some}
   const Some(
     this.value,
   );
@@ -153,12 +153,12 @@ class Some<T extends Object?> extends Optional<T> {
   int get hashCode => runtimeType.hashCode ^ value.hashCode;
 }
 
-/// {@template common.none}
+/// {@template {{#requirements_met}}common{{/requirements_met}}.none}
 /// A representation of an absent value.
 /// {@endtemplate}
 @immutable
 class None<T extends Object?> extends Optional<T> {
-  /// {@macro common.none}
+  /// {@macro {{#requirements_met}}common{{/requirements_met}}.none}
   const None();
 
   @override

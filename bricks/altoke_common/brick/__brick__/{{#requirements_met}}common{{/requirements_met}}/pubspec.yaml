@@ -1,5 +1,5 @@
-name: common
-description: A set of common elements used across projects.
+name: {{#requirements_met}}common{{/requirements_met}}
+description: A set of {{#requirements_met}}common{{/requirements_met}} elements used across projects.
 version: 0.0.1+1
 publish_to: none
 
