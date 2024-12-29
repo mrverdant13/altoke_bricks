@@ -1,5 +1,5 @@
 import 'package:common/common.dart';
-import 'package:local_database/local_database.dart';
+import 'package:{{#preconditions_met}}local_database{{/preconditions_met}}/{{#preconditions_met}}local_database{{/preconditions_met}}.dart';
 import 'package:test/test.dart';
 
 void main() {

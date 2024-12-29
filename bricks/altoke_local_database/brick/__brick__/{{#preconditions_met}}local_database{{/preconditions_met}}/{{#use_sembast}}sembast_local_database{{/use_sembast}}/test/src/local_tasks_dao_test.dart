@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:common/common.dart';
 import 'package:collection/collection.dart';
-import 'package:local_database/local_database.dart';
+import 'package:{{#preconditions_met}}local_database{{/preconditions_met}}/{{#preconditions_met}}local_database{{/preconditions_met}}.dart';
 import 'package:sembast/sembast_memory.dart';
-import 'package:sembast_local_database/sembast_local_database.dart';
-import 'package:sembast_local_database/src/helpers.dart' as sembast;
+import 'package:{{#use_sembast}}sembast_local_database{{/use_sembast}}/{{#use_sembast}}sembast_local_database{{/use_sembast}}.dart';
+import 'package:{{#use_sembast}}sembast_local_database{{/use_sembast}}/src/helpers.dart' as sembast;
 import 'package:test/test.dart';
 
 void main() {

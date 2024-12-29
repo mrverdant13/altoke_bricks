@@ -1,6 +1,6 @@
-import 'package:local_database/local_database.dart';
+import 'package:{{#preconditions_met}}local_database{{/preconditions_met}}/{{#preconditions_met}}local_database{{/preconditions_met}}.dart';
 
-/// {@template local_database.local_tasks_dao}
+/// {@template {{#preconditions_met}}local_database{{/preconditions_met}}.local_tasks_dao}
 /// An interface for a DAO that manages tasks in a local database.
 /// {@endtemplate}
 abstract interface class LocalTasksDao {

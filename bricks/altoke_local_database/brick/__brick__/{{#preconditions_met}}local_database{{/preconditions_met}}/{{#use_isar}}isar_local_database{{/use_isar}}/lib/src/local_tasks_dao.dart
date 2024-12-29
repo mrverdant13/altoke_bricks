@@ -1,15 +1,15 @@
 import 'package:common/common.dart';
 import 'package:isar/isar.dart';
-import 'package:isar_local_database/src/helpers.dart';
-import 'package:isar_local_database/src/task.dart' as isar;
-import 'package:local_database/local_database.dart';
+import 'package:{{#use_isar}}isar_local_database{{/use_isar}}/src/helpers.dart';
+import 'package:{{#use_isar}}isar_local_database{{/use_isar}}/src/task.dart' as isar;
+import 'package:{{#preconditions_met}}local_database{{/preconditions_met}}/{{#preconditions_met}}local_database{{/preconditions_met}}.dart';
 import 'package:meta/meta.dart';
 
-/// {@template isar_local_database.local_tasks_dao}
+/// {@template {{#use_isar}}isar_local_database{{/use_isar}}.local_tasks_dao}
 /// A DAO that manages tasks in an Isar local database.
 /// {@endtemplate}
 class LocalTasksIsarDao implements LocalTasksDao {
-  /// {@macro isar_local_database.local_tasks_dao}
+  /// {@macro {{#use_isar}}isar_local_database{{/use_isar}}.local_tasks_dao}
   LocalTasksIsarDao({
     required this.database,
   });

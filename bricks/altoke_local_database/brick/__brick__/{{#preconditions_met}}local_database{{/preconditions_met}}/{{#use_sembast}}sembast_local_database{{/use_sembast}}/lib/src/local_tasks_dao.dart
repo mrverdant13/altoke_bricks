@@ -1,14 +1,14 @@
 import 'package:common/common.dart';
-import 'package:local_database/local_database.dart';
+import 'package:{{#preconditions_met}}local_database{{/preconditions_met}}/{{#preconditions_met}}local_database{{/preconditions_met}}.dart';
 import 'package:meta/meta.dart';
 import 'package:sembast/sembast.dart';
-import 'package:sembast_local_database/src/helpers.dart' as sembast;
+import 'package:{{#use_sembast}}sembast_local_database{{/use_sembast}}/src/helpers.dart' as sembast;
 
-/// {@template sembast_local_database.local_tasks_dao}
+/// {@template {{#use_sembast}}sembast_local_database{{/use_sembast}}.local_tasks_dao}
 /// A DAO that manages tasks in an Sembast local database.
 /// {@endtemplate}
 class LocalTasksSembastDao implements LocalTasksDao {
-  /// {@macro sembast_local_database.local_tasks_dao}
+  /// {@macro {{#use_sembast}}sembast_local_database{{/use_sembast}}.local_tasks_dao}
   LocalTasksSembastDao({
     required this.database,
   });

@@ -1,4 +1,4 @@
-name: local_database
+name: {{#preconditions_met}}local_database{{/preconditions_met}}
 description: An interface for a persistent local database.
 version: 0.0.1+1
 publish_to: none

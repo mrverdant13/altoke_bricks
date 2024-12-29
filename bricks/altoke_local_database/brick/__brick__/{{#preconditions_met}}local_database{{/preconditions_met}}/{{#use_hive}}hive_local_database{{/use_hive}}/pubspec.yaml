@@ -1,4 +1,4 @@
-name: hive_local_database
+name: {{#use_hive}}hive_local_database{{/use_hive}}
 description: A persistent local database built on top of Hive.
 version: 0.0.1+1
 publish_to: none
@@ -11,8 +11,8 @@ dependencies:
     path: ../../common/
   collection: ^1.19.0
   hive: ^2.2.3
-  local_database:
-    path: ../local_database/
+  {{#preconditions_met}}local_database{{/preconditions_met}}:
+    path: ../{{#preconditions_met}}local_database{{/preconditions_met}}/
   meta: ^1.15.0
 
 dev_dependencies:

@@ -4,9 +4,9 @@ import 'package:common/common.dart';
 import 'package:collection/collection.dart';
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
-import 'package:drift_local_database/drift_local_database.dart';
-import 'package:drift_local_database/src/tasks.drift.dart' as drift;
-import 'package:local_database/local_database.dart';
+import 'package:{{#use_drift}}drift_local_database{{/use_drift}}/{{#use_drift}}drift_local_database{{/use_drift}}.dart';
+import 'package:{{#use_drift}}drift_local_database{{/use_drift}}/src/tasks.drift.dart' as drift;
+import 'package:{{#preconditions_met}}local_database{{/preconditions_met}}/{{#preconditions_met}}local_database{{/preconditions_met}}.dart';
 import 'package:test/test.dart';
 
 void main() {

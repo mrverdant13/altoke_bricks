@@ -1,7 +1,7 @@
 import 'package:drift/drift.dart';
-import 'package:drift_local_database/src/local_database.drift.dart';
+import 'package:{{#use_drift}}drift_local_database{{/use_drift}}/src/{{#preconditions_met}}local_database{{/preconditions_met}}.drift.dart';
 
-/// {@template drift_local_database.local_database}
+/// {@template {{#use_drift}}drift_local_database{{/use_drift}}.{{#preconditions_met}}local_database{{/preconditions_met}}}
 /// A local database.
 /// {@endtemplate}
 @DriftDatabase(
@@ -10,7 +10,7 @@ import 'package:drift_local_database/src/local_database.drift.dart';
   },
 )
 class LocalDatabase extends $LocalDatabase {
-  /// {@macro drift_local_database.local_database}
+  /// {@macro {{#use_drift}}drift_local_database{{/use_drift}}.{{#preconditions_met}}local_database{{/preconditions_met}}}
   LocalDatabase({
     required QueryExecutor queryExecutor,
     required this.schemaVersion,

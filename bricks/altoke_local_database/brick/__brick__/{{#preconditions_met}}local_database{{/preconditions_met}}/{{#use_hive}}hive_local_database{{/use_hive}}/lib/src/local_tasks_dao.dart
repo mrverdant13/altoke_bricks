@@ -1,14 +1,14 @@
 import 'package:common/common.dart';
 import 'package:hive/hive.dart';
-import 'package:hive_local_database/src/helpers.dart' as hive;
-import 'package:local_database/local_database.dart';
+import 'package:{{#use_hive}}hive_local_database{{/use_hive}}/src/helpers.dart' as hive;
+import 'package:{{#preconditions_met}}local_database{{/preconditions_met}}/{{#preconditions_met}}local_database{{/preconditions_met}}.dart';
 import 'package:meta/meta.dart';
 
-/// {@template hive_local_database.local_tasks_dao}
+/// {@template {{#use_hive}}hive_local_database{{/use_hive}}.local_tasks_dao}
 /// A DAO that manages tasks in an Hive local database.
 /// {@endtemplate}
 class LocalTasksHiveDao implements LocalTasksDao {
-  /// {@macro hive_local_database.local_tasks_dao}
+  /// {@macro {{#use_hive}}hive_local_database{{/use_hive}}.local_tasks_dao}
   LocalTasksHiveDao();
 
   /// Name for the tasks tasksBox.

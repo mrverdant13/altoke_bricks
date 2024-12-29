@@ -4,9 +4,9 @@ import 'dart:io';
 import 'package:common/common.dart';
 import 'package:collection/collection.dart';
 import 'package:hive/hive.dart';
-import 'package:hive_local_database/hive_local_database.dart';
-import 'package:hive_local_database/src/helpers.dart' as hive;
-import 'package:local_database/local_database.dart';
+import 'package:{{#use_hive}}hive_local_database{{/use_hive}}/{{#use_hive}}hive_local_database{{/use_hive}}.dart';
+import 'package:{{#use_hive}}hive_local_database{{/use_hive}}/src/helpers.dart' as hive;
+import 'package:{{#preconditions_met}}local_database{{/preconditions_met}}/{{#preconditions_met}}local_database{{/preconditions_met}}.dart';
 import 'package:test/test.dart';
 
 void main() {
