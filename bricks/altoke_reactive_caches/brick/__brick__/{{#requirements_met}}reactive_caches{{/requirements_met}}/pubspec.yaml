@@ -1,4 +1,4 @@
-name: reactive_caches
+name: {{#requirements_met}}reactive_caches{{/requirements_met}}
 description: In-memory reactive caches.
 version: 0.0.1+1
 publish_to: none

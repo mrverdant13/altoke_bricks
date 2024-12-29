@@ -10,11 +10,11 @@ typedef ElementsListEqualityChecker<E extends Object?> = bool Function(
   List<E> b,
 );
 
-/// {@template reactive_caches.reactive_elements_list_cache}
+/// {@template {{#requirements_met}}reactive_caches{{/requirements_met}}.reactive_elements_list_cache}
 /// A reactive cache for a [List] of elements of type [E].
 /// {@endtemplate}
 class ReactiveElementsListCache<E extends Object?> {
-  /// {@macro reactive_caches.reactive_elements_list_cache}
+  /// {@macro {{#requirements_met}}reactive_caches{{/requirements_met}}.reactive_elements_list_cache}
   ///
   /// If [equalityChecker] is `null`, the [defaultEqualityChecker] is used.
   ReactiveElementsListCache({

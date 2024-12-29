@@ -9,11 +9,11 @@ typedef ElementEqualityChecker<E extends Object?> = bool Function(
   E b,
 );
 
-/// {@template reactive_caches.reactive_element_cache}
+/// {@template {{#requirements_met}}reactive_caches{{/requirements_met}}.reactive_element_cache}
 /// A reactive cache for a single element of type [E].
 /// {@endtemplate}
 class ReactiveElementCache<E extends Object> {
-  /// {@macro reactive_caches.reactive_element_cache}
+  /// {@macro {{#requirements_met}}reactive_caches{{/requirements_met}}.reactive_element_cache}
   ///
   /// If [equalityChecker] is `null`, the [defaultEqualityChecker] is used.
   ReactiveElementCache({
