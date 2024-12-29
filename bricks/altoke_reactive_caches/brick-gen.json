@@ -1,5 +1,5 @@
 {
-  "targetRelativePath": ".",
+  "targetRelativePath": "./{{#preconditions_met}}reactive_caches{{/preconditions_met}}",
   "replacements": [
     {
       "from": "altoke_common",

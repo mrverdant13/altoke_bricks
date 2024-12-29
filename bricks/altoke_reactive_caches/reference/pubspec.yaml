@@ -10,7 +10,7 @@ dependencies:
   altoke_common:
     #*w 1v 4> w*#
     #*replace-start*#
-    path: ../../../altoke_common/reference/
+    path: ../../altoke_common/reference/
     #*with*#
     # path: ../common/
     #*replace-end*#

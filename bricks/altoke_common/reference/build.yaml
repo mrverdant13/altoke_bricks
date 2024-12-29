@@ -6,7 +6,7 @@ targets:
       #{{#use_dart_mappable}}#
       dart_mappable_builder:
         generate_for:
-          - lib/src/types/_cf___use_dart_mappable___optional.dart
+          - lib/src/types/optional.dart
         options:
           generateMethods:
             - stringify
@@ -14,7 +14,7 @@ targets:
       #{{#use_freezed}}#
       freezed:
         generate_for:
-          - lib/src/types/_cf___use_freezed___optional.dart
+          - lib/src/types/optional.dart
         options:
           copy_with: false
           map: false

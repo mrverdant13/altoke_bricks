@@ -1,9 +1,29 @@
 {
-  "targetRelativePath": ".",
+  "targetRelativePath": "./{{#preconditions_met}}local_database{{/preconditions_met}}",
   "replacements": [
     {
       "from": "altoke_common",
       "to": "common"
+    },
+    {
+      "from": "\\b(local_database)\\b",
+      "to": "{{#preconditions_met}}local_database{{/preconditions_met}}"
+    },
+    {
+      "from": "\\b(drift_local_database)\\b",
+      "to": "{{#use_drift}}drift_local_database{{/use_drift}}"
+    },
+    {
+      "from": "\\b(hive_local_database)\\b",
+      "to": "{{#use_hive}}hive_local_database{{/use_hive}}"
+    },
+    {
+      "from": "\\b(isar_local_database)\\b",
+      "to": "{{#use_isar}}isar_local_database{{/use_isar}}"
+    },
+    {
+      "from": "\\b(sembast_local_database)\\b",
+      "to": "{{#use_sembast}}sembast_local_database{{/use_sembast}}"
     }
   ]
 }

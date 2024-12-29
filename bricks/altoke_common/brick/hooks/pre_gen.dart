@@ -5,6 +5,7 @@ void run(HookContext context) {
   context.vars = {
     ...context.vars,
     ...context.valueEqualitySelectionMap,
+    'use_meta': context.valueEqualityUsesMeta,
     'use_code_generation': context.valueEqualityUsesCodeGeneration,
     'using_hooks': true,
   };

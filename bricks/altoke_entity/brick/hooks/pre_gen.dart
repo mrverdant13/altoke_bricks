@@ -47,9 +47,9 @@ Future<void> run(HookContext context) async {
 
   context.vars = {
     ...context.vars,
-    ...ValueEqualityApproach.getSelectionMap(context),
-    'use_code_generation':
-        ValueEqualityApproach.getSelectedApproach(context).usesCodeGeneration,
+    ...context.valueEqualitySelectionMap,
+    'use_meta': context.valueEqualityUsesMeta,
+    'use_code_generation': context.valueEqualityUsesCodeGeneration,
     'preconditions_met': preconditionsErrorMessages.isEmpty,
     'using_hooks': true,
   };

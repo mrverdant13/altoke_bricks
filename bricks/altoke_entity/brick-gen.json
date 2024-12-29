@@ -6,6 +6,22 @@
       "to": "common"
     },
     {
+      "from": "\\b(dm_altoke_entity)\\b",
+      "to": "{{#use_dart_mappable}}altoke_entity{{/use_dart_mappable}}"
+    },
+    {
+      "from": "\\b(e_altoke_entity)\\b",
+      "to": "{{#use_equatable}}altoke_entity{{/use_equatable}}"
+    },
+    {
+      "from": "\\b(f_altoke_entity)\\b",
+      "to": "{{#use_freezed}}altoke_entity{{/use_freezed}}"
+    },
+    {
+      "from": "\\b(o_altoke_entity)\\b",
+      "to": "{{#use_overrides}}altoke_entity{{/use_overrides}}"
+    },
+    {
       "from": "Representation of different altoke entity variants.",
       "to": "{{package_description}}"
     },
