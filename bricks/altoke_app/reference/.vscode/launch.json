@@ -9,7 +9,22 @@
       "request": "launch",
       "type": "dart",
       "cwd": "packages/app/",
-      "program": "lib/main.dart",
+      "program": "lib/bootstrap/main_${input:FLAVOR}.dart",
+      "toolArgs": [
+        "--flavor=${input:FLAVOR}",
+      ],
+    },
+  ],
+  "inputs": [
+    {
+      "id": "FLAVOR",
+      "type": "pickString",
+      "description": "Select the flavor",
+      "options": [
+        "development",
+        "staging",
+        "production",
+      ],
     },
   ],
 }
