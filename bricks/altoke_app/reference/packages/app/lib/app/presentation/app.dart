@@ -1,4 +1,5 @@
 import 'package:altoke_app/app/app.dart';
+import 'package:altoke_app/flavors/flavors.dart';
 import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/routing/routing.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +18,10 @@ class MyApp extends ConsumerWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: routerConfig,
-      builder: (context, child) => InitializationWrapper(
-        child: child!,
+      builder: (context, child) => FlavorBanner(
+        child: InitializationWrapper(
+          child: child!,
+        ),
       ),
     );
   }
