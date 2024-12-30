@@ -10,6 +10,7 @@ bool get isStg => flavor == AppFlavor.stg;
 @pragma('vm:platform-const-if', !kDebugMode)
 bool get isProd => flavor == AppFlavor.prod;
 
+@visibleForTesting
 enum AppFlavor {
   dev('development', 'DEV'),
   stg('staging', 'STG'),
