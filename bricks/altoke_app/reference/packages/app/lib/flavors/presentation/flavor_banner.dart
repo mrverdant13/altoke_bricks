@@ -1,4 +1,5 @@
 import 'package:altoke_app/flavors/flavors.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class FlavorBanner extends StatelessWidget {
@@ -9,17 +10,20 @@ class FlavorBanner extends StatelessWidget {
 
   final Widget child;
 
+  @pragma('vm:platform-const-if', !kDebugMode)
+  BannerPainter? get bannerPainter => isProd
+      ? null
+      : BannerPainter(
+          message: flavor.label,
+          textDirection: TextDirection.ltr,
+          location: BannerLocation.topStart,
+          layoutDirection: TextDirection.ltr,
+        );
+
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      foregroundPainter: isProd
-          ? null
-          : BannerPainter(
-              message: flavorLabel,
-              textDirection: TextDirection.ltr,
-              location: BannerLocation.topStart,
-              layoutDirection: TextDirection.ltr,
-            ),
+      foregroundPainter: bannerPainter,
       child: child,
     );
   }

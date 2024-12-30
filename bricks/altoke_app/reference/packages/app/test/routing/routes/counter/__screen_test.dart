@@ -1,4 +1,5 @@
 import 'package:altoke_app/app/app.dart';
+import 'package:altoke_app/flavors/flavors.dart';
 import 'package:altoke_app/routing/routing.dart';
 /*{{#use_auto_route}}*/
 import 'package:auto_route/auto_route.dart';
@@ -10,6 +11,14 @@ import 'package:go_router/go_router.dart';
 /*{{/use_go_router}}*/
 
 void main() {
+  setUp(() {
+    debugFlavor = AppFlavor.dev;
+  });
+
+  tearDown(() {
+    debugFlavor = null;
+  });
+
 /*w 1v w*/
 /*{{#use_auto_route}}*/
   testWidgets(
