@@ -10,7 +10,6 @@
 /coverage/
 
 # Platforms
-/**/packages/app/android/
 /**/packages/app/ios/
 /**/packages/app/linux/
 /**/packages/app/macos/

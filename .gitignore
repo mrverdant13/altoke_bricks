@@ -20,8 +20,6 @@
 /coverage/
 
 # Project platforms
-/**/__brick__/**/android/
-/**/reference_app/**/android/
 /**/__brick__/**/ios/
 /**/reference_app/**/ios/
 /**/__brick__/**/linux/
