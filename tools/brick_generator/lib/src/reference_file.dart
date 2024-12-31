@@ -18,18 +18,6 @@ abstract class AltokeRegexp {
     dotAll: true,
   );
 
-  /// Regexp to identify a conditional file to be resolved within its path.
-  static final conditionalFileRegexp = RegExp(
-    r'_cf(n?)___([^;\s]*)___([^;\s]*)',
-    dotAll: true,
-  );
-
-  /// Regexp to identify a conditional directory to be resolved within its path.
-  static final conditionalDirRegexp = RegExp(
-    r'_cd(n?)___([^;\s\\\/]*)___([^;\s\\\/]*)',
-    dotAll: true,
-  );
-
   /// Regexp to identify variables to be resolved within the contents of a file.
   @visibleForTesting
   static final variableRegexp = RegExp(
@@ -101,6 +89,10 @@ extension ReferenceFile on File {
   Future<void> resolveContents({
     required BrickGenData brickGenData,
   }) async {
+    const ignoredExtensions = {
+      '.png',
+    };
+    if (ignoredExtensions.contains(p.extension(path))) return;
     final BrickGenData(:replacements, :lineDeletions) = brickGenData;
     final referenceContent = await readAsString();
     final resolvedContents = referenceContent
@@ -118,14 +110,6 @@ extension ReferenceFile on File {
           transformReplacementMatchForFileContents,
         )
         .replaceAllMapped(
-          AltokeRegexp.conditionalFileRegexp,
-          transformConditionalFileMatchForFileContents,
-        )
-        .replaceAllMapped(
-          AltokeRegexp.conditionalDirRegexp,
-          transformConditionalDirMatchForFileContents,
-        )
-        .replaceAllMapped(
           AltokeRegexp.variableRegexp,
           transformVariableMatchForFileContents,
         )
@@ -141,16 +125,7 @@ extension ReferenceFile on File {
   Future<String> resolvePath({
     required BrickGenData brickGenData,
   }) async {
-    return brickGenData
-        .applyReplacementsToTargetRelativeDescendant(path)
-        .replaceAllMapped(
-          AltokeRegexp.conditionalFileRegexp,
-          transformConditionalFileMatchForFilePath,
-        )
-        .replaceAllMapped(
-          AltokeRegexp.conditionalDirRegexp,
-          transformConditionalDirMatchForFilePath,
-        );
+    return brickGenData.applyReplacementsToTargetRelativeDescendant(path);
   }
 }
 
