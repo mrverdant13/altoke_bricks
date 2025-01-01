@@ -155,7 +155,7 @@ String transformReplacementMatchForFileContents(Match match) {
     final buf = StringBuffer();
     final lines = rawLines.map(
       (line) => line.replaceFirst(
-        RegExp(r'\s*#* '),
+        RegExp(r'^\s*#* '),
         ' ' * indentation,
       ),
     );

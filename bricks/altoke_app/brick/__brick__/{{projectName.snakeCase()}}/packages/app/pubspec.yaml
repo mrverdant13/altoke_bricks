@@ -27,7 +27,7 @@ dev_dependencies:
   {{#use_go_router}}go_router_builder: ^2.7.1
   {{/use_go_router}}meta: ^1.15.0
   mocktail: ^1.0.4
-  path:^1.9.0
+  path: ^1.9.0
   riverpod_generator: ^2.6.3
   riverpod_lint: ^2.6.3
   very_good_analysis: ^7.0.0
