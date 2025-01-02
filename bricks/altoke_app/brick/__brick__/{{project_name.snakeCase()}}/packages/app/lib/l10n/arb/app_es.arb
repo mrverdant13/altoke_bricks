@@ -1,0 +1,161 @@
+{
+  "@@locale": "es",
+  "appTitle": "{{project_name.titleCase()}}",
+  "@appTitle": {
+    "description": "Título de la aplicación"
+  },
+  "genericRetryButtonLabel": "Reintentar",
+  "@genericRetryButtonLabel": {
+    "type": "text",
+    "description": "Etiqueta para un botón genérico de reintento",
+    "placeholders": {}
+  },
+  "appInitializationErrorMessage": "Hubo un problema al intentar lanzar la aplicación",
+  "@appInitializationErrorMessage": {
+    "type": "text",
+    "description": "Mensaje mostrado cuando falla la inicialización de la aplicación",
+    "placeholders": {}
+  },
+  "homeAppBarTitle": "Ejemplos",
+  "@homeAppBarTitle": {
+    "type": "text",
+    "description": "Título de la cabecera de la pantalla de ejemplos",
+    "placeholders": {}
+  },
+  "counterExampleListTileTitle": "Contador",
+  "@counterExampleListTileTitle": {
+    "type": "text",
+    "description": "Título de la tarjeta de ejemplo del contador",
+    "placeholders": {}
+  },
+  "counterAppBarTitle": "Contador",
+  "@counterAppBarTitle": {
+    "description": "Título de la cabecera de la pantalla del contador"
+  },
+  "counterPushTimesMessage": "{pushTimes, plural, =0{Aún no has pulsado el botón} =1{Has pulsado el botón una vez} other{Has pulsado el botón {pushTimes} veces}}.",
+  "@counterPushTimesMessage": {
+    "description": "Mensaje con el número de veces que se ha pulsado el botón",
+    "placeholders": {
+      "pushTimes": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
+  "counterIncrementButtonTooltip": "Incrementar",
+  "@counterIncrementButtonTooltip": {
+    "description": "Tooltip del botón de incrementar"
+  },
+  "counterResetButtonTooltip": "Reiniciar",
+  "@counterResetButtonTooltip": {
+    "description": "Tooltip del botón de reiniciar"
+  },
+  "tasksExampleListTileTitle": "Tareas",
+  "@tasksExampleListTileTitle": {
+    "type": "text",
+    "description": "Título de la tarjeta de ejemplo de tareas",
+    "placeholders": {}
+  },
+  "tasksAppBarTitle": "Tareas",
+  "@tasksAppBarTitle": {
+    "type": "text",
+    "description": "Título de la cabecera de la pantalla de tareas",
+    "placeholders": {}
+  },
+  "noTasksFoundMessage": "No se han encontrado tareas",
+  "@noTasksFoundMessage": {
+    "type": "text",
+    "description": "Mensaje mostrado cuando no se encuentran tareas",
+    "placeholders": {}
+  },
+  "createTaskButtonTooltip": "Crear tarea",
+  "@createTaskButtonTooltip": {
+    "type": "text",
+    "description": "Tooltip del botón de crear tarea",
+    "placeholders": {}
+  },
+  "newTaskFormTitleLabel": "Título",
+  "@newTaskFormTitleLabel": {
+    "type": "text",
+    "description": "Etiqueta del campo de título de la tarea",
+    "placeholders": {}
+  },
+  "newTaskFormDescriptionLabel": "Descripción",
+  "@newTaskFormDescriptionLabel": {
+    "type": "text",
+    "description": "Etiqueta del campo de descripción de la tarea",
+    "placeholders": {}
+  },
+  "newTaskFormPriorityLabel": "Prioridad",
+  "@newTaskFormPriorityLabel": {
+    "type": "text",
+    "description": "Etiqueta del campo de prioridad de la tarea",
+    "placeholders": {}
+  },
+  "newTaskFormPriorityLowLabel": "Baja",
+  "@newTaskFormPriorityLowLabel": {
+    "type": "text",
+    "description": "Etiqueta de la opción de prioridad baja en el formulario de nueva tarea",
+    "placeholders": {}
+  },
+  "newTaskFormPriorityMediumLabel": "Media",
+  "@newTaskFormPriorityMediumLabel": {
+    "type": "text",
+    "description": "Etiqueta de la opción de prioridad media en el formulario de nueva tarea",
+    "placeholders": {}
+  },
+  "newTaskFormPriorityHighLabel": "Alta",
+  "@newTaskFormPriorityHighLabel": {
+    "type": "text",
+    "description": "Etiqueta de la opción de prioridad alta en el formulario de nueva tarea",
+    "placeholders": {}
+  },
+  "newTaskFormSubmitButtonLabel": "Crear tarea",
+  "@newTaskFormSubmitButtonLabel": {
+    "type": "text",
+    "description": "Etiqueta del botón de crear tarea",
+    "placeholders": {}
+  },
+  "createTaskSuccessMessage": "Tarea creada exitosamente",
+  "@createTaskSuccessMessage": {
+    "type": "text",
+    "description": "Mensaje mostrado cuando se crea una tarea con éxito",
+    "placeholders": {}
+  },
+  "createTaskTitleEmptyError": "El título no puede estar vacío",
+  "@createTaskTitleEmptyError": {
+    "type": "text",
+    "description": "Mensaje mostrado cuando el título de la tarea está vacío",
+    "placeholders": {}
+  },
+  "createTaskDescriptionRequiredForHighPriorityTaskError": "Una descripción es necesaria para tareas de alta prioridad",
+  "@createTaskDescriptionRequiredForHighPriorityTaskError": {
+    "type": "text",
+    "description": "Mensaje mostrado cuando hace falta una descripción para tareas de alta prioridad",
+    "placeholders": {}
+  },
+  "createTaskGenericMessage": "Error inesperado al crear tarea",
+  "@createTaskGenericMessage": {
+    "type": "text",
+    "description": "Mensage genérico mostrado cuando falla inesperadamente la creación de una tarea",
+    "placeholders": {}
+  },
+  "createTaskFailureInvalidDataMessage": "Datos de tarea inválidos",
+  "@createTaskFailureInvalidDataMessage": {
+    "type": "text",
+    "description": "Mensaje mostrado cuando falla la creación de una tarea por datos inválidos",
+    "placeholders": {}
+  },
+  "deleteTaskButtonTooltip": "Eliminar tarea \"{taskTitle}\"",
+  "@deleteTaskButtonTooltip": {
+    "type": "text",
+    "description": "Tooltip del botón de eliminar tarea",
+    "placeholders": {
+      "taskTitle": {
+        "type": "String",
+        "description": "Título de la tarea",
+        "example": "Nueva tarea"
+      }
+    }
+  }
+}
