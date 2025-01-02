@@ -1,5 +1,5 @@
 {
-  "targetRelativePath": "./{{projectName.snakeCase()}}",
+  "targetRelativePath": "./{{project_name.snakeCase()}}",
   "replacements": [
     {
       "from": "packages/app/android",
@@ -15,24 +15,24 @@
     },
     {
       "from": "altoke-app",
-      "to": "{{projectName.kebabCase()}}"
+      "to": "{{project_name.kebabCase()}}"
     },
     {
       "from": "altoke_app",
-      "to": "{{projectName.snakeCase()}}"
+      "to": "{{project_name.snakeCase()}}"
     },
     {
       "from": "Altoke App",
-      "to": "{{projectName.titleCase()}}"
+      "to": "{{project_name.titleCase()}}"
     },
     {
       "from": "An Altoke App.",
-      "to": "{{projectDescription}}"
+      "to": "{{project_description}}"
     }
   ],
   "lineDeletions": [
     {
-      "filePath": "./{{projectName.snakeCase()}}/packages/app/lib/l10n/arb/app_en.arb",
+      "filePath": "./{{project_name.snakeCase()}}/packages/app/lib/l10n/arb/app_en.arb",
       "ranges": [
         {
           "start": 51,
@@ -41,7 +41,7 @@
       ]
     },
     {
-      "filePath": "./{{projectName.snakeCase()}}/packages/app/lib/l10n/arb/app_es.arb",
+      "filePath": "./{{project_name.snakeCase()}}/packages/app/lib/l10n/arb/app_es.arb",
       "ranges": [
         {
           "start": 51,
