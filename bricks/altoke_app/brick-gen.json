@@ -3,15 +3,15 @@
   "replacements": [
     {
       "from": "packages/app/android",
-      "to": "packages/app/{{#androidOrganization}}android{{/androidOrganization}}"
+      "to": "packages/app/{{#android_organization}}android{{/android_organization}}"
     },
     {
       "from": "com/mrverdant13/altoke_app",
-      "to": "{{{androidApplicationIdentifierAsPath}}}"
+      "to": "{{{android_application_identifier_as_path}}}"
     },
     {
       "from": "com.mrverdant13.altoke_app",
-      "to": "{{androidApplicationIdentifier}}"
+      "to": "{{android_application_identifier}}"
     },
     {
       "from": "altoke-app",
