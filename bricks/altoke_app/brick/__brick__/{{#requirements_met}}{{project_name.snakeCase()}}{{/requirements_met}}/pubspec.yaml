@@ -1,0 +1,10 @@
+name: {{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}_monorepo
+publish_to: none
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.6.0 <4.0.0"
+  flutter: ">=3.27.1 <4.0.0"
+
+dev_dependencies:
+  melos: ^6.2.0
