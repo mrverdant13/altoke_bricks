@@ -26,4 +26,7 @@ void run(HookContext context) {
         'android_application_identifier': androidApplicationIdentifier,
       });
   }
+  context.vars.addAll({
+    'requirements_met': true,
+  });
 }
