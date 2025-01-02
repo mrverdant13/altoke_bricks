@@ -14,7 +14,7 @@ vars:
     type: string
     description: A description of the project.
     prompt: What is the description of the project?
-  appRouter:
+  app_router:
     type: enum
     values:
       - auto_route
