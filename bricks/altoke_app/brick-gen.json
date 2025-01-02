@@ -15,7 +15,7 @@
     },
     {
       "from": "An Altoke App.",
-      "to": "{{projectDescription}}"
+      "to": "{{project_description}}"
     }
   ],
   "lineDeletions": [

@@ -10,7 +10,7 @@ vars:
     type: string
     description: The name of the project.
     prompt: What is the name of the project?
-  projectDescription:
+  project_description:
     type: string
     description: A description of the project.
     prompt: What is the description of the project?
