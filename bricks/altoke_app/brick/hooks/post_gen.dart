@@ -10,7 +10,7 @@ import 'package:shell/shell.dart';
 Future<void> run(HookContext context) async {
   final projectPath = path.join(
     Directory.current.path,
-    context.vars['projectName'] as String,
+    context.vars['project_name'] as String,
   );
   final projectDir = Directory(projectPath);
   final appPath = path.joinAll([projectPath, 'packages', 'app']);
