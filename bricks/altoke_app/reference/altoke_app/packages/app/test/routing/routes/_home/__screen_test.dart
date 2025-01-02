@@ -1,7 +1,6 @@
 import 'package:altoke_app/app/app.dart';
 import 'package:altoke_app/flavors/flavors.dart';
 import 'package:altoke_app/routing/routing.dart';
-/*{{/use_auto_route}}*/
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 /*{{#use_go_router}}*/

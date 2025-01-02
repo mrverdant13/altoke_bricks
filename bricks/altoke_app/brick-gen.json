@@ -1,5 +1,5 @@
 {
-  "targetRelativePath": "./{{project_name.snakeCase()}}",
+  "targetRelativePath": ".",
   "replacements": [
     {
       "from": "packages/app/android",
@@ -14,12 +14,16 @@
       "to": "{{android_application_identifier}}"
     },
     {
+      "from": "\\b(REQUIREMENTS.md)\\b",
+      "to": "{{^requirements_met}}REQUIREMENTS.md{{/requirements_met}}"
+    },
+    {
       "from": "altoke-app",
       "to": "{{project_name.kebabCase()}}"
     },
     {
       "from": "altoke_app",
-      "to": "{{project_name.snakeCase()}}"
+      "to": "{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}"
     },
     {
       "from": "Altoke App",
