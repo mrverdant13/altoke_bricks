@@ -8,13 +8,20 @@ dependencies:
   collection: ^1.19.0
   mason: ^0.1.0
   path: ^1.9.0
+  router_package:
+    path: ../../../../tools/router_package/
   shell:
-    path: ../../../../tools/shell
+    path: ../../../../tools/shell/
 
 dev_dependencies:
   very_good_analysis: ^7.0.0
 
 dependency_overrides:
+  router_package:
+    git:
+      url: https://github.com/mrverdant13/altoke_bricks.git
+      ref: 5a0798ccaf78f3a13d2211955193e9891638a29e
+      path: ./tools/router_package/
   shell:
     git:
       url: https://github.com/mrverdant13/altoke_bricks.git

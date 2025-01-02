@@ -2,6 +2,18 @@
   "targetRelativePath": "./{{project_name.snakeCase()}}",
   "replacements": [
     {
+      "from": "packages/app/android",
+      "to": "packages/app/{{#include_android_platform}}android{{/include_android_platform}}"
+    },
+    {
+      "from": "com/mrverdant13/altoke_app",
+      "to": "{{{android_application_identifier_as_path}}}"
+    },
+    {
+      "from": "com.mrverdant13.altoke_app",
+      "to": "{{android_application_identifier}}"
+    },
+    {
       "from": "altoke-app",
       "to": "{{project_name.kebabCase()}}"
     },

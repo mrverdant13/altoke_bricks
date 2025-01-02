@@ -14,11 +14,15 @@ vars:
     type: string
     description: A description of the project.
     prompt: What is the description of the project?
-  app_router:
+  android_organization:
+    type: string
+    description: The organization of the Android project.
+    prompt: What is the organization of the Android project? If not provided, no Android project will be created.
+  router_package:
     type: enum
     values:
-      - auto_route
-      - go_router
+      - "`auto_route`"
+      - "`go_router`"
     description: The package to use for routing.
     default: auto_route
     prompt: What router to use?
