@@ -3,7 +3,7 @@
   "replacements": [
     {
       "from": "packages/app/android",
-      "to": "packages/app/{{#android_organization}}android{{/android_organization}}"
+      "to": "packages/app/{{#include_android_platform}}android{{/include_android_platform}}"
     },
     {
       "from": "com/mrverdant13/altoke_app",
