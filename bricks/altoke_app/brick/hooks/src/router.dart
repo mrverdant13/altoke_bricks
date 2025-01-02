@@ -9,7 +9,7 @@ enum RouterPackage {
 
   final String varIdentifier;
 
-  static const varKey = 'appRouter';
+  static const varKey = 'app_router';
 
   static Map<String, bool> getSelectionMap(HookContext context) {
     final selectedApproach = RouterPackage.getSelectedApproach(context);
