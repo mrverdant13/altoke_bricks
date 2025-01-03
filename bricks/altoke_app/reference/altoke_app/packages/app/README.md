@@ -27,10 +27,10 @@ You can check the available scripts in the `melos.yaml` file, located in the roo
 
 **Note:** Don't forget to run `melos bootstrap` first.
 
-<!--*w 2v w*-->
+<!--w 2v w-->
 <!--{{#use_auto_route}}-->
-## Deep linking <!--*remove-start*-->(`auto_route`)<!--*remove-end*-->
-<!--*w 2v w*-->
+## Deep linking <!--remove-start-->(`auto_route`)<!--remove-end-->
+<!--w 2v w-->
 
 This project uses the [`auto_route` package][pub_package_auto_route] to support deep linking.
 
@@ -44,8 +44,8 @@ _For more information, see the [`auto_route` package][pub_package_auto_route] do
 
 <!--{{/use_auto_route}}-->
 <!--{{#use_go_router}}-->
-## Deep linking <!--*remove-start*-->(`go_router`)<!--*remove-end*-->
-<!--*w 2v w*-->
+## Deep linking <!--remove-start-->(`go_router`)<!--remove-end-->
+<!--w 2v w-->
 
 This project uses the [`go_router` package][pub_package_go_router] to support deep linking.
 
@@ -57,7 +57,7 @@ This project uses the [`go_router` package][pub_package_go_router] to support de
 
 _For more information, see the [`go_router` package][pub_package_go_router] documentation._
 <!--{{/use_go_router}}-->
-<!--*w 2v w*-->
+<!--w 2v w-->
 
 ## Internationalization
 
@@ -145,22 +145,22 @@ Widget build(BuildContext context) {
 [docs_melos_link]: https://melos.invertase.dev/
 [flutter_docs_internationalization_link]: https://docs.flutter.dev/ui/accessibility-and-localization/internationalization
 
-<!--*w 1v w*-->
+<!--w 1v w-->
 <!--{{#use_auto_route}}-->
 
 [pub_package_auto_route]: https://pub.dev/packages/auto_route
 
-<!--*w 1v w*-->
+<!--w 1v w-->
 <!--{{/use_auto_route}}-->
 
 [pub_package_flutter_localizations]: https://api.flutter.dev/flutter/flutter_localizations/flutter_localizations-library.html
 
-<!--*w 1v w*-->
+<!--w 1v w-->
 <!--{{#use_go_router}}-->
 
 [pub_package_go_router]: https://pub.dev/packages/go_router
 
-<!--*w 1v w*-->
+<!--w 1v w-->
 <!--{{/use_go_router}}-->
 
 [pub_package_intl]: https://pub.dev/packages/intl

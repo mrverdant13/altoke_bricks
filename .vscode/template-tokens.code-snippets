@@ -1,5 +1,6 @@
 {
-  "Remove Start": {
+  "Remove Start (yaml)": {
+    "scope": "yaml",
     "description": "Openning token for a fragment removal",
     "prefix": [
       "removestart",
@@ -7,10 +8,22 @@
       "rms",
     ],
     "body": [
-      "${1|/,#|}*remove-start*${1|/,#|}",
+      "#remove-start#",
     ]
   },
-  "Remove End": {
+  "Remove Start (generic)": {
+    "description": "Openning token for a fragment removal",
+    "prefix": [
+      "removestart",
+      "rmstart",
+      "rms",
+    ],
+    "body": [
+      "${BLOCK_COMMENT_START}remove-start${BLOCK_COMMENT_END}",
+    ]
+  },
+  "Remove End (yaml)": {
+    "scope": "yaml",
     "description": "Closing token for a fragment removal",
     "prefix": [
       "removeend",
@@ -18,10 +31,22 @@
       "rme",
     ],
     "body": [
-      "${1|/,#|}*remove-end*${1|/,#|}",
+      "#remove-end#",
     ]
   },
-  "Remove Selection": {
+  "Remove End (generic)": {
+    "description": "Closing token for a fragment removal",
+    "prefix": [
+      "removeend",
+      "rmend",
+      "rme",
+    ],
+    "body": [
+      "${BLOCK_COMMENT_START}remove-end${BLOCK_COMMENT_END}",
+    ]
+  },
+  "Remove Selection (yaml)": {
+    "scope": "yaml",
     "description": "Enclosing tokens for the removal of an optionally selected fragment",
     "prefix": [
       "removeselection",
@@ -29,12 +54,22 @@
       "rm",
     ],
     "body": [
-      "${1|/,#|}*remove-start*${1|/,#|}",
-      "$TM_SELECTED_TEXT",
-      "${1|/,#|}*remove-end*${1|/,#|}",
+      "#remove-start#${TM_SELECTED_TEXT}#remove-end#",
     ]
   },
-  "Variable Start": {
+  "Remove Selection (generic)": {
+    "description": "Enclosing tokens for the removal of an optionally selected fragment",
+    "prefix": [
+      "removeselection",
+      "rmselection",
+      "rm",
+    ],
+    "body": [
+      "${BLOCK_COMMENT_START}remove-start${BLOCK_COMMENT_END}${TM_SELECTED_TEXT}${BLOCK_COMMENT_START}remove-end${BLOCK_COMMENT_END}",
+    ]
+  },
+  "Variable Start (yaml)": {
+    "scope": "yaml",
     "description": "Openning token for a fragment parameterization",
     "prefix": [
       "variablestart",
@@ -42,10 +77,22 @@
       "vs",
     ],
     "body": [
-      "${1|/,#|}*{{#${2:mason variable}}}*${1|/,#|}",
+      "#{{${1|#,^|}${2:mason variable}}}#",
     ]
   },
-  "Variable End": {
+  "Variable Start (generic)": {
+    "description": "Openning token for a fragment parameterization",
+    "prefix": [
+      "variablestart",
+      "varstart",
+      "vs",
+    ],
+    "body": [
+      "${BLOCK_COMMENT_START}{{${1|#,^|}${2:mason variable}}}${BLOCK_COMMENT_END}",
+    ]
+  },
+  "Variable End (yaml)": {
+    "scope": "yaml",
     "description": "Closing token for a fragment parameterization",
     "prefix": [
       "variableend",
@@ -53,10 +100,22 @@
       "ve",
     ],
     "body": [
-      "${1|/,#|}*{{/${2:mason variable}}}*${1|/,#|}",
+      "#{{/${1:mason variable}}}#",
     ]
   },
-  "Variable Selection": {
+  "Variable End (generic)": {
+    "description": "Closing token for a fragment parameterization",
+    "prefix": [
+      "variableend",
+      "varend",
+      "ve",
+    ],
+    "body": [
+      "${BLOCK_COMMENT_START}{{/${1:mason variable}}}${BLOCK_COMMENT_END}",
+    ]
+  },
+  "Variable Selection (yaml)": {
+    "scope": "yaml",
     "description": "Enclosing tokens for the parameterization of an optionally selected fragment",
     "prefix": [
       "variableselection",
@@ -64,12 +123,22 @@
       "var",
     ],
     "body": [
-      "${1|/,#|}*{{#${2:mason variable}}}*${1|/,#|}",
-      "$TM_SELECTED_TEXT",
-      "${1|/,#|}*{{/${2:mason variable}}}*${1|/,#|}",
+      "#{{${1|#,^|}${2:mason variable}}}#${TM_SELECTED_TEXT}#{{/${2:mason variable}}}#",
     ]
   },
-  "Spacing": {
+  "Variable Selection (generic)": {
+    "description": "Enclosing tokens for the parameterization of an optionally selected fragment",
+    "prefix": [
+      "variableselection",
+      "varselection",
+      "var",
+    ],
+    "body": [
+      "${BLOCK_COMMENT_START}{{${1|#,^|}${2:mason variable}}}${BLOCK_COMMENT_END}${TM_SELECTED_TEXT}${BLOCK_COMMENT_START}{{/${2:mason variable}}}${BLOCK_COMMENT_END}",
+    ]
+  },
+  "Spacing groups (yaml)": {
+    "scope": "yaml",
     "description": "Inserts a spacing pattern token",
     "prefix": [
       "spacing",
@@ -77,7 +146,18 @@
       "sp",
     ],
     "body": [
-      "/*w $1 w*/",
+      "#w ${1:spacing groups} w#",
+    ]
+  },
+  "Spacing groups (generic)": {
+    "description": "Inserts a spacing pattern token",
+    "prefix": [
+      "spacing",
+      "space",
+      "sp",
+    ],
+    "body": [
+      "${BLOCK_COMMENT_START}w ${1:spacing groups} w${BLOCK_COMMENT_END}",
     ]
   },
 }

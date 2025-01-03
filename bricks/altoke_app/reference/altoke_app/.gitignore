@@ -31,4 +31,4 @@
 
 # Included in the git repo as per requirement of `melos`.
 # See: https://melos.invertase.dev/getting-started#configure-the-workspace
-#*w 1v w*##*remove-start*##*remove-end*#!/pubspec.lock
+#w 1v w##remove-start##remove-end#!/pubspec.lock

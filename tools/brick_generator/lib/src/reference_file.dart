@@ -1,50 +1,50 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:brick_generator/src/brick_gen_data.dart';
-import 'package:brick_generator/src/line_deletions.dart';
-import 'package:brick_generator/src/replacement.dart';
+import 'package:brick_generator/src/models/brick_gen_data.dart';
+import 'package:brick_generator/src/models/line_deletions.dart';
+import 'package:brick_generator/src/models/replacement.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
 import 'package:shell/git.dart';
 
 /// Regexp patterns to parametrize the template.
 @visibleForTesting
-abstract class AltokeRegexp {
+abstract class AltokeContentPattern {
   /// Regexp to identify blocks to be removed from the contents of a file.
   @visibleForTesting
-  static final remotionRegexp = RegExp(
-    r'(((\/)|(#)|(<!--))\*drop\*((\/)|(#)|(-->)).*)|((\s+)?((\/)|(#)|(<!--))\*remove-start\*((\/)|(#)|(-->))([\s\S]*?)((\/)|(#)|(<!--))\*remove-end\*((\/)|(#)|(-->))(\s+)?)',
+  static final remotion = RegExp(
+    r'(((\/\*)|(#)|(<!--))drop((\*\/)|(#)|(-->)).*)|((\s+)?((\/\*)|(#)|(<!--))remove-start((\*\/)|(#)|(-->))([\s\S]*?)((\/\*)|(#)|(<!--))remove-end((\*\/)|(#)|(-->))(\s+)?)',
     dotAll: true,
   );
 
   /// Regexp to identify variables to be resolved within the contents of a file.
   @visibleForTesting
-  static final variableRegexp = RegExp(
-    r'(\s+)?((#)|(\/\*)|(<!--)){{(.*?)}}((#)|(\*\/)|(-->))(\s+)?',
+  static final variable = RegExp(
+    r'(\s+)?((\/\*)|(#)|(<!--)){{(.*?)}}((\*\/)|(#)|(-->))(\s+)?',
     dotAll: true,
   );
 
   /// Regexp to identify whitespace actions to be resolved within the contents
   /// of a file.
   @visibleForTesting
-  static final spacingGroupsRegexp = RegExp(
-    r'(\s+)?((\/)|(#)|(<!--))\*w ((?:\d+[v>]\s*)+) w\*((\/)|(#)|(-->))(\s+)?',
+  static final spacingGroups = RegExp(
+    r'(\s+)?((\/\*)|(#)|(<!--))w ((?:\d+[v>]\s*)+) w((\*\/)|(#)|(-->))(\s+)?',
     dotAll: true,
   );
 
   /// Regexp to identify a single whitespace action to be resolved within the
   /// contents of a file.
   @visibleForTesting
-  static final spacingGroupDataRegexp = RegExp(
+  static final spacingGroup = RegExp(
     r'(\d+)([v>])',
     dotAll: true,
   );
 
   /// Regexp to identify a block to be replaced within the contents of a file.
   @visibleForTesting
-  static final replacementRegexp = RegExp(
-    r'((?:\/\*)|(?:#\*)|(?:<!--))replace-start(?:(?:\*\/)|(?:\*#)|(?:-->))(?:[\s\S]*?)(?:(?:\/\*)|(?:#\*)|(?:<!--))with\s*(?:i(\d+))?(?:(?:\*\/)|(?:\*#)|(?:-->))\s*([\s\S]*?)\s*(?:(?:\/\*)|(?:#\*)|(?:<!--))replace-end(?:(?:\*\/)|(?:\*#)|(?:-->))',
+  static final replacement = RegExp(
+    r'((?:\/\*)|(?:#)|(?:<!--))replace-start(?:(?:\*\/)|(?:#)|(?:-->))(?:[\s\S]*?)(?:(?:\/\*)|(?:#)|(?:<!--))with\s*(?:i(\d+))?(?:(?:\*\/)|(?:#)|(?:-->))\s*([\s\S]*?)\s*(?:(?:\/\*)|(?:#)|(?:<!--))replace-end(?:(?:\*\/)|(?:#)|(?:-->))',
     dotAll: true,
   );
 }
@@ -102,19 +102,19 @@ extension ReferenceFile on File {
         )
         .applyReplacements(replacements)
         .replaceAll(
-          AltokeRegexp.remotionRegexp,
+          AltokeContentPattern.remotion,
           '',
         )
         .replaceAllMapped(
-          AltokeRegexp.replacementRegexp,
+          AltokeContentPattern.replacement,
           transformReplacementMatchForFileContents,
         )
         .replaceAllMapped(
-          AltokeRegexp.variableRegexp,
+          AltokeContentPattern.variable,
           transformVariableMatchForFileContents,
         )
         .replaceAllMapped(
-          AltokeRegexp.spacingGroupsRegexp,
+          AltokeContentPattern.spacingGroups,
           transformWhitespaceActionsMatchForFileContents,
         );
     await writeAsString(resolvedContents);
@@ -182,7 +182,7 @@ String transformReplacementMatchForFileContents(Match match) {
   switch (type) {
     case '/*':
       return computeSlashBasedReplacement();
-    case '#*':
+    case '#':
       return computeHashBasedReplacement();
     case '<!--':
       return computeHtmlBasedReplacement();
@@ -247,7 +247,7 @@ String transformVariableMatchForFileContents(Match match) {
 String transformWhitespaceActionsMatchForFileContents(Match match) {
   final buf = StringBuffer();
   final candidates =
-      AltokeRegexp.spacingGroupDataRegexp.allMatches(match.group(6) ?? '');
+      AltokeContentPattern.spacingGroup.allMatches(match.group(6) ?? '');
   for (final candidate in candidates) {
     final count = int.tryParse(candidate.group(1) ?? '') ?? 0;
     final action = () {

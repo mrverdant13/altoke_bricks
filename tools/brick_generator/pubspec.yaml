@@ -6,6 +6,7 @@ environment:
   sdk: ">=3.6.0 <4.0.0"
 
 dependencies:
+  dart_mappable: ^4.3.0
   meta: ^1.15.0
   monorepo_elements:
     path: ../monorepo_elements
@@ -14,4 +15,7 @@ dependencies:
     path: ../shell
 
 dev_dependencies:
+  build_runner: ^2.4.14
+  dart_mappable_builder: ^4.3.0
+  test: ^1.25.14
   very_good_analysis: ^7.0.0

@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:brick_generator/src/brick_gen_data.dart';
-import 'package:brick_generator/src/brick_gen_options.dart';
+import 'package:brick_generator/src/models/brick_gen_data.dart';
+import 'package:brick_generator/src/models/brick_gen_options.dart';
 import 'package:brick_generator/src/reference_file.dart';
 import 'package:monorepo_elements/monorepo_elements.dart';
 import 'package:shell/git.dart';

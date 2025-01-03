@@ -2,7 +2,7 @@
 targets:
   $default:
     builders:
-      #*w 1v 6> w*#
+      #w 1v 6> w#
       #{{#use_dart_mappable}}#
       dart_mappable_builder:
         generate_for:
@@ -22,4 +22,4 @@ targets:
           when: false
       #{{/use_freezed}}#
 #{{/use_equatable}}#
-#*w 1v w*#
+#w 1v w#
