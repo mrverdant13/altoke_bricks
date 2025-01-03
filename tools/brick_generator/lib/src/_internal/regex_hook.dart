@@ -11,13 +11,14 @@ class RegexHook extends MappingHook {
   const RegexHook();
 
   @override
-  Object? beforeDecode(Object? value) {
-    return switch (value) {
-      final String value => RegExp(value),
-      _ => value,
-    };
-  }
+  Object? beforeDecode(Object? value) => switch (value) {
+        final RegExp value => value,
+        final String value => RegExp(value),
+        _ => RegExp(value.toString()),
+      };
 }
 
+// coverage:ignore-start
 /// {@macro brick_generator.regex_hook}
 const regexHook = RegexHook();
+// coverage:ignore-end

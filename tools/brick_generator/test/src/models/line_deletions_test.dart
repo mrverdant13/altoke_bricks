@@ -248,12 +248,16 @@ This is line 19.
 This is line 20.
 ''';
 
-      final result = lineDeletions.apply(
+      final resultForMatchingPath = lineDeletions.apply(
         filePath: 'file/path',
         input: input,
       );
-
-      expect(result, expected);
+      expect(resultForMatchingPath, expected);
+      final resultForNonMatchingPath = lineDeletions.apply(
+        filePath: 'non-matching/file/path',
+        input: input,
+      );
+      expect(resultForNonMatchingPath, input);
     });
   });
 
