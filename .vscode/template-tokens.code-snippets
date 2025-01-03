@@ -3,9 +3,9 @@
     "scope": "yaml",
     "description": "Openning token for a fragment removal",
     "prefix": [
-      "removestart",
-      "rmstart",
-      "rms",
+      "RemoveStart",
+      "RmStart",
+      "RmS",
     ],
     "body": [
       "#remove-start#",
@@ -14,9 +14,9 @@
   "Remove Start (generic)": {
     "description": "Openning token for a fragment removal",
     "prefix": [
-      "removestart",
-      "rmstart",
-      "rms",
+      "RemoveStart",
+      "RmStart",
+      "RmS",
     ],
     "body": [
       "${BLOCK_COMMENT_START}remove-start${BLOCK_COMMENT_END}",
@@ -26,9 +26,9 @@
     "scope": "yaml",
     "description": "Closing token for a fragment removal",
     "prefix": [
-      "removeend",
-      "rmend",
-      "rme",
+      "RemoveEnd",
+      "RmEnd",
+      "RmE",
     ],
     "body": [
       "#remove-end#",
@@ -37,9 +37,9 @@
   "Remove End (generic)": {
     "description": "Closing token for a fragment removal",
     "prefix": [
-      "removeend",
-      "rmend",
-      "rme",
+      "RemoveEnd",
+      "RmEnd",
+      "RmE",
     ],
     "body": [
       "${BLOCK_COMMENT_START}remove-end${BLOCK_COMMENT_END}",
@@ -49,9 +49,9 @@
     "scope": "yaml",
     "description": "Enclosing tokens for the removal of an optionally selected fragment",
     "prefix": [
-      "removeselection",
-      "rmselection",
-      "rm",
+      "RemoveSelection",
+      "RmSelection",
+      "Rm",
     ],
     "body": [
       "#remove-start#${TM_SELECTED_TEXT}#remove-end#",
@@ -60,9 +60,9 @@
   "Remove Selection (generic)": {
     "description": "Enclosing tokens for the removal of an optionally selected fragment",
     "prefix": [
-      "removeselection",
-      "rmselection",
-      "rm",
+      "RemoveSelection",
+      "RmSelection",
+      "Rm",
     ],
     "body": [
       "${BLOCK_COMMENT_START}remove-start${BLOCK_COMMENT_END}${TM_SELECTED_TEXT}${BLOCK_COMMENT_START}remove-end${BLOCK_COMMENT_END}",
@@ -72,9 +72,9 @@
     "scope": "yaml",
     "description": "Openning token for a fragment parameterization",
     "prefix": [
-      "variablestart",
-      "varstart",
-      "vs",
+      "VariableStart",
+      "VarStart",
+      "VS",
     ],
     "body": [
       "#{{${1|#,^|}${2:mason variable}}}#",
@@ -83,9 +83,9 @@
   "Variable Start (generic)": {
     "description": "Openning token for a fragment parameterization",
     "prefix": [
-      "variablestart",
-      "varstart",
-      "vs",
+      "VariableStart",
+      "VarStart",
+      "VS",
     ],
     "body": [
       "${BLOCK_COMMENT_START}{{${1|#,^|}${2:mason variable}}}${BLOCK_COMMENT_END}",
@@ -95,9 +95,9 @@
     "scope": "yaml",
     "description": "Closing token for a fragment parameterization",
     "prefix": [
-      "variableend",
-      "varend",
-      "ve",
+      "VariableEnd",
+      "VarEnd",
+      "VE",
     ],
     "body": [
       "#{{/${1:mason variable}}}#",
@@ -106,9 +106,9 @@
   "Variable End (generic)": {
     "description": "Closing token for a fragment parameterization",
     "prefix": [
-      "variableend",
-      "varend",
-      "ve",
+      "VariableEnd",
+      "VarEnd",
+      "VE",
     ],
     "body": [
       "${BLOCK_COMMENT_START}{{/${1:mason variable}}}${BLOCK_COMMENT_END}",
@@ -118,9 +118,9 @@
     "scope": "yaml",
     "description": "Enclosing tokens for the parameterization of an optionally selected fragment",
     "prefix": [
-      "variableselection",
-      "varselection",
-      "var",
+      "VariableSelection",
+      "VarSelection",
+      "Var",
     ],
     "body": [
       "#{{${1|#,^|}${2:mason variable}}}#${TM_SELECTED_TEXT}#{{/${2:mason variable}}}#",
@@ -129,9 +129,9 @@
   "Variable Selection (generic)": {
     "description": "Enclosing tokens for the parameterization of an optionally selected fragment",
     "prefix": [
-      "variableselection",
-      "varselection",
-      "var",
+      "VariableSelection",
+      "VarSelection",
+      "Var",
     ],
     "body": [
       "${BLOCK_COMMENT_START}{{${1|#,^|}${2:mason variable}}}${BLOCK_COMMENT_END}${TM_SELECTED_TEXT}${BLOCK_COMMENT_START}{{/${2:mason variable}}}${BLOCK_COMMENT_END}",
@@ -141,9 +141,9 @@
     "scope": "yaml",
     "description": "Inserts a spacing pattern token",
     "prefix": [
-      "spacing",
-      "space",
-      "sp",
+      "Spacing",
+      "Space",
+      "Sp",
     ],
     "body": [
       "#w ${1:spacing groups} w#",
@@ -152,9 +152,9 @@
   "Spacing groups (generic)": {
     "description": "Inserts a spacing pattern token",
     "prefix": [
-      "spacing",
-      "space",
-      "sp",
+      "Spacing",
+      "Space",
+      "Sp",
     ],
     "body": [
       "${BLOCK_COMMENT_START}w ${1:spacing groups} w${BLOCK_COMMENT_END}",
