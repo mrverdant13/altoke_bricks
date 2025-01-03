@@ -1,14 +1,21 @@
-import 'package:brick_generator/src/brick_gen_options.dart';
+import 'package:brick_generator/src/models/brick_gen_options.dart';
+import 'package:brick_generator/src/models/line_deletions.dart';
+import 'package:brick_generator/src/models/replacement.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as path;
+
+part 'brick_gen_data.mapper.dart';
 
 /// {@template brick_generator.brick_gen_data}
 /// The data used to generate a brick.
 /// {@endtemplate}
 @immutable
-class BrickGenData extends BrickGenOptions {
+@MappableClass()
+class BrickGenData extends BrickGenOptions with BrickGenDataMappable {
   /// {@macro brick_generator.brick_gen_data}
-  const BrickGenData._({
+  @visibleForTesting
+  const BrickGenData({
     required this.referenceAbsolutePath,
     required this.targetAbsolutePath,
     required super.targetRelativePath,
@@ -23,7 +30,7 @@ class BrickGenData extends BrickGenOptions {
     required String targetAbsolutePath,
     required BrickGenOptions options,
   }) {
-    return BrickGenData._(
+    return BrickGenData(
       referenceAbsolutePath: referenceAbsolutePath,
       targetAbsolutePath: targetAbsolutePath,
       targetRelativePath: options.targetRelativePath,
@@ -43,6 +50,11 @@ class BrickGenData extends BrickGenOptions {
   String applyReplacementsToTargetRelativeDescendant(String inputPath) {
     final relativePath = path.relative(inputPath, from: targetAbsolutePath);
     final resolvedRelativePath = replacements.apply(relativePath);
-    return path.join(targetAbsolutePath, resolvedRelativePath);
+    return path.normalize(
+      path.join(
+        targetAbsolutePath,
+        resolvedRelativePath,
+      ),
+    );
   }
 }

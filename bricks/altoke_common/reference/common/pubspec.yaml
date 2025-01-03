@@ -7,7 +7,7 @@ environment:
   sdk: ">=3.6.0 <4.0.0"
 
 dependencies:
-  #*w 1v 2> w*#
+  #w 1v 2> w#
   #{{#use_dart_mappable}}#
   dart_mappable: ^4.3.0
   #{{/use_dart_mappable}}#
@@ -18,16 +18,16 @@ dependencies:
   freezed_annotation: ^2.4.4
   #{{/use_freezed}}#
   #{{#use_meta}}#
-  #*w 1v 2> w*#
+  #w 1v 2> w#
   meta: ^1.15.0
   #{{/use_meta}}#
-#*w 2v w*#
+#w 2v w#
 
 dev_dependencies:
   #{{#use_code_generation}}#
-  #*w 1v 2> w*#
+  #w 1v 2> w#
   build_runner: ^2.4.14
-  #*w 1v 2> w*#
+  #w 1v 2> w#
   #{{/use_code_generation}}#
   #{{#use_dart_mappable}}#
   dart_mappable_builder: ^4.3.0
@@ -35,6 +35,6 @@ dev_dependencies:
   #{{#use_freezed}}#
   freezed: ^2.5.7
   #{{/use_freezed}}#
-  #*w 1v 2> w*#
+  #w 1v 2> w#
   test: ^1.25.14
   very_good_analysis: ^7.0.0

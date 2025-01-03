@@ -8,38 +8,38 @@ environment:
   flutter: ">=3.27.1 <4.0.0"
 
 dependencies:
-  #*remove-start*#
+  #remove-start#
   altoke_common:
     path: ../../../../../altoke_common/reference/common/
-  #*remove-end*#
-  #*w 1v 2> w*#
+  #remove-end#
+  #w 1v 2> w#
   #{{#use_auto_route}}#
   auto_route: ^9.2.2
-  #*w 1v 2> w*#
+  #w 1v 2> w#
   #{{/use_auto_route}}#
-  #*remove-start*#
+  #remove-start#
   drift: ^2.21.0
   drift_flutter: ^0.2.1
   drift_local_database:
     path: ../../../../../altoke_local_database/reference/local_database/drift_local_database/
-  #*remove-end*#
+  #remove-end#
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^2.6.1
-  #*w 1v 2> w*#
+  #w 1v 2> w#
   #{{#use_go_router}}#
   go_router: ^14.6.2
-  #*w 1v 2> w*#
+  #w 1v 2> w#
   #{{/use_go_router}}#
-  #*remove-start*#
+  #remove-start#
   hive: ^2.2.3
   hive_local_database:
     path: ../../../../../altoke_local_database/reference/local_database/hive_local_database/
-  #*remove-end*#
+  #remove-end#
   intl: ^0.19.0
-  #*remove-start*#
+  #remove-start#
   isar:
     version: 3.1.8
     hosted: https://pub.isar-community.dev/
@@ -52,33 +52,33 @@ dependencies:
     path: ../../../../../altoke_local_database/reference/local_database/local_database/
   path: ^1.9.0
   path_provider: ^2.1.5
-  #*remove-end*#
-  #*w 1v 2> w*#
+  #remove-end#
+  #w 1v 2> w#
   riverpod_annotation: ^2.6.1
 
 dev_dependencies:
-  #*w 1v 2> w*#
+  #w 1v 2> w#
   #{{#use_auto_route}}#
   auto_route_generator: ^9.0.0
-  #*w 1v 2> w*#
+  #w 1v 2> w#
   #{{/use_auto_route}}#
   build_runner: ^2.4.14
   custom_lint: ^0.7.0
   flutter_test:
     sdk: flutter
-  #*w 1v 2> w*#
+  #w 1v 2> w#
   #{{#use_go_router}}#
   go_router_builder: ^2.7.1
-  #*w 1v 2> w*#
+  #w 1v 2> w#
   #{{/use_go_router}}#
   meta: ^1.15.0
   mocktail: ^1.0.4
-  #*replace-start*##*with*#path: ^1.9.0#*replace-end*#
-  #*remove-start*#
+  #replace-start##with#path: ^1.9.0#replace-end#
+  #remove-start#
   path_provider_platform_interface: ^2.1.2
   plugin_platform_interface: ^2.1.8
-  #*remove-end*#
-  #*w 1v 2> w*#
+  #remove-end#
+  #w 1v 2> w#
   riverpod_generator: ^2.6.3
   riverpod_lint: ^2.6.3
   very_good_analysis: ^7.0.0

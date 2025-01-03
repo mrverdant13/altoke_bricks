@@ -7,10 +7,10 @@ environment:
   sdk: ">=3.6.0 <4.0.0"
 
 dev_dependencies:
-  #*w 1v 2> w*#
+  #w 1v 2> w#
   #{{#use_code_generation}}#
   build_runner: ^2.4.14
-  #*w 1v 2> w*#
+  #w 1v 2> w#
   #{{/use_code_generation}}#
   test: ^1.25.14
   very_good_analysis: ^7.0.0

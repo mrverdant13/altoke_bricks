@@ -7,15 +7,15 @@ environment:
   sdk: ">=3.6.0 <4.0.0"
 
 dependencies:
-  #*w 1v 2> w*#
-  #*replace-start*#
+  #w 1v 2> w#
+  #replace-start#
   altoke_common:
     path: ../../../../altoke_common/reference/common/
-  #*with i2*#
+  #with i2#
   # common:
   #   path: ../../common/
-  #*replace-end*#
-  #*w 1v 2> w*#
+  #replace-end#
+  #w 1v 2> w#
   collection: ^1.19.0
   isar:
     hosted: https://pub.isar-community.dev/
