@@ -1,6 +1,7 @@
 import 'package:brick_generator/src/models/brick_gen_data.dart';
 import 'package:brick_generator/src/models/brick_gen_options.dart';
 import 'package:brick_generator/src/models/replacement.dart';
+import 'package:path/path.dart' as path;
 import 'package:test/test.dart';
 
 void main() {
@@ -28,19 +29,28 @@ void main() {
         brickGenData,
         isA<BrickGenData>()
             .having(
-              (r) => r.referenceAbsolutePath,
+              (r) => path.equals(
+                r.referenceAbsolutePath,
+                'reference/absolute/path',
+              ),
               'referenceAbsolutePath',
-              'reference/absolute/path',
+              isTrue,
             )
             .having(
-              (r) => r.targetAbsolutePath,
+              (r) => path.equals(
+                r.targetAbsolutePath,
+                'target/absolute/path',
+              ),
               'targetAbsolutePath',
-              'target/absolute/path',
+              isTrue,
             )
             .having(
-              (r) => r.targetRelativePath,
+              (r) => path.equals(
+                r.targetRelativePath,
+                'target/relative/path',
+              ),
               'targetRelativePath',
-              'target/relative/path',
+              isTrue,
             )
             .having(
               (r) => r.replacements,
@@ -133,7 +143,8 @@ void main() {
       final result = brickGenData.applyReplacementsToTargetRelativeDescendant(
         'target/absolute/path/from/sub-path',
       );
-      expect(result, 'target/absolute/path/to/sub-path');
+      const expected = 'target/absolute/path/to/sub-path';
+      expect(path.equals(result, expected), isTrue);
     });
   });
 }
