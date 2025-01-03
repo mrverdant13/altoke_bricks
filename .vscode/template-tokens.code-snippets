@@ -1,7 +1,7 @@
 {
   "Remove Start (yaml)": {
     "scope": "yaml",
-    "description": "Openning token for a fragment removal",
+    "description": "Opening token for a fragment removal",
     "prefix": [
       "RemoveStart",
       "RmStart",
@@ -12,7 +12,7 @@
     ]
   },
   "Remove Start (generic)": {
-    "description": "Openning token for a fragment removal",
+    "description": "Opening token for a fragment removal",
     "prefix": [
       "RemoveStart",
       "RmStart",
@@ -70,7 +70,7 @@
   },
   "Variable Start (yaml)": {
     "scope": "yaml",
-    "description": "Openning token for a fragment parameterization",
+    "description": "Opening token for a fragment parameterization",
     "prefix": [
       "VariableStart",
       "VarStart",
@@ -81,7 +81,7 @@
     ]
   },
   "Variable Start (generic)": {
-    "description": "Openning token for a fragment parameterization",
+    "description": "Opening token for a fragment parameterization",
     "prefix": [
       "VariableStart",
       "VarStart",
