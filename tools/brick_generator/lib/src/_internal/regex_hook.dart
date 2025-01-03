@@ -17,14 +17,6 @@ class RegexHook extends MappingHook {
       _ => value,
     };
   }
-
-  @override
-  Object? beforeEncode(Object? value) {
-    return switch (value) {
-      final RegExp value => value.pattern,
-      _ => value,
-    };
-  }
 }
 
 /// {@macro brick_generator.regex_hook}
