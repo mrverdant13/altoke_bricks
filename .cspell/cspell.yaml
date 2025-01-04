@@ -22,6 +22,9 @@ dictionaryDefinitions:
   - name: android-allow
     path: ./android.allow.txt
     addWords: true
+  - name: ios-allow
+    path: ./ios.allow.txt
+    addWords: true
   - name: dart-allow
     path: ./dart.allow.txt
     addWords: true
@@ -35,6 +38,9 @@ overrides:
   - filename: "**/android/**/*"
     dictionaries:
       - android-allow
+  - filename: "**/ios/**/*"
+    dictionaries:
+      - ios-allow
   - filename: "**/{*.dart,pubspec.yaml,.metadata,build.yaml,melos.yaml,*.drift}"
     dictionaries:
       - dart-allow
