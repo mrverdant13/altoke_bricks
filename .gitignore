@@ -20,8 +20,6 @@
 /coverage/
 
 # Project platforms
-/**/__brick__/**/ios/
-/**/reference_app/**/ios/
 /**/__brick__/**/linux/
 /**/reference_app/**/linux/
 /**/__brick__/**/macos/
