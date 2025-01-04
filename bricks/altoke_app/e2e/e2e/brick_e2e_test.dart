@@ -30,7 +30,8 @@ Future<void> main() async {
       for (final routerPackage in routerPackages)
         (routerPackage: routerPackage),
     },
-    supportAndroid: true,
+    supportAndroid: false,
+    supportIos: false,
   );
 
   await testSuccessfulGeneration(
@@ -39,6 +40,25 @@ Future<void> main() async {
         (routerPackage: routerPackage),
     },
     supportAndroid: false,
+    supportIos: true,
+  );
+
+  await testSuccessfulGeneration(
+    cases: {
+      for (final routerPackage in routerPackages)
+        (routerPackage: routerPackage),
+    },
+    supportAndroid: true,
+    supportIos: false,
+  );
+
+  await testSuccessfulGeneration(
+    cases: {
+      for (final routerPackage in routerPackages)
+        (routerPackage: routerPackage),
+    },
+    supportAndroid: true,
+    supportIos: true,
   );
 
   await testGenerationWithoutHooks(
@@ -57,6 +77,7 @@ typedef GenerationCase = ({
 Future<void> testSuccessfulGeneration({
   required Set<GenerationCase> cases,
   required bool supportAndroid,
+  required bool supportIos,
 }) async {
   for (final generationCase in cases) {
     final (:routerPackage) = generationCase;
@@ -65,6 +86,7 @@ Future<void> testSuccessfulGeneration({
 GIVEN the Altoke App brick
 AND hooks enabled
 AND ${supportAndroid ? 'support' : 'no support'} for Android
+AND ${supportIos ? 'support' : 'no support'} for iOS
 WHEN the generation is run
 THEN the generated outputs should be valid and testable
 => with ${routerPackage.readableName}
@@ -83,6 +105,7 @@ THEN the generated outputs should be valid and testable
           'project_description': 'This is a test project.',
           RouterPackage.varKey: routerPackage.readableName,
           if (supportAndroid) 'android_organization': 'com.some_android_org',
+          if (supportIos) 'ios_bundle_identifier': 'some-iOS.Bundle-ID',
         };
         await BrickGenerator.app.runGeneration(
           target: directoryGeneratorTarget,
@@ -91,6 +114,7 @@ THEN the generated outputs should be valid and testable
         );
         final outputDir = directoryGeneratorTarget.outputDir;
         final androidDir = directoryGeneratorTarget.androidDir;
+        final iosDir = directoryGeneratorTarget.iosDir;
         final requirementsFile = directoryGeneratorTarget.requirementsFile;
         expect(
           outputDir.existsSync(),
@@ -101,6 +125,11 @@ THEN the generated outputs should be valid and testable
           androidDir.existsSync(),
           supportAndroid,
           reason: 'Android dir ${supportAndroid ? 'exists' : 'does not exist'}',
+        );
+        expect(
+          iosDir.existsSync(),
+          supportIos,
+          reason: 'iOS dir ${supportIos ? 'exists' : 'does not exist'}',
         );
         expect(
           requirementsFile.existsSync(),
@@ -207,5 +236,6 @@ extension on DirectoryGeneratorTarget {
   Directory get outputDir => dir.descendantDir('test_project');
   Directory get appDir => outputDir.descendantDir('packages/app');
   Directory get androidDir => appDir.descendantDir('android');
+  Directory get iosDir => appDir.descendantDir('ios');
   File get requirementsFile => dir.descendantFile('REQUIREMENTS.md');
 }

@@ -10,12 +10,13 @@
 /coverage/
 
 # Platforms
-/**/packages/app/ios/
 /**/packages/app/linux/
 /**/packages/app/macos/
 /**/packages/app/web/
 /**/packages/app/windows/
 
-# Generated source files
+# Generated files
 /**/__brick__/**/*.g.dart
 /**/__brick__/**/*.gr.dart
+/**/__brick__/**/*.lock
+/**/reference/**/*.lock

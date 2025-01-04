@@ -3,6 +3,7 @@ import 'package:mason/mason.dart';
 import 'src/android_application_identifier.dart';
 import 'src/android_identifier_segment.dart';
 import 'src/android_organization.dart';
+import 'src/ios_bundle_identifier.dart';
 
 void run(HookContext context) {
   final projectName = context.vars['project_name'] as String;
@@ -24,6 +25,17 @@ void run(HookContext context) {
         'android_application_identifier_as_path':
             androidApplicationIdentifier.segments.join('/'),
         'android_application_identifier': androidApplicationIdentifier,
+      });
+  }
+  switch (context.vars['ios_bundle_identifier']) {
+    case null:
+      context.vars.addAll({
+        'include_ios_platform': false,
+      });
+    case final String rawIosBundleIdentifier:
+      IosBundleIdentifier(rawIosBundleIdentifier);
+      context.vars.addAll({
+        'include_ios_platform': true,
       });
   }
   context.vars.addAll({
