@@ -104,7 +104,8 @@ THEN the generated outputs should be valid and testable
           'project_name': 'test_project',
           'project_description': 'This is a test project.',
           RouterPackage.varKey: routerPackage.readableName,
-          if (supportAndroid) 'android_organization': 'com.some_android_org',
+          if (supportAndroid)
+            'android_application_identifier': 'some_android.App_ID',
           if (supportIos) 'ios_bundle_identifier': 'some-iOS.Bundle-ID',
         };
         await BrickGenerator.app.runGeneration(

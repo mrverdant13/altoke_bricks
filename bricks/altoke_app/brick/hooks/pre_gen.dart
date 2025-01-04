@@ -1,30 +1,21 @@
 import 'package:mason/mason.dart';
 
-import 'src/android_application_identifier.dart';
-import 'src/android_identifier_segment.dart';
-import 'src/android_organization.dart';
-import 'src/ios_bundle_identifier.dart';
+import 'lib/src/android_application_identifier.dart';
+import 'lib/src/ios_bundle_identifier.dart';
 
 void run(HookContext context) {
-  final projectName = context.vars['project_name'] as String;
-  switch (context.vars['android_organization']) {
+  switch (context.vars['android_application_identifier']) {
     case null:
       context.vars.addAll({
         'include_android_platform': false,
       });
-    case final String rawAndroidOrganization:
-      final androidOrganization = AndroidOrganization(rawAndroidOrganization);
-      final androidProjectName = AndroidIdentifierSegment(projectName);
+    case final String rawAndroidApplicationIdentifier:
       final androidApplicationIdentifier =
-          AndroidApplicationIdentifier.fromParts(
-        organization: androidOrganization,
-        name: androidProjectName,
-      );
+          AndroidApplicationIdentifier(rawAndroidApplicationIdentifier);
       context.vars.addAll({
         'include_android_platform': true,
         'android_application_identifier_as_path':
-            androidApplicationIdentifier.segments.join('/'),
-        'android_application_identifier': androidApplicationIdentifier,
+            androidApplicationIdentifier.rawSegments.join('/'),
       });
   }
   switch (context.vars['ios_bundle_identifier']) {

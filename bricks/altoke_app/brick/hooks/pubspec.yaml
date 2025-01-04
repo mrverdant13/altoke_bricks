@@ -14,6 +14,7 @@ dependencies:
     path: ../../../../tools/shell/
 
 dev_dependencies:
+  test: ^1.25.14
   very_good_analysis: ^7.0.0
 
 dependency_overrides:
