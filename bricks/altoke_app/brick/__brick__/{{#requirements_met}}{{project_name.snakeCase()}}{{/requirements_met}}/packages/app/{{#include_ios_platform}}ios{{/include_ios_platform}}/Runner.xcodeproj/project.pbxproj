@@ -453,6 +453,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APP_ICON_SET_SUFFIX = "-dev";
 				APP_NAME = "$(APP_NAME_PREFIX)$(APP_NAME_BASE)";
 				APP_NAME_BASE = "{{project_name.titleCase()}}";
 				APP_NAME_PREFIX = "[DEV] ";
@@ -519,7 +520,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 03DFC7C82D28CEEF00A1232C /* Debug-development.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon$(APP_ICON_SET_SUFFIX)";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				ENABLE_BITCODE = NO;
@@ -559,6 +560,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APP_ICON_SET_SUFFIX = "-stg";
 				APP_NAME = "$(APP_NAME_PREFIX)$(APP_NAME_BASE)";
 				APP_NAME_BASE = "{{project_name.titleCase()}}";
 				APP_NAME_PREFIX = "[STG] ";
@@ -625,7 +627,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 03DFC7CA2D28CEEF00A1232C /* Debug-staging.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon$(APP_ICON_SET_SUFFIX)";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				ENABLE_BITCODE = NO;
@@ -665,6 +667,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APP_ICON_SET_SUFFIX = "-prod";
 				APP_NAME = "$(APP_NAME_PREFIX)$(APP_NAME_BASE)";
 				APP_NAME_BASE = "{{project_name.titleCase()}}";
 				APP_NAME_PREFIX = "";
@@ -731,7 +734,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 03DFC7C92D28CEEF00A1232C /* Debug-production.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon$(APP_ICON_SET_SUFFIX)";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				ENABLE_BITCODE = NO;
@@ -771,6 +774,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APP_ICON_SET_SUFFIX = "-dev";
 				APP_NAME = "$(APP_NAME_PREFIX)$(APP_NAME_BASE)";
 				APP_NAME_BASE = "{{project_name.titleCase()}}";
 				APP_NAME_PREFIX = "[DEV] ";
@@ -832,7 +836,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 03DFC7D42D28E34800A1232C /* Profile-development.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon$(APP_ICON_SET_SUFFIX)";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				ENABLE_BITCODE = NO;
@@ -869,6 +873,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APP_ICON_SET_SUFFIX = "-stg";
 				APP_NAME = "$(APP_NAME_PREFIX)$(APP_NAME_BASE)";
 				APP_NAME_BASE = "{{project_name.titleCase()}}";
 				APP_NAME_PREFIX = "[STG] ";
@@ -930,7 +935,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 03DFC7D62D28E34800A1232C /* Profile-staging.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon$(APP_ICON_SET_SUFFIX)";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				ENABLE_BITCODE = NO;
@@ -967,6 +972,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APP_ICON_SET_SUFFIX = "-prod";
 				APP_NAME = "$(APP_NAME_PREFIX)$(APP_NAME_BASE)";
 				APP_NAME_BASE = "{{project_name.titleCase()}}";
 				APP_NAME_PREFIX = "";
@@ -1028,7 +1034,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 03DFC7D52D28E34800A1232C /* Profile-production.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon$(APP_ICON_SET_SUFFIX)";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				ENABLE_BITCODE = NO;
@@ -1065,6 +1071,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APP_ICON_SET_SUFFIX = "-dev";
 				APP_NAME = "$(APP_NAME_PREFIX)$(APP_NAME_BASE)";
 				APP_NAME_BASE = "{{project_name.titleCase()}}";
 				APP_NAME_PREFIX = "[DEV] ";
@@ -1128,7 +1135,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 03DFC7CB2D28CEEF00A1232C /* Release-development.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon$(APP_ICON_SET_SUFFIX)";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				ENABLE_BITCODE = NO;
@@ -1165,6 +1172,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APP_ICON_SET_SUFFIX = "-stg";
 				APP_NAME = "$(APP_NAME_PREFIX)$(APP_NAME_BASE)";
 				APP_NAME_BASE = "{{project_name.titleCase()}}";
 				APP_NAME_PREFIX = "[STG] ";
@@ -1228,7 +1236,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 03DFC7CD2D28CEEF00A1232C /* Release-staging.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon$(APP_ICON_SET_SUFFIX)";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				ENABLE_BITCODE = NO;
@@ -1265,6 +1273,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APP_ICON_SET_SUFFIX = "-prod";
 				APP_NAME = "$(APP_NAME_PREFIX)$(APP_NAME_BASE)";
 				APP_NAME_BASE = "{{project_name.titleCase()}}";
 				APP_NAME_PREFIX = "";
@@ -1328,7 +1337,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 03DFC7CC2D28CEEF00A1232C /* Release-production.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon$(APP_ICON_SET_SUFFIX)";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				ENABLE_BITCODE = NO;
