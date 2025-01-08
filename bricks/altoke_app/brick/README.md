@@ -98,6 +98,7 @@ Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
 | `project_name` | The name of the project. | _None_ | String |
 | `project_description` | A description of the project. | _None_ | String |
 | `android_organization` | The organization of the Android project. | _None_ | String |
+| `ios_bundle_identifier` | The bundle identifier of the iOS project. | _None_ | String |
 | `router_package` | The package to use for routing. | auto_route | Enumeration |
 <!-- VARIABLES -->
 
