@@ -50,6 +50,11 @@ Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
 
 ### Features
 
+- **Multi-platform support:**\
+  Support for the following platforms:
+  - Android
+  - iOS
+
 - **Mono-repo setup:**\
   Supported with [Melos][docs_melos_link], with pre-configured scripts for common tasks.
 
@@ -58,12 +63,18 @@ Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
   - [`auto_route`][pub_package_auto_route]
   - [`go_router`][pub_package_go_router]
 
-- **Internationalization:**\
-  Supported by following the [official internationalization guide for Flutter][flutter_docs_internationalization_link].
-
 - **Spell checking:**\
   Supported with [CSpell][docs_cspell_link].\
   VSCode integration with the [Code Spell Checker extension][docs_vsc_spell_checker_link].
+
+- **Flavoring:**\
+  Support for the following environments (Android & iOS only):
+  - 🔴 Development
+  - 🟡 Staging
+  - 🟢 Production
+
+- **Internationalization:**\
+  Supported by following the [official internationalization guide for Flutter][flutter_docs_internationalization_link].
 
 - **State management:**\
   Supported with [`flutter_riverpod`][pub_package_flutter_riverpod].
@@ -87,6 +98,7 @@ Create a [Flutter][flutter_web_link] app, **_al toque_** (_quickly_).
 | `project_name` | The name of the project. | _None_ | String |
 | `project_description` | A description of the project. | _None_ | String |
 | `android_organization` | The organization of the Android project. | _None_ | String |
+| `ios_bundle_identifier` | The bundle identifier of the iOS project. | _None_ | String |
 | `router_package` | The package to use for routing. | auto_route | Enumeration |
 <!-- VARIABLES -->
 
