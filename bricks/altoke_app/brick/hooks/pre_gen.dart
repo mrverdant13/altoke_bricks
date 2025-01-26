@@ -1,9 +1,11 @@
 import 'package:mason/mason.dart';
+import 'package:router_package/router_package.dart';
 
 import 'lib/src/android_application_identifier.dart';
 import 'lib/src/ios_bundle_identifier.dart';
 
 void run(HookContext context) {
+  context.vars.addAll(context.routerPackageSelectionMap);
   switch (context.vars['android_application_identifier']) {
     case null:
       context.vars.addAll({
