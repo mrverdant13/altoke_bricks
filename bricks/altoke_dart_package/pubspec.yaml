@@ -2,6 +2,7 @@ name: altoke_dart_package_brick_scope
 description: Altoke Dart Package Brick Scope
 version: 0.0.1+1
 publish_to: none
+resolution: workspace
 
 environment:
   sdk: ">=3.6.0 <4.0.0"

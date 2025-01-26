@@ -1,36 +1,29 @@
 name: altoke_local_database_brick_hooks
 publish_to: none
+resolution: workspace
 
 environment:
   sdk: ">=3.6.0 <4.0.0"
 
 dependencies:
   local_database_alternative:
-    path: ../../../../tools/local_database_alternative
-  mason: ^0.1.0
-  path: ^1.9.0
-  pubspec_deps_sorter:
-    path: ../../../../tools/pubspec_deps_sorter
-  pubspec_parse: ^1.4.0
-  shell:
-    path: ../../../../tools/shell
-
-dev_dependencies:
-  very_good_analysis: ^7.0.0
-
-dependency_overrides:
-  local_database_alternative:
     git:
       url: https://github.com/mrverdant13/altoke_bricks.git
       ref: 575389c0d0d0752834361c4b4be6888ef4e32f83
       path: ./tools/local_database_alternative/
+  mason: ^0.1.0
+  path: ^1.9.0
   pubspec_deps_sorter:
     git:
       url: https://github.com/mrverdant13/altoke_bricks.git
       ref: 575389c0d0d0752834361c4b4be6888ef4e32f83
       path: ./tools/pubspec_deps_sorter/
+  pubspec_parse: ^1.4.0
   shell:
     git:
       url: https://github.com/mrverdant13/altoke_bricks.git
       ref: 575389c0d0d0752834361c4b4be6888ef4e32f83
       path: ./tools/shell/
+
+dev_dependencies:
+  very_good_analysis: ^7.0.0

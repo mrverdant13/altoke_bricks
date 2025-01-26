@@ -1,6 +1,7 @@
 name: local_brick_installer
 description: A tool to install bricks managed by a local monorepo.
 publish_to: none
+resolution: workspace
 
 environment:
   sdk: ">=3.6.0 <4.0.0"
