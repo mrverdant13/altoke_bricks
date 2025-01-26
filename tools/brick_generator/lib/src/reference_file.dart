@@ -91,6 +91,7 @@ extension ReferenceFile on File {
   }) async {
     const ignoredExtensions = {
       '.png',
+      '.webp', // cspell:disable-line
     };
     if (ignoredExtensions.contains(p.extension(path))) return;
     final BrickGenData(:replacements, :lineDeletions) = brickGenData;
