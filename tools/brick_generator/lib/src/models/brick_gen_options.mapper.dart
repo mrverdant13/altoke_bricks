@@ -22,9 +22,6 @@ class BrickGenOptionsMapper extends ClassMapperBase<BrickGenOptions> {
   @override
   final String id = 'BrickGenOptions';
 
-  static String _$targetRelativePath(BrickGenOptions v) => v.targetRelativePath;
-  static const Field<BrickGenOptions, String> _f$targetRelativePath =
-      Field('targetRelativePath', _$targetRelativePath);
   static List<Replacement> _$replacements(BrickGenOptions v) => v.replacements;
   static const Field<BrickGenOptions, List<Replacement>> _f$replacements =
       Field('replacements', _$replacements, opt: true, def: const []);
@@ -35,14 +32,12 @@ class BrickGenOptionsMapper extends ClassMapperBase<BrickGenOptions> {
 
   @override
   final MappableFields<BrickGenOptions> fields = const {
-    #targetRelativePath: _f$targetRelativePath,
     #replacements: _f$replacements,
     #lineDeletions: _f$lineDeletions,
   };
 
   static BrickGenOptions _instantiate(DecodingData data) {
     return BrickGenOptions(
-        targetRelativePath: data.dec(_f$targetRelativePath),
         replacements: data.dec(_f$replacements),
         lineDeletions: data.dec(_f$lineDeletions));
   }
@@ -106,9 +101,7 @@ abstract class BrickGenOptionsCopyWith<$R, $In extends BrickGenOptions, $Out>
           LinesDeletionCopyWith<$R, LinesDeletion, LinesDeletion>>
       get lineDeletions;
   $R call(
-      {String? targetRelativePath,
-      List<Replacement>? replacements,
-      List<LinesDeletion>? lineDeletions});
+      {List<Replacement>? replacements, List<LinesDeletion>? lineDeletions});
   BrickGenOptionsCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -133,18 +126,14 @@ class _BrickGenOptionsCopyWithImpl<$R, $Out>
           (v, t) => v.copyWith.$chain(t), (v) => call(lineDeletions: v));
   @override
   $R call(
-          {String? targetRelativePath,
-          List<Replacement>? replacements,
+          {List<Replacement>? replacements,
           List<LinesDeletion>? lineDeletions}) =>
       $apply(FieldCopyWithData({
-        if (targetRelativePath != null) #targetRelativePath: targetRelativePath,
         if (replacements != null) #replacements: replacements,
         if (lineDeletions != null) #lineDeletions: lineDeletions
       }));
   @override
   BrickGenOptions $make(CopyWithData data) => BrickGenOptions(
-      targetRelativePath:
-          data.get(#targetRelativePath, or: $value.targetRelativePath),
       replacements: data.get(#replacements, or: $value.replacements),
       lineDeletions: data.get(#lineDeletions, or: $value.lineDeletions));
 

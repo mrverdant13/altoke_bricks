@@ -18,7 +18,6 @@ class BrickGenData extends BrickGenOptions with BrickGenDataMappable {
   const BrickGenData({
     required this.referenceAbsolutePath,
     required this.targetAbsolutePath,
-    required super.targetRelativePath,
     required super.replacements,
     required super.lineDeletions,
   });
@@ -33,7 +32,6 @@ class BrickGenData extends BrickGenOptions with BrickGenDataMappable {
     return BrickGenData(
       referenceAbsolutePath: referenceAbsolutePath,
       targetAbsolutePath: targetAbsolutePath,
-      targetRelativePath: options.targetRelativePath,
       replacements: options.replacements,
       lineDeletions: options.lineDeletions,
     );
