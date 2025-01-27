@@ -71,10 +71,12 @@ extension LineDeletionsList on List<LinesDeletion> {
     required String input,
   }) {
     final lines = LineSplitter.split(input);
-    final deletableRanges = singleWhere(
+    final applyableDeletions = where(
       (deletion) => path.equals(deletion.filePath, filePath),
-      orElse: () => const LinesDeletion(filePath: '', ranges: []),
-    ).ranges;
+    );
+    final deletableRanges = applyableDeletions.expand(
+      (deletion) => deletion.ranges,
+    );
     if (deletableRanges.isEmpty) return input;
     final buf = StringBuffer();
     for (final (lineIndex, lineContent) in lines.indexed) {
