@@ -8,5 +8,5 @@ environment:
 
 dev_dependencies:
   {{#use_code_generation}}build_runner: ^2.4.14
-  {{/use_code_generation}}test: ^1.25.14
+  {{/use_code_generation}}test: ^1.25.8
   very_good_analysis: ^7.0.0
