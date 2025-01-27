@@ -30,9 +30,6 @@ class BrickGenDataMapper extends ClassMapperBase<BrickGenData> {
   static String _$targetAbsolutePath(BrickGenData v) => v.targetAbsolutePath;
   static const Field<BrickGenData, String> _f$targetAbsolutePath =
       Field('targetAbsolutePath', _$targetAbsolutePath);
-  static String _$targetRelativePath(BrickGenData v) => v.targetRelativePath;
-  static const Field<BrickGenData, String> _f$targetRelativePath =
-      Field('targetRelativePath', _$targetRelativePath);
   static List<Replacement> _$replacements(BrickGenData v) => v.replacements;
   static const Field<BrickGenData, List<Replacement>> _f$replacements =
       Field('replacements', _$replacements);
@@ -44,7 +41,6 @@ class BrickGenDataMapper extends ClassMapperBase<BrickGenData> {
   final MappableFields<BrickGenData> fields = const {
     #referenceAbsolutePath: _f$referenceAbsolutePath,
     #targetAbsolutePath: _f$targetAbsolutePath,
-    #targetRelativePath: _f$targetRelativePath,
     #replacements: _f$replacements,
     #lineDeletions: _f$lineDeletions,
   };
@@ -53,7 +49,6 @@ class BrickGenDataMapper extends ClassMapperBase<BrickGenData> {
     return BrickGenData(
         referenceAbsolutePath: data.dec(_f$referenceAbsolutePath),
         targetAbsolutePath: data.dec(_f$targetAbsolutePath),
-        targetRelativePath: data.dec(_f$targetRelativePath),
         replacements: data.dec(_f$replacements),
         lineDeletions: data.dec(_f$lineDeletions));
   }
@@ -121,7 +116,6 @@ abstract class BrickGenDataCopyWith<$R, $In extends BrickGenData, $Out>
   $R call(
       {String? referenceAbsolutePath,
       String? targetAbsolutePath,
-      String? targetRelativePath,
       List<Replacement>? replacements,
       List<LinesDeletion>? lineDeletions});
   BrickGenDataCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
@@ -149,14 +143,12 @@ class _BrickGenDataCopyWithImpl<$R, $Out>
   $R call(
           {String? referenceAbsolutePath,
           String? targetAbsolutePath,
-          String? targetRelativePath,
           List<Replacement>? replacements,
           List<LinesDeletion>? lineDeletions}) =>
       $apply(FieldCopyWithData({
         if (referenceAbsolutePath != null)
           #referenceAbsolutePath: referenceAbsolutePath,
         if (targetAbsolutePath != null) #targetAbsolutePath: targetAbsolutePath,
-        if (targetRelativePath != null) #targetRelativePath: targetRelativePath,
         if (replacements != null) #replacements: replacements,
         if (lineDeletions != null) #lineDeletions: lineDeletions
       }));
@@ -166,8 +158,6 @@ class _BrickGenDataCopyWithImpl<$R, $Out>
           data.get(#referenceAbsolutePath, or: $value.referenceAbsolutePath),
       targetAbsolutePath:
           data.get(#targetAbsolutePath, or: $value.targetAbsolutePath),
-      targetRelativePath:
-          data.get(#targetRelativePath, or: $value.targetRelativePath),
       replacements: data.get(#replacements, or: $value.replacements),
       lineDeletions: data.get(#lineDeletions, or: $value.lineDeletions));
 

@@ -33,12 +33,9 @@ Future<void> main(List<String> args) async {
   stdout.writeln('Reference directory: ${referenceDir.path}');
   final brickTemplateDir = Dirs.brickTemplate;
   stdout.writeln('Brick template directory: ${brickTemplateDir.path}');
-  final brickTemplateTargetPath =
-      brickTemplateDir.descendantDir(brickGenOptions.targetRelativePath);
-  stdout.writeln('Brick template target path: ${brickTemplateTargetPath.path}');
   final brickGenData = BrickGenData.fromOptions(
     referenceAbsolutePath: referenceDir.path,
-    targetAbsolutePath: brickTemplateTargetPath.path,
+    targetAbsolutePath: brickTemplateDir.path,
     options: brickGenOptions,
   );
   stdout.writeln('Generating brick template...');
@@ -54,7 +51,7 @@ Future<void> main(List<String> args) async {
   // Copy reference project.
   await Shell.copyDirectory(
     source: referenceDir,
-    destination: brickTemplateTargetPath,
+    destination: brickTemplateDir,
   );
 
   // Remove untracked files from brick directory.

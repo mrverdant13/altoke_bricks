@@ -13,16 +13,12 @@ part 'brick_gen_options.mapper.dart';
 class BrickGenOptions with BrickGenOptionsMappable {
   /// {@macro brick_generator.brick_gen_options}
   const BrickGenOptions({
-    required this.targetRelativePath,
     this.replacements = const [],
     this.lineDeletions = const [],
   });
 
   /// Creates a [BrickGenOptions] from a JSON map.
   static const fromJson = BrickGenOptionsMapper.fromMap;
-
-  /// The relative path to the target brick.
-  final String targetRelativePath;
 
   /// The replacements to be applied to the reference folder to generate the
   /// target brick.

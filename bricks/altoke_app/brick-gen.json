@@ -1,5 +1,4 @@
 {
-  "targetRelativePath": ".",
   "replacements": [
     {
       "from": "packages/app/android",

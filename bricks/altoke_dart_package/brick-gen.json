@@ -1,5 +1,4 @@
 {
-  "targetRelativePath": ".",
   "replacements": [
     {
       "from": "\\b(REQUIREMENTS.md)\\b",

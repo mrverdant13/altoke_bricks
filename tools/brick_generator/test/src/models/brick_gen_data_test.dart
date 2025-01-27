@@ -10,7 +10,6 @@ void main() {
       const brickGenData = BrickGenData(
         referenceAbsolutePath: 'reference/absolute/path',
         targetAbsolutePath: 'target/absolute/path',
-        targetRelativePath: 'target/relative/path',
         replacements: [],
         lineDeletions: [],
       );
@@ -21,9 +20,7 @@ void main() {
       final brickGenData = BrickGenData.fromOptions(
         referenceAbsolutePath: 'reference/absolute/path',
         targetAbsolutePath: 'target/absolute/path',
-        options: const BrickGenOptions(
-          targetRelativePath: 'target/relative/path',
-        ),
+        options: const BrickGenOptions(),
       );
       expect(
         brickGenData,
@@ -45,14 +42,6 @@ void main() {
               isTrue,
             )
             .having(
-              (r) => path.equals(
-                r.targetRelativePath,
-                'target/relative/path',
-              ),
-              'targetRelativePath',
-              isTrue,
-            )
-            .having(
               (r) => r.replacements,
               'replacements',
               isEmpty,
@@ -69,21 +58,18 @@ void main() {
       const reference = BrickGenData(
         referenceAbsolutePath: 'reference/absolute/path',
         targetAbsolutePath: 'target/absolute/path',
-        targetRelativePath: 'target/relative/path',
         replacements: [],
         lineDeletions: [],
       );
       const same = BrickGenData(
         referenceAbsolutePath: 'reference/absolute/path',
         targetAbsolutePath: 'target/absolute/path',
-        targetRelativePath: 'target/relative/path',
         replacements: [],
         lineDeletions: [],
       );
       final other = BrickGenData(
         referenceAbsolutePath: 'reference/absolute/path',
         targetAbsolutePath: 'target/absolute/path',
-        targetRelativePath: 'target/relative/path',
         replacements: [
           Replacement(
             from: RegExp('from'),
@@ -100,21 +86,18 @@ void main() {
       const reference = BrickGenData(
         referenceAbsolutePath: 'reference/absolute/path',
         targetAbsolutePath: 'target/absolute/path',
-        targetRelativePath: 'target/relative/path',
         replacements: [],
         lineDeletions: [],
       );
       const same = BrickGenData(
         referenceAbsolutePath: 'reference/absolute/path',
         targetAbsolutePath: 'target/absolute/path',
-        targetRelativePath: 'target/relative/path',
         replacements: [],
         lineDeletions: [],
       );
       final other = BrickGenData(
         referenceAbsolutePath: 'reference/absolute/path',
         targetAbsolutePath: 'target/absolute/path',
-        targetRelativePath: 'target/relative/path',
         replacements: [
           Replacement(
             from: RegExp('from'),
@@ -131,7 +114,6 @@ void main() {
       final brickGenData = BrickGenData(
         referenceAbsolutePath: 'reference/absolute/path',
         targetAbsolutePath: 'target/absolute/path',
-        targetRelativePath: 'target/relative/path',
         replacements: [
           Replacement(
             from: RegExp('from'),
