@@ -23,14 +23,7 @@ THEN the home screen should be shown
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            asyncInitializationPod.overrideWith((_) async {}),
-            routerConfigPod.overrideWithValue(
-              GoRouter(
-                routes: $appRoutes,
-                initialLocation: '/',
-              ),
-            ),
-          ],
+            asyncInitializationPod.overrideWith((_) async {}),],
           child: const MyApp(),
         ),
       );
