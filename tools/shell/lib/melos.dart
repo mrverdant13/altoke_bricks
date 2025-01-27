@@ -23,6 +23,8 @@ abstract class Melos {
       onStart: onStart,
       onSuccess: onSuccess,
       onError: onError,
+      environment: Platform.environment.withoutMelosReferences,
+      includeParentEnvironment: false,
     );
   }
 
@@ -46,6 +48,21 @@ abstract class Melos {
       onStart: onStart,
       onSuccess: onSuccess,
       onError: onError,
+      environment: Platform.environment.withoutMelosReferences,
+      includeParentEnvironment: false,
     );
+  }
+}
+
+extension on Map<String, String> {
+  /// Returns a new map with all the keys that contain 'MELOS' removed.
+  ///
+  /// This is useful when you want to run a melos command within a process
+  /// that already has been already created with melos.
+  Map<String, String> get withoutMelosReferences {
+    return {
+      for (final MapEntry(:key, :value) in entries)
+        if (!key.contains('MELOS')) key: value,
+    };
   }
 }
