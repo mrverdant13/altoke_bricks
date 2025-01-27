@@ -98,7 +98,7 @@ extension ReferenceFile on File {
     final referenceContent = await readAsString();
     final resolvedContents = referenceContent
         .applyLineDeletions(
-          filePath: path,
+          filePath: p.relative(path, from: brickGenData.targetAbsolutePath),
           lineDeletions: lineDeletions,
         )
         .applyReplacements(replacements)
