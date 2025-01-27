@@ -1,7 +1,7 @@
 /*{{#use_auto_route}}*/
 import 'package:auto_route/auto_route.dart';
-/*{{/use_auto_route}}*/
 import 'package:mocktail/mocktail.dart';
+/*{{/use_auto_route}}*/
 
 void registerFallbackValues() {
   /*w 1v 1*/

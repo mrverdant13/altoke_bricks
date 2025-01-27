@@ -78,6 +78,8 @@ abstract class Shell {
     AsyncVoidCallback? onStart,
     AsyncVoidCallback? onSuccess,
     AsyncVoidHandlerCallback<ExceptionDetails>? onError,
+    Map<String, String>? environment,
+    bool includeParentEnvironment = true,
   }) async {
     final [executable, ...arguments] = fullCommand.split(' ');
     final process = await Process.start(
@@ -85,6 +87,8 @@ abstract class Shell {
       arguments,
       workingDirectory: workingDir,
       runInShell: true,
+      environment: environment,
+      includeParentEnvironment: includeParentEnvironment,
     );
     await onStart?.call();
     try {
