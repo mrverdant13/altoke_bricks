@@ -29,12 +29,14 @@ THEN the home screen should be shown
         ProviderScope(
           overrides: [
             asyncInitializationPod.overrideWith((_) async {}),
+            /*remove-start*/
             routerConfigPod.overrideWithValue(
               GoRouter(
                 routes: $appRoutes,
                 initialLocation: '/',
               ),
             ),
+            /*remove-end*/
           ],
           child: const MyApp(),
         ),
