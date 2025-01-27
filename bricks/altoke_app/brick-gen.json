@@ -43,7 +43,7 @@
   ],
   "lineDeletions": [
     {
-      "filePath": "./{{project_name.snakeCase()}}/packages/app/lib/l10n/arb/app_en.arb",
+      "filePath": "./{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/packages/app/lib/l10n/arb/app_en.arb",
       "ranges": [
         {
           "start": 51,
@@ -52,7 +52,7 @@
       ]
     },
     {
-      "filePath": "./{{project_name.snakeCase()}}/packages/app/lib/l10n/arb/app_es.arb",
+      "filePath": "./{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/packages/app/lib/l10n/arb/app_es.arb",
       "ranges": [
         {
           "start": 51,
