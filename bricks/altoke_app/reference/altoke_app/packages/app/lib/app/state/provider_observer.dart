@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer' as developer;
 
 import 'package:flutter/foundation.dart';
@@ -19,24 +18,12 @@ class LoggerProviderObserver extends ProviderObserver {
     StackTrace? stackTrace,
   }) {
     if (!kDebugMode) return;
-    switch (kIsWeb) {
-      case true:
-        // HACK: Avoid logging issues on web.
-        // Using this logging approach as the `log` function has an
-        // unexpected behavior on web.
-        // Reference: https://github.com/flutter/flutter/issues/47913
-        final lines = LineSplitter.split(message);
-        final resultingLines = lines.map((line) => '$name: $line');
-        final resultingMessage = resultingLines.join('\n');
-        debugPrint(resultingMessage);
-      case false:
-        developer.log(
-          message,
-          name: name,
-          error: error,
-          stackTrace: stackTrace,
-        );
-    }
+    developer.log(
+      message,
+      name: name,
+      error: error,
+      stackTrace: stackTrace,
+    );
   }
 
   @override
