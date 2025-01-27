@@ -1,6 +1,7 @@
 name: brick_generator
 description: A generator for bricks.
 publish_to: none
+resolution: workspace
 
 environment:
   sdk: ">=3.6.0 <4.0.0"
@@ -17,5 +18,5 @@ dependencies:
 dev_dependencies:
   build_runner: ^2.4.14
   dart_mappable_builder: ^4.3.0
-  test: ^1.25.14
+  test: ^1.25.8
   very_good_analysis: ^7.0.0

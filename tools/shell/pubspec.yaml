@@ -2,6 +2,7 @@ name: shell
 description: A shell for running commands.
 version: 0.0.1+1
 publish_to: none
+resolution: workspace
 
 environment:
   sdk: ">=3.6.0 <4.0.0"

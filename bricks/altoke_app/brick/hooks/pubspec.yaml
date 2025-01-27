@@ -1,5 +1,6 @@
 name: altoke_app_brick_hooks
 publish_to: none
+resolution: workspace
 
 environment:
   sdk: ">=3.6.0 <4.0.0"
@@ -8,16 +9,6 @@ dependencies:
   collection: ^1.19.0
   mason: ^0.1.0
   path: ^1.9.0
-  router_package:
-    path: ../../../../tools/router_package/
-  shell:
-    path: ../../../../tools/shell/
-
-dev_dependencies:
-  test: ^1.25.14
-  very_good_analysis: ^7.0.0
-
-dependency_overrides:
   router_package:
     git:
       url: https://github.com/mrverdant13/altoke_bricks.git
@@ -28,3 +19,7 @@ dependency_overrides:
       url: https://github.com/mrverdant13/altoke_bricks.git
       ref: 575389c0d0d0752834361c4b4be6888ef4e32f83
       path: ./tools/shell/
+
+dev_dependencies:
+  test: ^1.25.8
+  very_good_analysis: ^7.0.0

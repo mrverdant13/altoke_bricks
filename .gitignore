@@ -1,23 +1,48 @@
+# Miscellaneous
+/*.class
+/*.log
+/*.pyc
+/*.swp
 /.DS_Store
 /.atom/
+/.buildlog/
+/.history
+/.svn/
+/migrate_working_dir/
+
+# IntelliJ related
+/*.iml
+/*.ipr
+/*.iws
 /.idea/
-/.vscode/*
 
-# Files and directories created by pub
+# VS Code
+/.vscode/
+
+# Flutter/Dart/Pub related
+/**/doc/api/
+/**/ios/Flutter/.last_build_id
 /.dart_tool/
+/.flutter-plugins
+/.flutter-plugins-dependencies
 /.packages/
-/**/pubspec.lock
-
-# Conventional directory for build outputs
+/.pub-cache/
+/.pub/
 /build/
+/**/untranslated-messages.json
+
+# Testing
+/coverage/
+
+
+
+
+
 
 # Local development
 /melos_overrides.yaml
 /**/melos_*.iml
 /**/pubspec_overrides.yaml
-
-# Testing
-/coverage/
 
 # Project platforms
 /**/__brick__/**/linux/
