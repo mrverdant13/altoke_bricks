@@ -462,10 +462,10 @@ packages:
     dependency: transitive
     description:
       name: go_router_builder
-      sha256: "293e366566c209f70a05508bb5fdd6ce536fa3f75e58ccba1f83341a7943a6be"
+      sha256: "4dc50f62b73e3bfcddb8c7fe9f91871128b5a698d35b6be1f113860bd384c82a"
       url: "https://pub.dev"
     source: hosted
-    version: "2.7.3"
+    version: "2.7.4"
   graphs:
     dependency: transitive
     description:
