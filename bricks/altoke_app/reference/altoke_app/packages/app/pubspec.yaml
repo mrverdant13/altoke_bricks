@@ -69,7 +69,7 @@ dev_dependencies:
     sdk: flutter
   #w 1v 2> w#
   #{{#use_go_router}}#
-  go_router_builder: ^2.7.1
+  go_router_builder: ^2.7.5
   #w 1v 2> w#
   #{{/use_go_router}}#
   meta: ^1.15.0
