@@ -20,7 +20,7 @@ dependencies:
   #{{/use_auto_route}}#
   #remove-start#
   drift: ^2.24.0
-  drift_flutter: ^0.2.1
+  drift_flutter: ^0.2.4
   drift_local_database:
     path: ../../../../../altoke_local_database/reference/local_database/drift_local_database/
   #remove-end#

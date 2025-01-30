@@ -39,4 +39,28 @@ THEN it should return the application documents directory
       ),
     );
   });
+
+  test('''
+
+GIVEN an async pod for the temporary directory
+WHEN it is invoked
+THEN it should return the temporary directory
+''', () async {
+    when(pathProviderPlatform.getTemporaryPath)
+        .thenAnswer((_) async => 'mock/temp-path');
+    final container = ProviderContainer();
+    addTearDown(container.dispose);
+    final asyncTemporaryDirectory =
+        container.read(asyncTemporaryDirectoryPod.future);
+    await expectLater(
+      asyncTemporaryDirectory,
+      completion(
+        isA<Directory>().having(
+          (directory) => directory.path,
+          'path',
+          'mock/temp-path',
+        ),
+      ),
+    );
+  });
 }
