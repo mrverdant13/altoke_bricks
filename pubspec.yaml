@@ -1,49 +1,8 @@
 name: altoke_bricks_monorepo
 repository: https://github.com/mrverdant13/altoke_bricks
 
-workspace:
-  - bricks/altoke_app
-  - bricks/altoke_app/brick/hooks
-  - bricks/altoke_app/e2e
-  - bricks/altoke_app/reference/altoke_app
-  - bricks/altoke_app/reference/altoke_app/packages/app
-  - bricks/altoke_common
-  - bricks/altoke_common/brick/hooks
-  - bricks/altoke_common/e2e
-  - bricks/altoke_common/reference/common
-  - bricks/altoke_dart_package
-  - bricks/altoke_dart_package/brick/hooks
-  - bricks/altoke_dart_package/e2e
-  - bricks/altoke_dart_package/reference/altoke_dart_package
-  - bricks/altoke_entity
-  - bricks/altoke_entity/brick/hooks
-  - bricks/altoke_entity/e2e
-  - bricks/altoke_entity/reference/altoke_entity
-  - bricks/altoke_local_database
-  - bricks/altoke_local_database/brick/hooks
-  - bricks/altoke_local_database/e2e
-  - bricks/altoke_local_database/reference/local_database/drift_local_database
-  - bricks/altoke_local_database/reference/local_database/hive_local_database
-  - bricks/altoke_local_database/reference/local_database/isar_local_database
-  - bricks/altoke_local_database/reference/local_database/local_database
-  - bricks/altoke_local_database/reference/local_database/sembast_local_database
-  - bricks/altoke_reactive_caches
-  - bricks/altoke_reactive_caches/brick/hooks
-  - bricks/altoke_reactive_caches/e2e
-  - bricks/altoke_reactive_caches/reference/reactive_caches
-  - tools/brick_generator
-  - tools/data_persistence_approach
-  - tools/local_brick_installer
-  - tools/local_database_alternative
-  - tools/monorepo_elements
-  - tools/pubspec_deps_sorter
-  - tools/readmes_resolver
-  - tools/router_package
-  - tools/shell
-  - tools/value_equality_approach
-
 environment:
-  sdk: ">=3.6.0 <4.0.0"
+  sdk: ">=3.6.1 <4.0.0"
 
 dev_dependencies:
   melos: ^7.0.0-dev.5
@@ -66,8 +25,8 @@ melos:
   command:
     bootstrap:
       environment:
-        sdk: ">=3.6.0 <4.0.0"
-        flutter: ">=3.27.1 <4.0.0"
+        sdk: ">=3.6.1 <4.0.0"
+        flutter: ">=3.27.3 <4.0.0"
       dependencies:
         collection: ^1.19.0
         mason: ^0.1.0
@@ -292,3 +251,44 @@ melos:
       steps:
         - brick.gen
         - brick.install
+
+workspace:
+  - bricks/altoke_app
+  - bricks/altoke_app/brick/hooks
+  - bricks/altoke_app/e2e
+  - bricks/altoke_app/reference/altoke_app
+  - bricks/altoke_app/reference/altoke_app/packages/app
+  - bricks/altoke_common
+  - bricks/altoke_common/brick/hooks
+  - bricks/altoke_common/e2e
+  - bricks/altoke_common/reference/common
+  - bricks/altoke_dart_package
+  - bricks/altoke_dart_package/brick/hooks
+  - bricks/altoke_dart_package/e2e
+  - bricks/altoke_dart_package/reference/altoke_dart_package
+  - bricks/altoke_entity
+  - bricks/altoke_entity/brick/hooks
+  - bricks/altoke_entity/e2e
+  - bricks/altoke_entity/reference/altoke_entity
+  - bricks/altoke_local_database
+  - bricks/altoke_local_database/brick/hooks
+  - bricks/altoke_local_database/e2e
+  - bricks/altoke_local_database/reference/local_database/drift_local_database
+  - bricks/altoke_local_database/reference/local_database/hive_local_database
+  - bricks/altoke_local_database/reference/local_database/isar_local_database
+  - bricks/altoke_local_database/reference/local_database/local_database
+  - bricks/altoke_local_database/reference/local_database/sembast_local_database
+  - bricks/altoke_reactive_caches
+  - bricks/altoke_reactive_caches/brick/hooks
+  - bricks/altoke_reactive_caches/e2e
+  - bricks/altoke_reactive_caches/reference/reactive_caches
+  - tools/brick_generator
+  - tools/data_persistence_approach
+  - tools/local_brick_installer
+  - tools/local_database_alternative
+  - tools/monorepo_elements
+  - tools/pubspec_deps_sorter
+  - tools/readmes_resolver
+  - tools/router_package
+  - tools/shell
+  - tools/value_equality_approach
