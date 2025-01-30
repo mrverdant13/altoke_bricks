@@ -24,7 +24,7 @@ dependencies:
   local_database:
     path: ../local_database/
   meta: ^1.15.0
-  sembast: ^3.8.0+1
+  sembast: ^3.8.2
 
 dev_dependencies:
   test: ^1.25.8
