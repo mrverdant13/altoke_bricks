@@ -13,7 +13,7 @@ dependencies:
   {{#requirements_met}}local_database{{/requirements_met}}:
     path: ../{{#requirements_met}}local_database{{/requirements_met}}/
   meta: ^1.15.0
-  sembast: ^3.8.0+1
+  sembast: ^3.8.2
 
 dev_dependencies:
   test: ^1.25.8
