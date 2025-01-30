@@ -77,7 +77,6 @@ dev_dependencies:
   #replace-start##with#path: ^1.9.0#replace-end#
   #remove-start#
   path_provider_platform_interface: ^2.1.2
-  plugin_platform_interface: ^2.1.8
   #remove-end#
   #w 1v 2> w#
   riverpod_generator: ^2.6.3

@@ -10,3 +10,8 @@ part 'directories_pods.g.dart';
 Future<Directory> asyncApplicationDocumentsDirectory(Ref ref) async {
   return getApplicationDocumentsDirectory();
 }
+
+@Riverpod(dependencies: [])
+Future<Directory> asyncTemporaryDirectory(Ref ref) async {
+  return getTemporaryDirectory();
+}

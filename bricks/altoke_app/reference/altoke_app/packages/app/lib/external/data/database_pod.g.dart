@@ -7,7 +7,7 @@ part of 'database_pod.dart';
 // **************************************************************************
 
 String _$asyncDriftLocalDatabaseHash() =>
-    r'838ef3909ad43e27081993c72d6c13d45f64c4a9';
+    r'3acd52622330646468ea5cd9b4bf4726398303ad';
 
 /// See also [asyncDriftLocalDatabase].
 @ProviderFor(asyncDriftLocalDatabase)
@@ -18,10 +18,15 @@ final asyncDriftLocalDatabasePod =
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$asyncDriftLocalDatabaseHash,
-  dependencies: <ProviderOrFamily>[asyncApplicationDocumentsDirectoryPod],
+  dependencies: <ProviderOrFamily>[
+    asyncApplicationDocumentsDirectoryPod,
+    asyncTemporaryDirectoryPod
+  ],
   allTransitiveDependencies: <ProviderOrFamily>{
     asyncApplicationDocumentsDirectoryPod,
-    ...?asyncApplicationDocumentsDirectoryPod.allTransitiveDependencies
+    ...?asyncApplicationDocumentsDirectoryPod.allTransitiveDependencies,
+    asyncTemporaryDirectoryPod,
+    ...?asyncTemporaryDirectoryPod.allTransitiveDependencies
   },
 );
 
