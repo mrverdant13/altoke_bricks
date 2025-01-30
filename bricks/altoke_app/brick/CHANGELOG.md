@@ -2,7 +2,7 @@
 
 - **FEAT**: Support for Android.
 - **FEAT**: Support for iOS.
-- **FEAT**: Mono-repo setup with `melos`.
+- **FEAT**: Mono-repo setup with `melos` and Dart workspaces.
 - **FEAT**: Router API (deep linking and dynamic linking) with `auto_route`.
 - **FEAT**: Router API (deep linking and dynamic linking) with `go_router`.
 - **FEAT**: Spell checking with CSpell.
