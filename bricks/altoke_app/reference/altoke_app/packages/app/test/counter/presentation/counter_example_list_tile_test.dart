@@ -14,43 +14,27 @@ import 'package:mocktail/mocktail.dart';
 import '../../helpers/helpers.dart';
 
 void main() {
-  final localizationVariant = LocalizationVariant.withCommonSelector(
-    localizedTextSelector: (l10n) => l10n.counterExampleListTileTitle,
-    partialCases: {
-      const (
-        Locale('en'),
-        'Counter',
-      ),
-      const (
-        Locale('es'),
-        // cspell:disable-next-line
-        'Contador',
-      ),
-    },
-  );
-
-  testExhaustiveLocalizationVariant(
-    '''
-
-GIVEN a localization variant
-WHEN testing the counter example list tile
-THEN all supported locales should be considered
-''',
-    localizationVariant,
-  );
-
-  testLocalizedWidget(
+  testWidgets(
     '''
 
 GIVEN a counter example list tile
 WHEN it is displayed
 THEN the button should include the localized label
 ''',
-    const Scaffold(
-      body: CounterExampleListTile(),
-    ),
-    ancestorFinder: find.byType(ListTile),
-    variant: localizationVariant,
+    (tester) async {
+      await tester.pumpAppWithScreen(
+        const Scaffold(
+          body: CounterExampleListTile(),
+        ),
+      );
+      expect(
+        find.l10n.widgetWithText(
+          ListTile,
+          (l10n) => l10n.counterExampleListTileTitle,
+        ),
+        findsOneWidget,
+      );
+    },
   );
 
   setUpAll(registerFallbackValues);
