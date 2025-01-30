@@ -5,7 +5,7 @@ template-arb-file: app_en.arb
 output-localization-file: app_localizations.dart
 format: true
 nullable-getter: false
-untranslated-messages-file: lib/l10n/arb/untranslated-messages.json
+untranslated-messages-file: lib/l10n/gen/untranslated-messages.json
 header: >
   // GENERATED CODE - DO NOT MODIFY BY HAND
   // coverage:ignore-file
