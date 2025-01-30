@@ -6,10 +6,7 @@ import 'package:drift_local_database/drift_local_database.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:isar/isar.dart';
-import 'package:mocktail/mocktail.dart';
-import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
-
-import '../../helpers/helpers.dart';
+import 'package:path/path.dart' as path;
 
 extension on Abi {
   String get localName {
@@ -53,20 +50,17 @@ WHEN it is invoked
 THEN it should return a LocalDatabase
 ''', () async {
     TestWidgetsFlutterBinding.ensureInitialized();
-
-    // HACK: Drift uses the path_provider package to get
-    // the temporary directory under the hood.
-    final pathProviderPlatform = MockPathProviderPlatform();
-    PathProviderPlatform.instance = pathProviderPlatform;
-    when(pathProviderPlatform.getTemporaryPath)
-        .thenAnswer((_) async => 'mock/temp-path');
-
-    final fakeDir = await Directory.systemTemp.createTemp();
-    addTearDown(() => fakeDir.delete(recursive: true));
+    final tempSysDir = await Directory.systemTemp.createTemp();
+    addTearDown(() => tempSysDir.delete(recursive: true));
+    final appDocsDir = path.join(tempSysDir.path, 'app_docs');
+    final tempDir = path.join(tempSysDir.path, 'temp');
     final container = ProviderContainer(
       overrides: [
         asyncApplicationDocumentsDirectoryPod.overrideWith(
-          (ref) async => fakeDir,
+          (ref) async => Directory(appDocsDir),
+        ),
+        asyncTemporaryDirectoryPod.overrideWith(
+          (ref) async => Directory(tempDir),
         ),
       ],
     );

@@ -4,7 +4,7 @@ version: 0.0.1+1
 publish_to: none
 
 environment:
-  sdk: ">=3.6.0 <4.0.0"
+  sdk: ">=3.6.1 <4.0.0"
 
 dependencies:
   common:
@@ -13,7 +13,7 @@ dependencies:
   {{#requirements_met}}local_database{{/requirements_met}}:
     path: ../{{#requirements_met}}local_database{{/requirements_met}}/
   meta: ^1.15.0
-  sembast: ^3.8.0+1
+  sembast: ^3.8.2
 
 dev_dependencies:
   test: ^1.25.8

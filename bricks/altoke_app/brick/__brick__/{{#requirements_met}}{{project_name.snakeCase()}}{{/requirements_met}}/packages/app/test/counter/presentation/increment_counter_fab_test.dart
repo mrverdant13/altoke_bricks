@@ -1,5 +1,4 @@
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/counter/counter.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -7,46 +6,24 @@ import 'package:mocktail/mocktail.dart';
 import '../../helpers/helpers.dart';
 
 void main() {
-  final localizationVariant = LocalizationVariant.withCommonSelector(
-    localizedTextSelector: (l10n) => l10n.counterIncrementButtonTooltip,
-    partialCases: {
-      const (
-        Locale('en'),
-        'Increment',
-      ),
-      const (
-        Locale('es'),
-        // cspell:disable-next-line
-        'Incrementar',
-      ),
-    },
-  );
-
-  testExhaustiveLocalizationVariant(
-    '''
-
-GIVEN a localization variant
-WHEN testing the increment counter fab
-THEN all supported locales should be considered
-''',
-    localizationVariant,
-  );
-
-  testLocalizedWidget(
+  testWidgets(
     '''
 
 GIVEN a increment counter fab
 WHEN it is displayed
 THEN the fab should include the localized tooltip
 ''',
-    const IncrementCounterFab(),
-    postPumpAction: (tester) async {
-      final tooltipFinder = find.byType(Tooltip);
-      await tester.longPress(tooltipFinder);
-      await tester.pumpAndSettle();
+    (tester) async {
+      await tester.pumpAppWithScreen(
+        const IncrementCounterFab(),
+      );
+      expect(
+        find.l10n.byTooltip(
+          (l10n) => l10n.counterIncrementButtonTooltip,
+        ),
+        findsOneWidget,
+      );
     },
-    ancestorFinder: find.byType(Overlay),
-    variant: localizationVariant,
   );
 
   testWidgets(

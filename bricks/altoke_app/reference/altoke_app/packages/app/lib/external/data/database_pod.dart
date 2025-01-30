@@ -16,16 +16,24 @@ part 'database_pod.g.dart';
 @Riverpod(
   dependencies: [
     asyncApplicationDocumentsDirectory,
+    asyncTemporaryDirectory,
   ],
 )
 Future<LocalDatabase> asyncDriftLocalDatabase(Ref ref) async {
   const dbName = 'app_db';
-  final databasePath = ref.watch(
+  final databaseDirectoryPath = ref.watch(
     asyncApplicationDocumentsDirectoryPod.selectAsync(
       (dir) => path.joinAll([
         dir.path,
         'drift_database',
-        '$dbName.sqlite',
+      ]),
+    ),
+  );
+  final temporaryDirectoryPath = ref.watch(
+    asyncTemporaryDirectoryPod.selectAsync(
+      (dir) => path.joinAll([
+        dir.path,
+        'drift_database',
       ]),
     ),
   );
@@ -34,7 +42,8 @@ Future<LocalDatabase> asyncDriftLocalDatabase(Ref ref) async {
     queryExecutor: driftDatabase(
       name: dbName,
       native: DriftNativeOptions(
-        databasePath: () async => databasePath,
+        databaseDirectory: () async => databaseDirectoryPath,
+        tempDirectoryPath: () async => temporaryDirectoryPath,
       ),
     ),
   );

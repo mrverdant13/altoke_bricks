@@ -2,12 +2,9 @@ name: {{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}_mon
 publish_to: none
 version: 1.0.0+1
 
-workspace:
-  - packages/app
-
 environment:
-  sdk: ">=3.6.0 <4.0.0"
-  flutter: ">=3.27.1 <4.0.0"
+  sdk: ">=3.6.1 <4.0.0"
+  flutter: ">=3.27.3 <4.0.0"
 
 dev_dependencies:
   melos: ^7.0.0-dev.5
@@ -17,8 +14,8 @@ melos:
   command:
     bootstrap:
       environment:
-        sdk: ">=3.6.0 <4.0.0"
-        flutter: ">=3.27.1 <4.0.0"
+        sdk: ">=3.6.1 <4.0.0"
+        flutter: ">=3.27.3 <4.0.0"
       dependencies:
         meta: ^1.15.0
       dev_dependencies:
@@ -160,3 +157,7 @@ melos:
       description: Check test coverage
       run: >
         coverde check -i MELOS_ROOT_PATH/coverage/filtered.lcov.info 100
+
+workspace:
+  - packages/app
+
