@@ -61,26 +61,13 @@ Future<void> run(HookContext context) async {
     onSuccess: onSuccess('🏭 Code generation complete!'),
     onError: onError('🏭 Failed to run code generation'),
   );
-
-  // HACK: Avoid undesired results when globally applying fixes.
-  // Applying fixes to the root results in unwanted changes on some
-  // `pubspec.yaml` files.
-  // This can be simplified in a single execution when the issue is resolved.
   await Dart.applyFixes(
-    Directory(path.join(appPath, 'lib')),
+    projectDir,
     codes: ['directives_ordering'],
     onStart: onStart('🔧 Applying fixes'),
     onSuccess: onSuccess('🔧 Fixes applied!'),
     onError: onError('🔧 Failed to apply fixes'),
   );
-  await Dart.applyFixes(
-    Directory(path.join(appPath, 'test')),
-    codes: ['directives_ordering'],
-    onStart: onStart('🔧 Applying fixes'),
-    onSuccess: onSuccess('🔧 Fixes applied!'),
-    onError: onError('🔧 Failed to apply fixes'),
-  );
-
   await Melos.runScript(
     appDir,
     'format.all',
