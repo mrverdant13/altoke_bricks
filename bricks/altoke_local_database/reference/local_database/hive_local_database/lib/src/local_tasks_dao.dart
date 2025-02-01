@@ -16,7 +16,7 @@ class LocalTasksHiveDao implements LocalTasksDao {
 
   /// Box for the tasks.
   @visibleForTesting
-  final Future<hive.TasksBox> asyncTasksBox = Hive.openBox(tasksBoxName);
+  late final Future<hive.TasksBox> asyncTasksBox = Hive.openBox(tasksBoxName);
 
   @override
   Future<Task> createOne(NewTask newTask) async {
