@@ -4,7 +4,6 @@ import 'package:altoke_app/external/external.dart';
 import 'package:altoke_app/tasks/tasks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hive/hive.dart';
 import 'package:local_database/local_database.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -41,16 +40,11 @@ WHEN it is invoked
 THEN a local tasks Hive DAO should be returned
 ''', () async {
     final dir = Directory.systemTemp.createTempSync();
-
-    // HACK: Disable teardown to avoid file system errors
-    // addTearDown(() => dir.deleteSync(recursive: true));
-
+    addTearDown(() => dir.deleteSync(recursive: true));
     final container = ProviderContainer(
       overrides: [
         asyncHiveInitializationPod.overrideWith(
-          (ref) {
-            Hive.init(dir.path);
-          },
+          (ref) {},
         ),
       ],
     );
