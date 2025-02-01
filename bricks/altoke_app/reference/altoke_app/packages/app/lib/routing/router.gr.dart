@@ -1,4 +1,3 @@
-// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
@@ -18,7 +17,10 @@ import 'package:auto_route/auto_route.dart' as _i4;
 /// [_i1.CounterScreen]
 class CounterRoute extends _i4.PageRouteInfo<void> {
   const CounterRoute({List<_i4.PageRouteInfo>? children})
-      : super(CounterRoute.name, initialChildren: children);
+      : super(
+          CounterRoute.name,
+          initialChildren: children,
+        );
 
   static const String name = 'CounterRoute';
 
@@ -34,7 +36,10 @@ class CounterRoute extends _i4.PageRouteInfo<void> {
 /// [_i2.HomeScreen]
 class HomeRoute extends _i4.PageRouteInfo<void> {
   const HomeRoute({List<_i4.PageRouteInfo>? children})
-      : super(HomeRoute.name, initialChildren: children);
+      : super(
+          HomeRoute.name,
+          initialChildren: children,
+        );
 
   static const String name = 'HomeRoute';
 
@@ -50,7 +55,10 @@ class HomeRoute extends _i4.PageRouteInfo<void> {
 /// [_i3.TasksScreen]
 class TasksRoute extends _i4.PageRouteInfo<void> {
   const TasksRoute({List<_i4.PageRouteInfo>? children})
-      : super(TasksRoute.name, initialChildren: children);
+      : super(
+          TasksRoute.name,
+          initialChildren: children,
+        );
 
   static const String name = 'TasksRoute';
 
