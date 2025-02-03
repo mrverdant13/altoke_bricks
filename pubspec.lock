@@ -886,10 +886,10 @@ packages:
     dependency: transitive
     description:
       name: sembast
-      sha256: "6cf9acde19bd88dba9ea8090d3e50725cdc70fc7cf1c117c26e79c257884b04b"
+      sha256: "9026ea34aa3a0f26a966529ef80b57b6fe40f810cadeadd1b208202d1bf153e7"
       url: "https://pub.dev"
     source: hosted
-    version: "3.8.2"
+    version: "3.8.3"
   shelf:
     dependency: transitive
     description:
