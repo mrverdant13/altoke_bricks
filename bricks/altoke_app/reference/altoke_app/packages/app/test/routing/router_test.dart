@@ -31,8 +31,10 @@ THEN the config is injected
       final container = ProviderContainer(
         /*remove-start*/
         overrides: [
-          routerPackagePod.overrideWithValue(
-            RouterPackage.autoRoute,
+          selectedRouterPackagePod.overrideWith(
+            () => FakeSelectedRouterPackage(
+              initialValue: RouterPackage.autoRoute,
+            ),
           ),
         ],
         /*remove-end*/
@@ -152,8 +154,10 @@ THEN the config is injected
       final container = ProviderContainer(
         /*remove-start*/
         overrides: [
-          routerPackagePod.overrideWithValue(
-            RouterPackage.goRouter,
+          selectedRouterPackagePod.overrideWith(
+            () => FakeSelectedRouterPackage(
+              initialValue: RouterPackage.goRouter,
+            ),
           ),
         ],
         /*remove-end*/

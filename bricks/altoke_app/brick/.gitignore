@@ -3,6 +3,7 @@
 /**/__brick__/**/*.g.dart
 /**/__brick__/**/app_localizations*.dart
 /**/__brick__/**/external/**
+/**/__brick__/**/test/helpers/fakes/selected_router_package.dart
 /**/__brick__/**/test/helpers/mocks/external.dart
 /**/__brick__/**/test/helpers/mocks/directories.dart
 /**/__brick__/**/tasks/**

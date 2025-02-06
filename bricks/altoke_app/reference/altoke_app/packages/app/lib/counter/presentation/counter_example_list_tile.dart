@@ -18,7 +18,7 @@ class CounterExampleListTile extends ConsumerWidget {
       onTap: () {
         /*w 1v w*/
         /*remove-start*/
-        switch (ref.read(routerPackagePod)) {
+        switch (ref.read(selectedRouterPackagePod)) {
           case RouterPackage.autoRoute:
             /*remove-end*/
             /*{{#use_auto_route}}*/

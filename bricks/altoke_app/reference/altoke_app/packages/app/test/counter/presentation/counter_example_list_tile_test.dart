@@ -55,8 +55,10 @@ THEN the counter screen should be shown
         /*remove-start*/
         ProviderScope(
           overrides: [
-            routerPackagePod.overrideWithValue(
-              RouterPackage.autoRoute,
+            selectedRouterPackagePod.overrideWith(
+              () => FakeSelectedRouterPackage(
+                initialValue: RouterPackage.autoRoute,
+              ),
             ),
           ],
           child:
@@ -95,8 +97,10 @@ THEN the counter screen should be shown
         /*remove-start*/
         ProviderScope(
           overrides: [
-            routerPackagePod.overrideWithValue(
-              RouterPackage.goRouter,
+            selectedRouterPackagePod.overrideWith(
+              () => FakeSelectedRouterPackage(
+                initialValue: RouterPackage.goRouter,
+              ),
             ),
           ],
           child:

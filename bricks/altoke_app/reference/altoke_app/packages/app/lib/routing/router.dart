@@ -109,13 +109,13 @@ class TasksRouteData extends GoRouteData {
 @Riverpod(
   dependencies: [
     /*remove-start*/
-    routerPackage,
+    SelectedRouterPackage,
     /*remove-end*/
   ],
 )
 RouterConfig<Object> routerConfig(Ref ref) {
   /*remove-start*/
-  final routerPackage = ref.watch(routerPackagePod);
+  final routerPackage = ref.watch(selectedRouterPackagePod);
   /*remove-end*/
   final routerConfig = /*remove-start*/ switch (routerPackage) {
     RouterPackage.autoRoute =>
@@ -179,17 +179,20 @@ enum RouterPackage {
   const RouterPackage(this.identifier);
 
   final String identifier;
-
-  static final fromEnv = RouterPackage.values.firstWhere(
-    (routerPackage) => routerPackage.identifier == routerIdentifier,
-  );
 }
-
-@visibleForTesting
-const routerIdentifier = String.fromEnvironment('ALTOKE_APP_ROUTER');
 
 @Riverpod(
   dependencies: [],
+  keepAlive: true,
 )
-RouterPackage routerPackage(Ref ref) => RouterPackage.fromEnv;
+class SelectedRouterPackage extends _$SelectedRouterPackage {
+  @override
+  RouterPackage build() {
+    return RouterPackage.values.first;
+  }
+
+  // No getter is needed as the state should be accessed directly.
+  // ignore: avoid_setters_without_getters
+  set value(RouterPackage value) => state = value;
+}
 // coverage:ignore-end
