@@ -18,14 +18,75 @@ class MyApp extends ConsumerWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: routerConfig,
-      builder: (context, child) => FlavorBanner(
-        child: InitializationWrapper(
-          child: child!,
-        ),
-      ),
+      builder: (context, child) => /*remove-start*/
+          RouterPackageSwitcherWrapper(
+        child: /*remove-end*/ FlavorBanner(
+          child: InitializationWrapper(
+            child: child!,
+          ),
+        ), /*remove-start*/
+      ), /*remove-end*/
     );
   }
 }
+
+/*remove-start*/
+class RouterPackageSwitcherWrapper extends ConsumerWidget {
+  const RouterPackageSwitcherWrapper({
+    required this.child,
+    super.key,
+  });
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final routerPackageIdentifier = ref.watch(
+      selectedRouterPackagePod.select(
+        (package) => package.identifier,
+      ),
+    );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(
+          child: MediaQuery.removePadding(
+            context: context,
+            removeBottom: true,
+            child: child,
+          ),
+        ),
+        Material(
+          shape: const Border(
+            top: BorderSide(),
+          ),
+          child: SafeArea(
+            top: false,
+            left: false,
+            right: false,
+            maintainBottomViewPadding: true,
+            child: Center(
+              child: TextButton.icon(
+                onPressed: () {
+                  final selectedRouterPackageIndex =
+                      ref.read(selectedRouterPackagePod).index;
+                  final newRouterPackageIndex =
+                      (selectedRouterPackageIndex + 1) %
+                          RouterPackage.values.length;
+                  ref.read(selectedRouterPackagePod.notifier).value =
+                      RouterPackage.values[newRouterPackageIndex];
+                },
+                label: Text(routerPackageIdentifier),
+                icon: const Icon(Icons.travel_explore),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+/*remove-end*/
 
 @visibleForTesting
 class InitializationWrapper extends ConsumerWidget {

@@ -85,7 +85,7 @@ extension $TasksRouteDataExtension on TasksRouteData {
 // RiverpodGenerator
 // **************************************************************************
 
-String _$routerConfigHash() => r'def697bc6181727eabea0f95172ae86422a39a79';
+String _$routerConfigHash() => r'24a584aa2ad828533c22efdbfecd842ce35ff6f7';
 
 /// See also [routerConfig].
 @ProviderFor(routerConfig)
@@ -94,32 +94,32 @@ final routerConfigPod = AutoDisposeProvider<RouterConfig<Object>>.internal(
   name: r'routerConfigPod',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$routerConfigHash,
-  dependencies: <ProviderOrFamily>[routerPackagePod],
+  dependencies: <ProviderOrFamily>[selectedRouterPackagePod],
   allTransitiveDependencies: <ProviderOrFamily>{
-    routerPackagePod,
-    ...?routerPackagePod.allTransitiveDependencies
+    selectedRouterPackagePod,
+    ...?selectedRouterPackagePod.allTransitiveDependencies
   },
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef RouterConfigRef = AutoDisposeProviderRef<RouterConfig<Object>>;
-String _$routerPackageHash() => r'33d0056f7095601d17e81ca2ce4eac2fca1d5fd5';
+String _$selectedRouterPackageHash() =>
+    r'2e08d6a2b92e21e304e7e0ea4a0bd63b35ecf662';
 
-/// See also [routerPackage].
-@ProviderFor(routerPackage)
-final routerPackagePod = AutoDisposeProvider<RouterPackage>.internal(
-  routerPackage,
-  name: r'routerPackagePod',
+/// See also [SelectedRouterPackage].
+@ProviderFor(SelectedRouterPackage)
+final selectedRouterPackagePod =
+    NotifierProvider<SelectedRouterPackage, RouterPackage>.internal(
+  SelectedRouterPackage.new,
+  name: r'selectedRouterPackagePod',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$routerPackageHash,
+      : _$selectedRouterPackageHash,
   dependencies: const <ProviderOrFamily>[],
   allTransitiveDependencies: const <ProviderOrFamily>{},
 );
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef RouterPackageRef = AutoDisposeProviderRef<RouterPackage>;
+typedef _$SelectedRouterPackage = Notifier<RouterPackage>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
