@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:{{#requirements_met}}reactive_caches{{/requirements_met}}/{{#requirements_met}}reactive_caches{{/requirements_met}}.dart';
+import 'package:{{#requirements_met}}reactive_caches{{/requirements_met}}/src/immediate_firer_stream.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -351,8 +352,10 @@ THEN the stream controller is closed
           expect(cache.streamController, isNotNull);
           await sub1a.cancel();
           expect(cache.streamController, isNotNull);
+          final controller1 = cache.streamController;
           await sub1b.cancel();
           expect(cache.streamController, isNull);
+          expect(controller1?.isClosed, isTrue);
           final stream2 = cache.watch();
           expect(stream2.isBroadcast, isTrue);
           final sub2a = stream2.listen((value) {});
@@ -361,8 +364,10 @@ THEN the stream controller is closed
           expect(cache.streamController, isNotNull);
           await sub2a.cancel();
           expect(cache.streamController, isNotNull);
+          final controller2 = cache.streamController;
           await sub2b.cancel();
           expect(cache.streamController, isNull);
+          expect(controller2?.isClosed, isTrue);
         },
       );
 
@@ -436,6 +441,18 @@ THEN the stream controller is closed
           expect(cache.streamController, isNotNull);
           await sub2b.cancel();
           expect(cache.streamController, isNull);
+        },
+      );
+
+      test(
+        '''
+
+WHEN the cache stream type is checked
+THEN the result is an immediate firer stream
+''',
+        () async {
+          final stream = cache.watch();
+          expect(stream, isA<ImmediateFirerStream<List<String?>>>());
         },
       );
 
