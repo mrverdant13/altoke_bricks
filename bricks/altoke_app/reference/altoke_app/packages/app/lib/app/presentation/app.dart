@@ -35,6 +35,7 @@ class MyApp extends ConsumerWidget {
 } /*w 2v w*/
 
 /*remove-start*/
+// coverage:ignore-start
 class RouterPackageSwitcherWrapper extends ConsumerWidget {
   const RouterPackageSwitcherWrapper({
     required this.child,
@@ -90,6 +91,7 @@ class RouterPackageSwitcherWrapper extends ConsumerWidget {
     );
   }
 }
+// coverage:ignore-end
 /*remove-end*/
 
 @visibleForTesting
