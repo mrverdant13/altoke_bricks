@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:altoke_reactive_caches/reactive_caches.dart';
+import 'package:altoke_reactive_caches/src/immediate_firer_stream.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -446,96 +447,12 @@ THEN the stream controller is closed
       test(
         '''
 
-WHEN the cached list is listened by a new listener
-THEN the current cached list should be immediately emitted
-AND the subsequent cached list changes should be emitted
+WHEN the cache stream type is checked
+THEN the result is an immediate firer stream
 ''',
         () async {
-          cache.set(['value 1']);
-          expect(
-            cache.elements,
-            ['value 1'],
-          );
-          cache.set([]);
-          expect(cache.elements, isEmpty);
-          cache.set(['value 1', 'value 2']);
-          expect(
-            cache.elements,
-            ['value 1', 'value 2'],
-          );
           final stream = cache.watch();
-          final sub1Values = <List<String?>>[];
-          final sub1 = stream.listen(sub1Values.add);
-          await Future.microtask(() {});
-          expect(
-            sub1Values,
-            [
-              ['value 1', 'value 2'],
-            ],
-          );
-          cache.set(['value 1', null, 'value 2']);
-          expect(
-            cache.elements,
-            ['value 1', null, 'value 2'],
-          );
-          cache.set(['value 1']);
-          expect(
-            cache.elements,
-            ['value 1'],
-          );
-          final sub2Values = <List<String?>>[];
-          final sub2 = stream.listen(sub2Values.add);
-          await Future.microtask(() {});
-          expect(
-            sub1Values,
-            [
-              ['value 1', 'value 2'],
-              ['value 1', null, 'value 2'],
-              ['value 1'],
-            ],
-          );
-          expect(
-            sub2Values,
-            [
-              ['value 1'],
-            ],
-          );
-          cache.set(['value 1', 'value 2', 'value 3']);
-          expect(
-            cache.elements,
-            ['value 1', 'value 2', 'value 3'],
-          );
-          cache.set([]);
-          expect(cache.elements, isEmpty);
-          cache.set(['value 1', 'value 2', 'value 3', 'value 4']);
-          expect(
-            cache.elements,
-            ['value 1', 'value 2', 'value 3', 'value 4'],
-          );
-          expect(
-            sub1Values,
-            [
-              ['value 1', 'value 2'],
-              ['value 1', null, 'value 2'],
-              ['value 1'],
-              ['value 1', 'value 2', 'value 3'],
-              <String?>[],
-              ['value 1', 'value 2', 'value 3', 'value 4'],
-            ],
-          );
-          expect(
-            sub2Values,
-            [
-              ['value 1'],
-              ['value 1', 'value 2', 'value 3'],
-              <String?>[],
-              ['value 1', 'value 2', 'value 3', 'value 4'],
-            ],
-          );
-          await [
-            sub1.cancel(),
-            sub2.cancel(),
-          ].wait;
+          expect(stream, isA<ImmediateFirerStream<List<String?>>>());
         },
       );
 

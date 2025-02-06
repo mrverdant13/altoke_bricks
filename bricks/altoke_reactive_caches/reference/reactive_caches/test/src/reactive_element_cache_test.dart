@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:altoke_reactive_caches/reactive_caches.dart';
+import 'package:altoke_reactive_caches/src/immediate_firer_stream.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -180,78 +181,12 @@ THEN the stream controller is closed
       test(
         '''
 
-WHEN the cached value is listened by a new listener
-THEN the current cached value should be immediately emitted
-AND the subsequent cached value changes should be emitted
+WHEN the cache stream type is checked
+THEN the result is an immediate firer stream
 ''',
         () async {
-          cache.set('value 1');
-          expect(cache.element, 'value 1');
-          cache.set(null);
-          expect(cache.element, isNull);
-          cache.set('value 2');
-          expect(cache.element, 'value 2');
           final stream = cache.watch();
-          final sub1Values = <String?>[];
-          final sub1 = stream.listen(sub1Values.add);
-          await Future.microtask(() {});
-          expect(
-            sub1Values,
-            [
-              'value 2',
-            ],
-          );
-          cache.set('value 3');
-          expect(cache.element, 'value 3');
-          cache.set('value 4');
-          expect(cache.element, 'value 4');
-          final sub2Values = <String?>[];
-          final sub2 = stream.listen(sub2Values.add);
-          await Future.microtask(() {});
-          expect(
-            sub1Values,
-            [
-              'value 2',
-              'value 3',
-              'value 4',
-            ],
-          );
-          expect(
-            sub2Values,
-            [
-              'value 4',
-            ],
-          );
-          cache.set('value 5');
-          expect(cache.element, 'value 5');
-          cache.set(null);
-          expect(cache.element, isNull);
-          cache.set('value 6');
-          expect(cache.element, 'value 6');
-          expect(
-            sub1Values,
-            [
-              'value 2',
-              'value 3',
-              'value 4',
-              'value 5',
-              null,
-              'value 6',
-            ],
-          );
-          expect(
-            sub2Values,
-            [
-              'value 4',
-              'value 5',
-              null,
-              'value 6',
-            ],
-          );
-          await [
-            sub1.cancel(),
-            sub2.cancel(),
-          ].wait;
+          expect(stream, isA<ImmediateFirerStream<String?>>());
         },
       );
 

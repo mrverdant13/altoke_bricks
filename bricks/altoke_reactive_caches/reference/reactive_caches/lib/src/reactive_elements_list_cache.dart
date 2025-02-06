@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:altoke_common/common.dart';
-import 'package:altoke_reactive_caches/src/latest_value_emitting_stream.dart';
+import 'package:altoke_reactive_caches/src/immediate_firer_stream.dart';
 import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
 
@@ -89,8 +89,8 @@ class ReactiveElementsListCache<E extends Object?> {
     );
     return streamController!.stream
         .map((list) => list.where(where).toList())
-        .emitImmediately()
-        .distinct(equalityChecker);
+        .distinct(equalityChecker)
+        .asImmediateFirer();
   }
 
   /// Inserts the provided [elements] at the provided [index] in the cached
