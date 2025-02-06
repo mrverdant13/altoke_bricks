@@ -351,8 +351,10 @@ THEN the stream controller is closed
           expect(cache.streamController, isNotNull);
           await sub1a.cancel();
           expect(cache.streamController, isNotNull);
+          final controller1 = cache.streamController;
           await sub1b.cancel();
           expect(cache.streamController, isNull);
+          expect(controller1?.isClosed, isTrue);
           final stream2 = cache.watch();
           expect(stream2.isBroadcast, isTrue);
           final sub2a = stream2.listen((value) {});
@@ -361,8 +363,10 @@ THEN the stream controller is closed
           expect(cache.streamController, isNotNull);
           await sub2a.cancel();
           expect(cache.streamController, isNotNull);
+          final controller2 = cache.streamController;
           await sub2b.cancel();
           expect(cache.streamController, isNull);
+          expect(controller2?.isClosed, isTrue);
         },
       );
 
@@ -436,6 +440,102 @@ THEN the stream controller is closed
           expect(cache.streamController, isNotNull);
           await sub2b.cancel();
           expect(cache.streamController, isNull);
+        },
+      );
+
+      test(
+        '''
+
+WHEN the cached list is listened by a new listener
+THEN the current cached list should be immediately emitted
+AND the subsequent cached list changes should be emitted
+''',
+        () async {
+          cache.set(['value 1']);
+          expect(
+            cache.elements,
+            ['value 1'],
+          );
+          cache.set([]);
+          expect(cache.elements, isEmpty);
+          cache.set(['value 1', 'value 2']);
+          expect(
+            cache.elements,
+            ['value 1', 'value 2'],
+          );
+          final stream = cache.watch();
+          final sub1Values = <List<String?>>[];
+          final sub1 = stream.listen(sub1Values.add);
+          await Future.microtask(() {});
+          expect(
+            sub1Values,
+            [
+              ['value 1', 'value 2'],
+            ],
+          );
+          cache.set(['value 1', null, 'value 2']);
+          expect(
+            cache.elements,
+            ['value 1', null, 'value 2'],
+          );
+          cache.set(['value 1']);
+          expect(
+            cache.elements,
+            ['value 1'],
+          );
+          final sub2Values = <List<String?>>[];
+          final sub2 = stream.listen(sub2Values.add);
+          await Future.microtask(() {});
+          expect(
+            sub1Values,
+            [
+              ['value 1', 'value 2'],
+              ['value 1', null, 'value 2'],
+              ['value 1'],
+            ],
+          );
+          expect(
+            sub2Values,
+            [
+              ['value 1'],
+            ],
+          );
+          cache.set(['value 1', 'value 2', 'value 3']);
+          expect(
+            cache.elements,
+            ['value 1', 'value 2', 'value 3'],
+          );
+          cache.set([]);
+          expect(cache.elements, isEmpty);
+          cache.set(['value 1', 'value 2', 'value 3', 'value 4']);
+          expect(
+            cache.elements,
+            ['value 1', 'value 2', 'value 3', 'value 4'],
+          );
+          expect(
+            sub1Values,
+            [
+              ['value 1', 'value 2'],
+              ['value 1', null, 'value 2'],
+              ['value 1'],
+              ['value 1', 'value 2', 'value 3'],
+              <String?>[],
+              ['value 1', 'value 2', 'value 3', 'value 4'],
+            ],
+          );
+          expect(
+            sub2Values,
+            [
+              ['value 1'],
+              ['value 1', 'value 2', 'value 3'],
+              <String?>[],
+              ['value 1', 'value 2', 'value 3', 'value 4'],
+            ],
+          );
+          await [
+            sub1.cancel(),
+            sub2.cancel(),
+          ].wait;
         },
       );
 

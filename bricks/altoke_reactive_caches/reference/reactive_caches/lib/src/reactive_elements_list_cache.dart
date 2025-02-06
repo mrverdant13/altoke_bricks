@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:altoke_common/common.dart';
+import 'package:altoke_reactive_caches/src/latest_value_emitting_stream.dart';
 import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
 
@@ -84,9 +85,11 @@ class ReactiveElementsListCache<E extends Object?> {
     streamController ??= StreamController<List<E>>.broadcast(
       onListen: onListen,
       onCancel: onCancel,
+      sync: true,
     );
     return streamController!.stream
         .map((list) => list.where(where).toList())
+        .emitImmediately()
         .distinct(equalityChecker);
   }
 
