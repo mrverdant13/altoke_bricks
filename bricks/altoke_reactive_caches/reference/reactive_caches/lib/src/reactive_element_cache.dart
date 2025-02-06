@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:altoke_common/common.dart';
+import 'package:altoke_reactive_caches/src/immediate_firer_stream.dart';
 import 'package:meta/meta.dart';
 
 /// Callback signature for comparing elements.
@@ -68,8 +69,11 @@ class ReactiveElementCache<E extends Object> {
     streamController ??= StreamController<E?>.broadcast(
       onListen: onListen,
       onCancel: onCancel,
+      sync: true,
     );
-    return streamController!.stream.distinct(equalityChecker);
+    return streamController!.stream
+        .distinct(equalityChecker)
+        .asImmediateFirer();
   }
 
   /// Updates the cached element by applying the provided [update] callback.
