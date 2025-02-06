@@ -18,17 +18,21 @@ class MyApp extends ConsumerWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: routerConfig,
-      builder: (context, child) => /*remove-start*/
+      builder: (context, child) => /*w 1> w*/ /*remove-start*/
           RouterPackageSwitcherWrapper(
         child: /*remove-end*/ FlavorBanner(
+          /*w 1v 8> w*/
           child: InitializationWrapper(
+            /*w 1v 10> w*/
             child: child!,
+            /*w 1v 8> w*/
           ),
+          /*w 1v 6> w*/
         ), /*remove-start*/
-      ), /*remove-end*/
+      ), /*remove-end*/ /*w 1v 4> w*/
     );
   }
-}
+} /*w 2v w*/
 
 /*remove-start*/
 class RouterPackageSwitcherWrapper extends ConsumerWidget {
