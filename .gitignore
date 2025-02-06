@@ -17,7 +17,7 @@
 /.idea/
 
 # VS Code
-/.vscode/
+/.vscode/*
 
 # Flutter/Dart/Pub related
 /**/doc/api/
@@ -60,9 +60,10 @@
 
 
 # =============== EXCEPTIONS ===============
-!/.vscode/extensions.json
-!/.vscode/settings.json
 !/.vscode/dummy-yaml-schema.json
+!/.vscode/extensions.json
+!/.vscode/launch.json
+!/.vscode/settings.json
 !/.vscode/*.code-snippets
 
 # Included in the git repo as per requirement of `melos`.
