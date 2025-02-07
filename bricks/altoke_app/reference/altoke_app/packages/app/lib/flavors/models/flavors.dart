@@ -1,15 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
-@pragma('vm:platform-const-if', !kDebugMode)
-bool get isDev => flavor == AppFlavor.dev;
-
-@pragma('vm:platform-const-if', !kDebugMode)
-bool get isStg => flavor == AppFlavor.stg;
-
-@pragma('vm:platform-const-if', !kDebugMode)
-bool get isProd => flavor == AppFlavor.prod;
-
 @visibleForTesting
 enum AppFlavor {
   dev('development', 'DEV'),
@@ -22,7 +13,26 @@ enum AppFlavor {
   final String label;
 }
 
+AppFlavor? _debugFlavor;
+
+@visibleForTesting
+AppFlavor? get debugFlavor => _debugFlavor;
+
+@visibleForTesting
+set debugFlavor(AppFlavor? value) {
+  // coverage:ignore-start
+  if (!kDebugMode) {
+    throw FlutterError(
+      'Cannot modify `debugFlavor` in non-debug builds.',
+    );
+  }
+  // coverage:ignore-end
+  _debugFlavor = value;
+}
+
 @pragma('vm:platform-const-if', !kDebugMode)
+@pragma('vm:prefer-inline')
+@pragma('dart2js:prefer-inline')
 AppFlavor get flavor {
   AppFlavor? flavor;
   flavor = [
@@ -40,19 +50,17 @@ AppFlavor get flavor {
   );
 }
 
-@visibleForTesting
-AppFlavor? get debugFlavor => _debugFlavor;
+@pragma('vm:platform-const-if', !kDebugMode)
+@pragma('vm:prefer-inline')
+@pragma('dart2js:prefer-inline')
+bool get isDev => flavor == AppFlavor.dev;
 
-@visibleForTesting
-set debugFlavor(AppFlavor? value) {
-  // coverage:ignore-start
-  if (!kDebugMode) {
-    throw FlutterError(
-      'Cannot modify `debugFlavor` in non-debug builds.',
-    );
-  }
-  // coverage:ignore-end
-  _debugFlavor = value;
-}
+@pragma('vm:platform-const-if', !kDebugMode)
+@pragma('vm:prefer-inline')
+@pragma('dart2js:prefer-inline')
+bool get isStg => flavor == AppFlavor.stg;
 
-AppFlavor? _debugFlavor;
+@pragma('vm:platform-const-if', !kDebugMode)
+@pragma('vm:prefer-inline')
+@pragma('dart2js:prefer-inline')
+bool get isProd => flavor == AppFlavor.prod;
