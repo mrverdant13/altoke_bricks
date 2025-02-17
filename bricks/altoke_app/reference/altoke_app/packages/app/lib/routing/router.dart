@@ -102,18 +102,14 @@ RouterConfig<Object> routerConfig(Ref ref) {
             RouterPackage.autoRoute =>
               /*remove-end*/
               /*{{#use_auto_route}}*/
-              AppRouter().config(),
-            /*{{/use_auto_route}}*/
-            /*remove-start*/
+              AppRouter().config() /*{{/use_auto_route}}*/ /*remove-start*/,
             RouterPackage.goRouter => /*remove-end*/
             /*{{#use_go_router}}*/
             GoRouter(
               routes: $appRoutes,
               debugLogDiagnostics: kDebugMode,
               initialLocation: const HomeRouteData().location,
-            ),
-            /*{{/use_go_router}}*/
-            /*remove-start*/
+            ) /*{{/use_go_router}}*/ /*remove-start*/,
           }
           as RouterConfig<Object> /*remove-end*/;
   final delegate = routerConfig.routerDelegate;
@@ -125,14 +121,14 @@ RouterConfig<Object> routerConfig(Ref ref) {
       RouterDelegate<UrlState>() =>
         /*remove-end*/
         /*{{#use_auto_route}}*/
-        delegate.currentConfiguration!.uri,
-      /*{{/use_auto_route}}*/
-      /*remove-start*/
+        delegate
+            .currentConfiguration!
+            .uri /*{{/use_auto_route}}*/ /*remove-start*/,
       GoRouterDelegate() => /*remove-end*/
         /*{{#use_go_router}}*/
-        delegate.currentConfiguration.uri,
-      /*{{/use_go_router}}*/
-      /*remove-start*/
+        delegate
+            .currentConfiguration
+            .uri /*{{/use_go_router}}*/ /*remove-start*/,
       _ => throw UnimplementedError(),
     }
     /*remove-end*/
