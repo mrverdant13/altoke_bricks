@@ -2,3 +2,8 @@ include: package:very_good_analysis/analysis_options.yaml
 analyzer:
   exclude:
     - lib/**.g.dart
+linter:
+  rules:
+    # HACK: Disable conflicting rule
+    # Issue: https://github.com/dart-lang/dart_style/issues/1646
+    require_trailing_commas: false
