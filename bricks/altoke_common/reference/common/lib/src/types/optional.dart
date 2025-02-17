@@ -15,7 +15,8 @@ import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 /*{{/use_freezed}}*/
 
-/*{{#use_meta}}*/ import 'package:meta/meta.dart'; /*{{/use_meta}}*/
+/*{{#use_meta}}*/
+import 'package:meta/meta.dart'; /*{{/use_meta}}*/
 
 /*{{#use_freezed}}*/
 part 'optional.freezed.dart';
@@ -171,9 +172,7 @@ sealed class Optional<T extends Object?> {
 @immutable
 class Some<T extends Object?> extends Optional<T> {
   /// {@macro common.some}
-  const Some(
-    this.value,
-  );
+  const Some(this.value);
 
   /// The underlying value.
   final T value;

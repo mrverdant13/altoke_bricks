@@ -27,13 +27,7 @@ Future<void> main(List<String> args) async {
   }
 
   final clearedRootReadme = rootReadmeContent
-      .replaceAll(
-        featuresRegex,
-        '$featuresToken\n\n$featuresToken',
-      )
-      .replaceAll(
-        bricksLinksRegex,
-        '$bricksLinksToken\n\n$bricksLinksToken',
-      );
+      .replaceAll(featuresRegex, '$featuresToken\n\n$featuresToken')
+      .replaceAll(bricksLinksRegex, '$bricksLinksToken\n\n$bricksLinksToken');
   rootReadmeFile.writeAsStringSync(clearedRootReadme);
 }

@@ -64,10 +64,7 @@ extension BrickGenerator on MasonGenerator {
         },
       );
     }
-    await generate(
-      target,
-      vars: vars,
-    );
+    await generate(target, vars: vars);
     if (runHooks) {
       await hooks.postGen(
         workingDirectory: target.dir.path,

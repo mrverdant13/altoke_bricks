@@ -52,26 +52,13 @@ THEN the generated outputs should be valid and testable
       expect(requirementsFile.existsSync(), isFalse);
       final coverageDir = outputDir.descendantDir('coverage');
       final baseLcovFile = coverageDir.descendantFile('lcov.info');
+      await expectLater(Dart.format(outputDir, failIfChanged: true), completes);
       await expectLater(
-        Dart.format(
-          outputDir,
-          failIfChanged: true,
-        ),
+        Dart.analyze(outputDir, fatalInfos: true, fatalWarnings: true),
         completes,
       );
       await expectLater(
-        Dart.analyze(
-          outputDir,
-          fatalInfos: true,
-          fatalWarnings: true,
-        ),
-        completes,
-      );
-      await expectLater(
-        Dart.test(
-          outputDir,
-          coverageDirectory: coverageDir,
-        ),
+        Dart.test(outputDir, coverageDirectory: coverageDir),
         completes,
       );
       await expectLater(
@@ -83,10 +70,7 @@ THEN the generated outputs should be valid and testable
         completes,
       );
       await expectLater(
-        Coverage.check(
-          inputLcov: baseLcovFile,
-          threshold: 100,
-        ),
+        Coverage.check(inputLcov: baseLcovFile, threshold: 100),
         completes,
       );
     },
@@ -108,10 +92,10 @@ THEN the requirements file should be generated
         'use_code_generation': true,
       };
       Future<void> action() async => BrickGenerator.dartPackage.runGeneration(
-            target: target,
-            vars: altokeDartPackageVars,
-            runHooks: false,
-          );
+        target: target,
+        vars: altokeDartPackageVars,
+        runHooks: false,
+      );
       expect(action(), throwsA(isNotNull));
       expect(outputDir.existsSync(), isFalse);
       expect(requirementsFile.existsSync(), isFalse);

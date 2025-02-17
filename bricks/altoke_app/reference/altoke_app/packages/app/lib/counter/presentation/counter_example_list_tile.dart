@@ -4,17 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CounterExampleListTile extends ConsumerWidget {
-  const CounterExampleListTile({
-    super.key,
-  });
+  const CounterExampleListTile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return ListTile(
-      title: Text(
-        l10n.counterExampleListTileTitle,
-      ),
+      title: Text(l10n.counterExampleListTileTitle),
       onTap: () {
         /*w 1v w*/
         /*remove-start*/

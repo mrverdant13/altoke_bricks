@@ -11,8 +11,9 @@ Future<void> run(HookContext context) async {
   final logger = context.logger;
 
   var requirementsCheckProgressMessage = 'Checking requirements';
-  final requirementsCheckProgress =
-      logger.progress(requirementsCheckProgressMessage);
+  final requirementsCheckProgress = logger.progress(
+    requirementsCheckProgressMessage,
+  );
   final requirementsCheckTimer = Timer.periodic(
     const Duration(milliseconds: 100),
     (timer) {

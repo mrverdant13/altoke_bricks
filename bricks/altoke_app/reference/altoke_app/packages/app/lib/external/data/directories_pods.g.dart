@@ -13,19 +13,20 @@ String _$asyncApplicationDocumentsDirectoryHash() =>
 @ProviderFor(asyncApplicationDocumentsDirectory)
 final asyncApplicationDocumentsDirectoryPod =
     AutoDisposeFutureProvider<Directory>.internal(
-  asyncApplicationDocumentsDirectory,
-  name: r'asyncApplicationDocumentsDirectoryPod',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$asyncApplicationDocumentsDirectoryHash,
-  dependencies: const <ProviderOrFamily>[],
-  allTransitiveDependencies: const <ProviderOrFamily>{},
-);
+      asyncApplicationDocumentsDirectory,
+      name: r'asyncApplicationDocumentsDirectoryPod',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$asyncApplicationDocumentsDirectoryHash,
+      dependencies: const <ProviderOrFamily>[],
+      allTransitiveDependencies: const <ProviderOrFamily>{},
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef AsyncApplicationDocumentsDirectoryRef
-    = AutoDisposeFutureProviderRef<Directory>;
+typedef AsyncApplicationDocumentsDirectoryRef =
+    AutoDisposeFutureProviderRef<Directory>;
 String _$asyncTemporaryDirectoryHash() =>
     r'c382a38a3426e6356a4ee2dd8485aff5bc5875a0';
 
@@ -33,14 +34,15 @@ String _$asyncTemporaryDirectoryHash() =>
 @ProviderFor(asyncTemporaryDirectory)
 final asyncTemporaryDirectoryPod =
     AutoDisposeFutureProvider<Directory>.internal(
-  asyncTemporaryDirectory,
-  name: r'asyncTemporaryDirectoryPod',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$asyncTemporaryDirectoryHash,
-  dependencies: const <ProviderOrFamily>[],
-  allTransitiveDependencies: const <ProviderOrFamily>{},
-);
+      asyncTemporaryDirectory,
+      name: r'asyncTemporaryDirectoryPod',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$asyncTemporaryDirectoryHash,
+      dependencies: const <ProviderOrFamily>[],
+      allTransitiveDependencies: const <ProviderOrFamily>{},
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element

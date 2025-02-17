@@ -6,34 +6,30 @@ part of 'router.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $homeRouteData,
-    ];
+List<RouteBase> get $appRoutes => [$homeRouteData];
 
 RouteBase get $homeRouteData => GoRouteData.$route(
-      path: '/',
-      name: 'HomeRoute',
-      factory: $HomeRouteDataExtension._fromState,
-      routes: [
-        GoRouteData.$route(
-          path: 'counter',
-          name: 'CounterRoute',
-          factory: $CounterRouteDataExtension._fromState,
-        ),
-        GoRouteData.$route(
-          path: 'tasks',
-          name: 'TasksRoute',
-          factory: $TasksRouteDataExtension._fromState,
-        ),
-      ],
-    );
+  path: '/',
+  name: 'HomeRoute',
+  factory: $HomeRouteDataExtension._fromState,
+  routes: [
+    GoRouteData.$route(
+      path: 'counter',
+      name: 'CounterRoute',
+      factory: $CounterRouteDataExtension._fromState,
+    ),
+    GoRouteData.$route(
+      path: 'tasks',
+      name: 'TasksRoute',
+      factory: $TasksRouteDataExtension._fromState,
+    ),
+  ],
+);
 
 extension $HomeRouteDataExtension on HomeRouteData {
   static HomeRouteData _fromState(GoRouterState state) => const HomeRouteData();
 
-  String get location => GoRouteData.$location(
-        '/',
-      );
+  String get location => GoRouteData.$location('/');
 
   void go(BuildContext context) => context.go(location);
 
@@ -49,9 +45,7 @@ extension $CounterRouteDataExtension on CounterRouteData {
   static CounterRouteData _fromState(GoRouterState state) =>
       const CounterRouteData();
 
-  String get location => GoRouteData.$location(
-        '/counter',
-      );
+  String get location => GoRouteData.$location('/counter');
 
   void go(BuildContext context) => context.go(location);
 
@@ -67,9 +61,7 @@ extension $TasksRouteDataExtension on TasksRouteData {
   static TasksRouteData _fromState(GoRouterState state) =>
       const TasksRouteData();
 
-  String get location => GoRouteData.$location(
-        '/tasks',
-      );
+  String get location => GoRouteData.$location('/tasks');
 
   void go(BuildContext context) => context.go(location);
 
@@ -97,7 +89,7 @@ final routerConfigPod = AutoDisposeProvider<RouterConfig<Object>>.internal(
   dependencies: <ProviderOrFamily>[selectedRouterPackagePod],
   allTransitiveDependencies: <ProviderOrFamily>{
     selectedRouterPackagePod,
-    ...?selectedRouterPackagePod.allTransitiveDependencies
+    ...?selectedRouterPackagePod.allTransitiveDependencies,
   },
 );
 
@@ -111,14 +103,15 @@ String _$selectedRouterPackageHash() =>
 @ProviderFor(SelectedRouterPackage)
 final selectedRouterPackagePod =
     NotifierProvider<SelectedRouterPackage, RouterPackage>.internal(
-  SelectedRouterPackage.new,
-  name: r'selectedRouterPackagePod',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$selectedRouterPackageHash,
-  dependencies: const <ProviderOrFamily>[],
-  allTransitiveDependencies: const <ProviderOrFamily>{},
-);
+      SelectedRouterPackage.new,
+      name: r'selectedRouterPackagePod',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$selectedRouterPackageHash,
+      dependencies: const <ProviderOrFamily>[],
+      allTransitiveDependencies: const <ProviderOrFamily>{},
+    );
 
 typedef _$SelectedRouterPackage = Notifier<RouterPackage>;
 // ignore_for_file: type=lint

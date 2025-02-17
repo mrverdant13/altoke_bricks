@@ -6,9 +6,7 @@ import 'package:local_database/local_database.dart';
 
 // coverage:ignore-start
 class TaskCreationDialog extends StatelessWidget {
-  const TaskCreationDialog({
-    super.key,
-  });
+  const TaskCreationDialog({super.key});
 
   static const maxWidth = 600.0;
 
@@ -17,9 +15,7 @@ class TaskCreationDialog extends StatelessWidget {
     final screenWidth = MediaQuery.sizeOf(context).width;
     return Center(
       child: ConstrainedBox(
-        constraints: const BoxConstraints(
-          maxWidth: maxWidth,
-        ),
+        constraints: const BoxConstraints(maxWidth: maxWidth),
         child: Dialog(
           insetPadding: switch (screenWidth) {
             >= maxWidth => null,
@@ -38,36 +34,27 @@ class TaskCreationDialog extends StatelessWidget {
 
 @visibleForTesting
 class TaskCreationDialogContent extends ConsumerWidget {
-  const TaskCreationDialogContent({
-    super.key,
-  });
+  const TaskCreationDialogContent({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    ref.listen(
-      createTaskMutationPod,
-      (previous, current) {
-        if (previous == null) return;
-        if (!previous.isRefreshing) return;
-        if (current is! AsyncData) return;
-        final message = l10n.createTaskSuccessMessage;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(message),
-          ),
-        );
-        Navigator.pop(context);
-      },
-    );
+    ref.listen(createTaskMutationPod, (previous, current) {
+      if (previous == null) return;
+      if (!previous.isRefreshing) return;
+      if (current is! AsyncData) return;
+      final message = l10n.createTaskSuccessMessage;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
+      Navigator.pop(context);
+    });
     return const NewTaskForm();
   }
 }
 
 class NewTaskForm extends ConsumerStatefulWidget {
-  const NewTaskForm({
-    super.key,
-  });
+  const NewTaskForm({super.key});
 
   @override
   ConsumerState<NewTaskForm> createState() => _NewTaskFormState();
@@ -93,38 +80,36 @@ class _NewTaskFormState extends ConsumerState<NewTaskForm> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    ref.listen(
-      createTaskMutationPod.select(
-        (result) => result.error,
-      ),
-      (previousError, currentError) {
-        if (currentError == null) return;
-        if (currentError is! CreateTaskFailure) {
+    ref.listen(createTaskMutationPod.select((result) => result.error), (
+      previousError,
+      currentError,
+    ) {
+      if (currentError == null) return;
+      if (currentError is! CreateTaskFailure) {
+        setState(() {
+          genericError = l10n.createTaskGenericMessage;
+        });
+        return;
+      }
+      switch (currentError) {
+        case CreateTaskFailureInvalidData(
+          :final titleValidationErrors,
+          :final complexValidationErrors,
+        ):
           setState(() {
-            genericError = l10n.createTaskGenericMessage;
+            titleError = titleValidationErrors.getFirstError(l10n);
           });
-          return;
-        }
-        switch (currentError) {
-          case CreateTaskFailureInvalidData(
-              :final titleValidationErrors,
-              :final complexValidationErrors,
-            ):
-            setState(() {
-              titleError = titleValidationErrors.getFirstError(l10n);
-            });
-            switch (complexValidationErrors.firstOrNull) {
-              case null:
-                break;
-              case TaskComplexValidationError.highPriorityWithNoDescription:
-                setState(() {
-                  descriptionError = l10n
-                      .createTaskDescriptionRequiredForHighPriorityTaskError;
-                });
-            }
-        }
-      },
-    );
+          switch (complexValidationErrors.firstOrNull) {
+            case null:
+              break;
+            case TaskComplexValidationError.highPriorityWithNoDescription:
+              setState(() {
+                descriptionError =
+                    l10n.createTaskDescriptionRequiredForHighPriorityTaskError;
+              });
+          }
+      }
+    });
     return ListView(
       shrinkWrap: true,
       padding: const EdgeInsets.all(24),
@@ -157,9 +142,7 @@ class _NewTaskFormState extends ConsumerState<NewTaskForm> {
         const SizedBox.square(dimension: 16),
         DropdownButtonFormField(
           value: priority,
-          decoration: InputDecoration(
-            labelText: l10n.newTaskFormPriorityLabel,
-          ),
+          decoration: InputDecoration(labelText: l10n.newTaskFormPriorityLabel),
           items: [
             for (final priority in TaskPriority.values)
               DropdownMenuItem(
@@ -179,9 +162,7 @@ class _NewTaskFormState extends ConsumerState<NewTaskForm> {
           const SizedBox.square(dimension: 24),
           Text(
             genericError!,
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.error,
-            ),
+            style: TextStyle(color: Theme.of(context).colorScheme.error),
           ),
         ],
         const SizedBox.square(dimension: 24),
@@ -224,4 +205,5 @@ extension on TaskPriority {
     };
   }
 }
+
 // coverage:ignore-end

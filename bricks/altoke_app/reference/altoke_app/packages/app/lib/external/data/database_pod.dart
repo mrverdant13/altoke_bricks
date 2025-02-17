@@ -14,27 +14,18 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'database_pod.g.dart';
 
 @Riverpod(
-  dependencies: [
-    asyncApplicationDocumentsDirectory,
-    asyncTemporaryDirectory,
-  ],
+  dependencies: [asyncApplicationDocumentsDirectory, asyncTemporaryDirectory],
 )
 Future<LocalDatabase> asyncDriftLocalDatabase(Ref ref) async {
   const dbName = 'app_db';
   final databaseDirectoryPath = ref.watch(
     asyncApplicationDocumentsDirectoryPod.selectAsync(
-      (dir) => path.joinAll([
-        dir.path,
-        'drift_database',
-      ]),
+      (dir) => path.joinAll([dir.path, 'drift_database']),
     ),
   );
   final temporaryDirectoryPath = ref.watch(
     asyncTemporaryDirectoryPod.selectAsync(
-      (dir) => path.joinAll([
-        dir.path,
-        'drift_database',
-      ]),
+      (dir) => path.joinAll([dir.path, 'drift_database']),
     ),
   );
   final db = LocalDatabase(
@@ -51,21 +42,14 @@ Future<LocalDatabase> asyncDriftLocalDatabase(Ref ref) async {
   return db;
 }
 
-@Riverpod(
-  dependencies: [
-    asyncApplicationDocumentsDirectory,
-  ],
-)
+@Riverpod(dependencies: [asyncApplicationDocumentsDirectory])
 Future<void> asyncHiveInitialization(Ref ref) async {
   if (!kIsWeb) {
     const dbName = 'app_db';
     final databasePath = ref.watch(
       asyncApplicationDocumentsDirectoryPod.select(
-        (asyncDir) => path.joinAll([
-          asyncDir.requireValue.path,
-          'hive_database',
-          dbName,
-        ]),
+        (asyncDir) =>
+            path.joinAll([asyncDir.requireValue.path, 'hive_database', dbName]),
       ),
     );
     final databaseDir = Directory(databasePath);
@@ -76,20 +60,13 @@ Future<void> asyncHiveInitialization(Ref ref) async {
   }
 }
 
-@Riverpod(
-  dependencies: [
-    asyncApplicationDocumentsDirectory,
-  ],
-)
+@Riverpod(dependencies: [asyncApplicationDocumentsDirectory])
 Future<Isar> asyncIsar(Ref ref) async {
   const dbName = 'app_db';
   final databasePath = ref.watch(
     asyncApplicationDocumentsDirectoryPod.select(
-      (asyncDir) => path.joinAll([
-        asyncDir.requireValue.path,
-        'isar_database',
-        dbName,
-      ]),
+      (asyncDir) =>
+          path.joinAll([asyncDir.requireValue.path, 'isar_database', dbName]),
     ),
   );
   final databaseDir = Directory(databasePath);
@@ -110,8 +87,7 @@ Future<Isar> asyncIsar(Ref ref) async {
 enum LocalDatabasePackage {
   drift('drift', 'Drift (SQLite)'),
   hive('hive', 'Hive'),
-  isar('isar', 'Isar'),
-  ;
+  isar('isar', 'Isar');
 
   const LocalDatabasePackage(this.identifier, this.displayName);
 
@@ -119,10 +95,7 @@ enum LocalDatabasePackage {
   final String displayName;
 }
 
-@Riverpod(
-  dependencies: [],
-  keepAlive: true,
-)
+@Riverpod(dependencies: [], keepAlive: true)
 class SelectedLocalDatabasePackage extends _$SelectedLocalDatabasePackage {
   @override
   LocalDatabasePackage build() {
@@ -133,4 +106,5 @@ class SelectedLocalDatabasePackage extends _$SelectedLocalDatabasePackage {
   // ignore: avoid_setters_without_getters
   set value(LocalDatabasePackage value) => state = value;
 }
+
 // coverage:ignore-end

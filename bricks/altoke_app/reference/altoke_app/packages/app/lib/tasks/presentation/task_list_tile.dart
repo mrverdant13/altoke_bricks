@@ -6,10 +6,7 @@ import 'package:local_database/local_database.dart';
 
 // coverage:ignore-start
 class TaskListTile extends ConsumerWidget {
-  const TaskListTile({
-    required this.task,
-    super.key,
-  });
+  const TaskListTile({required this.task, super.key});
 
   final Task task;
 
@@ -46,29 +43,31 @@ class TaskListTile extends ConsumerWidget {
             TaskPriority.high => Colors.red,
             TaskPriority.medium => Colors.orange,
             TaskPriority.low => Colors.green,
-          }
-              .withValues(alpha: completed ? 0.5 : 1),
+          }.withValues(alpha: completed ? 0.5 : 1),
         ),
         title: Text(
           title,
-          style: completed
-              ? const TextStyle(decoration: TextDecoration.lineThrough)
-              : null,
+          style:
+              completed
+                  ? const TextStyle(decoration: TextDecoration.lineThrough)
+                  : null,
         ),
-        subtitle: description == null
-            ? null
-            : Text(
-                description,
-                style: completed
-                    ? const TextStyle(decoration: TextDecoration.lineThrough)
-                    : null,
-              ),
+        subtitle:
+            description == null
+                ? null
+                : Text(
+                  description,
+                  style:
+                      completed
+                          ? const TextStyle(
+                            decoration: TextDecoration.lineThrough,
+                          )
+                          : null,
+                ),
         value: completed,
         onChanged: (value) {
           if (value == null) return;
-          final task = PartialTask(
-            completed: Optional.some(value),
-          );
+          final task = PartialTask(completed: Optional.some(value));
           ref
               .read(updateTaskMutationPod.notifier)
               .updateTask(taskId: id, task: task);
@@ -77,4 +76,5 @@ class TaskListTile extends ConsumerWidget {
     );
   }
 }
+
 // coverage:ignore-end

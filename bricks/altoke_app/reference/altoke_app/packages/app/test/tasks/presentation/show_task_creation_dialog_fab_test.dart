@@ -12,13 +12,9 @@ WHEN it is displayed
 THEN the fab should include the localized tooltip
 ''',
     (tester) async {
-      await tester.pumpAppWithScaffold(
-        const ShowTaskCreationDialogFab(),
-      );
+      await tester.pumpAppWithScaffold(const ShowTaskCreationDialogFab());
       expect(
-        find.l10n.byTooltip(
-          (l10n) => l10n.createTaskButtonTooltip,
-        ),
+        find.l10n.byTooltip((l10n) => l10n.createTaskButtonTooltip),
         findsOneWidget,
       );
     },
@@ -32,11 +28,10 @@ WHEN it is tapped
 THEN a task creation dialog should be shown
 ''',
     (tester) async {
-      await tester.pumpAppWithScaffold(
-        const ShowTaskCreationDialogFab(),
+      await tester.pumpAppWithScaffold(const ShowTaskCreationDialogFab());
+      final showTaskCreationDialogButtonFinder = find.byType(
+        ShowTaskCreationDialogFab,
       );
-      final showTaskCreationDialogButtonFinder =
-          find.byType(ShowTaskCreationDialogFab);
       await tester.tap(showTaskCreationDialogButtonFinder);
       await tester.pumpAndSettle();
       expect(find.byType(TaskCreationDialog), findsOneWidget);

@@ -20,17 +20,18 @@ enum LocalDatabaseAlternative {
   /// Sembast.
   ///
   /// NoSQL database.
-  sembast('sembast'),
-  ;
+  sembast('sembast');
 
   const LocalDatabaseAlternative(this.varIdentifier);
 
   factory LocalDatabaseAlternative.fromVarIdentifier(String varIdentifier) {
     return LocalDatabaseAlternative.values.firstWhere(
       (alternative) => alternative.varIdentifier == varIdentifier,
-      orElse: () => throw ArgumentError(
-        'Invalid local database alternative: $varIdentifier',
-      ),
+      orElse:
+          () =>
+              throw ArgumentError(
+                'Invalid local database alternative: $varIdentifier',
+              ),
     );
   }
 

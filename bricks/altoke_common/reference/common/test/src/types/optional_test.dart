@@ -312,10 +312,7 @@ THEN a string representation of the present value is returned
         /*remove-end*/
         /*{{#use_dart_mappable}}*/
         const presentValue = DmOptional.some('some-value');
-        expect(
-          presentValue.toString(),
-          'DmSome(value: some-value)',
-        );
+        expect(presentValue.toString(), 'DmSome(value: some-value)');
         /*{{/use_dart_mappable}}*/
         /*remove-start*/
       }
@@ -323,10 +320,7 @@ THEN a string representation of the present value is returned
         /*remove-end*/
         /*{{#use_equatable}}*/
         const presentValue = EOptional.some('some-value');
-        expect(
-          presentValue.toString(),
-          'ESome<String>(some-value)',
-        );
+        expect(presentValue.toString(), 'ESome<String>(some-value)');
         /*{{/use_equatable}}*/
         /*remove-start*/
       }
@@ -345,10 +339,7 @@ THEN a string representation of the present value is returned
         /*remove-end*/
         /*{{#use_overrides}}*/
         const presentValue = Optional.some('some-value');
-        expect(
-          presentValue.toString(),
-          'Some<String>(value: some-value)',
-        );
+        expect(presentValue.toString(), 'Some<String>(value: some-value)');
         /*{{/use_overrides}}*/
         /*remove-start*/
       }
@@ -371,10 +362,7 @@ THEN a string representation of the absent value is returned
         /*remove-end*/
         /*{{#use_dart_mappable}}*/
         const absentValue = DmOptional<String>.none();
-        expect(
-          absentValue.toString(),
-          'DmNone()',
-        );
+        expect(absentValue.toString(), 'DmNone()');
         /*{{/use_dart_mappable}}*/
         /*remove-start*/
       }
@@ -382,10 +370,7 @@ THEN a string representation of the absent value is returned
         /*remove-end*/
         /*{{#use_equatable}}*/
         const absentValue = EOptional<String>.none();
-        expect(
-          absentValue.toString(),
-          'ENone<String>()',
-        );
+        expect(absentValue.toString(), 'ENone<String>()');
         /*{{/use_equatable}}*/
         /*remove-start*/
       }
@@ -393,10 +378,7 @@ THEN a string representation of the absent value is returned
         /*remove-end*/
         /*{{#use_freezed}}*/
         const absentValue = FOptional<String>.none();
-        expect(
-          absentValue.toString(),
-          'FOptional<String>.none()',
-        );
+        expect(absentValue.toString(), 'FOptional<String>.none()');
         /*{{/use_freezed}}*/
         /*remove-start*/
       }
@@ -404,10 +386,7 @@ THEN a string representation of the absent value is returned
         /*remove-end*/
         /*{{#use_overrides}}*/
         const absentValue = Optional<String>.none();
-        expect(
-          absentValue.toString(),
-          'None<String>()',
-        );
+        expect(absentValue.toString(), 'None<String>()');
         /*{{/use_overrides}}*/
         /*remove-start*/
       }

@@ -31,10 +31,7 @@ THEN the home screen should be shown
             asyncInitializationPod.overrideWith((_) async {}),
             /*remove-start*/
             routerConfigPod.overrideWithValue(
-              GoRouter(
-                routes: $appRoutes,
-                initialLocation: '/',
-              ),
+              GoRouter(routes: $appRoutes, initialLocation: '/'),
             ),
             /*remove-end*/
           ],

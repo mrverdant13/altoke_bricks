@@ -37,9 +37,7 @@ LocalTasksDao localTasksDao(Ref ref) {
     case LocalDatabasePackage.isar:
       return LocalTasksIsarDao(
         database: ref.watch(
-          asyncIsarPod.select(
-            (asyncDatabase) => asyncDatabase.requireValue,
-          ),
+          asyncIsarPod.select((asyncDatabase) => asyncDatabase.requireValue),
         ),
       );
   }

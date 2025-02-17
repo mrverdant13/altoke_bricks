@@ -13,27 +13,28 @@ String _$asyncDriftLocalDatabaseHash() =>
 @ProviderFor(asyncDriftLocalDatabase)
 final asyncDriftLocalDatabasePod =
     AutoDisposeFutureProvider<LocalDatabase>.internal(
-  asyncDriftLocalDatabase,
-  name: r'asyncDriftLocalDatabasePod',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$asyncDriftLocalDatabaseHash,
-  dependencies: <ProviderOrFamily>[
-    asyncApplicationDocumentsDirectoryPod,
-    asyncTemporaryDirectoryPod
-  ],
-  allTransitiveDependencies: <ProviderOrFamily>{
-    asyncApplicationDocumentsDirectoryPod,
-    ...?asyncApplicationDocumentsDirectoryPod.allTransitiveDependencies,
-    asyncTemporaryDirectoryPod,
-    ...?asyncTemporaryDirectoryPod.allTransitiveDependencies
-  },
-);
+      asyncDriftLocalDatabase,
+      name: r'asyncDriftLocalDatabasePod',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$asyncDriftLocalDatabaseHash,
+      dependencies: <ProviderOrFamily>[
+        asyncApplicationDocumentsDirectoryPod,
+        asyncTemporaryDirectoryPod,
+      ],
+      allTransitiveDependencies: <ProviderOrFamily>{
+        asyncApplicationDocumentsDirectoryPod,
+        ...?asyncApplicationDocumentsDirectoryPod.allTransitiveDependencies,
+        asyncTemporaryDirectoryPod,
+        ...?asyncTemporaryDirectoryPod.allTransitiveDependencies,
+      },
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef AsyncDriftLocalDatabaseRef
-    = AutoDisposeFutureProviderRef<LocalDatabase>;
+typedef AsyncDriftLocalDatabaseRef =
+    AutoDisposeFutureProviderRef<LocalDatabase>;
 String _$asyncHiveInitializationHash() =>
     r'a73dd6f3d1f37f5bee2b68d48d4ed0dd50bf16b3';
 
@@ -42,13 +43,14 @@ String _$asyncHiveInitializationHash() =>
 final asyncHiveInitializationPod = AutoDisposeFutureProvider<void>.internal(
   asyncHiveInitialization,
   name: r'asyncHiveInitializationPod',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$asyncHiveInitializationHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$asyncHiveInitializationHash,
   dependencies: <ProviderOrFamily>[asyncApplicationDocumentsDirectoryPod],
   allTransitiveDependencies: <ProviderOrFamily>{
     asyncApplicationDocumentsDirectoryPod,
-    ...?asyncApplicationDocumentsDirectoryPod.allTransitiveDependencies
+    ...?asyncApplicationDocumentsDirectoryPod.allTransitiveDependencies,
   },
 );
 
@@ -67,7 +69,7 @@ final asyncIsarPod = AutoDisposeFutureProvider<Isar>.internal(
   dependencies: <ProviderOrFamily>[asyncApplicationDocumentsDirectoryPod],
   allTransitiveDependencies: <ProviderOrFamily>{
     asyncApplicationDocumentsDirectoryPod,
-    ...?asyncApplicationDocumentsDirectoryPod.allTransitiveDependencies
+    ...?asyncApplicationDocumentsDirectoryPod.allTransitiveDependencies,
   },
 );
 
@@ -80,12 +82,15 @@ String _$selectedLocalDatabasePackageHash() =>
 /// See also [SelectedLocalDatabasePackage].
 @ProviderFor(SelectedLocalDatabasePackage)
 final selectedLocalDatabasePackagePod = NotifierProvider<
-    SelectedLocalDatabasePackage, LocalDatabasePackage>.internal(
+  SelectedLocalDatabasePackage,
+  LocalDatabasePackage
+>.internal(
   SelectedLocalDatabasePackage.new,
   name: r'selectedLocalDatabasePackagePod',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$selectedLocalDatabasePackageHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$selectedLocalDatabasePackageHash,
   dependencies: const <ProviderOrFamily>[],
   allTransitiveDependencies: const <ProviderOrFamily>{},
 );

@@ -19,8 +19,8 @@ void main() {
     debugFlavor = null;
   });
 
-/*w 1v w*/
-/*{{#use_auto_route}}*/
+  /*w 1v w*/
+  /*{{#use_auto_route}}*/
   testWidgets(
     '''
 
@@ -48,9 +48,9 @@ THEN the counter screen should be shown
       expect(counterScreenFinder, findsOneWidget);
     },
   );
-/*{{/use_auto_route}}*/
+  /*{{/use_auto_route}}*/
 
-/*{{#use_go_router}}*/
+  /*{{#use_go_router}}*/
   testWidgets(
     '''
 
@@ -65,10 +65,7 @@ THEN the counter screen should be shown
           overrides: [
             asyncInitializationPod.overrideWith((_) async {}),
             routerConfigPod.overrideWithValue(
-              GoRouter(
-                routes: $appRoutes,
-                initialLocation: '/counter',
-              ),
+              GoRouter(routes: $appRoutes, initialLocation: '/counter'),
             ),
           ],
           child: const MyApp(),
@@ -79,6 +76,6 @@ THEN the counter screen should be shown
       expect(counterScreenFinder, findsOneWidget);
     },
   );
-/*{{/use_go_router}}*/
-/*w 1v w*/
+  /*{{/use_go_router}}*/
+  /*w 1v w*/
 }

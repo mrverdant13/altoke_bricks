@@ -59,10 +59,7 @@ WHEN the task is created
 THEN a task record is registered
 ''',
         () async {
-          const newTask = NewTask(
-            title: 'title',
-            priority: TaskPriority.low,
-          );
+          const newTask = NewTask(title: 'title', priority: TaskPriority.low);
           bool filter(Map<dynamic, dynamic> task) =>
               task[hive.Task.titleJsonKey] == newTask.title &&
               task[hive.Task.priorityJsonKey] == newTask.priority.identifier &&
@@ -73,10 +70,7 @@ THEN a task record is registered
           await dao.createOne(newTask);
           final resultingMatchingTasksCount =
               tasksBox.values.where(filter).length;
-          expect(
-            resultingMatchingTasksCount,
-            existingMatchingTasksCount + 1,
-          );
+          expect(resultingMatchingTasksCount, existingMatchingTasksCount + 1);
         },
       );
 
@@ -89,10 +83,7 @@ THEN an exception is thrown
 AND no task record is registered
 ''',
         () async {
-          const newTask = NewTask(
-            title: '',
-            priority: TaskPriority.high,
-          );
+          const newTask = NewTask(title: '', priority: TaskPriority.high);
           final existingMatchingTasksCount = tasksBox.length;
           expect(existingMatchingTasksCount, isZero);
           expect(
@@ -135,8 +126,9 @@ THEN the tasks are continuously emitted as they change
               completed: false,
             ),
           ];
-          final sortedTasksForStage00 = [...tasksForStage00]
-              .sorted((tA, tB) => tA.title.compareTo(tB.title));
+          final sortedTasksForStage00 = [
+            ...tasksForStage00,
+          ].sorted((tA, tB) => tA.title.compareTo(tB.title));
 
           // Stage 01
           const newTaskInStage01 = Task(
@@ -145,20 +137,19 @@ THEN the tasks are continuously emitted as they change
             priority: TaskPriority.low,
             completed: true,
           );
-          final tasksForStage01 = <Task>[
-            ...tasksForStage00,
-            newTaskInStage01,
-          ];
-          final sortedTasksForStage01 = [...tasksForStage01]
-              .sorted((tA, tB) => tA.title.compareTo(tB.title));
+          final tasksForStage01 = <Task>[...tasksForStage00, newTaskInStage01];
+          final sortedTasksForStage01 = [
+            ...tasksForStage01,
+          ].sorted((tA, tB) => tA.title.compareTo(tB.title));
 
           // Stage 02
           final tasksForStage02 = <Task>[
             for (final task in tasksForStage01)
               if (!task.title.contains('01')) task,
           ];
-          final sortedTasksForStage02 = [...tasksForStage02]
-              .sorted((tA, tB) => tA.title.compareTo(tB.title));
+          final sortedTasksForStage02 = [
+            ...tasksForStage02,
+          ].sorted((tA, tB) => tA.title.compareTo(tB.title));
 
           // Stage 03
           final tasksForStage03 = <Task>[
@@ -174,20 +165,19 @@ THEN the tasks are continuously emitted as they change
               else
                 task,
           ];
-          final sortedTasksForStage03 = [...tasksForStage03]
-              .sorted((tA, tB) => tA.title.compareTo(tB.title));
+          final sortedTasksForStage03 = [
+            ...tasksForStage03,
+          ].sorted((tA, tB) => tA.title.compareTo(tB.title));
 
           unawaited(
             expectLater(
               stream,
-              emitsInOrder(
-                [
-                  orderedEquals(sortedTasksForStage00),
-                  orderedEquals(sortedTasksForStage01),
-                  orderedEquals(sortedTasksForStage02),
-                  orderedEquals(sortedTasksForStage03),
-                ],
-              ),
+              emitsInOrder([
+                orderedEquals(sortedTasksForStage00),
+                orderedEquals(sortedTasksForStage01),
+                orderedEquals(sortedTasksForStage02),
+                orderedEquals(sortedTasksForStage03),
+              ]),
             ),
           );
 
@@ -203,27 +193,24 @@ THEN the tasks are continuously emitted as they change
           });
 
           // Stage 01
-          await tasksBox.put(
-            newTaskInStage01.id,
-            {
-              hive.Task.titleJsonKey: newTaskInStage01.title,
-              hive.Task.priorityJsonKey: newTaskInStage01.priority.identifier,
-              hive.Task.completedJsonKey: newTaskInStage01.completed,
-              hive.Task.descriptionJsonKey: newTaskInStage01.description,
-            },
-          );
+          await tasksBox.put(newTaskInStage01.id, {
+            hive.Task.titleJsonKey: newTaskInStage01.title,
+            hive.Task.priorityJsonKey: newTaskInStage01.priority.identifier,
+            hive.Task.completedJsonKey: newTaskInStage01.completed,
+            hive.Task.descriptionJsonKey: newTaskInStage01.description,
+          });
 
           // Stage 02
           {
-            final keysToDelete = tasksBox.toMap().entries.where(
-              (entry) {
-                final title = entry.value[hive.Task.titleJsonKey];
-                if (title is! String) return false;
-                return title.contains('01');
-              },
-            ).map(
-              (taskRecordEntry) => taskRecordEntry.key,
-            );
+            final keysToDelete = tasksBox
+                .toMap()
+                .entries
+                .where((entry) {
+                  final title = entry.value[hive.Task.titleJsonKey];
+                  if (title is! String) return false;
+                  return title.contains('01');
+                })
+                .map((taskRecordEntry) => taskRecordEntry.key);
             await tasksBox.deleteAll(keysToDelete);
           }
 
@@ -236,9 +223,10 @@ THEN the tasks are continuously emitted as they change
                   (entry) => entry.value[hive.Task.descriptionJsonKey] == null,
                 )
                 .map(
-                  (entry) => entry
-                    ..value[hive.Task.descriptionJsonKey] =
-                        'updated description',
+                  (entry) =>
+                      entry
+                        ..value[hive.Task.descriptionJsonKey] =
+                            'updated description',
                 );
             await tasksBox.putAll(Map.fromEntries(updatedTaskRecordEntries));
           }
@@ -293,10 +281,7 @@ THEN a task record is updated
           );
           final resultingMatchingTasksCount =
               tasksBox.toMap().entries.where(filter).length;
-          expect(
-            resultingMatchingTasksCount,
-            existingMatchingTasksCount + 1,
-          );
+          expect(resultingMatchingTasksCount, existingMatchingTasksCount + 1);
         },
       );
 

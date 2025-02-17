@@ -58,13 +58,14 @@ class DmSomeMapper extends ClassMapperBase<DmSome> {
 
   static Object? _$value(DmSome v) => v.value;
   static dynamic _arg$value<T extends Object?>(f) => f<T>();
-  static const Field<DmSome, Object?> _f$value =
-      Field('value', _$value, arg: _arg$value);
+  static const Field<DmSome, Object?> _f$value = Field(
+    'value',
+    _$value,
+    arg: _arg$value,
+  );
 
   @override
-  final MappableFields<DmSome> fields = const {
-    #value: _f$value,
-  };
+  final MappableFields<DmSome> fields = const {#value: _f$value};
 
   static DmSome<T> _instantiate<T extends Object?>(DecodingData data) {
     return DmSome(data.dec(_f$value));

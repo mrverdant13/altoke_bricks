@@ -2,9 +2,7 @@
 /// Error thrown when the root directory of the monorepo is invalid.
 /// {@endtemplate}
 sealed class InvalidRootDirectoryError implements Exception {
-  const InvalidRootDirectoryError(
-    this.reason,
-  );
+  const InvalidRootDirectoryError(this.reason);
 
   /// Reason for the error.
   final String reason;
@@ -20,9 +18,8 @@ sealed class InvalidRootDirectoryError implements Exception {
 /// {@endtemplate}
 class RootDirNotFoundError extends InvalidRootDirectoryError {
   /// {@macro root_dir_not_found_error}
-  const RootDirNotFoundError({
-    required String rootPath,
-  }) : super('Root directory not found ($rootPath).');
+  const RootDirNotFoundError({required String rootPath})
+    : super('Root directory not found ($rootPath).');
 }
 
 /// {@template root_readme_not_found_error}
@@ -30,7 +27,6 @@ class RootDirNotFoundError extends InvalidRootDirectoryError {
 /// {@endtemplate}
 class RootReadmeNotFoundError extends InvalidRootDirectoryError {
   /// {@macro root_readme_not_found_error}
-  const RootReadmeNotFoundError({
-    required String readmePath,
-  }) : super('Root README file not found ($readmePath).');
+  const RootReadmeNotFoundError({required String readmePath})
+    : super('Root README file not found ($readmePath).');
 }
