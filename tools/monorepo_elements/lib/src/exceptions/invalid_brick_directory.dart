@@ -2,9 +2,7 @@
 /// Error thrown when the brick directory is invalid.
 /// {@endtemplate}
 sealed class InvalidBrickDirError implements Exception {
-  const InvalidBrickDirError(
-    this.reason,
-  );
+  const InvalidBrickDirError(this.reason);
 
   /// Reason for the error.
   final String reason;
@@ -21,11 +19,11 @@ sealed class InvalidBrickDirError implements Exception {
 class AbsentBrickReferencePaths extends InvalidBrickDirError {
   /// {@macro absent_brick_reference_paths}
   const AbsentBrickReferencePaths()
-      : super(
-          'Missing brick reference paths. '
-          'For this brick to be identified, '
-          'the calling script must be run for a hooks or scope package.',
-        );
+    : super(
+        'Missing brick reference paths. '
+        'For this brick to be identified, '
+        'the calling script must be run for a hooks or scope package.',
+      );
 }
 
 /// {@template brick_dir_not_found_error}
@@ -33,9 +31,8 @@ class AbsentBrickReferencePaths extends InvalidBrickDirError {
 /// {@endtemplate}
 class BrickDirNotFoundError extends InvalidBrickDirError {
   /// {@macro brick_dir_not_found_error}
-  const BrickDirNotFoundError({
-    required String brickPath,
-  }) : super('Brick directory not found ($brickPath).');
+  const BrickDirNotFoundError({required String brickPath})
+    : super('Brick directory not found ($brickPath).');
 }
 
 /// {@template brick_readme_not_found_error}
@@ -43,9 +40,8 @@ class BrickDirNotFoundError extends InvalidBrickDirError {
 /// {@endtemplate}
 class BrickReadmeNotFoundError extends InvalidBrickDirError {
   /// {@macro brick_readme_not_found_error}
-  const BrickReadmeNotFoundError({
-    required String readmePath,
-  }) : super('Brick README file not found ($readmePath).');
+  const BrickReadmeNotFoundError({required String readmePath})
+    : super('Brick README file not found ($readmePath).');
 }
 
 /// {@template brick_manifest_not_found_error}
@@ -53,9 +49,8 @@ class BrickReadmeNotFoundError extends InvalidBrickDirError {
 /// {@endtemplate}
 class BrickManifestNotFoundError extends InvalidBrickDirError {
   /// {@macro brick_manifest_not_found_error}
-  const BrickManifestNotFoundError({
-    required String manifestPath,
-  }) : super('Brick manifest file not found ($manifestPath).');
+  const BrickManifestNotFoundError({required String manifestPath})
+    : super('Brick manifest file not found ($manifestPath).');
 }
 
 /// {@template brick_template_dir_not_found_error}
@@ -63,7 +58,6 @@ class BrickManifestNotFoundError extends InvalidBrickDirError {
 /// {@endtemplate}
 class BrickTemplateDirNotFoundError extends InvalidBrickDirError {
   /// {@macro brick_template_dir_not_found_error}
-  const BrickTemplateDirNotFoundError({
-    required String templatePath,
-  }) : super('Brick template directory not found ($templatePath).');
+  const BrickTemplateDirNotFoundError({required String templatePath})
+    : super('Brick template directory not found ($templatePath).');
 }

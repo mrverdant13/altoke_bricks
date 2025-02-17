@@ -93,20 +93,21 @@ abstract class Shell {
     await onStart?.call();
     try {
       final outBuf = StringBuffer()..writeln();
-      final [int exitCode, ...] = await [
-        process.exitCode,
-        process.stdout.forEach((raw) {
-          final record = String.fromCharCodes(raw);
-          outBuf.write('\x1B[34m$record\x1B[0m');
-        }),
-        process.stderr.forEach((raw) {
-          final record = String.fromCharCodes(raw);
-          outBuf.write('\x1B[31m$record\x1B[0m');
-        }),
-        if (stdin != null) process.stdin.addStream(stdin),
-        if (stdout != null) stdout.addStream(process.stdout),
-        if (stderr != null) stderr.addStream(process.stderr),
-      ].wait;
+      final [int exitCode, ...] =
+          await [
+            process.exitCode,
+            process.stdout.forEach((raw) {
+              final record = String.fromCharCodes(raw);
+              outBuf.write('\x1B[34m$record\x1B[0m');
+            }),
+            process.stderr.forEach((raw) {
+              final record = String.fromCharCodes(raw);
+              outBuf.write('\x1B[31m$record\x1B[0m');
+            }),
+            if (stdin != null) process.stdin.addStream(stdin),
+            if (stdout != null) stdout.addStream(process.stdout),
+            if (stderr != null) stderr.addStream(process.stderr),
+          ].wait;
       if (exitCode != 0) {
         throw ProcessException(
           '\x1B[31m$executable\x1B[0m',
@@ -134,10 +135,7 @@ typedef AsyncVoidHandlerCallback<T> = Future<void> Function(T);
 /// {@endtemplate}
 class ExceptionDetails {
   /// {@macro shell.exception_details}
-  const ExceptionDetails(
-    this.exception,
-    this.stackTrace,
-  );
+  const ExceptionDetails(this.exception, this.stackTrace);
 
   /// The exception.
   final Object exception;

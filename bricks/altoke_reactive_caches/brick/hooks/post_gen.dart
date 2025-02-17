@@ -9,10 +9,7 @@ import 'package:shell/shell.dart';
 
 Future<void> run(HookContext context) async {
   if (context.vars['requirements_met'] != true) return;
-  final projectPath = path.join(
-    Directory.current.path,
-    'reactive_caches',
-  );
+  final projectPath = path.join(Directory.current.path, 'reactive_caches');
   final projectDir = Directory(projectPath);
   final logger = context.logger;
   Progress? progress;
@@ -21,12 +18,11 @@ Future<void> run(HookContext context) async {
   AsyncVoidCallback onStart(String message) {
     return () async {
       progress = logger.progress(message);
-      progressTimer = Timer.periodic(
-        const Duration(milliseconds: 100),
-        (timer) {
-          progress?.update(message);
-        },
-      );
+      progressTimer = Timer.periodic(const Duration(milliseconds: 100), (
+        timer,
+      ) {
+        progress?.update(message);
+      });
     };
   }
 

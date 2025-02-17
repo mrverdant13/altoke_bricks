@@ -5,17 +5,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // coverage:ignore-start
 class TasksExampleListTile extends ConsumerWidget {
-  const TasksExampleListTile({
-    super.key,
-  });
+  const TasksExampleListTile({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return ListTile(
-      title: Text(
-        l10n.tasksExampleListTileTitle,
-      ),
+      title: Text(l10n.tasksExampleListTileTitle),
       onTap: () {
         /*w 1v w*/
         /*remove-start*/
@@ -39,4 +35,5 @@ class TasksExampleListTile extends ConsumerWidget {
     );
   }
 }
+
 // coverage:ignore-end

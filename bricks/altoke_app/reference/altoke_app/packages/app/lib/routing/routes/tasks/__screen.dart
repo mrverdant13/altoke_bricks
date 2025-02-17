@@ -9,14 +9,10 @@ import 'package:flutter/material.dart';
 // coverage:ignore-start
 
 /*{{#use_auto_route}}*/
-@RoutePage(
-  name: 'TasksRoute',
-)
+@RoutePage(name: 'TasksRoute')
 /*{{/use_auto_route}}*/
 class TasksScreen extends StatelessWidget {
-  const TasksScreen({
-    super.key,
-  });
+  const TasksScreen({super.key});
 
   @visibleForTesting
   static const maxContentWidth = 800.0;
@@ -53,4 +49,5 @@ class TasksScreen extends StatelessWidget {
     );
   }
 }
+
 // coverage:ignore-end

@@ -13,10 +13,7 @@ part 'line_deletions.mapper.dart';
 @MappableClass()
 class LinesDeletion with LinesDeletionMappable {
   /// {@macro brick_generator.line_deletions}
-  const LinesDeletion({
-    required this.filePath,
-    required this.ranges,
-  });
+  const LinesDeletion({required this.filePath, required this.ranges});
 
   /// Creates a [LinesDeletion] from a [json] map.
   static const fromJson = LinesDeletionMapper.fromMap;
@@ -35,10 +32,7 @@ class LinesDeletion with LinesDeletionMappable {
 @MappableClass()
 class LinesRange with LinesRangeMappable {
   /// {@macro brick_generator.lines_range}
-  const LinesRange({
-    required this.start,
-    required this.end,
-  });
+  const LinesRange({required this.start, required this.end});
 
   /// Creates a [LinesRange] from a [json] map.
   static const fromJson = LinesRangeMapper.fromMap;
@@ -59,17 +53,12 @@ extension LineDeletionsList on List<LinesDeletion> {
   static List<LinesDeletion> fromJson(List<dynamic> jsonList) {
     return [
       for (final json in jsonList)
-        LinesDeletion.fromJson(
-          json as Map<String, dynamic>,
-        ),
+        LinesDeletion.fromJson(json as Map<String, dynamic>),
     ];
   }
 
   /// Applies the lines deletion to the [input], given the [filePath].
-  String apply({
-    required String filePath,
-    required String input,
-  }) {
+  String apply({required String filePath, required String input}) {
     final lines = LineSplitter.split(input);
     final applyableDeletions = where(
       (deletion) => path.equals(deletion.filePath, filePath),
@@ -97,9 +86,5 @@ extension FileContentsWithDeletableLines on String {
   String applyLineDeletions({
     required String filePath,
     required List<LinesDeletion> lineDeletions,
-  }) =>
-      lineDeletions.apply(
-        filePath: filePath,
-        input: this,
-      );
+  }) => lineDeletions.apply(filePath: filePath, input: this);
 }

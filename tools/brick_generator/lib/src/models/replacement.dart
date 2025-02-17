@@ -11,10 +11,7 @@ part 'replacement.mapper.dart';
 @immutable
 class Replacement with ReplacementMappable {
   /// {@macro brick_generator.replacement}
-  const Replacement({
-    required this.from,
-    required this.to,
-  });
+  const Replacement({required this.from, required this.to});
 
   /// Creates a [Replacement] from a JSON map.
   static const fromJson = ReplacementMapper.fromMap;
@@ -36,17 +33,13 @@ extension ReplacementsList on List<Replacement> {
   static List<Replacement> fromJson(List<dynamic> jsonList) {
     return [
       for (final json in jsonList)
-        Replacement.fromJson(
-          json as Map<String, dynamic>,
-        ),
+        Replacement.fromJson(json as Map<String, dynamic>),
     ];
   }
 
   /// Applies the replacements to the [input].
-  String apply(String input) => fold(
-        input,
-        (resolved, replacement) => replacement.apply(resolved),
-      );
+  String apply(String input) =>
+      fold(input, (resolved, replacement) => replacement.apply(resolved));
 }
 
 /// An extension to apply [ReplacementsList] to a [String].

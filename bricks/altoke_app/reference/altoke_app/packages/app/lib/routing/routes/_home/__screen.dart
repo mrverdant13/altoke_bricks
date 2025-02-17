@@ -5,14 +5,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 /*{{#use_auto_route}}*/
-@RoutePage(
-  name: 'HomeRoute',
-)
+@RoutePage(name: 'HomeRoute')
 /*{{/use_auto_route}}*/
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({
-    super.key,
-  });
+  const HomeScreen({super.key});
 
   @visibleForTesting
   static const maxContentWidth = 1200.0;

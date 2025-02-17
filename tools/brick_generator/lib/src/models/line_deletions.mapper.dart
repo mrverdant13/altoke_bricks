@@ -22,11 +22,15 @@ class LinesDeletionMapper extends ClassMapperBase<LinesDeletion> {
   final String id = 'LinesDeletion';
 
   static String _$filePath(LinesDeletion v) => v.filePath;
-  static const Field<LinesDeletion, String> _f$filePath =
-      Field('filePath', _$filePath);
+  static const Field<LinesDeletion, String> _f$filePath = Field(
+    'filePath',
+    _$filePath,
+  );
   static List<LinesRange> _$ranges(LinesDeletion v) => v.ranges;
-  static const Field<LinesDeletion, List<LinesRange>> _f$ranges =
-      Field('ranges', _$ranges);
+  static const Field<LinesDeletion, List<LinesRange>> _f$ranges = Field(
+    'ranges',
+    _$ranges,
+  );
 
   @override
   final MappableFields<LinesDeletion> fields = const {
@@ -36,7 +40,9 @@ class LinesDeletionMapper extends ClassMapperBase<LinesDeletion> {
 
   static LinesDeletion _instantiate(DecodingData data) {
     return LinesDeletion(
-        filePath: data.dec(_f$filePath), ranges: data.dec(_f$ranges));
+      filePath: data.dec(_f$filePath),
+      ranges: data.dec(_f$ranges),
+    );
   }
 
   @override
@@ -53,34 +59,40 @@ class LinesDeletionMapper extends ClassMapperBase<LinesDeletion> {
 
 mixin LinesDeletionMappable {
   String toJson() {
-    return LinesDeletionMapper.ensureInitialized()
-        .encodeJson<LinesDeletion>(this as LinesDeletion);
+    return LinesDeletionMapper.ensureInitialized().encodeJson<LinesDeletion>(
+      this as LinesDeletion,
+    );
   }
 
   Map<String, dynamic> toMap() {
-    return LinesDeletionMapper.ensureInitialized()
-        .encodeMap<LinesDeletion>(this as LinesDeletion);
+    return LinesDeletionMapper.ensureInitialized().encodeMap<LinesDeletion>(
+      this as LinesDeletion,
+    );
   }
 
   LinesDeletionCopyWith<LinesDeletion, LinesDeletion, LinesDeletion>
-      get copyWith => _LinesDeletionCopyWithImpl(
-          this as LinesDeletion, $identity, $identity);
+  get copyWith =>
+      _LinesDeletionCopyWithImpl(this as LinesDeletion, $identity, $identity);
   @override
   String toString() {
-    return LinesDeletionMapper.ensureInitialized()
-        .stringifyValue(this as LinesDeletion);
+    return LinesDeletionMapper.ensureInitialized().stringifyValue(
+      this as LinesDeletion,
+    );
   }
 
   @override
   bool operator ==(Object other) {
-    return LinesDeletionMapper.ensureInitialized()
-        .equalsValue(this as LinesDeletion, other);
+    return LinesDeletionMapper.ensureInitialized().equalsValue(
+      this as LinesDeletion,
+      other,
+    );
   }
 
   @override
   int get hashCode {
-    return LinesDeletionMapper.ensureInitialized()
-        .hashValue(this as LinesDeletion);
+    return LinesDeletionMapper.ensureInitialized().hashValue(
+      this as LinesDeletion,
+    );
   }
 }
 
@@ -93,7 +105,7 @@ extension LinesDeletionValueCopy<$R, $Out>
 abstract class LinesDeletionCopyWith<$R, $In extends LinesDeletion, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   ListCopyWith<$R, LinesRange, LinesRangeCopyWith<$R, LinesRange, LinesRange>>
-      get ranges;
+  get ranges;
   $R call({String? filePath, List<LinesRange>? ranges});
   LinesDeletionCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -108,23 +120,28 @@ class _LinesDeletionCopyWithImpl<$R, $Out>
       LinesDeletionMapper.ensureInitialized();
   @override
   ListCopyWith<$R, LinesRange, LinesRangeCopyWith<$R, LinesRange, LinesRange>>
-      get ranges => ListCopyWith($value.ranges, (v, t) => v.copyWith.$chain(t),
-          (v) => call(ranges: v));
+  get ranges => ListCopyWith(
+    $value.ranges,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(ranges: v),
+  );
   @override
-  $R call({String? filePath, List<LinesRange>? ranges}) =>
-      $apply(FieldCopyWithData({
-        if (filePath != null) #filePath: filePath,
-        if (ranges != null) #ranges: ranges
-      }));
+  $R call({String? filePath, List<LinesRange>? ranges}) => $apply(
+    FieldCopyWithData({
+      if (filePath != null) #filePath: filePath,
+      if (ranges != null) #ranges: ranges,
+    }),
+  );
   @override
   LinesDeletion $make(CopyWithData data) => LinesDeletion(
-      filePath: data.get(#filePath, or: $value.filePath),
-      ranges: data.get(#ranges, or: $value.ranges));
+    filePath: data.get(#filePath, or: $value.filePath),
+    ranges: data.get(#ranges, or: $value.ranges),
+  );
 
   @override
   LinesDeletionCopyWith<$R2, LinesDeletion, $Out2> $chain<$R2, $Out2>(
-          Then<$Out2, $R2> t) =>
-      _LinesDeletionCopyWithImpl($value, $cast, t);
+    Then<$Out2, $R2> t,
+  ) => _LinesDeletionCopyWithImpl($value, $cast, t);
 }
 
 class LinesRangeMapper extends ClassMapperBase<LinesRange> {
@@ -170,27 +187,32 @@ class LinesRangeMapper extends ClassMapperBase<LinesRange> {
 
 mixin LinesRangeMappable {
   String toJson() {
-    return LinesRangeMapper.ensureInitialized()
-        .encodeJson<LinesRange>(this as LinesRange);
+    return LinesRangeMapper.ensureInitialized().encodeJson<LinesRange>(
+      this as LinesRange,
+    );
   }
 
   Map<String, dynamic> toMap() {
-    return LinesRangeMapper.ensureInitialized()
-        .encodeMap<LinesRange>(this as LinesRange);
+    return LinesRangeMapper.ensureInitialized().encodeMap<LinesRange>(
+      this as LinesRange,
+    );
   }
 
   LinesRangeCopyWith<LinesRange, LinesRange, LinesRange> get copyWith =>
       _LinesRangeCopyWithImpl(this as LinesRange, $identity, $identity);
   @override
   String toString() {
-    return LinesRangeMapper.ensureInitialized()
-        .stringifyValue(this as LinesRange);
+    return LinesRangeMapper.ensureInitialized().stringifyValue(
+      this as LinesRange,
+    );
   }
 
   @override
   bool operator ==(Object other) {
-    return LinesRangeMapper.ensureInitialized()
-        .equalsValue(this as LinesRange, other);
+    return LinesRangeMapper.ensureInitialized().equalsValue(
+      this as LinesRange,
+      other,
+    );
   }
 
   @override
@@ -220,15 +242,20 @@ class _LinesRangeCopyWithImpl<$R, $Out>
   late final ClassMapperBase<LinesRange> $mapper =
       LinesRangeMapper.ensureInitialized();
   @override
-  $R call({int? start, int? end}) => $apply(FieldCopyWithData(
-      {if (start != null) #start: start, if (end != null) #end: end}));
+  $R call({int? start, int? end}) => $apply(
+    FieldCopyWithData({
+      if (start != null) #start: start,
+      if (end != null) #end: end,
+    }),
+  );
   @override
   LinesRange $make(CopyWithData data) => LinesRange(
-      start: data.get(#start, or: $value.start),
-      end: data.get(#end, or: $value.end));
+    start: data.get(#start, or: $value.start),
+    end: data.get(#end, or: $value.end),
+  );
 
   @override
   LinesRangeCopyWith<$R2, LinesRange, $Out2> $chain<$R2, $Out2>(
-          Then<$Out2, $R2> t) =>
-      _LinesRangeCopyWithImpl($value, $cast, t);
+    Then<$Out2, $R2> t,
+  ) => _LinesRangeCopyWithImpl($value, $cast, t);
 }

@@ -12,7 +12,8 @@ part of 'altoke_entity.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$FAltokeEntity {
@@ -35,8 +36,9 @@ mixin _$FAltokeEntity {
 /// @nodoc
 abstract class $FAltokeEntityCopyWith<$Res> {
   factory $FAltokeEntityCopyWith(
-          FAltokeEntity value, $Res Function(FAltokeEntity) then) =
-      _$FAltokeEntityCopyWithImpl<$Res, FAltokeEntity>;
+    FAltokeEntity value,
+    $Res Function(FAltokeEntity) then,
+  ) = _$FAltokeEntityCopyWithImpl<$Res, FAltokeEntity>;
   @useResult
   $Res call({int id, String name, String? description});
 }
@@ -60,20 +62,26 @@ class _$FAltokeEntityCopyWithImpl<$Res, $Val extends FAltokeEntity>
     Object? name = null,
     Object? description = freezed,
   }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            id:
+                null == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as int,
+            name:
+                null == name
+                    ? _value.name
+                    : name // ignore: cast_nullable_to_non_nullable
+                        as String,
+            description:
+                freezed == description
+                    ? _value.description
+                    : description // ignore: cast_nullable_to_non_nullable
+                        as String?,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -81,8 +89,9 @@ class _$FAltokeEntityCopyWithImpl<$Res, $Val extends FAltokeEntity>
 abstract class _$$FAltokeEntityImplCopyWith<$Res>
     implements $FAltokeEntityCopyWith<$Res> {
   factory _$$FAltokeEntityImplCopyWith(
-          _$FAltokeEntityImpl value, $Res Function(_$FAltokeEntityImpl) then) =
-      __$$FAltokeEntityImplCopyWithImpl<$Res>;
+    _$FAltokeEntityImpl value,
+    $Res Function(_$FAltokeEntityImpl) then,
+  ) = __$$FAltokeEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int id, String name, String? description});
@@ -93,8 +102,9 @@ class __$$FAltokeEntityImplCopyWithImpl<$Res>
     extends _$FAltokeEntityCopyWithImpl<$Res, _$FAltokeEntityImpl>
     implements _$$FAltokeEntityImplCopyWith<$Res> {
   __$$FAltokeEntityImplCopyWithImpl(
-      _$FAltokeEntityImpl _value, $Res Function(_$FAltokeEntityImpl) _then)
-      : super(_value, _then);
+    _$FAltokeEntityImpl _value,
+    $Res Function(_$FAltokeEntityImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of FAltokeEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -105,28 +115,36 @@ class __$$FAltokeEntityImplCopyWithImpl<$Res>
     Object? name = null,
     Object? description = freezed,
   }) {
-    return _then(_$FAltokeEntityImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+    return _then(
+      _$FAltokeEntityImpl(
+        id:
+            null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as int,
+        name:
+            null == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                    as String,
+        description:
+            freezed == description
+                ? _value.description
+                : description // ignore: cast_nullable_to_non_nullable
+                    as String?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$FAltokeEntityImpl implements _FAltokeEntity {
-  const _$FAltokeEntityImpl(
-      {required this.id, required this.name, this.description});
+  const _$FAltokeEntityImpl({
+    required this.id,
+    required this.name,
+    this.description,
+  });
 
   /// The ID of this altoke entity.
   @override
@@ -169,10 +187,11 @@ class _$FAltokeEntityImpl implements _FAltokeEntity {
 }
 
 abstract class _FAltokeEntity implements FAltokeEntity {
-  const factory _FAltokeEntity(
-      {required final int id,
-      required final String name,
-      final String? description}) = _$FAltokeEntityImpl;
+  const factory _FAltokeEntity({
+    required final int id,
+    required final String name,
+    final String? description,
+  }) = _$FAltokeEntityImpl;
 
   /// The ID of this altoke entity.
   @override
@@ -212,8 +231,9 @@ mixin _$FNewAltokeEntity {
 /// @nodoc
 abstract class $FNewAltokeEntityCopyWith<$Res> {
   factory $FNewAltokeEntityCopyWith(
-          FNewAltokeEntity value, $Res Function(FNewAltokeEntity) then) =
-      _$FNewAltokeEntityCopyWithImpl<$Res, FNewAltokeEntity>;
+    FNewAltokeEntity value,
+    $Res Function(FNewAltokeEntity) then,
+  ) = _$FNewAltokeEntityCopyWithImpl<$Res, FNewAltokeEntity>;
   @useResult
   $Res call({String name, String? description});
 }
@@ -232,29 +252,32 @@ class _$FNewAltokeEntityCopyWithImpl<$Res, $Val extends FNewAltokeEntity>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? name = null,
-    Object? description = freezed,
-  }) {
-    return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+  $Res call({Object? name = null, Object? description = freezed}) {
+    return _then(
+      _value.copyWith(
+            name:
+                null == name
+                    ? _value.name
+                    : name // ignore: cast_nullable_to_non_nullable
+                        as String,
+            description:
+                freezed == description
+                    ? _value.description
+                    : description // ignore: cast_nullable_to_non_nullable
+                        as String?,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$FNewAltokeEntityImplCopyWith<$Res>
     implements $FNewAltokeEntityCopyWith<$Res> {
-  factory _$$FNewAltokeEntityImplCopyWith(_$FNewAltokeEntityImpl value,
-          $Res Function(_$FNewAltokeEntityImpl) then) =
-      __$$FNewAltokeEntityImplCopyWithImpl<$Res>;
+  factory _$$FNewAltokeEntityImplCopyWith(
+    _$FNewAltokeEntityImpl value,
+    $Res Function(_$FNewAltokeEntityImpl) then,
+  ) = __$$FNewAltokeEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String name, String? description});
@@ -264,28 +287,30 @@ abstract class _$$FNewAltokeEntityImplCopyWith<$Res>
 class __$$FNewAltokeEntityImplCopyWithImpl<$Res>
     extends _$FNewAltokeEntityCopyWithImpl<$Res, _$FNewAltokeEntityImpl>
     implements _$$FNewAltokeEntityImplCopyWith<$Res> {
-  __$$FNewAltokeEntityImplCopyWithImpl(_$FNewAltokeEntityImpl _value,
-      $Res Function(_$FNewAltokeEntityImpl) _then)
-      : super(_value, _then);
+  __$$FNewAltokeEntityImplCopyWithImpl(
+    _$FNewAltokeEntityImpl _value,
+    $Res Function(_$FNewAltokeEntityImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of FNewAltokeEntity
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? name = null,
-    Object? description = freezed,
-  }) {
-    return _then(_$FNewAltokeEntityImpl(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+  $Res call({Object? name = null, Object? description = freezed}) {
+    return _then(
+      _$FNewAltokeEntityImpl(
+        name:
+            null == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                    as String,
+        description:
+            freezed == description
+                ? _value.description
+                : description // ignore: cast_nullable_to_non_nullable
+                    as String?,
+      ),
+    );
   }
 }
 
@@ -327,13 +352,16 @@ class _$FNewAltokeEntityImpl implements _FNewAltokeEntity {
   @pragma('vm:prefer-inline')
   _$$FNewAltokeEntityImplCopyWith<_$FNewAltokeEntityImpl> get copyWith =>
       __$$FNewAltokeEntityImplCopyWithImpl<_$FNewAltokeEntityImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 }
 
 abstract class _FNewAltokeEntity implements FNewAltokeEntity {
-  const factory _FNewAltokeEntity(
-      {required final String name,
-      final String? description}) = _$FNewAltokeEntityImpl;
+  const factory _FNewAltokeEntity({
+    required final String name,
+    final String? description,
+  }) = _$FNewAltokeEntityImpl;
 
   /// The name of the new altoke entity.
   @override
@@ -368,16 +396,19 @@ mixin _$FPartialAltokeEntity {
 
 /// @nodoc
 abstract class $FPartialAltokeEntityCopyWith<$Res> {
-  factory $FPartialAltokeEntityCopyWith(FPartialAltokeEntity value,
-          $Res Function(FPartialAltokeEntity) then) =
-      _$FPartialAltokeEntityCopyWithImpl<$Res, FPartialAltokeEntity>;
+  factory $FPartialAltokeEntityCopyWith(
+    FPartialAltokeEntity value,
+    $Res Function(FPartialAltokeEntity) then,
+  ) = _$FPartialAltokeEntityCopyWithImpl<$Res, FPartialAltokeEntity>;
   @useResult
   $Res call({FOptional<String> name, FOptional<String?> description});
 }
 
 /// @nodoc
-class _$FPartialAltokeEntityCopyWithImpl<$Res,
-        $Val extends FPartialAltokeEntity>
+class _$FPartialAltokeEntityCopyWithImpl<
+  $Res,
+  $Val extends FPartialAltokeEntity
+>
     implements $FPartialAltokeEntityCopyWith<$Res> {
   _$FPartialAltokeEntityCopyWithImpl(this._value, this._then);
 
@@ -390,29 +421,32 @@ class _$FPartialAltokeEntityCopyWithImpl<$Res,
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? name = null,
-    Object? description = null,
-  }) {
-    return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as FOptional<String>,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as FOptional<String?>,
-    ) as $Val);
+  $Res call({Object? name = null, Object? description = null}) {
+    return _then(
+      _value.copyWith(
+            name:
+                null == name
+                    ? _value.name
+                    : name // ignore: cast_nullable_to_non_nullable
+                        as FOptional<String>,
+            description:
+                null == description
+                    ? _value.description
+                    : description // ignore: cast_nullable_to_non_nullable
+                        as FOptional<String?>,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$FPartialAltokeEntityImplCopyWith<$Res>
     implements $FPartialAltokeEntityCopyWith<$Res> {
-  factory _$$FPartialAltokeEntityImplCopyWith(_$FPartialAltokeEntityImpl value,
-          $Res Function(_$FPartialAltokeEntityImpl) then) =
-      __$$FPartialAltokeEntityImplCopyWithImpl<$Res>;
+  factory _$$FPartialAltokeEntityImplCopyWith(
+    _$FPartialAltokeEntityImpl value,
+    $Res Function(_$FPartialAltokeEntityImpl) then,
+  ) = __$$FPartialAltokeEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({FOptional<String> name, FOptional<String?> description});
@@ -422,37 +456,40 @@ abstract class _$$FPartialAltokeEntityImplCopyWith<$Res>
 class __$$FPartialAltokeEntityImplCopyWithImpl<$Res>
     extends _$FPartialAltokeEntityCopyWithImpl<$Res, _$FPartialAltokeEntityImpl>
     implements _$$FPartialAltokeEntityImplCopyWith<$Res> {
-  __$$FPartialAltokeEntityImplCopyWithImpl(_$FPartialAltokeEntityImpl _value,
-      $Res Function(_$FPartialAltokeEntityImpl) _then)
-      : super(_value, _then);
+  __$$FPartialAltokeEntityImplCopyWithImpl(
+    _$FPartialAltokeEntityImpl _value,
+    $Res Function(_$FPartialAltokeEntityImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of FPartialAltokeEntity
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? name = null,
-    Object? description = null,
-  }) {
-    return _then(_$FPartialAltokeEntityImpl(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as FOptional<String>,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as FOptional<String?>,
-    ));
+  $Res call({Object? name = null, Object? description = null}) {
+    return _then(
+      _$FPartialAltokeEntityImpl(
+        name:
+            null == name
+                ? _value.name
+                : name // ignore: cast_nullable_to_non_nullable
+                    as FOptional<String>,
+        description:
+            null == description
+                ? _value.description
+                : description // ignore: cast_nullable_to_non_nullable
+                    as FOptional<String?>,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$FPartialAltokeEntityImpl implements _FPartialAltokeEntity {
-  const _$FPartialAltokeEntityImpl(
-      {this.name = const FOptional<String>.none(),
-      this.description = const FOptional<String?>.none()});
+  const _$FPartialAltokeEntityImpl({
+    this.name = const FOptional<String>.none(),
+    this.description = const FOptional<String?>.none(),
+  });
 
   /// The optional name for the altoke entity.
   @override
@@ -488,15 +525,18 @@ class _$FPartialAltokeEntityImpl implements _FPartialAltokeEntity {
   @override
   @pragma('vm:prefer-inline')
   _$$FPartialAltokeEntityImplCopyWith<_$FPartialAltokeEntityImpl>
-      get copyWith =>
-          __$$FPartialAltokeEntityImplCopyWithImpl<_$FPartialAltokeEntityImpl>(
-              this, _$identity);
+  get copyWith =>
+      __$$FPartialAltokeEntityImplCopyWithImpl<_$FPartialAltokeEntityImpl>(
+        this,
+        _$identity,
+      );
 }
 
 abstract class _FPartialAltokeEntity implements FPartialAltokeEntity {
-  const factory _FPartialAltokeEntity(
-      {final FOptional<String> name,
-      final FOptional<String?> description}) = _$FPartialAltokeEntityImpl;
+  const factory _FPartialAltokeEntity({
+    final FOptional<String> name,
+    final FOptional<String?> description,
+  }) = _$FPartialAltokeEntityImpl;
 
   /// The optional name for the altoke entity.
   @override
@@ -511,5 +551,5 @@ abstract class _FPartialAltokeEntity implements FPartialAltokeEntity {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FPartialAltokeEntityImplCopyWith<_$FPartialAltokeEntityImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }

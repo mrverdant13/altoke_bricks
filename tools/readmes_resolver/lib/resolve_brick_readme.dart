@@ -57,24 +57,22 @@ void main(List<String> args) {
     }
   }
 
-  final resolvedBrickReadme = initialBrickReadmeContent.replaceAllMapped(
-    bannersHeaderRegex,
-    (match) {
-      final buf = StringBuffer()
-        ..writeln(bannersHeaderToken)
-        ..writeln(rootBannersHeader)
-        ..writeln(bannersHeaderToken);
-      return buf.toString().trim();
-    },
-  ).replaceAllMapped(
-    variablesRegex,
-    (match) {
-      final buf = StringBuffer()
-        ..writeln(variablesToken)
-        ..writeln(varsBuf.toString().trim())
-        ..writeln(variablesToken);
-      return buf.toString().trim();
-    },
-  );
+  final resolvedBrickReadme = initialBrickReadmeContent
+      .replaceAllMapped(bannersHeaderRegex, (match) {
+        final buf =
+            StringBuffer()
+              ..writeln(bannersHeaderToken)
+              ..writeln(rootBannersHeader)
+              ..writeln(bannersHeaderToken);
+        return buf.toString().trim();
+      })
+      .replaceAllMapped(variablesRegex, (match) {
+        final buf =
+            StringBuffer()
+              ..writeln(variablesToken)
+              ..writeln(varsBuf.toString().trim())
+              ..writeln(variablesToken);
+        return buf.toString().trim();
+      });
   brickReadmeFile.writeAsStringSync(resolvedBrickReadme);
 }

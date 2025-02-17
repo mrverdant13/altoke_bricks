@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // TODO(mrverdant13): Add tests.
 /*remove-end*/
 // coverage:ignore-start
+
 class LoggerProviderObserver extends ProviderObserver {
   const LoggerProviderObserver();
 
@@ -18,12 +19,7 @@ class LoggerProviderObserver extends ProviderObserver {
     StackTrace? stackTrace,
   }) {
     if (!kDebugMode) return;
-    developer.log(
-      message,
-      name: name,
-      error: error,
-      stackTrace: stackTrace,
-    );
+    developer.log(message, name: name, error: error, stackTrace: stackTrace);
   }
 
   @override
@@ -32,16 +28,13 @@ class LoggerProviderObserver extends ProviderObserver {
     Object? value,
     ProviderContainer container,
   ) {
-    final message = '''
+    final message =
+        '''
 ${DateTime.now()}
 Provider added
 Initial:  $value
-'''
-        .trim();
-    log(
-      message,
-      name: provider.loggerName,
-    );
+'''.trim();
+    log(message, name: provider.loggerName);
   }
 
   @override
@@ -51,12 +44,12 @@ Initial:  $value
     StackTrace stackTrace,
     ProviderContainer container,
   ) {
-    final message = '''
+    final message =
+        '''
 ${DateTime.now()}
 Provider failed
 $error
-'''
-        .trim();
+'''.trim();
     log(
       message,
       error: error,
@@ -72,17 +65,14 @@ $error
     Object? newValue,
     ProviderContainer container,
   ) {
-    final message = '''
+    final message =
+        '''
 ${DateTime.now()}
 Provider updated
 Previous: $previousValue
 New:      $newValue
-'''
-        .trim();
-    log(
-      message,
-      name: provider.loggerName,
-    );
+'''.trim();
+    log(message, name: provider.loggerName);
   }
 
   @override
@@ -90,19 +80,17 @@ New:      $newValue
     ProviderBase<Object?> provider,
     ProviderContainer container,
   ) {
-    final message = '''
+    final message =
+        '''
 ${DateTime.now()}
 Provider disposed
-'''
-        .trim();
-    log(
-      message,
-      name: provider.loggerName,
-    );
+'''.trim();
+    log(message, name: provider.loggerName);
   }
 }
 
 extension on ProviderBase<Object?> {
   String get loggerName => name ?? runtimeType.toString();
 }
+
 // coverage:ignore-end

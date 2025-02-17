@@ -13,9 +13,7 @@ sealed class UpdateTaskFailure implements Exception {
 /// {@endtemplate}
 class UpdateTaskFailureNotFound extends UpdateTaskFailure {
   /// {@macro local_database.update_task_failure_not_found}
-  const UpdateTaskFailureNotFound({
-    required this.taskId,
-  });
+  const UpdateTaskFailureNotFound({required this.taskId});
 
   /// The id of the task that was not found.
   final int taskId;

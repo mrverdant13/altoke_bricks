@@ -18,8 +18,8 @@ import '../helpers/helpers.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-/*w 1v w*/
-/*{{#use_auto_route}}*/
+  /*w 1v w*/
+  /*{{#use_auto_route}}*/
   test(
     '''
 
@@ -69,16 +69,10 @@ THEN the home screen should be shown
       final router = AppRouter();
       addTearDown(router.dispose);
       final config = router.config(
-        deepLinkBuilder: (_) => DeepLink.path(
-          path.joinAll([
-            '/',
-          ]),
-        ),
+        deepLinkBuilder: (_) => DeepLink.path(path.joinAll(['/'])),
       );
       await tester.pumpRoutedApp(
-        overrides: [
-          routerConfigPod.overrideWithValue(config),
-        ],
+        overrides: [routerConfigPod.overrideWithValue(config)],
       );
       await tester.pumpAndSettle();
       expect(find.byType(HomeScreen), findsOneWidget);
@@ -95,17 +89,10 @@ THEN the counter screen should be shown
       final router = AppRouter();
       addTearDown(router.dispose);
       final config = router.config(
-        deepLinkBuilder: (_) => DeepLink.path(
-          path.joinAll([
-            '/',
-            'counter',
-          ]),
-        ),
+        deepLinkBuilder: (_) => DeepLink.path(path.joinAll(['/', 'counter'])),
       );
       await tester.pumpRoutedApp(
-        overrides: [
-          routerConfigPod.overrideWithValue(config),
-        ],
+        overrides: [routerConfigPod.overrideWithValue(config)],
       );
       await tester.pumpAndSettle();
       expect(find.byType(CounterScreen), findsOneWidget);
@@ -123,12 +110,7 @@ THEN the tasks screen should be shown
       final router = AppRouter();
       addTearDown(router.dispose);
       final config = router.config(
-        deepLinkBuilder: (_) => DeepLink.path(
-          path.joinAll([
-            '/',
-            'tasks',
-          ]),
-        ),
+        deepLinkBuilder: (_) => DeepLink.path(path.joinAll(['/', 'tasks'])),
       );
       await tester.pumpRoutedApp(
         overrides: [
@@ -141,8 +123,8 @@ THEN the tasks screen should be shown
     },
   );
   /*remove-end*/
-/*{{/use_auto_route}}*/
-/*{{#use_go_router}}*/
+  /*{{/use_auto_route}}*/
+  /*{{#use_go_router}}*/
   test(
     '''
 
@@ -155,9 +137,8 @@ THEN the config is injected
         /*remove-start*/
         overrides: [
           selectedRouterPackagePod.overrideWith(
-            () => FakeSelectedRouterPackage(
-              initialValue: RouterPackage.goRouter,
-            ),
+            () =>
+                FakeSelectedRouterPackage(initialValue: RouterPackage.goRouter),
           ),
         ],
         /*remove-end*/
@@ -177,16 +158,12 @@ THEN the home screen should be shown
     (tester) async {
       final router = GoRouter(
         routes: $appRoutes,
-        initialLocation: path.joinAll([
-          '/',
-        ]),
+        initialLocation: path.joinAll(['/']),
       );
       addTearDown(router.dispose);
       final config = router;
       await tester.pumpRoutedApp(
-        overrides: [
-          routerConfigPod.overrideWithValue(config),
-        ],
+        overrides: [routerConfigPod.overrideWithValue(config)],
       );
       await tester.pumpAndSettle();
       expect(find.byType(HomeScreen), findsOneWidget);
@@ -202,17 +179,12 @@ THEN the counter screen should be shown
     (tester) async {
       final router = GoRouter(
         routes: $appRoutes,
-        initialLocation: path.joinAll([
-          '/',
-          'counter',
-        ]),
+        initialLocation: path.joinAll(['/', 'counter']),
       );
       addTearDown(router.dispose);
       final config = router;
       await tester.pumpRoutedApp(
-        overrides: [
-          routerConfigPod.overrideWithValue(config),
-        ],
+        overrides: [routerConfigPod.overrideWithValue(config)],
       );
       await tester.pumpAndSettle();
       expect(find.byType(CounterScreen), findsOneWidget);
@@ -229,10 +201,7 @@ THEN the tasks screen should be shown
     (tester) async {
       final router = GoRouter(
         routes: $appRoutes,
-        initialLocation: path.joinAll([
-          '/',
-          'tasks',
-        ]),
+        initialLocation: path.joinAll(['/', 'tasks']),
       );
       addTearDown(router.dispose);
       final config = router;
@@ -247,6 +216,6 @@ THEN the tasks screen should be shown
     },
   );
   /*remove-end*/
-/*{{/use_go_router}}*/
-/*w 1v w*/
+  /*{{/use_go_router}}*/
+  /*w 1v w*/
 }

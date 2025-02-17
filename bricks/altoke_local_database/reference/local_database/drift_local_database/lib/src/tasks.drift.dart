@@ -8,20 +8,22 @@ import 'package:drift_local_database/src/type_converters/task_priority_converter
     as i4;
 import 'package:drift/internal/modular.dart' as i5;
 
-typedef $TasksCreateCompanionBuilder = i3.TasksCompanion Function({
-  i0.Value<int> id,
-  required String title,
-  required i2.TaskPriority priority,
-  i0.Value<bool> completed,
-  i0.Value<String?> description,
-});
-typedef $TasksUpdateCompanionBuilder = i3.TasksCompanion Function({
-  i0.Value<int> id,
-  i0.Value<String> title,
-  i0.Value<i2.TaskPriority> priority,
-  i0.Value<bool> completed,
-  i0.Value<String?> description,
-});
+typedef $TasksCreateCompanionBuilder =
+    i3.TasksCompanion Function({
+      i0.Value<int> id,
+      required String title,
+      required i2.TaskPriority priority,
+      i0.Value<bool> completed,
+      i0.Value<String?> description,
+    });
+typedef $TasksUpdateCompanionBuilder =
+    i3.TasksCompanion Function({
+      i0.Value<int> id,
+      i0.Value<String> title,
+      i0.Value<i2.TaskPriority> priority,
+      i0.Value<bool> completed,
+      i0.Value<String?> description,
+    });
 
 class $TasksFilterComposer extends i0.Composer<i0.GeneratedDatabase, i3.Tasks> {
   $TasksFilterComposer({
@@ -32,22 +34,30 @@ class $TasksFilterComposer extends i0.Composer<i0.GeneratedDatabase, i3.Tasks> {
     super.$removeJoinBuilderFromRootComposer,
   });
   i0.ColumnFilters<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => i0.ColumnFilters(column));
+    column: $table.id,
+    builder: (column) => i0.ColumnFilters(column),
+  );
 
   i0.ColumnFilters<String> get title => $composableBuilder(
-      column: $table.title, builder: (column) => i0.ColumnFilters(column));
+    column: $table.title,
+    builder: (column) => i0.ColumnFilters(column),
+  );
 
   i0.ColumnWithTypeConverterFilters<i2.TaskPriority, i2.TaskPriority, String>
-      get priority => $composableBuilder(
-          column: $table.priority,
-          builder: (column) => i0.ColumnWithTypeConverterFilters(column));
+  get priority => $composableBuilder(
+    column: $table.priority,
+    builder: (column) => i0.ColumnWithTypeConverterFilters(column),
+  );
 
   i0.ColumnFilters<bool> get completed => $composableBuilder(
-      column: $table.completed, builder: (column) => i0.ColumnFilters(column));
+    column: $table.completed,
+    builder: (column) => i0.ColumnFilters(column),
+  );
 
   i0.ColumnFilters<String> get description => $composableBuilder(
-      column: $table.description,
-      builder: (column) => i0.ColumnFilters(column));
+    column: $table.description,
+    builder: (column) => i0.ColumnFilters(column),
+  );
 }
 
 class $TasksOrderingComposer
@@ -60,21 +70,29 @@ class $TasksOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   i0.ColumnOrderings<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => i0.ColumnOrderings(column));
+    column: $table.id,
+    builder: (column) => i0.ColumnOrderings(column),
+  );
 
   i0.ColumnOrderings<String> get title => $composableBuilder(
-      column: $table.title, builder: (column) => i0.ColumnOrderings(column));
+    column: $table.title,
+    builder: (column) => i0.ColumnOrderings(column),
+  );
 
   i0.ColumnOrderings<String> get priority => $composableBuilder(
-      column: $table.priority, builder: (column) => i0.ColumnOrderings(column));
+    column: $table.priority,
+    builder: (column) => i0.ColumnOrderings(column),
+  );
 
   i0.ColumnOrderings<bool> get completed => $composableBuilder(
-      column: $table.completed,
-      builder: (column) => i0.ColumnOrderings(column));
+    column: $table.completed,
+    builder: (column) => i0.ColumnOrderings(column),
+  );
 
   i0.ColumnOrderings<String> get description => $composableBuilder(
-      column: $table.description,
-      builder: (column) => i0.ColumnOrderings(column));
+    column: $table.description,
+    builder: (column) => i0.ColumnOrderings(column),
+  );
 }
 
 class $TasksAnnotationComposer
@@ -99,78 +117,94 @@ class $TasksAnnotationComposer
       $composableBuilder(column: $table.completed, builder: (column) => column);
 
   i0.GeneratedColumn<String> get description => $composableBuilder(
-      column: $table.description, builder: (column) => column);
+    column: $table.description,
+    builder: (column) => column,
+  );
 }
 
-class $TasksTableManager extends i0.RootTableManager<
-    i0.GeneratedDatabase,
-    i3.Tasks,
-    i1.Task,
-    i3.$TasksFilterComposer,
-    i3.$TasksOrderingComposer,
-    i3.$TasksAnnotationComposer,
-    $TasksCreateCompanionBuilder,
-    $TasksUpdateCompanionBuilder,
-    (i1.Task, i0.BaseReferences<i0.GeneratedDatabase, i3.Tasks, i1.Task>),
-    i1.Task,
-    i0.PrefetchHooks Function()> {
+class $TasksTableManager
+    extends
+        i0.RootTableManager<
+          i0.GeneratedDatabase,
+          i3.Tasks,
+          i1.Task,
+          i3.$TasksFilterComposer,
+          i3.$TasksOrderingComposer,
+          i3.$TasksAnnotationComposer,
+          $TasksCreateCompanionBuilder,
+          $TasksUpdateCompanionBuilder,
+          (i1.Task, i0.BaseReferences<i0.GeneratedDatabase, i3.Tasks, i1.Task>),
+          i1.Task,
+          i0.PrefetchHooks Function()
+        > {
   $TasksTableManager(i0.GeneratedDatabase db, i3.Tasks table)
-      : super(i0.TableManagerState(
+    : super(
+        i0.TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer: () =>
-              i3.$TasksFilterComposer($db: db, $table: table),
-          createOrderingComposer: () =>
-              i3.$TasksOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer: () =>
-              i3.$TasksAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback: ({
-            i0.Value<int> id = const i0.Value.absent(),
-            i0.Value<String> title = const i0.Value.absent(),
-            i0.Value<i2.TaskPriority> priority = const i0.Value.absent(),
-            i0.Value<bool> completed = const i0.Value.absent(),
-            i0.Value<String?> description = const i0.Value.absent(),
-          }) =>
-              i3.TasksCompanion(
-            id: id,
-            title: title,
-            priority: priority,
-            completed: completed,
-            description: description,
-          ),
-          createCompanionCallback: ({
-            i0.Value<int> id = const i0.Value.absent(),
-            required String title,
-            required i2.TaskPriority priority,
-            i0.Value<bool> completed = const i0.Value.absent(),
-            i0.Value<String?> description = const i0.Value.absent(),
-          }) =>
-              i3.TasksCompanion.insert(
-            id: id,
-            title: title,
-            priority: priority,
-            completed: completed,
-            description: description,
-          ),
-          withReferenceMapper: (p0) => p0
-              .map((e) => (e.readTable(table), i0.BaseReferences(db, table, e)))
-              .toList(),
+          createFilteringComposer:
+              () => i3.$TasksFilterComposer($db: db, $table: table),
+          createOrderingComposer:
+              () => i3.$TasksOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer:
+              () => i3.$TasksAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                i0.Value<int> id = const i0.Value.absent(),
+                i0.Value<String> title = const i0.Value.absent(),
+                i0.Value<i2.TaskPriority> priority = const i0.Value.absent(),
+                i0.Value<bool> completed = const i0.Value.absent(),
+                i0.Value<String?> description = const i0.Value.absent(),
+              }) => i3.TasksCompanion(
+                id: id,
+                title: title,
+                priority: priority,
+                completed: completed,
+                description: description,
+              ),
+          createCompanionCallback:
+              ({
+                i0.Value<int> id = const i0.Value.absent(),
+                required String title,
+                required i2.TaskPriority priority,
+                i0.Value<bool> completed = const i0.Value.absent(),
+                i0.Value<String?> description = const i0.Value.absent(),
+              }) => i3.TasksCompanion.insert(
+                id: id,
+                title: title,
+                priority: priority,
+                completed: completed,
+                description: description,
+              ),
+          withReferenceMapper:
+              (p0) =>
+                  p0
+                      .map(
+                        (e) => (
+                          e.readTable(table),
+                          i0.BaseReferences(db, table, e),
+                        ),
+                      )
+                      .toList(),
           prefetchHooksCallback: null,
-        ));
+        ),
+      );
 }
 
-typedef $TasksProcessedTableManager = i0.ProcessedTableManager<
-    i0.GeneratedDatabase,
-    i3.Tasks,
-    i1.Task,
-    i3.$TasksFilterComposer,
-    i3.$TasksOrderingComposer,
-    i3.$TasksAnnotationComposer,
-    $TasksCreateCompanionBuilder,
-    $TasksUpdateCompanionBuilder,
-    (i1.Task, i0.BaseReferences<i0.GeneratedDatabase, i3.Tasks, i1.Task>),
-    i1.Task,
-    i0.PrefetchHooks Function()>;
+typedef $TasksProcessedTableManager =
+    i0.ProcessedTableManager<
+      i0.GeneratedDatabase,
+      i3.Tasks,
+      i1.Task,
+      i3.$TasksFilterComposer,
+      i3.$TasksOrderingComposer,
+      i3.$TasksAnnotationComposer,
+      $TasksCreateCompanionBuilder,
+      $TasksUpdateCompanionBuilder,
+      (i1.Task, i0.BaseReferences<i0.GeneratedDatabase, i3.Tasks, i1.Task>),
+      i1.Task,
+      i0.PrefetchHooks Function()
+    >;
 
 class Tasks extends i0.Table with i0.TableInfo<Tasks, i1.Task> {
   @override
@@ -179,52 +213,79 @@ class Tasks extends i0.Table with i0.TableInfo<Tasks, i1.Task> {
   Tasks(this.attachedDatabase, [this._alias]);
   static const i0.VerificationMeta _idMeta = const i0.VerificationMeta('id');
   late final i0.GeneratedColumn<int> id = i0.GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: i0.DriftSqlType.int,
-      requiredDuringInsert: false,
-      $customConstraints: 'NOT NULL PRIMARY KEY AUTOINCREMENT');
-  static const i0.VerificationMeta _titleMeta =
-      const i0.VerificationMeta('title');
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: i0.DriftSqlType.int,
+    requiredDuringInsert: false,
+    $customConstraints: 'NOT NULL PRIMARY KEY AUTOINCREMENT',
+  );
+  static const i0.VerificationMeta _titleMeta = const i0.VerificationMeta(
+    'title',
+  );
   late final i0.GeneratedColumn<String> title = i0.GeneratedColumn<String>(
-      'title', aliasedName, false,
-      type: i0.DriftSqlType.string,
-      requiredDuringInsert: true,
-      $customConstraints: 'NOT NULL');
-  static const i0.VerificationMeta _priorityMeta =
-      const i0.VerificationMeta('priority');
+    'title',
+    aliasedName,
+    false,
+    type: i0.DriftSqlType.string,
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL',
+  );
+  static const i0.VerificationMeta _priorityMeta = const i0.VerificationMeta(
+    'priority',
+  );
   late final i0.GeneratedColumnWithTypeConverter<i2.TaskPriority, String>
-      priority = i0.GeneratedColumn<String>('priority', aliasedName, false,
-              type: i0.DriftSqlType.string,
-              requiredDuringInsert: true,
-              $customConstraints: 'NOT NULL')
-          .withConverter<i2.TaskPriority>(i3.Tasks.$converterpriority);
-  static const i0.VerificationMeta _completedMeta =
-      const i0.VerificationMeta('completed');
+  priority = i0.GeneratedColumn<String>(
+    'priority',
+    aliasedName,
+    false,
+    type: i0.DriftSqlType.string,
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL',
+  ).withConverter<i2.TaskPriority>(i3.Tasks.$converterpriority);
+  static const i0.VerificationMeta _completedMeta = const i0.VerificationMeta(
+    'completed',
+  );
   late final i0.GeneratedColumn<bool> completed = i0.GeneratedColumn<bool>(
-      'completed', aliasedName, false,
-      type: i0.DriftSqlType.bool,
-      requiredDuringInsert: false,
-      $customConstraints: 'NOT NULL DEFAULT FALSE',
-      defaultValue: const i0.CustomExpression('FALSE'));
-  static const i0.VerificationMeta _descriptionMeta =
-      const i0.VerificationMeta('description');
+    'completed',
+    aliasedName,
+    false,
+    type: i0.DriftSqlType.bool,
+    requiredDuringInsert: false,
+    $customConstraints: 'NOT NULL DEFAULT FALSE',
+    defaultValue: const i0.CustomExpression('FALSE'),
+  );
+  static const i0.VerificationMeta _descriptionMeta = const i0.VerificationMeta(
+    'description',
+  );
   late final i0.GeneratedColumn<String> description =
-      i0.GeneratedColumn<String>('description', aliasedName, true,
-          type: i0.DriftSqlType.string,
-          requiredDuringInsert: false,
-          $customConstraints: '');
+      i0.GeneratedColumn<String>(
+        'description',
+        aliasedName,
+        true,
+        type: i0.DriftSqlType.string,
+        requiredDuringInsert: false,
+        $customConstraints: '',
+      );
   @override
-  List<i0.GeneratedColumn> get $columns =>
-      [id, title, priority, completed, description];
+  List<i0.GeneratedColumn> get $columns => [
+    id,
+    title,
+    priority,
+    completed,
+    description,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'tasks';
   @override
-  i0.VerificationContext validateIntegrity(i0.Insertable<i1.Task> instance,
-      {bool isInserting = false}) {
+  i0.VerificationContext validateIntegrity(
+    i0.Insertable<i1.Task> instance, {
+    bool isInserting = false,
+  }) {
     final context = i0.VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -232,20 +293,27 @@ class Tasks extends i0.Table with i0.TableInfo<Tasks, i1.Task> {
     }
     if (data.containsKey('title')) {
       context.handle(
-          _titleMeta, title.isAcceptableOrUnknown(data['title']!, _titleMeta));
+        _titleMeta,
+        title.isAcceptableOrUnknown(data['title']!, _titleMeta),
+      );
     } else if (isInserting) {
       context.missing(_titleMeta);
     }
     context.handle(_priorityMeta, const i0.VerificationResult.success());
     if (data.containsKey('completed')) {
-      context.handle(_completedMeta,
-          completed.isAcceptableOrUnknown(data['completed']!, _completedMeta));
+      context.handle(
+        _completedMeta,
+        completed.isAcceptableOrUnknown(data['completed']!, _completedMeta),
+      );
     }
     if (data.containsKey('description')) {
       context.handle(
+        _descriptionMeta,
+        description.isAcceptableOrUnknown(
+          data['description']!,
           _descriptionMeta,
-          description.isAcceptableOrUnknown(
-              data['description']!, _descriptionMeta));
+        ),
+      );
     }
     return context;
   }
@@ -256,16 +324,31 @@ class Tasks extends i0.Table with i0.TableInfo<Tasks, i1.Task> {
   i1.Task map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return i1.Task(
-      id: attachedDatabase.typeMapping
-          .read(i0.DriftSqlType.int, data['${effectivePrefix}id'])!,
-      title: attachedDatabase.typeMapping
-          .read(i0.DriftSqlType.string, data['${effectivePrefix}title'])!,
-      priority: i3.Tasks.$converterpriority.fromSql(attachedDatabase.typeMapping
-          .read(i0.DriftSqlType.string, data['${effectivePrefix}priority'])!),
-      completed: attachedDatabase.typeMapping
-          .read(i0.DriftSqlType.bool, data['${effectivePrefix}completed'])!,
-      description: attachedDatabase.typeMapping
-          .read(i0.DriftSqlType.string, data['${effectivePrefix}description']),
+      id:
+          attachedDatabase.typeMapping.read(
+            i0.DriftSqlType.int,
+            data['${effectivePrefix}id'],
+          )!,
+      title:
+          attachedDatabase.typeMapping.read(
+            i0.DriftSqlType.string,
+            data['${effectivePrefix}title'],
+          )!,
+      priority: i3.Tasks.$converterpriority.fromSql(
+        attachedDatabase.typeMapping.read(
+          i0.DriftSqlType.string,
+          data['${effectivePrefix}priority'],
+        )!,
+      ),
+      completed:
+          attachedDatabase.typeMapping.read(
+            i0.DriftSqlType.bool,
+            data['${effectivePrefix}completed'],
+          )!,
+      description: attachedDatabase.typeMapping.read(
+        i0.DriftSqlType.string,
+        data['${effectivePrefix}description'],
+      ),
     );
   }
 
@@ -299,8 +382,8 @@ class TasksCompanion extends i0.UpdateCompanion<i1.Task> {
     required i2.TaskPriority priority,
     this.completed = const i0.Value.absent(),
     this.description = const i0.Value.absent(),
-  })  : title = i0.Value(title),
-        priority = i0.Value(priority);
+  }) : title = i0.Value(title),
+       priority = i0.Value(priority);
   static i0.Insertable<i1.Task> custom({
     i0.Expression<int>? id,
     i0.Expression<String>? title,
@@ -317,12 +400,13 @@ class TasksCompanion extends i0.UpdateCompanion<i1.Task> {
     });
   }
 
-  i3.TasksCompanion copyWith(
-      {i0.Value<int>? id,
-      i0.Value<String>? title,
-      i0.Value<i2.TaskPriority>? priority,
-      i0.Value<bool>? completed,
-      i0.Value<String?>? description}) {
+  i3.TasksCompanion copyWith({
+    i0.Value<int>? id,
+    i0.Value<String>? title,
+    i0.Value<i2.TaskPriority>? priority,
+    i0.Value<bool>? completed,
+    i0.Value<String?>? description,
+  }) {
     return i3.TasksCompanion(
       id: id ?? this.id,
       title: title ?? this.title,
@@ -343,7 +427,8 @@ class TasksCompanion extends i0.UpdateCompanion<i1.Task> {
     }
     if (priority.present) {
       map['priority'] = i0.Variable<String>(
-          i3.Tasks.$converterpriority.toSql(priority.value));
+        i3.Tasks.$converterpriority.toSql(priority.value),
+      );
     }
     if (completed.present) {
       map['completed'] = i0.Variable<bool>(completed.value);
@@ -369,27 +454,28 @@ class TasksCompanion extends i0.UpdateCompanion<i1.Task> {
 
 class TasksDrift extends i5.ModularAccessor {
   TasksDrift(i0.GeneratedDatabase db) : super(db);
-  Future<int> createTask(
-      {required String title,
-      required i2.TaskPriority priority,
-      String? description}) {
+  Future<int> createTask({
+    required String title,
+    required i2.TaskPriority priority,
+    String? description,
+  }) {
     return customInsert(
       'INSERT INTO tasks (title, priority, description) VALUES (?1, ?2, ?3)',
       variables: [
         i0.Variable<String>(title),
         i0.Variable<String>(i3.Tasks.$converterpriority.toSql(priority)),
-        i0.Variable<String>(description)
+        i0.Variable<String>(description),
       ],
       updates: {tasks},
     );
   }
 
   i0.Selectable<i1.Task> getTaskById({required int id}) {
-    return customSelect('SELECT * FROM tasks WHERE id = ?1', variables: [
-      i0.Variable<int>(id)
-    ], readsFrom: {
-      tasks,
-    }).asyncMap(tasks.mapFromRow);
+    return customSelect(
+      'SELECT * FROM tasks WHERE id = ?1',
+      variables: [i0.Variable<int>(id)],
+      readsFrom: {tasks},
+    ).asyncMap(tasks.mapFromRow);
   }
 
   i3.Tasks get tasks =>

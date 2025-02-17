@@ -14,14 +14,15 @@ String _$asyncInitializationHash() =>
 final asyncInitializationPod = AutoDisposeFutureProvider<void>.internal(
   asyncInitialization,
   name: r'asyncInitializationPod',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$asyncInitializationHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$asyncInitializationHash,
   dependencies: <ProviderOrFamily>{
     asyncApplicationDocumentsDirectoryPod,
     asyncDriftLocalDatabasePod,
     asyncHiveInitializationPod,
-    asyncIsarPod
+    asyncIsarPod,
   },
   allTransitiveDependencies: <ProviderOrFamily>{
     asyncApplicationDocumentsDirectoryPod,
@@ -31,7 +32,7 @@ final asyncInitializationPod = AutoDisposeFutureProvider<void>.internal(
     asyncHiveInitializationPod,
     ...?asyncHiveInitializationPod.allTransitiveDependencies,
     asyncIsarPod,
-    ...?asyncIsarPod.allTransitiveDependencies
+    ...?asyncIsarPod.allTransitiveDependencies,
   },
 );
 

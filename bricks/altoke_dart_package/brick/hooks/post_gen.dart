@@ -19,12 +19,11 @@ Future<void> run(HookContext context) async {
   AsyncVoidCallback onStart(String message) {
     return () async {
       progress = logger.progress(message);
-      progressTimer = Timer.periodic(
-        const Duration(milliseconds: 100),
-        (timer) {
-          progress?.update(message);
-        },
-      );
+      progressTimer = Timer.periodic(const Duration(milliseconds: 100), (
+        timer,
+      ) {
+        progress?.update(message);
+      });
     };
   }
 
