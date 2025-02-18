@@ -13,7 +13,7 @@ environment:
 dev_dependencies:
   #w 1v 2> w#
   #{{#use_code_generation}}#
-  build_runner: ^2.4.14
+  build_runner: ^2.4.15
   #w 1v 2> w#
   #{{/use_code_generation}}#
   test: ^1.25.8

@@ -36,7 +36,7 @@ dependencies:
 dev_dependencies:
   #{{#use_code_generation}}#
   #w 1v 2> w#
-  build_runner: ^2.4.14
+  build_runner: ^2.4.15
   #w 1v 2> w#
   #{{/use_code_generation}}#
   #{{#use_dart_mappable}}#
