@@ -20,8 +20,9 @@ extension type AndroidApplicationIdentifier._(String value) {
   }
 
   /// The pattern that a valid Android Application Identifier must match.
-  static final pattern =
-      RegExp(r'^[a-zA-Z][a-zA-Z0-9_]*(?:\.[a-zA-Z][a-zA-Z0-9_]*)+$');
+  static final pattern = RegExp(
+    r'^[a-zA-Z][a-zA-Z0-9_]*(?:\.[a-zA-Z][a-zA-Z0-9_]*)+$',
+  );
 
   /// Evaluates if the given [value] is a valid Android Application Identifier.
   ///

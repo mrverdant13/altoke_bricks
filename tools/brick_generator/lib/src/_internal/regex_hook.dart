@@ -12,10 +12,10 @@ class RegexHook extends MappingHook {
 
   @override
   Object? beforeDecode(Object? value) => switch (value) {
-        final RegExp value => value,
-        final String value => RegExp(value),
-        _ => RegExp(value.toString()),
-      };
+    final RegExp value => value,
+    final String value => RegExp(value),
+    _ => RegExp(value.toString()),
+  };
 }
 
 // coverage:ignore-start

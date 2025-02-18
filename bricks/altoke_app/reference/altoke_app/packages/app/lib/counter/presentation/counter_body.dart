@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CounterBody extends StatelessWidget {
-  const CounterBody({
-    super.key,
-  });
+  const CounterBody({super.key});
 
   @visibleForTesting
   static const textStyleChangeDuration = Duration(milliseconds: 300);
@@ -18,10 +16,7 @@ class CounterBody extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          PushCountMessage(),
-          PushCountValue(),
-        ],
+        children: [PushCountMessage(), PushCountValue()],
       ),
     );
   }
@@ -72,9 +67,7 @@ class PushCountValue extends ConsumerWidget {
           duration: CounterBody.textStyleChangeDuration,
           style: textTheme.titleMedium!.copyWith(fontSize: fontSize),
           textAlign: TextAlign.center,
-          child: Text(
-            '${ref.watch(counterPod)}',
-          ),
+          child: Text('${ref.watch(counterPod)}'),
         );
       },
     );

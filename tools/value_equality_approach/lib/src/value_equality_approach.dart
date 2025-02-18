@@ -15,17 +15,18 @@ enum ValueEqualityApproach {
   overrides('Overrides', 'overrides'),
 
   /// No value equality approach.
-  none('None', 'none'),
-  ;
+  none('None', 'none');
 
   const ValueEqualityApproach(this.readableName, this.varIdentifier);
 
   factory ValueEqualityApproach.fromReadableName(String readableName) {
     return ValueEqualityApproach.values.firstWhere(
       (approach) => approach.readableName == readableName,
-      orElse: () => throw ArgumentError(
-        'Invalid value equality approach: $readableName',
-      ),
+      orElse:
+          () =>
+              throw ArgumentError(
+                'Invalid value equality approach: $readableName',
+              ),
     );
   }
 
@@ -56,13 +57,13 @@ enum ValueEqualityApproach {
 
   /// Returns whether the value equality approach uses code generation.
   bool get usesCodeGeneration => [
-        ValueEqualityApproach.dartMappable,
-        ValueEqualityApproach.freezed,
-      ].contains(this);
+    ValueEqualityApproach.dartMappable,
+    ValueEqualityApproach.freezed,
+  ].contains(this);
 
   /// Returns whether the value equality approach uses the `meta` package.
   bool get usesMeta => [
-        ValueEqualityApproach.dartMappable,
-        ValueEqualityApproach.overrides,
-      ].contains(this);
+    ValueEqualityApproach.dartMappable,
+    ValueEqualityApproach.overrides,
+  ].contains(this);
 }

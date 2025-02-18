@@ -16,7 +16,8 @@ import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 /*{{/use_freezed}}*/
 
-/*{{#use_meta}}*/ import 'package:meta/meta.dart'; /*{{/use_meta}}*/
+/*{{#use_meta}}*/
+import 'package:meta/meta.dart'; /*{{/use_meta}}*/
 
 /*{{#use_freezed}}*/
 part 'altoke_entity.freezed.dart';
@@ -56,10 +57,7 @@ class DmAltokeEntity with DmAltokeEntityMappable {
 @immutable
 class DmNewAltokeEntity with DmNewAltokeEntityMappable {
   /// {@macro altoke_entity.new_altoke_entity}
-  const DmNewAltokeEntity({
-    required this.name,
-    this.description,
-  });
+  const DmNewAltokeEntity({required this.name, this.description});
 
   /// The name of the new altoke entity.
   final String name;
@@ -95,11 +93,7 @@ class DmPartialAltokeEntity with DmPartialAltokeEntityMappable {
 /// {@endtemplate}
 class EAltokeEntity extends Equatable {
   /// {@macro altoke_entity.altoke_entity}
-  const EAltokeEntity({
-    required this.id,
-    required this.name,
-    this.description,
-  });
+  const EAltokeEntity({required this.id, required this.name, this.description});
 
   /// The ID of this altoke entity.
   final int id;
@@ -133,10 +127,7 @@ class EAltokeEntity extends Equatable {
 /// {@endtemplate}
 class ENewAltokeEntity extends Equatable {
   /// {@macro altoke_entity.new_altoke_entity}
-  const ENewAltokeEntity({
-    required this.name,
-    this.description,
-  });
+  const ENewAltokeEntity({required this.name, this.description});
 
   /// The name of the new altoke entity.
   final String name;
@@ -149,10 +140,7 @@ class ENewAltokeEntity extends Equatable {
 
   /// Returns a copy of this [ENewAltokeEntity] with the given fields replaced
   /// by the new values.
-  ENewAltokeEntity copyWith({
-    String? name,
-    String? Function()? description,
-  }) {
+  ENewAltokeEntity copyWith({String? name, String? Function()? description}) {
     return ENewAltokeEntity(
       name: name ?? this.name,
       description: (description ?? () => this.description)(),
@@ -250,11 +238,7 @@ class FPartialAltokeEntity with _$FPartialAltokeEntity {
 @immutable
 class AltokeEntity {
   /// {@macro altoke_entity.altoke_entity}
-  const AltokeEntity({
-    required this.id,
-    required this.name,
-    this.description,
-  });
+  const AltokeEntity({required this.id, required this.name, this.description});
 
   /// The ID of this altoke entity.
   final int id;
@@ -302,10 +286,7 @@ class AltokeEntity {
 @immutable
 class NewAltokeEntity {
   /// {@macro altoke_entity.new_altoke_entity}
-  const NewAltokeEntity({
-    required this.name,
-    this.description,
-  });
+  const NewAltokeEntity({required this.name, this.description});
 
   /// The name of the new altoke entity.
   final String name;
@@ -329,10 +310,7 @@ class NewAltokeEntity {
 
   /// Returns a copy of this [NewAltokeEntity] with the given fields replaced
   /// by the new values.
-  NewAltokeEntity copyWith({
-    String? name,
-    String? Function()? description,
-  }) {
+  NewAltokeEntity copyWith({String? name, String? Function()? description}) {
     return NewAltokeEntity(
       name: name ?? this.name,
       description: (description ?? () => this.description)(),
@@ -383,4 +361,5 @@ class PartialAltokeEntity {
     );
   }
 }
+
 /*{{/use_overrides}}*/

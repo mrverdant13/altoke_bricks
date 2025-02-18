@@ -26,9 +26,7 @@ Future<void> main(List<String> args) async {
   final scopeDir = Dirs.scope;
   final referenceDir = scopeDir.descendantDir('reference');
   if (!referenceDir.existsSync()) {
-    throw Exception(
-      'Reference directory not found (${referenceDir.path}).',
-    );
+    throw Exception('Reference directory not found (${referenceDir.path}).');
   }
   stdout.writeln('Reference directory: ${referenceDir.path}');
   final brickTemplateDir = Dirs.brickTemplate;
@@ -61,10 +59,7 @@ Future<void> main(List<String> args) async {
   final fsEntities = brickTemplateDir.listSync(recursive: true);
   await Future.wait<void>([
     for (final fsEntity in fsEntities)
-      if (fsEntity is File)
-        fsEntity.parametrize(
-          brickGenData: brickGenData,
-        ),
+      if (fsEntity is File) fsEntity.parametrize(brickGenData: brickGenData),
   ]);
 
   stdout.writeln('Brick template successfully generated.');

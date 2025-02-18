@@ -220,10 +220,7 @@ THEN a string representation of the altoke entity is returned
           name: 'name',
           description: 'description',
         );
-        expect(
-          altokeEntity.toString(),
-          'EAltokeEntity(37, name, description)',
-        );
+        expect(altokeEntity.toString(), 'EAltokeEntity(37, name, description)');
         /*{{/use_equatable}}*/
         /*remove-start*/
       }
@@ -296,10 +293,7 @@ THEN an new instance of the altoke entity is returned
         );
         final noopCopiedAltokeEntity = altokeEntity.copyWith();
         expect(noopCopiedAltokeEntity, isNotNull);
-        expect(
-          noopCopiedAltokeEntity,
-          altokeEntity,
-        );
+        expect(noopCopiedAltokeEntity, altokeEntity);
         /*{{/use_dart_mappable}}*/
         /*remove-start*/
       }
@@ -326,10 +320,7 @@ THEN an new instance of the altoke entity is returned
         );
         final noopCopiedAltokeEntity = altokeEntity.copyWith();
         expect(noopCopiedAltokeEntity, isNotNull);
-        expect(
-          noopCopiedAltokeEntity,
-          altokeEntity,
-        );
+        expect(noopCopiedAltokeEntity, altokeEntity);
         /*{{/use_equatable}}*/
         /*remove-start*/
       }
@@ -356,10 +347,7 @@ THEN an new instance of the altoke entity is returned
         );
         final noopCopiedAltokeEntity = altokeEntity.copyWith();
         expect(noopCopiedAltokeEntity, isNotNull);
-        expect(
-          noopCopiedAltokeEntity,
-          altokeEntity,
-        );
+        expect(noopCopiedAltokeEntity, altokeEntity);
         /*{{/use_freezed}}*/
         /*remove-start*/
       }
@@ -386,10 +374,7 @@ THEN an new instance of the altoke entity is returned
         );
         final noopCopiedAltokeEntity = altokeEntity.copyWith();
         expect(noopCopiedAltokeEntity, isNotNull);
-        expect(
-          noopCopiedAltokeEntity,
-          altokeEntity,
-        );
+        expect(noopCopiedAltokeEntity, altokeEntity);
         /*{{/use_overrides}}*/
         /*remove-start*/
       }
@@ -680,10 +665,7 @@ THEN an new instance of the new altoke entity is returned
         );
         final noopCopiedNewAltokeEntity = newAltokeEntity.copyWith();
         expect(noopCopiedNewAltokeEntity, isNotNull);
-        expect(
-          noopCopiedNewAltokeEntity,
-          newAltokeEntity,
-        );
+        expect(noopCopiedNewAltokeEntity, newAltokeEntity);
         /*{{/use_dart_mappable}}*/
         /*remove-start*/
       }
@@ -707,10 +689,7 @@ THEN an new instance of the new altoke entity is returned
         );
         final noopCopiedNewAltokeEntity = newAltokeEntity.copyWith();
         expect(noopCopiedNewAltokeEntity, isNotNull);
-        expect(
-          noopCopiedNewAltokeEntity,
-          newAltokeEntity,
-        );
+        expect(noopCopiedNewAltokeEntity, newAltokeEntity);
         /*{{/use_equatable}}*/
         /*remove-start*/
       }
@@ -734,10 +713,7 @@ THEN an new instance of the new altoke entity is returned
         );
         final noopCopiedNewAltokeEntity = newAltokeEntity.copyWith();
         expect(noopCopiedNewAltokeEntity, isNotNull);
-        expect(
-          noopCopiedNewAltokeEntity,
-          newAltokeEntity,
-        );
+        expect(noopCopiedNewAltokeEntity, newAltokeEntity);
         /*{{/use_freezed}}*/
         /*remove-start*/
       }
@@ -761,10 +737,7 @@ THEN an new instance of the new altoke entity is returned
         );
         final noopCopiedNewAltokeEntity = newAltokeEntity.copyWith();
         expect(noopCopiedNewAltokeEntity, isNotNull);
-        expect(
-          noopCopiedNewAltokeEntity,
-          newAltokeEntity,
-        );
+        expect(noopCopiedNewAltokeEntity, newAltokeEntity);
         /*{{/use_overrides}}*/
         /*remove-start*/
       }
@@ -1050,11 +1023,7 @@ THEN an new instance of the partial altoke entity is returned
         expect(
           fullyCopiedPartialAltokeEntity,
           isA<DmPartialAltokeEntity>()
-              .having(
-                (e) => e.name,
-                'name',
-                const DmOptional.some('new name'),
-              )
+              .having((e) => e.name, 'name', const DmOptional.some('new name'))
               .having(
                 (e) => e.description,
                 'description',
@@ -1063,10 +1032,7 @@ THEN an new instance of the partial altoke entity is returned
         );
         final noopCopiedPartialAltokeEntity = partialAltokeEntity.copyWith();
         expect(noopCopiedPartialAltokeEntity, isNotNull);
-        expect(
-          noopCopiedPartialAltokeEntity,
-          partialAltokeEntity,
-        );
+        expect(noopCopiedPartialAltokeEntity, partialAltokeEntity);
         /*{{/use_dart_mappable}}*/
         /*remove-start*/
       }
@@ -1085,11 +1051,7 @@ THEN an new instance of the partial altoke entity is returned
         expect(
           fullyCopiedPartialAltokeEntity,
           isA<EPartialAltokeEntity>()
-              .having(
-                (e) => e.name,
-                'name',
-                const EOptional.some('new name'),
-              )
+              .having((e) => e.name, 'name', const EOptional.some('new name'))
               .having(
                 (e) => e.description,
                 'description',
@@ -1098,10 +1060,7 @@ THEN an new instance of the partial altoke entity is returned
         );
         final noopCopiedPartialAltokeEntity = partialAltokeEntity.copyWith();
         expect(noopCopiedPartialAltokeEntity, isNotNull);
-        expect(
-          noopCopiedPartialAltokeEntity,
-          partialAltokeEntity,
-        );
+        expect(noopCopiedPartialAltokeEntity, partialAltokeEntity);
         /*{{/use_equatable}}*/
         /*remove-start*/
       }
@@ -1120,11 +1079,7 @@ THEN an new instance of the partial altoke entity is returned
         expect(
           fullyCopiedPartialAltokeEntity,
           isA<FPartialAltokeEntity>()
-              .having(
-                (e) => e.name,
-                'name',
-                const FOptional.some('new name'),
-              )
+              .having((e) => e.name, 'name', const FOptional.some('new name'))
               .having(
                 (e) => e.description,
                 'description',
@@ -1133,10 +1088,7 @@ THEN an new instance of the partial altoke entity is returned
         );
         final noopCopiedPartialAltokeEntity = partialAltokeEntity.copyWith();
         expect(noopCopiedPartialAltokeEntity, isNotNull);
-        expect(
-          noopCopiedPartialAltokeEntity,
-          partialAltokeEntity,
-        );
+        expect(noopCopiedPartialAltokeEntity, partialAltokeEntity);
         /*{{/use_freezed}}*/
         /*remove-start*/
       }
@@ -1155,11 +1107,7 @@ THEN an new instance of the partial altoke entity is returned
         expect(
           fullyCopiedPartialAltokeEntity,
           isA<PartialAltokeEntity>()
-              .having(
-                (e) => e.name,
-                'name',
-                const Optional.some('new name'),
-              )
+              .having((e) => e.name, 'name', const Optional.some('new name'))
               .having(
                 (e) => e.description,
                 'description',
@@ -1168,10 +1116,7 @@ THEN an new instance of the partial altoke entity is returned
         );
         final noopCopiedPartialAltokeEntity = partialAltokeEntity.copyWith();
         expect(noopCopiedPartialAltokeEntity, isNotNull);
-        expect(
-          noopCopiedPartialAltokeEntity,
-          partialAltokeEntity,
-        );
+        expect(noopCopiedPartialAltokeEntity, partialAltokeEntity);
         /*{{/use_overrides}}*/
         /*remove-start*/
       }

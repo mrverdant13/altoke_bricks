@@ -5,21 +5,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // coverage:ignore-start
 class TasksAppBar extends AppBar {
-  TasksAppBar({
-    super.key,
-  }) : super(
-          title: const TasksAppBarTitle(),
-          actions: [
-            const SwitchDbPackageAction(),
-          ],
-        );
+  TasksAppBar({super.key})
+    : super(
+        title: const TasksAppBarTitle(),
+        actions: [const SwitchDbPackageAction()],
+      );
 }
 
 @visibleForTesting
 class TasksAppBarTitle extends ConsumerWidget {
-  const TasksAppBarTitle({
-    super.key,
-  });
+  const TasksAppBarTitle({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -35,9 +30,7 @@ class TasksAppBarTitle extends ConsumerWidget {
 
 @visibleForTesting
 class SwitchDbPackageAction extends ConsumerWidget {
-  const SwitchDbPackageAction({
-    super.key,
-  });
+  const SwitchDbPackageAction({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -48,11 +41,12 @@ class SwitchDbPackageAction extends ConsumerWidget {
             ref.read(selectedLocalDatabasePackagePod).index;
         final newLocalDatabasePackageIndex =
             (selectedLocalDatabasePackageIndex + 1) %
-                LocalDatabasePackage.values.length;
+            LocalDatabasePackage.values.length;
         ref.read(selectedLocalDatabasePackagePod.notifier).value =
             LocalDatabasePackage.values[newLocalDatabasePackageIndex];
       },
     );
   }
 }
+
 // coverage:ignore-end

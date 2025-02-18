@@ -43,21 +43,18 @@ void main(List<String> args) {
           .join('\n')
           .trim();
 
-  final resolvedRootReadme = initialRootReadmeContent.replaceAllMapped(
-    featuresRegex,
-    (match) {
-      final features = match.group(1)?.trim();
-      final buf = StringBuffer()..writeln(featuresToken);
-      if (features != null) {
+  final resolvedRootReadme = initialRootReadmeContent
+      .replaceAllMapped(featuresRegex, (match) {
+        final features = match.group(1)?.trim();
+        final buf = StringBuffer()..writeln(featuresToken);
+        if (features != null) {
+          buf
+            ..writeln(features)
+            ..writeln();
+        }
         buf
-          ..writeln(features)
-          ..writeln();
-      }
-      buf
-        ..writeln(
-          brickFeatures.replaceAllMapped(
-            headlineRegex,
-            (match) {
+          ..writeln(
+            brickFeatures.replaceAllMapped(headlineRegex, (match) {
               final buf = StringBuffer();
               final current = match.group(0) ?? '';
               buf
@@ -65,15 +62,14 @@ void main(List<String> args) {
                 ..write(current);
               if (current.trim().length == 2) buf.write('🧱 ');
               return buf.toString();
-            },
-          ),
-        )
-        ..writeln(featuresToken);
-      return buf.toString().trim();
-    },
-  ).replaceAll(
-    bricksLinksRegex,
-    '$bricksLinksToken\n$rootBricksLinks\n$bricksLinksToken',
-  );
+            }),
+          )
+          ..writeln(featuresToken);
+        return buf.toString().trim();
+      })
+      .replaceAll(
+        bricksLinksRegex,
+        '$bricksLinksToken\n$rootBricksLinks\n$bricksLinksToken',
+      );
   rootReadmeFile.writeAsStringSync(resolvedRootReadme);
 }

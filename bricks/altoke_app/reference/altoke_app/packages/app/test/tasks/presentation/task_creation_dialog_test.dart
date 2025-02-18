@@ -7,31 +7,33 @@ import 'package:local_database/local_database.dart';
 import '../../helpers/helpers.dart';
 
 void main() {
-  testWidgets('''
+  testWidgets(
+    '''
 
 GIVEN a tasks creation dialog
 WHEN it is displayed
 THEN it shows its content
-''', (tester) async {
-    await tester.pumpAppWithScaffold(
-      const TaskCreationDialog(),
-    );
-    final contentFinder = find.byType(TaskCreationDialogContent);
-    expect(contentFinder, findsOneWidget);
-  });
+''',
+    (tester) async {
+      await tester.pumpAppWithScaffold(const TaskCreationDialog());
+      final contentFinder = find.byType(TaskCreationDialogContent);
+      expect(contentFinder, findsOneWidget);
+    },
+  );
 
-  testWidgets('''
+  testWidgets(
+    '''
 
 GIVEN a tasks creation dialog content
 WHEN it is displayed
 THEN it shows a new task form
-''', (tester) async {
-    await tester.pumpAppWithScaffold(
-      const TaskCreationDialogContent(),
-    );
-    final newTaskFormFinder = find.byType(NewTaskForm);
-    expect(newTaskFormFinder, findsOneWidget);
-  });
+''',
+    (tester) async {
+      await tester.pumpAppWithScaffold(const TaskCreationDialogContent());
+      final newTaskFormFinder = find.byType(NewTaskForm);
+      expect(newTaskFormFinder, findsOneWidget);
+    },
+  );
 
   testWidgets(
     '''
@@ -42,11 +44,7 @@ THEN the form should include the localized label
 ''',
     (tester) async {
       await tester.pumpAppWithScreen(
-        const ProviderScope(
-          child: Scaffold(
-            body: NewTaskForm(),
-          ),
-        ),
+        const ProviderScope(child: Scaffold(body: NewTaskForm())),
       );
       expect(
         find.l10n.widgetWithText(
@@ -67,11 +65,7 @@ THEN the form should include the localized label
 ''',
     (tester) async {
       await tester.pumpAppWithScreen(
-        const ProviderScope(
-          child: Scaffold(
-            body: NewTaskForm(),
-          ),
-        ),
+        const ProviderScope(child: Scaffold(body: NewTaskForm())),
       );
       expect(
         find.l10n.widgetWithText(
@@ -92,11 +86,7 @@ THEN the form should include the localized label
 ''',
     (tester) async {
       await tester.pumpAppWithScreen(
-        const ProviderScope(
-          child: Scaffold(
-            body: NewTaskForm(),
-          ),
-        ),
+        const ProviderScope(child: Scaffold(body: NewTaskForm())),
       );
       expect(
         find.l10n.widgetWithText(
@@ -117,11 +107,7 @@ THEN the form should include the localized label
 ''',
     (tester) async {
       await tester.pumpAppWithScreen(
-        const ProviderScope(
-          child: Scaffold(
-            body: NewTaskForm(),
-          ),
-        ),
+        const ProviderScope(child: Scaffold(body: NewTaskForm())),
       );
       expect(
         find.l10n.widgetWithText(
@@ -142,11 +128,7 @@ THEN the form should show the localized error
 ''',
     (tester) async {
       await tester.pumpAppWithScreen(
-        const ProviderScope(
-          child: Scaffold(
-            body: NewTaskForm(),
-          ),
-        ),
+        const ProviderScope(child: Scaffold(body: NewTaskForm())),
       );
       final context = tester.element(find.byType(NewTaskForm));
       final container = ProviderScope.containerOf(context, listen: false);
@@ -155,15 +137,10 @@ THEN the form should show the localized error
         (_, __) {},
       );
       addTearDown(subscription.close);
-      subscription.read().state = const AsyncError(
-        Object(),
-        StackTrace.empty,
-      );
+      subscription.read().state = const AsyncError(Object(), StackTrace.empty);
       await tester.pumpAndSettle();
       expect(
-        find.l10n.text(
-          (l10n) => l10n.createTaskGenericMessage,
-        ),
+        find.l10n.text((l10n) => l10n.createTaskGenericMessage),
         findsOneWidget,
       );
     },
@@ -178,11 +155,7 @@ THEN the form should show the localized error
 ''',
     (tester) async {
       await tester.pumpAppWithScreen(
-        const ProviderScope(
-          child: Scaffold(
-            body: NewTaskForm(),
-          ),
-        ),
+        const ProviderScope(child: Scaffold(body: NewTaskForm())),
       );
       final context = tester.element(find.byType(NewTaskForm));
       final container = ProviderScope.containerOf(context, listen: false);
@@ -193,9 +166,7 @@ THEN the form should show the localized error
       addTearDown(subscription.close);
       subscription.read().state = const AsyncError(
         CreateTaskFailureInvalidData(
-          titleValidationErrors: {
-            TaskTitleValidationError.empty,
-          },
+          titleValidationErrors: {TaskTitleValidationError.empty},
           complexValidationErrors: {},
         ),
         StackTrace.empty,
@@ -220,11 +191,7 @@ THEN the form should show the localized error
 ''',
     (tester) async {
       await tester.pumpAppWithScreen(
-        const ProviderScope(
-          child: Scaffold(
-            body: NewTaskForm(),
-          ),
-        ),
+        const ProviderScope(child: Scaffold(body: NewTaskForm())),
       );
       final context = tester.element(find.byType(NewTaskForm));
       final container = ProviderScope.containerOf(context, listen: false);
