@@ -10,8 +10,9 @@ import 'package:shell/shell.dart';
 
 Future<void> run(HookContext context) async {
   if (context.vars['requirements_met'] != true) return;
-  final selectedAlternative =
-      LocalDatabaseAlternative.getSelectedAlternative(context);
+  final selectedAlternative = LocalDatabaseAlternative.getSelectedAlternative(
+    context,
+  );
   final logger = context.logger;
   Progress? progress;
   Timer? progressTimer;
@@ -19,12 +20,11 @@ Future<void> run(HookContext context) async {
   AsyncVoidCallback onStart(String message) {
     return () async {
       progress = logger.progress(message);
-      progressTimer = Timer.periodic(
-        const Duration(milliseconds: 100),
-        (timer) {
-          progress?.update(message);
-        },
-      );
+      progressTimer = Timer.periodic(const Duration(milliseconds: 100), (
+        timer,
+      ) {
+        progress?.update(message);
+      });
     };
   }
 
@@ -79,14 +79,8 @@ Future<void> run(HookContext context) async {
     );
   }
 
-  final umbrellaPath = path.join(
-    Directory.current.path,
-    'local_database',
-  );
-  final interfaceProjectPath = path.join(
-    umbrellaPath,
-    'local_database',
-  );
+  final umbrellaPath = path.join(Directory.current.path, 'local_database');
+  final interfaceProjectPath = path.join(umbrellaPath, 'local_database');
   await runCommands(
     projectDir: Directory(interfaceProjectPath),
     runCodeGeneration: false,
@@ -103,7 +97,7 @@ Future<void> run(HookContext context) async {
 
 extension on LocalDatabaseAlternative {
   bool get shouldRunCodeGeneration => [
-        LocalDatabaseAlternative.drift,
-        LocalDatabaseAlternative.isar,
-      ].contains(this);
+    LocalDatabaseAlternative.drift,
+    LocalDatabaseAlternative.isar,
+  ].contains(this);
 }

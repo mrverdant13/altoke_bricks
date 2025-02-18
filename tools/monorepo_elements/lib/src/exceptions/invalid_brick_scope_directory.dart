@@ -2,9 +2,7 @@
 /// Error thrown when the brick scope directory is invalid.
 /// {@endtemplate}
 sealed class InvalidBrickScopeDirError implements Exception {
-  const InvalidBrickScopeDirError(
-    this.reason,
-  );
+  const InvalidBrickScopeDirError(this.reason);
 
   /// Reason for the error.
   final String reason;
@@ -20,9 +18,8 @@ sealed class InvalidBrickScopeDirError implements Exception {
 /// {@endtemplate}
 class InvalidBrickScopeNameError extends InvalidBrickScopeDirError {
   /// {@macro invalid_brick_scope_name_error}
-  const InvalidBrickScopeNameError({
-    required String description,
-  }) : super(description);
+  const InvalidBrickScopeNameError({required String description})
+    : super(description);
 }
 
 /// {@template brick_scope_dir_not_found_error}
@@ -30,9 +27,8 @@ class InvalidBrickScopeNameError extends InvalidBrickScopeDirError {
 /// {@endtemplate}
 class BrickScopeDirNotFoundError extends InvalidBrickScopeDirError {
   /// {@macro brick_scope_dir_not_found_error}
-  const BrickScopeDirNotFoundError({
-    required String scopePath,
-  }) : super('Brick scope directory not found ($scopePath).');
+  const BrickScopeDirNotFoundError({required String scopePath})
+    : super('Brick scope directory not found ($scopePath).');
 }
 
 /// {@template brick_scope_gen_data_not_found_error}
@@ -40,7 +36,6 @@ class BrickScopeDirNotFoundError extends InvalidBrickScopeDirError {
 /// {@endtemplate}
 class BrickScopeGenDataNotFoundError extends InvalidBrickScopeDirError {
   /// {@macro brick_scope_gen_data_not_found_error}
-  const BrickScopeGenDataNotFoundError({
-    required String brickGenDataPath,
-  }) : super('Brick generation data file not found ($brickGenDataPath).');
+  const BrickScopeGenDataNotFoundError({required String brickGenDataPath})
+    : super('Brick generation data file not found ($brickGenDataPath).');
 }

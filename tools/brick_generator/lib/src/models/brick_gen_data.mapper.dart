@@ -25,14 +25,20 @@ class BrickGenDataMapper extends ClassMapperBase<BrickGenData> {
 
   static String _$referenceAbsolutePath(BrickGenData v) =>
       v.referenceAbsolutePath;
-  static const Field<BrickGenData, String> _f$referenceAbsolutePath =
-      Field('referenceAbsolutePath', _$referenceAbsolutePath);
+  static const Field<BrickGenData, String> _f$referenceAbsolutePath = Field(
+    'referenceAbsolutePath',
+    _$referenceAbsolutePath,
+  );
   static String _$targetAbsolutePath(BrickGenData v) => v.targetAbsolutePath;
-  static const Field<BrickGenData, String> _f$targetAbsolutePath =
-      Field('targetAbsolutePath', _$targetAbsolutePath);
+  static const Field<BrickGenData, String> _f$targetAbsolutePath = Field(
+    'targetAbsolutePath',
+    _$targetAbsolutePath,
+  );
   static List<Replacement> _$replacements(BrickGenData v) => v.replacements;
-  static const Field<BrickGenData, List<Replacement>> _f$replacements =
-      Field('replacements', _$replacements);
+  static const Field<BrickGenData, List<Replacement>> _f$replacements = Field(
+    'replacements',
+    _$replacements,
+  );
   static List<LinesDeletion> _$lineDeletions(BrickGenData v) => v.lineDeletions;
   static const Field<BrickGenData, List<LinesDeletion>> _f$lineDeletions =
       Field('lineDeletions', _$lineDeletions);
@@ -47,10 +53,11 @@ class BrickGenDataMapper extends ClassMapperBase<BrickGenData> {
 
   static BrickGenData _instantiate(DecodingData data) {
     return BrickGenData(
-        referenceAbsolutePath: data.dec(_f$referenceAbsolutePath),
-        targetAbsolutePath: data.dec(_f$targetAbsolutePath),
-        replacements: data.dec(_f$replacements),
-        lineDeletions: data.dec(_f$lineDeletions));
+      referenceAbsolutePath: data.dec(_f$referenceAbsolutePath),
+      targetAbsolutePath: data.dec(_f$targetAbsolutePath),
+      replacements: data.dec(_f$replacements),
+      lineDeletions: data.dec(_f$lineDeletions),
+    );
   }
 
   @override
@@ -67,33 +74,39 @@ class BrickGenDataMapper extends ClassMapperBase<BrickGenData> {
 
 mixin BrickGenDataMappable {
   String toJson() {
-    return BrickGenDataMapper.ensureInitialized()
-        .encodeJson<BrickGenData>(this as BrickGenData);
+    return BrickGenDataMapper.ensureInitialized().encodeJson<BrickGenData>(
+      this as BrickGenData,
+    );
   }
 
   Map<String, dynamic> toMap() {
-    return BrickGenDataMapper.ensureInitialized()
-        .encodeMap<BrickGenData>(this as BrickGenData);
+    return BrickGenDataMapper.ensureInitialized().encodeMap<BrickGenData>(
+      this as BrickGenData,
+    );
   }
 
   BrickGenDataCopyWith<BrickGenData, BrickGenData, BrickGenData> get copyWith =>
       _BrickGenDataCopyWithImpl(this as BrickGenData, $identity, $identity);
   @override
   String toString() {
-    return BrickGenDataMapper.ensureInitialized()
-        .stringifyValue(this as BrickGenData);
+    return BrickGenDataMapper.ensureInitialized().stringifyValue(
+      this as BrickGenData,
+    );
   }
 
   @override
   bool operator ==(Object other) {
-    return BrickGenDataMapper.ensureInitialized()
-        .equalsValue(this as BrickGenData, other);
+    return BrickGenDataMapper.ensureInitialized().equalsValue(
+      this as BrickGenData,
+      other,
+    );
   }
 
   @override
   int get hashCode {
-    return BrickGenDataMapper.ensureInitialized()
-        .hashValue(this as BrickGenData);
+    return BrickGenDataMapper.ensureInitialized().hashValue(
+      this as BrickGenData,
+    );
   }
 }
 
@@ -106,18 +119,26 @@ extension BrickGenDataValueCopy<$R, $Out>
 abstract class BrickGenDataCopyWith<$R, $In extends BrickGenData, $Out>
     implements BrickGenOptionsCopyWith<$R, $In, $Out> {
   @override
-  ListCopyWith<$R, Replacement,
-      ReplacementCopyWith<$R, Replacement, Replacement>> get replacements;
+  ListCopyWith<
+    $R,
+    Replacement,
+    ReplacementCopyWith<$R, Replacement, Replacement>
+  >
+  get replacements;
   @override
-  ListCopyWith<$R, LinesDeletion,
-          LinesDeletionCopyWith<$R, LinesDeletion, LinesDeletion>>
-      get lineDeletions;
+  ListCopyWith<
+    $R,
+    LinesDeletion,
+    LinesDeletionCopyWith<$R, LinesDeletion, LinesDeletion>
+  >
+  get lineDeletions;
   @override
-  $R call(
-      {String? referenceAbsolutePath,
-      String? targetAbsolutePath,
-      List<Replacement>? replacements,
-      List<LinesDeletion>? lineDeletions});
+  $R call({
+    String? referenceAbsolutePath,
+    String? targetAbsolutePath,
+    List<Replacement>? replacements,
+    List<LinesDeletion>? lineDeletions,
+  });
   BrickGenDataCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -130,39 +151,58 @@ class _BrickGenDataCopyWithImpl<$R, $Out>
   late final ClassMapperBase<BrickGenData> $mapper =
       BrickGenDataMapper.ensureInitialized();
   @override
-  ListCopyWith<$R, Replacement,
-          ReplacementCopyWith<$R, Replacement, Replacement>>
-      get replacements => ListCopyWith($value.replacements,
-          (v, t) => v.copyWith.$chain(t), (v) => call(replacements: v));
+  ListCopyWith<
+    $R,
+    Replacement,
+    ReplacementCopyWith<$R, Replacement, Replacement>
+  >
+  get replacements => ListCopyWith(
+    $value.replacements,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(replacements: v),
+  );
   @override
-  ListCopyWith<$R, LinesDeletion,
-          LinesDeletionCopyWith<$R, LinesDeletion, LinesDeletion>>
-      get lineDeletions => ListCopyWith($value.lineDeletions,
-          (v, t) => v.copyWith.$chain(t), (v) => call(lineDeletions: v));
+  ListCopyWith<
+    $R,
+    LinesDeletion,
+    LinesDeletionCopyWith<$R, LinesDeletion, LinesDeletion>
+  >
+  get lineDeletions => ListCopyWith(
+    $value.lineDeletions,
+    (v, t) => v.copyWith.$chain(t),
+    (v) => call(lineDeletions: v),
+  );
   @override
-  $R call(
-          {String? referenceAbsolutePath,
-          String? targetAbsolutePath,
-          List<Replacement>? replacements,
-          List<LinesDeletion>? lineDeletions}) =>
-      $apply(FieldCopyWithData({
-        if (referenceAbsolutePath != null)
-          #referenceAbsolutePath: referenceAbsolutePath,
-        if (targetAbsolutePath != null) #targetAbsolutePath: targetAbsolutePath,
-        if (replacements != null) #replacements: replacements,
-        if (lineDeletions != null) #lineDeletions: lineDeletions
-      }));
+  $R call({
+    String? referenceAbsolutePath,
+    String? targetAbsolutePath,
+    List<Replacement>? replacements,
+    List<LinesDeletion>? lineDeletions,
+  }) => $apply(
+    FieldCopyWithData({
+      if (referenceAbsolutePath != null)
+        #referenceAbsolutePath: referenceAbsolutePath,
+      if (targetAbsolutePath != null) #targetAbsolutePath: targetAbsolutePath,
+      if (replacements != null) #replacements: replacements,
+      if (lineDeletions != null) #lineDeletions: lineDeletions,
+    }),
+  );
   @override
   BrickGenData $make(CopyWithData data) => BrickGenData(
-      referenceAbsolutePath:
-          data.get(#referenceAbsolutePath, or: $value.referenceAbsolutePath),
-      targetAbsolutePath:
-          data.get(#targetAbsolutePath, or: $value.targetAbsolutePath),
-      replacements: data.get(#replacements, or: $value.replacements),
-      lineDeletions: data.get(#lineDeletions, or: $value.lineDeletions));
+    referenceAbsolutePath: data.get(
+      #referenceAbsolutePath,
+      or: $value.referenceAbsolutePath,
+    ),
+    targetAbsolutePath: data.get(
+      #targetAbsolutePath,
+      or: $value.targetAbsolutePath,
+    ),
+    replacements: data.get(#replacements, or: $value.replacements),
+    lineDeletions: data.get(#lineDeletions, or: $value.lineDeletions),
+  );
 
   @override
   BrickGenDataCopyWith<$R2, BrickGenData, $Out2> $chain<$R2, $Out2>(
-          Then<$Out2, $R2> t) =>
-      _BrickGenDataCopyWithImpl($value, $cast, t);
+    Then<$Out2, $R2> t,
+  ) => _BrickGenDataCopyWithImpl($value, $cast, t);
 }

@@ -23,9 +23,7 @@ THEN the button should include the localized label
 ''',
     (tester) async {
       await tester.pumpAppWithScreen(
-        const Scaffold(
-          body: CounterExampleListTile(),
-        ),
+        const Scaffold(body: CounterExampleListTile()),
       );
       expect(
         find.l10n.widgetWithText(
@@ -39,7 +37,7 @@ THEN the button should include the localized label
 
   setUpAll(registerFallbackValues);
 
-/*{{#use_auto_route}}*/
+  /*{{#use_auto_route}}*/
   testWidgets(
     '''
 
@@ -62,13 +60,11 @@ THEN the counter screen should be shown
             ),
           ],
           child:
-              /*remove-end*/
-              StackRouterScope(
+          /*remove-end*/
+          StackRouterScope(
             controller: stackRouter,
             stateHash: 0,
-            child: const Scaffold(
-              body: CounterExampleListTile(),
-            ),
+            child: const Scaffold(body: CounterExampleListTile()),
           ),
           /*remove-start*/
         ),
@@ -79,9 +75,9 @@ THEN the counter screen should be shown
       verify(() => stackRouter.navigate(const CounterRoute())).called(1);
     },
   );
-/*{{/use_auto_route}}*/
+  /*{{/use_auto_route}}*/
 
-/*{{#use_go_router}}*/
+  /*{{#use_go_router}}*/
   testWidgets(
     '''
 
@@ -104,12 +100,10 @@ THEN the counter screen should be shown
             ),
           ],
           child:
-              /*remove-end*/
-              InheritedGoRouter(
+          /*remove-end*/
+          InheritedGoRouter(
             goRouter: goRouter,
-            child: const Scaffold(
-              body: CounterExampleListTile(),
-            ),
+            child: const Scaffold(body: CounterExampleListTile()),
           ),
           /*remove-start*/
         ),
@@ -120,6 +114,6 @@ THEN the counter screen should be shown
       verify(() => goRouter.go(const CounterRouteData().location)).called(1);
     },
   );
-/*{{/use_go_router}}*/
-/*w 1v w*/
+  /*{{/use_go_router}}*/
+  /*w 1v w*/
 }

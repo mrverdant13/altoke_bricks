@@ -17,10 +17,7 @@ abstract class Dart {
     AsyncVoidHandlerCallback<ExceptionDetails>? onError,
   }) async {
     await Shell.run(
-      [
-        'dart pub add',
-        packageDetails.join(' '),
-      ].join(' '),
+      ['dart pub add', packageDetails.join(' ')].join(' '),
       workingDir: directory.path,
       stdin: stdin,
       stdout: stdout,
@@ -43,10 +40,7 @@ abstract class Dart {
     AsyncVoidHandlerCallback<ExceptionDetails>? onError,
   }) async {
     await Shell.run(
-      [
-        'dart pub remove',
-        packageDetails.join(' '),
-      ].join(' '),
+      ['dart pub remove', packageDetails.join(' ')].join(' '),
       workingDir: directory.path,
       stdin: stdin,
       stdout: stdout,

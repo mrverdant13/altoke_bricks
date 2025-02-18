@@ -7,14 +7,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 /*{{#use_auto_route}}*/
-@RoutePage(
-  name: 'CounterRoute',
-)
+@RoutePage(name: 'CounterRoute')
 /*{{/use_auto_route}}*/
 class CounterScreen extends StatelessWidget {
-  const CounterScreen({
-    super.key,
-  });
+  const CounterScreen({super.key});
 
   @visibleForTesting
   static const maxContentWidth = 1200.0;

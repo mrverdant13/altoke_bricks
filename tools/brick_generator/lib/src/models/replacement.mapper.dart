@@ -21,16 +21,16 @@ class ReplacementMapper extends ClassMapperBase<Replacement> {
   final String id = 'Replacement';
 
   static RegExp _$from(Replacement v) => v.from;
-  static const Field<Replacement, RegExp> _f$from =
-      Field('from', _$from, hook: regexHook);
+  static const Field<Replacement, RegExp> _f$from = Field(
+    'from',
+    _$from,
+    hook: regexHook,
+  );
   static String _$to(Replacement v) => v.to;
   static const Field<Replacement, String> _f$to = Field('to', _$to);
 
   @override
-  final MappableFields<Replacement> fields = const {
-    #from: _f$from,
-    #to: _f$to,
-  };
+  final MappableFields<Replacement> fields = const {#from: _f$from, #to: _f$to};
 
   static Replacement _instantiate(DecodingData data) {
     return Replacement(from: data.dec(_f$from), to: data.dec(_f$to));
@@ -50,27 +50,32 @@ class ReplacementMapper extends ClassMapperBase<Replacement> {
 
 mixin ReplacementMappable {
   String toJson() {
-    return ReplacementMapper.ensureInitialized()
-        .encodeJson<Replacement>(this as Replacement);
+    return ReplacementMapper.ensureInitialized().encodeJson<Replacement>(
+      this as Replacement,
+    );
   }
 
   Map<String, dynamic> toMap() {
-    return ReplacementMapper.ensureInitialized()
-        .encodeMap<Replacement>(this as Replacement);
+    return ReplacementMapper.ensureInitialized().encodeMap<Replacement>(
+      this as Replacement,
+    );
   }
 
   ReplacementCopyWith<Replacement, Replacement, Replacement> get copyWith =>
       _ReplacementCopyWithImpl(this as Replacement, $identity, $identity);
   @override
   String toString() {
-    return ReplacementMapper.ensureInitialized()
-        .stringifyValue(this as Replacement);
+    return ReplacementMapper.ensureInitialized().stringifyValue(
+      this as Replacement,
+    );
   }
 
   @override
   bool operator ==(Object other) {
-    return ReplacementMapper.ensureInitialized()
-        .equalsValue(this as Replacement, other);
+    return ReplacementMapper.ensureInitialized().equalsValue(
+      this as Replacement,
+      other,
+    );
   }
 
   @override
@@ -100,14 +105,17 @@ class _ReplacementCopyWithImpl<$R, $Out>
   late final ClassMapperBase<Replacement> $mapper =
       ReplacementMapper.ensureInitialized();
   @override
-  $R call({RegExp? from, String? to}) => $apply(FieldCopyWithData(
-      {if (from != null) #from: from, if (to != null) #to: to}));
+  $R call({RegExp? from, String? to}) => $apply(
+    FieldCopyWithData({if (from != null) #from: from, if (to != null) #to: to}),
+  );
   @override
   Replacement $make(CopyWithData data) => Replacement(
-      from: data.get(#from, or: $value.from), to: data.get(#to, or: $value.to));
+    from: data.get(#from, or: $value.from),
+    to: data.get(#to, or: $value.to),
+  );
 
   @override
   ReplacementCopyWith<$R2, Replacement, $Out2> $chain<$R2, $Out2>(
-          Then<$Out2, $R2> t) =>
-      _ReplacementCopyWithImpl($value, $cast, t);
+    Then<$Out2, $R2> t,
+  ) => _ReplacementCopyWithImpl($value, $cast, t);
 }

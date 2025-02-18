@@ -6,9 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MyApp extends ConsumerWidget {
-  const MyApp({
-    super.key,
-  });
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -18,18 +16,22 @@ class MyApp extends ConsumerWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: routerConfig,
-      builder: (context, child) => /*w 1> w*/ /*remove-start*/
-          RouterPackageSwitcherWrapper(
-        child: /*remove-end*/ FlavorBanner(
-          /*w 1v 8> w*/
-          child: InitializationWrapper(
-            /*w 1v 10> w*/
-            child: child!,
-            /*w 1v 8> w*/
-          ),
-          /*w 1v 6> w*/
-        ), /*remove-start*/
-      ), /*remove-end*/ /*w 1v 4> w*/
+      builder:
+          (context, child) => /*w 1> w*/ /*remove-start*/
+              RouterPackageSwitcherWrapper(
+                child: /*remove-end*/ FlavorBanner(
+                  /*w 1v 8> w*/
+                  child: InitializationWrapper(
+                    /*w 1v 10> w*/
+                    child: child!,
+                    /*w 1v 8> w*/
+                  ),
+                  /*w 1v 6> w*/
+                ),
+                /*remove-start*/
+              ),
+      /*remove-end*/
+      /*w 1v 4> w*/
     );
   }
 } /*w 2v w*/
@@ -37,19 +39,14 @@ class MyApp extends ConsumerWidget {
 /*remove-start*/
 // coverage:ignore-start
 class RouterPackageSwitcherWrapper extends ConsumerWidget {
-  const RouterPackageSwitcherWrapper({
-    required this.child,
-    super.key,
-  });
+  const RouterPackageSwitcherWrapper({required this.child, super.key});
 
   final Widget child;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final routerPackageIdentifier = ref.watch(
-      selectedRouterPackagePod.select(
-        (package) => package.identifier,
-      ),
+      selectedRouterPackagePod.select((package) => package.identifier),
     );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -62,9 +59,7 @@ class RouterPackageSwitcherWrapper extends ConsumerWidget {
           ),
         ),
         Material(
-          shape: const Border(
-            top: BorderSide(),
-          ),
+          shape: const Border(top: BorderSide()),
           child: SafeArea(
             top: false,
             left: false,
@@ -77,7 +72,7 @@ class RouterPackageSwitcherWrapper extends ConsumerWidget {
                       ref.read(selectedRouterPackagePod).index;
                   final newRouterPackageIndex =
                       (selectedRouterPackageIndex + 1) %
-                          RouterPackage.values.length;
+                      RouterPackage.values.length;
                   ref.read(selectedRouterPackagePod.notifier).value =
                       RouterPackage.values[newRouterPackageIndex];
                 },
@@ -96,10 +91,7 @@ class RouterPackageSwitcherWrapper extends ConsumerWidget {
 
 @visibleForTesting
 class InitializationWrapper extends ConsumerWidget {
-  const InitializationWrapper({
-    required this.child,
-    super.key,
-  });
+  const InitializationWrapper({required this.child, super.key});
 
   final Widget child;
 
@@ -119,25 +111,19 @@ class InitializationWrapper extends ConsumerWidget {
 
 @visibleForTesting
 class InitializingScreen extends StatelessWidget {
-  const InitializingScreen({
-    super.key,
-  });
+  const InitializingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: CircularProgressIndicator.adaptive(),
-      ),
+      body: Center(child: CircularProgressIndicator.adaptive()),
     );
   }
 }
 
 @visibleForTesting
 class ErroredInitializationScreen extends ConsumerWidget {
-  const ErroredInitializationScreen({
-    super.key,
-  });
+  const ErroredInitializationScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -159,9 +145,7 @@ class ErroredInitializationScreen extends ConsumerWidget {
                 onPressed: () {
                   ref.invalidate(asyncInitializationPod);
                 },
-                child: Text(
-                  l10n.genericRetryButtonLabel,
-                ),
+                child: Text(l10n.genericRetryButtonLabel),
               ),
             ],
           ),

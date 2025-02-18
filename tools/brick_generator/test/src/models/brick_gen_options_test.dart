@@ -12,19 +12,13 @@ void main() {
     test('fromJson', () {
       final brickGenOptions = BrickGenOptions.fromJson(const {
         'replacements': [
-          {
-            'from': r'^from$',
-            'to': 'to',
-          },
+          {'from': r'^from$', 'to': 'to'},
         ],
         'lineDeletions': [
           {
             'filePath': 'file/path',
             'ranges': [
-              {
-                'start': 1,
-                'end': 5,
-              },
+              {'start': 1, 'end': 5},
             ],
           },
         ],
@@ -32,16 +26,8 @@ void main() {
       expect(
         brickGenOptions,
         isA<BrickGenOptions>()
-            .having(
-              (r) => r.replacements,
-              'replacements',
-              isNotEmpty,
-            )
-            .having(
-              (r) => r.lineDeletions,
-              'lineDeletions',
-              isNotEmpty,
-            ),
+            .having((r) => r.replacements, 'replacements', isNotEmpty)
+            .having((r) => r.lineDeletions, 'lineDeletions', isNotEmpty),
       );
     });
 
@@ -49,12 +35,7 @@ void main() {
       const reference = BrickGenOptions();
       const same = BrickGenOptions();
       final other = BrickGenOptions(
-        replacements: [
-          Replacement(
-            from: RegExp(r'^from$'),
-            to: 'to',
-          ),
-        ],
+        replacements: [Replacement(from: RegExp(r'^from$'), to: 'to')],
       );
 
       expect(reference, same);
@@ -65,12 +46,7 @@ void main() {
       const reference = BrickGenOptions();
       const same = BrickGenOptions();
       final other = BrickGenOptions(
-        replacements: [
-          Replacement(
-            from: RegExp(r'^from$'),
-            to: 'to',
-          ),
-        ],
+        replacements: [Replacement(from: RegExp(r'^from$'), to: 'to')],
       );
 
       expect(reference.hashCode, same.hashCode);

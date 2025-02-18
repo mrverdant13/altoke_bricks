@@ -5,9 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // coverage:ignore-start
 class TasksList extends ConsumerWidget {
-  const TasksList({
-    super.key,
-  });
+  const TasksList({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,16 +20,12 @@ class TasksList extends ConsumerWidget {
 
 @visibleForTesting
 class LoadedTasksList extends ConsumerWidget {
-  const LoadedTasksList({
-    super.key,
-  });
+  const LoadedTasksList({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tasks = ref.watch(
-      asyncTasksPod.select(
-        (asyncTasks) => asyncTasks.requireValue,
-      ),
+      asyncTasksPod.select((asyncTasks) => asyncTasks.requireValue),
     );
     if (tasks.isEmpty) {
       return Builder(
@@ -52,9 +46,7 @@ class LoadedTasksList extends ConsumerWidget {
       itemCount: tasks.length,
       itemBuilder: (context, index) {
         final task = tasks.elementAt(index);
-        return TaskListTile(
-          task: task,
-        );
+        return TaskListTile(task: task);
       },
     );
   }
@@ -62,9 +54,7 @@ class LoadedTasksList extends ConsumerWidget {
 
 @visibleForTesting
 class FailedTasks extends ConsumerWidget {
-  const FailedTasks({
-    super.key,
-  });
+  const FailedTasks({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -82,15 +72,12 @@ class FailedTasks extends ConsumerWidget {
 
 @visibleForTesting
 class LoadingTasksList extends StatelessWidget {
-  const LoadingTasksList({
-    super.key,
-  });
+  const LoadingTasksList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: CircularProgressIndicator.adaptive(),
-    );
+    return const Center(child: CircularProgressIndicator.adaptive());
   }
 }
+
 // coverage:ignore-end
