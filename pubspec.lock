@@ -330,18 +330,18 @@ packages:
     dependency: transitive
     description:
       name: drift
-      sha256: "76f23535e19a9f2be92f954e74d8802e96f526e5195d7408c1a20f6659043941"
+      sha256: "97d5832657d49f26e7a8e07de397ddc63790b039372878d5117af816d0fdb5cb"
       url: "https://pub.dev"
     source: hosted
-    version: "2.24.0"
+    version: "2.25.1"
   drift_dev:
     dependency: transitive
     description:
       name: drift_dev
-      sha256: d1d90b0d55b22de412b77186f3bf3179a4b7e2acc4c8fb3a7aaf28a01abc194b
+      sha256: f1db88482dbb016b9bbddddf746d5d0a6938b156ff20e07320052981f97388cc
       url: "https://pub.dev"
     source: hosted
-    version: "2.24.0"
+    version: "2.25.2"
   drift_flutter:
     dependency: transitive
     description:
