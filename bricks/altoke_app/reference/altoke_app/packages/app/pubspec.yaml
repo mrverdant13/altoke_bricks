@@ -31,7 +31,7 @@ dependencies:
   flutter_riverpod: ^2.6.1
   #w 1v 2> w#
   #{{#use_go_router}}#
-  go_router: ^14.7.2
+  go_router: ^14.8.0
   #w 1v 2> w#
   #{{/use_go_router}}#
   #remove-start#
@@ -63,13 +63,13 @@ dev_dependencies:
   auto_route_generator: ^9.0.0
   #w 1v 2> w#
   #{{/use_auto_route}}#
-  build_runner: ^2.4.14
+  build_runner: ^2.4.15
   custom_lint: ^0.7.0
   flutter_test:
     sdk: flutter
   #w 1v 2> w#
   #{{#use_go_router}}#
-  go_router_builder: ^2.7.5
+  go_router_builder: ^2.8.0
   #w 1v 2> w#
   #{{/use_go_router}}#
   meta: ^1.15.0

@@ -122,18 +122,18 @@ packages:
     dependency: transitive
     description:
       name: build_resolvers
-      sha256: "99d3980049739a985cf9b21f30881f46db3ebc62c5b8d5e60e27440876b1ba1e"
+      sha256: b9e4fda21d846e192628e7a4f6deda6888c36b5b69ba02ff291a01fd529140f0
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.3"
+    version: "2.4.4"
   build_runner:
     dependency: transitive
     description:
       name: build_runner
-      sha256: "74691599a5bc750dc96a6b4bfd48f7d9d66453eab04c7f4063134800d6a5c573"
+      sha256: "058fe9dce1de7d69c4b84fada934df3e0153dd000758c4d65964d0166779aa99"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.14"
+    version: "2.4.15"
   build_runner_core:
     dependency: transitive
     description:
@@ -298,10 +298,10 @@ packages:
     dependency: transitive
     description:
       name: dart_mappable
-      sha256: f69a961ae8589724ebb542e588f228ae844c5f78028899cbe2cc718977c1b382
+      sha256: a88d1637354b8e3120433cbdf2b816dd9e38659b8a9b6ed8cb19cd101e12c545
       url: "https://pub.dev"
     source: hosted
-    version: "4.3.0"
+    version: "4.4.0"
   dart_mappable_builder:
     dependency: transitive
     description:
@@ -454,18 +454,18 @@ packages:
     dependency: transitive
     description:
       name: go_router
-      sha256: "9b736a9fa879d8ad6df7932cbdcc58237c173ab004ef90d8377923d7ad731eaa"
+      sha256: "04539267a740931c6d4479a10d466717ca5901c6fdfd3fcda09391bbb8ebd651"
       url: "https://pub.dev"
     source: hosted
-    version: "14.7.2"
+    version: "14.8.0"
   go_router_builder:
     dependency: transitive
     description:
       name: go_router_builder
-      sha256: "63a1ebd575411216599055ec203014964b8e2b5af8f3b2e501447f87b492200b"
+      sha256: "8f2c92accbd2d335a25ec7273d01d74d594aa272609c8975781f50d8e0db68e1"
       url: "https://pub.dev"
     source: hosted
-    version: "2.7.5"
+    version: "2.8.0"
   graphs:
     dependency: transitive
     description:
@@ -886,10 +886,10 @@ packages:
     dependency: transitive
     description:
       name: sembast
-      sha256: "6cf9acde19bd88dba9ea8090d3e50725cdc70fc7cf1c117c26e79c257884b04b"
+      sha256: f90377eb5ef66ac5a42d7afd72f4f900c436a2528d6b67b318fb2b9f5484bbe5
       url: "https://pub.dev"
     source: hosted
-    version: "3.8.2"
+    version: "3.8.4"
   shelf:
     dependency: transitive
     description:
