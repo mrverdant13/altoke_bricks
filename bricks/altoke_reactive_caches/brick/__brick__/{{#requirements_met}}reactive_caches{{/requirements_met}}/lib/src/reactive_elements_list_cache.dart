@@ -6,10 +6,8 @@ import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
 
 /// Callback signature for comparing lists of elements.
-typedef ElementsListEqualityChecker<E extends Object?> = bool Function(
-  List<E> a,
-  List<E> b,
-);
+typedef ElementsListEqualityChecker<E extends Object?> =
+    bool Function(List<E> a, List<E> b);
 
 /// {@template {{#requirements_met}}reactive_caches{{/requirements_met}}.reactive_elements_list_cache}
 /// A reactive cache for a [List] of elements of type [E].
@@ -18,9 +16,8 @@ class ReactiveElementsListCache<E extends Object?> {
   /// {@macro {{#requirements_met}}reactive_caches{{/requirements_met}}.reactive_elements_list_cache}
   ///
   /// If [equalityChecker] is `null`, the [defaultEqualityChecker] is used.
-  ReactiveElementsListCache({
-    ElementsListEqualityChecker<E>? equalityChecker,
-  }) : equalityChecker = equalityChecker ?? defaultEqualityChecker;
+  ReactiveElementsListCache({ElementsListEqualityChecker<E>? equalityChecker})
+    : equalityChecker = equalityChecker ?? defaultEqualityChecker;
 
   /// The default equality checker for lists of elements of type [E].
   @visibleForTesting
@@ -71,17 +68,13 @@ class ReactiveElementsListCache<E extends Object?> {
   }
 
   /// Returns the cached list filtered by the provided [where] callback.
-  List<E> get({
-    WhereCallback<E> where = noFilter,
-  }) {
+  List<E> get({WhereCallback<E> where = noFilter}) {
     return elements.where(where).toList();
   }
 
   /// Returns a stream of the cached list filtered by the provided [where]
   /// callback.
-  Stream<List<E>> watch({
-    WhereCallback<E> where = noFilter,
-  }) {
+  Stream<List<E>> watch({WhereCallback<E> where = noFilter}) {
     streamController ??= StreamController<List<E>>.broadcast(
       onListen: onListen,
       onCancel: onCancel,
@@ -97,10 +90,7 @@ class ReactiveElementsListCache<E extends Object?> {
   /// list.
   ///
   /// If [index] is out of bounds, no action is taken.
-  void insertMany(
-    List<E> elements, {
-    required int index,
-  }) {
+  void insertMany(List<E> elements, {required int index}) {
     if (index < 0 || index > this.elements.length) return;
     this.elements = [
       ...this.elements.take(index),
@@ -117,61 +107,59 @@ class ReactiveElementsListCache<E extends Object?> {
     IndexedIterable<E> indexedElements, {
     required PlacementMode mode,
   }) {
-    this.elements = this
-        .elements
-        .mapIndexed(
-          (index, currentElement) {
-            final overridingElements = indexedElements
-                .where((indexedElement) => indexedElement.$1 == index)
-                .map((indexedElement) => indexedElement.$2);
-            return switch (mode) {
-              PlacementMode.appendGroup => [
+    this.elements =
+        this.elements
+            .mapIndexed((index, currentElement) {
+              final overridingElements = indexedElements
+                  .where((indexedElement) => indexedElement.$1 == index)
+                  .map((indexedElement) => indexedElement.$2);
+              return switch (mode) {
+                PlacementMode.appendGroup => [
                   currentElement,
                   if (overridingElements.isNotEmpty) ...overridingElements,
                 ],
-              PlacementMode.appendFirst => [
+                PlacementMode.appendFirst => [
                   currentElement,
                   if (overridingElements.isNotEmpty) overridingElements.first,
                 ],
-              PlacementMode.appendLast => [
+                PlacementMode.appendLast => [
                   currentElement,
                   if (overridingElements.isNotEmpty) overridingElements.last,
                 ],
-              PlacementMode.prependGroup => [
+                PlacementMode.prependGroup => [
                   if (overridingElements.isNotEmpty) ...overridingElements,
                   currentElement,
                 ],
-              PlacementMode.prependFirst => [
+                PlacementMode.prependFirst => [
                   if (overridingElements.isNotEmpty) overridingElements.first,
                   currentElement,
                 ],
-              PlacementMode.prependLast => [
+                PlacementMode.prependLast => [
                   if (overridingElements.isNotEmpty) overridingElements.last,
                   currentElement,
                 ],
-              PlacementMode.replaceWithGroup => [
+                PlacementMode.replaceWithGroup => [
                   if (overridingElements.isNotEmpty)
                     ...overridingElements
                   else
                     currentElement,
                 ],
-              PlacementMode.replaceWithFirst => [
+                PlacementMode.replaceWithFirst => [
                   if (overridingElements.isNotEmpty)
                     overridingElements.first
                   else
                     currentElement,
                 ],
-              PlacementMode.replaceWithLast => [
+                PlacementMode.replaceWithLast => [
                   if (overridingElements.isNotEmpty)
                     overridingElements.last
                   else
                     currentElement,
                 ],
-            };
-          },
-        )
-        .flattened
-        .toList();
+              };
+            })
+            .flattened
+            .toList();
     streamController?.add(this.elements);
   }
 
@@ -190,9 +178,7 @@ class ReactiveElementsListCache<E extends Object?> {
 
   /// Removes the elements from the cached list that match the provided [where]
   /// callback.
-  void remove({
-    WhereIndexedCallback<E> where = noIndexedFilter,
-  }) {
+  void remove({WhereIndexedCallback<E> where = noIndexedFilter}) {
     this.elements = [
       for (final (index, element) in this.elements.indexed)
         if (!where(index, element)) element,
@@ -303,5 +289,4 @@ enum PlacementMode {
   /// - Indexed elements: `[(2, 2.1), (2, 2.2), (4, 4.1)]`
   /// - Resulting list: `[0, 1, 2.2, 3, 4.1]`
   replaceWithLast,
-  ;
 }

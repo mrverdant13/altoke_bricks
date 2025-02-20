@@ -30,13 +30,11 @@ GIVEN a reactive cache for a single element''',
     () {
       late ReactiveElementCache<String> cache;
 
-      setUp(
-        () {
-          cache = ReactiveElementCache<String>(
-            equalityChecker: (a, b) => a?.trim() == b?.trim(),
-          );
-        },
-      );
+      setUp(() {
+        cache = ReactiveElementCache<String>(
+          equalityChecker: (a, b) => a?.trim() == b?.trim(),
+        );
+      });
 
       test(
         '''
