@@ -8,7 +8,7 @@ resolution: workspace
 #w 2v w#
 
 environment:
-  sdk: ">=3.6.1 <4.0.0"
+  sdk: ">=3.7.0 <4.0.0"
 
 dependencies:
   altoke_common:
@@ -20,7 +20,7 @@ dependencies:
     #replace-end#
   #w 1v 2> w#
   #{{#use_dart_mappable}}#
-  dart_mappable: ^4.3.0
+  dart_mappable: ^4.4.0
   #{{/use_dart_mappable}}#
   #{{#use_equatable}}#
   equatable: ^2.0.7

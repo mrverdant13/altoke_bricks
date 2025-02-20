@@ -16,51 +16,61 @@ void main() {
     PathProviderPlatform.instance = pathProviderPlatform;
   });
 
-  test('''
+  test(
+    '''
 
 GIVEN an async pod for the application documents directory
 WHEN it is invoked
 THEN it should return the application documents directory
-''', () async {
-    when(pathProviderPlatform.getApplicationDocumentsPath)
-        .thenAnswer((_) async => 'mock/app-docs-path');
-    final container = ProviderContainer();
-    addTearDown(container.dispose);
-    final asyncApplicationDocumentsDirectory =
-        container.read(asyncApplicationDocumentsDirectoryPod.future);
-    await expectLater(
-      asyncApplicationDocumentsDirectory,
-      completion(
-        isA<Directory>().having(
-          (directory) => directory.path,
-          'path',
-          'mock/app-docs-path',
+''',
+    () async {
+      when(
+        pathProviderPlatform.getApplicationDocumentsPath,
+      ).thenAnswer((_) async => 'mock/app-docs-path');
+      final container = ProviderContainer();
+      addTearDown(container.dispose);
+      final asyncApplicationDocumentsDirectory = container.read(
+        asyncApplicationDocumentsDirectoryPod.future,
+      );
+      await expectLater(
+        asyncApplicationDocumentsDirectory,
+        completion(
+          isA<Directory>().having(
+            (directory) => directory.path,
+            'path',
+            'mock/app-docs-path',
+          ),
         ),
-      ),
-    );
-  });
+      );
+    },
+  );
 
-  test('''
+  test(
+    '''
 
 GIVEN an async pod for the temporary directory
 WHEN it is invoked
 THEN it should return the temporary directory
-''', () async {
-    when(pathProviderPlatform.getTemporaryPath)
-        .thenAnswer((_) async => 'mock/temp-path');
-    final container = ProviderContainer();
-    addTearDown(container.dispose);
-    final asyncTemporaryDirectory =
-        container.read(asyncTemporaryDirectoryPod.future);
-    await expectLater(
-      asyncTemporaryDirectory,
-      completion(
-        isA<Directory>().having(
-          (directory) => directory.path,
-          'path',
-          'mock/temp-path',
+''',
+    () async {
+      when(
+        pathProviderPlatform.getTemporaryPath,
+      ).thenAnswer((_) async => 'mock/temp-path');
+      final container = ProviderContainer();
+      addTearDown(container.dispose);
+      final asyncTemporaryDirectory = container.read(
+        asyncTemporaryDirectoryPod.future,
+      );
+      await expectLater(
+        asyncTemporaryDirectory,
+        completion(
+          isA<Directory>().having(
+            (directory) => directory.path,
+            'path',
+            'mock/temp-path',
+          ),
         ),
-      ),
-    );
-  });
+      );
+    },
+  );
 }

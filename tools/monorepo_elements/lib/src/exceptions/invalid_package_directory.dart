@@ -2,9 +2,7 @@
 /// Error thrown when the package directory is invalid.
 /// {@endtemplate}
 sealed class InvalidPackageDirectoryError implements Exception {
-  const InvalidPackageDirectoryError(
-    this.reason,
-  );
+  const InvalidPackageDirectoryError(this.reason);
 
   /// Reason for the error.
   final String reason;
@@ -20,7 +18,6 @@ sealed class InvalidPackageDirectoryError implements Exception {
 /// {@endtemplate}
 class PackageDirNotFoundError extends InvalidPackageDirectoryError {
   /// {@macro package_dir_not_found_error}
-  const PackageDirNotFoundError({
-    required String packagePath,
-  }) : super('Package directory not found ($packagePath).');
+  const PackageDirNotFoundError({required String packagePath})
+    : super('Package directory not found ($packagePath).');
 }

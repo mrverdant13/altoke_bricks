@@ -298,10 +298,10 @@ packages:
     dependency: transitive
     description:
       name: dart_mappable
-      sha256: f69a961ae8589724ebb542e588f228ae844c5f78028899cbe2cc718977c1b382
+      sha256: a88d1637354b8e3120433cbdf2b816dd9e38659b8a9b6ed8cb19cd101e12c545
       url: "https://pub.dev"
     source: hosted
-    version: "4.3.0"
+    version: "4.4.0"
   dart_mappable_builder:
     dependency: transitive
     description:
@@ -330,18 +330,18 @@ packages:
     dependency: transitive
     description:
       name: drift
-      sha256: "76f23535e19a9f2be92f954e74d8802e96f526e5195d7408c1a20f6659043941"
+      sha256: "97d5832657d49f26e7a8e07de397ddc63790b039372878d5117af816d0fdb5cb"
       url: "https://pub.dev"
     source: hosted
-    version: "2.24.0"
+    version: "2.25.1"
   drift_dev:
     dependency: transitive
     description:
       name: drift_dev
-      sha256: d1d90b0d55b22de412b77186f3bf3179a4b7e2acc4c8fb3a7aaf28a01abc194b
+      sha256: f1db88482dbb016b9bbddddf746d5d0a6938b156ff20e07320052981f97388cc
       url: "https://pub.dev"
     source: hosted
-    version: "2.24.0"
+    version: "2.25.2"
   drift_flutter:
     dependency: transitive
     description:
@@ -646,10 +646,10 @@ packages:
     dependency: "direct dev"
     description:
       name: melos
-      sha256: "8703e67939dee401a0073045824457e3670dade35a7c991a068915ed84a92516"
+      sha256: "63e9852a28a44c811503b31c607606f9ce8d891e22879e1e97fc7417c22ed6bc"
       url: "https://pub.dev"
     source: hosted
-    version: "7.0.0-dev.5"
+    version: "7.0.0-dev.7"
   meta:
     dependency: transitive
     description:
@@ -1232,5 +1232,5 @@ packages:
     source: hosted
     version: "2.2.2"
 sdks:
-  dart: ">=3.6.1 <4.0.0"
-  flutter: ">=3.27.3"
+  dart: ">=3.7.0 <4.0.0"
+  flutter: ">=3.29.0"

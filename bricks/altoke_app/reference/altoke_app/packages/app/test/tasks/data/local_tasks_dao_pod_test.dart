@@ -10,69 +10,68 @@ import 'package:mocktail/mocktail.dart';
 import '../../helpers/helpers.dart';
 
 void main() {
-  test('''
+  test(
+    '''
 
 GIVEN a local tasks DAO pod
 WHEN it is invoked
 THEN a local tasks Drift DAO should be returned
-''', () async {
-    final localDatabase = MockLocalDatabase();
-    final tasksDrift = MockTasksDrift();
-    when(() => localDatabase.tasksDrift).thenReturn(tasksDrift);
-    final container = ProviderContainer(
-      overrides: [
-        asyncDriftLocalDatabasePod.overrideWith(
-          (ref) => localDatabase,
-        ),
-      ],
-    );
-    addTearDown(container.dispose);
-    container.read(selectedLocalDatabasePackagePod.notifier).value =
-        LocalDatabasePackage.drift;
-    final dao = container.read(localTasksDaoPod);
-    expect(dao, isA<LocalTasksDao>());
-  });
+''',
+    () async {
+      final localDatabase = MockLocalDatabase();
+      final tasksDrift = MockTasksDrift();
+      when(() => localDatabase.tasksDrift).thenReturn(tasksDrift);
+      final container = ProviderContainer(
+        overrides: [
+          asyncDriftLocalDatabasePod.overrideWith((ref) => localDatabase),
+        ],
+      );
+      addTearDown(container.dispose);
+      container.read(selectedLocalDatabasePackagePod.notifier).value =
+          LocalDatabasePackage.drift;
+      final dao = container.read(localTasksDaoPod);
+      expect(dao, isA<LocalTasksDao>());
+    },
+  );
 
-  test('''
+  test(
+    '''
 
 GIVEN a local tasks DAO pod
 WHEN it is invoked
 THEN a local tasks Hive DAO should be returned
-''', () async {
-    final dir = Directory.systemTemp.createTempSync();
-    addTearDown(() => dir.deleteSync(recursive: true));
-    final container = ProviderContainer(
-      overrides: [
-        asyncHiveInitializationPod.overrideWith(
-          (ref) {},
-        ),
-      ],
-    );
-    addTearDown(container.dispose);
-    container.read(selectedLocalDatabasePackagePod.notifier).value =
-        LocalDatabasePackage.hive;
-    final dao = container.read(localTasksDaoPod);
-    expect(dao, isA<LocalTasksDao>());
-  });
+''',
+    () async {
+      final dir = Directory.systemTemp.createTempSync();
+      addTearDown(() => dir.deleteSync(recursive: true));
+      final container = ProviderContainer(
+        overrides: [asyncHiveInitializationPod.overrideWith((ref) {})],
+      );
+      addTearDown(container.dispose);
+      container.read(selectedLocalDatabasePackagePod.notifier).value =
+          LocalDatabasePackage.hive;
+      final dao = container.read(localTasksDaoPod);
+      expect(dao, isA<LocalTasksDao>());
+    },
+  );
 
-  test('''
+  test(
+    '''
 
 GIVEN a local tasks DAO pod
 WHEN it is invoked
 THEN a local tasks Isar DAO should be returned
-''', () async {
-    final isar = MockIsar();
-    final container = ProviderContainer(
-      overrides: [
-        asyncIsarPod.overrideWith(
-          (ref) => isar,
-        ),
-      ],
-    );
-    addTearDown(container.dispose);
-    container.read(selectedLocalDatabasePackagePod.notifier).value =
-        LocalDatabasePackage.isar;
-    final dao = container.read(localTasksDaoPod);
-    expect(dao, isA<LocalTasksDao>());
-  });
+''',
+    () async {
+      final isar = MockIsar();
+      final container = ProviderContainer(
+        overrides: [asyncIsarPod.overrideWith((ref) => isar)],
+      );
+      addTearDown(container.dispose);
+      container.read(selectedLocalDatabasePackagePod.notifier).value =
+          LocalDatabasePackage.isar;
+      final dao = container.read(localTasksDaoPod);
+      expect(dao, isA<LocalTasksDao>());
+    },
+  );
 }

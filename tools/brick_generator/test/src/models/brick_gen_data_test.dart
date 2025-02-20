@@ -34,23 +34,12 @@ void main() {
               isTrue,
             )
             .having(
-              (r) => path.equals(
-                r.targetAbsolutePath,
-                'target/absolute/path',
-              ),
+              (r) => path.equals(r.targetAbsolutePath, 'target/absolute/path'),
               'targetAbsolutePath',
               isTrue,
             )
-            .having(
-              (r) => r.replacements,
-              'replacements',
-              isEmpty,
-            )
-            .having(
-              (r) => r.lineDeletions,
-              'lineDeletions',
-              isEmpty,
-            ),
+            .having((r) => r.replacements, 'replacements', isEmpty)
+            .having((r) => r.lineDeletions, 'lineDeletions', isEmpty),
       );
     });
 
@@ -70,12 +59,7 @@ void main() {
       final other = BrickGenData(
         referenceAbsolutePath: 'reference/absolute/path',
         targetAbsolutePath: 'target/absolute/path',
-        replacements: [
-          Replacement(
-            from: RegExp('from'),
-            to: 'to',
-          ),
-        ],
+        replacements: [Replacement(from: RegExp('from'), to: 'to')],
         lineDeletions: const [],
       );
       expect(reference, same);
@@ -98,12 +82,7 @@ void main() {
       final other = BrickGenData(
         referenceAbsolutePath: 'reference/absolute/path',
         targetAbsolutePath: 'target/absolute/path',
-        replacements: [
-          Replacement(
-            from: RegExp('from'),
-            to: 'to',
-          ),
-        ],
+        replacements: [Replacement(from: RegExp('from'), to: 'to')],
         lineDeletions: const [],
       );
       expect(reference.hashCode, same.hashCode);
@@ -114,12 +93,7 @@ void main() {
       final brickGenData = BrickGenData(
         referenceAbsolutePath: 'reference/absolute/path',
         targetAbsolutePath: 'target/absolute/path',
-        replacements: [
-          Replacement(
-            from: RegExp('from'),
-            to: 'to',
-          ),
-        ],
+        replacements: [Replacement(from: RegExp('from'), to: 'to')],
         lineDeletions: const [],
       );
       final result = brickGenData.applyReplacementsToTargetRelativeDescendant(

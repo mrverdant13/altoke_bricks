@@ -13,11 +13,7 @@ WHEN it is displayed
 THEN the app bar should include the localized title
 ''',
     (tester) async {
-      await tester.pumpAppWithScreen(
-        Scaffold(
-          appBar: HomeAppBar(),
-        ),
-      );
+      await tester.pumpAppWithScreen(Scaffold(appBar: HomeAppBar()));
       expect(find.byType(HomeAppBarTitle), findsOneWidget);
       expect(
         find.l10n.widgetWithText(

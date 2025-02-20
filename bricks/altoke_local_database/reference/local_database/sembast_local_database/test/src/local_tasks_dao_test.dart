@@ -54,33 +54,26 @@ WHEN the task is created
 THEN a task record is registered
 ''',
         () async {
-          const newTask = NewTask(
-            title: 'title',
-            priority: TaskPriority.low,
-          );
+          const newTask = NewTask(title: 'title', priority: TaskPriority.low);
           final filter = Filter.and([
-            Filter.equals(
-              sembast.Task.titleJsonKey,
-              newTask.title,
-            ),
+            Filter.equals(sembast.Task.titleJsonKey, newTask.title),
             Filter.equals(
               sembast.Task.priorityJsonKey,
               newTask.priority.identifier,
             ),
-            Filter.isNull(
-              sembast.Task.descriptionJsonKey,
-            ),
+            Filter.isNull(sembast.Task.descriptionJsonKey),
           ]);
-          final existingMatchingTasksCount =
-              await tasksStore.count(database, filter: filter);
+          final existingMatchingTasksCount = await tasksStore.count(
+            database,
+            filter: filter,
+          );
           expect(existingMatchingTasksCount, isZero);
           await dao.createOne(newTask);
-          final resultingMatchingTasksCount =
-              await tasksStore.count(database, filter: filter);
-          expect(
-            resultingMatchingTasksCount,
-            existingMatchingTasksCount + 1,
+          final resultingMatchingTasksCount = await tasksStore.count(
+            database,
+            filter: filter,
           );
+          expect(resultingMatchingTasksCount, existingMatchingTasksCount + 1);
         },
       );
 
@@ -93,10 +86,7 @@ THEN an exception is thrown
 AND no task record is registered
 ''',
         () async {
-          const newTask = NewTask(
-            title: '',
-            priority: TaskPriority.high,
-          );
+          const newTask = NewTask(title: '', priority: TaskPriority.high);
           final existingMatchingTasksCount = await tasksStore.count(database);
           expect(existingMatchingTasksCount, isZero);
           expect(
@@ -139,8 +129,9 @@ THEN the tasks are continuously emitted as they change
               completed: false,
             ),
           ];
-          final sortedTasksForStage00 = [...tasksForStage00]
-              .sorted((tA, tB) => tA.title.compareTo(tB.title));
+          final sortedTasksForStage00 = [
+            ...tasksForStage00,
+          ].sorted((tA, tB) => tA.title.compareTo(tB.title));
 
           // Stage 01
           const newTaskInStage01 = Task(
@@ -149,20 +140,19 @@ THEN the tasks are continuously emitted as they change
             priority: TaskPriority.low,
             completed: true,
           );
-          final tasksForStage01 = <Task>[
-            ...tasksForStage00,
-            newTaskInStage01,
-          ];
-          final sortedTasksForStage01 = [...tasksForStage01]
-              .sorted((tA, tB) => tA.title.compareTo(tB.title));
+          final tasksForStage01 = <Task>[...tasksForStage00, newTaskInStage01];
+          final sortedTasksForStage01 = [
+            ...tasksForStage01,
+          ].sorted((tA, tB) => tA.title.compareTo(tB.title));
 
           // Stage 02
           final tasksForStage02 = <Task>[
             for (final task in tasksForStage01)
               if (!task.title.contains('01')) task,
           ];
-          final sortedTasksForStage02 = [...tasksForStage02]
-              .sorted((tA, tB) => tA.title.compareTo(tB.title));
+          final sortedTasksForStage02 = [
+            ...tasksForStage02,
+          ].sorted((tA, tB) => tA.title.compareTo(tB.title));
 
           // Stage 03
           final tasksForStage03 = <Task>[
@@ -178,21 +168,20 @@ THEN the tasks are continuously emitted as they change
               else
                 task,
           ];
-          final sortedTasksForStage03 = [...tasksForStage03]
-              .sorted((tA, tB) => tA.title.compareTo(tB.title));
+          final sortedTasksForStage03 = [
+            ...tasksForStage03,
+          ].sorted((tA, tB) => tA.title.compareTo(tB.title));
 
           unawaited(
             expectLater(
               stream,
-              emitsInOrder(
-                [
-                  List<Task>.empty(), // initially empty
-                  orderedEquals(sortedTasksForStage00),
-                  orderedEquals(sortedTasksForStage01),
-                  orderedEquals(sortedTasksForStage02),
-                  orderedEquals(sortedTasksForStage03),
-                ],
-              ),
+              emitsInOrder([
+                List<Task>.empty(), // initially empty
+                orderedEquals(sortedTasksForStage00),
+                orderedEquals(sortedTasksForStage01),
+                orderedEquals(sortedTasksForStage02),
+                orderedEquals(sortedTasksForStage03),
+              ]),
             ),
           );
 
@@ -213,26 +202,19 @@ THEN the tasks are continuously emitted as they change
           }
 
           // Stage 01
-          await tasksStore.record(newTaskInStage01.id).put(
-            database,
-            {
-              sembast.Task.titleJsonKey: newTaskInStage01.title,
-              sembast.Task.priorityJsonKey:
-                  newTaskInStage01.priority.identifier,
-              sembast.Task.completedJsonKey: newTaskInStage01.completed,
-              sembast.Task.descriptionJsonKey: newTaskInStage01.description,
-            },
-          );
+          await tasksStore.record(newTaskInStage01.id).put(database, {
+            sembast.Task.titleJsonKey: newTaskInStage01.title,
+            sembast.Task.priorityJsonKey: newTaskInStage01.priority.identifier,
+            sembast.Task.completedJsonKey: newTaskInStage01.completed,
+            sembast.Task.descriptionJsonKey: newTaskInStage01.description,
+          });
 
           // Stage 02
 
           await tasksStore.delete(
             database,
             finder: Finder(
-              filter: Filter.matches(
-                sembast.Task.titleJsonKey,
-                '01',
-              ),
+              filter: Filter.matches(sembast.Task.titleJsonKey, '01'),
             ),
           );
 
@@ -272,25 +254,15 @@ THEN a task record is updated
           const newDescription = 'new description';
           final filter = Filter.and([
             Filter.byKey(taskId),
-            Filter.equals(
-              sembast.Task.titleJsonKey,
-              newTitle,
-            ),
-            Filter.equals(
-              sembast.Task.priorityJsonKey,
-              newPriority.identifier,
-            ),
-            Filter.equals(
-              sembast.Task.completedJsonKey,
-              newCompleted,
-            ),
-            Filter.equals(
-              sembast.Task.descriptionJsonKey,
-              newDescription,
-            ),
+            Filter.equals(sembast.Task.titleJsonKey, newTitle),
+            Filter.equals(sembast.Task.priorityJsonKey, newPriority.identifier),
+            Filter.equals(sembast.Task.completedJsonKey, newCompleted),
+            Filter.equals(sembast.Task.descriptionJsonKey, newDescription),
           ]);
-          final existingMatchingTasksCount =
-              await tasksStore.count(database, filter: filter);
+          final existingMatchingTasksCount = await tasksStore.count(
+            database,
+            filter: filter,
+          );
           expect(existingMatchingTasksCount, isZero);
           await dao.updateOneById(
             taskId: taskId,
@@ -301,12 +273,11 @@ THEN a task record is updated
               description: Some(newDescription),
             ),
           );
-          final resultingMatchingTasksCount =
-              await tasksStore.count(database, filter: filter);
-          expect(
-            resultingMatchingTasksCount,
-            existingMatchingTasksCount + 1,
+          final resultingMatchingTasksCount = await tasksStore.count(
+            database,
+            filter: filter,
           );
+          expect(resultingMatchingTasksCount, existingMatchingTasksCount + 1);
         },
       );
 
@@ -330,25 +301,15 @@ AND no task record is updated
 
           final filter = Filter.and([
             Filter.byKey(taskId),
-            Filter.equals(
-              sembast.Task.titleJsonKey,
-              newTitle,
-            ),
-            Filter.equals(
-              sembast.Task.priorityJsonKey,
-              newPriority.identifier,
-            ),
-            Filter.equals(
-              sembast.Task.completedJsonKey,
-              newCompleted,
-            ),
-            Filter.equals(
-              sembast.Task.descriptionJsonKey,
-              newDescription,
-            ),
+            Filter.equals(sembast.Task.titleJsonKey, newTitle),
+            Filter.equals(sembast.Task.priorityJsonKey, newPriority.identifier),
+            Filter.equals(sembast.Task.completedJsonKey, newCompleted),
+            Filter.equals(sembast.Task.descriptionJsonKey, newDescription),
           ]);
-          final existingMatchingTasksCount =
-              await tasksStore.count(database, filter: filter);
+          final existingMatchingTasksCount = await tasksStore.count(
+            database,
+            filter: filter,
+          );
           expect(existingMatchingTasksCount, isZero);
           expect(
             () async => dao.updateOneById(
@@ -362,8 +323,10 @@ AND no task record is updated
             ),
             throwsA(isA<UpdateTaskFailureNotFound>()),
           );
-          final resultingMatchingTasksCount =
-              await tasksStore.count(database, filter: filter);
+          final resultingMatchingTasksCount = await tasksStore.count(
+            database,
+            filter: filter,
+          );
           expect(resultingMatchingTasksCount, isZero);
         },
       );
@@ -394,25 +357,15 @@ AND no task record is updated
           const newDescription = '';
           final filter = Filter.and([
             Filter.byKey(taskId),
-            Filter.equals(
-              sembast.Task.titleJsonKey,
-              newTitle,
-            ),
-            Filter.equals(
-              sembast.Task.priorityJsonKey,
-              newPriority.identifier,
-            ),
-            Filter.equals(
-              sembast.Task.completedJsonKey,
-              newCompleted,
-            ),
-            Filter.equals(
-              sembast.Task.descriptionJsonKey,
-              newDescription,
-            ),
+            Filter.equals(sembast.Task.titleJsonKey, newTitle),
+            Filter.equals(sembast.Task.priorityJsonKey, newPriority.identifier),
+            Filter.equals(sembast.Task.completedJsonKey, newCompleted),
+            Filter.equals(sembast.Task.descriptionJsonKey, newDescription),
           ]);
-          final existingMatchingTasksCount =
-              await tasksStore.count(database, filter: filter);
+          final existingMatchingTasksCount = await tasksStore.count(
+            database,
+            filter: filter,
+          );
           expect(existingMatchingTasksCount, isZero);
           expect(
             () async => dao.updateOneById(
@@ -426,8 +379,10 @@ AND no task record is updated
             ),
             throwsA(isA<UpdateTaskFailureInvalidData>()),
           );
-          final resultingMatchingTasksCount =
-              await tasksStore.count(database, filter: filter);
+          final resultingMatchingTasksCount = await tasksStore.count(
+            database,
+            filter: filter,
+          );
           expect(resultingMatchingTasksCount, isZero);
         },
       );
@@ -451,12 +406,16 @@ AND the deleted task is returned
           };
           await tasksStore.record(taskId).put(database, task);
           final filter = Filter.byKey(taskId);
-          final initialMatchingTasksCount =
-              await tasksStore.count(database, filter: filter);
+          final initialMatchingTasksCount = await tasksStore.count(
+            database,
+            filter: filter,
+          );
           expect(initialMatchingTasksCount, 1);
           await dao.deleteOneById(taskId);
-          final resultingMatchingTasksCount =
-              await tasksStore.count(database, filter: filter);
+          final resultingMatchingTasksCount = await tasksStore.count(
+            database,
+            filter: filter,
+          );
           expect(resultingMatchingTasksCount, isZero);
         },
       );

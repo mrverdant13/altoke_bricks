@@ -36,10 +36,7 @@ abstract class AltokeContentPattern {
   /// Regexp to identify a single whitespace action to be resolved within the
   /// contents of a file.
   @visibleForTesting
-  static final spacingGroup = RegExp(
-    r'(\d+)([v>])',
-    dotAll: true,
-  );
+  static final spacingGroup = RegExp(r'(\d+)([v>])', dotAll: true);
 
   /// Regexp to identify a block to be replaced within the contents of a file.
   @visibleForTesting
@@ -52,9 +49,7 @@ abstract class AltokeContentPattern {
 /// Extension methods for a reference [File] to be parametrized.
 extension ReferenceFile on File {
   /// Parametrizes the reference file.
-  Future<void> parametrize({
-    required BrickGenData brickGenData,
-  }) async {
+  Future<void> parametrize({required BrickGenData brickGenData}) async {
     try {
       if (await isGitIgnored) {
         await delete(recursive: true);
@@ -86,9 +81,7 @@ extension ReferenceFile on File {
 
   /// Resolves the parametrized contents of the reference [File].
   @visibleForTesting
-  Future<void> resolveContents({
-    required BrickGenData brickGenData,
-  }) async {
+  Future<void> resolveContents({required BrickGenData brickGenData}) async {
     const ignoredExtensions = {
       '.png',
       '.webp', // cspell:disable-line
@@ -102,10 +95,7 @@ extension ReferenceFile on File {
           lineDeletions: lineDeletions,
         )
         .applyReplacements(replacements)
-        .replaceAll(
-          AltokeContentPattern.remotion,
-          '',
-        )
+        .replaceAll(AltokeContentPattern.remotion, '')
         .replaceAllMapped(
           AltokeContentPattern.replacement,
           transformReplacementMatchForFileContents,
@@ -123,9 +113,7 @@ extension ReferenceFile on File {
 
   /// Resolves the parametrized path of the reference [File].
   @visibleForTesting
-  Future<String> resolvePath({
-    required BrickGenData brickGenData,
-  }) async {
+  Future<String> resolvePath({required BrickGenData brickGenData}) async {
     return brickGenData.applyReplacementsToTargetRelativeDescendant(path);
   }
 }
@@ -141,10 +129,7 @@ String transformReplacementMatchForFileContents(Match match) {
   String computeSlashBasedReplacement() {
     final buf = StringBuffer();
     final lines = rawLines.map(
-      (line) => line.replaceFirst(
-        RegExp(r'\s*\/\/ '),
-        ' ' * indentation,
-      ),
+      (line) => line.replaceFirst(RegExp(r'\s*\/\/ '), ' ' * indentation),
     );
     for (final line in lines) {
       buf.writeln(line);
@@ -155,10 +140,7 @@ String transformReplacementMatchForFileContents(Match match) {
   String computeHashBasedReplacement() {
     final buf = StringBuffer();
     final lines = rawLines.map(
-      (line) => line.replaceFirst(
-        RegExp(r'^\s*#* '),
-        ' ' * indentation,
-      ),
+      (line) => line.replaceFirst(RegExp(r'^\s*#* '), ' ' * indentation),
     );
     for (final line in lines) {
       buf.writeln(line);
@@ -169,10 +151,7 @@ String transformReplacementMatchForFileContents(Match match) {
   String computeHtmlBasedReplacement() {
     final buf = StringBuffer();
     final lines = rawLines.map(
-      (line) => line.replaceFirst(
-        RegExp(r'\s*<!-- '),
-        ' ' * indentation,
-      ),
+      (line) => line.replaceFirst(RegExp(r'\s*<!-- '), ' ' * indentation),
     );
     for (final line in lines) {
       buf.writeln(line.substring(0, line.length - 3).trim());
@@ -247,8 +226,9 @@ String transformVariableMatchForFileContents(Match match) {
 @visibleForTesting
 String transformWhitespaceActionsMatchForFileContents(Match match) {
   final buf = StringBuffer();
-  final candidates =
-      AltokeContentPattern.spacingGroup.allMatches(match.group(6) ?? '');
+  final candidates = AltokeContentPattern.spacingGroup.allMatches(
+    match.group(6) ?? '',
+  );
   for (final candidate in candidates) {
     final count = int.tryParse(candidate.group(1) ?? '') ?? 0;
     final action = () {

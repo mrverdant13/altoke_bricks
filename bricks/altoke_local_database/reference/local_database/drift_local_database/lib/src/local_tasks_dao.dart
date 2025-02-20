@@ -8,9 +8,7 @@ import 'package:local_database/local_database.dart';
 /// {@endtemplate}
 class LocalTasksDriftDao implements LocalTasksDao {
   /// {@macro drift_local_database.local_tasks_dao}
-  LocalTasksDriftDao({
-    required this.tasksDrift,
-  });
+  LocalTasksDriftDao({required this.tasksDrift});
 
   /// The internal Drift DAO for tasks.
   final TasksDrift tasksDrift;
@@ -63,8 +61,9 @@ class LocalTasksDriftDao implements LocalTasksDao {
     };
     final complexValidationErrors = {
       if (priority == const Some(TaskPriority.high))
-        if (description case Some(value: final description)
-            when (description ?? '').trim().isEmpty)
+        if (description case Some(
+          value: final description,
+        ) when (description ?? '').trim().isEmpty)
           TaskComplexValidationError.highPriorityWithNoDescription,
     };
     if (titleValidationErrors.isNotEmpty ||
@@ -76,43 +75,32 @@ class LocalTasksDriftDao implements LocalTasksDao {
     }
     final resultingTask = TasksCompanion(
       id: Value(taskId),
-      title: Value(
-        switch (title) {
-          None() => rawTask.title,
-          Some(value: final title) => title.trim(),
-        },
-      ),
-      priority: Value(
-        switch (priority) {
-          None() => rawTask.priority,
-          Some(value: final priority) => priority,
-        },
-      ),
-      completed: Value(
-        switch (completed) {
-          None() => rawTask.completed,
-          Some(value: final completed) => completed,
-        },
-      ),
+      title: Value(switch (title) {
+        None() => rawTask.title,
+        Some(value: final title) => title.trim(),
+      }),
+      priority: Value(switch (priority) {
+        None() => rawTask.priority,
+        Some(value: final priority) => priority,
+      }),
+      completed: Value(switch (completed) {
+        None() => rawTask.completed,
+        Some(value: final completed) => completed,
+      }),
       description: switch (description) {
         None() => const Value.absent(),
-        Some(value: final description) => Value(
-            switch (description?.trim() ?? '') {
-              '' => null,
-              final description => description,
-            },
-          ),
+        Some(value: final description) => Value(switch (description?.trim() ??
+            '') {
+          '' => null,
+          final description => description,
+        }),
       },
     );
     await tasksDrift.tasks.replaceOne(resultingTask);
   }
 
   @override
-  Future<void> deleteOneById(
-    int taskId,
-  ) async {
-    await tasksDrift.tasks.deleteWhere(
-      (tasks) => tasks.id.equals(taskId),
-    );
+  Future<void> deleteOneById(int taskId) async {
+    await tasksDrift.tasks.deleteWhere((tasks) => tasks.id.equals(taskId));
   }
 }

@@ -12,4 +12,5 @@ class MockStackRouter extends Mock implements StackRouter {}
 
 /*{{#use_go_router}}*/
 class MockGoRouter extends Mock implements GoRouter {}
+
 /*{{/use_go_router}}*/

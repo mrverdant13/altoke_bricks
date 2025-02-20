@@ -23,8 +23,9 @@ Future<void> main() async {
   );
   final vars = brickManifest.vars;
   final rawLocalDatabaseAlternative = vars[LocalDatabaseAlternative.varKey]!;
-  final localDatabaseAlternatives = rawLocalDatabaseAlternative.values!
-      .map(LocalDatabaseAlternative.fromVarIdentifier);
+  final localDatabaseAlternatives = rawLocalDatabaseAlternative.values!.map(
+    LocalDatabaseAlternative.fromVarIdentifier,
+  );
 
   await testSuccessfulGeneration(
     cases: {
@@ -48,9 +49,7 @@ Future<void> main() async {
   );
 }
 
-typedef GenerationCase = ({
-  LocalDatabaseAlternative localDatabaseAlternative,
-});
+typedef GenerationCase = ({LocalDatabaseAlternative localDatabaseAlternative});
 
 @isTest
 Future<void> testSuccessfulGeneration({
@@ -102,33 +101,22 @@ THEN the generated outputs should be valid and testable
         final implementationProjectDir = directoryGeneratorTarget
             .implementationProjectDir(localDatabaseAlternative);
 
-        Future<void> runCommands({
-          required Directory projectDir,
-        }) async {
+        Future<void> runCommands({required Directory projectDir}) async {
           final coverageDir = projectDir.descendantDir('coverage');
           final baseLcovFile = coverageDir.descendantFile('lcov.info');
-          final filteredLcovFile =
-              coverageDir.descendantFile('filtered.lcov.info');
+          final filteredLcovFile = coverageDir.descendantFile(
+            'filtered.lcov.info',
+          );
           await expectLater(
-            Dart.format(
-              projectDir,
-              failIfChanged: true,
-            ),
+            Dart.format(projectDir, failIfChanged: true),
             completes,
           );
           await expectLater(
-            Dart.analyze(
-              projectDir,
-              fatalInfos: true,
-              fatalWarnings: true,
-            ),
+            Dart.analyze(projectDir, fatalInfos: true, fatalWarnings: true),
             completes,
           );
           await expectLater(
-            Dart.test(
-              projectDir,
-              coverageDirectory: coverageDir,
-            ),
+            Dart.test(projectDir, coverageDirectory: coverageDir),
             completes,
           );
           await expectLater(
@@ -143,19 +131,12 @@ THEN the generated outputs should be valid and testable
             Coverage.filter(
               inputLcov: baseLcovFile,
               outputLcov: filteredLcovFile,
-              filters: [
-                r'\.freezed\.dart',
-                r'\.g\.dart',
-                r'\.mapper\.dart',
-              ],
+              filters: [r'\.freezed\.dart', r'\.g\.dart', r'\.mapper\.dart'],
             ),
             completes,
           );
           await expectLater(
-            Coverage.check(
-              inputLcov: filteredLcovFile,
-              threshold: 100,
-            ),
+            Coverage.check(inputLcov: filteredLcovFile, threshold: 100),
             completes,
           );
         }
@@ -267,7 +248,5 @@ extension on DirectoryGeneratorTarget {
   Directory get interfaceProjectDir =>
       outputDir.descendantDir('local_database');
   Directory implementationProjectDir(LocalDatabaseAlternative alternative) =>
-      outputDir.descendantDir(
-        '${alternative.varIdentifier}_local_database',
-      );
+      outputDir.descendantDir('${alternative.varIdentifier}_local_database');
 }

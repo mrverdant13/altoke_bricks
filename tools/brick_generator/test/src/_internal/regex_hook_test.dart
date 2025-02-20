@@ -22,11 +22,7 @@ void main() {
         final result = regexHook.beforeDecode(input);
         expect(
           result,
-          isA<RegExp>().having(
-            (r) => r.pattern,
-            'pattern',
-            input,
-          ),
+          isA<RegExp>().having((r) => r.pattern, 'pattern', input),
         );
       });
 
@@ -35,11 +31,7 @@ void main() {
         final result = regexHook.beforeDecode(input);
         expect(
           result,
-          isA<RegExp>().having(
-            (r) => r.pattern,
-            'pattern',
-            input.toString(),
-          ),
+          isA<RegExp>().having((r) => r.pattern, 'pattern', input.toString()),
         );
       });
     });

@@ -48,11 +48,6 @@ class BrickGenData extends BrickGenOptions with BrickGenDataMappable {
   String applyReplacementsToTargetRelativeDescendant(String inputPath) {
     final relativePath = path.relative(inputPath, from: targetAbsolutePath);
     final resolvedRelativePath = replacements.apply(relativePath);
-    return path.normalize(
-      path.join(
-        targetAbsolutePath,
-        resolvedRelativePath,
-      ),
-    );
+    return path.normalize(path.join(targetAbsolutePath, resolvedRelativePath));
   }
 }

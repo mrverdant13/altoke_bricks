@@ -11,10 +11,10 @@ part 'async_initialization_pod.g.dart';
 // coverage:ignore-start
 /*remove-end*/
 @Riverpod(
-/*w 1v 2> w*/
-/*remove-start*/
-// coverage:ignore-end
-/*remove-end*/
+  /*w 1v 2> w*/
+  /*remove-start*/
+  // coverage:ignore-end
+  /*remove-end*/
   dependencies: [
     /*remove-start*/
     asyncApplicationDocumentsDirectory,

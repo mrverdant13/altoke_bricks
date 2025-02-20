@@ -40,7 +40,8 @@ abstract final class Vars {
     final scopeName = packageName;
     if (!scopeName.isValidScopeName) {
       throw InvalidBrickScopeNameError(
-        description: 'The package name must end with "$scopeNameSuffix" '
+        description:
+            'The package name must end with "$scopeNameSuffix" '
             '($scopeName).',
       );
     }
@@ -57,10 +58,7 @@ abstract final class Vars {
 
   /// Path to the brick generation data file of a brick scope managed by the
   /// monorepo.
-  static final scopeBrickGenDataPath = path.join(
-    scopePath,
-    'brick-gen.json',
-  );
+  static final scopeBrickGenDataPath = path.join(scopePath, 'brick-gen.json');
 
   /// Name of a brick hooks managed by the monorepo.
   static final hooksName = () {
@@ -87,7 +85,8 @@ abstract final class Vars {
     final e2eTestName = packageName;
     if (!e2eTestName.endsWith(e2eTestNameSuffix)) {
       throw InvalidBrickE2eNameError(
-        description: 'The package name must end with '
+        description:
+            'The package name must end with '
             '"$e2eTestNameSuffix" ($e2eTestName).',
       );
     }

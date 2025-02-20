@@ -4,10 +4,7 @@ import 'package:test/test.dart';
 void main() {
   group('LinesDeletion', () {
     test('can be instantiated', () {
-      const linesDeletion = LinesDeletion(
-        filePath: 'file/path',
-        ranges: [],
-      );
+      const linesDeletion = LinesDeletion(filePath: 'file/path', ranges: []);
       expect(linesDeletion, isA<LinesDeletion>());
     });
 
@@ -22,11 +19,7 @@ void main() {
       expect(
         linesDeletion,
         isA<LinesDeletion>()
-            .having(
-              (r) => r.filePath,
-              'filePath',
-              'file/path',
-            )
+            .having((r) => r.filePath, 'filePath', 'file/path')
             .having(
               (r) => r.ranges,
               'ranges',
@@ -39,36 +32,18 @@ void main() {
     });
 
     test('can be compared', () {
-      const reference = LinesDeletion(
-        filePath: 'file/path',
-        ranges: [],
-      );
-      const same = LinesDeletion(
-        filePath: 'file/path',
-        ranges: [],
-      );
-      const other = LinesDeletion(
-        filePath: 'other/file/path',
-        ranges: [],
-      );
+      const reference = LinesDeletion(filePath: 'file/path', ranges: []);
+      const same = LinesDeletion(filePath: 'file/path', ranges: []);
+      const other = LinesDeletion(filePath: 'other/file/path', ranges: []);
 
       expect(reference, same);
       expect(reference, isNot(other));
     });
 
     test('has consistent hash code', () {
-      const reference = LinesDeletion(
-        filePath: 'file/path',
-        ranges: [],
-      );
-      const same = LinesDeletion(
-        filePath: 'file/path',
-        ranges: [],
-      );
-      const other = LinesDeletion(
-        filePath: 'other/file/path',
-        ranges: [],
-      );
+      const reference = LinesDeletion(filePath: 'file/path', ranges: []);
+      const same = LinesDeletion(filePath: 'file/path', ranges: []);
+      const other = LinesDeletion(filePath: 'other/file/path', ranges: []);
 
       expect(reference.hashCode, same.hashCode);
       expect(reference.hashCode, isNot(other.hashCode));
@@ -77,75 +52,40 @@ void main() {
 
   group('LinesRange', () {
     test('can be instantiated', () {
-      const linesRange = LinesRange(
-        start: 1,
-        end: 5,
-      );
+      const linesRange = LinesRange(start: 1, end: 5);
       expect(linesRange, isA<LinesRange>());
     });
 
     test('fromJson', () {
-      final linesRange = LinesRange.fromJson(const {
-        'start': 1,
-        'end': 5,
-      });
+      final linesRange = LinesRange.fromJson(const {'start': 1, 'end': 5});
       expect(
         linesRange,
         isA<LinesRange>()
-            .having(
-              (r) => r.start,
-              'start',
-              1,
-            )
-            .having(
-              (r) => r.end,
-              'end',
-              5,
-            ),
+            .having((r) => r.start, 'start', 1)
+            .having((r) => r.end, 'end', 5),
       );
     });
 
     test('can be compared', () {
-      const reference = LinesRange(
-        start: 1,
-        end: 5,
-      );
-      const same = LinesRange(
-        start: 1,
-        end: 5,
-      );
-      const other = LinesRange(
-        start: 1,
-        end: 6,
-      );
+      const reference = LinesRange(start: 1, end: 5);
+      const same = LinesRange(start: 1, end: 5);
+      const other = LinesRange(start: 1, end: 6);
 
       expect(reference, same);
       expect(reference, isNot(other));
     });
 
     test('has consistent hash code', () {
-      const reference = LinesRange(
-        start: 1,
-        end: 5,
-      );
-      const same = LinesRange(
-        start: 1,
-        end: 5,
-      );
-      const other = LinesRange(
-        start: 1,
-        end: 6,
-      );
+      const reference = LinesRange(start: 1, end: 5);
+      const same = LinesRange(start: 1, end: 5);
+      const other = LinesRange(start: 1, end: 6);
 
       expect(reference.hashCode, same.hashCode);
       expect(reference.hashCode, isNot(other.hashCode));
     });
 
     test('contains', () {
-      const linesRange = LinesRange(
-        start: 1,
-        end: 5,
-      );
+      const linesRange = LinesRange(start: 1, end: 5);
       expect(linesRange.contains(0), isFalse);
       expect(linesRange.contains(1), isTrue);
       expect(linesRange.contains(3), isTrue);

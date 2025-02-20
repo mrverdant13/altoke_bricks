@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ShowTaskCreationDialogFab extends ConsumerWidget {
-  const ShowTaskCreationDialogFab({
-    super.key,
-  });
+  const ShowTaskCreationDialogFab({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
