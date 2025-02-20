@@ -22,9 +22,7 @@ AppFlavor? get debugFlavor => _debugFlavor;
 set debugFlavor(AppFlavor? value) {
   // coverage:ignore-start
   if (!kDebugMode) {
-    throw FlutterError(
-      'Cannot modify `debugFlavor` in non-debug builds.',
-    );
+    throw FlutterError('Cannot modify `debugFlavor` in non-debug builds.');
   }
   // coverage:ignore-end
   _debugFlavor = value;
@@ -38,9 +36,7 @@ AppFlavor get flavor {
   flavor = [
     ...AppFlavor.values,
     null,
-  ].firstWhere(
-    (flavor) => flavor?.identifier == appFlavor,
-  );
+  ].firstWhere((flavor) => flavor?.identifier == appFlavor);
   if (kDebugMode && debugFlavor != null) flavor = debugFlavor;
   if (flavor != null) return flavor;
   throw FlutterError(

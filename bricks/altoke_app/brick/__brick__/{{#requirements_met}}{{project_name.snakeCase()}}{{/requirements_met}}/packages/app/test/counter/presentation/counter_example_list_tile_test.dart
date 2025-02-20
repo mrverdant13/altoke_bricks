@@ -15,9 +15,7 @@ THEN the button should include the localized label
 ''',
     (tester) async {
       await tester.pumpAppWithScreen(
-        const Scaffold(
-          body: CounterExampleListTile(),
-        ),
+        const Scaffold(body: CounterExampleListTile()),
       );
       expect(
         find.l10n.widgetWithText(
@@ -43,9 +41,7 @@ THEN the counter screen should be shown
       await tester.pumpAppWithScreen(StackRouterScope(
             controller: stackRouter,
             stateHash: 0,
-            child: const Scaffold(
-              body: CounterExampleListTile(),
-            ),
+            child: const Scaffold(body: CounterExampleListTile()),
           ),);
       await tester.pumpAndSettle();
       await tester.tap(find.byType(CounterExampleListTile));
@@ -64,9 +60,7 @@ THEN the counter screen should be shown
       when(() => goRouter.go(any())).thenAnswer((_) async {});
       await tester.pumpAppWithScreen(InheritedGoRouter(
             goRouter: goRouter,
-            child: const Scaffold(
-              body: CounterExampleListTile(),
-            ),
+            child: const Scaffold(body: CounterExampleListTile()),
           ),);
       await tester.pumpAndSettle();
       await tester.tap(find.byType(CounterExampleListTile));

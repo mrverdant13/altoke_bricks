@@ -14,13 +14,9 @@ WHEN it is displayed
 THEN the fab should include the localized tooltip
 ''',
     (tester) async {
-      await tester.pumpAppWithScreen(
-        const IncrementCounterFab(),
-      );
+      await tester.pumpAppWithScreen(const IncrementCounterFab());
       expect(
-        find.l10n.byTooltip(
-          (l10n) => l10n.counterIncrementButtonTooltip,
-        ),
+        find.l10n.byTooltip((l10n) => l10n.counterIncrementButtonTooltip),
         findsOneWidget,
       );
     },
@@ -36,11 +32,7 @@ THEN the counter should be incremented
     (tester) async {
       final counterNotifier = MockCounter(() => 5);
       final container = ProviderContainer(
-        overrides: [
-          counterPod.overrideWith(
-            () => counterNotifier,
-          ),
-        ],
+        overrides: [counterPod.overrideWith(() => counterNotifier)],
       );
       addTearDown(container.dispose);
       final subscription = container.listen(counterPod.notifier, (_, __) {});

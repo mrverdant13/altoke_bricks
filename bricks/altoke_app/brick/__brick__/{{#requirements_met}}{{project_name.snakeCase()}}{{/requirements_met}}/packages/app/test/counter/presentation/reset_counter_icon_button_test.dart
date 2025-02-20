@@ -15,13 +15,9 @@ WHEN it is displayed
 THEN the button should include the localized tooltip
 ''',
     (tester) async {
-      await tester.pumpAppWithScreen(
-        const ResetCounterIconButton(),
-      );
+      await tester.pumpAppWithScreen(const ResetCounterIconButton());
       expect(
-        find.l10n.byTooltip(
-          (l10n) => l10n.counterResetButtonTooltip,
-        ),
+        find.l10n.byTooltip((l10n) => l10n.counterResetButtonTooltip),
         findsOneWidget,
       );
     },
@@ -37,11 +33,7 @@ THEN the counter should be reset
     (tester) async {
       final counterNotifier = MockCounter(() => 0);
       final container = ProviderContainer(
-        overrides: [
-          counterPod.overrideWith(
-            () => counterNotifier,
-          ),
-        ],
+        overrides: [counterPod.overrideWith(() => counterNotifier)],
       );
       addTearDown(container.dispose);
       final subscription = container.listen(counterPod.notifier, (_, __) {});

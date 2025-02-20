@@ -5,9 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 extension AppTester on WidgetTester {
-  Future<void> pumpRoutedApp({
-    List<Override> overrides = const [],
-  }) async {
+  Future<void> pumpRoutedApp({List<Override> overrides = const []}) async {
     return pumpWidget(
       ProviderScope(
         overrides: overrides,
@@ -45,12 +43,7 @@ extension AppTester on WidgetTester {
     Widget body, {
     List<Override> overrides = const [],
   }) async {
-    await pumpAppWithScreen(
-      Scaffold(
-        body: body,
-      ),
-      overrides: overrides,
-    );
+    await pumpAppWithScreen(Scaffold(body: body), overrides: overrides);
   }
 
   Future<void> pumpAppWithSlivers(
@@ -80,16 +73,17 @@ extension AppTester on WidgetTester {
       NestedScrollView(
         physics: physics,
         controller: scrollController,
-        headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          SliverOverlapAbsorber(
-            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-            sliver: SliverToBoxAdapter(
-              child: SizedBox(
-                height: fakeHeaderHeight,
+        headerSliverBuilder:
+            (context, innerBoxIsScrolled) => [
+              SliverOverlapAbsorber(
+                handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                  context,
+                ),
+                sliver: SliverToBoxAdapter(
+                  child: SizedBox(height: fakeHeaderHeight),
+                ),
               ),
-            ),
-          ),
-        ],
+            ],
         body: body,
       ),
       overrides: overrides,
