@@ -77,8 +77,9 @@ class LocalTasksHiveDao implements LocalTasksDao {
     };
     final complexValidationErrors = {
       if (priority == const Some(TaskPriority.high))
-        if (description case Some(value: final description)
-            when (description ?? '').trim().isEmpty)
+        if (description case Some(
+          value: final description,
+        ) when (description ?? '').trim().isEmpty)
           TaskComplexValidationError.highPriorityWithNoDescription,
     };
     if (titleValidationErrors.isNotEmpty ||
@@ -105,9 +106,7 @@ class LocalTasksHiveDao implements LocalTasksDao {
   }
 
   @override
-  Future<void> deleteOneById(
-    int taskId,
-  ) async {
+  Future<void> deleteOneById(int taskId) async {
     final tasksBox = await asyncTasksBox;
     return tasksBox.delete(taskId);
   }
@@ -115,28 +114,25 @@ class LocalTasksHiveDao implements LocalTasksDao {
 
 extension on NewTask {
   Task toTaskWithId(int id) => Task(
-        id: id,
-        title: title,
-        priority: priority,
-        completed: false,
-        description: description,
-      );
+    id: id,
+    title: title,
+    priority: priority,
+    completed: false,
+    description: description,
+  );
 }
 
 extension on Iterable<MapEntry<dynamic, Map<dynamic, dynamic>>> {
-  Iterable<Task> toTasks() => map(
-        (entry) {
-          final MapEntry(key: id, value: rawData) = entry;
-          return Task(
-            id: id as int,
-            title: rawData[hive.Task.titleJsonKey] as String,
-            priority:
-                (rawData[hive.Task.priorityJsonKey] as String).toTaskPriority(),
-            completed: rawData[hive.Task.completedJsonKey] as bool,
-            description: rawData[hive.Task.descriptionJsonKey] as String?,
-          );
-        },
-      );
+  Iterable<Task> toTasks() => map((entry) {
+    final MapEntry(key: id, value: rawData) = entry;
+    return Task(
+      id: id as int,
+      title: rawData[hive.Task.titleJsonKey] as String,
+      priority: (rawData[hive.Task.priorityJsonKey] as String).toTaskPriority(),
+      completed: rawData[hive.Task.completedJsonKey] as bool,
+      description: rawData[hive.Task.descriptionJsonKey] as String?,
+    );
+  });
 }
 
 const _identifiableTaskPriorityMap = {
@@ -150,9 +146,10 @@ const _identifiableTaskPriorityMap = {
 @visibleForTesting
 extension IdentifiableTaskPriority on TaskPriority {
   /// The priority internal identifier.
-  String get identifier => _identifiableTaskPriorityMap.entries
-      .firstWhere((entry) => entry.value == this)
-      .key;
+  String get identifier =>
+      _identifiableTaskPriorityMap.entries
+          .firstWhere((entry) => entry.value == this)
+          .key;
 }
 
 /// An extension on a [String] that represents a [TaskPriority] identifier.

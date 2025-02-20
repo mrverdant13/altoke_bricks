@@ -64,10 +64,7 @@ WHEN the task is created
 THEN a task record is registered
 ''',
         () async {
-          const newTask = NewTask(
-            title: 'title',
-            priority: TaskPriority.low,
-          );
+          const newTask = NewTask(title: 'title', priority: TaskPriority.low);
           Expression<bool> filter(drift.Tasks table) =>
               table.title.equals(newTask.title) &
               table.priority.equalsValue(newTask.priority) &
@@ -78,10 +75,7 @@ THEN a task record is registered
           await dao.createOne(newTask);
           final resultingMatchingTasksCount =
               await tasksTable.count(where: filter).getSingle();
-          expect(
-            resultingMatchingTasksCount,
-            existingMatchingTasksCount + 1,
-          );
+          expect(resultingMatchingTasksCount, existingMatchingTasksCount + 1);
         },
       );
 
@@ -94,10 +88,7 @@ THEN an exception is thrown
 AND no task record is registered
 ''',
         () async {
-          const newTask = NewTask(
-            title: '',
-            priority: TaskPriority.high,
-          );
+          const newTask = NewTask(title: '', priority: TaskPriority.high);
           final existingMatchingTasksCount =
               await tasksTable.count().getSingle();
           expect(existingMatchingTasksCount, isZero);
@@ -143,8 +134,9 @@ THEN the tasks are continuously emitted as they change
               completed: false,
             ),
           ];
-          final sortedTasksForStage00 = [...tasksForStage00]
-              .sorted((tA, tB) => tA.title.compareTo(tB.title));
+          final sortedTasksForStage00 = [
+            ...tasksForStage00,
+          ].sorted((tA, tB) => tA.title.compareTo(tB.title));
 
           // Stage 01
           const newTaskInStage01 = Task(
@@ -153,20 +145,19 @@ THEN the tasks are continuously emitted as they change
             priority: TaskPriority.low,
             completed: true,
           );
-          final tasksForStage01 = <Task>[
-            ...tasksForStage00,
-            newTaskInStage01,
-          ];
-          final sortedTasksForStage01 = [...tasksForStage01]
-              .sorted((tA, tB) => tA.title.compareTo(tB.title));
+          final tasksForStage01 = <Task>[...tasksForStage00, newTaskInStage01];
+          final sortedTasksForStage01 = [
+            ...tasksForStage01,
+          ].sorted((tA, tB) => tA.title.compareTo(tB.title));
 
           // Stage 02
           final tasksForStage02 = <Task>[
             for (final task in tasksForStage01)
               if (!task.title.contains('01')) task,
           ];
-          final sortedTasksForStage02 = [...tasksForStage02]
-              .sorted((tA, tB) => tA.title.compareTo(tB.title));
+          final sortedTasksForStage02 = [
+            ...tasksForStage02,
+          ].sorted((tA, tB) => tA.title.compareTo(tB.title));
 
           // Stage 03
           final tasksForStage03 = <Task>[
@@ -182,56 +173,51 @@ THEN the tasks are continuously emitted as they change
               else
                 task,
           ];
-          final sortedTasksForStage03 = [...tasksForStage03]
-              .sorted((tA, tB) => tA.title.compareTo(tB.title));
+          final sortedTasksForStage03 = [
+            ...tasksForStage03,
+          ].sorted((tA, tB) => tA.title.compareTo(tB.title));
 
           unawaited(
             expectLater(
               stream,
-              emitsInOrder(
-                [
-                  List<Task>.empty(), // initially empty
-                  orderedEquals(sortedTasksForStage00),
-                  orderedEquals(sortedTasksForStage01),
-                  orderedEquals(sortedTasksForStage02),
-                  orderedEquals(sortedTasksForStage03),
-                ],
-              ),
+              emitsInOrder([
+                List<Task>.empty(), // initially empty
+                orderedEquals(sortedTasksForStage00),
+                orderedEquals(sortedTasksForStage01),
+                orderedEquals(sortedTasksForStage02),
+                orderedEquals(sortedTasksForStage03),
+              ]),
             ),
           );
 
           // Stage 00
           await database.transaction(
             () async => tasksTable.insertAll(
-              tasksForStage00.map(
-                (task) => task.toDrift(),
-              ),
+              tasksForStage00.map((task) => task.toDrift()),
             ),
           );
 
           // Stage 01
           await database.transaction(
-            () async => tasksTable.insertOne(
-              newTaskInStage01.toDrift(),
-            ),
+            () async => tasksTable.insertOne(newTaskInStage01.toDrift()),
           );
 
           // Stage 02
           await database.transaction(
-            () async => tasksTable.deleteWhere(
-              (table) => table.title.contains('01'),
-            ),
+            () async =>
+                tasksTable.deleteWhere((table) => table.title.contains('01')),
           );
 
           // Stage 03
           await database.transaction(
-            () async => (tasksTable.update()
-                  ..where((table) => table.description.isNull()))
-                .write(
-              const drift.TasksCompanion(
-                description: Value('updated description'),
-              ),
-            ),
+            () async =>
+                (tasksTable.update()
+                      ..where((table) => table.description.isNull()))
+                    .write(
+                      const drift.TasksCompanion(
+                        description: Value('updated description'),
+                      ),
+                    ),
           );
         },
       );
@@ -282,10 +268,7 @@ THEN a task record is updated
           );
           final resultingMatchingTasksCount =
               await tasksTable.count(where: filter).getSingle();
-          expect(
-            resultingMatchingTasksCount,
-            existingMatchingTasksCount + 1,
-          );
+          expect(resultingMatchingTasksCount, existingMatchingTasksCount + 1);
         },
       );
 
@@ -409,14 +392,16 @@ AND the deleted task is returned
             description: 'description',
           );
           await tasksTable.insertOne(task.toDrift());
-          final initialMatchingTasksCount = await tasksTable
-              .count(where: (table) => table.id.equals(taskId))
-              .getSingle();
+          final initialMatchingTasksCount =
+              await tasksTable
+                  .count(where: (table) => table.id.equals(taskId))
+                  .getSingle();
           expect(initialMatchingTasksCount, 1);
           await dao.deleteOneById(taskId);
-          final resultingMatchingTasksCount = await tasksTable
-              .count(where: (table) => table.id.equals(taskId))
-              .getSingle();
+          final resultingMatchingTasksCount =
+              await tasksTable
+                  .count(where: (table) => table.id.equals(taskId))
+                  .getSingle();
           expect(resultingMatchingTasksCount, isZero);
         },
       );

@@ -10,9 +10,7 @@ import 'package:meta/meta.dart';
 /// {@endtemplate}
 class LocalTasksIsarDao implements LocalTasksDao {
   /// {@macro {{#use_isar}}isar_local_database{{/use_isar}}.local_tasks_dao}
-  LocalTasksIsarDao({
-    required this.database,
-  });
+  LocalTasksIsarDao({required this.database});
 
   /// The internal Isar database.
   @visibleForTesting
@@ -39,19 +37,17 @@ class LocalTasksIsarDao implements LocalTasksDao {
         complexValidationErrors: complexValidationErrors,
       );
     }
-    final rawTask = await database.writeTxn(
-      () async {
-        final taskId = await tasksCollection.put(
-          isar.Task()
-            ..title = title.trim()
-            ..priority = priority.identifier
-            ..description =
-                (description ?? '').trim().isEmpty ? null : description?.trim()
-            ..completed = false,
-        );
-        return tasksCollection.get(taskId);
-      },
-    );
+    final rawTask = await database.writeTxn(() async {
+      final taskId = await tasksCollection.put(
+        isar.Task()
+          ..title = title.trim()
+          ..priority = priority.identifier
+          ..description =
+              (description ?? '').trim().isEmpty ? null : description?.trim()
+          ..completed = false,
+      );
+      return tasksCollection.get(taskId);
+    });
     return rawTask!.toTask();
   }
 
@@ -80,8 +76,9 @@ class LocalTasksIsarDao implements LocalTasksDao {
     };
     final complexValidationErrors = {
       if (priority == const Some(TaskPriority.high))
-        if (description case Some(value: final description)
-            when (description ?? '').trim().isEmpty)
+        if (description case Some(
+          value: final description,
+        ) when (description ?? '').trim().isEmpty)
           TaskComplexValidationError.highPriorityWithNoDescription,
     };
     if (titleValidationErrors.isNotEmpty ||
@@ -104,37 +101,29 @@ class LocalTasksIsarDao implements LocalTasksDao {
       rawTask.description =
           (description ?? '').trim().isEmpty ? null : description?.trim();
     }
-    await database.writeTxn(
-      () async {
-        await tasksCollection.put(rawTask);
-      },
-    );
+    await database.writeTxn(() async {
+      await tasksCollection.put(rawTask);
+    });
   }
 
   @override
-  Future<void> deleteOneById(
-    int taskId,
-  ) async {
-    await database.writeTxn(
-      () async => tasksCollection.delete(taskId),
-    );
+  Future<void> deleteOneById(int taskId) async {
+    await database.writeTxn(() async => tasksCollection.delete(taskId));
   }
 }
 
 extension on isar.Task {
   Task toTask() => Task(
-        id: id,
-        title: title,
-        priority: priority.toTaskPriority(),
-        completed: completed,
-        description: description,
-      );
+    id: id,
+    title: title,
+    priority: priority.toTaskPriority(),
+    completed: completed,
+    description: description,
+  );
 }
 
 extension on List<isar.Task> {
-  Iterable<Task> toTasks() => map(
-        (result) => result.toTask(),
-      );
+  Iterable<Task> toTasks() => map((result) => result.toTask());
 }
 
 const _identifiableTaskPriorityMap = {
@@ -148,9 +137,10 @@ const _identifiableTaskPriorityMap = {
 @visibleForTesting
 extension IdentifiableTaskPriority on TaskPriority {
   /// The priority internal identifier.
-  String get identifier => _identifiableTaskPriorityMap.entries
-      .firstWhere((entry) => entry.value == this)
-      .key;
+  String get identifier =>
+      _identifiableTaskPriorityMap.entries
+          .firstWhere((entry) => entry.value == this)
+          .key;
 }
 
 /// An extension on a [String] that represents a [TaskPriority] identifier.
