@@ -21,9 +21,7 @@ class TaskPriorityConverter extends TypeConverter<TaskPriority, String> {
 
   @override
   String toSql(TaskPriority value) {
-    final entry = _map.entries.firstWhere(
-      (entry) => entry.value == value,
-    );
+    final entry = _map.entries.firstWhere((entry) => entry.value == value);
     return entry.key;
   }
 }
