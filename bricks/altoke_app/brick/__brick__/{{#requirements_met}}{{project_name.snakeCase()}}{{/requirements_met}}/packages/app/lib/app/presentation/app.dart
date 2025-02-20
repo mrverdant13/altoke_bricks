@@ -6,9 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MyApp extends ConsumerWidget {
-  const MyApp({
-    super.key,
-  });
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -18,7 +16,8 @@ class MyApp extends ConsumerWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: routerConfig,
-      builder: (context, child) => FlavorBanner(
+      builder:
+          (context, child) => FlavorBanner(
         child: InitializationWrapper(
           child: child!,
         ),
@@ -29,10 +28,7 @@ class MyApp extends ConsumerWidget {
 
 @visibleForTesting
 class InitializationWrapper extends ConsumerWidget {
-  const InitializationWrapper({
-    required this.child,
-    super.key,
-  });
+  const InitializationWrapper({required this.child, super.key});
 
   final Widget child;
 
@@ -52,25 +48,19 @@ class InitializationWrapper extends ConsumerWidget {
 
 @visibleForTesting
 class InitializingScreen extends StatelessWidget {
-  const InitializingScreen({
-    super.key,
-  });
+  const InitializingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: CircularProgressIndicator.adaptive(),
-      ),
+      body: Center(child: CircularProgressIndicator.adaptive()),
     );
   }
 }
 
 @visibleForTesting
 class ErroredInitializationScreen extends ConsumerWidget {
-  const ErroredInitializationScreen({
-    super.key,
-  });
+  const ErroredInitializationScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -92,9 +82,7 @@ class ErroredInitializationScreen extends ConsumerWidget {
                 onPressed: () {
                   ref.invalidate(asyncInitializationPod);
                 },
-                child: Text(
-                  l10n.genericRetryButtonLabel,
-                ),
+                child: Text(l10n.genericRetryButtonLabel),
               ),
             ],
           ),

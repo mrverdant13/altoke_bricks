@@ -4,12 +4,15 @@ import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements
 import '../../helpers/helpers.dart';
 
 void main() {
-  testWidgets('''
+  testWidgets(
+    '''
 
 GIVEN a home body
 WHEN it is displayed
 THEN a counter example list tile should be displayed
-''', (tester) async {
-    await tester.pumpAppWithScaffold(const HomeBody());
-    expect(find.byType(CounterExampleListTile), findsOneWidget);});
+''',
+    (tester) async {
+      await tester.pumpAppWithScaffold(const HomeBody());
+      expect(find.byType(CounterExampleListTile), findsOneWidget);},
+  );
 }

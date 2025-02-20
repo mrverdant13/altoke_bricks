@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class IncrementCounterFab extends ConsumerWidget {
-  const IncrementCounterFab({
-    super.key,
-  });
+  const IncrementCounterFab({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

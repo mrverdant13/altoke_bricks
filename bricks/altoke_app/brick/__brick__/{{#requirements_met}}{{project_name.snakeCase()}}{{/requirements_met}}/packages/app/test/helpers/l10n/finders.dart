@@ -59,10 +59,7 @@ class _LocalizedTooltipFinder extends MatchFinder {
     );
     if (l10n == null) return false;
     final text = selector(l10n);
-    final textFinder = find.byTooltip(
-      text,
-      skipOffstage: skipOffstage,
-    );
+    final textFinder = find.byTooltip(text, skipOffstage: skipOffstage);
     return textFinder.findInCandidates([candidate]).isNotEmpty;
   }
 }
@@ -104,10 +101,7 @@ class L10nFinders {
         skipOffstage: skipOffstage,
         description: description,
       ),
-      matching: find.byType(
-        widgetType,
-        skipOffstage: skipOffstage,
-      ),
+      matching: find.byType(widgetType, skipOffstage: skipOffstage),
     );
   }
 
