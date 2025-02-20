@@ -43,28 +43,25 @@ class ImmediateFirerStream<T> extends Stream<T> {
 
   /// The multi-subscription stream.
   @visibleForTesting
-  late final multiStream = Stream<T>.multi(
-    (controller) async {
-      if (sourceIsDone) {
-        controller.closeSync();
-        if (currentListeners.isEmpty) {
-          await sourceSubscription?.cancel();
-          sourceSubscription = null;
-        }
-        return;
+  late final multiStream = Stream<T>.multi((controller) async {
+    if (sourceIsDone) {
+      controller.closeSync();
+      if (currentListeners.isEmpty) {
+        await sourceSubscription?.cancel();
+        sourceSubscription = null;
       }
-      currentListeners.add(controller);
-      if (latestValue is T) controller.addSync(latestValue as T);
-      controller.onCancel = () {
-        currentListeners.remove(controller);
-        if (currentListeners.isEmpty) {
-          sourceSubscription?.cancel();
-          sourceSubscription = null;
-        }
-      };
-    },
-    isBroadcast: source.isBroadcast,
-  );
+      return;
+    }
+    currentListeners.add(controller);
+    if (latestValue is T) controller.addSync(latestValue as T);
+    controller.onCancel = () {
+      currentListeners.remove(controller);
+      if (currentListeners.isEmpty) {
+        sourceSubscription?.cancel();
+        sourceSubscription = null;
+      }
+    };
+  }, isBroadcast: source.isBroadcast);
 
   /// Handles the data event from the source stream.
   void onSourceData(T event) {
@@ -94,9 +91,7 @@ class ImmediateFirerStream<T> extends Stream<T> {
   }
 
   /// Listens to the source stream.
-  StreamSubscription<T>? listenToSource({
-    bool? cancelOnError,
-  }) {
+  StreamSubscription<T>? listenToSource({bool? cancelOnError}) {
     if (sourceIsDone) return null;
     return sourceSubscription ??= source.listen(
       onSourceData,

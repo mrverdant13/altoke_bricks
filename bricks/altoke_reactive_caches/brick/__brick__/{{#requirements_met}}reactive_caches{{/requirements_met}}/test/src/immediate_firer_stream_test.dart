@@ -72,20 +72,11 @@ AND the error should be forwarded and emitted
             },
           );
           await Future.microtask(() {});
-          expect(
-            values1,
-            isEmpty,
-          );
+          expect(values1, isEmpty);
           controller
             ..add(1)
             ..addError('1');
-          expect(
-            values1,
-            [
-              (value: 1),
-              (error: '1'),
-            ],
-          );
+          expect(values1, [(value: 1), (error: '1')]);
           final values2 = <Object>[];
           final sub2 = stream.listen(
             (value) => values2.add((value: value)),
@@ -97,24 +88,9 @@ AND the error should be forwarded and emitted
           controller
             ..add(2)
             ..addError('2');
-          expect(
-            values1,
-            [
-              (value: 1),
-              (error: '1'),
-              (value: 2),
-              (error: '2'),
-            ],
-          );
-          expect(values2, [
-            (value: 1),
-            (value: 2),
-            (error: '2'),
-          ]);
-          await [
-            sub1.cancel(),
-            sub2.cancel(),
-          ].wait;
+          expect(values1, [(value: 1), (error: '1'), (value: 2), (error: '2')]);
+          expect(values2, [(value: 1), (value: 2), (error: '2')]);
+          await [sub1.cancel(), sub2.cancel()].wait;
         },
       );
 
@@ -166,10 +142,7 @@ AND the subscription should be canceled
           final sub2 = stream.listen((_) {});
           expect(stream.currentListeners, isEmpty);
           expect(stream.sourceSubscription, isNull);
-          await [
-            sub1.cancel(),
-            sub2.cancel(),
-          ].wait;
+          await [sub1.cancel(), sub2.cancel()].wait;
         },
       );
     },

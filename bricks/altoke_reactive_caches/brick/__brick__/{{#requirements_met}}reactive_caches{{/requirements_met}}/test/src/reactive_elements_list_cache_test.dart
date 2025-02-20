@@ -17,13 +17,7 @@ THEN an instance of the cache is returned
       final cache = ReactiveElementsListCache<String?>();
       expect(cache, isNotNull);
       expect(cache, isA<ReactiveElementsListCache<String?>>());
-      expect(
-        cache.equalityChecker(
-          [''],
-          [''],
-        ),
-        isTrue,
-      );
+      expect(cache.equalityChecker([''], ['']), isTrue);
       expect(
         cache.equalityChecker(
           ['string 1', 'string 2'],
@@ -62,19 +56,17 @@ GIVEN a reactive cache for a list of elements''',
     () {
       late ReactiveElementsListCache<String?> cache;
 
-      setUp(
-        () {
-          cache = ReactiveElementsListCache<String?>(
-            equalityChecker: (a, b) {
-              if (a.length != b.length) return false;
-              for (var i = 0; i < a.length; i++) {
-                if (a[i]?.trim() != b[i]?.trim()) return false;
-              }
-              return true;
-            },
-          );
-        },
-      );
+      setUp(() {
+        cache = ReactiveElementsListCache<String?>(
+          equalityChecker: (a, b) {
+            if (a.length != b.length) return false;
+            for (var i = 0; i < a.length; i++) {
+              if (a[i]?.trim() != b[i]?.trim()) return false;
+            }
+            return true;
+          },
+        );
+      });
 
       test(
         '''
@@ -84,16 +76,10 @@ WHEN another list is cached
 THEN the cached list is the new list
 ''',
         () {
-          cache.elements = [
-            'original value 1',
-            'original value 2',
-          ];
+          cache.elements = ['original value 1', 'original value 2'];
           expect(
             cache.elements,
-            orderedEquals([
-              'original value 1',
-              'original value 2',
-            ]),
+            orderedEquals(['original value 1', 'original value 2']),
           );
           cache.set([
             'new value 1',
@@ -125,16 +111,10 @@ WHEN another list is appended
 THEN the cached list is updated with the appended list
 ''',
         () {
-          cache.elements = [
-            'original value 1',
-            'original value 2',
-          ];
+          cache.elements = ['original value 1', 'original value 2'];
           expect(
             cache.elements,
-            orderedEquals([
-              'original value 1',
-              'original value 2',
-            ]),
+            orderedEquals(['original value 1', 'original value 2']),
           );
           cache.appendMany([
             null,
@@ -291,17 +271,10 @@ THEN the filtered cached list is returned
               'value 4',
             ]),
           );
-          final element = cache.get(
-            where: (element) => element != null,
-          );
+          final element = cache.get(where: (element) => element != null);
           expect(
             element,
-            orderedEquals([
-              'value 1',
-              'value 2',
-              'value 3',
-              'value 4',
-            ]),
+            orderedEquals(['value 1', 'value 2', 'value 3', 'value 4']),
           );
         },
       );
@@ -324,9 +297,7 @@ THEN the complete cached list is continuously emitted as it changes
           unawaited(
             expectLater(
               stream,
-              emitsInOrder([
-                for (final value in values) orderedEquals(value),
-              ]),
+              emitsInOrder([for (final value in values) orderedEquals(value)]),
             ),
           );
           expect(cache.streamController, isNotNull);
@@ -378,9 +349,7 @@ WHEN the cached list is watched with a filter
 THEN the filtered cached list is continuously emitted as it changes
 ''',
         () async {
-          final stream = cache.watch(
-            where: (element) => element != null,
-          );
+          final stream = cache.watch(where: (element) => element != null);
           final values = <List<String?>>[
             [],
             ['value 1', 'value 2', null, 'value 3', null],
@@ -495,19 +464,16 @@ THEN the cached list is updated with the inserted list
               'original value 7',
             ]),
           );
-          cache.insertMany(
-            [
-              'new value 3',
-              null,
-              'new value 4',
-              null,
-              null,
-              'new value 5',
-              null,
-              null,
-            ],
-            index: 5,
-          );
+          cache.insertMany([
+            'new value 3',
+            null,
+            'new value 4',
+            null,
+            null,
+            'new value 5',
+            null,
+            null,
+          ], index: 5);
           expect(
             cache.elements,
             orderedEquals([
@@ -544,35 +510,16 @@ WHEN another collection of indexed elements is requested to be placed (append gr
 THEN the cached list is updated with the placed indexed elements
 ''',
         () {
-          cache.elements = [
-            '0',
-            '1',
-            '2',
-            '3',
-            '4',
-            '5',
-            '6',
-          ];
+          cache.elements = ['0', '1', '2', '3', '4', '5', '6'];
           expect(
             cache.elements,
-            orderedEquals([
-              '0',
-              '1',
-              '2',
-              '3',
-              '4',
-              '5',
-              '6',
-            ]),
+            orderedEquals(['0', '1', '2', '3', '4', '5', '6']),
           );
-          cache.placeMany(
-            [
-              (2, '2.1'),
-              (2, '2.2'),
-              (4, '4.1'),
-            ],
-            mode: PlacementMode.appendGroup,
-          );
+          cache.placeMany([
+            (2, '2.1'),
+            (2, '2.2'),
+            (4, '4.1'),
+          ], mode: PlacementMode.appendGroup);
           expect(
             cache.elements,
             orderedEquals([
@@ -599,48 +546,19 @@ WHEN another collection of indexed elements is requested to be placed (append fi
 THEN the cached list is updated with the placed indexed elements
 ''',
         () {
-          cache.elements = [
-            '0',
-            '1',
-            '2',
-            '3',
-            '4',
-            '5',
-            '6',
-          ];
+          cache.elements = ['0', '1', '2', '3', '4', '5', '6'];
           expect(
             cache.elements,
-            orderedEquals([
-              '0',
-              '1',
-              '2',
-              '3',
-              '4',
-              '5',
-              '6',
-            ]),
+            orderedEquals(['0', '1', '2', '3', '4', '5', '6']),
           );
-          cache.placeMany(
-            [
-              (2, '2.1'),
-              (2, '2.2'),
-              (4, '4.1'),
-            ],
-            mode: PlacementMode.appendFirst,
-          );
+          cache.placeMany([
+            (2, '2.1'),
+            (2, '2.2'),
+            (4, '4.1'),
+          ], mode: PlacementMode.appendFirst);
           expect(
             cache.elements,
-            orderedEquals([
-              '0',
-              '1',
-              '2',
-              '2.1',
-              '3',
-              '4',
-              '4.1',
-              '5',
-              '6',
-            ]),
+            orderedEquals(['0', '1', '2', '2.1', '3', '4', '4.1', '5', '6']),
           );
         },
       );
@@ -653,48 +571,19 @@ WHEN another collection of indexed elements is requested to be placed (append la
 THEN the cached list is updated with the placed indexed elements
 ''',
         () {
-          cache.elements = [
-            '0',
-            '1',
-            '2',
-            '3',
-            '4',
-            '5',
-            '6',
-          ];
+          cache.elements = ['0', '1', '2', '3', '4', '5', '6'];
           expect(
             cache.elements,
-            orderedEquals([
-              '0',
-              '1',
-              '2',
-              '3',
-              '4',
-              '5',
-              '6',
-            ]),
+            orderedEquals(['0', '1', '2', '3', '4', '5', '6']),
           );
-          cache.placeMany(
-            [
-              (2, '2.1'),
-              (2, '2.2'),
-              (4, '4.1'),
-            ],
-            mode: PlacementMode.appendLast,
-          );
+          cache.placeMany([
+            (2, '2.1'),
+            (2, '2.2'),
+            (4, '4.1'),
+          ], mode: PlacementMode.appendLast);
           expect(
             cache.elements,
-            orderedEquals([
-              '0',
-              '1',
-              '2',
-              '2.2',
-              '3',
-              '4',
-              '4.1',
-              '5',
-              '6',
-            ]),
+            orderedEquals(['0', '1', '2', '2.2', '3', '4', '4.1', '5', '6']),
           );
         },
       );
@@ -707,35 +596,16 @@ WHEN another collection of indexed elements is requested to be placed (prepend g
 THEN the cached list is updated with the placed indexed elements
 ''',
         () {
-          cache.elements = [
-            '0',
-            '1',
-            '2',
-            '3',
-            '4',
-            '5',
-            '6',
-          ];
+          cache.elements = ['0', '1', '2', '3', '4', '5', '6'];
           expect(
             cache.elements,
-            orderedEquals([
-              '0',
-              '1',
-              '2',
-              '3',
-              '4',
-              '5',
-              '6',
-            ]),
+            orderedEquals(['0', '1', '2', '3', '4', '5', '6']),
           );
-          cache.placeMany(
-            [
-              (2, '2.1'),
-              (2, '2.2'),
-              (4, '4.1'),
-            ],
-            mode: PlacementMode.prependGroup,
-          );
+          cache.placeMany([
+            (2, '2.1'),
+            (2, '2.2'),
+            (4, '4.1'),
+          ], mode: PlacementMode.prependGroup);
           expect(
             cache.elements,
             orderedEquals([
@@ -762,48 +632,19 @@ WHEN another collection of indexed elements is requested to be placed (prepend f
 THEN the cached list is updated with the placed indexed elements
 ''',
         () {
-          cache.elements = [
-            '0',
-            '1',
-            '2',
-            '3',
-            '4',
-            '5',
-            '6',
-          ];
+          cache.elements = ['0', '1', '2', '3', '4', '5', '6'];
           expect(
             cache.elements,
-            orderedEquals([
-              '0',
-              '1',
-              '2',
-              '3',
-              '4',
-              '5',
-              '6',
-            ]),
+            orderedEquals(['0', '1', '2', '3', '4', '5', '6']),
           );
-          cache.placeMany(
-            [
-              (2, '2.1'),
-              (2, '2.2'),
-              (4, '4.1'),
-            ],
-            mode: PlacementMode.prependFirst,
-          );
+          cache.placeMany([
+            (2, '2.1'),
+            (2, '2.2'),
+            (4, '4.1'),
+          ], mode: PlacementMode.prependFirst);
           expect(
             cache.elements,
-            orderedEquals([
-              '0',
-              '1',
-              '2.1',
-              '2',
-              '3',
-              '4.1',
-              '4',
-              '5',
-              '6',
-            ]),
+            orderedEquals(['0', '1', '2.1', '2', '3', '4.1', '4', '5', '6']),
           );
         },
       );
@@ -816,48 +657,19 @@ WHEN another collection of indexed elements is requested to be placed (prepend l
 THEN the cached list is updated with the placed indexed elements
 ''',
         () {
-          cache.elements = [
-            '0',
-            '1',
-            '2',
-            '3',
-            '4',
-            '5',
-            '6',
-          ];
+          cache.elements = ['0', '1', '2', '3', '4', '5', '6'];
           expect(
             cache.elements,
-            orderedEquals([
-              '0',
-              '1',
-              '2',
-              '3',
-              '4',
-              '5',
-              '6',
-            ]),
+            orderedEquals(['0', '1', '2', '3', '4', '5', '6']),
           );
-          cache.placeMany(
-            [
-              (2, '2.1'),
-              (2, '2.2'),
-              (4, '4.1'),
-            ],
-            mode: PlacementMode.prependLast,
-          );
+          cache.placeMany([
+            (2, '2.1'),
+            (2, '2.2'),
+            (4, '4.1'),
+          ], mode: PlacementMode.prependLast);
           expect(
             cache.elements,
-            orderedEquals([
-              '0',
-              '1',
-              '2.2',
-              '2',
-              '3',
-              '4.1',
-              '4',
-              '5',
-              '6',
-            ]),
+            orderedEquals(['0', '1', '2.2', '2', '3', '4.1', '4', '5', '6']),
           );
         },
       );
@@ -870,47 +682,19 @@ WHEN another collection of indexed elements is requested to be placed (replace w
 THEN the cached list is updated with the placed indexed elements
 ''',
         () {
-          cache.elements = [
-            '0',
-            '1',
-            '2',
-            '3',
-            '4',
-            '5',
-            '6',
-          ];
+          cache.elements = ['0', '1', '2', '3', '4', '5', '6'];
           expect(
             cache.elements,
-            orderedEquals([
-              '0',
-              '1',
-              '2',
-              '3',
-              '4',
-              '5',
-              '6',
-            ]),
+            orderedEquals(['0', '1', '2', '3', '4', '5', '6']),
           );
-          cache.placeMany(
-            [
-              (2, '2.1'),
-              (2, '2.2'),
-              (4, '4.1'),
-            ],
-            mode: PlacementMode.replaceWithGroup,
-          );
+          cache.placeMany([
+            (2, '2.1'),
+            (2, '2.2'),
+            (4, '4.1'),
+          ], mode: PlacementMode.replaceWithGroup);
           expect(
             cache.elements,
-            orderedEquals([
-              '0',
-              '1',
-              '2.1',
-              '2.2',
-              '3',
-              '4.1',
-              '5',
-              '6',
-            ]),
+            orderedEquals(['0', '1', '2.1', '2.2', '3', '4.1', '5', '6']),
           );
         },
       );
@@ -923,46 +707,19 @@ WHEN another collection of indexed elements is requested to be placed (replace w
 THEN the cached list is updated with the placed indexed elements
 ''',
         () {
-          cache.elements = [
-            '0',
-            '1',
-            '2',
-            '3',
-            '4',
-            '5',
-            '6',
-          ];
+          cache.elements = ['0', '1', '2', '3', '4', '5', '6'];
           expect(
             cache.elements,
-            orderedEquals([
-              '0',
-              '1',
-              '2',
-              '3',
-              '4',
-              '5',
-              '6',
-            ]),
+            orderedEquals(['0', '1', '2', '3', '4', '5', '6']),
           );
-          cache.placeMany(
-            [
-              (2, '2.1'),
-              (2, '2.2'),
-              (4, '4.1'),
-            ],
-            mode: PlacementMode.replaceWithFirst,
-          );
+          cache.placeMany([
+            (2, '2.1'),
+            (2, '2.2'),
+            (4, '4.1'),
+          ], mode: PlacementMode.replaceWithFirst);
           expect(
             cache.elements,
-            orderedEquals([
-              '0',
-              '1',
-              '2.1',
-              '3',
-              '4.1',
-              '5',
-              '6',
-            ]),
+            orderedEquals(['0', '1', '2.1', '3', '4.1', '5', '6']),
           );
         },
       );
@@ -975,46 +732,19 @@ WHEN another collection of indexed elements is requested to be placed (replace w
 THEN the cached list is updated with the placed indexed elements
 ''',
         () {
-          cache.elements = [
-            '0',
-            '1',
-            '2',
-            '3',
-            '4',
-            '5',
-            '6',
-          ];
+          cache.elements = ['0', '1', '2', '3', '4', '5', '6'];
           expect(
             cache.elements,
-            orderedEquals([
-              '0',
-              '1',
-              '2',
-              '3',
-              '4',
-              '5',
-              '6',
-            ]),
+            orderedEquals(['0', '1', '2', '3', '4', '5', '6']),
           );
-          cache.placeMany(
-            [
-              (2, '2.1'),
-              (2, '2.2'),
-              (4, '4.1'),
-            ],
-            mode: PlacementMode.replaceWithLast,
-          );
+          cache.placeMany([
+            (2, '2.1'),
+            (2, '2.2'),
+            (4, '4.1'),
+          ], mode: PlacementMode.replaceWithLast);
           expect(
             cache.elements,
-            orderedEquals([
-              '0',
-              '1',
-              '2.2',
-              '3',
-              '4.1',
-              '5',
-              '6',
-            ]),
+            orderedEquals(['0', '1', '2.2', '3', '4.1', '5', '6']),
           );
         },
       );
@@ -1094,17 +824,10 @@ THEN the cached list is updated without the removed elements
               'value 4',
             ]),
           );
-          cache.remove(
-            where: (_, element) => element == null,
-          );
+          cache.remove(where: (_, element) => element == null);
           expect(
             cache.elements,
-            orderedEquals([
-              'value 1',
-              'value 2',
-              'value 3',
-              'value 4',
-            ]),
+            orderedEquals(['value 1', 'value 2', 'value 3', 'value 4']),
           );
         },
       );
@@ -1139,12 +862,7 @@ THEN the cached list is updated without the removed elements
           cache.removeLast(2);
           expect(
             cache.elements,
-            orderedEquals([
-              'value 1',
-              'value 2',
-              null,
-              'value 3',
-            ]),
+            orderedEquals(['value 1', 'value 2', null, 'value 3']),
           );
         },
       );
@@ -1179,12 +897,7 @@ THEN the cached list is updated without the removed elements
           cache.removeFirst(2);
           expect(
             cache.elements,
-            orderedEquals([
-              null,
-              'value 3',
-              null,
-              'value 4',
-            ]),
+            orderedEquals([null, 'value 3', null, 'value 4']),
           );
         },
       );
