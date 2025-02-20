@@ -13,7 +13,7 @@ environment:
 dependencies:
   #w 1v 2> w#
   #{{#use_dart_mappable}}#
-  dart_mappable: ^4.3.0
+  dart_mappable: ^4.4.0
   #{{/use_dart_mappable}}#
   #{{#use_equatable}}#
   equatable: ^2.0.7
@@ -30,7 +30,7 @@ dependencies:
 dev_dependencies:
   #{{#use_code_generation}}#
   #w 1v 2> w#
-  build_runner: ^2.4.14
+  build_runner: ^2.4.15
   #w 1v 2> w#
   #{{/use_code_generation}}#
   #{{#use_dart_mappable}}#
