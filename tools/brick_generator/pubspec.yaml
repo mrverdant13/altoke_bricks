@@ -11,7 +11,7 @@ dependencies:
   meta: ^1.16.0
   monorepo_elements:
     path: ../monorepo_elements
-  path: ^1.9.0
+  path: ^1.9.1
   shell:
     path: ../shell
 

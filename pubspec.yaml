@@ -31,7 +31,7 @@ melos:
         collection: ^1.19.0
         mason: ^0.1.0
         meta: ^1.16.0
-        path: ^1.9.0
+        path: ^1.9.1
       dev_dependencies:
         build_runner: ^2.4.15
         collection: ^1.19.1
@@ -39,7 +39,7 @@ melos:
         melos: ^7.0.0-dev.7
         meta: ^1.16.0
         mocktail: ^1.0.4
-        path: ^1.9.0
+        path: ^1.9.1
         test: ^1.25.8
         very_good_analysis: ^7.0.0
     clean:
