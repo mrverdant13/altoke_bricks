@@ -8,7 +8,7 @@ environment:
 
 dependencies:
   dart_mappable: ^4.4.0
-  meta: ^1.15.0
+  meta: ^1.16.0
   monorepo_elements:
     path: ../monorepo_elements
   path: ^1.9.0
