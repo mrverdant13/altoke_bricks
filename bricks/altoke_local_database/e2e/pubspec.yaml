@@ -10,7 +10,7 @@ dev_dependencies:
   local_database_alternative:
     path: ../../../tools/local_database_alternative
   mason: ^0.1.0
-  meta: ^1.15.0
+  meta: ^1.16.0
   mocktail: ^1.0.4
   monorepo_elements:
     path: ../../../tools/monorepo_elements

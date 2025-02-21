@@ -24,7 +24,7 @@ dependencies:
   drift: ^2.25.1
   local_database:
     path: ../local_database/
-  meta: ^1.15.0
+  meta: ^1.16.0
 
 dev_dependencies:
   build_runner: ^2.4.15

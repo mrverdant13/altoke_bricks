@@ -21,7 +21,7 @@ melos:
         sdk: ">=3.7.0 <4.0.0"
         flutter: ">=3.29.0 <4.0.0"
       dependencies:
-        meta: ^1.15.0
+        meta: ^1.16.0
       dev_dependencies:
         very_good_analysis: ^7.0.0
     clean:
