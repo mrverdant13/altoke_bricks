@@ -12,7 +12,7 @@ dev_dependencies:
   mocktail: ^1.0.4
   monorepo_elements:
     path: ../../../tools/monorepo_elements
-  path: ^1.9.0
+  path: ^1.9.1
   router_package:
     path: ../../../tools/router_package
   shell: any

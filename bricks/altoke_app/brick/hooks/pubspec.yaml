@@ -8,7 +8,7 @@ environment:
 dependencies:
   collection: ^1.19.0
   mason: ^0.1.0
-  path: ^1.9.0
+  path: ^1.9.1
   router_package:
     git:
       url: https://github.com/mrverdant13/altoke_bricks.git

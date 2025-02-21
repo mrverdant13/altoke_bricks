@@ -7,7 +7,7 @@ environment:
 
 dependencies:
   mason: ^0.1.0
-  path: ^1.9.0
+  path: ^1.9.1
   pubspec_deps_sorter:
     git:
       url: https://github.com/mrverdant13/altoke_bricks.git
