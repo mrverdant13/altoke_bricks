@@ -6,7 +6,7 @@ environment:
   sdk: ">=3.7.0 <4.0.0"
 
 dependencies:
-  collection: ^1.19.0
+  collection: ^1.19.1
   mason: ^0.1.0
   path: ^1.9.1
   router_package:
