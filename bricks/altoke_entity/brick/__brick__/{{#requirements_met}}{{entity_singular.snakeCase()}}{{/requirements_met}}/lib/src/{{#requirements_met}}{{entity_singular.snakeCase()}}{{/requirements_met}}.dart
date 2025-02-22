@@ -28,10 +28,7 @@ class {{entity_singular.pascalCase()}} with {{entity_singular.pascalCase()}}Mapp
 @immutable
 class New{{entity_singular.pascalCase()}} with New{{entity_singular.pascalCase()}}Mappable {
   /// {@macro {{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}.new_{{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}}
-  const New{{entity_singular.pascalCase()}}({
-    required this.name,
-    this.description,
-  });
+  const New{{entity_singular.pascalCase()}}({required this.name, this.description});
 
   /// The name of the new {{entity_singular.lowerCase()}}.
   final String name;
@@ -62,11 +59,7 @@ class Partial{{entity_singular.pascalCase()}} with Partial{{entity_singular.pasc
 /// {@endtemplate}
 class {{entity_singular.pascalCase()}} extends Equatable {
   /// {@macro {{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}.{{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}}
-  const {{entity_singular.pascalCase()}}({
-    required this.id,
-    required this.name,
-    this.description,
-  });
+  const {{entity_singular.pascalCase()}}({required this.id, required this.name, this.description});
 
   /// The ID of this {{entity_singular.lowerCase()}}.
   final int id;
@@ -100,10 +93,7 @@ class {{entity_singular.pascalCase()}} extends Equatable {
 /// {@endtemplate}
 class New{{entity_singular.pascalCase()}} extends Equatable {
   /// {@macro {{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}.new_{{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}}
-  const New{{entity_singular.pascalCase()}}({
-    required this.name,
-    this.description,
-  });
+  const New{{entity_singular.pascalCase()}}({required this.name, this.description});
 
   /// The name of the new {{entity_singular.lowerCase()}}.
   final String name;
@@ -116,10 +106,7 @@ class New{{entity_singular.pascalCase()}} extends Equatable {
 
   /// Returns a copy of this [New{{entity_singular.pascalCase()}}] with the given fields replaced
   /// by the new values.
-  New{{entity_singular.pascalCase()}} copyWith({
-    String? name,
-    String? Function()? description,
-  }) {
+  New{{entity_singular.pascalCase()}} copyWith({String? name, String? Function()? description}) {
     return New{{entity_singular.pascalCase()}}(
       name: name ?? this.name,
       description: (description ?? () => this.description)(),
@@ -209,11 +196,7 @@ class Partial{{entity_singular.pascalCase()}} with _$Partial{{entity_singular.pa
 @immutable
 class {{entity_singular.pascalCase()}} {
   /// {@macro {{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}.{{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}}
-  const {{entity_singular.pascalCase()}}({
-    required this.id,
-    required this.name,
-    this.description,
-  });
+  const {{entity_singular.pascalCase()}}({required this.id, required this.name, this.description});
 
   /// The ID of this {{entity_singular.lowerCase()}}.
   final int id;
@@ -261,10 +244,7 @@ class {{entity_singular.pascalCase()}} {
 @immutable
 class New{{entity_singular.pascalCase()}} {
   /// {@macro {{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}.new_{{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}}
-  const New{{entity_singular.pascalCase()}}({
-    required this.name,
-    this.description,
-  });
+  const New{{entity_singular.pascalCase()}}({required this.name, this.description});
 
   /// The name of the new {{entity_singular.lowerCase()}}.
   final String name;
@@ -288,10 +268,7 @@ class New{{entity_singular.pascalCase()}} {
 
   /// Returns a copy of this [New{{entity_singular.pascalCase()}}] with the given fields replaced
   /// by the new values.
-  New{{entity_singular.pascalCase()}} copyWith({
-    String? name,
-    String? Function()? description,
-  }) {
+  New{{entity_singular.pascalCase()}} copyWith({String? name, String? Function()? description}) {
     return New{{entity_singular.pascalCase()}}(
       name: name ?? this.name,
       description: (description ?? () => this.description)(),
