@@ -9,9 +9,7 @@ import 'package:{{#use_sembast}}sembast_local_database{{/use_sembast}}/src/helpe
 /// {@endtemplate}
 class LocalTasksSembastDao implements LocalTasksDao {
   /// {@macro {{#use_sembast}}sembast_local_database{{/use_sembast}}.local_tasks_dao}
-  LocalTasksSembastDao({
-    required this.database,
-  });
+  LocalTasksSembastDao({required this.database});
 
   /// The internal Sembast database.
   @visibleForTesting
@@ -77,8 +75,9 @@ class LocalTasksSembastDao implements LocalTasksDao {
     };
     final complexValidationErrors = {
       if (priority == const Some(TaskPriority.high))
-        if (description case Some(value: final description)
-            when (description ?? '').trim().isEmpty)
+        if (description case Some(
+          value: final description,
+        ) when (description ?? '').trim().isEmpty)
           TaskComplexValidationError.highPriorityWithNoDescription,
     };
     if (titleValidationErrors.isNotEmpty ||
@@ -106,37 +105,33 @@ class LocalTasksSembastDao implements LocalTasksDao {
   }
 
   @override
-  Future<void> deleteOneById(
-    int taskId,
-  ) async {
+  Future<void> deleteOneById(int taskId) async {
     await tasksStore.record(taskId).delete(database);
   }
 }
 
 extension on NewTask {
   Task toTaskWithId(int id) => Task(
-        id: id,
-        title: title,
-        priority: priority,
-        completed: false,
-        description: description,
-      );
+    id: id,
+    title: title,
+    priority: priority,
+    completed: false,
+    description: description,
+  );
 }
 
 extension on Iterable<RecordSnapshot<int, Map<String, Object?>>> {
-  Iterable<Task> toTasks() => map(
-        (snapshot) {
-          final RecordSnapshot(key: id, value: rawData) = snapshot;
-          return Task(
-            id: id,
-            title: rawData[sembast.Task.titleJsonKey]! as String,
-            priority: (rawData[sembast.Task.priorityJsonKey]! as String)
-                .toTaskPriority(),
-            completed: rawData[sembast.Task.completedJsonKey]! as bool,
-            description: rawData[sembast.Task.descriptionJsonKey] as String?,
-          );
-        },
-      );
+  Iterable<Task> toTasks() => map((snapshot) {
+    final RecordSnapshot(key: id, value: rawData) = snapshot;
+    return Task(
+      id: id,
+      title: rawData[sembast.Task.titleJsonKey]! as String,
+      priority:
+          (rawData[sembast.Task.priorityJsonKey]! as String).toTaskPriority(),
+      completed: rawData[sembast.Task.completedJsonKey]! as bool,
+      description: rawData[sembast.Task.descriptionJsonKey] as String?,
+    );
+  });
 }
 
 const _identifiableTaskPriorityMap = {
@@ -150,9 +145,10 @@ const _identifiableTaskPriorityMap = {
 @visibleForTesting
 extension IdentifiableTaskPriority on TaskPriority {
   /// The priority internal identifier.
-  String get identifier => _identifiableTaskPriorityMap.entries
-      .firstWhere((entry) => entry.value == this)
-      .key;
+  String get identifier =>
+      _identifiableTaskPriorityMap.entries
+          .firstWhere((entry) => entry.value == this)
+          .key;
 }
 
 /// An extension on a [String] that represents a [TaskPriority] identifier.
