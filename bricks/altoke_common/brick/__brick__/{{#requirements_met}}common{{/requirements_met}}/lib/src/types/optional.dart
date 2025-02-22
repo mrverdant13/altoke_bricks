@@ -132,9 +132,7 @@ sealed class Optional<T extends Object?> {
 @immutable
 class Some<T extends Object?> extends Optional<T> {
   /// {@macro {{#requirements_met}}common{{/requirements_met}}.some}
-  const Some(
-    this.value,
-  );
+  const Some(this.value);
 
   /// The underlying value.
   final T value;
