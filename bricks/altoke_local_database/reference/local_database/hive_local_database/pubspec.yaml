@@ -20,7 +20,7 @@ dependencies:
   #   path: ../../common/
   #replace-end#
   #w 1v 2> w#
-  collection: ^1.19.0
+  collection: ^1.19.1
   hive: ^2.2.3
   local_database:
     path: ../local_database/
