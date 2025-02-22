@@ -5,10 +5,7 @@ import 'package:{{#requirements_met}}reactive_caches{{/requirements_met}}/src/im
 import 'package:meta/meta.dart';
 
 /// Callback signature for comparing elements.
-typedef ElementEqualityChecker<E extends Object?> = bool Function(
-  E a,
-  E b,
-);
+typedef ElementEqualityChecker<E extends Object?> = bool Function(E a, E b);
 
 /// {@template {{#requirements_met}}reactive_caches{{/requirements_met}}.reactive_element_cache}
 /// A reactive cache for a single element of type [E].
@@ -17,9 +14,8 @@ class ReactiveElementCache<E extends Object> {
   /// {@macro {{#requirements_met}}reactive_caches{{/requirements_met}}.reactive_element_cache}
   ///
   /// If [equalityChecker] is `null`, the [defaultEqualityChecker] is used.
-  ReactiveElementCache({
-    ElementEqualityChecker<E?>? equalityChecker,
-  }) : equalityChecker = equalityChecker ?? defaultEqualityChecker;
+  ReactiveElementCache({ElementEqualityChecker<E?>? equalityChecker})
+    : equalityChecker = equalityChecker ?? defaultEqualityChecker;
 
   /// The default equality checker for an element of type [E].
   @visibleForTesting
