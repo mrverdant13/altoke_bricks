@@ -11,7 +11,8 @@ import 'package:{{#requirements_met}}local_database{{/requirements_met}}/{{#requ
 import 'package:test/test.dart';
 
 Future<Isar> openIsar(Directory dbDir) async {
-  final isar = Isar.getInstance() ??
+  final isar =
+      Isar.getInstance() ??
       await Isar.open(
         localDatabaseSchemas,
         directory: dbDir.path,
@@ -41,20 +42,18 @@ extension on Abi {
 }
 
 void main() {
-  setUpAll(
-    () async {
-      // This step is a workaround to avoid issues affecting test suits.
-      // See: https://github.com/isar/isar/issues/1518
-      final isarLibDir = Directory.systemTemp.createTempSync('isar-test-lib-');
-      final abi = Abi.current();
-      await Isar.initializeIsarCore(
-        download: true,
-        libraries: {
-          abi: '${isarLibDir.path}${Platform.pathSeparator}${abi.localName}',
-        },
-      );
-    },
-  );
+  setUpAll(() async {
+    // This step is a workaround to avoid issues affecting test suits.
+    // See: https://github.com/isar/isar/issues/1518
+    final isarLibDir = Directory.systemTemp.createTempSync('isar-test-lib-');
+    final abi = Abi.current();
+    await Isar.initializeIsarCore(
+      download: true,
+      libraries: {
+        abi: '${isarLibDir.path}${Platform.pathSeparator}${abi.localName}',
+      },
+    );
+  });
 
   test(
     '''
@@ -105,23 +104,18 @@ WHEN the task is created
 THEN a task record is registered
 ''',
         () async {
-          const newTask = NewTask(
-            title: 'title',
-            priority: TaskPriority.low,
-          );
-          final query = tasksCollection
-              .filter()
-              .titleEqualTo(newTask.title)
-              .priorityEqualTo(newTask.priority.identifier)
-              .descriptionIsNull();
+          const newTask = NewTask(title: 'title', priority: TaskPriority.low);
+          final query =
+              tasksCollection
+                  .filter()
+                  .titleEqualTo(newTask.title)
+                  .priorityEqualTo(newTask.priority.identifier)
+                  .descriptionIsNull();
           final existingMatchingTasksCount = await query.count();
           expect(existingMatchingTasksCount, isZero);
           await dao.createOne(newTask);
           final resultingMatchingTasksCount = await query.count();
-          expect(
-            resultingMatchingTasksCount,
-            existingMatchingTasksCount + 1,
-          );
+          expect(resultingMatchingTasksCount, existingMatchingTasksCount + 1);
         },
       );
 
@@ -134,10 +128,7 @@ THEN an exception is thrown
 AND no task record is registered
 ''',
         () async {
-          const newTask = NewTask(
-            title: '',
-            priority: TaskPriority.high,
-          );
+          const newTask = NewTask(title: '', priority: TaskPriority.high);
           final existingMatchingTasksCount = await tasksCollection.count();
           expect(existingMatchingTasksCount, isZero);
           expect(
@@ -180,8 +171,9 @@ THEN the tasks are continuously emitted as they change
               completed: false,
             ),
           ];
-          final sortedTasksForStage00 = [...tasksForStage00]
-              .sorted((tA, tB) => tA.title.compareTo(tB.title));
+          final sortedTasksForStage00 = [
+            ...tasksForStage00,
+          ].sorted((tA, tB) => tA.title.compareTo(tB.title));
 
           // Stage 01
           const newTaskInStage01 = Task(
@@ -190,20 +182,19 @@ THEN the tasks are continuously emitted as they change
             priority: TaskPriority.low,
             completed: true,
           );
-          final tasksForStage01 = <Task>[
-            ...tasksForStage00,
-            newTaskInStage01,
-          ];
-          final sortedTasksForStage01 = [...tasksForStage01]
-              .sorted((tA, tB) => tA.title.compareTo(tB.title));
+          final tasksForStage01 = <Task>[...tasksForStage00, newTaskInStage01];
+          final sortedTasksForStage01 = [
+            ...tasksForStage01,
+          ].sorted((tA, tB) => tA.title.compareTo(tB.title));
 
           // Stage 02
           final tasksForStage02 = <Task>[
             for (final task in tasksForStage01)
               if (!task.title.contains('01')) task,
           ];
-          final sortedTasksForStage02 = [...tasksForStage02]
-              .sorted((tA, tB) => tA.title.compareTo(tB.title));
+          final sortedTasksForStage02 = [
+            ...tasksForStage02,
+          ].sorted((tA, tB) => tA.title.compareTo(tB.title));
 
           // Stage 03
           final tasksForStage03 = <Task>[
@@ -219,21 +210,20 @@ THEN the tasks are continuously emitted as they change
               else
                 task,
           ];
-          final sortedTasksForStage03 = [...tasksForStage03]
-              .sorted((tA, tB) => tA.title.compareTo(tB.title));
+          final sortedTasksForStage03 = [
+            ...tasksForStage03,
+          ].sorted((tA, tB) => tA.title.compareTo(tB.title));
 
           unawaited(
             expectLater(
               stream,
-              emitsInOrder(
-                [
-                  List<Task>.empty(), // initially empty
-                  orderedEquals(sortedTasksForStage00),
-                  orderedEquals(sortedTasksForStage01),
-                  orderedEquals(sortedTasksForStage02),
-                  orderedEquals(sortedTasksForStage03),
-                ],
-              ),
+              emitsInOrder([
+                List<Task>.empty(), // initially empty
+                orderedEquals(sortedTasksForStage00),
+                orderedEquals(sortedTasksForStage01),
+                orderedEquals(sortedTasksForStage02),
+                orderedEquals(sortedTasksForStage03),
+              ]),
             ),
           );
 
@@ -269,16 +259,14 @@ THEN the tasks are continuously emitted as they change
           );
 
           // Stage 03
-          await database.writeTxn(
-            () async {
-              final tasksWithoutDescription =
-                  await tasksCollection.filter().descriptionIsNull().findAll();
-              await tasksCollection.putAll([
-                for (final task in tasksWithoutDescription)
-                  task..description = 'updated description',
-              ]);
-            },
-          );
+          await database.writeTxn(() async {
+            final tasksWithoutDescription =
+                await tasksCollection.filter().descriptionIsNull().findAll();
+            await tasksCollection.putAll([
+              for (final task in tasksWithoutDescription)
+                task..description = 'updated description',
+            ]);
+          });
         },
       );
 
@@ -291,15 +279,14 @@ WHEN the task is updated
 THEN a task record is updated
 ''',
         () async {
-          final task = isar.Task()
-            ..id = 31
-            ..title = 'title'
-            ..priority = TaskPriority.high.identifier
-            ..completed = false
-            ..description = 'description';
-          await database.writeTxn(
-            () async => tasksCollection.put(task),
-          );
+          final task =
+              isar.Task()
+                ..id = 31
+                ..title = 'title'
+                ..priority = TaskPriority.high.identifier
+                ..completed = false
+                ..description = 'description';
+          await database.writeTxn(() async => tasksCollection.put(task));
           final existingTasksCount = await tasksCollection.count();
           expect(existingTasksCount, 1);
           const newTitle = 'new title';
@@ -327,10 +314,7 @@ THEN a task record is updated
             ),
           );
           final resultingMatchingTasksCount = await query.count();
-          expect(
-            resultingMatchingTasksCount,
-            existingMatchingTasksCount + 1,
-          );
+          expect(resultingMatchingTasksCount, existingMatchingTasksCount + 1);
         },
       );
 
@@ -389,15 +373,14 @@ THEN an exception is thrown
 AND no task record is updated
 ''',
         () async {
-          final task = isar.Task()
-            ..id = 31
-            ..title = 'title'
-            ..priority = TaskPriority.low.identifier
-            ..completed = true
-            ..description = 'description';
-          await database.writeTxn(
-            () async => tasksCollection.put(task),
-          );
+          final task =
+              isar.Task()
+                ..id = 31
+                ..title = 'title'
+                ..priority = TaskPriority.low.identifier
+                ..completed = true
+                ..description = 'description';
+          await database.writeTxn(() async => tasksCollection.put(task));
           final existingTasksCount = await tasksCollection.count();
           expect(existingTasksCount, 1);
           const newTitle = '';
@@ -443,15 +426,14 @@ AND the deleted task is returned
 ''',
         () async {
           const taskId = 13;
-          final task = isar.Task()
-            ..id = taskId
-            ..title = 'title'
-            ..priority = TaskPriority.low.identifier
-            ..completed = true
-            ..description = 'description';
-          await database.writeTxn(
-            () async => tasksCollection.put(task),
-          );
+          final task =
+              isar.Task()
+                ..id = taskId
+                ..title = 'title'
+                ..priority = TaskPriority.low.identifier
+                ..completed = true
+                ..description = 'description';
+          await database.writeTxn(() async => tasksCollection.put(task));
           final query = tasksCollection.filter().idEqualTo(taskId);
           final initialMatchingTasksCount = await query.count();
           expect(initialMatchingTasksCount, 1);

@@ -8,11 +8,8 @@ final class FakeLocalTasksDao implements LocalTasksDao {
 
 void main() {
   group('$LocalTasksDao', () {
-    test(
-      'can be implemented',
-      () {
-        expect(FakeLocalTasksDao.new, returnsNormally);
-      },
-    );
+    test('can be implemented', () {
+      expect(FakeLocalTasksDao.new, returnsNormally);
+    });
   });
 }
