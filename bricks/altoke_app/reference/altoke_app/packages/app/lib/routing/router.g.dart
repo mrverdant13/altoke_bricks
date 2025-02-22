@@ -11,16 +11,19 @@ List<RouteBase> get $appRoutes => [$homeRouteData];
 RouteBase get $homeRouteData => GoRouteData.$route(
   path: '/',
   name: 'HomeRoute',
+
   factory: $HomeRouteDataExtension._fromState,
   routes: [
     GoRouteData.$route(
       path: 'counter',
       name: 'CounterRoute',
+
       factory: $CounterRouteDataExtension._fromState,
     ),
     GoRouteData.$route(
       path: 'tasks',
       name: 'TasksRoute',
+
       factory: $TasksRouteDataExtension._fromState,
     ),
   ],

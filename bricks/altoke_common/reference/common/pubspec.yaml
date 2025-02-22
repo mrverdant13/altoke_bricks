@@ -34,10 +34,10 @@ dev_dependencies:
   #w 1v 2> w#
   #{{/use_code_generation}}#
   #{{#use_dart_mappable}}#
-  dart_mappable_builder: ^4.3.1+1
+  dart_mappable_builder: ^4.4.0
   #{{/use_dart_mappable}}#
   #{{#use_freezed}}#
-  freezed: ^2.5.7
+  freezed: ^2.5.8
   #{{/use_freezed}}#
   #w 1v 2> w#
   test: ^1.25.15

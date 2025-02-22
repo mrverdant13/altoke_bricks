@@ -34,6 +34,7 @@ const TaskSchema = CollectionSchema(
     ),
     r'title': PropertySchema(id: 3, name: r'title', type: IsarType.string),
   },
+
   estimateSize: _taskEstimateSize,
   serialize: _taskSerialize,
   deserialize: _taskDeserialize,
@@ -42,6 +43,7 @@ const TaskSchema = CollectionSchema(
   indexes: {},
   links: {},
   embeddedSchemas: {},
+
   getId: _taskGetId,
   getLinks: _taskGetLinks,
   attach: _taskAttach,
