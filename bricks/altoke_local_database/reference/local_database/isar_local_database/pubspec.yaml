@@ -31,7 +31,10 @@ dependencies:
 dev_dependencies:
   build_runner: ^2.4.15
   isar_generator:
-    hosted: https://pub.isar-community.dev/
-    version: 3.1.8
+    # HACK: Using a forked version of isar_generator to avoid version conflicts with `source_gen` v2.
+    git:
+      url: https://github.com/mdddj/isar
+      ref: v3
+      path: packages/isar_generator/
   test: ^1.25.15
   very_good_analysis: ^7.0.0
