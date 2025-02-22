@@ -5,16 +5,19 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../helpers/helpers.dart';
 
 void main() {
-  testWidgets('''
+  testWidgets(
+    '''
 
 GIVEN a counter body
 WHEN it is displayed
 THEN a count message and a count value should be shown
-''', (tester) async {
-    await tester.pumpAppWithScreen(const CounterBody());
-    expect(find.byType(PushCountMessage), findsOneWidget);
-    expect(find.byType(PushCountValue), findsOneWidget);
-  });
+''',
+    (tester) async {
+      await tester.pumpAppWithScreen(const CounterBody());
+      expect(find.byType(PushCountMessage), findsOneWidget);
+      expect(find.byType(PushCountValue), findsOneWidget);
+    },
+  );
 
   testWidgets(
     '''
@@ -27,11 +30,7 @@ THEN the body should include the localized message
     (tester) async {
       await tester.pumpAppWithScreen(
         ProviderScope(
-          overrides: [
-            counterPod.overrideWith(
-              () => MockCounter(() => 0),
-            ),
-          ],
+          overrides: [counterPod.overrideWith(() => MockCounter(() => 0))],
           child: const CounterBody(),
         ),
       );
@@ -56,11 +55,7 @@ THEN the body should include the localized message
     (tester) async {
       await tester.pumpAppWithScreen(
         ProviderScope(
-          overrides: [
-            counterPod.overrideWith(
-              () => MockCounter(() => 1),
-            ),
-          ],
+          overrides: [counterPod.overrideWith(() => MockCounter(() => 1))],
           child: const CounterBody(),
         ),
       );
@@ -85,11 +80,7 @@ THEN the body should include the localized message
     (tester) async {
       await tester.pumpAppWithScreen(
         ProviderScope(
-          overrides: [
-            counterPod.overrideWith(
-              () => MockCounter(() => 8),
-            ),
-          ],
+          overrides: [counterPod.overrideWith(() => MockCounter(() => 8))],
           child: const CounterBody(),
         ),
       );

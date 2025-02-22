@@ -1,11 +1,7 @@
 import 'dart:math' as math;
 
-import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/counter/counter.dart';{{#use_auto_route}}import 'package:auto_route/auto_route.dart';{{/use_auto_route}}import 'package:flutter/material.dart';{{#use_auto_route}}@RoutePage(
-  name: 'CounterRoute',
-){{/use_auto_route}}class CounterScreen extends StatelessWidget {
-  const CounterScreen({
-    super.key,
-  });
+import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/counter/counter.dart';{{#use_auto_route}}import 'package:auto_route/auto_route.dart';{{/use_auto_route}}import 'package:flutter/material.dart';{{#use_auto_route}}@RoutePage(name: 'CounterRoute'){{/use_auto_route}}class CounterScreen extends StatelessWidget {
+  const CounterScreen({super.key});
 
   @visibleForTesting
   static const maxContentWidth = 1200.0;

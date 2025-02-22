@@ -45,16 +45,10 @@ THEN the home screen should be shown
       final router = AppRouter();
       addTearDown(router.dispose);
       final config = router.config(
-        deepLinkBuilder: (_) => DeepLink.path(
-          path.joinAll([
-            '/',
-          ]),
-        ),
+        deepLinkBuilder: (_) => DeepLink.path(path.joinAll(['/'])),
       );
       await tester.pumpRoutedApp(
-        overrides: [
-          routerConfigPod.overrideWithValue(config),
-        ],
+        overrides: [routerConfigPod.overrideWithValue(config)],
       );
       await tester.pumpAndSettle();
       expect(find.byType(HomeScreen), findsOneWidget);
@@ -71,17 +65,10 @@ THEN the counter screen should be shown
       final router = AppRouter();
       addTearDown(router.dispose);
       final config = router.config(
-        deepLinkBuilder: (_) => DeepLink.path(
-          path.joinAll([
-            '/',
-            'counter',
-          ]),
-        ),
+        deepLinkBuilder: (_) => DeepLink.path(path.joinAll(['/', 'counter'])),
       );
       await tester.pumpRoutedApp(
-        overrides: [
-          routerConfigPod.overrideWithValue(config),
-        ],
+        overrides: [routerConfigPod.overrideWithValue(config)],
       );
       await tester.pumpAndSettle();
       expect(find.byType(CounterScreen), findsOneWidget);
@@ -110,16 +97,12 @@ THEN the home screen should be shown
     (tester) async {
       final router = GoRouter(
         routes: $appRoutes,
-        initialLocation: path.joinAll([
-          '/',
-        ]),
+        initialLocation: path.joinAll(['/']),
       );
       addTearDown(router.dispose);
       final config = router;
       await tester.pumpRoutedApp(
-        overrides: [
-          routerConfigPod.overrideWithValue(config),
-        ],
+        overrides: [routerConfigPod.overrideWithValue(config)],
       );
       await tester.pumpAndSettle();
       expect(find.byType(HomeScreen), findsOneWidget);
@@ -135,17 +118,12 @@ THEN the counter screen should be shown
     (tester) async {
       final router = GoRouter(
         routes: $appRoutes,
-        initialLocation: path.joinAll([
-          '/',
-          'counter',
-        ]),
+        initialLocation: path.joinAll(['/', 'counter']),
       );
       addTearDown(router.dispose);
       final config = router;
       await tester.pumpRoutedApp(
-        overrides: [
-          routerConfigPod.overrideWithValue(config),
-        ],
+        overrides: [routerConfigPod.overrideWithValue(config)],
       );
       await tester.pumpAndSettle();
       expect(find.byType(CounterScreen), findsOneWidget);

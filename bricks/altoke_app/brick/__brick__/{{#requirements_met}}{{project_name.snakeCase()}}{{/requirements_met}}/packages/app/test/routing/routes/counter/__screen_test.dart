@@ -49,10 +49,7 @@ THEN the counter screen should be shown
           overrides: [
             asyncInitializationPod.overrideWith((_) async {}),
             routerConfigPod.overrideWithValue(
-              GoRouter(
-                routes: $appRoutes,
-                initialLocation: '/counter',
-              ),
+              GoRouter(routes: $appRoutes, initialLocation: '/counter'),
             ),
           ],
           child: const MyApp(),
