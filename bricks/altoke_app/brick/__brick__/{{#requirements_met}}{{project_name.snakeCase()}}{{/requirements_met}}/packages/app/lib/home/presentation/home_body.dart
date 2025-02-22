@@ -2,9 +2,7 @@ import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements
 import 'package:flutter/material.dart';
 
 class HomeBody extends StatelessWidget {
-  const HomeBody({
-    super.key,
-  });
+  const HomeBody({super.key});
 
   @override
   Widget build(BuildContext context) {

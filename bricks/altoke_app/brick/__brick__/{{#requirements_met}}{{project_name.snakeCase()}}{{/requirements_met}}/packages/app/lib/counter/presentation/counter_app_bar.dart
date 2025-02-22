@@ -4,12 +4,10 @@ import 'package:flutter/material.dart';
 
 class CounterAppBar extends AppBar {
   CounterAppBar({super.key})
-      : super(
-          title: const CounterAppBarTitle(),
-          actions: const [
-            ResetCounterIconButton(),
-          ],
-        );
+    : super(
+        title: const CounterAppBarTitle(),
+        actions: const [ResetCounterIconButton()],
+      );
 }
 
 @visibleForTesting

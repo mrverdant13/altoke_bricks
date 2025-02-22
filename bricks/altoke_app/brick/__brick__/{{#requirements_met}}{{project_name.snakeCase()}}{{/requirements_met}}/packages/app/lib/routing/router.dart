@@ -6,13 +6,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';{{#use_go_router}}import
 
 export 'routes/routes.dart';
 
-part 'router.g.dart';{{#use_auto_route}}@AutoRouterConfig(
-  generateForDir: ['lib/routing/'],
-)
+part 'router.g.dart';{{#use_auto_route}}@AutoRouterConfig(generateForDir: ['lib/routing/'])
 class AppRouter extends RootStackRouter {
-  AppRouter({
-    @visibleForTesting this.testRoutes = const [],
-  });
+  AppRouter({@visibleForTesting this.testRoutes = const []});
 
   @override
   RouteType get defaultRouteType => const RouteType.adaptive();
@@ -20,15 +16,8 @@ class AppRouter extends RootStackRouter {
   @override
   late final List<AutoRoute> routes = [
     if (testRoutes.isEmpty) ...[
-      AdaptiveRoute<void>(
-        initial: true,
-        path: '/',
-        page: HomeRoute.page,
-      ),
-      AdaptiveRoute<void>(
-        path: '/counter',
-        page: CounterRoute.page,
-      ),
+      AdaptiveRoute<void>(initial: true, path: '/', page: HomeRoute.page),
+      AdaptiveRoute<void>(path: '/counter', page: CounterRoute.page),
     ] else
       ...testRoutes,
   ];
@@ -39,10 +28,7 @@ class AppRouter extends RootStackRouter {
   path: '/',
   name: 'HomeRoute',
   routes: [
-    TypedGoRoute<CounterRouteData>(
-      path: 'counter',
-      name: 'CounterRoute',
-    ),
+    TypedGoRoute<CounterRouteData>(path: 'counter', name: 'CounterRoute'),
   ],
 )
 class HomeRouteData extends GoRouteData {
@@ -65,20 +51,21 @@ class CounterRouteData extends GoRouteData {
   dependencies: [],
 )
 RouterConfig<Object> routerConfig(Ref ref) {final routerConfig ={{#use_auto_route}}AppRouter().config(){{/use_auto_route}}{{#use_go_router}}GoRouter(
-        routes: $appRoutes,
-        debugLogDiagnostics: kDebugMode,
-        initialLocation: const HomeRouteData().location,
-      ){{/use_go_router}};
+              routes: $appRoutes,
+              debugLogDiagnostics: kDebugMode,
+              initialLocation: const HomeRouteData().location,
+            ){{/use_go_router}};
   final delegate = routerConfig.routerDelegate;
 
   // coverage:ignore-start
   void logCurrentUri() {
     if (!kDebugMode) return;
-    final currentUri ={{#use_auto_route}}delegate.currentConfiguration!.uri{{/use_auto_route}}{{#use_go_router}}delegate.currentConfiguration.uri{{/use_go_router}};
-    log(
-      'path: <$currentUri>',
-      name: 'Navigation',
-    );
+    final currentUri ={{#use_auto_route}}delegate
+            .currentConfiguration!
+            .uri{{/use_auto_route}}{{#use_go_router}}delegate
+            .currentConfiguration
+            .uri{{/use_go_router}};
+    log('path: <$currentUri>', name: 'Navigation');
   }
   // coverage:ignore-end
 
