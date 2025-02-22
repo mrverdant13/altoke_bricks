@@ -2,22 +2,15 @@
   "Remove Start (yaml)": {
     "scope": "yaml",
     "description": "Opening token for a fragment removal",
-    "prefix": [
-      "RemoveStart",
-      "RmStart",
-      "RmS",
-    ],
+    "prefix": "RemoveStart",
     "body": [
       "#remove-start#",
     ]
   },
   "Remove Start (generic)": {
+    "scope": "dart,javascript,json,typescript",
     "description": "Opening token for a fragment removal",
-    "prefix": [
-      "RemoveStart",
-      "RmStart",
-      "RmS",
-    ],
+    "prefix": "RemoveStart",
     "body": [
       "${BLOCK_COMMENT_START}remove-start${BLOCK_COMMENT_END}",
     ]
@@ -25,22 +18,15 @@
   "Remove End (yaml)": {
     "scope": "yaml",
     "description": "Closing token for a fragment removal",
-    "prefix": [
-      "RemoveEnd",
-      "RmEnd",
-      "RmE",
-    ],
+    "prefix": "RemoveEnd",
     "body": [
       "#remove-end#",
     ]
   },
   "Remove End (generic)": {
+    "scope": "dart,javascript,json,typescript",
     "description": "Closing token for a fragment removal",
-    "prefix": [
-      "RemoveEnd",
-      "RmEnd",
-      "RmE",
-    ],
+    "prefix": "RemoveEnd",
     "body": [
       "${BLOCK_COMMENT_START}remove-end${BLOCK_COMMENT_END}",
     ]
@@ -48,22 +34,15 @@
   "Remove Selection (yaml)": {
     "scope": "yaml",
     "description": "Enclosing tokens for the removal of an optionally selected fragment",
-    "prefix": [
-      "RemoveSelection",
-      "RmSelection",
-      "Rm",
-    ],
+    "prefix": "RemoveSelection",
     "body": [
       "#remove-start#${TM_SELECTED_TEXT}#remove-end#",
     ]
   },
   "Remove Selection (generic)": {
+    "scope": "dart,javascript,json,typescript",
     "description": "Enclosing tokens for the removal of an optionally selected fragment",
-    "prefix": [
-      "RemoveSelection",
-      "RmSelection",
-      "Rm",
-    ],
+    "prefix": "RemoveSelection",
     "body": [
       "${BLOCK_COMMENT_START}remove-start${BLOCK_COMMENT_END}${TM_SELECTED_TEXT}${BLOCK_COMMENT_START}remove-end${BLOCK_COMMENT_END}",
     ]
@@ -71,22 +50,15 @@
   "Variable Start (yaml)": {
     "scope": "yaml",
     "description": "Opening token for a fragment parameterization",
-    "prefix": [
-      "VariableStart",
-      "VarStart",
-      "VS",
-    ],
+    "prefix": "VariableStart",
     "body": [
       "#{{${1|#,^|}${2:mason variable}}}#",
     ]
   },
   "Variable Start (generic)": {
+    "scope": "dart,javascript,json,typescript",
     "description": "Opening token for a fragment parameterization",
-    "prefix": [
-      "VariableStart",
-      "VarStart",
-      "VS",
-    ],
+    "prefix": "VariableStart",
     "body": [
       "${BLOCK_COMMENT_START}{{${1|#,^|}${2:mason variable}}}${BLOCK_COMMENT_END}",
     ]
@@ -94,22 +66,15 @@
   "Variable End (yaml)": {
     "scope": "yaml",
     "description": "Closing token for a fragment parameterization",
-    "prefix": [
-      "VariableEnd",
-      "VarEnd",
-      "VE",
-    ],
+    "prefix": "VariableEnd",
     "body": [
       "#{{/${1:mason variable}}}#",
     ]
   },
   "Variable End (generic)": {
+    "scope": "dart,javascript,json,typescript",
     "description": "Closing token for a fragment parameterization",
-    "prefix": [
-      "VariableEnd",
-      "VarEnd",
-      "VE",
-    ],
+    "prefix": "VariableEnd",
     "body": [
       "${BLOCK_COMMENT_START}{{/${1:mason variable}}}${BLOCK_COMMENT_END}",
     ]
@@ -117,45 +82,55 @@
   "Variable Selection (yaml)": {
     "scope": "yaml",
     "description": "Enclosing tokens for the parameterization of an optionally selected fragment",
-    "prefix": [
-      "VariableSelection",
-      "VarSelection",
-      "Var",
-    ],
+    "prefix": "VariableSelection",
     "body": [
       "#{{${1|#,^|}${2:mason variable}}}#${TM_SELECTED_TEXT}#{{/${2:mason variable}}}#",
     ]
   },
   "Variable Selection (generic)": {
+    "scope": "dart,javascript,json,typescript",
     "description": "Enclosing tokens for the parameterization of an optionally selected fragment",
-    "prefix": [
-      "VariableSelection",
-      "VarSelection",
-      "Var",
-    ],
+    "prefix": "VariableSelection",
     "body": [
       "${BLOCK_COMMENT_START}{{${1|#,^|}${2:mason variable}}}${BLOCK_COMMENT_END}${TM_SELECTED_TEXT}${BLOCK_COMMENT_START}{{/${2:mason variable}}}${BLOCK_COMMENT_END}",
+    ]
+  },
+  "Replace Selection (yaml)": {
+    "scope": "yaml",
+    "description": "Enclosing tokens for the replacement of an optionally selected fragment",
+    "prefix": "ReplaceSelection",
+    "body": [
+      "#replace-start#",
+      "${TM_SELECTED_TEXT}",
+      "#with i${1:indentation}#",
+      "# ${2:replacement}",
+      "#replace-end#",
+    ]
+  },
+  "Replacee Selection (generic)": {
+    "scope": "dart,javascript,json,typescript",
+    "description": "Enclosing tokens for the replacement of an optionally selected fragment",
+    "prefix": "ReplaceSelection",
+    "body": [
+      "${BLOCK_COMMENT_START}replace-start${BLOCK_COMMENT_END}",
+      "${TM_SELECTED_TEXT}",
+      "${BLOCK_COMMENT_START}with i${1:indentation}${BLOCK_COMMENT_END}",
+      "${LINE_COMMENT} ${2:replacement}",
+      "${BLOCK_COMMENT_START}replace-end${BLOCK_COMMENT_END}",
     ]
   },
   "Spacing groups (yaml)": {
     "scope": "yaml",
     "description": "Inserts a spacing pattern token",
-    "prefix": [
-      "Spacing",
-      "Space",
-      "Sp",
-    ],
+    "prefix": "Spacing",
     "body": [
       "#w ${1:spacing groups} w#",
     ]
   },
   "Spacing groups (generic)": {
+    "scope": "dart,javascript,json,typescript",
     "description": "Inserts a spacing pattern token",
-    "prefix": [
-      "Spacing",
-      "Space",
-      "Sp",
-    ],
+    "prefix": "Spacing",
     "body": [
       "${BLOCK_COMMENT_START}w ${1:spacing groups} w${BLOCK_COMMENT_END}",
     ]
