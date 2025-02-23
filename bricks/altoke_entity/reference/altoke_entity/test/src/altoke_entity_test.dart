@@ -11,11 +11,10 @@ WHEN the constructor is called
 THEN an instance of the altoke entity is returned
 ''',
     () {
-      /*w 1v w*/
       /*remove-start*/
       {
-        /*remove-end*/
-        /*{{#use_dart_mappable}}*/
+        /*remove-end-x*/
+        /*{{#use_dart_mappable}}x*/
         const altokeEntity = DmAltokeEntity(
           id: 37,
           name: 'name',
@@ -23,12 +22,12 @@ THEN an instance of the altoke entity is returned
         );
         expect(altokeEntity, isNotNull);
         expect(altokeEntity, isA<DmAltokeEntity>());
-        /*{{/use_dart_mappable}}*/
+        /*x{{/use_dart_mappable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*x{{#use_equatable}}x*/
         const altokeEntity = EAltokeEntity(
           id: 37,
           name: 'name',
@@ -36,12 +35,12 @@ THEN an instance of the altoke entity is returned
         );
         expect(altokeEntity, isNotNull);
         expect(altokeEntity, isA<EAltokeEntity>());
-        /*{{/use_equatable}}*/
+        /*x{{/use_equatable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*x{{#use_freezed}}x*/
         const altokeEntity = FAltokeEntity(
           id: 37,
           name: 'name',
@@ -49,12 +48,12 @@ THEN an instance of the altoke entity is returned
         );
         expect(altokeEntity, isNotNull);
         expect(altokeEntity, isA<FAltokeEntity>());
-        /*{{/use_freezed}}*/
+        /*x{{/use_freezed}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_overrides}}*/
+        /*x{{#use_overrides}}x*/
         const altokeEntity = AltokeEntity(
           id: 37,
           name: 'name',
@@ -62,11 +61,10 @@ THEN an instance of the altoke entity is returned
         );
         expect(altokeEntity, isNotNull);
         expect(altokeEntity, isA<AltokeEntity>());
-        /*{{/use_overrides}}*/
-        /*remove-start*/
+        /*x{{/use_overrides}}*/
+        /*x-remove-start*/
       }
       /*remove-end*/
-      /*w 1v w*/
     },
   );
 
@@ -80,11 +78,10 @@ THEN they are equal if they have the same values
 AND their hash codes are equal if they have the same values
 ''',
     () {
-      /*w 1v w*/
       /*remove-start*/
       {
-        /*remove-end*/
-        /*{{#use_dart_mappable}}*/
+        /*remove-end-x*/
+        /*{{#use_dart_mappable}}x*/
         const altokeEntity = DmAltokeEntity(
           id: 37,
           name: 'name',
@@ -104,12 +101,12 @@ AND their hash codes are equal if they have the same values
         expect(altokeEntity, isNot(differentAltokeEntity));
         expect(altokeEntity.hashCode, sameAltokeEntity.hashCode);
         expect(altokeEntity.hashCode, isNot(differentAltokeEntity.hashCode));
-        /*{{/use_dart_mappable}}*/
+        /*x{{/use_dart_mappable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*x{{#use_equatable}}x*/
         const altokeEntity = EAltokeEntity(
           id: 37,
           name: 'name',
@@ -129,12 +126,12 @@ AND their hash codes are equal if they have the same values
         expect(altokeEntity, isNot(differentAltokeEntity));
         expect(altokeEntity.hashCode, sameAltokeEntity.hashCode);
         expect(altokeEntity.hashCode, isNot(differentAltokeEntity.hashCode));
-        /*{{/use_equatable}}*/
+        /*x{{/use_equatable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*x{{#use_freezed}}x*/
         const altokeEntity = FAltokeEntity(
           id: 37,
           name: 'name',
@@ -154,12 +151,12 @@ AND their hash codes are equal if they have the same values
         expect(altokeEntity, isNot(differentAltokeEntity));
         expect(altokeEntity.hashCode, sameAltokeEntity.hashCode);
         expect(altokeEntity.hashCode, isNot(differentAltokeEntity.hashCode));
-        /*{{/use_freezed}}*/
+        /*x{{/use_freezed}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_overrides}}*/
+        /*x{{#use_overrides}}x*/
         const altokeEntity = AltokeEntity(
           id: 37,
           name: 'name',
@@ -179,11 +176,10 @@ AND their hash codes are equal if they have the same values
         expect(altokeEntity, isNot(differentAltokeEntity));
         expect(altokeEntity.hashCode, sameAltokeEntity.hashCode);
         expect(altokeEntity.hashCode, isNot(differentAltokeEntity.hashCode));
-        /*{{/use_overrides}}*/
-        /*remove-start*/
+        /*x{{/use_overrides}}*/
+        /*x-remove-start*/
       }
       /*remove-end*/
-      /*w 1v w*/
     },
   );
 
@@ -195,11 +191,10 @@ WHEN its string representation is requested
 THEN a string representation of the altoke entity is returned
 ''',
     () {
-      /*w 1v w*/
       /*remove-start*/
       {
-        /*remove-end*/
-        /*{{#use_dart_mappable}}*/
+        /*remove-end-x*/
+        /*{{#use_dart_mappable}}x*/
         const altokeEntity = DmAltokeEntity(
           id: 37,
           name: 'name',
@@ -209,24 +204,24 @@ THEN a string representation of the altoke entity is returned
           altokeEntity.toString(),
           'DmAltokeEntity(id: 37, name: name, description: description)',
         );
-        /*{{/use_dart_mappable}}*/
+        /*x{{/use_dart_mappable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*x{{#use_equatable}}x*/
         const altokeEntity = EAltokeEntity(
           id: 37,
           name: 'name',
           description: 'description',
         );
         expect(altokeEntity.toString(), 'EAltokeEntity(37, name, description)');
-        /*{{/use_equatable}}*/
+        /*x{{/use_equatable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*x{{#use_freezed}}x*/
         const altokeEntity = FAltokeEntity(
           id: 37,
           name: 'name',
@@ -236,12 +231,12 @@ THEN a string representation of the altoke entity is returned
           altokeEntity.toString(),
           'FAltokeEntity(id: 37, name: name, description: description)',
         );
-        /*{{/use_freezed}}*/
+        /*x{{/use_freezed}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_overrides}}*/
+        /*x{{#use_overrides}}x*/
         const altokeEntity = AltokeEntity(
           id: 37,
           name: 'name',
@@ -251,11 +246,10 @@ THEN a string representation of the altoke entity is returned
           altokeEntity.toString(),
           'AltokeEntity(id: 37, name: name, description: description)',
         );
-        /*{{/use_overrides}}*/
-        /*remove-start*/
+        /*x{{/use_overrides}}*/
+        /*x-remove-start*/
       }
       /*remove-end*/
-      /*w 1v w*/
     },
   );
 
@@ -268,11 +262,10 @@ THEN an new instance of the altoke entity is returned
 ├─ THAT has updated values
 ''',
     () {
-      /*w 1v w*/
       /*remove-start*/
       {
-        /*remove-end*/
-        /*{{#use_dart_mappable}}*/
+        /*remove-end-x*/
+        /*{{#use_dart_mappable}}x*/
         const altokeEntity = DmAltokeEntity(
           id: 37,
           name: 'name',
@@ -294,12 +287,12 @@ THEN an new instance of the altoke entity is returned
         final noopCopiedAltokeEntity = altokeEntity.copyWith();
         expect(noopCopiedAltokeEntity, isNotNull);
         expect(noopCopiedAltokeEntity, altokeEntity);
-        /*{{/use_dart_mappable}}*/
+        /*x{{/use_dart_mappable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*x{{#use_equatable}}x*/
         const altokeEntity = EAltokeEntity(
           id: 37,
           name: 'name',
@@ -321,12 +314,12 @@ THEN an new instance of the altoke entity is returned
         final noopCopiedAltokeEntity = altokeEntity.copyWith();
         expect(noopCopiedAltokeEntity, isNotNull);
         expect(noopCopiedAltokeEntity, altokeEntity);
-        /*{{/use_equatable}}*/
+        /*x{{/use_equatable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*x{{#use_freezed}}x*/
         const altokeEntity = FAltokeEntity(
           id: 37,
           name: 'name',
@@ -348,12 +341,12 @@ THEN an new instance of the altoke entity is returned
         final noopCopiedAltokeEntity = altokeEntity.copyWith();
         expect(noopCopiedAltokeEntity, isNotNull);
         expect(noopCopiedAltokeEntity, altokeEntity);
-        /*{{/use_freezed}}*/
+        /*x{{/use_freezed}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_overrides}}*/
+        /*x{{#use_overrides}}x*/
         const altokeEntity = AltokeEntity(
           id: 37,
           name: 'name',
@@ -375,11 +368,10 @@ THEN an new instance of the altoke entity is returned
         final noopCopiedAltokeEntity = altokeEntity.copyWith();
         expect(noopCopiedAltokeEntity, isNotNull);
         expect(noopCopiedAltokeEntity, altokeEntity);
-        /*{{/use_overrides}}*/
-        /*remove-start*/
+        /*x{{/use_overrides}}*/
+        /*x-remove-start*/
       }
       /*remove-end*/
-      /*w 1v w*/
     },
   );
 
@@ -391,58 +383,56 @@ WHEN the constructor is called
 THEN an instance of the new altoke entity is returned
 ''',
     () {
-      /*w 1v w*/
       /*remove-start*/
       {
-        /*remove-end*/
-        /*{{#use_dart_mappable}}*/
+        /*remove-end-x*/
+        /*{{#use_dart_mappable}}x*/
         const newAltokeEntity = DmNewAltokeEntity(
           name: 'name',
           description: 'description',
         );
         expect(newAltokeEntity, isNotNull);
         expect(newAltokeEntity, isA<DmNewAltokeEntity>());
-        /*{{/use_dart_mappable}}*/
+        /*x{{/use_dart_mappable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*x{{#use_equatable}}x*/
         const newAltokeEntity = ENewAltokeEntity(
           name: 'name',
           description: 'description',
         );
         expect(newAltokeEntity, isNotNull);
         expect(newAltokeEntity, isA<ENewAltokeEntity>());
-        /*{{/use_equatable}}*/
+        /*x{{/use_equatable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*x{{#use_freezed}}x*/
         const newAltokeEntity = FNewAltokeEntity(
           name: 'name',
           description: 'description',
         );
         expect(newAltokeEntity, isNotNull);
         expect(newAltokeEntity, isA<FNewAltokeEntity>());
-        /*{{/use_freezed}}*/
+        /*x{{/use_freezed}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_overrides}}*/
+        /*x{{#use_overrides}}x*/
         const newAltokeEntity = NewAltokeEntity(
           name: 'name',
           description: 'description',
         );
         expect(newAltokeEntity, isNotNull);
         expect(newAltokeEntity, isA<NewAltokeEntity>());
-        /*{{/use_overrides}}*/
-        /*remove-start*/
+        /*x{{/use_overrides}}*/
+        /*x-remove-start*/
       }
       /*remove-end*/
-      /*w 1v w*/
     },
   );
 
@@ -456,11 +446,10 @@ THEN they are equal if they have the same values
 AND their hash codes are equal if they have the same values
 ''',
     () {
-      /*w 1v w*/
       /*remove-start*/
       {
-        /*remove-end*/
-        /*{{#use_dart_mappable}}*/
+        /*remove-end-x*/
+        /*{{#use_dart_mappable}}x*/
         const newAltokeEntity = DmNewAltokeEntity(
           name: 'name',
           description: 'description',
@@ -480,12 +469,12 @@ AND their hash codes are equal if they have the same values
           newAltokeEntity.hashCode,
           isNot(differentNewAltokeEntity.hashCode),
         );
-        /*{{/use_dart_mappable}}*/
+        /*x{{/use_dart_mappable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*x{{#use_equatable}}x*/
         const newAltokeEntity = ENewAltokeEntity(
           name: 'name',
           description: 'description',
@@ -505,12 +494,12 @@ AND their hash codes are equal if they have the same values
           newAltokeEntity.hashCode,
           isNot(differentNewAltokeEntity.hashCode),
         );
-        /*{{/use_equatable}}*/
+        /*x{{/use_equatable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*x{{#use_freezed}}x*/
         const newAltokeEntity = FNewAltokeEntity(
           name: 'name',
           description: 'description',
@@ -530,12 +519,12 @@ AND their hash codes are equal if they have the same values
           newAltokeEntity.hashCode,
           isNot(differentNewAltokeEntity.hashCode),
         );
-        /*{{/use_freezed}}*/
+        /*x{{/use_freezed}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_overrides}}*/
+        /*x{{#use_overrides}}x*/
         const newAltokeEntity = NewAltokeEntity(
           name: 'name',
           description: 'description',
@@ -555,11 +544,10 @@ AND their hash codes are equal if they have the same values
           newAltokeEntity.hashCode,
           isNot(differentNewAltokeEntity.hashCode),
         );
-        /*{{/use_overrides}}*/
-        /*remove-start*/
+        /*x{{/use_overrides}}*/
+        /*x-remove-start*/
       }
       /*remove-end*/
-      /*w 1v w*/
     },
   );
 
@@ -571,11 +559,10 @@ WHEN its string representation is requested
 THEN a string representation of the new altoke entity is returned
 ''',
     () {
-      /*w 1v w*/
       /*remove-start*/
       {
-        /*remove-end*/
-        /*{{#use_dart_mappable}}*/
+        /*remove-end-x*/
+        /*{{#use_dart_mappable}}x*/
         const newAltokeEntity = DmNewAltokeEntity(
           name: 'name',
           description: 'description',
@@ -584,12 +571,12 @@ THEN a string representation of the new altoke entity is returned
           newAltokeEntity.toString(),
           'DmNewAltokeEntity(name: name, description: description)',
         );
-        /*{{/use_dart_mappable}}*/
+        /*x{{/use_dart_mappable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*x{{#use_equatable}}x*/
         const newAltokeEntity = ENewAltokeEntity(
           name: 'name',
           description: 'description',
@@ -598,12 +585,12 @@ THEN a string representation of the new altoke entity is returned
           newAltokeEntity.toString(),
           'ENewAltokeEntity(name, description)',
         );
-        /*{{/use_equatable}}*/
+        /*x{{/use_equatable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*x{{#use_freezed}}x*/
         const newAltokeEntity = FNewAltokeEntity(
           name: 'name',
           description: 'description',
@@ -612,12 +599,12 @@ THEN a string representation of the new altoke entity is returned
           newAltokeEntity.toString(),
           'FNewAltokeEntity(name: name, description: description)',
         );
-        /*{{/use_freezed}}*/
+        /*x{{/use_freezed}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_overrides}}*/
+        /*x{{#use_overrides}}x*/
         const newAltokeEntity = NewAltokeEntity(
           name: 'name',
           description: 'description',
@@ -626,11 +613,10 @@ THEN a string representation of the new altoke entity is returned
           newAltokeEntity.toString(),
           'NewAltokeEntity(name: name, description: description)',
         );
-        /*{{/use_overrides}}*/
-        /*remove-start*/
+        /*x{{/use_overrides}}*/
+        /*x-remove-start*/
       }
       /*remove-end*/
-      /*w 1v w*/
     },
   );
 
@@ -643,11 +629,10 @@ THEN an new instance of the new altoke entity is returned
 ├─ THAT has updated values
 ''',
     () {
-      /*w 1v w*/
       /*remove-start*/
       {
-        /*remove-end*/
-        /*{{#use_dart_mappable}}*/
+        /*remove-end-x*/
+        /*{{#use_dart_mappable}}x*/
         const newAltokeEntity = DmNewAltokeEntity(
           name: 'name',
           description: 'description',
@@ -666,12 +651,12 @@ THEN an new instance of the new altoke entity is returned
         final noopCopiedNewAltokeEntity = newAltokeEntity.copyWith();
         expect(noopCopiedNewAltokeEntity, isNotNull);
         expect(noopCopiedNewAltokeEntity, newAltokeEntity);
-        /*{{/use_dart_mappable}}*/
+        /*x{{/use_dart_mappable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*x{{#use_equatable}}x*/
         const newAltokeEntity = ENewAltokeEntity(
           name: 'name',
           description: 'description',
@@ -690,12 +675,12 @@ THEN an new instance of the new altoke entity is returned
         final noopCopiedNewAltokeEntity = newAltokeEntity.copyWith();
         expect(noopCopiedNewAltokeEntity, isNotNull);
         expect(noopCopiedNewAltokeEntity, newAltokeEntity);
-        /*{{/use_equatable}}*/
+        /*x{{/use_equatable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*x{{#use_freezed}}x*/
         const newAltokeEntity = FNewAltokeEntity(
           name: 'name',
           description: 'description',
@@ -714,12 +699,12 @@ THEN an new instance of the new altoke entity is returned
         final noopCopiedNewAltokeEntity = newAltokeEntity.copyWith();
         expect(noopCopiedNewAltokeEntity, isNotNull);
         expect(noopCopiedNewAltokeEntity, newAltokeEntity);
-        /*{{/use_freezed}}*/
+        /*x{{/use_freezed}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_overrides}}*/
+        /*x{{#use_overrides}}x*/
         const newAltokeEntity = NewAltokeEntity(
           name: 'name',
           description: 'description',
@@ -738,11 +723,10 @@ THEN an new instance of the new altoke entity is returned
         final noopCopiedNewAltokeEntity = newAltokeEntity.copyWith();
         expect(noopCopiedNewAltokeEntity, isNotNull);
         expect(noopCopiedNewAltokeEntity, newAltokeEntity);
-        /*{{/use_overrides}}*/
-        /*remove-start*/
+        /*x{{/use_overrides}}*/
+        /*x-remove-start*/
       }
       /*remove-end*/
-      /*w 1v w*/
     },
   );
 
@@ -754,58 +738,56 @@ WHEN the constructor is called
 THEN an instance of the partial altoke entity is returned
 ''',
     () {
-      /*w 1v w*/
       /*remove-start*/
       {
-        /*remove-end*/
-        /*{{#use_dart_mappable}}*/
+        /*remove-end-x*/
+        /*{{#use_dart_mappable}}x*/
         const partialAltokeEntity = DmPartialAltokeEntity(
           name: DmOptional.some('name'),
           description: DmOptional.some('description'),
         );
         expect(partialAltokeEntity, isNotNull);
         expect(partialAltokeEntity, isA<DmPartialAltokeEntity>());
-        /*{{/use_dart_mappable}}*/
+        /*x{{/use_dart_mappable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*x{{#use_equatable}}x*/
         const partialAltokeEntity = EPartialAltokeEntity(
           name: EOptional.some('name'),
           description: EOptional.some('description'),
         );
         expect(partialAltokeEntity, isNotNull);
         expect(partialAltokeEntity, isA<EPartialAltokeEntity>());
-        /*{{/use_equatable}}*/
+        /*x{{/use_equatable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*x{{#use_freezed}}x*/
         const partialAltokeEntity = FPartialAltokeEntity(
           name: FOptional.some('name'),
           description: FOptional.some('description'),
         );
         expect(partialAltokeEntity, isNotNull);
         expect(partialAltokeEntity, isA<FPartialAltokeEntity>());
-        /*{{/use_freezed}}*/
+        /*x{{/use_freezed}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_overrides}}*/
+        /*x{{#use_overrides}}x*/
         const partialAltokeEntity = PartialAltokeEntity(
           name: Optional.some('name'),
           description: Optional.some('description'),
         );
         expect(partialAltokeEntity, isNotNull);
         expect(partialAltokeEntity, isA<PartialAltokeEntity>());
-        /*{{/use_overrides}}*/
-        /*remove-start*/
+        /*x{{/use_overrides}}*/
+        /*x-remove-start*/
       }
       /*remove-end*/
-      /*w 1v w*/
     },
   );
 
@@ -819,11 +801,10 @@ THEN they are equal if they have the same values
 AND their hash codes are equal if they have the same values
 ''',
     () {
-      /*w 1v w*/
       /*remove-start*/
       {
-        /*remove-end*/
-        /*{{#use_dart_mappable}}*/
+        /*remove-end-x*/
+        /*{{#use_dart_mappable}}x*/
         const partialAltokeEntity = DmPartialAltokeEntity(
           name: DmOptional.some('name'),
           description: DmOptional.some('description'),
@@ -843,12 +824,12 @@ AND their hash codes are equal if they have the same values
           partialAltokeEntity.hashCode,
           isNot(differentPartialAltokeEntity.hashCode),
         );
-        /*{{/use_dart_mappable}}*/
+        /*x{{/use_dart_mappable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*x{{#use_equatable}}x*/
         const partialAltokeEntity = EPartialAltokeEntity(
           name: EOptional.some('name'),
           description: EOptional.some('description'),
@@ -868,12 +849,12 @@ AND their hash codes are equal if they have the same values
           partialAltokeEntity.hashCode,
           isNot(differentPartialAltokeEntity.hashCode),
         );
-        /*{{/use_equatable}}*/
+        /*x{{/use_equatable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*x{{#use_freezed}}x*/
         const partialAltokeEntity = FPartialAltokeEntity(
           name: FOptional.some('name'),
           description: FOptional.some('description'),
@@ -893,12 +874,12 @@ AND their hash codes are equal if they have the same values
           partialAltokeEntity.hashCode,
           isNot(differentPartialAltokeEntity.hashCode),
         );
-        /*{{/use_freezed}}*/
+        /*x{{/use_freezed}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_overrides}}*/
+        /*x{{#use_overrides}}x*/
         const partialAltokeEntity = PartialAltokeEntity(
           name: Optional.some('name'),
           description: Optional.some('description'),
@@ -918,11 +899,10 @@ AND their hash codes are equal if they have the same values
           partialAltokeEntity.hashCode,
           isNot(differentPartialAltokeEntity.hashCode),
         );
-        /*{{/use_overrides}}*/
-        /*remove-start*/
+        /*x{{/use_overrides}}*/
+        /*x-remove-start*/
       }
       /*remove-end*/
-      /*w 1v w*/
     },
   );
 
@@ -934,11 +914,10 @@ WHEN its string representation is requested
 THEN a string representation of the partial altoke entity is returned
 ''',
     () {
-      /*w 1v w*/
       /*remove-start*/
       {
-        /*remove-end*/
-        /*{{#use_dart_mappable}}*/
+        /*remove-end-x*/
+        /*{{#use_dart_mappable}}x*/
         const partialAltokeEntity = DmPartialAltokeEntity(
           name: DmOptional.some('name'),
           description: DmOptional.some('description'),
@@ -947,12 +926,12 @@ THEN a string representation of the partial altoke entity is returned
           partialAltokeEntity.toString(),
           '''DmPartialAltokeEntity(name: DmSome(value: name), description: DmSome(value: description))''',
         );
-        /*{{/use_dart_mappable}}*/
+        /*x{{/use_dart_mappable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*x{{#use_equatable}}x*/
         const partialAltokeEntity = EPartialAltokeEntity(
           name: EOptional.some('name'),
           description: EOptional.some('description'),
@@ -961,12 +940,12 @@ THEN a string representation of the partial altoke entity is returned
           partialAltokeEntity.toString(),
           '''EPartialAltokeEntity(ESome<String>(name), ESome<String?>(description))''',
         );
-        /*{{/use_equatable}}*/
+        /*x{{/use_equatable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*x{{#use_freezed}}x*/
         const partialAltokeEntity = FPartialAltokeEntity(
           name: FOptional.some('name'),
           description: FOptional.some('description'),
@@ -975,12 +954,12 @@ THEN a string representation of the partial altoke entity is returned
           partialAltokeEntity.toString(),
           '''FPartialAltokeEntity(name: FOptional<String>.some(value: name), description: FOptional<String?>.some(value: description))''',
         );
-        /*{{/use_freezed}}*/
+        /*x{{/use_freezed}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_overrides}}*/
+        /*x{{#use_overrides}}x*/
         const partialAltokeEntity = PartialAltokeEntity(
           name: Optional.some('name'),
           description: Optional.some('description'),
@@ -989,11 +968,10 @@ THEN a string representation of the partial altoke entity is returned
           partialAltokeEntity.toString(),
           '''PartialAltokeEntity(name: Some<String>(value: name), description: Some<String?>(value: description))''',
         );
-        /*{{/use_overrides}}*/
-        /*remove-start*/
+        /*x{{/use_overrides}}*/
+        /*x-remove-start*/
       }
       /*remove-end*/
-      /*w 1v w*/
     },
   );
 
@@ -1006,11 +984,10 @@ THEN an new instance of the partial altoke entity is returned
 ├─ THAT has updated values
 ''',
     () {
-      /*w 1v w*/
       /*remove-start*/
       {
-        /*remove-end*/
-        /*{{#use_dart_mappable}}*/
+        /*remove-end-x*/
+        /*{{#use_dart_mappable}}x*/
         const partialAltokeEntity = DmPartialAltokeEntity(
           name: DmOptional.some('name'),
           description: DmOptional.some('description'),
@@ -1033,12 +1010,12 @@ THEN an new instance of the partial altoke entity is returned
         final noopCopiedPartialAltokeEntity = partialAltokeEntity.copyWith();
         expect(noopCopiedPartialAltokeEntity, isNotNull);
         expect(noopCopiedPartialAltokeEntity, partialAltokeEntity);
-        /*{{/use_dart_mappable}}*/
+        /*x{{/use_dart_mappable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*x{{#use_equatable}}x*/
         const partialAltokeEntity = EPartialAltokeEntity(
           name: EOptional.some('name'),
           description: EOptional.some('description'),
@@ -1061,12 +1038,12 @@ THEN an new instance of the partial altoke entity is returned
         final noopCopiedPartialAltokeEntity = partialAltokeEntity.copyWith();
         expect(noopCopiedPartialAltokeEntity, isNotNull);
         expect(noopCopiedPartialAltokeEntity, partialAltokeEntity);
-        /*{{/use_equatable}}*/
+        /*x{{/use_equatable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*x{{#use_freezed}}x*/
         const partialAltokeEntity = FPartialAltokeEntity(
           name: FOptional.some('name'),
           description: FOptional.some('description'),
@@ -1089,12 +1066,12 @@ THEN an new instance of the partial altoke entity is returned
         final noopCopiedPartialAltokeEntity = partialAltokeEntity.copyWith();
         expect(noopCopiedPartialAltokeEntity, isNotNull);
         expect(noopCopiedPartialAltokeEntity, partialAltokeEntity);
-        /*{{/use_freezed}}*/
+        /*x{{/use_freezed}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_overrides}}*/
+        /*x{{#use_overrides}}x*/
         const partialAltokeEntity = PartialAltokeEntity(
           name: Optional.some('name'),
           description: Optional.some('description'),
@@ -1117,11 +1094,10 @@ THEN an new instance of the partial altoke entity is returned
         final noopCopiedPartialAltokeEntity = partialAltokeEntity.copyWith();
         expect(noopCopiedPartialAltokeEntity, isNotNull);
         expect(noopCopiedPartialAltokeEntity, partialAltokeEntity);
-        /*{{/use_overrides}}*/
-        /*remove-start*/
+        /*x{{/use_overrides}}*/
+        /*x-remove-start*/
       }
       /*remove-end*/
-      /*w 1v w*/
     },
   );
 }

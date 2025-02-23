@@ -1,31 +1,26 @@
-/*remove-start*/
-//
-// ignore_for_file: unnecessary_import
-/*remove-end*/
-
-/*{{#use_dart_mappable}}*/
+/*{{#use_dart_mappable}}x*/
 import 'package:dart_mappable/dart_mappable.dart';
-/*{{/use_dart_mappable}}*/
-
-/*{{#use_equatable}}*/
+/*x{{/use_dart_mappable}}x*/
+/*x{{#use_equatable}}x*/
 import 'package:equatable/equatable.dart';
-/*{{/use_equatable}}*/
-
-/*{{#use_freezed}}*/
+/*x{{/use_equatable}}x*/
+/*x{{#use_freezed}}x*/
 import 'package:freezed_annotation/freezed_annotation.dart';
-/*{{/use_freezed}}*/
 
-/*{{#use_meta}}*/
-import 'package:meta/meta.dart'; /*{{/use_meta}}*/
-
-/*{{#use_freezed}}*/
+/*x{{/use_freezed}}*/
+/*{{#use_meta}}x*/
+/*insert-start*/
+// import 'package:meta/meta.dart';
+/*insert-end*/
+/*x{{/use_meta}}*/
+/*{{#use_freezed}}x*/
 part 'optional.freezed.dart';
-/*{{/use_freezed}}*/
-/*{{#use_dart_mappable}}*/
+/*x{{/use_freezed}}x*/
+/*x{{#use_dart_mappable}}x*/
 part 'optional.mapper.dart';
-/*{{/use_dart_mappable}}*/
+/*x{{/use_dart_mappable}}*/
 
-/*{{#use_dart_mappable}}*/
+/*{{#use_dart_mappable}}x*/
 /// {@template common.optional}
 /// A representation of an optional value.
 /// {@endtemplate}
@@ -87,9 +82,9 @@ class DmNone<T extends Object?> extends DmOptional<T> with DmNoneMappable<T> {
   @override
   int get hashCode => runtimeType.hashCode;
 }
-/*{{/use_dart_mappable}}*/
+/*x{{/use_dart_mappable}}x*/
 
-/*{{#use_equatable}}*/
+/*x{{#use_equatable}}x*/
 /// {@template common.optional}
 /// A representation of an optional value.
 /// {@endtemplate}
@@ -128,9 +123,9 @@ class ENone<T extends Object?> extends EOptional<T> {
   @override
   List<Object?> get props => [];
 }
-/*{{/use_equatable}}*/
+/*x{{/use_equatable}}x*/
 
-/*{{#use_freezed}}*/
+/*x{{#use_freezed}}x*/
 /// {@template common.optional}
 /// A representation of an optional value.
 /// {@endtemplate}
@@ -148,9 +143,9 @@ class FOptional<T extends Object?> with _$FOptional<T> {
   /// Creates an [FOptional] with an absent value.
   const factory FOptional.none() = FNone<T>;
 }
-/*{{/use_freezed}}*/
+/*x{{/use_freezed}}x*/
 
-/*{{#use_overrides}}*/
+/*x{{#use_overrides}}x*/
 /// {@template common.optional}
 /// A representation of an optional value.
 /// {@endtemplate}
@@ -212,4 +207,4 @@ class None<T extends Object?> extends Optional<T> {
   int get hashCode => runtimeType.hashCode;
 }
 
-/*{{/use_overrides}}*/
+/*x{{/use_overrides}}*/

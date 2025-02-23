@@ -1,9 +1,8 @@
-#{{^use_equatable}}#
+#{{^use_equatable}}x#
 targets:
   $default:
     builders:
-      #w 1v 6> w#
-      #{{#use_dart_mappable}}#
+      #{{#use_dart_mappable}}x#
       dart_mappable_builder:
         generate_for:
           - lib/src/altoke_entity.dart
@@ -12,14 +11,13 @@ targets:
             - copy
             - equals
             - stringify
-      #{{/use_dart_mappable}}#
-      #{{#use_freezed}}#
+      #x{{/use_dart_mappable}}x#
+      #x{{#use_freezed}}x#
       freezed:
         generate_for:
           - lib/src/altoke_entity.dart
         options:
           map: false
           when: false
-      #{{/use_freezed}}#
-#{{/use_equatable}}#
-#w 1v w#
+      #x{{/use_freezed}}x#
+#x{{/use_equatable}}#

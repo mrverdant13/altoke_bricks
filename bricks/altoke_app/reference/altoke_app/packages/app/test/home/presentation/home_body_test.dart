@@ -1,6 +1,6 @@
 import 'package:altoke_app/counter/counter.dart';
 import 'package:altoke_app/home/home.dart';
-/*remove-start*/
+/*x-remove-start*/
 import 'package:altoke_app/tasks/tasks.dart';
 /*remove-end*/
 import 'package:flutter_test/flutter_test.dart';
@@ -18,7 +18,7 @@ THEN a counter example list tile should be displayed
     (tester) async {
       await tester.pumpAppWithScaffold(const HomeBody());
       expect(find.byType(CounterExampleListTile), findsOneWidget);
-      /*remove-start*/
+      /*x-remove-start*/
       expect(find.byType(TasksExampleListTile), findsOneWidget);
       /*remove-end*/
     },

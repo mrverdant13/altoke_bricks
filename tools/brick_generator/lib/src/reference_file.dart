@@ -8,42 +8,151 @@ import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
 import 'package:shell/git.dart';
 
-/// Regexp patterns to parametrize the template.
-@visibleForTesting
-abstract class AltokeContentPattern {
-  /// Regexp to identify blocks to be removed from the contents of a file.
-  @visibleForTesting
-  static final remotion = RegExp(
-    r'(((\/\*)|(#)|(<!--))drop((\*\/)|(#)|(-->)).*)|((\s+)?((\/\*)|(#)|(<!--))remove-start((\*\/)|(#)|(-->))([\s\S]*?)((\/\*)|(#)|(<!--))remove-end((\*\/)|(#)|(-->))(\s+)?)',
-    dotAll: true,
-  );
+extension on String {
+  String get withResolvedRemotions {
+    final blockDropPatterns = [r'\/\*drop\*\/.*', '#drop#.*', '<!--drop-->.*'];
+    final blockDropPattern = blockDropPatterns
+        .map((pattern) => '(?:$pattern)')
+        .join('|');
+    final blockDropRegex = RegExp(blockDropPattern, dotAll: true);
+    final afterDropContent = replaceAll(blockDropRegex, '');
+    final blockRemotionPatterns = [
+      r'(?<leading>\s*)\/\*(?<dropLeading>x-)?remove-start\*\/.*?\/\*remove-end(?<dropTrailing>-x)?\*\/(?<trailing>\s*)',
+      r'(?<leading>\s*)#(?<dropLeading>x-)?remove-start#.*?#remove-end(?<dropTrailing>-x)?#(?<trailing>\s*)',
+      r'(?<leading>\s*)<!--(?<dropLeading>x-)?remove-start-->.*?<!--remove-end(?<dropTrailing>-x)?-->(?<trailing>\s*)',
+    ];
+    return blockRemotionPatterns.fold(afterDropContent, (content, pattern) {
+      final regex = RegExp(pattern, dotAll: true);
+      return content.replaceAllMapped(regex, (match) {
+        match as RegExpMatch;
+        final keepLeading = (match.namedGroup('dropLeading') ?? '').isEmpty;
+        final keepTrailing = (match.namedGroup('dropTrailing') ?? '').isEmpty;
+        final leading = match.namedGroup('leading') ?? '';
+        final trailing = match.namedGroup('trailing') ?? '';
+        return [if (keepLeading) leading, if (keepTrailing) trailing].join();
+      });
+    });
+  }
 
-  /// Regexp to identify variables to be resolved within the contents of a file.
-  @visibleForTesting
-  static final variable = RegExp(
-    r'(\s+)?((\/\*)|(#)|(<!--)){{(.*?)}}((\*\/)|(#)|(-->))(\s+)?',
-    dotAll: true,
-  );
+  String get withResolveReplacements {
+    final patternGroups = [
+      (
+        r'\/\*replace-start\*\/ *\n.*?\n *\/\*with(?: +i(?<indentation>\d+))?\*\/ *\n(?<replacement>.*?)\n *\/\*replace-end\*\/',
+        r'\/\/ (?<line>.*)',
+      ),
+      (
+        r'#replace-start# *\n.*?\n *#with(?: +i(?<indentation>\d+))?# *\n(?<replacement>.*?)\n *#replace-end#',
+        '# (?<line>.*)',
+      ),
+      (
+        r'<!--replace-start--> *\n.*?\n *<!--with(?: +i(?<indentation>\d+))?--> *\n(?<replacement>.*?)\n *<!--replace-end-->',
+        '<!-- (?<line>.*)-->',
+      ),
+    ];
+    return patternGroups.fold(this, (content, patternGroup) {
+      final (replacementPattern, linePattern) = patternGroup;
+      final replacementRegex = RegExp(replacementPattern, dotAll: true);
+      final lineRegex = RegExp(linePattern, dotAll: true);
+      return content.replaceAllMapped(replacementRegex, (match) {
+        match as RegExpMatch;
+        final indentation =
+            int.tryParse(match.namedGroup('indentation') ?? '') ?? 0;
+        final replacement = match.namedGroup('replacement') ?? '';
+        final lines = LineSplitter.split(replacement);
+        return lines
+            .map((line) {
+              final lineMatch = lineRegex.allMatches(line).single;
+              final lineContent = lineMatch.namedGroup('line') ?? '';
+              return ' ' * indentation + lineContent;
+            })
+            .join('\n');
+      });
+    });
+  }
 
-  /// Regexp to identify whitespace actions to be resolved within the contents
-  /// of a file.
-  @visibleForTesting
-  static final spacingGroups = RegExp(
-    r'(\s+)?((\/\*)|(#)|(<!--))w ((?:\d+[v>]\s*)+) w((\*\/)|(#)|(-->))(\s+)?',
-    dotAll: true,
-  );
+  String get withResolvedInsertions {
+    final patternGroups = [
+      (
+        r'\/\*insert-start\*\/ *\n(?<insertion>.*?)\n *\/\*insert-end\*\/',
+        r'\/\/ (?<line>.*)',
+      ),
+      (r'#insert-start# *\n(?<insertion>.*?)\n *#insert-end#', '# (?<line>.*)'),
+      (
+        r'<!--insert-start--> *\n(?<insertion>.*?)\n *<!--insert-end-->',
+        '<!-- (?<line>.*)-->',
+      ),
+    ];
+    return patternGroups.fold(this, (content, patternGroup) {
+      final (insertionPattern, linePattern) = patternGroup;
+      final insertionRegex = RegExp(insertionPattern, dotAll: true);
+      final lineRegex = RegExp(linePattern, dotAll: true);
+      return content.replaceAllMapped(insertionRegex, (match) {
+        match as RegExpMatch;
+        final insertion = match.namedGroup('insertion') ?? '';
+        final lines = LineSplitter.split(insertion);
+        return lines
+            .map((line) {
+              final lineMatch = lineRegex.allMatches(line).single;
+              final lineContent = lineMatch.namedGroup('line') ?? '';
+              return lineContent;
+            })
+            .join('\n');
+      });
+    });
+  }
 
-  /// Regexp to identify a single whitespace action to be resolved within the
-  /// contents of a file.
-  @visibleForTesting
-  static final spacingGroup = RegExp(r'(\d+)([v>])', dotAll: true);
+  String get withResolveMustacheTags {
+    final patterns = [
+      r'(?<leading>\s*)\/\*(?<dropLeading>x)?(?<mustacheTag>{{.*?}})(?<dropTrailing>x)?\*\/(?<trailing>\s*)',
+      r'(?<leading>\s*)#(?<dropLeading>x)?(?<mustacheTag>{{.*?}})(?<dropTrailing>x)?#(?<trailing>\s*)',
+      r'(?<leading>\s*)<!--(?<dropLeading>x)?(?<mustacheTag>{{.*?}})(?<dropTrailing>x)?-->(?<trailing>\s*)',
+    ];
+    return patterns.fold(this, (content, pattern) {
+      final regex = RegExp(pattern, dotAll: true);
+      return content.replaceAllMapped(regex, (match) {
+        match as RegExpMatch;
+        final mustacheTag = match.namedGroup('mustacheTag') ?? '';
+        final keepLeading = (match.namedGroup('dropLeading') ?? '').isEmpty;
+        final keepTrailing = (match.namedGroup('dropTrailing') ?? '').isEmpty;
+        final leading = match.namedGroup('leading') ?? '';
+        final trailing = match.namedGroup('trailing') ?? '';
+        return [
+          if (keepLeading) leading,
+          mustacheTag,
+          if (keepTrailing) trailing,
+        ].join();
+      });
+    });
+  }
 
-  /// Regexp to identify a block to be replaced within the contents of a file.
-  @visibleForTesting
-  static final replacement = RegExp(
-    r'((?:\/\*)|(?:#)|(?:<!--))replace-start(?:(?:\*\/)|(?:#)|(?:-->))(?:[\s\S]*?)(?:(?:\/\*)|(?:#)|(?:<!--))with\s*(?:i(\d+))?(?:(?:\*\/)|(?:#)|(?:-->))\s*([\s\S]*?)\s*(?:(?:\/\*)|(?:#)|(?:<!--))replace-end(?:(?:\*\/)|(?:#)|(?:-->))',
-    dotAll: true,
-  );
+  String get withResolveSpacingGroups {
+    const groupPatterns = [
+      r'\s*\/\*w ?(?<spacingGroups>(?:\d+[v>] ?)*) ?w\*\/\s*',
+      r'\s*#w ?(?<spacingGroups>(?:\d+[v>] ?)*) ?w#\s*',
+      r'\s*<!--w ?(?<spacingGroups>(?:\d+[v>] ?)*) ?w-->\s*',
+    ];
+    const actionPattern = r'(?<actionTimes>\d+)(?<actionType>[v>]) ?';
+    return groupPatterns.fold(this, (content, groupPattern) {
+      final groupRegex = RegExp(groupPattern, dotAll: true);
+      final actionRegex = RegExp(actionPattern, dotAll: true);
+      return content.replaceAllMapped(groupRegex, (match) {
+        match as RegExpMatch;
+        final spacingGroups = match.namedGroup('spacingGroups') ?? '';
+        return spacingGroups.replaceAllMapped(actionRegex, (actionMatch) {
+          actionMatch as RegExpMatch;
+          final actionTimes =
+              int.tryParse(actionMatch.namedGroup('actionTimes') ?? '') ?? 0;
+          final actionType = actionMatch.namedGroup('actionType') ?? '';
+          return switch (actionType) {
+                'v' => '\n',
+                '>' => ' ',
+                _ => '',
+              } *
+              actionTimes;
+        });
+      });
+    });
+  }
 }
 
 /// Extension methods for a reference [File] to be parametrized.
@@ -89,25 +198,18 @@ extension ReferenceFile on File {
     if (ignoredExtensions.contains(p.extension(path))) return;
     final BrickGenData(:replacements, :lineDeletions) = brickGenData;
     final referenceContent = await readAsString();
-    final resolvedContents = referenceContent
-        .applyLineDeletions(
-          filePath: p.relative(path, from: brickGenData.targetAbsolutePath),
-          lineDeletions: lineDeletions,
-        )
-        .applyReplacements(replacements)
-        .replaceAll(AltokeContentPattern.remotion, '')
-        .replaceAllMapped(
-          AltokeContentPattern.replacement,
-          transformReplacementMatchForFileContents,
-        )
-        .replaceAllMapped(
-          AltokeContentPattern.variable,
-          transformVariableMatchForFileContents,
-        )
-        .replaceAllMapped(
-          AltokeContentPattern.spacingGroups,
-          transformWhitespaceActionsMatchForFileContents,
-        );
+    final resolvedContents =
+        referenceContent
+            .applyLineDeletions(
+              filePath: p.relative(path, from: brickGenData.targetAbsolutePath),
+              lineDeletions: lineDeletions,
+            )
+            .applyReplacements(replacements)
+            .withResolvedRemotions
+            .withResolveReplacements
+            .withResolvedInsertions
+            .withResolveMustacheTags
+            .withResolveSpacingGroups;
     await writeAsString(resolvedContents);
   }
 
@@ -116,133 +218,4 @@ extension ReferenceFile on File {
   Future<String> resolvePath({required BrickGenData brickGenData}) async {
     return brickGenData.applyReplacementsToTargetRelativeDescendant(path);
   }
-}
-
-/// Transforms a replacement match into the actual replacement block, in the
-/// contents of a file.
-@visibleForTesting
-String transformReplacementMatchForFileContents(Match match) {
-  final type = match.group(1);
-  final indentation = int.tryParse(match.group(2) ?? '') ?? 0;
-  final rawLines = LineSplitter.split((match.group(3) ?? '').trim());
-
-  String computeSlashBasedReplacement() {
-    final buf = StringBuffer();
-    final lines = rawLines.map(
-      (line) => line.replaceFirst(RegExp(r'\s*\/\/ '), ' ' * indentation),
-    );
-    for (final line in lines) {
-      buf.writeln(line);
-    }
-    return buf.toString().trim();
-  }
-
-  String computeHashBasedReplacement() {
-    final buf = StringBuffer();
-    final lines = rawLines.map(
-      (line) => line.replaceFirst(RegExp(r'^\s*#* '), ' ' * indentation),
-    );
-    for (final line in lines) {
-      buf.writeln(line);
-    }
-    return buf.toString().trim();
-  }
-
-  String computeHtmlBasedReplacement() {
-    final buf = StringBuffer();
-    final lines = rawLines.map(
-      (line) => line.replaceFirst(RegExp(r'\s*<!-- '), ' ' * indentation),
-    );
-    for (final line in lines) {
-      buf.writeln(line.substring(0, line.length - 3).trim());
-    }
-    return buf.toString().trim();
-  }
-
-  switch (type) {
-    case '/*':
-      return computeSlashBasedReplacement();
-    case '#':
-      return computeHashBasedReplacement();
-    case '<!--':
-      return computeHtmlBasedReplacement();
-    case _:
-      return '';
-  }
-}
-
-/// Transforms a conditional file match into a parametrized conditional
-/// filename, in the path of a file.
-@visibleForTesting
-String transformConditionalFileMatchForFilePath(Match match) {
-  final logicCharacter = switch (match.group(1)) {
-    'n' => '^',
-    _ => '#',
-  };
-  final variable = match.group(2);
-  final pathSegment = match.group(3);
-  return '{{$logicCharacter$variable}}$pathSegment{{${p.separator}$variable}}';
-}
-
-/// Transforms a conditional file match into an filename, in the contents of a
-/// file.
-@visibleForTesting
-String transformConditionalFileMatchForFileContents(Match match) {
-  final pathSegment = match.group(3);
-  return '$pathSegment';
-}
-
-/// Transforms a conditional directory match into a parametrized conditional
-/// directory path segment, in the path of a file.
-@visibleForTesting
-String transformConditionalDirMatchForFilePath(Match match) {
-  final logicCharacter = switch (match.group(1)) {
-    'n' => '^',
-    _ => '#',
-  };
-  final variable = match.group(2);
-  final pathSegment = match.group(3);
-  return '{{$logicCharacter$variable}}$pathSegment{{${p.separator}$variable}}';
-}
-
-/// Transforms a conditional directory match into an directory path segment, in
-/// the contents of a file.
-@visibleForTesting
-String transformConditionalDirMatchForFileContents(Match match) {
-  final pathSegment = match.group(3);
-  return '$pathSegment';
-}
-
-/// Transforms a variable match into an actual mustache variable, in the
-/// contents of a file.
-@visibleForTesting
-String transformVariableMatchForFileContents(Match match) {
-  final variable = match.group(6);
-  return '{{$variable}}';
-}
-
-/// Transforms a whitespace actions match into an actual set of spacing actions,
-/// such as new lines and spaces, in the contents of a file.
-@visibleForTesting
-String transformWhitespaceActionsMatchForFileContents(Match match) {
-  final buf = StringBuffer();
-  final candidates = AltokeContentPattern.spacingGroup.allMatches(
-    match.group(6) ?? '',
-  );
-  for (final candidate in candidates) {
-    final count = int.tryParse(candidate.group(1) ?? '') ?? 0;
-    final action = () {
-      final actionChar = candidate.group(2);
-      switch (actionChar) {
-        case 'v':
-          return '\n';
-        case '>':
-          return ' ';
-        default:
-          return '';
-      }
-    }();
-    buf.write(action * count);
-  }
-  return buf.toString();
 }

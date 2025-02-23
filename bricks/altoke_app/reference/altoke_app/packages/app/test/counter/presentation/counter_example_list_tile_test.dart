@@ -1,14 +1,14 @@
 import 'package:altoke_app/counter/counter.dart';
 import 'package:altoke_app/routing/routing.dart';
-/*{{#use_auto_route}}*/
+/*x{{#use_auto_route}}*/
 import 'package:auto_route/auto_route.dart';
-/*{{/use_auto_route}}*/
+/*x{{/use_auto_route}}*/
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-/*{{#use_go_router}}*/
+/*x{{#use_go_router}}*/
 import 'package:go_router/go_router.dart';
-/*{{/use_go_router}}*/
+/*x{{/use_go_router}}*/
 import 'package:mocktail/mocktail.dart';
 
 import '../../helpers/helpers.dart';
@@ -37,7 +37,7 @@ THEN the button should include the localized label
 
   setUpAll(registerFallbackValues);
 
-  /*{{#use_auto_route}}*/
+  /*{{#use_auto_route}}x*/
   testWidgets(
     '''
 
@@ -59,25 +59,23 @@ THEN the counter screen should be shown
               ),
             ),
           ],
-          child:
-          /*remove-end*/
-          StackRouterScope(
+          child: /*remove-end-x*/ StackRouterScope(
             controller: stackRouter,
             stateHash: 0,
             child: const Scaffold(body: CounterExampleListTile()),
+            /*x-remove-start*/
           ),
-          /*remove-start*/
+          /*remove-end*/
         ),
-        /*remove-end*/
       );
       await tester.pumpAndSettle();
       await tester.tap(find.byType(CounterExampleListTile));
       verify(() => stackRouter.navigate(const CounterRoute())).called(1);
     },
   );
-  /*{{/use_auto_route}}*/
+  /*x{{/use_auto_route}}x*/
 
-  /*{{#use_go_router}}*/
+  /*x{{#use_go_router}}x*/
   testWidgets(
     '''
 
@@ -99,21 +97,18 @@ THEN the counter screen should be shown
               ),
             ),
           ],
-          child:
-          /*remove-end*/
-          InheritedGoRouter(
+          child: /*remove-end-x*/ InheritedGoRouter(
             goRouter: goRouter,
             child: const Scaffold(body: CounterExampleListTile()),
+            /*x-remove-start*/
           ),
-          /*remove-start*/
+          /*remove-end*/
         ),
-        /*remove-end*/
       );
       await tester.pumpAndSettle();
       await tester.tap(find.byType(CounterExampleListTile));
       verify(() => goRouter.go(const CounterRouteData().location)).called(1);
     },
   );
-  /*{{/use_go_router}}*/
-  /*w 1v w*/
+  /*x{{/use_go_router}}*/
 }

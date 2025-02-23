@@ -1,14 +1,14 @@
 import 'dart:math' as math;
 
 import 'package:altoke_app/counter/counter.dart';
-/*{{#use_auto_route}}*/
+/*x{{#use_auto_route}}*/
 import 'package:auto_route/auto_route.dart';
-/*{{/use_auto_route}}*/
+/*x{{/use_auto_route}}*/
 import 'package:flutter/material.dart';
 
-/*{{#use_auto_route}}*/
+/*{{#use_auto_route}}x*/
 @RoutePage(name: 'CounterRoute')
-/*{{/use_auto_route}}*/
+/*{{/use_auto_route}}x*/
 class CounterScreen extends StatelessWidget {
   const CounterScreen({super.key});
 

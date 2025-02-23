@@ -1,22 +1,22 @@
 import 'dart:developer';
 
 import 'package:altoke_app/routing/routing.dart';
-/*{{#use_auto_route}}*/
+/*x{{#use_auto_route}}*/
 import 'package:auto_route/auto_route.dart';
-/*{{/use_auto_route}}*/
+/*x{{/use_auto_route}}*/
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-/*{{#use_go_router}}*/
+/*x{{#use_go_router}}*/
 import 'package:go_router/go_router.dart';
-/*{{/use_go_router}}*/
+/*x{{/use_go_router}}*/
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 export 'routes/routes.dart';
 
 part 'router.g.dart';
 
-/*{{#use_auto_route}}*/
+/*{{#use_auto_route}}x*/
 @AutoRouterConfig(generateForDir: ['lib/routing/'])
 class AppRouter extends RootStackRouter {
   AppRouter({@visibleForTesting this.testRoutes = const []});
@@ -29,10 +29,9 @@ class AppRouter extends RootStackRouter {
     if (testRoutes.isEmpty) ...[
       AdaptiveRoute<void>(initial: true, path: '/', page: HomeRoute.page),
       AdaptiveRoute<void>(path: '/counter', page: CounterRoute.page),
-      /*remove-start*/
+      /*x-remove-start*/
       AdaptiveRoute<void>(path: '/tasks', page: TasksRoute.page),
       /*remove-end*/
-      /*w 1v 4> w*/
     ] else
       ...testRoutes,
   ];
@@ -40,18 +39,17 @@ class AppRouter extends RootStackRouter {
   @visibleForTesting
   final List<AutoRoute> testRoutes;
 }
-/*{{/use_auto_route}}*/
+/*x{{/use_auto_route}}x*/
 
-/*{{#use_go_router}}*/
+/*x{{#use_go_router}}x*/
 @TypedGoRoute<HomeRouteData>(
   path: '/',
   name: 'HomeRoute',
   routes: [
     TypedGoRoute<CounterRouteData>(path: 'counter', name: 'CounterRoute'),
-    /*remove-start*/
+    /*x-remove-start*/
     TypedGoRoute<TasksRouteData>(path: 'tasks', name: 'TasksRoute'),
     /*remove-end*/
-    /*w 1v 2> w*/
   ],
 )
 class HomeRouteData extends GoRouteData {
@@ -72,7 +70,7 @@ class CounterRouteData extends GoRouteData {
   }
 }
 
-/*remove-start*/
+/*x-remove-start*/
 // coverage:ignore-start
 class TasksRouteData extends GoRouteData {
   const TasksRouteData();
@@ -83,33 +81,31 @@ class TasksRouteData extends GoRouteData {
   }
 }
 // coverage:ignore-end
-/*remove-end*/
-/*{{/use_go_router}}*/
+/*remove-end-x*/
+/*x{{/use_go_router}}*/
 
-@Riverpod(
-  dependencies: [
-    /*remove-start*/
-    SelectedRouterPackage,
-    /*remove-end*/
-  ],
-)
+/*replace-start*/
+@Riverpod(dependencies: [SelectedRouterPackage])
+/*with*/
+// @Riverpod(dependencies: [])
+/*replace-end*/
 RouterConfig<Object> routerConfig(Ref ref) {
-  /*remove-start*/
+  /*x-remove-start*/
   final routerPackage = ref.watch(selectedRouterPackagePod);
   /*remove-end*/
   final routerConfig = /*remove-start*/
       switch (routerPackage) {
             RouterPackage.autoRoute =>
-              /*remove-end*/
-              /*{{#use_auto_route}}*/
-              AppRouter().config() /*{{/use_auto_route}}*/ /*remove-start*/,
+              /*remove-end-x*/
+              /*{{#use_auto_route}}x*/
+              AppRouter().config() /*x{{/use_auto_route}}x*/ /*remove-start*/,
             RouterPackage.goRouter => /*remove-end*/
-            /*{{#use_go_router}}*/
+            /*x{{#use_go_router}}x*/
             GoRouter(
               routes: $appRoutes,
               debugLogDiagnostics: kDebugMode,
               initialLocation: const HomeRouteData().location,
-            ) /*{{/use_go_router}}*/ /*remove-start*/,
+            ) /*x{{/use_go_router}}x*/ /*remove-start*/,
           }
           as RouterConfig<Object> /*remove-end*/;
   final delegate = routerConfig.routerDelegate;
@@ -119,16 +115,16 @@ RouterConfig<Object> routerConfig(Ref ref) {
     if (!kDebugMode) return;
     final currentUri = /*remove-start*/ switch (delegate) {
       RouterDelegate<UrlState>() =>
-        /*remove-end*/
-        /*{{#use_auto_route}}*/
+        /*remove-end-x*/
+        /*{{#use_auto_route}}x*/
         delegate
             .currentConfiguration!
-            .uri /*{{/use_auto_route}}*/ /*remove-start*/,
+            .uri /*x{{/use_auto_route}}x*/ /*remove-start*/,
       GoRouterDelegate() => /*remove-end*/
-        /*{{#use_go_router}}*/
+        /*x{{#use_go_router}}x*/
         delegate
             .currentConfiguration
-            .uri /*{{/use_go_router}}*/ /*remove-start*/,
+            .uri /*x{{/use_go_router}}x*/ /*remove-start*/,
       _ => throw UnimplementedError(),
     }
     /*remove-end*/
