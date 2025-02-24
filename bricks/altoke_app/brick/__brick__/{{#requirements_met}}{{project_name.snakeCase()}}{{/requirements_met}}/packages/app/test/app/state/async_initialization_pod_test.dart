@@ -1,7 +1,10 @@
 import 'dart:io';
 
-import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/app/app.dart';import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_test/flutter_test.dart';void main() {
+import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/app/app.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+void main() {
   test(
     '''
 
@@ -18,6 +21,7 @@ THEN the async initializer sequence should complete
       );
       addTearDown(subscription.close);
       final future = container.read(asyncInitializationPod.future);
-      await expectLater(future, completes);},
+      await expectLater(future, completes);
+    },
   );
 }

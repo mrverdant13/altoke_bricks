@@ -1,12 +1,18 @@
 import 'dart:developer';
 
-import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/routing/routing.dart';{{#use_auto_route}}import 'package:auto_route/auto_route.dart';{{/use_auto_route}}import 'package:flutter/foundation.dart';
+import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/routing/routing.dart';{{#use_auto_route}}
+import 'package:auto_route/auto_route.dart';{{/use_auto_route}}
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';{{#use_go_router}}import 'package:go_router/go_router.dart';{{/use_go_router}}import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';{{#use_go_router}}
+import 'package:go_router/go_router.dart';{{/use_go_router}}
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 export 'routes/routes.dart';
 
-part 'router.g.dart';{{#use_auto_route}}@AutoRouterConfig(generateForDir: ['lib/routing/'])
+part 'router.g.dart';
+
+{{#use_auto_route}}@AutoRouterConfig(generateForDir: ['lib/routing/'])
 class AppRouter extends RootStackRouter {
   AppRouter({@visibleForTesting this.testRoutes = const []});
 
@@ -47,10 +53,11 @@ class CounterRouteData extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) {
     return const CounterScreen();
   }
-}{{/use_go_router}}@Riverpod(
-  dependencies: [],
-)
-RouterConfig<Object> routerConfig(Ref ref) {final routerConfig ={{#use_auto_route}}AppRouter().config(){{/use_auto_route}}{{#use_go_router}}GoRouter(
+}{{/use_go_router}}
+
+@Riverpod(dependencies: [])
+RouterConfig<Object> routerConfig(Ref ref) {
+  final routerConfig = {{#use_auto_route}}AppRouter().config(){{/use_auto_route}}{{#use_go_router}}GoRouter(
               routes: $appRoutes,
               debugLogDiagnostics: kDebugMode,
               initialLocation: const HomeRouteData().location,
@@ -60,7 +67,7 @@ RouterConfig<Object> routerConfig(Ref ref) {final routerConfig ={{#use_auto_rout
   // coverage:ignore-start
   void logCurrentUri() {
     if (!kDebugMode) return;
-    final currentUri ={{#use_auto_route}}delegate
+    final currentUri = {{#use_auto_route}}delegate
             .currentConfiguration!
             .uri{{/use_auto_route}}{{#use_go_router}}delegate
             .currentConfiguration

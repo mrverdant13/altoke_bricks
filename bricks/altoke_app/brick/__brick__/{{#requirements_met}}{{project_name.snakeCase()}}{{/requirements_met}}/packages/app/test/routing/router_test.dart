@@ -1,12 +1,17 @@
-import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/routing/routing.dart';{{#use_auto_route}}import 'package:auto_route/auto_route.dart';{{/use_auto_route}}import 'package:flutter/material.dart';
+import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/routing/routing.dart';{{#use_auto_route}}
+import 'package:auto_route/auto_route.dart';{{/use_auto_route}}
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_test/flutter_test.dart';{{#use_go_router}}import 'package:go_router/go_router.dart';{{/use_go_router}}import 'package:path/path.dart' as path;
+import 'package:flutter_test/flutter_test.dart';{{#use_go_router}}
+import 'package:go_router/go_router.dart';{{/use_go_router}}
+import 'package:path/path.dart' as path;
 
 import '../helpers/helpers.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-{{#use_auto_route}}test(
+
+  {{#use_auto_route}}test(
     '''
 
 GIVEN a router config pod

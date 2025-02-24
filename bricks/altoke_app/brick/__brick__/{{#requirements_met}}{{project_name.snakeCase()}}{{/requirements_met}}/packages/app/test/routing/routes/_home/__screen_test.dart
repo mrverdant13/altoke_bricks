@@ -2,7 +2,10 @@ import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/flavors/flavors.dart';
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/routing/routing.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_test/flutter_test.dart';{{#use_go_router}}import 'package:go_router/go_router.dart';{{/use_go_router}}void main() {
+import 'package:flutter_test/flutter_test.dart';{{#use_go_router}}
+import 'package:go_router/go_router.dart';{{/use_go_router}}
+
+void main() {
   setUp(() {
     debugFlavor = AppFlavor.dev;
   });
@@ -23,7 +26,8 @@ THEN the home screen should be shown
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            asyncInitializationPod.overrideWith((_) async {}),],
+            asyncInitializationPod.overrideWith((_) async {}),
+          ],
           child: const MyApp(),
         ),
       );
