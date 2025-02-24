@@ -159,22 +159,18 @@ extension on String {
 extension ReferenceFile on File {
   /// Parametrizes the reference file.
   Future<void> parametrize({required BrickGenData brickGenData}) async {
-    try {
-      if (await isGitIgnored) {
-        await delete(recursive: true);
-        return;
-      }
-      final resolvedPath = await resolvePath(brickGenData: brickGenData);
-      final resultingFile = await () async {
-        if (p.equals(resolvedPath, path)) return this;
-        final dir = Directory(p.dirname(resolvedPath));
-        if (!dir.existsSync()) await dir.create(recursive: true);
-        return rename(resolvedPath);
-      }();
-      await resultingFile.resolveContents(brickGenData: brickGenData);
-    } on Object catch (e) {
-      stderr.writeln(e);
+    if (await isGitIgnored) {
+      await delete(recursive: true);
+      return;
     }
+    final resolvedPath = _resolvePath(brickGenData: brickGenData);
+    final resultingFile = await () async {
+      if (p.equals(resolvedPath, path)) return this;
+      final dir = Directory(p.dirname(resolvedPath));
+      if (!dir.existsSync()) await dir.create(recursive: true);
+      return rename(resolvedPath);
+    }();
+    await resultingFile._resolveContents(brickGenData: brickGenData);
   }
 
   /// Checks if the reference file is git ignored.
@@ -189,8 +185,7 @@ extension ReferenceFile on File {
   }
 
   /// Resolves the parametrized contents of the reference [File].
-  @visibleForTesting
-  Future<void> resolveContents({required BrickGenData brickGenData}) async {
+  Future<void> _resolveContents({required BrickGenData brickGenData}) async {
     const ignoredExtensions = {
       '.png',
       '.webp', // cspell:disable-line
@@ -214,8 +209,7 @@ extension ReferenceFile on File {
   }
 
   /// Resolves the parametrized path of the reference [File].
-  @visibleForTesting
-  Future<String> resolvePath({required BrickGenData brickGenData}) async {
+  String _resolvePath({required BrickGenData brickGenData}) {
     return brickGenData.applyReplacementsToTargetRelativeDescendant(path);
   }
 }
