@@ -69,7 +69,7 @@ class _NavigatorUriListenerState extends State<NavigatorUriListener> {
     final uri = switch (delegate) {
       AutoRouterDelegate() => delegate.currentConfiguration!.uri,
       GoRouterDelegate() => delegate.currentConfiguration.uri,
-      _ => throw UnimplementedError(),
+      _ => throw UnimplementedError(), // coverage:ignore-line
     };
     /*with*/
     // /*{{#use_auto_route}}x*/
