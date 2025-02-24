@@ -16,12 +16,13 @@ class MyApp extends ConsumerWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: routerConfig,
-      builder:
-          (context, child) => FlavorBanner(
-        child: InitializationWrapper(
-          child: child!,
-        ),
-      ),
+      builder: (context, router) {
+        router!;
+        return NavigatorUriListener(
+          router: router as Router<Object>,
+          child: FlavorBanner(child: InitializationWrapper(child: router)),
+        );
+      },
     );
   }
 }

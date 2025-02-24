@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/routing/routing.dart';{{#use_auto_route}}
 import 'package:auto_route/auto_route.dart';{{/use_auto_route}}
 import 'package:flutter/foundation.dart';
@@ -30,6 +28,13 @@ class AppRouter extends RootStackRouter {
 
   @visibleForTesting
   final List<AutoRoute> testRoutes;
+}
+
+@Riverpod(dependencies: [])
+RouterConfig<UrlState> routerConfig(Ref ref) {
+  final appRouter = AppRouter();
+  ref.onDispose(appRouter.dispose);
+  return appRouter.config();
 }{{/use_auto_route}}{{#use_go_router}}@TypedGoRoute<HomeRouteData>(
   path: '/',
   name: 'HomeRoute',
@@ -53,32 +58,16 @@ class CounterRouteData extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) {
     return const CounterScreen();
   }
-}{{/use_go_router}}
+}
 
 @Riverpod(dependencies: [])
-RouterConfig<Object> routerConfig(Ref ref) {
-  final routerConfig = {{#use_auto_route}}AppRouter().config(){{/use_auto_route}}{{#use_go_router}}GoRouter(
-              routes: $appRoutes,
-              debugLogDiagnostics: kDebugMode,
-              initialLocation: const HomeRouteData().location,
-            ){{/use_go_router}};
-  final delegate = routerConfig.routerDelegate;
-
-  // coverage:ignore-start
-  void logCurrentUri() {
-    if (!kDebugMode) return;
-    final currentUri = {{#use_auto_route}}delegate
-            .currentConfiguration!
-            .uri{{/use_auto_route}}{{#use_go_router}}delegate
-            .currentConfiguration
-            .uri{{/use_go_router}};
-    log('path: <$currentUri>', name: 'Navigation');
-  }
-  // coverage:ignore-end
-
-  delegate.addListener(logCurrentUri);
-  ref.onDispose(() => delegate.removeListener(logCurrentUri));
-
-  return routerConfig;
-}
+RouterConfig<RouteMatchList> routerConfig(Ref ref) {
+  final goRouter = GoRouter(
+    routes: $appRoutes,
+    debugLogDiagnostics: kDebugMode,
+    initialLocation: const HomeRouteData().location,
+  );
+  ref.onDispose(goRouter.dispose);
+  return goRouter;
+}{{/use_go_router}}
 
