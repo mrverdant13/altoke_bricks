@@ -11,6 +11,7 @@ part 'async_initialization_pod.g.dart';
 @Riverpod(
   dependencies: [
     asyncApplicationDocumentsDirectory,
+    asyncTemporaryDirectory,
     asyncDriftLocalDatabase,
     asyncHiveInitialization,
     asyncIsar,
@@ -25,10 +26,9 @@ Future<void> asyncInitialization(Ref ref) async {
   /*x-remove-start*/
   // coverage:ignore-start
   await ref.watch(asyncApplicationDocumentsDirectoryPod.future);
+  await ref.watch(asyncTemporaryDirectoryPod.future);
   await ref.watch(asyncDriftLocalDatabasePod.future);
-  await ref.watch(asyncApplicationDocumentsDirectoryPod.future);
   await ref.watch(asyncHiveInitializationPod.future);
-  await ref.watch(asyncApplicationDocumentsDirectoryPod.future);
   await ref.watch(asyncIsarPod.future);
   // coverage:ignore-end
   /*remove-end*/
