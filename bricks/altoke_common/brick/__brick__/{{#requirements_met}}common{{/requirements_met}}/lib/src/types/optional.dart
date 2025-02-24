@@ -1,4 +1,8 @@
-{{#use_dart_mappable}}import 'package:dart_mappable/dart_mappable.dart';{{/use_dart_mappable}}{{#use_equatable}}import 'package:equatable/equatable.dart';{{/use_equatable}}{{#use_freezed}}import 'package:freezed_annotation/freezed_annotation.dart';{{/use_freezed}}{{#use_meta}}import 'package:meta/meta.dart';{{/use_meta}}{{#use_freezed}}part 'optional.freezed.dart';{{/use_freezed}}{{#use_dart_mappable}}part 'optional.mapper.dart';{{/use_dart_mappable}}{{#use_dart_mappable}}/// {@template {{#requirements_met}}common{{/requirements_met}}.optional}
+{{#use_dart_mappable}}import 'package:dart_mappable/dart_mappable.dart';{{/use_dart_mappable}}{{#use_equatable}}import 'package:equatable/equatable.dart';{{/use_equatable}}{{#use_freezed}}import 'package:freezed_annotation/freezed_annotation.dart';{{/use_freezed}}
+{{#use_meta}}import 'package:meta/meta.dart';{{/use_meta}}
+{{#use_freezed}}part 'optional.freezed.dart';{{/use_freezed}}{{#use_dart_mappable}}part 'optional.mapper.dart';{{/use_dart_mappable}}
+
+{{#use_dart_mappable}}/// {@template {{#requirements_met}}common{{/requirements_met}}.optional}
 /// A representation of an optional value.
 /// {@endtemplate}
 @MappableClass()
