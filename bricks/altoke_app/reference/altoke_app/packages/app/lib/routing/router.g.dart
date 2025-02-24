@@ -80,7 +80,45 @@ extension $TasksRouteDataExtension on TasksRouteData {
 // RiverpodGenerator
 // **************************************************************************
 
-String _$routerConfigHash() => r'24a584aa2ad828533c22efdbfecd842ce35ff6f7';
+String _$autoRouteConfigHash() => r'fc12ab8aa28b7aebffa96d2cda0e942424002616';
+
+/// See also [autoRouteConfig].
+@ProviderFor(autoRouteConfig)
+final autoRouteConfigPod = AutoDisposeProvider<RouterConfig<UrlState>>.internal(
+  autoRouteConfig,
+  name: r'autoRouteConfigPod',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$autoRouteConfigHash,
+  dependencies: const <ProviderOrFamily>[],
+  allTransitiveDependencies: const <ProviderOrFamily>{},
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef AutoRouteConfigRef = AutoDisposeProviderRef<RouterConfig<UrlState>>;
+String _$goRouterConfigHash() => r'36abcb131ca29d324161a8c15ca16812458b9c2c';
+
+/// See also [goRouterConfig].
+@ProviderFor(goRouterConfig)
+final goRouterConfigPod =
+    AutoDisposeProvider<RouterConfig<RouteMatchList>>.internal(
+      goRouterConfig,
+      name: r'goRouterConfigPod',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$goRouterConfigHash,
+      dependencies: const <ProviderOrFamily>[],
+      allTransitiveDependencies: const <ProviderOrFamily>{},
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef GoRouterConfigRef =
+    AutoDisposeProviderRef<RouterConfig<RouteMatchList>>;
+String _$routerConfigHash() => r'406e8fd9eb6e6af997c14e7855c667efe6554997';
 
 /// See also [routerConfig].
 @ProviderFor(routerConfig)
@@ -89,10 +127,18 @@ final routerConfigPod = AutoDisposeProvider<RouterConfig<Object>>.internal(
   name: r'routerConfigPod',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$routerConfigHash,
-  dependencies: <ProviderOrFamily>[selectedRouterPackagePod],
+  dependencies: <ProviderOrFamily>[
+    selectedRouterPackagePod,
+    autoRouteConfigPod,
+    goRouterConfigPod,
+  ],
   allTransitiveDependencies: <ProviderOrFamily>{
     selectedRouterPackagePod,
     ...?selectedRouterPackagePod.allTransitiveDependencies,
+    autoRouteConfigPod,
+    ...?autoRouteConfigPod.allTransitiveDependencies,
+    goRouterConfigPod,
+    ...?goRouterConfigPod.allTransitiveDependencies,
   },
 );
 
