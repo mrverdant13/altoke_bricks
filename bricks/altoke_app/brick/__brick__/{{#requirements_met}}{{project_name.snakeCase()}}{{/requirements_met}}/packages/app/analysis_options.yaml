@@ -1,8 +1,8 @@
 include: package:very_good_analysis/analysis_options.yaml
 analyzer:
   exclude:
-    - lib/**.g.dart
-    {{#use_auto_route}}- lib/**.gr.dart{{/use_auto_route}}
+    - lib/**.g.dart{{#use_auto_route}}
+    - lib/**.gr.dart{{/use_auto_route}}
   plugins:
     - custom_lint
 linter:
