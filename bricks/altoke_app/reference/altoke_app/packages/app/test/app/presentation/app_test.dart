@@ -1,19 +1,18 @@
 import 'package:altoke_app/app/app.dart';
 import 'package:altoke_app/flavors/flavors.dart';
 import 'package:altoke_app/routing/routing.dart';
-/*{{#use_auto_route}}*/
+/*x{{#use_auto_route}}*/
 import 'package:auto_route/auto_route.dart';
-/*{{/use_auto_route}}*/
+/*x{{/use_auto_route}}*/
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-/*{{#use_go_router}}*/
+/*x{{#use_go_router}}*/
 import 'package:go_router/go_router.dart';
-/*{{/use_go_router}}*/
+/*x{{/use_go_router}}*/
 
 void main() {
-  /*w 1v w*/
-  /*{{#use_auto_route}}*/
+  /*{{#use_auto_route}}x*/
   testWidgets(
     '''
 
@@ -147,9 +146,9 @@ THEN the errored initialization screen should be shown
     },
   );
 
-  /*{{/use_auto_route}}*/
+  /*x{{/use_auto_route}}x*/
 
-  /*{{#use_go_router}}*/
+  /*x{{#use_go_router}}x*/
   testWidgets(
     '''
 
@@ -270,6 +269,5 @@ THEN the errored initialization screen should be shown
       expect(find.text('Fake Screen'), findsOneWidget);
     },
   );
-  /*{{/use_go_router}}*/
-  /*w 1v w*/
+  /*x{{/use_go_router}}*/
 }

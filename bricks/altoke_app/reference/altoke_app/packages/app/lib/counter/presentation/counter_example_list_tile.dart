@@ -12,24 +12,22 @@ class CounterExampleListTile extends ConsumerWidget {
     return ListTile(
       title: Text(l10n.counterExampleListTileTitle),
       onTap: () {
-        /*w 1v w*/
         /*remove-start*/
         switch (ref.read(selectedRouterPackagePod)) {
           case RouterPackage.autoRoute:
-            /*remove-end*/
-            /*{{#use_auto_route}}*/
+            /*remove-end-x*/
+            /*{{#use_auto_route}}x*/
             const CounterRoute().navigate(context);
-          /*{{/use_auto_route}}*/
+          /*x{{/use_auto_route}}x*/
           /*remove-start*/
           case RouterPackage.goRouter:
             /*remove-end*/
-            /*{{#use_go_router}}*/
+            /*x{{#use_go_router}}x*/
             const CounterRouteData().go(context);
-          /*{{/use_go_router}}*/
-          /*remove-start*/
+          /*x{{/use_go_router}}*/
+          /*x-remove-start*/
         }
         /*remove-end*/
-        /*w 1v w*/
       },
     );
   }

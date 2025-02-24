@@ -1,16 +1,16 @@
-/*{{#use_auto_route}}*/
+/*{{#use_auto_route}}x*/
 import 'package:auto_route/auto_route.dart';
-/*{{/use_auto_route}}*/
-/*{{#use_go_router}}*/
+/*{{/use_auto_route}}x*/
+/*x{{#use_go_router}}x*/
 import 'package:go_router/go_router.dart';
-/*{{/use_go_router}}*/
+/*{{/use_go_router}}x*/
 import 'package:mocktail/mocktail.dart';
 
-/*{{#use_auto_route}}*/
+/*{{#use_auto_route}}x*/
 class MockStackRouter extends Mock implements StackRouter {}
-/*{{/use_auto_route}}*/
+/*x{{/use_auto_route}}*/
 
-/*{{#use_go_router}}*/
+/*{{#use_go_router}}x*/
 class MockGoRouter extends Mock implements GoRouter {}
 
-/*{{/use_go_router}}*/
+/*x{{/use_go_router}}*/

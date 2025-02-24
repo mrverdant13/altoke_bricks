@@ -1,32 +1,27 @@
-/*remove-start*/
-//
-// ignore_for_file: unnecessary_import
-/*remove-end*/
-
 import 'package:altoke_common/common.dart';
-/*{{#use_dart_mappable}}*/
+/*{{#use_dart_mappable}}x*/
 import 'package:dart_mappable/dart_mappable.dart';
-/*{{/use_dart_mappable}}*/
-
-/*{{#use_equatable}}*/
+/*x{{/use_dart_mappable}}x*/
+/*x{{#use_equatable}}x*/
 import 'package:equatable/equatable.dart';
-/*{{/use_equatable}}*/
-
-/*{{#use_freezed}}*/
+/*x{{/use_equatable}}x*/
+/*x{{#use_freezed}}x*/
 import 'package:freezed_annotation/freezed_annotation.dart';
-/*{{/use_freezed}}*/
 
-/*{{#use_meta}}*/
-import 'package:meta/meta.dart'; /*{{/use_meta}}*/
-
-/*{{#use_freezed}}*/
+/*x{{/use_freezed}}*/
+/*{{#use_meta}}x*/
+/*insert-start*/
+// import 'package:meta/meta.dart';
+/*insert-end*/
+/*x{{/use_meta}}*/
+/*{{#use_freezed}}x*/
 part 'altoke_entity.freezed.dart';
-/*{{/use_freezed}}*/
-/*{{#use_dart_mappable}}*/
+/*x{{/use_freezed}}x*/
+/*x{{#use_dart_mappable}}x*/
 part 'altoke_entity.mapper.dart';
-/*{{/use_dart_mappable}}*/
+/*x{{/use_dart_mappable}}*/
 
-/*{{#use_dart_mappable}}*/
+/*{{#use_dart_mappable}}x*/
 /// {@template altoke_entity.altoke_entity}
 /// Altoke entity.
 /// {@endtemplate}
@@ -85,9 +80,9 @@ class DmPartialAltokeEntity with DmPartialAltokeEntityMappable {
   final DmOptional<String?> description;
 }
 
-/*{{/use_dart_mappable}}*/
+/*x{{/use_dart_mappable}}x*/
 
-/*{{#use_equatable}}*/
+/*x{{#use_equatable}}x*/
 /// {@template altoke_entity.altoke_entity}
 /// Altoke entity.
 /// {@endtemplate}
@@ -179,9 +174,9 @@ class EPartialAltokeEntity extends Equatable {
     );
   }
 }
-/*{{/use_equatable}}*/
+/*x{{/use_equatable}}x*/
 
-/*{{#use_freezed}}*/
+/*x{{#use_freezed}}x*/
 /// {@template altoke_entity.altoke_entity}
 /// Altoke entity.
 /// {@endtemplate}
@@ -229,9 +224,9 @@ class FPartialAltokeEntity with _$FPartialAltokeEntity {
     @Default(FOptional<String?>.none()) FOptional<String?> description,
   }) = _FPartialAltokeEntity;
 }
-/*{{/use_freezed}}*/
+/*x{{/use_freezed}}x*/
 
-/*{{#use_overrides}}*/
+/*x{{#use_overrides}}x*/
 /// {@template altoke_entity.altoke_entity}
 /// Altoke entity.
 /// {@endtemplate}
@@ -362,4 +357,4 @@ class PartialAltokeEntity {
   }
 }
 
-/*{{/use_overrides}}*/
+/*x{{/use_overrides}}*/

@@ -10,46 +10,45 @@ WHEN the constructor is called
 THEN an instance of the present is returned
 ''',
     () {
-      /*w 1v w*/
       /*remove-start*/
       {
-        /*remove-end*/
-        /*{{#use_dart_mappable}}*/
+        /*remove-end-x*/
+        /*{{#use_dart_mappable}}x*/
         const presentValue = DmOptional.some('value');
         expect(presentValue, isNotNull);
         expect(presentValue, isA<DmOptional>());
         expect(presentValue, isA<DmSome>());
-        /*{{/use_dart_mappable}}*/
+        /*x{{/use_dart_mappable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*x{{#use_equatable}}x*/
         const presentValue = EOptional.some('value');
         expect(presentValue, isNotNull);
         expect(presentValue, isA<EOptional>());
         expect(presentValue, isA<ESome>());
-        /*{{/use_equatable}}*/
+        /*x{{/use_equatable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*x{{#use_freezed}}x*/
         const presentValue = FOptional.some('value');
         expect(presentValue, isNotNull);
         expect(presentValue, isA<FOptional>());
         expect(presentValue, isA<FSome>());
-        /*{{/use_freezed}}*/
+        /*x{{/use_freezed}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_overrides}}*/
+        /*x{{#use_overrides}}x*/
         const presentValue = Optional.some('value');
         expect(presentValue, isNotNull);
         expect(presentValue, isA<Optional>());
         expect(presentValue, isA<Some>());
-        /*{{/use_overrides}}*/
+        /*x{{/use_overrides}}x*/
         /*remove-start*/
       }
       /*remove-end*/
@@ -68,43 +67,43 @@ THEN an instance of the absent value is returned
       /*w 1v w*/
       /*remove-start*/
       {
-        /*remove-end*/
-        /*{{#use_dart_mappable}}*/
+        /*remove-end-x*/
+        /*x{{#use_dart_mappable}}x*/
         const absentValue = DmOptional.none();
         expect(absentValue, isNotNull);
         expect(absentValue, isA<DmOptional>());
         expect(absentValue, isA<DmNone>());
-        /*{{/use_dart_mappable}}*/
+        /*x{{/use_dart_mappable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*x{{#use_equatable}}x*/
         const absentValue = EOptional.none();
         expect(absentValue, isNotNull);
         expect(absentValue, isA<EOptional>());
         expect(absentValue, isA<ENone>());
-        /*{{/use_equatable}}*/
+        /*x{{/use_equatable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*x{{#use_freezed}}x*/
         const absentValue = FOptional.none();
         expect(absentValue, isNotNull);
         expect(absentValue, isA<FOptional>());
         expect(absentValue, isA<FNone>());
-        /*{{/use_freezed}}*/
+        /*x{{/use_freezed}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_overrides}}*/
+        /*x{{#use_overrides}}x*/
         const absentValue = Optional.none();
         expect(absentValue, isNotNull);
         expect(absentValue, isA<Optional>());
         expect(absentValue, isA<None>());
-        /*{{/use_overrides}}*/
+        /*x{{/use_overrides}}x*/
         /*remove-start*/
       }
       /*remove-end*/
@@ -125,8 +124,8 @@ AND their hash codes are equal if they have the same values
       /*w 1v w*/
       /*remove-start*/
       {
-        /*remove-end*/
-        /*{{#use_dart_mappable}}*/
+        /*remove-end-x*/
+        /*x{{#use_dart_mappable}}x*/
         const presentValue = DmOptional.some('some-value');
         const sameOptional = DmSome('some-value');
         const differentOptional1 = DmSome('other-value');
@@ -140,12 +139,12 @@ AND their hash codes are equal if they have the same values
         expect(presentValue.hashCode, isNot(differentOptional1.hashCode));
         expect(presentValue.hashCode, isNot(differentOptional2.hashCode));
         expect(presentValue.hashCode, isNot(differentOptional3.hashCode));
-        /*{{/use_dart_mappable}}*/
+        /*x{{/use_dart_mappable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*x{{#use_equatable}}x*/
         const presentValue = EOptional.some('some-value');
         const sameOptional = ESome('some-value');
         const differentOptional1 = ESome('other-value');
@@ -159,12 +158,12 @@ AND their hash codes are equal if they have the same values
         expect(presentValue.hashCode, isNot(differentOptional1.hashCode));
         expect(presentValue.hashCode, isNot(differentOptional2.hashCode));
         expect(presentValue.hashCode, isNot(differentOptional3.hashCode));
-        /*{{/use_equatable}}*/
+        /*x{{/use_equatable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*x{{#use_freezed}}x*/
         const presentValue = FOptional.some('some-value');
         const sameOptional = FSome('some-value');
         const differentOptional1 = FSome('other-value');
@@ -178,12 +177,12 @@ AND their hash codes are equal if they have the same values
         expect(presentValue.hashCode, isNot(differentOptional1.hashCode));
         expect(presentValue.hashCode, isNot(differentOptional2.hashCode));
         expect(presentValue.hashCode, isNot(differentOptional3.hashCode));
-        /*{{/use_freezed}}*/
+        /*x{{/use_freezed}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_overrides}}*/
+        /*x{{#use_overrides}}x*/
         const presentValue = Optional.some('some-value');
         const sameOptional = Some('some-value');
         const differentOptional1 = Some('other-value');
@@ -197,7 +196,7 @@ AND their hash codes are equal if they have the same values
         expect(presentValue.hashCode, isNot(differentOptional1.hashCode));
         expect(presentValue.hashCode, isNot(differentOptional2.hashCode));
         expect(presentValue.hashCode, isNot(differentOptional3.hashCode));
-        /*{{/use_overrides}}*/
+        /*x{{/use_overrides}}x*/
         /*remove-start*/
       }
       /*remove-end*/
@@ -218,8 +217,8 @@ AND their hash codes are equal if they have the same values
       /*w 1v w*/
       /*remove-start*/
       {
-        /*remove-end*/
-        /*{{#use_dart_mappable}}*/
+        /*remove-end-x*/
+        /*x{{#use_dart_mappable}}x*/
         const absentValue = DmOptional<String>.none();
         const sameOptional = DmNone<String>();
         const differentOptional1 = DmNone<int>();
@@ -233,12 +232,12 @@ AND their hash codes are equal if they have the same values
         expect(absentValue.hashCode, isNot(differentOptional1.hashCode));
         expect(absentValue.hashCode, isNot(differentOptional2.hashCode));
         expect(absentValue.hashCode, isNot(differentOptional3.hashCode));
-        /*{{/use_dart_mappable}}*/
+        /*x{{/use_dart_mappable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*x{{#use_equatable}}x*/
         const absentValue = EOptional<String>.none();
         const sameOptional = ENone<String>();
         const differentOptional1 = ENone<int>();
@@ -252,12 +251,12 @@ AND their hash codes are equal if they have the same values
         expect(absentValue.hashCode, isNot(differentOptional1.hashCode));
         expect(absentValue.hashCode, isNot(differentOptional2.hashCode));
         expect(absentValue.hashCode, isNot(differentOptional3.hashCode));
-        /*{{/use_equatable}}*/
+        /*x{{/use_equatable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*x{{#use_freezed}}x*/
         const absentValue = FOptional<String>.none();
         const sameOptional = FNone<String>();
         const differentOptional1 = FNone<int>();
@@ -271,12 +270,12 @@ AND their hash codes are equal if they have the same values
         expect(absentValue.hashCode, isNot(differentOptional1.hashCode));
         expect(absentValue.hashCode, isNot(differentOptional2.hashCode));
         expect(absentValue.hashCode, isNot(differentOptional3.hashCode));
-        /*{{/use_freezed}}*/
+        /*x{{/use_freezed}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_overrides}}*/
+        /*x{{#use_overrides}}x*/
         const absentValue = Optional<String>.none();
         const sameOptional = None<String>();
         const differentOptional1 = None<int>();
@@ -290,7 +289,7 @@ AND their hash codes are equal if they have the same values
         expect(absentValue.hashCode, isNot(differentOptional1.hashCode));
         expect(absentValue.hashCode, isNot(differentOptional2.hashCode));
         expect(absentValue.hashCode, isNot(differentOptional3.hashCode));
-        /*{{/use_overrides}}*/
+        /*x{{/use_overrides}}x*/
         /*remove-start*/
       }
       /*remove-end*/
@@ -309,38 +308,38 @@ THEN a string representation of the present value is returned
       /*w 1v w*/
       /*remove-start*/
       {
-        /*remove-end*/
-        /*{{#use_dart_mappable}}*/
+        /*remove-end-x*/
+        /*x{{#use_dart_mappable}}x*/
         const presentValue = DmOptional.some('some-value');
         expect(presentValue.toString(), 'DmSome(value: some-value)');
-        /*{{/use_dart_mappable}}*/
+        /*x{{/use_dart_mappable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*x{{#use_equatable}}x*/
         const presentValue = EOptional.some('some-value');
         expect(presentValue.toString(), 'ESome<String>(some-value)');
-        /*{{/use_equatable}}*/
+        /*x{{/use_equatable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*x{{#use_freezed}}x*/
         const presentValue = FOptional.some('some-value');
         expect(
           presentValue.toString(),
           'FOptional<String>.some(value: some-value)',
         );
-        /*{{/use_freezed}}*/
+        /*x{{/use_freezed}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_overrides}}*/
+        /*x{{#use_overrides}}x*/
         const presentValue = Optional.some('some-value');
         expect(presentValue.toString(), 'Some<String>(value: some-value)');
-        /*{{/use_overrides}}*/
+        /*x{{/use_overrides}}x*/
         /*remove-start*/
       }
       /*remove-end*/
@@ -359,35 +358,35 @@ THEN a string representation of the absent value is returned
       /*w 1v w*/
       /*remove-start*/
       {
-        /*remove-end*/
-        /*{{#use_dart_mappable}}*/
+        /*remove-end-x*/
+        /*x{{#use_dart_mappable}}x*/
         const absentValue = DmOptional<String>.none();
         expect(absentValue.toString(), 'DmNone()');
-        /*{{/use_dart_mappable}}*/
+        /*x{{/use_dart_mappable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_equatable}}*/
+        /*x{{#use_equatable}}x*/
         const absentValue = EOptional<String>.none();
         expect(absentValue.toString(), 'ENone<String>()');
-        /*{{/use_equatable}}*/
+        /*x{{/use_equatable}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_freezed}}*/
+        /*x{{#use_freezed}}x*/
         const absentValue = FOptional<String>.none();
         expect(absentValue.toString(), 'FOptional<String>.none()');
-        /*{{/use_freezed}}*/
+        /*x{{/use_freezed}}x*/
         /*remove-start*/
       }
       {
         /*remove-end*/
-        /*{{#use_overrides}}*/
+        /*x{{#use_overrides}}x*/
         const absentValue = Optional<String>.none();
         expect(absentValue.toString(), 'None<String>()');
-        /*{{/use_overrides}}*/
+        /*x{{/use_overrides}}x*/
         /*remove-start*/
       }
       /*remove-end*/

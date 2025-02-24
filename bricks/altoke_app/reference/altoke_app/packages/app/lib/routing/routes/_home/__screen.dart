@@ -1,12 +1,12 @@
 import 'package:altoke_app/home/home.dart';
-/*{{#use_auto_route}}*/
+/*x{{#use_auto_route}}*/
 import 'package:auto_route/auto_route.dart';
-/*{{/use_auto_route}}*/
+/*x{{/use_auto_route}}*/
 import 'package:flutter/material.dart';
 
-/*{{#use_auto_route}}*/
+/*{{#use_auto_route}}x*/
 @RoutePage(name: 'HomeRoute')
-/*{{/use_auto_route}}*/
+/*{{/use_auto_route}}x*/
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 

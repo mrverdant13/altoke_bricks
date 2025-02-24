@@ -1,12 +1,10 @@
-/*{{#use_auto_route}}*/
+/*{{#use_auto_route}}x*/
 import 'package:auto_route/auto_route.dart';
 import 'package:mocktail/mocktail.dart';
-/*{{/use_auto_route}}*/
+/*x{{/use_auto_route}}*/
 
 void registerFallbackValues() {
-  /*w 1v w*/
-  /*{{#use_auto_route}}*/
+  /*{{#use_auto_route}}x*/
   registerFallbackValue(const PageRouteInfo(''));
-  /*{{/use_auto_route}}*/
-  /*w 1v w*/
+  /*x{{/use_auto_route}}*/
 }

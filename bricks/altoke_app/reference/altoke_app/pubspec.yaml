@@ -162,9 +162,8 @@ melos:
       run: >
         coverde check -i MELOS_ROOT_PATH/coverage/filtered.lcov.info 100
 
-#replace-start#
-#with#
+#insert-start#
 # workspace:
 #   - packages/app
-#replace-end#
+#insert-end#
 

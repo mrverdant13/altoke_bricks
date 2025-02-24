@@ -4,10 +4,10 @@ import 'package:altoke_app/app/app.dart';
 /*remove-start*/
 import 'package:altoke_app/external/external.dart';
 import 'package:drift_local_database/drift_local_database.dart';
-/*remove-end*/
+/*remove-end-x*/
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-/*remove-start*/
+/*x-remove-start*/
 import 'package:isar/isar.dart';
 
 import '../../helpers/helpers.dart';
@@ -23,7 +23,7 @@ THEN the async initializer sequence should complete
 ''',
     () async {
       final container = ProviderContainer(
-        /*remove-start*/
+        /*x-remove-start*/
         overrides: [
           asyncApplicationDocumentsDirectoryPod.overrideWith((ref) async {
             final dir = await Directory.systemTemp.createTemp();
@@ -36,7 +36,7 @@ THEN the async initializer sequence should complete
           asyncHiveInitializationPod.overrideWith((ref) async {}),
           asyncIsarPod.overrideWith((ref) async => MockIsar()),
         ],
-        /*remove-end*/
+        /*remove-end-x*/
       );
       addTearDown(container.dispose);
       final subscription = container.listen(
@@ -46,7 +46,7 @@ THEN the async initializer sequence should complete
       addTearDown(subscription.close);
       final future = container.read(asyncInitializationPod.future);
       await expectLater(future, completes);
-      /*remove-start*/
+      /*x-remove-start*/
       final applicationDocumentsDirectory = container.read(
         asyncApplicationDocumentsDirectoryPod.future,
       );

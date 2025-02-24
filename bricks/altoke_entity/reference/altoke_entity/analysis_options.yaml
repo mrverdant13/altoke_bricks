@@ -1,17 +1,14 @@
 include: package:very_good_analysis/analysis_options.yaml
-#w 1v w#
-#{{#use_code_generation}}#
+#{{#use_code_generation}}x#
 analyzer:
   exclude:
-    #w 1v 4> w#
-    #{{#use_dart_mappable}}#
+    #{{#use_dart_mappable}}x#
     - lib/**.mapper.dart
-    #{{/use_dart_mappable}}#
-    #{{#use_freezed}}#
+    #x{{/use_dart_mappable}}x#
+    #x{{#use_freezed}}x#
     - lib/**.freezed.dart
-    #{{/use_freezed}}#
-#w 1v w#
-#{{/use_code_generation}}#
+    #x{{/use_freezed}}#
+#{{/use_code_generation}}x#
 linter:
   rules:
     # HACK: Disable conflicting rule

@@ -3,9 +3,9 @@ import 'package:altoke_app/flavors/flavors.dart';
 import 'package:altoke_app/routing/routing.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-/*{{#use_go_router}}*/
+/*x{{#use_go_router}}*/
 import 'package:go_router/go_router.dart';
-/*{{/use_go_router}}*/
+/*x{{/use_go_router}}*/
 
 void main() {
   setUp(() {
@@ -29,7 +29,7 @@ THEN the home screen should be shown
         ProviderScope(
           overrides: [
             asyncInitializationPod.overrideWith((_) async {}),
-            /*remove-start*/
+            /*x-remove-start*/
             routerConfigPod.overrideWithValue(
               GoRouter(routes: $appRoutes, initialLocation: '/'),
             ),
