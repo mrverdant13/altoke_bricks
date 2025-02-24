@@ -11,7 +11,7 @@ WHEN the constructor is called
 THEN an instance of the {{entity_singular.lowerCase()}} is returned
 ''',
     () {
-{{#use_dart_mappable}}const {{entity_singular.camelCase()}} = {{entity_singular.pascalCase()}}(
+      {{#use_dart_mappable}}const {{entity_singular.camelCase()}} = {{entity_singular.pascalCase()}}(
           id: 37,
           name: 'name',
           description: 'description',
@@ -36,7 +36,7 @@ THEN an instance of the {{entity_singular.lowerCase()}} is returned
         );
         expect({{entity_singular.camelCase()}}, isNotNull);
         expect({{entity_singular.camelCase()}}, isA<{{entity_singular.pascalCase()}}>());{{/use_overrides}}
-},
+    },
   );
 
   test(
@@ -49,7 +49,7 @@ THEN they are equal if they have the same values
 AND their hash codes are equal if they have the same values
 ''',
     () {
-{{#use_dart_mappable}}const {{entity_singular.camelCase()}} = {{entity_singular.pascalCase()}}(
+      {{#use_dart_mappable}}const {{entity_singular.camelCase()}} = {{entity_singular.pascalCase()}}(
           id: 37,
           name: 'name',
           description: 'description',
@@ -122,7 +122,7 @@ AND their hash codes are equal if they have the same values
         expect({{entity_singular.camelCase()}}, isNot(different{{entity_singular.pascalCase()}}));
         expect({{entity_singular.camelCase()}}.hashCode, same{{entity_singular.pascalCase()}}.hashCode);
         expect({{entity_singular.camelCase()}}.hashCode, isNot(different{{entity_singular.pascalCase()}}.hashCode));{{/use_overrides}}
-},
+    },
   );
 
   test(
@@ -133,7 +133,7 @@ WHEN its string representation is requested
 THEN a string representation of the {{entity_singular.lowerCase()}} is returned
 ''',
     () {
-{{#use_dart_mappable}}const {{entity_singular.camelCase()}} = {{entity_singular.pascalCase()}}(
+      {{#use_dart_mappable}}const {{entity_singular.camelCase()}} = {{entity_singular.pascalCase()}}(
           id: 37,
           name: 'name',
           description: 'description',
@@ -163,7 +163,7 @@ THEN a string representation of the {{entity_singular.lowerCase()}} is returned
           {{entity_singular.camelCase()}}.toString(),
           '{{entity_singular.pascalCase()}}(id: 37, name: name, description: description)',
         );{{/use_overrides}}
-},
+    },
   );
 
   test(
@@ -175,7 +175,7 @@ THEN an new instance of the {{entity_singular.lowerCase()}} is returned
 ├─ THAT has updated values
 ''',
     () {
-{{#use_dart_mappable}}const {{entity_singular.camelCase()}} = {{entity_singular.pascalCase()}}(
+      {{#use_dart_mappable}}const {{entity_singular.camelCase()}} = {{entity_singular.pascalCase()}}(
           id: 37,
           name: 'name',
           description: 'description',
@@ -256,7 +256,7 @@ THEN an new instance of the {{entity_singular.lowerCase()}} is returned
         final noopCopied{{entity_singular.pascalCase()}} = {{entity_singular.camelCase()}}.copyWith();
         expect(noopCopied{{entity_singular.pascalCase()}}, isNotNull);
         expect(noopCopied{{entity_singular.pascalCase()}}, {{entity_singular.camelCase()}});{{/use_overrides}}
-},
+    },
   );
 
   test(
@@ -267,7 +267,7 @@ WHEN the constructor is called
 THEN an instance of the new {{entity_singular.lowerCase()}} is returned
 ''',
     () {
-{{#use_dart_mappable}}const new{{entity_singular.pascalCase()}} = New{{entity_singular.pascalCase()}}(
+      {{#use_dart_mappable}}const new{{entity_singular.pascalCase()}} = New{{entity_singular.pascalCase()}}(
           name: 'name',
           description: 'description',
         );
@@ -288,7 +288,7 @@ THEN an instance of the new {{entity_singular.lowerCase()}} is returned
         );
         expect(new{{entity_singular.pascalCase()}}, isNotNull);
         expect(new{{entity_singular.pascalCase()}}, isA<New{{entity_singular.pascalCase()}}>());{{/use_overrides}}
-},
+    },
   );
 
   test(
@@ -301,7 +301,7 @@ THEN they are equal if they have the same values
 AND their hash codes are equal if they have the same values
 ''',
     () {
-{{#use_dart_mappable}}const new{{entity_singular.pascalCase()}} = New{{entity_singular.pascalCase()}}(
+      {{#use_dart_mappable}}const new{{entity_singular.pascalCase()}} = New{{entity_singular.pascalCase()}}(
           name: 'name',
           description: 'description',
         );
@@ -374,7 +374,7 @@ AND their hash codes are equal if they have the same values
           new{{entity_singular.pascalCase()}}.hashCode,
           isNot(differentNew{{entity_singular.pascalCase()}}.hashCode),
         );{{/use_overrides}}
-},
+    },
   );
 
   test(
@@ -385,7 +385,7 @@ WHEN its string representation is requested
 THEN a string representation of the new {{entity_singular.lowerCase()}} is returned
 ''',
     () {
-{{#use_dart_mappable}}const new{{entity_singular.pascalCase()}} = New{{entity_singular.pascalCase()}}(
+      {{#use_dart_mappable}}const new{{entity_singular.pascalCase()}} = New{{entity_singular.pascalCase()}}(
           name: 'name',
           description: 'description',
         );
@@ -414,7 +414,7 @@ THEN a string representation of the new {{entity_singular.lowerCase()}} is retur
           new{{entity_singular.pascalCase()}}.toString(),
           'New{{entity_singular.pascalCase()}}(name: name, description: description)',
         );{{/use_overrides}}
-},
+    },
   );
 
   test(
@@ -426,7 +426,7 @@ THEN an new instance of the new {{entity_singular.lowerCase()}} is returned
 ├─ THAT has updated values
 ''',
     () {
-{{#use_dart_mappable}}const new{{entity_singular.pascalCase()}} = New{{entity_singular.pascalCase()}}(
+      {{#use_dart_mappable}}const new{{entity_singular.pascalCase()}} = New{{entity_singular.pascalCase()}}(
           name: 'name',
           description: 'description',
         );
@@ -495,7 +495,7 @@ THEN an new instance of the new {{entity_singular.lowerCase()}} is returned
         final noopCopiedNew{{entity_singular.pascalCase()}} = new{{entity_singular.pascalCase()}}.copyWith();
         expect(noopCopiedNew{{entity_singular.pascalCase()}}, isNotNull);
         expect(noopCopiedNew{{entity_singular.pascalCase()}}, new{{entity_singular.pascalCase()}});{{/use_overrides}}
-},
+    },
   );
 
   test(
@@ -506,7 +506,7 @@ WHEN the constructor is called
 THEN an instance of the partial {{entity_singular.lowerCase()}} is returned
 ''',
     () {
-{{#use_dart_mappable}}const partial{{entity_singular.pascalCase()}} = Partial{{entity_singular.pascalCase()}}(
+      {{#use_dart_mappable}}const partial{{entity_singular.pascalCase()}} = Partial{{entity_singular.pascalCase()}}(
           name: Optional.some('name'),
           description: Optional.some('description'),
         );
@@ -527,7 +527,7 @@ THEN an instance of the partial {{entity_singular.lowerCase()}} is returned
         );
         expect(partial{{entity_singular.pascalCase()}}, isNotNull);
         expect(partial{{entity_singular.pascalCase()}}, isA<Partial{{entity_singular.pascalCase()}}>());{{/use_overrides}}
-},
+    },
   );
 
   test(
@@ -540,7 +540,7 @@ THEN they are equal if they have the same values
 AND their hash codes are equal if they have the same values
 ''',
     () {
-{{#use_dart_mappable}}const partial{{entity_singular.pascalCase()}} = Partial{{entity_singular.pascalCase()}}(
+      {{#use_dart_mappable}}const partial{{entity_singular.pascalCase()}} = Partial{{entity_singular.pascalCase()}}(
           name: Optional.some('name'),
           description: Optional.some('description'),
         );
@@ -613,7 +613,7 @@ AND their hash codes are equal if they have the same values
           partial{{entity_singular.pascalCase()}}.hashCode,
           isNot(differentPartial{{entity_singular.pascalCase()}}.hashCode),
         );{{/use_overrides}}
-},
+    },
   );
 
   test(
@@ -624,7 +624,7 @@ WHEN its string representation is requested
 THEN a string representation of the partial {{entity_singular.lowerCase()}} is returned
 ''',
     () {
-{{#use_dart_mappable}}const partial{{entity_singular.pascalCase()}} = Partial{{entity_singular.pascalCase()}}(
+      {{#use_dart_mappable}}const partial{{entity_singular.pascalCase()}} = Partial{{entity_singular.pascalCase()}}(
           name: Optional.some('name'),
           description: Optional.some('description'),
         );
@@ -653,7 +653,7 @@ THEN a string representation of the partial {{entity_singular.lowerCase()}} is r
           partial{{entity_singular.pascalCase()}}.toString(),
           '''Partial{{entity_singular.pascalCase()}}(name: Some<String>(value: name), description: Some<String?>(value: description))''',
         );{{/use_overrides}}
-},
+    },
   );
 
   test(
@@ -665,7 +665,7 @@ THEN an new instance of the partial {{entity_singular.lowerCase()}} is returned
 ├─ THAT has updated values
 ''',
     () {
-{{#use_dart_mappable}}const partial{{entity_singular.pascalCase()}} = Partial{{entity_singular.pascalCase()}}(
+      {{#use_dart_mappable}}const partial{{entity_singular.pascalCase()}} = Partial{{entity_singular.pascalCase()}}(
           name: Optional.some('name'),
           description: Optional.some('description'),
         );
@@ -750,6 +750,6 @@ THEN an new instance of the partial {{entity_singular.lowerCase()}} is returned
         final noopCopiedPartial{{entity_singular.pascalCase()}} = partial{{entity_singular.pascalCase()}}.copyWith();
         expect(noopCopiedPartial{{entity_singular.pascalCase()}}, isNotNull);
         expect(noopCopiedPartial{{entity_singular.pascalCase()}}, partial{{entity_singular.pascalCase()}});{{/use_overrides}}
-},
+    },
   );
 }

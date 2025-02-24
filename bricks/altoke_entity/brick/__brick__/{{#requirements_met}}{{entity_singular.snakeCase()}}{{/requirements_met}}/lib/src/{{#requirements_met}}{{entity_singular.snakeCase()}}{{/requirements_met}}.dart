@@ -1,4 +1,9 @@
-import 'package:common/common.dart';{{#use_dart_mappable}}import 'package:dart_mappable/dart_mappable.dart';{{/use_dart_mappable}}{{#use_equatable}}import 'package:equatable/equatable.dart';{{/use_equatable}}{{#use_freezed}}import 'package:freezed_annotation/freezed_annotation.dart';{{/use_freezed}}{{#use_meta}}import 'package:meta/meta.dart';{{/use_meta}}{{#use_freezed}}part '{{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}.freezed.dart';{{/use_freezed}}{{#use_dart_mappable}}part '{{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}.mapper.dart';{{/use_dart_mappable}}{{#use_dart_mappable}}/// {@template {{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}.{{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}}
+import 'package:common/common.dart';
+{{#use_dart_mappable}}import 'package:dart_mappable/dart_mappable.dart';{{/use_dart_mappable}}{{#use_equatable}}import 'package:equatable/equatable.dart';{{/use_equatable}}{{#use_freezed}}import 'package:freezed_annotation/freezed_annotation.dart';{{/use_freezed}}
+{{#use_meta}}import 'package:meta/meta.dart';{{/use_meta}}
+{{#use_freezed}}part '{{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}.freezed.dart';{{/use_freezed}}{{#use_dart_mappable}}part '{{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}.mapper.dart';{{/use_dart_mappable}}
+
+{{#use_dart_mappable}}/// {@template {{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}.{{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}}
 /// {{entity_singular.sentenceCase()}}.
 /// {@endtemplate}
 @MappableClass()
