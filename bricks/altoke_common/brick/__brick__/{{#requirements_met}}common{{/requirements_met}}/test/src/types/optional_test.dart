@@ -10,7 +10,7 @@ WHEN the constructor is called
 THEN an instance of the present is returned
 ''',
     () {
-{{#use_dart_mappable}}const presentValue = Optional.some('value');
+      {{#use_dart_mappable}}const presentValue = Optional.some('value');
         expect(presentValue, isNotNull);
         expect(presentValue, isA<Optional>());
         expect(presentValue, isA<DmSome>());{{/use_dart_mappable}}{{#use_equatable}}const presentValue = Optional.some('value');
