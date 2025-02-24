@@ -30,6 +30,11 @@ THEN the async initializer sequence should complete
             ref.onDispose(dir.delete);
             return dir;
           }),
+          asyncTemporaryDirectoryPod.overrideWith((ref) async {
+            final dir = await Directory.systemTemp.createTemp();
+            ref.onDispose(dir.delete);
+            return dir;
+          }),
           asyncDriftLocalDatabasePod.overrideWith(
             (ref) async => MockLocalDatabase(),
           ),
