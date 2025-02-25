@@ -11,6 +11,7 @@
       "cwd": "packages/app/",
       "program": "lib/bootstrap/main_${input:FLAVOR}.dart",
       "toolArgs": [
+        "--no-pub",
         "--flavor=${input:FLAVOR}",
       ],
     },
