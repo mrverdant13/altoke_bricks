@@ -10,6 +10,7 @@
       "type": "dart",
       "cwd": "${workspaceFolder}/bricks/altoke_app/reference/altoke_app/packages/app/",
       "toolArgs": [
+        "--no-pub",
         "--flavor=${input:FLAVOR}",
       ],
       "program": "lib/bootstrap/main_${input:FLAVOR}.dart",
