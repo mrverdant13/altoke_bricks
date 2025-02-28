@@ -7,7 +7,7 @@ part of 'async_initialization_pod.dart';
 // **************************************************************************
 
 String _$asyncInitializationHash() =>
-    r'ff0fb24140ac54b388d1bd468b5b2aabc0610187';
+    r'cd515118506c4b8f845cb21f9bf3dddd709a4a86';
 
 /// See also [asyncInitialization].
 @ProviderFor(asyncInitialization)
@@ -23,7 +23,6 @@ final asyncInitializationPod = AutoDisposeFutureProvider<void>.internal(
     asyncTemporaryDirectoryPod,
     asyncDriftLocalDatabasePod,
     asyncHiveInitializationPod,
-    asyncIsarPod,
   },
   allTransitiveDependencies: <ProviderOrFamily>{
     asyncApplicationDocumentsDirectoryPod,
@@ -34,8 +33,6 @@ final asyncInitializationPod = AutoDisposeFutureProvider<void>.internal(
     ...?asyncDriftLocalDatabasePod.allTransitiveDependencies,
     asyncHiveInitializationPod,
     ...?asyncHiveInitializationPod.allTransitiveDependencies,
-    asyncIsarPod,
-    ...?asyncIsarPod.allTransitiveDependencies,
   },
 );
 

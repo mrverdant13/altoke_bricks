@@ -54,24 +54,4 @@ THEN a local tasks Hive DAO should be returned
       expect(dao, isA<LocalTasksDao>());
     },
   );
-
-  test(
-    '''
-
-GIVEN a local tasks DAO pod
-WHEN it is invoked
-THEN a local tasks Isar DAO should be returned
-''',
-    () async {
-      final isar = MockIsar();
-      final container = ProviderContainer(
-        overrides: [asyncIsarPod.overrideWith((ref) => isar)],
-      );
-      addTearDown(container.dispose);
-      container.read(selectedLocalDatabasePackagePod.notifier).value =
-          LocalDatabasePackage.isar;
-      final dao = container.read(localTasksDaoPod);
-      expect(dao, isA<LocalTasksDao>());
-    },
-  );
 }

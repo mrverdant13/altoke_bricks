@@ -18,7 +18,7 @@ WHEN the constructor is called
 THEN an instance of $LocalTasksHiveDao is returned
 ''',
     () async {
-      final dbDir = Directory.systemTemp.createTempSync('isar-testing-');
+      final dbDir = Directory.systemTemp.createTempSync('hive-testing-');
       Hive.init(dbDir.path);
       final dao = LocalTasksHiveDao();
       expect(dao, isA<LocalTasksHiveDao>());
@@ -33,14 +33,14 @@ THEN an instance of $LocalTasksHiveDao is returned
     '''
 
 GIVEN a $LocalTasksHiveDao
-├─ THAT uses an Isar database''',
+├─ THAT uses an Hive database''',
     () {
       late Directory dbDir;
       late LocalTasksHiveDao dao;
       late hive.TasksBox tasksBox;
 
       setUp(() async {
-        dbDir = Directory.systemTemp.createTempSync('isar-testing-');
+        dbDir = Directory.systemTemp.createTempSync('hive-testing-');
         Hive.init(dbDir.path);
         dao = LocalTasksHiveDao();
         tasksBox = await dao.asyncTasksBox;

@@ -37,14 +37,6 @@ dependencies:
   #remove-end#
   intl: ^0.19.0
   #x-remove-start#
-  isar:
-    hosted: https://pub.isar-community.dev/
-    version: 3.1.8
-  isar_flutter_libs:
-    hosted: https://pub.isar-community.dev/
-    version: 3.1.8
-  isar_local_database:
-    path: ../../../../../altoke_local_database/reference/local_database/isar_local_database/
   local_database:
     path: ../../../../../altoke_local_database/reference/local_database/local_database/
   path: ^1.9.1

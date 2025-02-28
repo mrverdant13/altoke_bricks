@@ -7,8 +7,8 @@ import 'package:drift_local_database/drift_local_database.dart';
 /*remove-end-x*/
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 /*x-remove-start*/
-import 'package:isar/isar.dart';
 
 import '../../helpers/helpers.dart';
 /*remove-end*/
@@ -39,7 +39,6 @@ THEN the async initializer sequence should complete
             (ref) async => MockLocalDatabase(),
           ),
           asyncHiveInitializationPod.overrideWith((ref) async {}),
-          asyncIsarPod.overrideWith((ref) async => MockIsar()),
         ],
         /*remove-end-x*/
       );
@@ -67,8 +66,6 @@ THEN the async initializer sequence should complete
         asyncHiveInitializationPod.future,
       );
       await expectLater(hiveInitialization, completes);
-      final isar = container.read(asyncIsarPod.future);
-      await expectLater(isar, completion(isA<Isar>()));
       /*remove-end*/
     },
   );

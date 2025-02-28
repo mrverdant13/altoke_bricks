@@ -6,8 +6,6 @@ import 'package:drift_local_database/drift_local_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
-import 'package:isar/isar.dart';
-import 'package:isar_local_database/isar_local_database.dart';
 import 'package:path/path.dart' as path;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -60,34 +58,11 @@ Future<void> asyncHiveInitialization(Ref ref) async {
   }
 }
 
-@Riverpod(dependencies: [asyncApplicationDocumentsDirectory])
-Future<Isar> asyncIsar(Ref ref) async {
-  const dbName = 'app_db';
-  final databasePath = ref.watch(
-    asyncApplicationDocumentsDirectoryPod.select(
-      (asyncDir) =>
-          path.joinAll([asyncDir.requireValue.path, 'isar_database', dbName]),
-    ),
-  );
-  final databaseDir = Directory(databasePath);
-  if (!databaseDir.existsSync()) {
-    await databaseDir.create(recursive: true);
-  }
-  final isar = await Isar.open(
-    name: dbName,
-    localDatabaseSchemas,
-    directory: databasePath,
-  );
-  ref.onDispose(isar.close);
-  return isar;
-}
-
 /*drop*/
 // coverage:ignore-start
 enum LocalDatabasePackage {
   drift('drift', 'Drift (SQLite)'),
-  hive('hive', 'Hive'),
-  isar('isar', 'Isar');
+  hive('hive', 'Hive');
 
   const LocalDatabasePackage(this.identifier, this.displayName);
 

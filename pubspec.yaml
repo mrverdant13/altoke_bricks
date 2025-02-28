@@ -252,6 +252,14 @@ melos:
         - brick.gen
         - brick.install
 
+    # Dependencies management
+    deps.outdated:
+      description: Check outdated dependencies
+      run: >
+        melos exec -- "dart pub outdated --no-dev-dependencies"
+        &&
+        melos exec -- "dart pub outdated --dev-dependencies"
+
 workspace:
   - bricks/altoke_app
   - bricks/altoke_app/brick/hooks
@@ -275,7 +283,7 @@ workspace:
   - bricks/altoke_local_database/e2e
   - bricks/altoke_local_database/reference/local_database/drift_local_database
   - bricks/altoke_local_database/reference/local_database/hive_local_database
-  - bricks/altoke_local_database/reference/local_database/isar_local_database
+  # - bricks/altoke_local_database/reference/local_database/isar_local_database
   - bricks/altoke_local_database/reference/local_database/local_database
   - bricks/altoke_local_database/reference/local_database/sembast_local_database
   - bricks/altoke_reactive_caches

@@ -2,7 +2,6 @@ import 'package:altoke_app/external/external.dart';
 import 'package:drift_local_database/drift_local_database.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_local_database/hive_local_database.dart';
-import 'package:isar_local_database/isar_local_database.dart';
 import 'package:local_database/local_database.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -13,7 +12,6 @@ part 'local_tasks_dao_pod.g.dart';
     SelectedLocalDatabasePackage,
     asyncDriftLocalDatabase,
     asyncHiveInitialization,
-    asyncIsar,
   ],
 )
 LocalTasksDao localTasksDao(Ref ref) {
@@ -34,11 +32,5 @@ LocalTasksDao localTasksDao(Ref ref) {
         ),
       );
       return LocalTasksHiveDao();
-    case LocalDatabasePackage.isar:
-      return LocalTasksIsarDao(
-        database: ref.watch(
-          asyncIsarPod.select((asyncDatabase) => asyncDatabase.requireValue),
-        ),
-      );
   }
 }

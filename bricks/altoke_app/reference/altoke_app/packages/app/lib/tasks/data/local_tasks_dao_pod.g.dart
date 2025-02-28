@@ -6,7 +6,7 @@ part of 'local_tasks_dao_pod.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$localTasksDaoHash() => r'295609edb9a223bde540ffd8535f215ef3bda22d';
+String _$localTasksDaoHash() => r'696b6929be909b8add2f4668549b6ddf29165115';
 
 /// See also [localTasksDao].
 @ProviderFor(localTasksDao)
@@ -17,12 +17,11 @@ final localTasksDaoPod = AutoDisposeProvider<LocalTasksDao>.internal(
       const bool.fromEnvironment('dart.vm.product')
           ? null
           : _$localTasksDaoHash,
-  dependencies: <ProviderOrFamily>{
+  dependencies: <ProviderOrFamily>[
     selectedLocalDatabasePackagePod,
     asyncDriftLocalDatabasePod,
     asyncHiveInitializationPod,
-    asyncIsarPod,
-  },
+  ],
   allTransitiveDependencies: <ProviderOrFamily>{
     selectedLocalDatabasePackagePod,
     ...?selectedLocalDatabasePackagePod.allTransitiveDependencies,
@@ -30,8 +29,6 @@ final localTasksDaoPod = AutoDisposeProvider<LocalTasksDao>.internal(
     ...?asyncDriftLocalDatabasePod.allTransitiveDependencies,
     asyncHiveInitializationPod,
     ...?asyncHiveInitializationPod.allTransitiveDependencies,
-    asyncIsarPod,
-    ...?asyncIsarPod.allTransitiveDependencies,
   },
 );
 

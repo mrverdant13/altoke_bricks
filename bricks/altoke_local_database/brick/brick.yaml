@@ -11,7 +11,6 @@ vars:
     values:
       - drift
       - hive
-      - isar
       - sembast
     description: The local database alternative.
     default: drift
