@@ -155,7 +155,6 @@ Create a local database, **_al toque_** (_quickly_).
   Supported with one of the following alternatives:
     - [`drift` (SQLite)][pub_package_drift]
     - [`hive`][pub_package_hive]
-    - [`isar`][pub_package_isar]
     - [`sembast`][pub_package_sembast]
 
 - **Strict lint rules:**\
@@ -203,7 +202,6 @@ Create a package that provides general-purpose caches, **_al toque_** (_quickly_
 [pub_package_very_good_analysis]: https://pub.dev/packages/very_good_analysis
 [pub_package_drift]: https://pub.dev/packages/drift
 [pub_package_hive]: https://pub.dev/packages/hive
-[pub_package_isar]: https://pub.dev/packages/isar
 [pub_package_sembast]: https://pub.dev/packages/sembast
 <!-- BRICK LINKS -->
 

@@ -8,9 +8,6 @@ enum DataPersistenceApproach {
   /// Use `hive` for data persistence.
   hive('hive'),
 
-  /// Use `isar` for data persistence.
-  isar('isar'),
-
   /// Use `sembast` for data persistence.
   sembast('sembast');
 

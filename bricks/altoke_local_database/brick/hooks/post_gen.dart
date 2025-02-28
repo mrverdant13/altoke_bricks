@@ -96,8 +96,6 @@ Future<void> run(HookContext context) async {
 }
 
 extension on LocalDatabaseAlternative {
-  bool get shouldRunCodeGeneration => [
-    LocalDatabaseAlternative.drift,
-    LocalDatabaseAlternative.isar,
-  ].contains(this);
+  bool get shouldRunCodeGeneration =>
+      [LocalDatabaseAlternative.drift].contains(this);
 }

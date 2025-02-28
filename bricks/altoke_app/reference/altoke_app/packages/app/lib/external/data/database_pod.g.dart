@@ -57,25 +57,6 @@ final asyncHiveInitializationPod = AutoDisposeFutureProvider<void>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef AsyncHiveInitializationRef = AutoDisposeFutureProviderRef<void>;
-String _$asyncIsarHash() => r'ed4e3f359a22f34c3f7b283b034721c22fe59c9d';
-
-/// See also [asyncIsar].
-@ProviderFor(asyncIsar)
-final asyncIsarPod = AutoDisposeFutureProvider<Isar>.internal(
-  asyncIsar,
-  name: r'asyncIsarPod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$asyncIsarHash,
-  dependencies: <ProviderOrFamily>[asyncApplicationDocumentsDirectoryPod],
-  allTransitiveDependencies: <ProviderOrFamily>{
-    asyncApplicationDocumentsDirectoryPod,
-    ...?asyncApplicationDocumentsDirectoryPod.allTransitiveDependencies,
-  },
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef AsyncIsarRef = AutoDisposeFutureProviderRef<Isar>;
 String _$selectedLocalDatabasePackageHash() =>
     r'05bcf0ffd220fe4a6144ea95453dc7b0d487104b';
 

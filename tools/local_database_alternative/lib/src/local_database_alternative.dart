@@ -12,11 +12,6 @@ enum LocalDatabaseAlternative {
   /// NoSQL database.
   hive('hive'),
 
-  /// Isar.
-  ///
-  /// NoSQL database.
-  isar('isar'),
-
   /// Sembast.
   ///
   /// NoSQL database.
