@@ -67,9 +67,9 @@ Create a local database, **_al toque_** (_quickly_).
 <!-- VARIABLES -->
 ### Variables
 
-| Variable                     | Description                     | Default | Type        |
-| ---------------------------- | ------------------------------- | ------- | ----------- |
-| `local_database_alternative` | The local database alternative. | drift   | Enumeration |
+| Variable | Description | Default | Type |
+| -------- | ----------- | ------- | ---- |
+| `local_database_alternative` | The local database alternative. | drift | Enumeration |
 <!-- VARIABLES -->
 
 <!-- EDITABLE -->
