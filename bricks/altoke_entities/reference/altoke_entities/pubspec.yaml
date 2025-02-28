@@ -1,0 +1,43 @@
+name: altoke_entities
+description: A set of objects to represent app entities.
+version: 0.0.1+1
+publish_to: none
+#x-remove-start#
+resolution: workspace
+#remove-end#
+
+environment:
+  sdk: ">=3.7.0 <4.0.0"
+
+dependencies:
+  altoke_common:
+    #replace-start#
+    path: ../../../altoke_common/reference/common/
+    #with#
+    # path: ../common/
+    #replace-end#
+  #{{#use_dart_mappable}}x#
+  dart_mappable: ^4.4.0
+  #x{{/use_dart_mappable}}x#
+  #x{{#use_equatable}}x#
+  equatable: ^2.0.7
+  #x{{/use_equatable}}x#
+  #x{{#use_freezed}}x#
+  freezed_annotation: ^2.4.4
+  #x{{/use_freezed}}x#
+  #x{{#use_overrides}}x#
+  meta: ^1.16.0
+  #x{{/use_overrides}}#
+
+dev_dependencies:
+  #x{{#use_code_generation}}#
+  build_runner: ^2.4.15
+  #{{/use_code_generation}}#
+  #{{#use_dart_mappable}}x#
+  dart_mappable_builder: ^4.4.0
+  #x{{/use_dart_mappable}}x#
+  #x{{#use_freezed}}x#
+  freezed: ^2.5.8
+  #x{{/use_freezed}}#
+  test: ^1.25.15
+  very_good_analysis: ^7.0.0
