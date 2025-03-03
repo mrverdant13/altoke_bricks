@@ -6,7 +6,7 @@ environment:
   sdk: ">=3.7.0 <4.0.0"
 
 dependencies:
-  mason: ^0.1.0
+  mason: ^0.1.1
   path: ^1.9.1
   pubspec_deps_sorter:
     git:
