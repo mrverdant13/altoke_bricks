@@ -6,7 +6,7 @@ environment:
   sdk: ">=3.7.0 <4.0.0"
 
 dev_dependencies:
-  mason: ^0.1.0
+  mason: ^0.1.1
   mocktail: ^1.0.4
   monorepo_elements:
     path: ../../../tools/monorepo_elements
