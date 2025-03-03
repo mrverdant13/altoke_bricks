@@ -17,7 +17,7 @@ dependencies:
   equatable: ^2.0.7
   #x{{/use_equatable}}x#
   #x{{#use_freezed}}x#
-  freezed_annotation: ^2.4.4
+  freezed_annotation: ^3.0.0
   #x{{/use_freezed}}x#
   #x{{#use_meta}}#
   meta: ^1.16.0
@@ -31,7 +31,7 @@ dev_dependencies:
   dart_mappable_builder: ^4.4.0
   #x{{/use_dart_mappable}}x#
   #x{{#use_freezed}}x#
-  freezed: ^2.5.8
+  freezed: ^3.0.3
   #x{{/use_freezed}}#
   test: ^1.25.15
   very_good_analysis: ^7.0.0
