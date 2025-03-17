@@ -155,16 +155,19 @@ class Partial{{entity_singular.pascalCase()}} extends Equatable {
 @freezed
 class {{entity_singular.pascalCase()}} with _${{entity_singular.pascalCase()}} {
   /// {@macro {{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}.{{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}}
-  const factory {{entity_singular.pascalCase()}}({
-    /// The ID of this {{entity_singular.lowerCase()}}.
-    required int id,
+  const {{entity_singular.pascalCase()}}({required this.id, required this.name, this.description});
 
-    /// The name of this {{entity_singular.lowerCase()}}.
-    required String name,
+  /// The ID of this {{entity_singular.lowerCase()}}.
+  @override
+  final int id;
 
-    /// The description of this {{entity_singular.lowerCase()}}.
-    String? description,
-  }) = _{{entity_singular.pascalCase()}};
+  /// The name of this {{entity_singular.lowerCase()}}.
+  @override
+  final String name;
+
+  /// The description of this {{entity_singular.lowerCase()}}.
+  @override
+  final String? description;
 }
 
 /// {@template {{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}.new_{{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}}
@@ -173,13 +176,15 @@ class {{entity_singular.pascalCase()}} with _${{entity_singular.pascalCase()}} {
 @freezed
 class New{{entity_singular.pascalCase()}} with _$New{{entity_singular.pascalCase()}} {
   /// {@macro {{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}.new_{{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}}
-  const factory New{{entity_singular.pascalCase()}}({
-    /// The name of the new {{entity_singular.lowerCase()}}.
-    required String name,
+  const New{{entity_singular.pascalCase()}}({required this.name, this.description});
 
-    /// The description of the new {{entity_singular.lowerCase()}}.
-    String? description,
-  }) = _New{{entity_singular.pascalCase()}};
+  /// The name of the new {{entity_singular.lowerCase()}}.
+  @override
+  final String name;
+
+  /// The description of the new {{entity_singular.lowerCase()}}.
+  @override
+  final String? description;
 }
 
 /// {@template {{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}.partial_{{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}}
@@ -188,13 +193,18 @@ class New{{entity_singular.pascalCase()}} with _$New{{entity_singular.pascalCase
 @freezed
 class Partial{{entity_singular.pascalCase()}} with _$Partial{{entity_singular.pascalCase()}} {
   /// {@macro {{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}.partial_{{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}}
-  const factory Partial{{entity_singular.pascalCase()}}({
-    /// The optional name for the {{entity_singular.lowerCase()}}.
-    @Default(Optional<String>.none()) Optional<String> name,
+  const Partial{{entity_singular.pascalCase()}}({
+    this.name = const Optional.none(),
+    this.description = const Optional.none(),
+  });
 
-    /// The optional description for the {{entity_singular.lowerCase()}}.
-    @Default(Optional<String?>.none()) Optional<String?> description,
-  }) = _Partial{{entity_singular.pascalCase()}};
+  /// The optional name for the {{entity_singular.lowerCase()}}.
+  @override
+  final Optional<String> name;
+
+  /// The optional description for the {{entity_singular.lowerCase()}}.
+  @override
+  final Optional<String?> description;
 }{{/use_freezed}}{{#use_overrides}}/// {@template {{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}.{{#requirements_met}}{{entity_singular.snakeCase()}}{{/requirements_met}}}
 /// {{entity_singular.sentenceCase()}}.
 /// {@endtemplate}
