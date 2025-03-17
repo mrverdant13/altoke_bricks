@@ -1,0 +1,4 @@
+# Requirements
+
+- Hooks are required.
+- A sibling `common` package created with the `common` brick is required.
