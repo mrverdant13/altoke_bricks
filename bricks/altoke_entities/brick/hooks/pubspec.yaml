@@ -1,0 +1,24 @@
+name: altoke_entities_brick_hooks
+publish_to: none
+resolution: workspace
+
+environment:
+  sdk: ">=3.7.0 <4.0.0"
+
+dependencies:
+  mason: ^0.1.0
+  path: ^1.9.1
+  pubspec_parse: ^1.5.0
+  shell:
+    git:
+      url: https://github.com/mrverdant13/altoke_bricks.git
+      ref: 575389c0d0d0752834361c4b4be6888ef4e32f83
+      path: ./tools/shell/
+  value_equality_approach:
+    git:
+      url: https://github.com/mrverdant13/altoke_bricks.git
+      ref: 575389c0d0d0752834361c4b4be6888ef4e32f83
+      path: ./tools/value_equality_approach/
+
+dev_dependencies:
+  very_good_analysis: ^7.0.0

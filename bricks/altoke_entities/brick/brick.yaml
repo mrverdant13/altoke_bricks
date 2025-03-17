@@ -1,0 +1,26 @@
+name: altoke_entities
+description: A template for an package that holds app entities.
+version: 0.0.1
+
+environment:
+  mason: ^0.1.0
+
+vars:
+  package_name:
+    type: string
+    description: A name for the package.
+    prompt: "What is the name of the package?"
+  package_description:
+    type: string
+    description: A description for the package.
+    prompt: "What is the description of the package?"
+  value_equality_approach:
+    type: enum
+    description: The approach to use for value equality.
+    prompt: What approach to use for value equality?
+    values:
+      - "`dart_mappable`"
+      - "`equatable`"
+      - "`freezed`"
+      - "Overrides"
+    default: dart_mappable
