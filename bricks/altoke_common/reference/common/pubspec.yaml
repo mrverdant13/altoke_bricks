@@ -11,7 +11,7 @@ environment:
 
 dependencies:
   #{{#use_dart_mappable}}x#
-  dart_mappable: ^4.4.0
+  dart_mappable: ^4.5.0
   #x{{/use_dart_mappable}}x#
   #x{{#use_equatable}}x#
   equatable: ^2.0.7
