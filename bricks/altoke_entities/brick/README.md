@@ -68,10 +68,10 @@ Create a package to hold app entities, **_al toque_** (_quickly_).
 <!-- VARIABLES -->
 ### Variables
 
-| Variable                  | Description                             | Default       | Type        |
-| ------------------------- | --------------------------------------- | ------------- | ----------- |
-| `entity_singular`         | The name of the entity (singular).      | my entity     | String      |
-| `package_description`     | A description for the package.          | _None_        | String      |
+| Variable | Description | Default | Type |
+| -------- | ----------- | ------- | ---- |
+| `package_name` | A name for the package. | _None_ | String |
+| `package_description` | A description for the package. | _None_ | String |
 | `value_equality_approach` | The approach to use for value equality. | dart_mappable | Enumeration |
 <!-- VARIABLES -->
 
