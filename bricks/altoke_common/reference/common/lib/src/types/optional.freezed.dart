@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,71 +10,98 @@ part of 'optional.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
-
 /// @nodoc
-mixin _$FOptional<T extends Object?> {}
+mixin _$FOptional<T extends Object?> {
 
-/// @nodoc
 
-class _$FSomeImpl<T extends Object?> extends FSome<T> {
-  const _$FSomeImpl(this.value) : super._();
 
-  /// The underlying value.
-  @override
-  final T value;
 
-  @override
-  String toString() {
-    return 'FOptional<$T>.some(value: $value)';
-  }
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FSomeImpl<T> &&
-            const DeepCollectionEquality().equals(other.value, value));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(value));
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FOptional<T>);
 }
 
-abstract class FSome<T extends Object?> extends FOptional<T> {
-  const factory FSome(final T value) = _$FSomeImpl<T>;
-  const FSome._() : super._();
 
-  /// The underlying value.
-  T get value;
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'FOptional<$T>()';
 }
+
+
+}
+
+
+
 
 /// @nodoc
 
-class _$FNoneImpl<T extends Object?> extends FNone<T> {
-  const _$FNoneImpl() : super._();
 
-  @override
-  String toString() {
-    return 'FOptional<$T>.none()';
-  }
+class FSome<T extends Object?> extends FOptional<T> {
+  const FSome(this.value): super._();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FNoneImpl<T>);
-  }
+/// The underlying value.
+ final  T value;
 
-  @override
-  int get hashCode => runtimeType.hashCode;
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FSome<T>&&const DeepCollectionEquality().equals(other.value, value));
 }
 
-abstract class FNone<T extends Object?> extends FOptional<T> {
-  const factory FNone() = _$FNoneImpl<T>;
-  const FNone._() : super._();
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(value));
+
+@override
+String toString() {
+  return 'FOptional<$T>.some(value: $value)';
 }
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class FNone<T extends Object?> extends FOptional<T> {
+  const FNone(): super._();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FNone<T>);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'FOptional<$T>.none()';
+}
+
+
+}
+
+
+
+
+// dart format on
