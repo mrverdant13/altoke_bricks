@@ -69,18 +69,18 @@ packages:
     dependency: transitive
     description:
       name: auto_route
-      sha256: fd5af38a2a682e4cbb06c6842ea728efdf460cbf6a425d9459fa9647ad5468f2
+      sha256: "89bc5d17d8c575399891194b8cd02b39f52a8512c730052f17ebe443cdcb9109"
       url: "https://pub.dev"
     source: hosted
-    version: "10.0.0"
+    version: "10.0.1"
   auto_route_generator:
     dependency: transitive
     description:
       name: auto_route_generator
-      sha256: "74419086890a82ebde04fb91da95dc352988f47fa01e6e2889d9896a0ece70d8"
+      sha256: "8e622d26dc6be4bf496d47969e3e9ba555c3abcf2290da6abfa43cbd4f57fa52"
       url: "https://pub.dev"
     source: hosted
-    version: "10.0.0"
+    version: "10.0.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -449,10 +449,10 @@ packages:
     dependency: transitive
     description:
       name: go_router_builder
-      sha256: d094b60c654aa9a303f93ed627f139753ef582a83d43c1f247d2173d6727e285
+      sha256: a79845a602f9ce3d837408c408915ea034eb2957fe0b527cfa3fc50e2e9bcb93
       url: "https://pub.dev"
     source: hosted
-    version: "2.8.1"
+    version: "2.8.2"
   graphs:
     dependency: transitive
     description:
