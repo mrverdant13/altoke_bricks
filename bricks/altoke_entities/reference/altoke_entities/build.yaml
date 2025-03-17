@@ -1,0 +1,21 @@
+targets:
+  $default:
+    builders:
+      #{{#use_dart_mappable}}x#
+      dart_mappable_builder:
+        generate_for:
+          - lib/src/task.dart
+        options:
+          generateMethods:
+            - copy
+            - equals
+            - stringify
+      #x{{/use_dart_mappable}}x#
+      #x{{#use_freezed}}x#
+      freezed:
+        generate_for:
+          - lib/src/task.dart
+        options:
+          map: false
+          when: false
+      #x{{/use_freezed}}x#

@@ -1,0 +1,40 @@
+{
+  "replacements": [
+    {
+      "from": "altoke_common",
+      "to": "common"
+    },
+    {
+      "from": "\\b(REQUIREMENTS.md)\\b",
+      "to": "{{^requirements_met}}REQUIREMENTS.md{{/requirements_met}}"
+    },
+    {
+      "from": "altoke_entities",
+      "to": "{{package_name}}"
+    },
+    {
+      "from": "A set of objects to represent app entities.",
+      "to": "{{package_description}}"
+    },
+    {
+      "from": "(DmTask)|(ETask)|(FTask)",
+      "to": "Task"
+    },
+    {
+      "from": "(DmNewTask)|(ENewTask)|(FNewTask)",
+      "to": "NewTask"
+    },
+    {
+      "from": "(DmPartialTask)|(EPartialTask)|(FPartialTask)",
+      "to": "PartialTask"
+    },
+    {
+      "from": "(DmOptional)|(EOptional)|(FOptional)",
+      "to": "Optional"
+    },
+    {
+      "from": "build.yaml",
+      "to": "{{^use_equatable}}build.yaml{{/use_equatable}}"
+    }
+  ]
+}

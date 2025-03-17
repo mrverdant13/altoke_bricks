@@ -274,6 +274,10 @@ workspace:
   - bricks/altoke_dart_package/brick/hooks
   - bricks/altoke_dart_package/e2e
   - bricks/altoke_dart_package/reference/altoke_dart_package
+  - bricks/altoke_entities
+  - bricks/altoke_entities/brick/hooks
+  - bricks/altoke_entities/e2e
+  - bricks/altoke_entities/reference/altoke_entities
   - bricks/altoke_entity
   - bricks/altoke_entity/brick/hooks
   - bricks/altoke_entity/e2e
