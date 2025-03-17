@@ -17,7 +17,7 @@ dependencies:
   auto_route: ^10.0.1
   #{{/use_auto_route}}#
   #x-remove-start#
-  drift: ^2.25.1
+  drift: ^2.26.0
   drift_flutter: ^0.2.4
   drift_local_database:
     path: ../../../../../altoke_local_database/reference/local_database/drift_local_database/
