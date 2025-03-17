@@ -176,16 +176,19 @@ class EPartialTask extends Equatable {
 @freezed
 class FTask with _$FTask {
   /// {@macro altoke_entities.task}
-  const factory FTask({
-    /// The ID of this task.
-    required int id,
+  const FTask({required this.id, required this.name, this.description});
 
-    /// The name of this task.
-    required String name,
+  /// The ID of this task.
+  @override
+  final int id;
 
-    /// The description of this task.
-    String? description,
-  }) = _FTask;
+  /// The name of this task.
+  @override
+  final String name;
+
+  /// The description of this task.
+  @override
+  final String? description;
 }
 
 /// {@template altoke_entities.new_task}
@@ -194,13 +197,15 @@ class FTask with _$FTask {
 @freezed
 class FNewTask with _$FNewTask {
   /// {@macro altoke_entities.new_task}
-  const factory FNewTask({
-    /// The name of the new task.
-    required String name,
+  const FNewTask({required this.name, this.description});
 
-    /// The description of the new task.
-    String? description,
-  }) = _FNewTask;
+  /// The name of the new task.
+  @override
+  final String name;
+
+  /// The description of the new task.
+  @override
+  final String? description;
 }
 
 /// {@template altoke_entities.partial_task}
@@ -209,13 +214,18 @@ class FNewTask with _$FNewTask {
 @freezed
 class FPartialTask with _$FPartialTask {
   /// {@macro altoke_entities.partial_task}
-  const factory FPartialTask({
-    /// The optional name for the task.
-    @Default(FOptional<String>.none()) FOptional<String> name,
+  const FPartialTask({
+    this.name = const FOptional.none(),
+    this.description = const FOptional.none(),
+  });
 
-    /// The optional description for the task.
-    @Default(FOptional<String?>.none()) FOptional<String?> description,
-  }) = _FPartialTask;
+  /// The optional name for the task.
+  @override
+  final FOptional<String> name;
+
+  /// The optional description for the task.
+  @override
+  final FOptional<String?> description;
 }
 /*x{{/use_freezed}}x*/
 

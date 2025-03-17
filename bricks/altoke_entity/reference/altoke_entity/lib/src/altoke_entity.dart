@@ -183,16 +183,19 @@ class EPartialAltokeEntity extends Equatable {
 @freezed
 class FAltokeEntity with _$FAltokeEntity {
   /// {@macro altoke_entity.altoke_entity}
-  const factory FAltokeEntity({
-    /// The ID of this altoke entity.
-    required int id,
+  const FAltokeEntity({required this.id, required this.name, this.description});
 
-    /// The name of this altoke entity.
-    required String name,
+  /// The ID of this altoke entity.
+  @override
+  final int id;
 
-    /// The description of this altoke entity.
-    String? description,
-  }) = _FAltokeEntity;
+  /// The name of this altoke entity.
+  @override
+  final String name;
+
+  /// The description of this altoke entity.
+  @override
+  final String? description;
 }
 
 /// {@template altoke_entity.new_altoke_entity}
@@ -201,13 +204,15 @@ class FAltokeEntity with _$FAltokeEntity {
 @freezed
 class FNewAltokeEntity with _$FNewAltokeEntity {
   /// {@macro altoke_entity.new_altoke_entity}
-  const factory FNewAltokeEntity({
-    /// The name of the new altoke entity.
-    required String name,
+  const FNewAltokeEntity({required this.name, this.description});
 
-    /// The description of the new altoke entity.
-    String? description,
-  }) = _FNewAltokeEntity;
+  /// The name of the new altoke entity.
+  @override
+  final String name;
+
+  /// The description of the new altoke entity.
+  @override
+  final String? description;
 }
 
 /// {@template altoke_entity.partial_altoke_entity}
@@ -216,13 +221,18 @@ class FNewAltokeEntity with _$FNewAltokeEntity {
 @freezed
 class FPartialAltokeEntity with _$FPartialAltokeEntity {
   /// {@macro altoke_entity.partial_altoke_entity}
-  const factory FPartialAltokeEntity({
-    /// The optional name for the altoke entity.
-    @Default(FOptional<String>.none()) FOptional<String> name,
+  const FPartialAltokeEntity({
+    this.name = const FOptional.none(),
+    this.description = const FOptional.none(),
+  });
 
-    /// The optional description for the altoke entity.
-    @Default(FOptional<String?>.none()) FOptional<String?> description,
-  }) = _FPartialAltokeEntity;
+  /// The optional name for the altoke entity.
+  @override
+  final FOptional<String> name;
+
+  /// The optional description for the altoke entity.
+  @override
+  final FOptional<String?> description;
 }
 /*x{{/use_freezed}}x*/
 
