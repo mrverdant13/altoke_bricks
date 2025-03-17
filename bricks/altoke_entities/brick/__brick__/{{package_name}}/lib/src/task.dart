@@ -148,16 +148,19 @@ class PartialTask extends Equatable {
 @freezed
 class Task with _$Task {
   /// {@macro {{package_name}}.task}
-  const factory Task({
-    /// The ID of this task.
-    required int id,
+  const Task({required this.id, required this.name, this.description});
 
-    /// The name of this task.
-    required String name,
+  /// The ID of this task.
+  @override
+  final int id;
 
-    /// The description of this task.
-    String? description,
-  }) = _Task;
+  /// The name of this task.
+  @override
+  final String name;
+
+  /// The description of this task.
+  @override
+  final String? description;
 }
 
 /// {@template {{package_name}}.new_task}
@@ -166,13 +169,15 @@ class Task with _$Task {
 @freezed
 class NewTask with _$NewTask {
   /// {@macro {{package_name}}.new_task}
-  const factory NewTask({
-    /// The name of the new task.
-    required String name,
+  const NewTask({required this.name, this.description});
 
-    /// The description of the new task.
-    String? description,
-  }) = _NewTask;
+  /// The name of the new task.
+  @override
+  final String name;
+
+  /// The description of the new task.
+  @override
+  final String? description;
 }
 
 /// {@template {{package_name}}.partial_task}
@@ -181,13 +186,18 @@ class NewTask with _$NewTask {
 @freezed
 class PartialTask with _$PartialTask {
   /// {@macro {{package_name}}.partial_task}
-  const factory PartialTask({
-    /// The optional name for the task.
-    @Default(Optional<String>.none()) Optional<String> name,
+  const PartialTask({
+    this.name = const Optional.none(),
+    this.description = const Optional.none(),
+  });
 
-    /// The optional description for the task.
-    @Default(Optional<String?>.none()) Optional<String?> description,
-  }) = _PartialTask;
+  /// The optional name for the task.
+  @override
+  final Optional<String> name;
+
+  /// The optional description for the task.
+  @override
+  final Optional<String?> description;
 }{{/use_freezed}}{{#use_overrides}}/// {@template {{package_name}}.task}
 /// Task.
 /// {@endtemplate}
