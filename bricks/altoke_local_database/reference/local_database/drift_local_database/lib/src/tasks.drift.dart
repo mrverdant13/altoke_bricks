@@ -232,9 +232,6 @@ class Tasks extends i0.Table with i0.TableInfo<Tasks, i1.Task> {
     requiredDuringInsert: true,
     $customConstraints: 'NOT NULL',
   );
-  static const i0.VerificationMeta _priorityMeta = const i0.VerificationMeta(
-    'priority',
-  );
   late final i0.GeneratedColumnWithTypeConverter<i2.TaskPriority, String>
   priority = i0.GeneratedColumn<String>(
     'priority',
@@ -299,7 +296,6 @@ class Tasks extends i0.Table with i0.TableInfo<Tasks, i1.Task> {
     } else if (isInserting) {
       context.missing(_titleMeta);
     }
-    context.handle(_priorityMeta, const i0.VerificationResult.success());
     if (data.containsKey('completed')) {
       context.handle(
         _completedMeta,
