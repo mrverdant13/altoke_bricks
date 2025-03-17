@@ -68,19 +68,10 @@ THEN the generated outputs should be valid and testable
 ''';
     test(composedDescription, () async {
       registerFallbackValue(systemEncoding);
-      final rootDir = Dirs.root;
-      final vscodeDir = rootDir.descendantDir('.vscode');
-      final tempDir = vscodeDir.descendantDir(
-        'altoke_entities_e2e_test-${valueEqualityApproach.varIdentifier}',
+      final tempDir = Directory.systemTemp.createTempSync(
+        'altoke-entities-e2e-test-${valueEqualityApproach.varIdentifier}-',
       );
-      if (tempDir.existsSync()) {
-        tempDir.deleteSync(recursive: true);
-      }
-      tempDir.createSync();
-      // final tempDir = Directory.systemTemp.createTempSync(
-      //   'altoke-entities-e2e-test-${valueEqualityApproach.varIdentifier}-',
-      // );
-      // addTearDown(() => tempDir.deleteSync(recursive: true));
+      addTearDown(() => tempDir.deleteSync(recursive: true));
       final directoryGeneratorTarget = DirectoryGeneratorTarget(tempDir);
       final altokeCommonVars = <String, dynamic>{
         ValueEqualityApproach.varKey: valueEqualityApproach.readableName,
