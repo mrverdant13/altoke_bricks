@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:brick_generator/src/models/brick_gen_data.dart';
-import 'package:brick_generator/src/models/line_deletions.dart';
-import 'package:brick_generator/src/models/replacement.dart';
+import 'package:brick_generator/src/models/models.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
 import 'package:shell/git.dart';
@@ -153,6 +151,26 @@ extension on String {
       });
     });
   }
+
+  String withResolvedPartials({required String targetAbsolutePath}) {
+    final partialPatterns = [
+      r'\/\*partial v (?<partialName>.*?)\*\/(?<partialPayload>.*?)\/\*partial \^ \k<partialName>\*\/',
+      r'#partial v (?<partialName>.*?)#(?<partialPayload>.*?)#partial \^ \k<partialName>#',
+      r'<!--partial v (?<partialName>.*?)-->(?<partialPayload>.*?)<!--partial \^ \k<partialName>-->',
+    ];
+    return partialPatterns.fold(this, (content, pattern) {
+      final regex = RegExp(pattern, dotAll: true);
+      return content.replaceAllMapped(regex, (match) {
+        match as RegExpMatch;
+        final partialName = match.namedGroup('partialName') ?? '';
+        final partialPayload = match.namedGroup('partialPayload') ?? '';
+        File(p.join(targetAbsolutePath, '$partialName.partial'))
+          ..createSync(recursive: true)
+          ..writeAsStringSync(partialPayload);
+        return '{{~$partialName.partial}}';
+      });
+    });
+  }
 }
 
 /// Extension methods for a reference [File] to be parametrized.
@@ -193,18 +211,20 @@ extension ReferenceFile on File {
     if (ignoredExtensions.contains(p.extension(path))) return;
     final BrickGenData(:replacements, :lineDeletions) = brickGenData;
     final referenceContent = await readAsString();
-    final resolvedContents =
-        referenceContent
-            .applyLineDeletions(
-              filePath: p.relative(path, from: brickGenData.targetAbsolutePath),
-              lineDeletions: lineDeletions,
-            )
-            .applyReplacements(replacements)
-            .withResolvedRemotions
-            .withResolveReplacements
-            .withResolvedInsertions
-            .withResolveMustacheTags
-            .withResolveSpacingGroups;
+    final resolvedContents = referenceContent
+        .applyLineDeletions(
+          filePath: p.relative(path, from: brickGenData.targetAbsolutePath),
+          lineDeletions: lineDeletions,
+        )
+        .applyReplacements(replacements)
+        .withResolvedRemotions
+        .withResolveReplacements
+        .withResolvedInsertions
+        .withResolveMustacheTags
+        .withResolveSpacingGroups
+        .withResolvedPartials(
+          targetAbsolutePath: brickGenData.targetAbsolutePath,
+        );
     await writeAsString(resolvedContents);
   }
 
