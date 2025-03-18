@@ -457,6 +457,73 @@ text
           expect(file.existsSync(), isTrue);
           expect(file.readAsStringSync(), resultingContent);
         });
+
+        test('extracts and creates partials', () async {
+          final testDir = tempDir.descendantDir('partials');
+          addTearDown(() => testDir.deleteSync(recursive: true));
+          final file = testDir.descendantFile('file.txt');
+          expect(file.existsSync(), isFalse);
+          file.createSync(recursive: true);
+          const originalContent = '''
+text
+/*partial v partialA*/
+/*w w*/
+this is
+the partial
+A
+/*partial ^ partialA*/
+more text
+#partial v partialB#
+#w w#
+this is
+the partial
+B
+#partial ^ partialB#
+yet more text
+<!--partial v partialC-->
+<!--w w-->
+this is
+the partial
+C
+<!--partial ^ partialC-->
+and even more text
+''';
+          const resultingContent = '''
+text
+{{~partialA.partial}}
+more text
+{{~partialB.partial}}
+yet more text
+{{~partialC.partial}}
+and even more text
+''';
+          file.writeAsStringSync(originalContent);
+          expect(file.existsSync(), isTrue);
+          expect(file.readAsStringSync(), originalContent);
+          await file.parametrize(
+            brickGenData: BrickGenData(
+              referenceAbsolutePath: '',
+              targetAbsolutePath: testDir.path,
+              replacements: const [],
+              lineDeletions: const [],
+            ),
+          );
+          expect(file.existsSync(), isTrue);
+          expect(file.readAsStringSync(), resultingContent);
+          const cases = ['A', 'B', 'C'];
+          for (final partialName in cases) {
+            final partialFile = testDir.descendantFile(
+              'partial$partialName.partial',
+            );
+            final partialContent = '''
+this is
+the partial
+$partialName
+''';
+            expect(partialFile.existsSync(), isTrue);
+            expect(partialFile.readAsStringSync(), partialContent);
+          }
+        });
       });
     });
   });
