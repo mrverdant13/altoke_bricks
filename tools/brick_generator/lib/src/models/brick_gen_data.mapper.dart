@@ -86,7 +86,11 @@ mixin BrickGenDataMappable {
   }
 
   BrickGenDataCopyWith<BrickGenData, BrickGenData, BrickGenData> get copyWith =>
-      _BrickGenDataCopyWithImpl(this as BrickGenData, $identity, $identity);
+      _BrickGenDataCopyWithImpl<BrickGenData, BrickGenData>(
+        this as BrickGenData,
+        $identity,
+        $identity,
+      );
   @override
   String toString() {
     return BrickGenDataMapper.ensureInitialized().stringifyValue(
@@ -113,7 +117,7 @@ mixin BrickGenDataMappable {
 extension BrickGenDataValueCopy<$R, $Out>
     on ObjectCopyWith<$R, BrickGenData, $Out> {
   BrickGenDataCopyWith<$R, BrickGenData, $Out> get $asBrickGenData =>
-      $base.as((v, t, t2) => _BrickGenDataCopyWithImpl(v, t, t2));
+      $base.as((v, t, t2) => _BrickGenDataCopyWithImpl<$R, $Out>(v, t, t2));
 }
 
 abstract class BrickGenDataCopyWith<$R, $In extends BrickGenData, $Out>
@@ -204,5 +208,5 @@ class _BrickGenDataCopyWithImpl<$R, $Out>
   @override
   BrickGenDataCopyWith<$R2, BrickGenData, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
-  ) => _BrickGenDataCopyWithImpl($value, $cast, t);
+  ) => _BrickGenDataCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }

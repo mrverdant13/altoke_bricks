@@ -68,11 +68,12 @@ mixin BrickGenOptionsMappable {
   }
 
   BrickGenOptionsCopyWith<BrickGenOptions, BrickGenOptions, BrickGenOptions>
-  get copyWith => _BrickGenOptionsCopyWithImpl(
-    this as BrickGenOptions,
-    $identity,
-    $identity,
-  );
+  get copyWith =>
+      _BrickGenOptionsCopyWithImpl<BrickGenOptions, BrickGenOptions>(
+        this as BrickGenOptions,
+        $identity,
+        $identity,
+      );
   @override
   String toString() {
     return BrickGenOptionsMapper.ensureInitialized().stringifyValue(
@@ -99,7 +100,7 @@ mixin BrickGenOptionsMappable {
 extension BrickGenOptionsValueCopy<$R, $Out>
     on ObjectCopyWith<$R, BrickGenOptions, $Out> {
   BrickGenOptionsCopyWith<$R, BrickGenOptions, $Out> get $asBrickGenOptions =>
-      $base.as((v, t, t2) => _BrickGenOptionsCopyWithImpl(v, t, t2));
+      $base.as((v, t, t2) => _BrickGenOptionsCopyWithImpl<$R, $Out>(v, t, t2));
 }
 
 abstract class BrickGenOptionsCopyWith<$R, $In extends BrickGenOptions, $Out>
@@ -174,5 +175,5 @@ class _BrickGenOptionsCopyWithImpl<$R, $Out>
   @override
   BrickGenOptionsCopyWith<$R2, BrickGenOptions, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
-  ) => _BrickGenOptionsCopyWithImpl($value, $cast, t);
+  ) => _BrickGenOptionsCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
