@@ -52,7 +52,7 @@ class DmTaskMapper extends ClassMapperBase<DmTask> {
 
 mixin DmTaskMappable {
   DmTaskCopyWith<DmTask, DmTask, DmTask> get copyWith =>
-      _DmTaskCopyWithImpl(this as DmTask, $identity, $identity);
+      _DmTaskCopyWithImpl<DmTask, DmTask>(this as DmTask, $identity, $identity);
   @override
   String toString() {
     return DmTaskMapper.ensureInitialized().stringifyValue(this as DmTask);
@@ -71,7 +71,7 @@ mixin DmTaskMappable {
 
 extension DmTaskValueCopy<$R, $Out> on ObjectCopyWith<$R, DmTask, $Out> {
   DmTaskCopyWith<$R, DmTask, $Out> get $asDmTask =>
-      $base.as((v, t, t2) => _DmTaskCopyWithImpl(v, t, t2));
+      $base.as((v, t, t2) => _DmTaskCopyWithImpl<$R, $Out>(v, t, t2));
 }
 
 abstract class DmTaskCopyWith<$R, $In extends DmTask, $Out>
@@ -103,7 +103,7 @@ class _DmTaskCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, DmTask, $Out>
 
   @override
   DmTaskCopyWith<$R2, DmTask, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-      _DmTaskCopyWithImpl($value, $cast, t);
+      _DmTaskCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
 class DmNewTaskMapper extends ClassMapperBase<DmNewTask> {
@@ -148,7 +148,11 @@ class DmNewTaskMapper extends ClassMapperBase<DmNewTask> {
 
 mixin DmNewTaskMappable {
   DmNewTaskCopyWith<DmNewTask, DmNewTask, DmNewTask> get copyWith =>
-      _DmNewTaskCopyWithImpl(this as DmNewTask, $identity, $identity);
+      _DmNewTaskCopyWithImpl<DmNewTask, DmNewTask>(
+        this as DmNewTask,
+        $identity,
+        $identity,
+      );
   @override
   String toString() {
     return DmNewTaskMapper.ensureInitialized().stringifyValue(
@@ -172,7 +176,7 @@ mixin DmNewTaskMappable {
 
 extension DmNewTaskValueCopy<$R, $Out> on ObjectCopyWith<$R, DmNewTask, $Out> {
   DmNewTaskCopyWith<$R, DmNewTask, $Out> get $asDmNewTask =>
-      $base.as((v, t, t2) => _DmNewTaskCopyWithImpl(v, t, t2));
+      $base.as((v, t, t2) => _DmNewTaskCopyWithImpl<$R, $Out>(v, t, t2));
 }
 
 abstract class DmNewTaskCopyWith<$R, $In extends DmNewTask, $Out>
@@ -205,7 +209,7 @@ class _DmNewTaskCopyWithImpl<$R, $Out>
   @override
   DmNewTaskCopyWith<$R2, DmNewTask, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
-  ) => _DmNewTaskCopyWithImpl($value, $cast, t);
+  ) => _DmNewTaskCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
 class DmPartialTaskMapper extends ClassMapperBase<DmPartialTask> {
@@ -257,8 +261,11 @@ class DmPartialTaskMapper extends ClassMapperBase<DmPartialTask> {
 
 mixin DmPartialTaskMappable {
   DmPartialTaskCopyWith<DmPartialTask, DmPartialTask, DmPartialTask>
-  get copyWith =>
-      _DmPartialTaskCopyWithImpl(this as DmPartialTask, $identity, $identity);
+  get copyWith => _DmPartialTaskCopyWithImpl<DmPartialTask, DmPartialTask>(
+    this as DmPartialTask,
+    $identity,
+    $identity,
+  );
   @override
   String toString() {
     return DmPartialTaskMapper.ensureInitialized().stringifyValue(
@@ -285,7 +292,7 @@ mixin DmPartialTaskMappable {
 extension DmPartialTaskValueCopy<$R, $Out>
     on ObjectCopyWith<$R, DmPartialTask, $Out> {
   DmPartialTaskCopyWith<$R, DmPartialTask, $Out> get $asDmPartialTask =>
-      $base.as((v, t, t2) => _DmPartialTaskCopyWithImpl(v, t, t2));
+      $base.as((v, t, t2) => _DmPartialTaskCopyWithImpl<$R, $Out>(v, t, t2));
 }
 
 abstract class DmPartialTaskCopyWith<$R, $In extends DmPartialTask, $Out>
@@ -319,5 +326,5 @@ class _DmPartialTaskCopyWithImpl<$R, $Out>
   @override
   DmPartialTaskCopyWith<$R2, DmPartialTask, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
-  ) => _DmPartialTaskCopyWithImpl($value, $cast, t);
+  ) => _DmPartialTaskCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }

@@ -71,8 +71,11 @@ mixin LinesDeletionMappable {
   }
 
   LinesDeletionCopyWith<LinesDeletion, LinesDeletion, LinesDeletion>
-  get copyWith =>
-      _LinesDeletionCopyWithImpl(this as LinesDeletion, $identity, $identity);
+  get copyWith => _LinesDeletionCopyWithImpl<LinesDeletion, LinesDeletion>(
+    this as LinesDeletion,
+    $identity,
+    $identity,
+  );
   @override
   String toString() {
     return LinesDeletionMapper.ensureInitialized().stringifyValue(
@@ -99,7 +102,7 @@ mixin LinesDeletionMappable {
 extension LinesDeletionValueCopy<$R, $Out>
     on ObjectCopyWith<$R, LinesDeletion, $Out> {
   LinesDeletionCopyWith<$R, LinesDeletion, $Out> get $asLinesDeletion =>
-      $base.as((v, t, t2) => _LinesDeletionCopyWithImpl(v, t, t2));
+      $base.as((v, t, t2) => _LinesDeletionCopyWithImpl<$R, $Out>(v, t, t2));
 }
 
 abstract class LinesDeletionCopyWith<$R, $In extends LinesDeletion, $Out>
@@ -141,7 +144,7 @@ class _LinesDeletionCopyWithImpl<$R, $Out>
   @override
   LinesDeletionCopyWith<$R2, LinesDeletion, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
-  ) => _LinesDeletionCopyWithImpl($value, $cast, t);
+  ) => _LinesDeletionCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
 class LinesRangeMapper extends ClassMapperBase<LinesRange> {
@@ -199,7 +202,11 @@ mixin LinesRangeMappable {
   }
 
   LinesRangeCopyWith<LinesRange, LinesRange, LinesRange> get copyWith =>
-      _LinesRangeCopyWithImpl(this as LinesRange, $identity, $identity);
+      _LinesRangeCopyWithImpl<LinesRange, LinesRange>(
+        this as LinesRange,
+        $identity,
+        $identity,
+      );
   @override
   String toString() {
     return LinesRangeMapper.ensureInitialized().stringifyValue(
@@ -224,7 +231,7 @@ mixin LinesRangeMappable {
 extension LinesRangeValueCopy<$R, $Out>
     on ObjectCopyWith<$R, LinesRange, $Out> {
   LinesRangeCopyWith<$R, LinesRange, $Out> get $asLinesRange =>
-      $base.as((v, t, t2) => _LinesRangeCopyWithImpl(v, t, t2));
+      $base.as((v, t, t2) => _LinesRangeCopyWithImpl<$R, $Out>(v, t, t2));
 }
 
 abstract class LinesRangeCopyWith<$R, $In extends LinesRange, $Out>
@@ -257,5 +264,5 @@ class _LinesRangeCopyWithImpl<$R, $Out>
   @override
   LinesRangeCopyWith<$R2, LinesRange, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
-  ) => _LinesRangeCopyWithImpl($value, $cast, t);
+  ) => _LinesRangeCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }

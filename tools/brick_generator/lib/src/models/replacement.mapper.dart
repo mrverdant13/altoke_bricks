@@ -62,7 +62,11 @@ mixin ReplacementMappable {
   }
 
   ReplacementCopyWith<Replacement, Replacement, Replacement> get copyWith =>
-      _ReplacementCopyWithImpl(this as Replacement, $identity, $identity);
+      _ReplacementCopyWithImpl<Replacement, Replacement>(
+        this as Replacement,
+        $identity,
+        $identity,
+      );
   @override
   String toString() {
     return ReplacementMapper.ensureInitialized().stringifyValue(
@@ -87,7 +91,7 @@ mixin ReplacementMappable {
 extension ReplacementValueCopy<$R, $Out>
     on ObjectCopyWith<$R, Replacement, $Out> {
   ReplacementCopyWith<$R, Replacement, $Out> get $asReplacement =>
-      $base.as((v, t, t2) => _ReplacementCopyWithImpl(v, t, t2));
+      $base.as((v, t, t2) => _ReplacementCopyWithImpl<$R, $Out>(v, t, t2));
 }
 
 abstract class ReplacementCopyWith<$R, $In extends Replacement, $Out>
@@ -117,5 +121,5 @@ class _ReplacementCopyWithImpl<$R, $Out>
   @override
   ReplacementCopyWith<$R2, Replacement, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
-  ) => _ReplacementCopyWithImpl($value, $cast, t);
+  ) => _ReplacementCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }

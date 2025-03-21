@@ -52,8 +52,11 @@ class DmAltokeEntityMapper extends ClassMapperBase<DmAltokeEntity> {
 
 mixin DmAltokeEntityMappable {
   DmAltokeEntityCopyWith<DmAltokeEntity, DmAltokeEntity, DmAltokeEntity>
-  get copyWith =>
-      _DmAltokeEntityCopyWithImpl(this as DmAltokeEntity, $identity, $identity);
+  get copyWith => _DmAltokeEntityCopyWithImpl<DmAltokeEntity, DmAltokeEntity>(
+    this as DmAltokeEntity,
+    $identity,
+    $identity,
+  );
   @override
   String toString() {
     return DmAltokeEntityMapper.ensureInitialized().stringifyValue(
@@ -80,7 +83,7 @@ mixin DmAltokeEntityMappable {
 extension DmAltokeEntityValueCopy<$R, $Out>
     on ObjectCopyWith<$R, DmAltokeEntity, $Out> {
   DmAltokeEntityCopyWith<$R, DmAltokeEntity, $Out> get $asDmAltokeEntity =>
-      $base.as((v, t, t2) => _DmAltokeEntityCopyWithImpl(v, t, t2));
+      $base.as((v, t, t2) => _DmAltokeEntityCopyWithImpl<$R, $Out>(v, t, t2));
 }
 
 abstract class DmAltokeEntityCopyWith<$R, $In extends DmAltokeEntity, $Out>
@@ -117,7 +120,7 @@ class _DmAltokeEntityCopyWithImpl<$R, $Out>
   @override
   DmAltokeEntityCopyWith<$R2, DmAltokeEntity, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
-  ) => _DmAltokeEntityCopyWithImpl($value, $cast, t);
+  ) => _DmAltokeEntityCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
 class DmNewAltokeEntityMapper extends ClassMapperBase<DmNewAltokeEntity> {
@@ -166,11 +169,12 @@ mixin DmNewAltokeEntityMappable {
     DmNewAltokeEntity,
     DmNewAltokeEntity
   >
-  get copyWith => _DmNewAltokeEntityCopyWithImpl(
-    this as DmNewAltokeEntity,
-    $identity,
-    $identity,
-  );
+  get copyWith =>
+      _DmNewAltokeEntityCopyWithImpl<DmNewAltokeEntity, DmNewAltokeEntity>(
+        this as DmNewAltokeEntity,
+        $identity,
+        $identity,
+      );
   @override
   String toString() {
     return DmNewAltokeEntityMapper.ensureInitialized().stringifyValue(
@@ -197,8 +201,9 @@ mixin DmNewAltokeEntityMappable {
 extension DmNewAltokeEntityValueCopy<$R, $Out>
     on ObjectCopyWith<$R, DmNewAltokeEntity, $Out> {
   DmNewAltokeEntityCopyWith<$R, DmNewAltokeEntity, $Out>
-  get $asDmNewAltokeEntity =>
-      $base.as((v, t, t2) => _DmNewAltokeEntityCopyWithImpl(v, t, t2));
+  get $asDmNewAltokeEntity => $base.as(
+    (v, t, t2) => _DmNewAltokeEntityCopyWithImpl<$R, $Out>(v, t, t2),
+  );
 }
 
 abstract class DmNewAltokeEntityCopyWith<
@@ -237,7 +242,7 @@ class _DmNewAltokeEntityCopyWithImpl<$R, $Out>
   @override
   DmNewAltokeEntityCopyWith<$R2, DmNewAltokeEntity, $Out2> $chain<$R2, $Out2>(
     Then<$Out2, $R2> t,
-  ) => _DmNewAltokeEntityCopyWithImpl($value, $cast, t);
+  ) => _DmNewAltokeEntityCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
 
 class DmPartialAltokeEntityMapper
@@ -296,11 +301,10 @@ mixin DmPartialAltokeEntityMappable {
     DmPartialAltokeEntity,
     DmPartialAltokeEntity
   >
-  get copyWith => _DmPartialAltokeEntityCopyWithImpl(
-    this as DmPartialAltokeEntity,
-    $identity,
-    $identity,
-  );
+  get copyWith => _DmPartialAltokeEntityCopyWithImpl<
+    DmPartialAltokeEntity,
+    DmPartialAltokeEntity
+  >(this as DmPartialAltokeEntity, $identity, $identity);
   @override
   String toString() {
     return DmPartialAltokeEntityMapper.ensureInitialized().stringifyValue(
@@ -327,8 +331,9 @@ mixin DmPartialAltokeEntityMappable {
 extension DmPartialAltokeEntityValueCopy<$R, $Out>
     on ObjectCopyWith<$R, DmPartialAltokeEntity, $Out> {
   DmPartialAltokeEntityCopyWith<$R, DmPartialAltokeEntity, $Out>
-  get $asDmPartialAltokeEntity =>
-      $base.as((v, t, t2) => _DmPartialAltokeEntityCopyWithImpl(v, t, t2));
+  get $asDmPartialAltokeEntity => $base.as(
+    (v, t, t2) => _DmPartialAltokeEntityCopyWithImpl<$R, $Out>(v, t, t2),
+  );
 }
 
 abstract class DmPartialAltokeEntityCopyWith<
@@ -366,8 +371,7 @@ class _DmPartialAltokeEntityCopyWithImpl<$R, $Out>
   );
 
   @override
-  DmPartialAltokeEntityCopyWith<$R2, DmPartialAltokeEntity, $Out2> $chain<
-    $R2,
-    $Out2
-  >(Then<$Out2, $R2> t) => _DmPartialAltokeEntityCopyWithImpl($value, $cast, t);
+  DmPartialAltokeEntityCopyWith<$R2, DmPartialAltokeEntity, $Out2>
+  $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
+      _DmPartialAltokeEntityCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }

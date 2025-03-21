@@ -58,7 +58,7 @@ class DmSomeMapper extends ClassMapperBase<DmSome> {
 
   static Object? _$value(DmSome v) => v.value;
   static dynamic _arg$value<T extends Object?>(f) => f<T>();
-  static const Field<DmSome, Object?> _f$value = Field(
+  static const Field<DmSome, Object> _f$value = Field(
     'value',
     _$value,
     arg: _arg$value,
