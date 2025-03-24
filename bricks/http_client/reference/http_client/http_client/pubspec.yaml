@@ -1,0 +1,10 @@
+name: http_client
+description: An interface for an HTTP client.
+version: 0.0.1+1
+publish_to: none
+#x-remove-start#
+resolution: workspace
+#remove-end#
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
