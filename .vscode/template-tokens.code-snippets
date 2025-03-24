@@ -8,7 +8,7 @@
     ]
   },
   "Remove Start (generic)": {
-    "scope": "dart,javascript,json,typescript",
+    "scope": "dart,javascript,json,markdown,typescript",
     "description": "Opening token for a fragment removal",
     "prefix": "RemoveStart",
     "body": [
@@ -24,7 +24,7 @@
     ]
   },
   "Remove End (generic)": {
-    "scope": "dart,javascript,json,typescript",
+    "scope": "dart,javascript,json,markdown,typescript",
     "description": "Closing token for a fragment removal",
     "prefix": "RemoveEnd",
     "body": [
@@ -40,7 +40,7 @@
     ]
   },
   "Remove Selection (generic)": {
-    "scope": "dart,javascript,json,typescript",
+    "scope": "dart,javascript,json,markdown,typescript",
     "description": "Enclosing tokens for the removal of an optionally selected fragment",
     "prefix": "RemoveSelection",
     "body": [
@@ -56,7 +56,7 @@
     ]
   },
   "Variable Start (generic)": {
-    "scope": "dart,javascript,json,typescript",
+    "scope": "dart,javascript,json,markdown,typescript",
     "description": "Opening token for a fragment parameterization",
     "prefix": "VariableStart",
     "body": [
@@ -72,7 +72,7 @@
     ]
   },
   "Variable End (generic)": {
-    "scope": "dart,javascript,json,typescript",
+    "scope": "dart,javascript,json,markdown,typescript",
     "description": "Closing token for a fragment parameterization",
     "prefix": "VariableEnd",
     "body": [
@@ -88,7 +88,7 @@
     ]
   },
   "Variable Selection (generic)": {
-    "scope": "dart,javascript,json,typescript",
+    "scope": "dart,javascript,json,markdown,typescript",
     "description": "Enclosing tokens for the parameterization of an optionally selected fragment",
     "prefix": "VariableSelection",
     "body": [
@@ -108,7 +108,7 @@
     ]
   },
   "Replacee Selection (generic)": {
-    "scope": "dart,javascript,json,typescript",
+    "scope": "dart,javascript,json,markdown,typescript",
     "description": "Enclosing tokens for the replacement of an optionally selected fragment",
     "prefix": "ReplaceSelection",
     "body": [
@@ -128,7 +128,7 @@
     ]
   },
   "Spacing groups (generic)": {
-    "scope": "dart,javascript,json,typescript",
+    "scope": "dart,javascript,json,markdown,typescript",
     "description": "Inserts a spacing pattern token",
     "prefix": "Spacing",
     "body": [
