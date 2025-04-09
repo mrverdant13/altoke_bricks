@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:altoke_reactive_caches/reactive_caches.dart';
-import 'package:altoke_reactive_caches/src/immediate_firer_stream.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -15,7 +12,6 @@ THEN an instance of the cache is returned
 ''',
     () {
       final cache = ReactiveElementCache<String>();
-      expect(cache, isNotNull);
       expect(cache, isA<ReactiveElementCache>());
       expect(cache.equalityChecker('', ''), isTrue);
       expect(cache.equalityChecker('string', 'string'), isTrue);
@@ -116,75 +112,59 @@ WHEN the cached value is watched
 THEN the cached value is continuously emitted as it changes
 ''',
         () async {
-          final stream = cache.watch();
-          final values = <String?>[
-            null,
-            'value 1   ',
-            'value 1',
-            'value 2',
-            '   value 2',
-            null,
-            'value 3',
-          ];
-          final expectedValues = <String?>[
-            null,
-            'value 1   ',
-            'value 2',
-            null,
-            'value 3',
-          ];
-          unawaited(expectLater(stream, emitsInOrder(expectedValues)));
-          expect(cache.streamController, isNotNull);
-          values.forEach(cache.set);
-        },
-      );
-
-      test(
-        '''
-
-WHEN the cached value is listened multiple times
-THEN the cached value is continuously emitted as it changes
-WHEN all listeners are canceled
-THEN the stream controller is closed
-''',
-        () async {
-          expect(cache.streamController, isNull);
-          final stream1 = cache.watch();
-          expect(stream1.isBroadcast, isTrue);
-          final sub1a = stream1.listen((value) {});
-          expect(cache.streamController, isNotNull);
-          final sub1b = stream1.listen((value) {});
-          expect(cache.streamController, isNotNull);
-          await sub1a.cancel();
-          expect(cache.streamController, isNotNull);
-          final controller1 = cache.streamController;
-          await sub1b.cancel();
-          expect(cache.streamController, isNull);
-          expect(controller1?.isClosed, isTrue);
-          final stream2 = cache.watch();
-          expect(stream2.isBroadcast, isTrue);
-          final sub2a = stream2.listen((value) {});
-          expect(cache.streamController, isNotNull);
-          final sub2b = stream2.listen((value) {});
-          expect(cache.streamController, isNotNull);
-          await sub2a.cancel();
-          expect(cache.streamController, isNotNull);
-          final controller2 = cache.streamController;
-          await sub2b.cancel();
-          expect(cache.streamController, isNull);
-          expect(controller2?.isClosed, isTrue);
-        },
-      );
-
-      test(
-        '''
-
-WHEN the cache stream type is checked
-THEN the result is an immediate firer stream
-''',
-        () async {
-          final stream = cache.watch();
-          expect(stream, isA<ImmediateFirerStream<String?>>());
+          final streamA = cache.watch();
+          expect(
+            streamA,
+            emitsInOrder([
+              null,
+              'value 1   ',
+              'value 2',
+              null,
+              'value 3',
+              null,
+            ]),
+          );
+          await pumpEventQueue();
+          cache.streamController
+            ..add(null)
+            ..add('value 1   ')
+            ..add('value 2')
+            ..add('   value 2')
+            ..add(null)
+            ..add('value 3')
+            ..add(null);
+          await pumpEventQueue();
+          final streamB = cache.watch();
+          expect(
+            streamA,
+            emitsInOrder([
+              'value 3',
+              'value 4',
+              '   value 5   ',
+              null,
+              'value 6',
+            ]),
+          );
+          expect(
+            streamB,
+            emitsInOrder([
+              null,
+              'value 3',
+              'value 4',
+              '   value 5   ',
+              null,
+              'value 6',
+            ]),
+          );
+          await pumpEventQueue();
+          cache.streamController
+            ..add('value 3')
+            ..add('value 4')
+            ..add('   value 5   ')
+            ..add('value 5')
+            ..add(null)
+            ..add('value 6');
+          await pumpEventQueue();
         },
       );
 

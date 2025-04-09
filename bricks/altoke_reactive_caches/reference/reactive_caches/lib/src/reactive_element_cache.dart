@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:altoke_common/common.dart';
 import 'package:altoke_reactive_caches/reactive_caches.dart';
-import 'package:altoke_reactive_caches/src/immediate_firer_stream.dart';
 import 'package:meta/meta.dart';
 
 /// {@template reactive_caches.reactive_element_cache}
@@ -29,28 +28,18 @@ class ReactiveElementCache<E extends Object> {
 
   /// The stream controller for the cached element.
   @visibleForTesting
-  StreamController<E?>? streamController;
+  final streamController = StreamController<E?>.broadcast(sync: true);
 
-  /// Performs side effects when the first listener is added to the stream.
+  /// The stream of the cached element.
   @visibleForTesting
-  Future<void> onListen() async {
-    streamController?.add(element);
-  }
-
-  /// Performs side effects when the last listener is removed from the stream.
-  @visibleForTesting
-  Future<void> onCancel() async {
-    final controller = streamController;
-    streamController = null;
-    await controller?.close();
-  }
+  Stream<E?> get stream => streamController.stream;
 
   /// Caches the provided [element].
   ///
   /// If [element] is `null`, the cached element is cleared.
   void set(E? element) {
     this.element = element;
-    streamController?.add(element);
+    streamController.add(element);
   }
 
   /// Returns the cached element, or `null` if no element is cached.
@@ -60,19 +49,19 @@ class ReactiveElementCache<E extends Object> {
 
   /// Returns a stream of the cached element.
   Stream<E?> watch() {
-    streamController ??= StreamController<E?>.broadcast(
-      onListen: onListen,
-      onCancel: onCancel,
-      sync: true,
-    );
-    return streamController!.stream
-        .distinct(equalityChecker)
-        .asImmediateFirer();
+    return () async* {
+      E? latestEmitted;
+      yield latestEmitted = element;
+      await for (final element in stream) {
+        if (equalityChecker(latestEmitted, element)) continue;
+        yield latestEmitted = element;
+      }
+    }().asBroadcastStream();
   }
 
   /// Updates the cached element by applying the provided [update] callback.
   void update(UpdateCallback<E?> update) {
     element = update(element);
-    streamController?.add(element);
+    streamController.add(element);
   }
 }
