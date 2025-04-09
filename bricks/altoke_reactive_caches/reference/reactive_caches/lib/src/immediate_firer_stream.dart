@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:altoke_common/common.dart';
 import 'package:meta/meta.dart';
 
 /// An extension on [Stream] that allows to listen to the stream and
@@ -28,7 +29,7 @@ class ImmediateFirerStream<T> extends Stream<T> {
 
   /// The latest valid value of the source stream.
   @visibleForTesting
-  T? latestValue;
+  Optional<T> latestValue = const Optional.none();
 
   /// The current listeners of the stream.
   @visibleForTesting
@@ -53,7 +54,7 @@ class ImmediateFirerStream<T> extends Stream<T> {
       return;
     }
     currentListeners.add(controller);
-    if (latestValue is T) controller.addSync(latestValue as T);
+    if (latestValue case Some(:final value)) controller.addSync(value);
     controller.onCancel = () {
       currentListeners.remove(controller);
       if (currentListeners.isEmpty) {
@@ -65,10 +66,9 @@ class ImmediateFirerStream<T> extends Stream<T> {
 
   /// Handles the data event from the source stream.
   void onSourceData(T event) {
-    latestValue = event;
-    if (latestValue is! T) return;
+    latestValue = Some(event);
     for (final listener in [...currentListeners]) {
-      listener.addSync(latestValue as T);
+      listener.addSync(event);
     }
   }
 
