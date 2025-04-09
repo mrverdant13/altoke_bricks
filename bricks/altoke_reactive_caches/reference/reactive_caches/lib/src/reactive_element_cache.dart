@@ -1,11 +1,9 @@
 import 'dart:async';
 
 import 'package:altoke_common/common.dart';
+import 'package:altoke_reactive_caches/reactive_caches.dart';
 import 'package:altoke_reactive_caches/src/immediate_firer_stream.dart';
 import 'package:meta/meta.dart';
-
-/// Callback signature for comparing elements.
-typedef ElementEqualityChecker<E extends Object?> = bool Function(E a, E b);
 
 /// {@template reactive_caches.reactive_element_cache}
 /// A reactive cache for a single element of type [E].

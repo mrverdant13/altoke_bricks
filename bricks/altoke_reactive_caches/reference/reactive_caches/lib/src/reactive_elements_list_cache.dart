@@ -1,13 +1,10 @@
 import 'dart:async';
 
 import 'package:altoke_common/common.dart';
+import 'package:altoke_reactive_caches/reactive_caches.dart';
 import 'package:altoke_reactive_caches/src/immediate_firer_stream.dart';
 import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
-
-/// Callback signature for comparing lists of elements.
-typedef ElementsListEqualityChecker<E extends Object?> =
-    bool Function(List<E> a, List<E> b);
 
 /// {@template reactive_caches.reactive_elements_list_cache}
 /// A reactive cache for a [List] of elements of type [E].
