@@ -1,11 +1,9 @@
 import 'dart:async';
 
 import 'package:common/common.dart';
+import 'package:{{#requirements_met}}reactive_caches{{/requirements_met}}/{{#requirements_met}}reactive_caches{{/requirements_met}}.dart';
 import 'package:{{#requirements_met}}reactive_caches{{/requirements_met}}/src/immediate_firer_stream.dart';
 import 'package:meta/meta.dart';
-
-/// Callback signature for comparing elements.
-typedef ElementEqualityChecker<E extends Object?> = bool Function(E a, E b);
 
 /// {@template {{#requirements_met}}reactive_caches{{/requirements_met}}.reactive_element_cache}
 /// A reactive cache for a single element of type [E].
@@ -15,7 +13,15 @@ class ReactiveElementCache<E extends Object> {
   ///
   /// If [equalityChecker] is `null`, the [defaultEqualityChecker] is used.
   ReactiveElementCache({ElementEqualityChecker<E?>? equalityChecker})
-    : equalityChecker = equalityChecker ?? defaultEqualityChecker;
+    : equalityChecker = equalityChecker ?? defaultEqualityChecker {
+    stream = ImmediateFirerStream<E?>(
+      streamController.stream,
+      computeInitialValue: () => Some(element),
+    );
+    streamSubscription = stream.listen((element) {
+      this.element = element;
+    });
+  }
 
   /// The default equality checker for an element of type [E].
   @visibleForTesting
@@ -31,28 +37,22 @@ class ReactiveElementCache<E extends Object> {
 
   /// The stream controller for the cached element.
   @visibleForTesting
-  StreamController<E?>? streamController;
+  final streamController = StreamController<E?>.broadcast(sync: true);
 
-  /// Performs side effects when the first listener is added to the stream.
+  /// The stream of the cached element.
   @visibleForTesting
-  Future<void> onListen() async {
-    streamController?.add(element);
-  }
+  // late final stream = streamController.stream;
+  late final Stream<E?> stream;
 
-  /// Performs side effects when the last listener is removed from the stream.
+  /// The subscription to the stream of the cached element.
   @visibleForTesting
-  Future<void> onCancel() async {
-    final controller = streamController;
-    streamController = null;
-    await controller?.close();
-  }
+  late final StreamSubscription<E?> streamSubscription;
 
   /// Caches the provided [element].
   ///
   /// If [element] is `null`, the cached element is cleared.
   void set(E? element) {
-    this.element = element;
-    streamController?.add(element);
+    streamController.add(element);
   }
 
   /// Returns the cached element, or `null` if no element is cached.
@@ -62,19 +62,17 @@ class ReactiveElementCache<E extends Object> {
 
   /// Returns a stream of the cached element.
   Stream<E?> watch() {
-    streamController ??= StreamController<E?>.broadcast(
-      onListen: onListen,
-      onCancel: onCancel,
-      sync: true,
-    );
-    return streamController!.stream
-        .distinct(equalityChecker)
-        .asImmediateFirer();
+    return stream.distinct(equalityChecker);
   }
 
   /// Updates the cached element by applying the provided [update] callback.
   void update(UpdateCallback<E?> update) {
-    element = update(element);
-    streamController?.add(element);
+    streamController.add(update(element));
+  }
+
+  /// Releases the resources used by the cache.
+  Future<void> dispose() async {
+    await streamSubscription.cancel();
+    await streamController.close();
   }
 }
