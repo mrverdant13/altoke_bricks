@@ -192,6 +192,11 @@ class ReactiveElementsListCache<E extends Object?> {
     this.elements = this.elements.skip(count).toList();
     streamController.add(this.elements);
   }
+
+  /// Releases the resources used by the cache.
+  Future<void> dispose() async {
+    await streamController.close();
+  }
 }
 
 /// The placement mode for the [ReactiveElementsListCache.placeMany] method.

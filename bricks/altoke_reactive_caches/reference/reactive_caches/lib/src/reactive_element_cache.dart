@@ -64,4 +64,9 @@ class ReactiveElementCache<E extends Object> {
     element = update(element);
     streamController.add(element);
   }
+
+  /// Releases the resources used by the cache.
+  Future<void> dispose() async {
+    await streamController.close();
+  }
 }
