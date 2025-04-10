@@ -12,6 +12,7 @@ THEN an instance of the cache is returned
 ''',
     () {
       final cache = ReactiveElementsListCache<String?>();
+      addTearDown(cache.dispose);
       expect(cache, isA<ReactiveElementsListCache<String?>>());
       expect(cache.equalityChecker([''], ['']), isTrue);
       expect(
@@ -66,6 +67,10 @@ GIVEN a reactive cache for a list of elements''',
         );
       });
 
+      tearDown(() async {
+        await cache.dispose();
+      });
+
       test(
         '''
 
@@ -73,7 +78,7 @@ AND a cached list
 WHEN another list is cached
 THEN the cached list is the new list
 ''',
-        () {
+        () async {
           cache.elements = ['original value 1', 'original value 2'];
           expect(
             cache.elements,
@@ -285,16 +290,9 @@ THEN the complete cached list is continuously emitted as it changes
 ''',
         () async {
           final streamA = cache.watch();
-          expect(
-            streamA,
-            emitsInOrder([
-              <String?>[],
-              ['value 1', 'value 2', null, 'value 3', null],
-              ['value 1'],
-              ['value 1', null, 'value 2'],
-              [null, 'value 1', null, null, 'value 2', 'value 3'],
-            ]),
-          );
+          final valuesA1 = <List<String?>>[];
+          final subA1 = streamA.listen(valuesA1.add);
+          addTearDown(subA1.cancel);
           await pumpEventQueue();
           cache.streamController
             ..add([])
@@ -304,33 +302,29 @@ THEN the complete cached list is continuously emitted as it changes
             ..add(['value 1', null, 'value 2'])
             ..add(['   value 1', null, 'value 2   '])
             ..add([null, 'value 1', null, null, 'value 2', 'value 3'])
-            ..add([null, 'value 1 ', null, null, ' value 2', ' value 3 '])
-            ..add([]);
+            ..add([null, 'value 1 ', null, null, ' value 2', ' value 3 ']);
           await pumpEventQueue();
+          expect(
+            valuesA1,
+            pairwiseCompare<List<String?>, List<String?>>(
+              [
+                <String?>[],
+                ['value 1', 'value 2', null, 'value 3', null],
+                ['value 1'],
+                ['value 1', null, 'value 2'],
+                [null, 'value 1', null, null, 'value 2', 'value 3'],
+              ],
+              equalityChecker,
+              'equal (with checker) to',
+            ),
+          );
+          final valuesA2 = <List<String?>>[];
+          final subA2 = streamA.listen(valuesA2.add);
+          addTearDown(subA2.cancel);
           final streamB = cache.watch();
-          expect(
-            streamA,
-            emitsInOrder([
-              [null, 'value 1', null, null, 'value 2', 'value 3'],
-              ['value 1', null, null, 'value 2', 'value 3'],
-              [null, 'value 1', null, 'value 2', 'value 3'],
-              [null, 'value 1', 'value 2'],
-              [null, 'value 1'],
-              ['value 1'],
-            ]),
-          );
-          expect(
-            streamB,
-            emitsInOrder([
-              <String?>[],
-              [null, 'value 1', null, null, 'value 2', 'value 3'],
-              ['value 1', null, null, 'value 2', 'value 3'],
-              [null, 'value 1', null, 'value 2', 'value 3'],
-              [null, 'value 1', 'value 2'],
-              [null, 'value 1'],
-              ['value 1'],
-            ]),
-          );
+          final valuesB2 = <List<String?>>[];
+          final subB2 = streamB.listen(valuesB2.add);
+          addTearDown(subB2.cancel);
           await pumpEventQueue();
           cache.streamController
             ..add([null, 'value 1', null, null, 'value 2', 'value 3'])
@@ -345,6 +339,30 @@ THEN the complete cached list is continuously emitted as it changes
             ..add(['value 1'])
             ..add(['       value 1       ']);
           await pumpEventQueue();
+          final expectedValues = [
+            [null, 'value 1', null, null, 'value 2', 'value 3'],
+            ['value 1', null, null, 'value 2', 'value 3'],
+            [null, 'value 1', null, 'value 2', 'value 3'],
+            [null, 'value 1', 'value 2'],
+            [null, 'value 1'],
+            ['value 1'],
+          ];
+          expect(
+            valuesA2,
+            pairwiseCompare<List<String?>, List<String?>>(
+              expectedValues,
+              equalityChecker,
+              'equal (with checker) to',
+            ),
+          );
+          expect(
+            valuesB2,
+            pairwiseCompare<List<String?>, List<String?>>(
+              expectedValues,
+              equalityChecker,
+              'equal (with checker) to',
+            ),
+          );
         },
       );
 
@@ -357,16 +375,9 @@ THEN the complete cached list is continuously emitted as it changes
         () async {
           bool where(String? element) => !(element ?? '').contains('ignore');
           final streamA = cache.watch(where: where);
-          expect(
-            streamA,
-            emitsInOrder([
-              <String?>[],
-              ['value 1', 'value 2', null, 'value 3', null],
-              ['value 1'],
-              ['value 1', null, 'value 2'],
-              [null, 'value 1', null, null, 'value 2', 'value 3'],
-            ]),
-          );
+          final valuesA1 = <List<String?>>[];
+          final subA1 = streamA.listen(valuesA1.add);
+          addTearDown(subA1.cancel);
           await pumpEventQueue();
           cache.streamController
             ..add([])
@@ -376,33 +387,29 @@ THEN the complete cached list is continuously emitted as it changes
             ..add(['value 1', null, 'ignore this', 'value 2'])
             ..add(['   value 1', null, 'value 2   '])
             ..add([null, 'value 1', null, null, 'value 2', 'value 3'])
-            ..add([null, 'value 1 ', null, null, ' value 2', ' value 3 '])
-            ..add(['should be ignored']);
+            ..add([null, 'value 1 ', null, null, ' value 2', ' value 3 ']);
           await pumpEventQueue();
+          expect(
+            valuesA1,
+            pairwiseCompare<List<String?>, List<String?>>(
+              [
+                <String?>[],
+                ['value 1', 'value 2', null, 'value 3', null],
+                ['value 1'],
+                ['value 1', null, 'value 2'],
+                [null, 'value 1', null, null, 'value 2', 'value 3'],
+              ],
+              equalityChecker,
+              'equal (with checker) to',
+            ),
+          );
+          final valuesA2 = <List<String?>>[];
+          final subA2 = streamA.listen(valuesA2.add);
+          addTearDown(subA2.cancel);
           final streamB = cache.watch(where: where);
-          expect(
-            streamA,
-            emitsInOrder([
-              [null, 'value 1', null, null, 'value 2', 'value 3'],
-              ['value 1', null, null, 'value 2', 'value 3'],
-              [null, 'value 1', null, 'value 2', 'value 3'],
-              [null, 'value 1', 'value 2'],
-              [null, 'value 1'],
-              ['value 1'],
-            ]),
-          );
-          expect(
-            streamB,
-            emitsInOrder([
-              <String?>[],
-              [null, 'value 1', null, null, 'value 2', 'value 3'],
-              ['value 1', null, null, 'value 2', 'value 3'],
-              [null, 'value 1', null, 'value 2', 'value 3'],
-              [null, 'value 1', 'value 2'],
-              [null, 'value 1'],
-              ['value 1'],
-            ]),
-          );
+          final valuesB2 = <List<String?>>[];
+          final subB2 = streamB.listen(valuesB2.add);
+          addTearDown(subB2.cancel);
           await pumpEventQueue();
           cache.streamController
             ..add([null, 'value 1', null, null, 'value 2', 'value 3'])
@@ -417,6 +424,30 @@ THEN the complete cached list is continuously emitted as it changes
             ..add(['value 1', 'should be ignored'])
             ..add(['       value 1       ']);
           await pumpEventQueue();
+          final expectedValues = [
+            [null, 'value 1', null, null, 'value 2', 'value 3'],
+            ['value 1', null, null, 'value 2', 'value 3'],
+            [null, 'value 1', null, 'value 2', 'value 3'],
+            [null, 'value 1', 'value 2'],
+            [null, 'value 1'],
+            ['value 1'],
+          ];
+          expect(
+            valuesA2,
+            pairwiseCompare<List<String?>, List<String?>>(
+              expectedValues,
+              equalityChecker,
+              'equal (with checker) to',
+            ),
+          );
+          expect(
+            valuesB2,
+            pairwiseCompare<List<String?>, List<String?>>(
+              expectedValues,
+              equalityChecker,
+              'equal (with checker) to',
+            ),
+          );
         },
       );
 

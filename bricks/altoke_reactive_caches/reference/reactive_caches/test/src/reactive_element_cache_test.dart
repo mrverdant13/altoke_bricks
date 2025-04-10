@@ -12,6 +12,7 @@ THEN an instance of the cache is returned
 ''',
     () {
       final cache = ReactiveElementCache<String>();
+      addTearDown(cache.dispose);
       expect(cache, isA<ReactiveElementCache>());
       expect(cache.equalityChecker('', ''), isTrue);
       expect(cache.equalityChecker('string', 'string'), isTrue);
@@ -24,12 +25,16 @@ THEN an instance of the cache is returned
 
 GIVEN a reactive cache for a single element''',
     () {
+      late ElementEqualityChecker<String?> equalityChecker;
       late ReactiveElementCache<String> cache;
 
       setUp(() {
-        cache = ReactiveElementCache<String>(
-          equalityChecker: (a, b) => a?.trim() == b?.trim(),
-        );
+        equalityChecker = (a, b) => a?.trim() == b?.trim();
+        cache = ReactiveElementCache<String>(equalityChecker: equalityChecker);
+      });
+
+      tearDown(() async {
+        await cache.dispose();
       });
 
       test(
@@ -113,58 +118,68 @@ THEN the cached value is continuously emitted as it changes
 ''',
         () async {
           final streamA = cache.watch();
-          expect(
-            streamA,
-            emitsInOrder([
-              null,
-              'value 1   ',
-              'value 2',
-              null,
-              'value 3',
-              null,
-            ]),
-          );
+          final valuesA1 = <String?>[];
+          final subA1 = streamA.listen(valuesA1.add);
+          addTearDown(subA1.cancel);
           await pumpEventQueue();
           cache.streamController
-            ..add(null)
             ..add('value 1   ')
             ..add('value 2')
             ..add('   value 2')
             ..add(null)
             ..add('value 3')
-            ..add(null);
+            ..add('value 4')
+            ..add('   value 4   ');
           await pumpEventQueue();
+          expect(
+            valuesA1,
+            pairwiseCompare<String?, String?>(
+              [null, 'value 1   ', 'value 2', null, 'value 3', 'value 4'],
+              equalityChecker,
+              'equal (with checker) to',
+            ),
+          );
+          final valuesA2 = <String?>[];
+          final subA2 = streamA.listen(valuesA2.add);
+          addTearDown(subA2.cancel);
           final streamB = cache.watch();
-          expect(
-            streamA,
-            emitsInOrder([
-              'value 3',
-              'value 4',
-              '   value 5   ',
-              null,
-              'value 6',
-            ]),
-          );
-          expect(
-            streamB,
-            emitsInOrder([
-              null,
-              'value 3',
-              'value 4',
-              '   value 5   ',
-              null,
-              'value 6',
-            ]),
-          );
+          final valuesB2 = <String?>[];
+          final subB2 = streamB.listen(valuesB2.add);
+          addTearDown(subB2.cancel);
           await pumpEventQueue();
           cache.streamController
-            ..add('value 3')
-            ..add('value 4')
             ..add('   value 5   ')
             ..add('value 5')
             ..add(null)
-            ..add('value 6');
+            ..add(null)
+            ..add('value 6   ')
+            ..add(null)
+            ..add('   value 7');
           await pumpEventQueue();
+          final expectedValues = <String?>[
+            'value 4',
+            '   value 5   ',
+            null,
+            'value 6   ',
+            null,
+            '   value 7',
+          ];
+          expect(
+            valuesA2,
+            pairwiseCompare<String?, String?>(
+              expectedValues,
+              equalityChecker,
+              'equal (with checker) to',
+            ),
+          );
+          expect(
+            valuesB2,
+            pairwiseCompare<String?, String?>(
+              expectedValues,
+              equalityChecker,
+              'equal (with checker) to',
+            ),
+          );
         },
       );
 
