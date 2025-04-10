@@ -1,13 +1,10 @@
 import 'dart:async';
 
 import 'package:common/common.dart';
+import 'package:{{#requirements_met}}reactive_caches{{/requirements_met}}/{{#requirements_met}}reactive_caches{{/requirements_met}}.dart';
 import 'package:{{#requirements_met}}reactive_caches{{/requirements_met}}/src/immediate_firer_stream.dart';
 import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
-
-/// Callback signature for comparing lists of elements.
-typedef ElementsListEqualityChecker<E extends Object?> =
-    bool Function(List<E> a, List<E> b);
 
 /// {@template {{#requirements_met}}reactive_caches{{/requirements_met}}.reactive_elements_list_cache}
 /// A reactive cache for a [List] of elements of type [E].
@@ -17,7 +14,15 @@ class ReactiveElementsListCache<E extends Object?> {
   ///
   /// If [equalityChecker] is `null`, the [defaultEqualityChecker] is used.
   ReactiveElementsListCache({ElementsListEqualityChecker<E>? equalityChecker})
-    : equalityChecker = equalityChecker ?? defaultEqualityChecker;
+    : equalityChecker = equalityChecker ?? defaultEqualityChecker {
+    stream = ImmediateFirerStream<List<E>>(
+      streamController.stream,
+      computeInitialValue: () => Some(elements),
+    );
+    streamSubscription = stream.listen((elements) {
+      this.elements = elements;
+    });
+  }
 
   /// The default equality checker for lists of elements of type [E].
   @visibleForTesting
@@ -34,37 +39,30 @@ class ReactiveElementsListCache<E extends Object?> {
 
   /// The stream controller for the cached elements.
   @visibleForTesting
-  StreamController<List<E>>? streamController;
+  final StreamController<List<E>> streamController =
+      StreamController<List<E>>.broadcast(sync: true);
 
-  /// Performs side effects when the first listener is added to the stream.
-  Future<void> onListen() async {
-    streamController?.add(elements);
-  }
-
-  /// Performs side effects when the last listener is removed from the stream.
+  /// The stream of the cached elements.
   @visibleForTesting
-  Future<void> onCancel() async {
-    final streamController = this.streamController;
-    this.streamController = null;
-    await streamController?.close();
-  }
+  late final Stream<List<E>> stream;
+
+  /// The subscription to the stream of the cached elements.
+  @visibleForTesting
+  late final StreamSubscription<List<E>> streamSubscription;
 
   /// Caches the provided [elements], replacing the current cached list.
   void set(Iterable<E> elements) {
-    this.elements = [...elements];
-    streamController?.add(this.elements);
+    streamController.add([...elements]);
   }
 
   /// Appends the provided [elements] to the cached list.
   void appendMany(Iterable<E> elements) {
-    this.elements = [...this.elements, ...elements];
-    streamController?.add(this.elements);
+    streamController.add([...this.elements, ...elements]);
   }
 
   /// Prepends the provided [elements] to the cached list.
   void prependMany(Iterable<E> elements) {
-    this.elements = [...elements, ...this.elements];
-    streamController?.add(this.elements);
+    streamController.add([...elements, ...this.elements]);
   }
 
   /// Returns the cached list filtered by the provided [where] callback.
@@ -75,15 +73,9 @@ class ReactiveElementsListCache<E extends Object?> {
   /// Returns a stream of the cached list filtered by the provided [where]
   /// callback.
   Stream<List<E>> watch({WhereCallback<E> where = noFilter}) {
-    streamController ??= StreamController<List<E>>.broadcast(
-      onListen: onListen,
-      onCancel: onCancel,
-      sync: true,
-    );
-    return streamController!.stream
-        .map((list) => list.where(where).toList())
-        .distinct(equalityChecker)
-        .asImmediateFirer();
+    return stream
+        .map((elements) => elements.where(where).toList())
+        .distinct(equalityChecker);
   }
 
   /// Inserts the provided [elements] at the provided [index] in the cached
@@ -92,12 +84,11 @@ class ReactiveElementsListCache<E extends Object?> {
   /// If [index] is out of bounds, no action is taken.
   void insertMany(List<E> elements, {required int index}) {
     if (index < 0 || index > this.elements.length) return;
-    this.elements = [
+    streamController.add([
       ...this.elements.take(index),
       ...elements,
       ...this.elements.skip(index),
-    ];
-    streamController?.add(this.elements);
+    ]);
   }
 
   /// Places the provided [indexedElements] according to the provided [mode].
@@ -107,60 +98,60 @@ class ReactiveElementsListCache<E extends Object?> {
     IndexedIterable<E> indexedElements, {
     required PlacementMode mode,
   }) {
-    this.elements =
-        this.elements
-            .mapIndexed((index, currentElement) {
-              final overridingElements = indexedElements
-                  .where((indexedElement) => indexedElement.$1 == index)
-                  .map((indexedElement) => indexedElement.$2);
-              return switch (mode) {
-                PlacementMode.appendGroup => [
+    streamController.add(
+      this.elements
+          .mapIndexed((index, currentElement) {
+            final overridingElements = indexedElements
+                .where((indexedElement) => indexedElement.$1 == index)
+                .map((indexedElement) => indexedElement.$2);
+            return switch (mode) {
+              PlacementMode.appendGroup => [
+                currentElement,
+                if (overridingElements.isNotEmpty) ...overridingElements,
+              ],
+              PlacementMode.appendFirst => [
+                currentElement,
+                if (overridingElements.isNotEmpty) overridingElements.first,
+              ],
+              PlacementMode.appendLast => [
+                currentElement,
+                if (overridingElements.isNotEmpty) overridingElements.last,
+              ],
+              PlacementMode.prependGroup => [
+                if (overridingElements.isNotEmpty) ...overridingElements,
+                currentElement,
+              ],
+              PlacementMode.prependFirst => [
+                if (overridingElements.isNotEmpty) overridingElements.first,
+                currentElement,
+              ],
+              PlacementMode.prependLast => [
+                if (overridingElements.isNotEmpty) overridingElements.last,
+                currentElement,
+              ],
+              PlacementMode.replaceWithGroup => [
+                if (overridingElements.isNotEmpty)
+                  ...overridingElements
+                else
                   currentElement,
-                  if (overridingElements.isNotEmpty) ...overridingElements,
-                ],
-                PlacementMode.appendFirst => [
+              ],
+              PlacementMode.replaceWithFirst => [
+                if (overridingElements.isNotEmpty)
+                  overridingElements.first
+                else
                   currentElement,
-                  if (overridingElements.isNotEmpty) overridingElements.first,
-                ],
-                PlacementMode.appendLast => [
+              ],
+              PlacementMode.replaceWithLast => [
+                if (overridingElements.isNotEmpty)
+                  overridingElements.last
+                else
                   currentElement,
-                  if (overridingElements.isNotEmpty) overridingElements.last,
-                ],
-                PlacementMode.prependGroup => [
-                  if (overridingElements.isNotEmpty) ...overridingElements,
-                  currentElement,
-                ],
-                PlacementMode.prependFirst => [
-                  if (overridingElements.isNotEmpty) overridingElements.first,
-                  currentElement,
-                ],
-                PlacementMode.prependLast => [
-                  if (overridingElements.isNotEmpty) overridingElements.last,
-                  currentElement,
-                ],
-                PlacementMode.replaceWithGroup => [
-                  if (overridingElements.isNotEmpty)
-                    ...overridingElements
-                  else
-                    currentElement,
-                ],
-                PlacementMode.replaceWithFirst => [
-                  if (overridingElements.isNotEmpty)
-                    overridingElements.first
-                  else
-                    currentElement,
-                ],
-                PlacementMode.replaceWithLast => [
-                  if (overridingElements.isNotEmpty)
-                    overridingElements.last
-                  else
-                    currentElement,
-                ],
-              };
-            })
-            .flattened
-            .toList();
-    streamController?.add(this.elements);
+              ],
+            };
+          })
+          .flattened
+          .toList(),
+    );
   }
 
   /// Updates the cached list by applying the provided [update] callback to each
@@ -169,21 +160,19 @@ class ReactiveElementsListCache<E extends Object?> {
     required UpdateCallback<E> update,
     WhereIndexedCallback<E> where = noIndexedFilter,
   }) {
-    this.elements = [
+    streamController.add([
       for (final (index, element) in this.elements.indexed)
         if (where(index, element)) update(element) else element,
-    ];
-    streamController?.add(this.elements);
+    ]);
   }
 
   /// Removes the elements from the cached list that match the provided [where]
   /// callback.
   void remove({WhereIndexedCallback<E> where = noIndexedFilter}) {
-    this.elements = [
+    streamController.add([
       for (final (index, element) in this.elements.indexed)
         if (!where(index, element)) element,
-    ];
-    streamController?.add(this.elements);
+    ]);
   }
 
   /// Removes the last [count] elements from the cached list.
@@ -192,8 +181,7 @@ class ReactiveElementsListCache<E extends Object?> {
   /// is removed.
   void removeLast([int count = 1]) {
     if (count < 1) return;
-    this.elements = this.elements.take(this.elements.length - count).toList();
-    streamController?.add(this.elements);
+    streamController.add([...this.elements.take(this.elements.length - count)]);
   }
 
   /// Removes the first [count] elements from the cached list.
@@ -202,8 +190,13 @@ class ReactiveElementsListCache<E extends Object?> {
   /// is removed.
   void removeFirst([int count = 1]) {
     if (count < 1) return;
-    this.elements = this.elements.skip(count).toList();
-    streamController?.add(this.elements);
+    streamController.add([...this.elements.skip(count)]);
+  }
+
+  /// Releases the resources used by the cache.
+  Future<void> dispose() async {
+    await streamSubscription.cancel();
+    await streamController.close();
   }
 }
 
