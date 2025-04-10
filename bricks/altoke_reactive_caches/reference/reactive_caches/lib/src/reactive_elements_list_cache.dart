@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:altoke_common/common.dart';
 import 'package:altoke_reactive_caches/reactive_caches.dart';
-import 'package:altoke_reactive_caches/src/immediate_firer_stream.dart';
 import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
 
@@ -31,37 +30,29 @@ class ReactiveElementsListCache<E extends Object?> {
 
   /// The stream controller for the cached elements.
   @visibleForTesting
-  StreamController<List<E>>? streamController;
+  final StreamController<List<E>> streamController =
+      StreamController<List<E>>.broadcast(sync: true);
 
-  /// Performs side effects when the first listener is added to the stream.
-  Future<void> onListen() async {
-    streamController?.add(elements);
-  }
-
-  /// Performs side effects when the last listener is removed from the stream.
+  /// The stream of the cached elements.
   @visibleForTesting
-  Future<void> onCancel() async {
-    final streamController = this.streamController;
-    this.streamController = null;
-    await streamController?.close();
-  }
+  Stream<List<E>> get stream => streamController.stream;
 
   /// Caches the provided [elements], replacing the current cached list.
   void set(Iterable<E> elements) {
     this.elements = [...elements];
-    streamController?.add(this.elements);
+    streamController.add(this.elements);
   }
 
   /// Appends the provided [elements] to the cached list.
   void appendMany(Iterable<E> elements) {
     this.elements = [...this.elements, ...elements];
-    streamController?.add(this.elements);
+    streamController.add(this.elements);
   }
 
   /// Prepends the provided [elements] to the cached list.
   void prependMany(Iterable<E> elements) {
     this.elements = [...elements, ...this.elements];
-    streamController?.add(this.elements);
+    streamController.add(this.elements);
   }
 
   /// Returns the cached list filtered by the provided [where] callback.
@@ -72,15 +63,14 @@ class ReactiveElementsListCache<E extends Object?> {
   /// Returns a stream of the cached list filtered by the provided [where]
   /// callback.
   Stream<List<E>> watch({WhereCallback<E> where = noFilter}) {
-    streamController ??= StreamController<List<E>>.broadcast(
-      onListen: onListen,
-      onCancel: onCancel,
-      sync: true,
-    );
-    return streamController!.stream
-        .map((list) => list.where(where).toList())
-        .distinct(equalityChecker)
-        .asImmediateFirer();
+    return () async* {
+      List<E> latestEmitted;
+      yield latestEmitted = elements.where(where).toList();
+      await for (final list in stream) {
+        if (equalityChecker(latestEmitted, list)) continue;
+        yield latestEmitted = list.where(where).toList();
+      }
+    }().asBroadcastStream();
   }
 
   /// Inserts the provided [elements] at the provided [index] in the cached
@@ -94,7 +84,7 @@ class ReactiveElementsListCache<E extends Object?> {
       ...elements,
       ...this.elements.skip(index),
     ];
-    streamController?.add(this.elements);
+    streamController.add(this.elements);
   }
 
   /// Places the provided [indexedElements] according to the provided [mode].
@@ -157,7 +147,7 @@ class ReactiveElementsListCache<E extends Object?> {
             })
             .flattened
             .toList();
-    streamController?.add(this.elements);
+    streamController.add(this.elements);
   }
 
   /// Updates the cached list by applying the provided [update] callback to each
@@ -170,7 +160,7 @@ class ReactiveElementsListCache<E extends Object?> {
       for (final (index, element) in this.elements.indexed)
         if (where(index, element)) update(element) else element,
     ];
-    streamController?.add(this.elements);
+    streamController.add(this.elements);
   }
 
   /// Removes the elements from the cached list that match the provided [where]
@@ -180,7 +170,7 @@ class ReactiveElementsListCache<E extends Object?> {
       for (final (index, element) in this.elements.indexed)
         if (!where(index, element)) element,
     ];
-    streamController?.add(this.elements);
+    streamController.add(this.elements);
   }
 
   /// Removes the last [count] elements from the cached list.
@@ -190,7 +180,7 @@ class ReactiveElementsListCache<E extends Object?> {
   void removeLast([int count = 1]) {
     if (count < 1) return;
     this.elements = this.elements.take(this.elements.length - count).toList();
-    streamController?.add(this.elements);
+    streamController.add(this.elements);
   }
 
   /// Removes the first [count] elements from the cached list.
@@ -200,7 +190,7 @@ class ReactiveElementsListCache<E extends Object?> {
   void removeFirst([int count = 1]) {
     if (count < 1) return;
     this.elements = this.elements.skip(count).toList();
-    streamController?.add(this.elements);
+    streamController.add(this.elements);
   }
 }
 

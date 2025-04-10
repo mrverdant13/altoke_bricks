@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:altoke_reactive_caches/reactive_caches.dart';
-import 'package:altoke_reactive_caches/src/immediate_firer_stream.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -15,7 +12,6 @@ THEN an instance of the cache is returned
 ''',
     () {
       final cache = ReactiveElementsListCache<String?>();
-      expect(cache, isNotNull);
       expect(cache, isA<ReactiveElementsListCache<String?>>());
       expect(cache.equalityChecker([''], ['']), isTrue);
       expect(
@@ -54,17 +50,19 @@ THEN an instance of the cache is returned
 
 GIVEN a reactive cache for a list of elements''',
     () {
+      late ElementsListEqualityChecker<String?> equalityChecker;
       late ReactiveElementsListCache<String?> cache;
 
       setUp(() {
+        equalityChecker = (a, b) {
+          if (a.length != b.length) return false;
+          for (var i = 0; i < a.length; i++) {
+            if (a[i]?.trim() != b[i]?.trim()) return false;
+          }
+          return true;
+        };
         cache = ReactiveElementsListCache<String?>(
-          equalityChecker: (a, b) {
-            if (a.length != b.length) return false;
-            for (var i = 0; i < a.length; i++) {
-              if (a[i]?.trim() != b[i]?.trim()) return false;
-            }
-            return true;
-          },
+          equalityChecker: equalityChecker,
         );
       });
 
@@ -286,59 +284,67 @@ WHEN the cached list is watched without a filter
 THEN the complete cached list is continuously emitted as it changes
 ''',
         () async {
-          final stream = cache.watch();
-          final values = <List<String?>>[
-            [],
-            ['value 1', 'value 2', null, 'value 3', null],
-            ['value 1'],
-            ['value 1', null, 'value 2'],
-            [null, 'value 1', null, null, 'value 2', 'value 3', 'value 4'],
-          ];
-          unawaited(
-            expectLater(
-              stream,
-              emitsInOrder([for (final value in values) orderedEquals(value)]),
-            ),
+          final streamA = cache.watch();
+          expect(
+            streamA,
+            emitsInOrder([
+              <String?>[],
+              ['value 1', 'value 2', null, 'value 3', null],
+              ['value 1'],
+              ['value 1', null, 'value 2'],
+              [null, 'value 1', null, null, 'value 2', 'value 3'],
+            ]),
           );
-          expect(cache.streamController, isNotNull);
-          values.forEach(cache.set);
-        },
-      );
-
-      test(
-        '''
-
-WHEN the cached list is listened (without filters) multiple times
-THEN the complete cached list is continuously emitted as it changes
-WHEN all listeners are canceled
-THEN the stream controller is closed
-''',
-        () async {
-          expect(cache.streamController, isNull);
-          final stream1 = cache.watch();
-          expect(stream1.isBroadcast, isTrue);
-          final sub1a = stream1.listen((value) {});
-          expect(cache.streamController, isNotNull);
-          final sub1b = stream1.listen((value) {});
-          expect(cache.streamController, isNotNull);
-          await sub1a.cancel();
-          expect(cache.streamController, isNotNull);
-          final controller1 = cache.streamController;
-          await sub1b.cancel();
-          expect(cache.streamController, isNull);
-          expect(controller1?.isClosed, isTrue);
-          final stream2 = cache.watch();
-          expect(stream2.isBroadcast, isTrue);
-          final sub2a = stream2.listen((value) {});
-          expect(cache.streamController, isNotNull);
-          final sub2b = stream2.listen((value) {});
-          expect(cache.streamController, isNotNull);
-          await sub2a.cancel();
-          expect(cache.streamController, isNotNull);
-          final controller2 = cache.streamController;
-          await sub2b.cancel();
-          expect(cache.streamController, isNull);
-          expect(controller2?.isClosed, isTrue);
+          await pumpEventQueue();
+          cache.streamController
+            ..add([])
+            ..add(['value 1', 'value 2', null, 'value 3', null])
+            ..add(['value 1   ', '   value 2', null, '   value 3   ', null])
+            ..add(['value 1'])
+            ..add(['value 1', null, 'value 2'])
+            ..add(['   value 1', null, 'value 2   '])
+            ..add([null, 'value 1', null, null, 'value 2', 'value 3'])
+            ..add([null, 'value 1 ', null, null, ' value 2', ' value 3 '])
+            ..add([]);
+          await pumpEventQueue();
+          final streamB = cache.watch();
+          expect(
+            streamA,
+            emitsInOrder([
+              [null, 'value 1', null, null, 'value 2', 'value 3'],
+              ['value 1', null, null, 'value 2', 'value 3'],
+              [null, 'value 1', null, 'value 2', 'value 3'],
+              [null, 'value 1', 'value 2'],
+              [null, 'value 1'],
+              ['value 1'],
+            ]),
+          );
+          expect(
+            streamB,
+            emitsInOrder([
+              <String?>[],
+              [null, 'value 1', null, null, 'value 2', 'value 3'],
+              ['value 1', null, null, 'value 2', 'value 3'],
+              [null, 'value 1', null, 'value 2', 'value 3'],
+              [null, 'value 1', 'value 2'],
+              [null, 'value 1'],
+              ['value 1'],
+            ]),
+          );
+          await pumpEventQueue();
+          cache.streamController
+            ..add([null, 'value 1', null, null, 'value 2', 'value 3'])
+            ..add(['value 1', null, null, 'value 2', 'value 3'])
+            ..add([' value 1', null, null, 'value 2 ', ' value 3 '])
+            ..add([null, 'value 1', null, 'value 2', 'value 3'])
+            ..add([null, ' value 1 ', null, ' value 2 ', ' value 3 '])
+            ..add([null, 'value 1', 'value 2'])
+            ..add([null, '  value 1  ', '  value 2  '])
+            ..add([null, 'value 1'])
+            ..add([null, '   value 1   '])
+            ..add(['value 1'])
+            ..add(['       value 1       ']);
+          await pumpEventQueue();
         },
       );
 
@@ -346,82 +352,71 @@ THEN the stream controller is closed
         '''
 
 WHEN the cached list is watched with a filter
-THEN the filtered cached list is continuously emitted as it changes
-''',
-        () async {
-          final stream = cache.watch(where: (element) => element != null);
-          final values = <List<String?>>[
-            [],
-            ['value 1', 'value 2', null, 'value 3', null],
-            ['value 1'],
-            ['value 1   '],
-            ['value 1', null, 'value 2'],
-            [null, 'value 1', 'value 2'],
-            [null, 'value 1', null, null, 'value 2', 'value 3', 'value 4'],
-          ];
-          final expectedValues = <List<String?>>[
-            [],
-            ['value 1', 'value 2', 'value 3'],
-            ['value 1'],
-            ['value 1', 'value 2'],
-            ['value 1', 'value 2', 'value 3', 'value 4'],
-          ];
-          unawaited(
-            expectLater(
-              stream,
-              emitsInOrder([
-                for (final value in expectedValues)
-                  orderedEquals(value.nonNulls),
-              ]),
-            ),
-          );
-          expect(cache.streamController, isNotNull);
-          values.forEach(cache.set);
-        },
-      );
-
-      test(
-        '''
-
-WHEN the cached list is listened (with a filter) multiple times
 THEN the complete cached list is continuously emitted as it changes
-WHEN all listeners are canceled
-THEN the stream controller is closed
 ''',
         () async {
-          expect(cache.streamController, isNull);
-          final stream1 = cache.watch(where: (element) => element != null);
-          expect(stream1.isBroadcast, isTrue);
-          final sub1a = stream1.listen((value) {});
-          expect(cache.streamController, isNotNull);
-          final sub1b = stream1.listen((value) {});
-          expect(cache.streamController, isNotNull);
-          await sub1a.cancel();
-          expect(cache.streamController, isNotNull);
-          await sub1b.cancel();
-          expect(cache.streamController, isNull);
-          final stream2 = cache.watch(where: (element) => element != null);
-          expect(stream2.isBroadcast, isTrue);
-          final sub2a = stream2.listen((value) {});
-          expect(cache.streamController, isNotNull);
-          final sub2b = stream2.listen((value) {});
-          expect(cache.streamController, isNotNull);
-          await sub2a.cancel();
-          expect(cache.streamController, isNotNull);
-          await sub2b.cancel();
-          expect(cache.streamController, isNull);
-        },
-      );
-
-      test(
-        '''
-
-WHEN the cache stream type is checked
-THEN the result is an immediate firer stream
-''',
-        () async {
-          final stream = cache.watch();
-          expect(stream, isA<ImmediateFirerStream<List<String?>>>());
+          bool where(String? element) => !(element ?? '').contains('ignore');
+          final streamA = cache.watch(where: where);
+          expect(
+            streamA,
+            emitsInOrder([
+              <String?>[],
+              ['value 1', 'value 2', null, 'value 3', null],
+              ['value 1'],
+              ['value 1', null, 'value 2'],
+              [null, 'value 1', null, null, 'value 2', 'value 3'],
+            ]),
+          );
+          await pumpEventQueue();
+          cache.streamController
+            ..add([])
+            ..add(['value 1', 'ignore', 'value 2', null, 'value 3', null])
+            ..add(['value 1   ', '   value 2', null, '   value 3   ', null])
+            ..add(['value 1', 'to be ignored'])
+            ..add(['value 1', null, 'ignore this', 'value 2'])
+            ..add(['   value 1', null, 'value 2   '])
+            ..add([null, 'value 1', null, null, 'value 2', 'value 3'])
+            ..add([null, 'value 1 ', null, null, ' value 2', ' value 3 '])
+            ..add(['should be ignored']);
+          await pumpEventQueue();
+          final streamB = cache.watch(where: where);
+          expect(
+            streamA,
+            emitsInOrder([
+              [null, 'value 1', null, null, 'value 2', 'value 3'],
+              ['value 1', null, null, 'value 2', 'value 3'],
+              [null, 'value 1', null, 'value 2', 'value 3'],
+              [null, 'value 1', 'value 2'],
+              [null, 'value 1'],
+              ['value 1'],
+            ]),
+          );
+          expect(
+            streamB,
+            emitsInOrder([
+              <String?>[],
+              [null, 'value 1', null, null, 'value 2', 'value 3'],
+              ['value 1', null, null, 'value 2', 'value 3'],
+              [null, 'value 1', null, 'value 2', 'value 3'],
+              [null, 'value 1', 'value 2'],
+              [null, 'value 1'],
+              ['value 1'],
+            ]),
+          );
+          await pumpEventQueue();
+          cache.streamController
+            ..add([null, 'value 1', null, null, 'value 2', 'value 3'])
+            ..add(['value 1', 'ignore', null, null, 'value 2', 'value 3'])
+            ..add([' value 1', null, null, 'value 2 ', ' value 3 '])
+            ..add([null, 'value 1', null, 'value 2', 'value 3'])
+            ..add([null, ' value 1 ', null, ' value 2 ', ' value 3 '])
+            ..add([null, 'value 1', 'to be ignored', 'value 2'])
+            ..add([null, '  value 1  ', '  value 2  '])
+            ..add([null, 'value 1', 'ignore this'])
+            ..add([null, '   value 1   '])
+            ..add(['value 1', 'should be ignored'])
+            ..add(['       value 1       ']);
+          await pumpEventQueue();
         },
       );
 
