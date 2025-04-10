@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:altoke_reactive_caches/reactive_caches.dart';
-import 'package:altoke_reactive_caches/src/immediate_firer_stream.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -15,7 +12,7 @@ THEN an instance of the cache is returned
 ''',
     () {
       final cache = ReactiveElementCache<String>();
-      expect(cache, isNotNull);
+      addTearDown(cache.dispose);
       expect(cache, isA<ReactiveElementCache>());
       expect(cache.equalityChecker('', ''), isTrue);
       expect(cache.equalityChecker('string', 'string'), isTrue);
@@ -28,12 +25,16 @@ THEN an instance of the cache is returned
 
 GIVEN a reactive cache for a single element''',
     () {
+      late ElementEqualityChecker<String?> equalityChecker;
       late ReactiveElementCache<String> cache;
 
       setUp(() {
-        cache = ReactiveElementCache<String>(
-          equalityChecker: (a, b) => a?.trim() == b?.trim(),
-        );
+        equalityChecker = (a, b) => a?.trim() == b?.trim();
+        cache = ReactiveElementCache<String>(equalityChecker: equalityChecker);
+      });
+
+      tearDown(() async {
+        await cache.dispose();
       });
 
       test(
@@ -116,75 +117,69 @@ WHEN the cached value is watched
 THEN the cached value is continuously emitted as it changes
 ''',
         () async {
-          final stream = cache.watch();
-          final values = <String?>[
-            null,
-            'value 1   ',
-            'value 1',
-            'value 2',
-            '   value 2',
-            null,
-            'value 3',
-          ];
+          final streamA = cache.watch();
+          final valuesA1 = <String?>[];
+          final subA1 = streamA.listen(valuesA1.add);
+          addTearDown(subA1.cancel);
+          await pumpEventQueue();
+          cache.streamController
+            ..add('value 1   ')
+            ..add('value 2')
+            ..add('   value 2')
+            ..add(null)
+            ..add('value 3')
+            ..add('value 4')
+            ..add('   value 4   ');
+          await pumpEventQueue();
+          expect(
+            valuesA1,
+            pairwiseCompare<String?, String?>(
+              [null, 'value 1   ', 'value 2', null, 'value 3', 'value 4'],
+              equalityChecker,
+              'equal (with checker) to',
+            ),
+          );
+          final valuesA2 = <String?>[];
+          final subA2 = streamA.listen(valuesA2.add);
+          addTearDown(subA2.cancel);
+          final streamB = cache.watch();
+          final valuesB2 = <String?>[];
+          final subB2 = streamB.listen(valuesB2.add);
+          addTearDown(subB2.cancel);
+          await pumpEventQueue();
+          cache.streamController
+            ..add('   value 5   ')
+            ..add('value 5')
+            ..add(null)
+            ..add(null)
+            ..add('value 6   ')
+            ..add(null)
+            ..add('   value 7');
+          await pumpEventQueue();
           final expectedValues = <String?>[
+            'value 4',
+            '   value 5   ',
             null,
-            'value 1   ',
-            'value 2',
+            'value 6   ',
             null,
-            'value 3',
+            '   value 7',
           ];
-          unawaited(expectLater(stream, emitsInOrder(expectedValues)));
-          expect(cache.streamController, isNotNull);
-          values.forEach(cache.set);
-        },
-      );
-
-      test(
-        '''
-
-WHEN the cached value is listened multiple times
-THEN the cached value is continuously emitted as it changes
-WHEN all listeners are canceled
-THEN the stream controller is closed
-''',
-        () async {
-          expect(cache.streamController, isNull);
-          final stream1 = cache.watch();
-          expect(stream1.isBroadcast, isTrue);
-          final sub1a = stream1.listen((value) {});
-          expect(cache.streamController, isNotNull);
-          final sub1b = stream1.listen((value) {});
-          expect(cache.streamController, isNotNull);
-          await sub1a.cancel();
-          expect(cache.streamController, isNotNull);
-          final controller1 = cache.streamController;
-          await sub1b.cancel();
-          expect(cache.streamController, isNull);
-          expect(controller1?.isClosed, isTrue);
-          final stream2 = cache.watch();
-          expect(stream2.isBroadcast, isTrue);
-          final sub2a = stream2.listen((value) {});
-          expect(cache.streamController, isNotNull);
-          final sub2b = stream2.listen((value) {});
-          expect(cache.streamController, isNotNull);
-          await sub2a.cancel();
-          expect(cache.streamController, isNotNull);
-          final controller2 = cache.streamController;
-          await sub2b.cancel();
-          expect(cache.streamController, isNull);
-          expect(controller2?.isClosed, isTrue);
-        },
-      );
-
-      test(
-        '''
-
-WHEN the cache stream type is checked
-THEN the result is an immediate firer stream
-''',
-        () async {
-          final stream = cache.watch();
-          expect(stream, isA<ImmediateFirerStream<String?>>());
+          expect(
+            valuesA2,
+            pairwiseCompare<String?, String?>(
+              expectedValues,
+              equalityChecker,
+              'equal (with checker) to',
+            ),
+          );
+          expect(
+            valuesB2,
+            pairwiseCompare<String?, String?>(
+              expectedValues,
+              equalityChecker,
+              'equal (with checker) to',
+            ),
+          );
         },
       );
 
