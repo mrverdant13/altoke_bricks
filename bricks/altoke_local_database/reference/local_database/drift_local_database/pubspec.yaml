@@ -21,7 +21,7 @@ dependencies:
   #replace-end#
   #w 1v 2> w#
   collection: ^1.19.1
-  drift: ^2.26.0
+  drift: ^2.26.1
   local_database:
     path: ../local_database/
   meta: ^1.16.0
