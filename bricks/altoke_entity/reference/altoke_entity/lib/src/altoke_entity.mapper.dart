@@ -301,10 +301,11 @@ mixin DmPartialAltokeEntityMappable {
     DmPartialAltokeEntity,
     DmPartialAltokeEntity
   >
-  get copyWith => _DmPartialAltokeEntityCopyWithImpl<
-    DmPartialAltokeEntity,
-    DmPartialAltokeEntity
-  >(this as DmPartialAltokeEntity, $identity, $identity);
+  get copyWith =>
+      _DmPartialAltokeEntityCopyWithImpl<
+        DmPartialAltokeEntity,
+        DmPartialAltokeEntity
+      >(this as DmPartialAltokeEntity, $identity, $identity);
   @override
   String toString() {
     return DmPartialAltokeEntityMapper.ensureInitialized().stringifyValue(

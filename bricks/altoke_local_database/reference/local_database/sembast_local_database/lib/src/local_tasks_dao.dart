@@ -44,8 +44,9 @@ class LocalTasksSembastDao implements LocalTasksDao {
     final id = await tasksStore.add(database, {
       sembast.Task.titleJsonKey: title,
       sembast.Task.priorityJsonKey: priority.identifier,
-      sembast.Task.descriptionJsonKey:
-          ((description ?? '').trim().isEmpty) ? null : description?.trim(),
+      sembast.Task.descriptionJsonKey: ((description ?? '').trim().isEmpty)
+          ? null
+          : description?.trim(),
       sembast.Task.completedJsonKey: false,
     });
     return newTask.toTaskWithId(id);
@@ -126,8 +127,8 @@ extension on Iterable<RecordSnapshot<int, Map<String, Object?>>> {
     return Task(
       id: id,
       title: rawData[sembast.Task.titleJsonKey]! as String,
-      priority:
-          (rawData[sembast.Task.priorityJsonKey]! as String).toTaskPriority(),
+      priority: (rawData[sembast.Task.priorityJsonKey]! as String)
+          .toTaskPriority(),
       completed: rawData[sembast.Task.completedJsonKey]! as bool,
       description: rawData[sembast.Task.descriptionJsonKey] as String?,
     );
@@ -145,10 +146,9 @@ const _identifiableTaskPriorityMap = {
 @visibleForTesting
 extension IdentifiableTaskPriority on TaskPriority {
   /// The priority internal identifier.
-  String get identifier =>
-      _identifiableTaskPriorityMap.entries
-          .firstWhere((entry) => entry.value == this)
-          .key;
+  String get identifier => _identifiableTaskPriorityMap.entries
+      .firstWhere((entry) => entry.value == this)
+      .key;
 }
 
 /// An extension on a [String] that represents a [TaskPriority] identifier.

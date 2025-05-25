@@ -39,8 +39,9 @@ class LocalTasksHiveDao implements LocalTasksDao {
     final id = await tasksBox.add({
       hive.Task.titleJsonKey: title,
       hive.Task.priorityJsonKey: priority.identifier,
-      hive.Task.descriptionJsonKey:
-          ((description ?? '').trim().isEmpty) ? null : description?.trim(),
+      hive.Task.descriptionJsonKey: ((description ?? '').trim().isEmpty)
+          ? null
+          : description?.trim(),
       hive.Task.completedJsonKey: false,
     });
     return newTask.toTaskWithId(id);
@@ -99,8 +100,9 @@ class LocalTasksHiveDao implements LocalTasksDao {
       rawTask[hive.Task.completedJsonKey] = completed;
     }
     if (description case Some(value: final description)) {
-      rawTask[hive.Task.descriptionJsonKey] =
-          (description ?? '').trim().isEmpty ? null : description?.trim();
+      rawTask[hive.Task.descriptionJsonKey] = (description ?? '').trim().isEmpty
+          ? null
+          : description?.trim();
     }
     await tasksBox.put(taskId, rawTask);
   }
@@ -146,10 +148,9 @@ const _identifiableTaskPriorityMap = {
 @visibleForTesting
 extension IdentifiableTaskPriority on TaskPriority {
   /// The priority internal identifier.
-  String get identifier =>
-      _identifiableTaskPriorityMap.entries
-          .firstWhere((entry) => entry.value == this)
-          .key;
+  String get identifier => _identifiableTaskPriorityMap.entries
+      .firstWhere((entry) => entry.value == this)
+      .key;
 }
 
 /// An extension on a [String] that represents a [TaskPriority] identifier.

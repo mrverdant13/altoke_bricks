@@ -46,7 +46,8 @@ typedef GenerationCase = ({ValueEqualityApproach valueEqualityApproach});
 Future<void> testGeneration({required Set<GenerationCase> cases}) async {
   for (final generationCase in cases) {
     final (:valueEqualityApproach) = generationCase;
-    final composedDescription = '''
+    final composedDescription =
+        '''
 
 GIVEN the Altoke Common brick
 AND hooks enabled
@@ -112,7 +113,8 @@ Future<void> testGenerationWithoutHooks({
 }) async {
   for (final generationCase in cases) {
     final (:valueEqualityApproach) = generationCase;
-    final composedDescription = '''
+    final composedDescription =
+        '''
 
 GIVEN the Altoke Common brick
 AND hooks disabled

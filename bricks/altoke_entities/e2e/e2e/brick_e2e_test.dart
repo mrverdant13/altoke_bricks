@@ -57,7 +57,8 @@ Future<void> testSuccessfulGeneration({
 }) async {
   for (final generationCase in cases) {
     final (:valueEqualityApproach) = generationCase;
-    final composedDescription = '''
+    final composedDescription =
+        '''
 
 GIVEN the Altoke Entities brick
 AND hooks enabled
@@ -134,7 +135,8 @@ Future<void> testGenerationWithoutCommonPackage({
 }) async {
   for (final generationCase in cases) {
     final (:valueEqualityApproach) = generationCase;
-    final composedDescription = '''
+    final composedDescription =
+        '''
 
 GIVEN the Altoke Entities brick
 AND hooks enabled
@@ -170,7 +172,8 @@ Future<void> testGenerationWithoutHooks({
 }) async {
   for (final generationCase in cases) {
     final (:valueEqualityApproach) = generationCase;
-    final composedDescription = '''
+    final composedDescription =
+        '''
 
 GIVEN the Altoke Entities brick
 AND hooks disabled

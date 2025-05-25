@@ -13,8 +13,9 @@ String _$asyncTasksHash() => r'befe0325d2483f47a0461b813fee3d06fc575009';
 final asyncTasksPod = AutoDisposeStreamProvider<Iterable<Task>>.internal(
   asyncTasks,
   name: r'asyncTasksPod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$asyncTasksHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$asyncTasksHash,
   dependencies: <ProviderOrFamily>[localTasksDaoPod],
   allTransitiveDependencies: <ProviderOrFamily>{
     localTasksDaoPod,
@@ -34,10 +35,9 @@ final createTaskMutationPod =
     AutoDisposeAsyncNotifierProvider<CreateTaskMutation, NewTask?>.internal(
       CreateTaskMutation.new,
       name: r'createTaskMutationPod',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$createTaskMutationHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$createTaskMutationHash,
       dependencies: <ProviderOrFamily>[localTasksDaoPod],
       allTransitiveDependencies: <ProviderOrFamily>{
         localTasksDaoPod,
@@ -51,22 +51,22 @@ String _$updateTaskMutationHash() =>
 
 /// See also [UpdateTaskMutation].
 @ProviderFor(UpdateTaskMutation)
-final updateTaskMutationPod = AutoDisposeAsyncNotifierProvider<
-  UpdateTaskMutation,
-  (int, PartialTask)?
->.internal(
-  UpdateTaskMutation.new,
-  name: r'updateTaskMutationPod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
+final updateTaskMutationPod =
+    AutoDisposeAsyncNotifierProvider<
+      UpdateTaskMutation,
+      (int, PartialTask)?
+    >.internal(
+      UpdateTaskMutation.new,
+      name: r'updateTaskMutationPod',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
           : _$updateTaskMutationHash,
-  dependencies: <ProviderOrFamily>[localTasksDaoPod],
-  allTransitiveDependencies: <ProviderOrFamily>{
-    localTasksDaoPod,
-    ...?localTasksDaoPod.allTransitiveDependencies,
-  },
-);
+      dependencies: <ProviderOrFamily>[localTasksDaoPod],
+      allTransitiveDependencies: <ProviderOrFamily>{
+        localTasksDaoPod,
+        ...?localTasksDaoPod.allTransitiveDependencies,
+      },
+    );
 
 typedef _$UpdateTaskMutation = AutoDisposeAsyncNotifier<(int, PartialTask)?>;
 String _$deleteTaskByIdMutationHash() =>
@@ -78,10 +78,9 @@ final deleteTaskByIdMutationPod =
     AutoDisposeAsyncNotifierProvider<DeleteTaskByIdMutation, int?>.internal(
       DeleteTaskByIdMutation.new,
       name: r'deleteTaskByIdMutationPod',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$deleteTaskByIdMutationHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$deleteTaskByIdMutationHash,
       dependencies: <ProviderOrFamily>[localTasksDaoPod],
       allTransitiveDependencies: <ProviderOrFamily>{
         localTasksDaoPod,

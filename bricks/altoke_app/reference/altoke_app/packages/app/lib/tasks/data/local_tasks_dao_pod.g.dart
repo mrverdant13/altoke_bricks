@@ -13,10 +13,9 @@ String _$localTasksDaoHash() => r'696b6929be909b8add2f4668549b6ddf29165115';
 final localTasksDaoPod = AutoDisposeProvider<LocalTasksDao>.internal(
   localTasksDao,
   name: r'localTasksDaoPod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$localTasksDaoHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$localTasksDaoHash,
   dependencies: <ProviderOrFamily>[
     selectedLocalDatabasePackagePod,
     asyncDriftLocalDatabasePod,

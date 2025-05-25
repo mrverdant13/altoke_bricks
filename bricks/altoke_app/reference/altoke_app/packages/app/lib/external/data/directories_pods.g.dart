@@ -15,10 +15,9 @@ final asyncApplicationDocumentsDirectoryPod =
     AutoDisposeFutureProvider<Directory>.internal(
       asyncApplicationDocumentsDirectory,
       name: r'asyncApplicationDocumentsDirectoryPod',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$asyncApplicationDocumentsDirectoryHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$asyncApplicationDocumentsDirectoryHash,
       dependencies: const <ProviderOrFamily>[],
       allTransitiveDependencies: const <ProviderOrFamily>{},
     );
@@ -36,10 +35,9 @@ final asyncTemporaryDirectoryPod =
     AutoDisposeFutureProvider<Directory>.internal(
       asyncTemporaryDirectory,
       name: r'asyncTemporaryDirectoryPod',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$asyncTemporaryDirectoryHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$asyncTemporaryDirectoryHash,
       dependencies: const <ProviderOrFamily>[],
       allTransitiveDependencies: const <ProviderOrFamily>{},
     );

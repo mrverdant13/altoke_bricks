@@ -14,10 +14,9 @@ String _$asyncInitializationHash() =>
 final asyncInitializationPod = AutoDisposeFutureProvider<void>.internal(
   asyncInitialization,
   name: r'asyncInitializationPod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$asyncInitializationHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$asyncInitializationHash,
   dependencies: <ProviderOrFamily>{
     asyncApplicationDocumentsDirectoryPod,
     asyncTemporaryDirectoryPod,

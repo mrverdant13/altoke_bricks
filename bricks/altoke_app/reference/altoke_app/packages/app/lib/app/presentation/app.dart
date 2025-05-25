@@ -20,12 +20,12 @@ class MyApp extends ConsumerWidget {
         router!;
         /*replace-start*/
         final child =
-        /*with*/
-        // return
-        /*replace-end*/ NavigatorUriListener(
-          router: router as Router<Object>,
-          child: FlavorBanner(child: InitializationWrapper(child: router)),
-        );
+            /*with*/
+            // return
+            /*replace-end*/ NavigatorUriListener(
+              router: router as Router<Object>,
+              child: FlavorBanner(child: InitializationWrapper(child: router)),
+            );
         /*x-remove-start*/
         return RouterPackageSwitcherWrapper(child: child);
         /*remove-end*/
@@ -66,8 +66,9 @@ class RouterPackageSwitcherWrapper extends ConsumerWidget {
             child: Center(
               child: TextButton.icon(
                 onPressed: () {
-                  final selectedRouterPackageIndex =
-                      ref.read(selectedRouterPackagePod).index;
+                  final selectedRouterPackageIndex = ref
+                      .read(selectedRouterPackagePod)
+                      .index;
                   final newRouterPackageIndex =
                       (selectedRouterPackageIndex + 1) %
                       RouterPackage.values.length;

@@ -262,7 +262,8 @@ line 5
             final file = testDir.descendantFile('file$index.txt');
             expect(file.existsSync(), isFalse);
             file.createSync(recursive: true);
-            final originalContent = '''
+            final originalContent =
+                '''
 line 0
 line 1
 line 2
@@ -515,7 +516,8 @@ and even more text
             final partialFile = testDir.descendantFile(
               'partial$partialName.partial',
             );
-            final partialContent = '''
+            final partialContent =
+                '''
 this is
 the partial
 $partialName

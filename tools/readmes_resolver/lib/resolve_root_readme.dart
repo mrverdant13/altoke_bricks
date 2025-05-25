@@ -14,8 +14,10 @@ void main(List<String> args) {
     dotAll: true,
   );
   final headlineRegex = RegExp(r'^#+\s', multiLine: true);
-  final brickFeatures =
-      featuresRegex.firstMatch(initialBrickReadmeContent)?.group(1)?.trim();
+  final brickFeatures = featuresRegex
+      .firstMatch(initialBrickReadmeContent)
+      ?.group(1)
+      ?.trim();
   if (brickFeatures == null) {
     throw StateError('Features not found in brick readme');
   }
@@ -25,13 +27,17 @@ void main(List<String> args) {
     '$bricksLinksToken(.*?)$bricksLinksToken',
     dotAll: true,
   );
-  final rawRootBricksLinks =
-      bricksLinksRegex.firstMatch(initialRootReadmeContent)?.group(1)?.trim();
+  final rawRootBricksLinks = bricksLinksRegex
+      .firstMatch(initialRootReadmeContent)
+      ?.group(1)
+      ?.trim();
   if (rawRootBricksLinks == null) {
     throw StateError('Bricks links not found in root readme');
   }
-  final rawBricksLinks =
-      bricksLinksRegex.firstMatch(initialBrickReadmeContent)?.group(1)?.trim();
+  final rawBricksLinks = bricksLinksRegex
+      .firstMatch(initialBrickReadmeContent)
+      ?.group(1)
+      ?.trim();
   if (rawBricksLinks == null) {
     throw StateError('Bricks links not found in brick readme');
   }

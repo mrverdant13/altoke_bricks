@@ -22,11 +22,8 @@ enum ValueEqualityApproach {
   factory ValueEqualityApproach.fromReadableName(String readableName) {
     return ValueEqualityApproach.values.firstWhere(
       (approach) => approach.readableName == readableName,
-      orElse:
-          () =>
-              throw ArgumentError(
-                'Invalid value equality approach: $readableName',
-              ),
+      orElse: () =>
+          throw ArgumentError('Invalid value equality approach: $readableName'),
     );
   }
 

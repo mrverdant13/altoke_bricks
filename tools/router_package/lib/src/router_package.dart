@@ -13,9 +13,8 @@ enum RouterPackage {
   factory RouterPackage.fromReadableName(String readableName) {
     return RouterPackage.values.firstWhere(
       (package) => package.readableName == readableName,
-      orElse:
-          () =>
-              throw ArgumentError('Invalid router package name: $readableName'),
+      orElse: () =>
+          throw ArgumentError('Invalid router package name: $readableName'),
     );
   }
 

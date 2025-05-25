@@ -69,12 +69,14 @@ THEN a task record is registered
               table.title.equals(newTask.title) &
               table.priority.equalsValue(newTask.priority) &
               table.description.isNull();
-          final existingMatchingTasksCount =
-              await tasksTable.count(where: filter).getSingle();
+          final existingMatchingTasksCount = await tasksTable
+              .count(where: filter)
+              .getSingle();
           expect(existingMatchingTasksCount, isZero);
           await dao.createOne(newTask);
-          final resultingMatchingTasksCount =
-              await tasksTable.count(where: filter).getSingle();
+          final resultingMatchingTasksCount = await tasksTable
+              .count(where: filter)
+              .getSingle();
           expect(resultingMatchingTasksCount, existingMatchingTasksCount + 1);
         },
       );
@@ -89,15 +91,17 @@ AND no task record is registered
 ''',
         () async {
           const newTask = NewTask(title: '', priority: TaskPriority.high);
-          final existingMatchingTasksCount =
-              await tasksTable.count().getSingle();
+          final existingMatchingTasksCount = await tasksTable
+              .count()
+              .getSingle();
           expect(existingMatchingTasksCount, isZero);
           expect(
             () async => dao.createOne(newTask),
             throwsA(isA<CreateTaskFailureInvalidData>()),
           );
-          final resultingMatchingTasksCount =
-              await tasksTable.count().getSingle();
+          final resultingMatchingTasksCount = await tasksTable
+              .count()
+              .getSingle();
           expect(resultingMatchingTasksCount, isZero);
         },
       );
@@ -254,8 +258,9 @@ THEN a task record is updated
                 tasksTable.description.equals(newDescription);
           }
 
-          final existingMatchingTasksCount =
-              await tasksTable.count(where: filter).getSingle();
+          final existingMatchingTasksCount = await tasksTable
+              .count(where: filter)
+              .getSingle();
           expect(existingMatchingTasksCount, isZero);
           await dao.updateOneById(
             taskId: task.id,
@@ -266,8 +271,9 @@ THEN a task record is updated
               description: Some(newDescription),
             ),
           );
-          final resultingMatchingTasksCount =
-              await tasksTable.count(where: filter).getSingle();
+          final resultingMatchingTasksCount = await tasksTable
+              .count(where: filter)
+              .getSingle();
           expect(resultingMatchingTasksCount, existingMatchingTasksCount + 1);
         },
       );
@@ -298,8 +304,9 @@ AND no task record is updated
                 tasksTable.description.equals(newDescription);
           }
 
-          final existingMatchingTasksCount =
-              await tasksTable.count(where: filter).getSingle();
+          final existingMatchingTasksCount = await tasksTable
+              .count(where: filter)
+              .getSingle();
           expect(existingMatchingTasksCount, isZero);
           expect(
             () async => dao.updateOneById(
@@ -313,8 +320,9 @@ AND no task record is updated
             ),
             throwsA(isA<UpdateTaskFailureNotFound>()),
           );
-          final resultingMatchingTasksCount =
-              await tasksTable.count(where: filter).getSingle();
+          final resultingMatchingTasksCount = await tasksTable
+              .count(where: filter)
+              .getSingle();
           expect(resultingMatchingTasksCount, isZero);
         },
       );
@@ -352,8 +360,9 @@ AND no task record is updated
                 tasksTable.description.equals(newDescription);
           }
 
-          final existingMatchingTasksCount =
-              await tasksTable.count(where: filter).getSingle();
+          final existingMatchingTasksCount = await tasksTable
+              .count(where: filter)
+              .getSingle();
           expect(existingMatchingTasksCount, isZero);
           expect(
             () async => dao.updateOneById(
@@ -367,8 +376,9 @@ AND no task record is updated
             ),
             throwsA(isA<UpdateTaskFailureInvalidData>()),
           );
-          final resultingMatchingTasksCount =
-              await tasksTable.count(where: filter).getSingle();
+          final resultingMatchingTasksCount = await tasksTable
+              .count(where: filter)
+              .getSingle();
           expect(resultingMatchingTasksCount, isZero);
         },
       );
@@ -392,16 +402,14 @@ AND the deleted task is returned
             description: 'description',
           );
           await tasksTable.insertOne(task.toDrift());
-          final initialMatchingTasksCount =
-              await tasksTable
-                  .count(where: (table) => table.id.equals(taskId))
-                  .getSingle();
+          final initialMatchingTasksCount = await tasksTable
+              .count(where: (table) => table.id.equals(taskId))
+              .getSingle();
           expect(initialMatchingTasksCount, 1);
           await dao.deleteOneById(taskId);
-          final resultingMatchingTasksCount =
-              await tasksTable
-                  .count(where: (table) => table.id.equals(taskId))
-                  .getSingle();
+          final resultingMatchingTasksCount = await tasksTable
+              .count(where: (table) => table.id.equals(taskId))
+              .getSingle();
           expect(resultingMatchingTasksCount, isZero);
         },
       );

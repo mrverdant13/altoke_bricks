@@ -47,23 +47,18 @@ class TaskListTile extends ConsumerWidget {
         ),
         title: Text(
           title,
-          style:
-              completed
-                  ? const TextStyle(decoration: TextDecoration.lineThrough)
-                  : null,
+          style: completed
+              ? const TextStyle(decoration: TextDecoration.lineThrough)
+              : null,
         ),
-        subtitle:
-            description == null
-                ? null
-                : Text(
-                  description,
-                  style:
-                      completed
-                          ? const TextStyle(
-                            decoration: TextDecoration.lineThrough,
-                          )
-                          : null,
-                ),
+        subtitle: description == null
+            ? null
+            : Text(
+                description,
+                style: completed
+                    ? const TextStyle(decoration: TextDecoration.lineThrough)
+                    : null,
+              ),
         value: completed,
         onChanged: (value) {
           if (value == null) return;
