@@ -15,10 +15,9 @@ final asyncDriftLocalDatabasePod =
     AutoDisposeFutureProvider<LocalDatabase>.internal(
       asyncDriftLocalDatabase,
       name: r'asyncDriftLocalDatabasePod',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$asyncDriftLocalDatabaseHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$asyncDriftLocalDatabaseHash,
       dependencies: <ProviderOrFamily>[
         asyncApplicationDocumentsDirectoryPod,
         asyncTemporaryDirectoryPod,
@@ -43,10 +42,9 @@ String _$asyncHiveInitializationHash() =>
 final asyncHiveInitializationPod = AutoDisposeFutureProvider<void>.internal(
   asyncHiveInitialization,
   name: r'asyncHiveInitializationPod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$asyncHiveInitializationHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$asyncHiveInitializationHash,
   dependencies: <ProviderOrFamily>[asyncApplicationDocumentsDirectoryPod],
   allTransitiveDependencies: <ProviderOrFamily>{
     asyncApplicationDocumentsDirectoryPod,
@@ -62,19 +60,19 @@ String _$selectedLocalDatabasePackageHash() =>
 
 /// See also [SelectedLocalDatabasePackage].
 @ProviderFor(SelectedLocalDatabasePackage)
-final selectedLocalDatabasePackagePod = NotifierProvider<
-  SelectedLocalDatabasePackage,
-  LocalDatabasePackage
->.internal(
-  SelectedLocalDatabasePackage.new,
-  name: r'selectedLocalDatabasePackagePod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
+final selectedLocalDatabasePackagePod =
+    NotifierProvider<
+      SelectedLocalDatabasePackage,
+      LocalDatabasePackage
+    >.internal(
+      SelectedLocalDatabasePackage.new,
+      name: r'selectedLocalDatabasePackagePod',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
           : _$selectedLocalDatabasePackageHash,
-  dependencies: const <ProviderOrFamily>[],
-  allTransitiveDependencies: const <ProviderOrFamily>{},
-);
+      dependencies: const <ProviderOrFamily>[],
+      allTransitiveDependencies: const <ProviderOrFamily>{},
+    );
 
 typedef _$SelectedLocalDatabasePackage = Notifier<LocalDatabasePackage>;
 // ignore_for_file: type=lint

@@ -9,8 +9,10 @@ Future<void> main(List<String> args) async {
     '$featuresToken(.*?)$featuresToken',
     dotAll: true,
   );
-  final rootFeatures =
-      featuresRegex.firstMatch(rootReadmeContent)?.group(1)?.trim();
+  final rootFeatures = featuresRegex
+      .firstMatch(rootReadmeContent)
+      ?.group(1)
+      ?.trim();
   if (rootFeatures == null) {
     throw StateError('Features not found in brick readme');
   }
@@ -20,8 +22,10 @@ Future<void> main(List<String> args) async {
     '$bricksLinksToken(.*?)$bricksLinksToken',
     dotAll: true,
   );
-  final rootBricksLinks =
-      bricksLinksRegex.firstMatch(rootReadmeContent)?.group(1)?.trim();
+  final rootBricksLinks = bricksLinksRegex
+      .firstMatch(rootReadmeContent)
+      ?.group(1)
+      ?.trim();
   if (rootBricksLinks == null) {
     throw StateError('Bricks links not found in root readme');
   }

@@ -2,7 +2,7 @@ name: altoke_bricks_monorepo
 repository: https://github.com/mrverdant13/altoke_bricks
 
 environment:
-  sdk: ">=3.7.0 <4.0.0"
+  sdk: ">=3.8.0 <4.0.0"
 
 dev_dependencies:
   melos: ^7.0.0-dev.8
@@ -25,10 +25,11 @@ melos:
   command:
     bootstrap:
       environment:
-        sdk: ">=3.7.0 <4.0.0"
-        flutter: ">=3.29.0 <4.0.0"
+        sdk: ">=3.8.0 <4.0.0"
+        flutter: ">=3.32.0 <4.0.0"
       dependencies:
         collection: ^1.19.1
+        intl: ^0.20.2
         mason: ^0.1.1
         meta: ^1.16.0
         path: ^1.9.1

@@ -87,10 +87,9 @@ String _$autoRouteConfigHash() => r'fc12ab8aa28b7aebffa96d2cda0e942424002616';
 final autoRouteConfigPod = AutoDisposeProvider<RouterConfig<UrlState>>.internal(
   autoRouteConfig,
   name: r'autoRouteConfigPod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$autoRouteConfigHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$autoRouteConfigHash,
   dependencies: const <ProviderOrFamily>[],
   allTransitiveDependencies: const <ProviderOrFamily>{},
 );
@@ -106,10 +105,9 @@ final goRouterConfigPod =
     AutoDisposeProvider<RouterConfig<RouteMatchList>>.internal(
       goRouterConfig,
       name: r'goRouterConfigPod',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$goRouterConfigHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$goRouterConfigHash,
       dependencies: const <ProviderOrFamily>[],
       allTransitiveDependencies: const <ProviderOrFamily>{},
     );
@@ -125,8 +123,9 @@ String _$routerConfigHash() => r'406e8fd9eb6e6af997c14e7855c667efe6554997';
 final routerConfigPod = AutoDisposeProvider<RouterConfig<Object>>.internal(
   routerConfig,
   name: r'routerConfigPod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$routerConfigHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$routerConfigHash,
   dependencies: <ProviderOrFamily>[
     selectedRouterPackagePod,
     autoRouteConfigPod,
@@ -154,10 +153,9 @@ final selectedRouterPackagePod =
     NotifierProvider<SelectedRouterPackage, RouterPackage>.internal(
       SelectedRouterPackage.new,
       name: r'selectedRouterPackagePod',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$selectedRouterPackageHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$selectedRouterPackageHash,
       dependencies: const <ProviderOrFamily>[],
       allTransitiveDependencies: const <ProviderOrFamily>{},
     );

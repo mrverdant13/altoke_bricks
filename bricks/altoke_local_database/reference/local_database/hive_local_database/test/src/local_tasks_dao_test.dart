@@ -64,12 +64,14 @@ THEN a task record is registered
               task[hive.Task.titleJsonKey] == newTask.title &&
               task[hive.Task.priorityJsonKey] == newTask.priority.identifier &&
               task[hive.Task.descriptionJsonKey] == null;
-          final existingMatchingTasksCount =
-              tasksBox.values.where(filter).length;
+          final existingMatchingTasksCount = tasksBox.values
+              .where(filter)
+              .length;
           expect(existingMatchingTasksCount, isZero);
           await dao.createOne(newTask);
-          final resultingMatchingTasksCount =
-              tasksBox.values.where(filter).length;
+          final resultingMatchingTasksCount = tasksBox.values
+              .where(filter)
+              .length;
           expect(resultingMatchingTasksCount, existingMatchingTasksCount + 1);
         },
       );
@@ -223,10 +225,9 @@ THEN the tasks are continuously emitted as they change
                   (entry) => entry.value[hive.Task.descriptionJsonKey] == null,
                 )
                 .map(
-                  (entry) =>
-                      entry
-                        ..value[hive.Task.descriptionJsonKey] =
-                            'updated description',
+                  (entry) => entry
+                    ..value[hive.Task.descriptionJsonKey] =
+                        'updated description',
                 );
             await tasksBox.putAll(Map.fromEntries(updatedTaskRecordEntries));
           }
@@ -267,8 +268,11 @@ THEN a task record is updated
                 data[hive.Task.descriptionJsonKey] == newDescription;
           }
 
-          final existingMatchingTasksCount =
-              tasksBox.toMap().entries.where(filter).length;
+          final existingMatchingTasksCount = tasksBox
+              .toMap()
+              .entries
+              .where(filter)
+              .length;
           expect(existingMatchingTasksCount, isZero);
           await dao.updateOneById(
             taskId: taskId,
@@ -279,8 +283,11 @@ THEN a task record is updated
               description: Some(newDescription),
             ),
           );
-          final resultingMatchingTasksCount =
-              tasksBox.toMap().entries.where(filter).length;
+          final resultingMatchingTasksCount = tasksBox
+              .toMap()
+              .entries
+              .where(filter)
+              .length;
           expect(resultingMatchingTasksCount, existingMatchingTasksCount + 1);
         },
       );
@@ -313,8 +320,11 @@ AND no task record is updated
                 data[hive.Task.descriptionJsonKey] == newDescription;
           }
 
-          final existingMatchingTasksCount =
-              tasksBox.toMap().entries.where(filter).length;
+          final existingMatchingTasksCount = tasksBox
+              .toMap()
+              .entries
+              .where(filter)
+              .length;
           expect(existingMatchingTasksCount, isZero);
           expect(
             () async => dao.updateOneById(
@@ -328,8 +338,11 @@ AND no task record is updated
             ),
             throwsA(isA<UpdateTaskFailureNotFound>()),
           );
-          final resultingMatchingTasksCount =
-              tasksBox.toMap().entries.where(filter).length;
+          final resultingMatchingTasksCount = tasksBox
+              .toMap()
+              .entries
+              .where(filter)
+              .length;
           expect(resultingMatchingTasksCount, isZero);
         },
       );
@@ -369,8 +382,11 @@ AND no task record is updated
                 data[hive.Task.descriptionJsonKey] == newDescription;
           }
 
-          final existingMatchingTasksCount =
-              tasksBox.toMap().entries.where(filter).length;
+          final existingMatchingTasksCount = tasksBox
+              .toMap()
+              .entries
+              .where(filter)
+              .length;
           expect(existingMatchingTasksCount, isZero);
           expect(
             () async => dao.updateOneById(
@@ -384,8 +400,11 @@ AND no task record is updated
             ),
             throwsA(isA<UpdateTaskFailureInvalidData>()),
           );
-          final resultingMatchingTasksCount =
-              tasksBox.toMap().entries.where(filter).length;
+          final resultingMatchingTasksCount = tasksBox
+              .toMap()
+              .entries
+              .where(filter)
+              .length;
           expect(resultingMatchingTasksCount, isZero);
         },
       );
@@ -410,12 +429,18 @@ AND the deleted task is returned
           await tasksBox.put(taskId, task);
           bool filter(MapEntry<dynamic, Map<dynamic, dynamic>> rawTask) =>
               rawTask.key == taskId;
-          final initialMatchingTasksCount =
-              tasksBox.toMap().entries.where(filter).length;
+          final initialMatchingTasksCount = tasksBox
+              .toMap()
+              .entries
+              .where(filter)
+              .length;
           expect(initialMatchingTasksCount, 1);
           await dao.deleteOneById(taskId);
-          final resultingMatchingTasksCount =
-              tasksBox.toMap().entries.where(filter).length;
+          final resultingMatchingTasksCount = tasksBox
+              .toMap()
+              .entries
+              .where(filter)
+              .length;
           expect(resultingMatchingTasksCount, isZero);
         },
       );

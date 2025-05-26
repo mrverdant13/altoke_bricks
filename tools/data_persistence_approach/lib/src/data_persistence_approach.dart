@@ -16,11 +16,9 @@ enum DataPersistenceApproach {
   factory DataPersistenceApproach.fromVarIdentifier(String varIdentifier) {
     return DataPersistenceApproach.values.firstWhere(
       (approach) => approach.varIdentifier == varIdentifier,
-      orElse:
-          () =>
-              throw ArgumentError(
-                'Invalid data persistence approach: $varIdentifier',
-              ),
+      orElse: () => throw ArgumentError(
+        'Invalid data persistence approach: $varIdentifier',
+      ),
     );
   }
 

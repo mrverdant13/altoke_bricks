@@ -23,7 +23,8 @@ class DmOptionalMapper extends ClassMapperBase<DmOptional> {
   @override
   final String id = 'DmOptional';
   @override
-  Function get typeFactory => <T extends Object?>(f) => f<DmOptional<T>>();
+  Function get typeFactory =>
+      <T extends Object?>(f) => f<DmOptional<T>>();
 
   @override
   final MappableFields<DmOptional> fields = const {};
@@ -54,7 +55,8 @@ class DmSomeMapper extends ClassMapperBase<DmSome> {
   @override
   final String id = 'DmSome';
   @override
-  Function get typeFactory => <T extends Object?>(f) => f<DmSome<T>>();
+  Function get typeFactory =>
+      <T extends Object?>(f) => f<DmSome<T>>();
 
   static Object? _$value(DmSome v) => v.value;
   static dynamic _arg$value<T extends Object?>(f) => f<T>();
@@ -98,7 +100,8 @@ class DmNoneMapper extends ClassMapperBase<DmNone> {
   @override
   final String id = 'DmNone';
   @override
-  Function get typeFactory => <T extends Object?>(f) => f<DmNone<T>>();
+  Function get typeFactory =>
+      <T extends Object?>(f) => f<DmNone<T>>();
 
   @override
   final MappableFields<DmNone> fields = const {};

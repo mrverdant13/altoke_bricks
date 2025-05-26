@@ -80,7 +80,8 @@ Future<void> testSuccessfulGeneration({
 }) async {
   for (final generationCase in cases) {
     final (:routerPackage) = generationCase;
-    final composedDescription = '''
+    final composedDescription =
+        '''
 
 GIVEN the Altoke App brick
 AND hooks enabled
@@ -151,7 +152,8 @@ Future<void> testGenerationWithoutHooks({
 }) async {
   for (final generationCase in cases) {
     final (:routerPackage) = generationCase;
-    final composedDescription = '''
+    final composedDescription =
+        '''
 
 GIVEN the Altoke App brick
 AND hooks disabled

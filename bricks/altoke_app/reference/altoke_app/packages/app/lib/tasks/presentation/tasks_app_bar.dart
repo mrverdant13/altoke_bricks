@@ -37,8 +37,9 @@ class SwitchDbPackageAction extends ConsumerWidget {
     return IconButton(
       icon: const Icon(Icons.storage),
       onPressed: () {
-        final selectedLocalDatabasePackageIndex =
-            ref.read(selectedLocalDatabasePackagePod).index;
+        final selectedLocalDatabasePackageIndex = ref
+            .read(selectedLocalDatabasePackagePod)
+            .index;
         final newLocalDatabasePackageIndex =
             (selectedLocalDatabasePackageIndex + 1) %
             LocalDatabasePackage.values.length;

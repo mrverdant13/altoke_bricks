@@ -142,12 +142,12 @@ class $TasksTableManager
         i0.TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => i3.$TasksFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => i3.$TasksOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => i3.$TasksAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              i3.$TasksFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              i3.$TasksOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              i3.$TasksAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 i0.Value<int> id = const i0.Value.absent(),
@@ -176,16 +176,9 @@ class $TasksTableManager
                 completed: completed,
                 description: description,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          i0.BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), i0.BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
@@ -320,27 +313,24 @@ class Tasks extends i0.Table with i0.TableInfo<Tasks, i1.Task> {
   i1.Task map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return i1.Task(
-      id:
-          attachedDatabase.typeMapping.read(
-            i0.DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      title:
-          attachedDatabase.typeMapping.read(
-            i0.DriftSqlType.string,
-            data['${effectivePrefix}title'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        i0.DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      title: attachedDatabase.typeMapping.read(
+        i0.DriftSqlType.string,
+        data['${effectivePrefix}title'],
+      )!,
       priority: i3.Tasks.$converterpriority.fromSql(
         attachedDatabase.typeMapping.read(
           i0.DriftSqlType.string,
           data['${effectivePrefix}priority'],
         )!,
       ),
-      completed:
-          attachedDatabase.typeMapping.read(
-            i0.DriftSqlType.bool,
-            data['${effectivePrefix}completed'],
-          )!,
+      completed: attachedDatabase.typeMapping.read(
+        i0.DriftSqlType.bool,
+        data['${effectivePrefix}completed'],
+      )!,
       description: attachedDatabase.typeMapping.read(
         i0.DriftSqlType.string,
         data['${effectivePrefix}description'],

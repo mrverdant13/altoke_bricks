@@ -5,8 +5,8 @@ version: 1.0.0+1
 resolution: workspace
 
 environment:
-  sdk: ">=3.7.0 <4.0.0"
-  flutter: ">=3.29.0 <4.0.0"
+  sdk: ">=3.8.0 <4.0.0"
+  flutter: ">=3.32.0 <4.0.0"
 
 dependencies:
   #remove-start#
@@ -35,7 +35,7 @@ dependencies:
   hive_local_database:
     path: ../../../../../altoke_local_database/reference/local_database/hive_local_database/
   #remove-end#
-  intl: ^0.19.0
+  intl: ^0.20.2
   #x-remove-start#
   local_database:
     path: ../../../../../altoke_local_database/reference/local_database/local_database/
@@ -71,4 +71,5 @@ dev_dependencies:
   very_good_analysis: ^7.0.0
 
 flutter:
+  generate: true
   uses-material-design: true

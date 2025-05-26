@@ -22,11 +22,9 @@ enum LocalDatabaseAlternative {
   factory LocalDatabaseAlternative.fromVarIdentifier(String varIdentifier) {
     return LocalDatabaseAlternative.values.firstWhere(
       (alternative) => alternative.varIdentifier == varIdentifier,
-      orElse:
-          () =>
-              throw ArgumentError(
-                'Invalid local database alternative: $varIdentifier',
-              ),
+      orElse: () => throw ArgumentError(
+        'Invalid local database alternative: $varIdentifier',
+      ),
     );
   }
 
