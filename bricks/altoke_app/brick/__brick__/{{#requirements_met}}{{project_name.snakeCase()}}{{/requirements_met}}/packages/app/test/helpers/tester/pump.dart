@@ -73,17 +73,14 @@ extension AppTester on WidgetTester {
       NestedScrollView(
         physics: physics,
         controller: scrollController,
-        headerSliverBuilder:
-            (context, innerBoxIsScrolled) => [
-              SliverOverlapAbsorber(
-                handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                  context,
-                ),
-                sliver: SliverToBoxAdapter(
-                  child: SizedBox(height: fakeHeaderHeight),
-                ),
-              ),
-            ],
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          SliverOverlapAbsorber(
+            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+            sliver: SliverToBoxAdapter(
+              child: SizedBox(height: fakeHeaderHeight),
+            ),
+          ),
+        ],
         body: body,
       ),
       overrides: overrides,

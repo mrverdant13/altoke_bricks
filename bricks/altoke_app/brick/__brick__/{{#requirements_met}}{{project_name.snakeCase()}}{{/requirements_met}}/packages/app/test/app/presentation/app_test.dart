@@ -24,9 +24,8 @@ THEN the flavor banner should be displayed
             path: '/',
             page: PageInfo(
               'FakeRoute',
-              builder:
-                  (data) =>
-                      const Scaffold(body: Center(child: Text('Fake Screen'))),
+              builder: (data) =>
+                  const Scaffold(body: Center(child: Text('Fake Screen'))),
             ),
           ),
         ],
@@ -65,9 +64,8 @@ THEN the initialized router content should be shown
             path: '/',
             page: PageInfo(
               'FakeRoute',
-              builder:
-                  (data) =>
-                      const Scaffold(body: Center(child: Text('Fake Screen'))),
+              builder: (data) =>
+                  const Scaffold(body: Center(child: Text('Fake Screen'))),
             ),
           ),
         ],
@@ -107,9 +105,8 @@ THEN the errored initialization screen should be shown
             path: '/',
             page: PageInfo(
               'FakeRoute',
-              builder:
-                  (data) =>
-                      const Scaffold(body: Center(child: Text('Fake Screen'))),
+              builder: (data) =>
+                  const Scaffold(body: Center(child: Text('Fake Screen'))),
             ),
           ),
         ],
@@ -154,9 +151,8 @@ THEN the flavor banner should be displayed
           GoRoute(
             path: '/',
             name: 'FakeRoute',
-            builder:
-                (context, state) =>
-                    const Scaffold(body: Center(child: Text('Fake Screen'))),
+            builder: (context, state) =>
+                const Scaffold(body: Center(child: Text('Fake Screen'))),
           ),
         ],
       );
@@ -191,9 +187,8 @@ THEN the initialized router content should be shown
           GoRoute(
             path: '/',
             name: 'FakeRoute',
-            builder:
-                (context, state) =>
-                    const Scaffold(body: Center(child: Text('Fake Screen'))),
+            builder: (context, state) =>
+                const Scaffold(body: Center(child: Text('Fake Screen'))),
           ),
         ],
       );
@@ -229,9 +224,8 @@ THEN the errored initialization screen should be shown
           GoRoute(
             path: '/',
             name: 'FakeRoute',
-            builder:
-                (context, state) =>
-                    const Scaffold(body: Center(child: Text('Fake Screen'))),
+            builder: (context, state) =>
+                const Scaffold(body: Center(child: Text('Fake Screen'))),
           ),
         ],
       );
