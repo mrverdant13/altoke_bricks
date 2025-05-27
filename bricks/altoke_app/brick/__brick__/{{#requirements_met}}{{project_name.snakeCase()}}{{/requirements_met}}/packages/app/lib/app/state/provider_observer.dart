@@ -29,7 +29,8 @@ class LoggerProviderObserver extends ProviderObserver {
 ${DateTime.now()}
 Provider added
 Initial:  $value
-'''.trim();
+'''
+            .trim();
     log(message, name: provider.loggerName);
   }
 
@@ -45,7 +46,8 @@ Initial:  $value
 ${DateTime.now()}
 Provider failed
 $error
-'''.trim();
+'''
+            .trim();
     log(
       message,
       error: error,
@@ -67,7 +69,8 @@ ${DateTime.now()}
 Provider updated
 Previous: $previousValue
 New:      $newValue
-'''.trim();
+'''
+            .trim();
     log(message, name: provider.loggerName);
   }
 
@@ -80,7 +83,8 @@ New:      $newValue
         '''
 ${DateTime.now()}
 Provider disposed
-'''.trim();
+'''
+            .trim();
     log(message, name: provider.loggerName);
   }
 }

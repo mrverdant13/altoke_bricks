@@ -9,15 +9,14 @@ class FlavorBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      foregroundPainter:
-          isProd
-              ? null
-              : BannerPainter(
-                message: flavor.label,
-                textDirection: TextDirection.ltr,
-                location: BannerLocation.topStart,
-                layoutDirection: TextDirection.ltr,
-              ),
+      foregroundPainter: isProd
+          ? null
+          : BannerPainter(
+              message: flavor.label,
+              textDirection: TextDirection.ltr,
+              location: BannerLocation.topStart,
+              layoutDirection: TextDirection.ltr,
+            ),
       child: child,
     );
   }

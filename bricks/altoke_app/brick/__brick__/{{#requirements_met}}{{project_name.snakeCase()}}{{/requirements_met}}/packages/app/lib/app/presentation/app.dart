@@ -19,9 +19,9 @@ class MyApp extends ConsumerWidget {
       builder: (context, router) {
         router!;
         return NavigatorUriListener(
-          router: router as Router<Object>,
-          child: FlavorBanner(child: InitializationWrapper(child: router)),
-        );
+              router: router as Router<Object>,
+              child: FlavorBanner(child: InitializationWrapper(child: router)),
+            );
       },
     );
   }
