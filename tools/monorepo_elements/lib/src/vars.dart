@@ -15,28 +15,28 @@ abstract final class Vars {
   static const e2eTestNameSuffix = '_e2e';
 
   /// Path to the root directory of the monorepo.
-  static final rootPath = () {
+  static final String rootPath = () {
     final rootPath = Platform.environment['MELOS_ROOT_PATH'] ?? '';
     if (rootPath.isEmpty) throw const InvalidRuntimeError();
     return rootPath;
   }();
 
   /// Path to the directory of a package managed by the monorepo.
-  static final packagePath = () {
+  static final String packagePath = () {
     final packagePath = Platform.environment['MELOS_PACKAGE_PATH'] ?? '';
     if (packagePath.isEmpty) throw const InvalidRuntimeError();
     return packagePath;
   }();
 
   /// Name of a package managed by the monorepo.
-  static final packageName = () {
+  static final String packageName = () {
     final packageName = Platform.environment['MELOS_PACKAGE_NAME'] ?? '';
     if (packageName.isEmpty) throw const InvalidRuntimeError();
     return packageName;
   }();
 
   /// Name of a brick scope managed by the monorepo.
-  static final scopeName = () {
+  static final String scopeName = () {
     final scopeName = packageName;
     if (!scopeName.isValidScopeName) {
       throw InvalidBrickScopeNameError(
@@ -49,7 +49,7 @@ abstract final class Vars {
   }();
 
   /// Path to the directory of a brick scope managed by the monorepo.
-  static final scopePath = () {
+  static final String scopePath = () {
     // Required to ensure the scope name is valid.
     // ignore: unnecessary_statements
     scopeName; // Ensure the scope name is valid.
@@ -58,10 +58,13 @@ abstract final class Vars {
 
   /// Path to the brick generation data file of a brick scope managed by the
   /// monorepo.
-  static final scopeBrickGenDataPath = path.join(scopePath, 'brick-gen.json');
+  static final String scopeBrickGenDataPath = path.join(
+    scopePath,
+    'brick-gen.json',
+  );
 
   /// Name of a brick hooks managed by the monorepo.
-  static final hooksName = () {
+  static final String hooksName = () {
     final hooksName = packageName;
     if (!hooksName.isValidHooksName) {
       throw InvalidBrickHooksNameError(
@@ -73,7 +76,7 @@ abstract final class Vars {
   }();
 
   /// Path to the directory of a brick hooks managed by the monorepo.
-  static final hooksPath = () {
+  static final String hooksPath = () {
     // Required to ensure the hooks name is valid.
     // ignore: unnecessary_statements
     hooksName; // Ensure the hooks name is valid.
@@ -81,7 +84,7 @@ abstract final class Vars {
   }();
 
   /// Name of a brick E2E test managed by the monorepo.
-  static final e2eTestName = () {
+  static final String e2eTestName = () {
     final e2eTestName = packageName;
     if (!e2eTestName.endsWith(e2eTestNameSuffix)) {
       throw InvalidBrickE2eNameError(
@@ -94,7 +97,7 @@ abstract final class Vars {
   }();
 
   /// Path to the directory of a brick E2E test managed by the monorepo.
-  static final e2eTestPath = () {
+  static final String e2eTestPath = () {
     // Required to ensure the E2E test name is valid.
     // ignore: unnecessary_statements
     e2eTestName; // Ensure the E2E test name is valid.
@@ -102,7 +105,7 @@ abstract final class Vars {
   }();
 
   /// Path to the brick directory of a brick managed by the monorepo.
-  static final brickPath = () {
+  static final String brickPath = () {
     try {
       return path.join(scopePath, 'brick');
     } on Object {
@@ -122,14 +125,14 @@ abstract final class Vars {
   }();
 
   /// Path to the template directory of a brick managed by the monorepo.
-  static final brickTemplatePath = path.joinAll([
+  static final String brickTemplatePath = path.joinAll([
     scopePath,
     'brick',
     '__brick__',
   ]);
 
   /// Name of a brick managed by the monorepo.
-  static final brickName = path.basename(path.dirname(brickPath));
+  static final String brickName = path.basename(path.dirname(brickPath));
 }
 
 extension on String {

@@ -103,7 +103,7 @@ class InitializationWrapper extends ConsumerWidget {
       skipLoadingOnReload: false,
       loading: InitializingScreen.new,
       data: (_) => child,
-      error: (_, __) => const ErroredInitializationScreen(),
+      error: (_, _) => const ErroredInitializationScreen(),
     );
   }
 }

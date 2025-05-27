@@ -10,4 +10,4 @@ bool noFilter(_) => true;
 
 /// A [WhereIndexedCallback] that always returns `true` and, therefore, does not
 /// filter elements.
-bool noIndexedFilter(_, __) => true;
+bool noIndexedFilter(_, _) => true;

@@ -16,6 +16,7 @@ class LinesDeletion with LinesDeletionMappable {
   const LinesDeletion({required this.filePath, required this.ranges});
 
   /// Creates a [LinesDeletion] from a [json] map.
+  // ignore: specify_nonobvious_property_types
   static const fromJson = LinesDeletionMapper.fromMap;
 
   /// The path to the file to be dropped from.
@@ -35,6 +36,7 @@ class LinesRange with LinesRangeMappable {
   const LinesRange({required this.start, required this.end});
 
   /// Creates a [LinesRange] from a [json] map.
+  // ignore: specify_nonobvious_property_types
   static const fromJson = LinesRangeMapper.fromMap;
 
   /// The beginning of the range (inclusive & zero-based).

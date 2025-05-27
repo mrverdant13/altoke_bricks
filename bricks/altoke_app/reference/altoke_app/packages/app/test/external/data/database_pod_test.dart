@@ -62,7 +62,7 @@ THEN it should complete without issues
       addTearDown(container.dispose);
       final subscription = container.listen(
         asyncHiveInitializationPod.future,
-        (_, __) {},
+        (_, _) {},
       );
       addTearDown(subscription.close);
       final asyncHiveInitialization = subscription.read();

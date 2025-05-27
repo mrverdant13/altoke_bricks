@@ -8,7 +8,7 @@ class TaskPriorityConverter extends TypeConverter<TaskPriority, String> {
   /// {@macro drift_local_database.task_priority_converter}
   const TaskPriorityConverter();
 
-  static const _map = {
+  static const _map = <String, TaskPriority>{
     'low': TaskPriority.low,
     'medium': TaskPriority.medium,
     'high': TaskPriority.high,

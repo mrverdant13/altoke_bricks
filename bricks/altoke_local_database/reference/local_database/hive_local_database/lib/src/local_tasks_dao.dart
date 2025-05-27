@@ -133,7 +133,7 @@ extension on Iterable<MapEntry<dynamic, Map<dynamic, dynamic>>> {
   });
 }
 
-const _identifiableTaskPriorityMap = {
+const _identifiableTaskPriorityMap = <String, TaskPriority>{
   'low': TaskPriority.low,
   'medium': TaskPriority.medium,
   'high': TaskPriority.high,

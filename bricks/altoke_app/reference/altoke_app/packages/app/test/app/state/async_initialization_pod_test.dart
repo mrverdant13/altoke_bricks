@@ -45,7 +45,7 @@ THEN the async initializer sequence should complete
       addTearDown(container.dispose);
       final subscription = container.listen(
         asyncInitializationPod.future,
-        (_, __) {},
+        (_, _) {},
       );
       addTearDown(subscription.close);
       final future = container.read(asyncInitializationPod.future);
