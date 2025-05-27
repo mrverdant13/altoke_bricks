@@ -27,10 +27,10 @@ class LocalTasksSembastDao implements LocalTasksDao {
   Future<Task> createOne(NewTask newTask) async {
     final NewTask(:title, :priority, :description) = newTask;
     final titleValidationErrors = {
-      if (title.trim().isEmpty) TaskTitleValidationError.empty,
+      if (title.isBlank) TaskTitleValidationError.empty,
     };
     final complexValidationErrors = {
-      if (priority == TaskPriority.high && (description ?? '').trim().isEmpty)
+      if (priority == TaskPriority.high && description.isBlank)
         TaskComplexValidationError.highPriorityWithNoDescription,
     };
     if (titleValidationErrors.isNotEmpty ||
@@ -44,8 +44,7 @@ class LocalTasksSembastDao implements LocalTasksDao {
     final id = await tasksStore.add(database, {
       sembast.Task.titleJsonKey: title,
       sembast.Task.priorityJsonKey: priority.identifier,
-      sembast.Task.descriptionJsonKey:
-          ((description ?? '').trim().isEmpty) ? null : description?.trim(),
+      sembast.Task.descriptionJsonKey: description.nonBlankOrNull,
       sembast.Task.completedJsonKey: false,
     });
     return newTask.toTaskWithId(id);
@@ -70,14 +69,14 @@ class LocalTasksSembastDao implements LocalTasksDao {
     }
     final PartialTask(:title, :priority, :completed, :description) = task;
     final titleValidationErrors = {
-      if (title case Some(value: final title) when title.trim().isEmpty)
+      if (title case Some(value: final title) when title.isBlank)
         TaskTitleValidationError.empty,
     };
     final complexValidationErrors = {
       if (priority == const Some(TaskPriority.high))
         if (description case Some(
           value: final description,
-        ) when (description ?? '').trim().isEmpty)
+        ) when description.isBlank)
           TaskComplexValidationError.highPriorityWithNoDescription,
     };
     if (titleValidationErrors.isNotEmpty ||
@@ -98,8 +97,7 @@ class LocalTasksSembastDao implements LocalTasksDao {
       taskPatch[sembast.Task.completedJsonKey] = completed;
     }
     if (description case Some(value: final description)) {
-      taskPatch[sembast.Task.descriptionJsonKey] =
-          (description ?? '').trim().isEmpty ? null : description?.trim();
+      taskPatch[sembast.Task.descriptionJsonKey] = description.nonBlankOrNull;
     }
     await tasksStore.record(taskId).put(database, taskPatch, merge: true);
   }
@@ -126,8 +124,8 @@ extension on Iterable<RecordSnapshot<int, Map<String, Object?>>> {
     return Task(
       id: id,
       title: rawData[sembast.Task.titleJsonKey]! as String,
-      priority:
-          (rawData[sembast.Task.priorityJsonKey]! as String).toTaskPriority(),
+      priority: (rawData[sembast.Task.priorityJsonKey]! as String)
+          .toTaskPriority(),
       completed: rawData[sembast.Task.completedJsonKey]! as bool,
       description: rawData[sembast.Task.descriptionJsonKey] as String?,
     );
@@ -145,10 +143,9 @@ const _identifiableTaskPriorityMap = {
 @visibleForTesting
 extension IdentifiableTaskPriority on TaskPriority {
   /// The priority internal identifier.
-  String get identifier =>
-      _identifiableTaskPriorityMap.entries
-          .firstWhere((entry) => entry.value == this)
-          .key;
+  String get identifier => _identifiableTaskPriorityMap.entries
+      .firstWhere((entry) => entry.value == this)
+      .key;
 }
 
 /// An extension on a [String] that represents a [TaskPriority] identifier.
@@ -156,4 +153,16 @@ extension IdentifiableTaskPriority on TaskPriority {
 extension TaskPriorityIdentifier on String {
   /// Returns the corresponding [TaskPriority].
   TaskPriority toTaskPriority() => _identifiableTaskPriorityMap[this]!;
+}
+
+/// Extension methods for nullable strings.
+@visibleForTesting
+extension ExtendedNullableString on String? {
+  String get _trimmed => (this ?? '').trim();
+
+  /// Returns `true` if the string is `null` or empty.
+  bool get isBlank => _trimmed.isEmpty;
+
+  /// Returns the trimmed string if it is not empty, otherwise returns `null`.
+  String? get nonBlankOrNull => isBlank ? null : _trimmed;
 }

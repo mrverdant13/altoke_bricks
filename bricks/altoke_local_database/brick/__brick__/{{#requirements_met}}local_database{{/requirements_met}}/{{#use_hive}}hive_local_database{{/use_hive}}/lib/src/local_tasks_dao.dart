@@ -22,10 +22,10 @@ class LocalTasksHiveDao implements LocalTasksDao {
   Future<Task> createOne(NewTask newTask) async {
     final NewTask(:title, :priority, :description) = newTask;
     final titleValidationErrors = {
-      if (title.trim().isEmpty) TaskTitleValidationError.empty,
+      if (title.isBlank) TaskTitleValidationError.empty,
     };
     final complexValidationErrors = {
-      if (priority == TaskPriority.high && (description ?? '').trim().isEmpty)
+      if (priority == TaskPriority.high && description.isBlank)
         TaskComplexValidationError.highPriorityWithNoDescription,
     };
     if (titleValidationErrors.isNotEmpty ||
@@ -39,8 +39,7 @@ class LocalTasksHiveDao implements LocalTasksDao {
     final id = await tasksBox.add({
       hive.Task.titleJsonKey: title,
       hive.Task.priorityJsonKey: priority.identifier,
-      hive.Task.descriptionJsonKey:
-          ((description ?? '').trim().isEmpty) ? null : description?.trim(),
+      hive.Task.descriptionJsonKey: description.nonBlankOrNull,
       hive.Task.completedJsonKey: false,
     });
     return newTask.toTaskWithId(id);
@@ -72,14 +71,14 @@ class LocalTasksHiveDao implements LocalTasksDao {
     }
     final PartialTask(:title, :priority, :completed, :description) = task;
     final titleValidationErrors = {
-      if (title case Some(value: final title) when title.trim().isEmpty)
+      if (title case Some(value: final title) when title.isBlank)
         TaskTitleValidationError.empty,
     };
     final complexValidationErrors = {
       if (priority == const Some(TaskPriority.high))
         if (description case Some(
           value: final description,
-        ) when (description ?? '').trim().isEmpty)
+        ) when description.isBlank)
           TaskComplexValidationError.highPriorityWithNoDescription,
     };
     if (titleValidationErrors.isNotEmpty ||
@@ -99,8 +98,7 @@ class LocalTasksHiveDao implements LocalTasksDao {
       rawTask[hive.Task.completedJsonKey] = completed;
     }
     if (description case Some(value: final description)) {
-      rawTask[hive.Task.descriptionJsonKey] =
-          (description ?? '').trim().isEmpty ? null : description?.trim();
+      rawTask[hive.Task.descriptionJsonKey] = description.nonBlankOrNull;
     }
     await tasksBox.put(taskId, rawTask);
   }
@@ -146,10 +144,9 @@ const _identifiableTaskPriorityMap = {
 @visibleForTesting
 extension IdentifiableTaskPriority on TaskPriority {
   /// The priority internal identifier.
-  String get identifier =>
-      _identifiableTaskPriorityMap.entries
-          .firstWhere((entry) => entry.value == this)
-          .key;
+  String get identifier => _identifiableTaskPriorityMap.entries
+      .firstWhere((entry) => entry.value == this)
+      .key;
 }
 
 /// An extension on a [String] that represents a [TaskPriority] identifier.
@@ -157,4 +154,16 @@ extension IdentifiableTaskPriority on TaskPriority {
 extension TaskPriorityIdentifier on String {
   /// Returns the corresponding [TaskPriority].
   TaskPriority toTaskPriority() => _identifiableTaskPriorityMap[this]!;
+}
+
+/// Extension methods for nullable strings.
+@visibleForTesting
+extension ExtendedNullableString on String? {
+  String get _trimmed => (this ?? '').trim();
+
+  /// Returns `true` if the string is `null` or empty.
+  bool get isBlank => _trimmed.isEmpty;
+
+  /// Returns the trimmed string if it is not empty, otherwise returns `null`.
+  String? get nonBlankOrNull => isBlank ? null : _trimmed;
 }
