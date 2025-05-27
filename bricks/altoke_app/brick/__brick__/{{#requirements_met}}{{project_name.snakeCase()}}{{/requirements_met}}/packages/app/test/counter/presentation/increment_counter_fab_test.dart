@@ -35,7 +35,7 @@ THEN the counter should be incremented
         overrides: [counterPod.overrideWith(() => counterNotifier)],
       );
       addTearDown(container.dispose);
-      final subscription = container.listen(counterPod.notifier, (_, __) {});
+      final subscription = container.listen(counterPod.notifier, (_, _) {});
       addTearDown(subscription.close);
       await tester.pumpAppWithScreen(
         UncontrolledProviderScope(
