@@ -28,8 +28,8 @@ void main() {
     test('emits the latest value on each new subscription', () async {
       final values1 = <int>[];
       final stream = buildSubject(
-        computeInitialValue:
-            () => values1.isEmpty ? const None<int>() : Some<int>(values1.last),
+        computeInitialValue: () =>
+            values1.isEmpty ? const None<int>() : Some<int>(values1.last),
       );
       final sub1 = stream.listen(values1.add);
       addTearDown(sub1.cancel);
