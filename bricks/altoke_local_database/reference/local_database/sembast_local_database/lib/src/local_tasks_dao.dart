@@ -132,7 +132,7 @@ extension on Iterable<RecordSnapshot<int, Map<String, Object?>>> {
   });
 }
 
-const _identifiableTaskPriorityMap = {
+const _identifiableTaskPriorityMap = <String, TaskPriority>{
   'low': TaskPriority.low,
   'medium': TaskPriority.medium,
   'high': TaskPriority.high,

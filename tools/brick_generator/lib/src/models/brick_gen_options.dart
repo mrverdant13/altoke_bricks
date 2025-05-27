@@ -18,6 +18,7 @@ class BrickGenOptions with BrickGenOptionsMappable {
   });
 
   /// Creates a [BrickGenOptions] from a JSON map.
+  // ignore: specify_nonobvious_property_types
   static const fromJson = BrickGenOptionsMapper.fromMap;
 
   /// The replacements to be applied to the reference folder to generate the

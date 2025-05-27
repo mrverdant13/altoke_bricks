@@ -14,6 +14,7 @@ class Replacement with ReplacementMappable {
   const Replacement({required this.from, required this.to});
 
   /// Creates a [Replacement] from a JSON map.
+  // ignore: specify_nonobvious_property_types
   static const fromJson = ReplacementMapper.fromMap;
 
   /// The pattern to be replaced.

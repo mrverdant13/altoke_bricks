@@ -134,7 +134,7 @@ THEN the form should show the localized error
       final container = ProviderScope.containerOf(context, listen: false);
       final subscription = container.listen(
         createTaskMutationPod.notifier,
-        (_, __) {},
+        (_, _) {},
       );
       addTearDown(subscription.close);
       subscription.read().state = const AsyncError(Object(), StackTrace.empty);
@@ -161,7 +161,7 @@ THEN the form should show the localized error
       final container = ProviderScope.containerOf(context, listen: false);
       final subscription = container.listen(
         createTaskMutationPod.notifier,
-        (_, __) {},
+        (_, _) {},
       );
       addTearDown(subscription.close);
       subscription.read().state = const AsyncError(
@@ -197,7 +197,7 @@ THEN the form should show the localized error
       final container = ProviderScope.containerOf(context, listen: false);
       final subscription = container.listen(
         createTaskMutationPod.notifier,
-        (_, __) {},
+        (_, _) {},
       );
       addTearDown(subscription.close);
       subscription.read().state = const AsyncError(
