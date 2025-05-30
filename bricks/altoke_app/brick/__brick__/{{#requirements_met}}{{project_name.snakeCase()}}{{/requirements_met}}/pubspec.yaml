@@ -7,8 +7,8 @@ environment:
   flutter: ">=3.32.0 <4.0.0"
 
 dev_dependencies:
-  melos: ^7.0.0-dev.8
-  very_good_analysis: ^7.0.0
+  melos: ^7.0.0-dev.9
+  very_good_analysis: ^8.0.0
 
 melos:
   command:
@@ -19,7 +19,7 @@ melos:
       dependencies:
         meta: ^1.16.0
       dev_dependencies:
-        very_good_analysis: ^7.0.0
+        very_good_analysis: ^8.0.0
     clean:
       hooks:
         pre:
