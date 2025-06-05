@@ -6,7 +6,7 @@ environment:
   sdk: ">=3.8.0 <4.0.0"
 
 dev_dependencies:
-  checked_yaml: ^2.0.3
+  checked_yaml: ^2.0.4
   local_database_alternative:
     path: ../../../tools/local_database_alternative
   mason: ^0.1.1
