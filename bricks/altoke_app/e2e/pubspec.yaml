@@ -6,7 +6,7 @@ environment:
   sdk: ">=3.8.0 <4.0.0"
 
 dev_dependencies:
-  checked_yaml: ^2.0.3
+  checked_yaml: ^2.0.4
   mason: ^0.1.1
   meta: ^1.16.0
   mocktail: ^1.0.4
