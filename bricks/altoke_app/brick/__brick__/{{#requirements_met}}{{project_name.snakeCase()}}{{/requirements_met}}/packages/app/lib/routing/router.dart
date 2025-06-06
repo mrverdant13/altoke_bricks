@@ -42,7 +42,7 @@ RouterConfig<UrlState> routerConfig(Ref ref) {
     TypedGoRoute<CounterRouteData>(path: 'counter', name: 'CounterRoute'),
   ],
 )
-class HomeRouteData extends GoRouteData {
+class HomeRouteData extends GoRouteData with _$HomeRouteData {
   const HomeRouteData();
 
   @override
@@ -51,7 +51,7 @@ class HomeRouteData extends GoRouteData {
   }
 }
 
-class CounterRouteData extends GoRouteData {
+class CounterRouteData extends GoRouteData with _$CounterRouteData {
   const CounterRouteData();
 
   @override
