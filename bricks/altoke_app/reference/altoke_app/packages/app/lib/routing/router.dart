@@ -61,7 +61,7 @@ RouterConfig<UrlState> autoRouteConfig(Ref ref) {
     /*remove-end*/
   ],
 )
-class HomeRouteData extends GoRouteData {
+class HomeRouteData extends GoRouteData with _$HomeRouteData {
   const HomeRouteData();
 
   @override
@@ -70,7 +70,7 @@ class HomeRouteData extends GoRouteData {
   }
 }
 
-class CounterRouteData extends GoRouteData {
+class CounterRouteData extends GoRouteData with _$CounterRouteData {
   const CounterRouteData();
 
   @override
@@ -81,7 +81,7 @@ class CounterRouteData extends GoRouteData {
 
 /*x-remove-start*/
 // coverage:ignore-start
-class TasksRouteData extends GoRouteData {
+class TasksRouteData extends GoRouteData with _$TasksRouteData {
   const TasksRouteData();
 
   @override
