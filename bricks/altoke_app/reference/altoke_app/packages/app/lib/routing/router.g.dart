@@ -12,67 +12,82 @@ RouteBase get $homeRouteData => GoRouteData.$route(
   path: '/',
   name: 'HomeRoute',
 
-  factory: $HomeRouteDataExtension._fromState,
+  factory: _$HomeRouteData._fromState,
   routes: [
     GoRouteData.$route(
       path: 'counter',
       name: 'CounterRoute',
 
-      factory: $CounterRouteDataExtension._fromState,
+      factory: _$CounterRouteData._fromState,
     ),
     GoRouteData.$route(
       path: 'tasks',
       name: 'TasksRoute',
 
-      factory: $TasksRouteDataExtension._fromState,
+      factory: _$TasksRouteData._fromState,
     ),
   ],
 );
 
-extension $HomeRouteDataExtension on HomeRouteData {
+mixin _$HomeRouteData on GoRouteData {
   static HomeRouteData _fromState(GoRouterState state) => const HomeRouteData();
 
+  @override
   String get location => GoRouteData.$location('/');
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $CounterRouteDataExtension on CounterRouteData {
+mixin _$CounterRouteData on GoRouteData {
   static CounterRouteData _fromState(GoRouterState state) =>
       const CounterRouteData();
 
+  @override
   String get location => GoRouteData.$location('/counter');
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $TasksRouteDataExtension on TasksRouteData {
+mixin _$TasksRouteData on GoRouteData {
   static TasksRouteData _fromState(GoRouterState state) =>
       const TasksRouteData();
 
+  @override
   String get location => GoRouteData.$location('/tasks');
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
