@@ -53,7 +53,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   #{{#use_go_router}}x#
-  go_router_builder: ^2.9.0
+  go_router_builder: ^3.0.0
   #{{/use_go_router}}x#
   meta: ^1.16.0
   mocktail: ^1.0.4
