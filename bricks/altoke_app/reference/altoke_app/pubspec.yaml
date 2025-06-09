@@ -12,7 +12,7 @@ environment:
 
 dev_dependencies:
   melos: ^7.0.0-dev.9
-  very_good_analysis: ^8.0.0
+  very_good_analysis: ^9.0.0
 
 melos:
   command:
