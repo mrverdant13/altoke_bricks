@@ -17,4 +17,4 @@ dev_dependencies:
     path: ../../../tools/router_package
   shell: any
   test: ^1.25.15
-  very_good_analysis: ^8.0.0
+  very_good_analysis: ^9.0.0
