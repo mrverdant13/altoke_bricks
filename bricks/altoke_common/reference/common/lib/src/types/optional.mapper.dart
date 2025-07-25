@@ -67,7 +67,9 @@ class DmSomeMapper extends ClassMapperBase<DmSome> {
   );
 
   @override
-  final MappableFields<DmSome> fields = const {#value: _f$value};
+  final MappableFields<DmSome> fields = const {
+    #value: _f$value,
+  };
 
   static DmSome<T> _instantiate<T extends Object?>(DecodingData data) {
     return DmSome(data.dec(_f$value));
