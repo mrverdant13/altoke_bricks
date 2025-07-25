@@ -11,7 +11,7 @@ environment:
 
 dev_dependencies:
   #{{#use_code_generation}}x#
-  build_runner: ^2.4.15
+  build_runner: ^2.5.4
   #{{/use_code_generation}}x#
   test: ^1.25.15
   very_good_analysis: ^9.0.0

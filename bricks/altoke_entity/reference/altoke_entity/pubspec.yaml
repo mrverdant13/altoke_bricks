@@ -31,7 +31,7 @@ dependencies:
 
 dev_dependencies:
   #x{{#use_code_generation}}#
-  build_runner: ^2.4.15
+  build_runner: ^2.5.4
   #{{/use_code_generation}}#
   #{{#use_dart_mappable}}x#
   dart_mappable_builder: ^4.5.0

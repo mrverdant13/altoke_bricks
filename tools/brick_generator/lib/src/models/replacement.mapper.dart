@@ -30,7 +30,10 @@ class ReplacementMapper extends ClassMapperBase<Replacement> {
   static const Field<Replacement, String> _f$to = Field('to', _$to);
 
   @override
-  final MappableFields<Replacement> fields = const {#from: _f$from, #to: _f$to};
+  final MappableFields<Replacement> fields = const {
+    #from: _f$from,
+    #to: _f$to,
+  };
 
   static Replacement _instantiate(DecodingData data) {
     return Replacement(from: data.dec(_f$from), to: data.dec(_f$to));
