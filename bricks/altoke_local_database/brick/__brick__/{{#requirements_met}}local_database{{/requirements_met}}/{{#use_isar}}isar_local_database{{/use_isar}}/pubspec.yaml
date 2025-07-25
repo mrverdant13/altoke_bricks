@@ -4,7 +4,7 @@ version: 0.0.1+1
 publish_to: none
 
 environment:
-  sdk: ">=3.8.0 <4.0.0"
+  sdk: ">=3.8.1 <4.0.0"
 
 dependencies:
   common:
@@ -18,7 +18,7 @@ dependencies:
   meta: ^1.16.0
 
 dev_dependencies:
-  build_runner: ^2.4.15
+  build_runner: ^2.5.4
   isar_generator:
     # HACK: Using a forked version of isar_generator to avoid version conflicts with `source_gen` v2.
     git:
@@ -26,4 +26,4 @@ dev_dependencies:
       ref: v3
       path: packages/isar_generator/
   test: ^1.25.15
-  very_good_analysis: ^8.0.0
+  very_good_analysis: ^9.0.0
