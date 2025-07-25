@@ -21,4 +21,4 @@ dependencies:
       path: ./tools/value_equality_approach/
 
 dev_dependencies:
-  very_good_analysis: ^8.0.0
+  very_good_analysis: ^9.0.0
