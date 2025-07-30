@@ -125,7 +125,7 @@ bot:
     - chore/(.+/)?update-template
     - dependabot
     - docs/update-root-readme
-    - docs/.+/update-readme
+    - docs/(.+/)?update-readme
 
 build:
   - head-branch:
