@@ -3,23 +3,23 @@ publish_to: none
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.8.0 <4.0.0"
-  flutter: ">=3.32.0 <4.0.0"
+  sdk: ">=3.8.1 <4.0.0"
+  flutter: ">=3.32.7 <4.0.0"
 
 dev_dependencies:
   melos: ^7.0.0-dev.9
-  very_good_analysis: ^8.0.0
+  very_good_analysis: ^9.0.0
 
 melos:
   command:
     bootstrap:
       environment:
-        sdk: ">=3.8.0 <4.0.0"
-        flutter: ">=3.32.0 <4.0.0"
+        sdk: ">=3.8.1 <4.0.0"
+        flutter: ">=3.32.7 <4.0.0"
       dependencies:
         meta: ^1.16.0
       dev_dependencies:
-        very_good_analysis: ^8.0.0
+        very_good_analysis: ^9.0.0
     clean:
       hooks:
         pre:
