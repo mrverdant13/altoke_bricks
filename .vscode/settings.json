@@ -37,5 +37,6 @@
       "comments": false,
       "strings": true
     }
-  }
+  },
+  "dart.flutterSdkPath": ".fvm/versions/3.32.7",
 }
