@@ -122,7 +122,7 @@ s:template:
 
 bot:
   - head-branch:
-    - chore/.+/update-template
+    - chore/(.+/)?update-template
     - dependabot
     - docs/update-root-readme
     - docs/.+/update-readme
