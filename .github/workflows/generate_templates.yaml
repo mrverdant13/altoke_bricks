@@ -77,7 +77,6 @@ jobs:
           delete-branch: true
           labels: |
             bot
-            b:${{ steps.build-brick-tag-name.outputs.brick-tag-name }}
           author: Altoke Bot <altoke.bot@users.noreply.github.com>
           committer: Altoke Bot <altoke.bot@users.noreply.github.com>
           assignees: mrverdant13
