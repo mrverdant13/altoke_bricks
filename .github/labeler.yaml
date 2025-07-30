@@ -120,6 +120,17 @@ s:template:
     - any-glob-to-any-file:
       - bricks/*/brick/__brick__/**
 
+bot:
+  - head-branch:
+    - chore/**/update-template
+    - dependabot
+    - docs/update-root-readme
+    - docs/**/update-readme
+
+build:
+  - head-branch:
+    - dependabot/pub/**
+
 ci:
   - changed-files:
     - any-glob-to-any-file:
