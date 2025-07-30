@@ -31,6 +31,9 @@
 /build/
 /**/untranslated-messages.json
 
+# FVM Version Cache
+.fvm/
+
 # Testing
 /coverage/
 
