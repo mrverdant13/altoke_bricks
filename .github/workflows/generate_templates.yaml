@@ -75,8 +75,6 @@ jobs:
           title: 'chore(b-${{ steps.build-brick-tag-name.outputs.brick-tag-name }}): update template'
           body: Update template.
           delete-branch: true
-          labels: |
-            bot
           author: Altoke Bot <altoke.bot@users.noreply.github.com>
           committer: Altoke Bot <altoke.bot@users.noreply.github.com>
           assignees: mrverdant13

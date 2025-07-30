@@ -40,9 +40,6 @@ jobs:
           title: 'docs: update root README'
           body: Update root README.
           delete-branch: true
-          labels: |
-            bot
-            docs
           author: Altoke Bot <altoke.bot@users.noreply.github.com>
           committer: Altoke Bot <altoke.bot@users.noreply.github.com>
           assignees: mrverdant13
@@ -110,10 +107,6 @@ jobs:
           title: 'docs(b-${{ steps.build-brick-tag-name.outputs.brick-tag-name }}): update README'
           body: Update README.
           delete-branch: true
-          labels: |
-            bot
-            docs
-            b:${{ steps.build-brick-tag-name.outputs.brick-tag-name }}
           author: Altoke Bot <altoke.bot@users.noreply.github.com>
           committer: Altoke Bot <altoke.bot@users.noreply.github.com>
           assignees: mrverdant13
