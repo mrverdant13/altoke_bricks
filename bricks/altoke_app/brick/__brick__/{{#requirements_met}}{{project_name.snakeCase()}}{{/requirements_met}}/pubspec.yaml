@@ -29,8 +29,9 @@ melos:
     # Clean-up
     clean:
       description: Deep clean-up
+      # Preserves FVM internal folder to avoid re-installing the Flutter SDK when developing locally.
       run: >
-        git clean -dfX MELOS_ROOT_PATH
+        git clean --exclude="!.fvm" -dfX MELOS_ROOT_PATH
 
     # Code generation
     gen:
