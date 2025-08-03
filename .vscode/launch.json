@@ -12,6 +12,7 @@
       "toolArgs": [
         "--no-pub",
         "--flavor=${input:FLAVOR}",
+        "--web-port=3000"
       ],
       "program": "lib/bootstrap/main_${input:FLAVOR}.dart",
     },
