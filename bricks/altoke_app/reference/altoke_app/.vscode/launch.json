@@ -13,6 +13,7 @@
       "toolArgs": [
         "--no-pub",
         "--flavor=${input:FLAVOR}",
+        "--web-port=3000"
       ],
     },
   ],

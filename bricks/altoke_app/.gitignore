@@ -12,11 +12,7 @@
 # Platforms
 /**/packages/app/linux/
 /**/packages/app/macos/
-/**/packages/app/web/
 /**/packages/app/windows/
 
-# Generated files
-/**/__brick__/**/*.g.dart
-/**/__brick__/**/*.gr.dart
-/**/__brick__/**/*.lock
+# Generated reference files
 /**/reference/**/*.lock

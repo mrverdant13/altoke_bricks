@@ -1,6 +1,7 @@
 /*x-remove-start*/
 import 'package:altoke_app/external/external.dart';
 /*remove-end-x*/
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -24,8 +25,10 @@ Future<void> asyncInitialization(Ref ref) async {
   // Run async initialization.
   /*x-remove-start*/
   // coverage:ignore-start
-  await ref.watch(asyncApplicationDocumentsDirectoryPod.future);
-  await ref.watch(asyncTemporaryDirectoryPod.future);
+  if (!kIsWeb) {
+    await ref.watch(asyncApplicationDocumentsDirectoryPod.future);
+    await ref.watch(asyncTemporaryDirectoryPod.future);
+  }
   await ref.watch(asyncDriftLocalDatabasePod.future);
   await ref.watch(asyncHiveInitializationPod.future);
   // coverage:ignore-end
