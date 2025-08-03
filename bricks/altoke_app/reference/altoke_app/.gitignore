@@ -13,6 +13,9 @@
 /**/melos_*.iml
 /**/pubspec_overrides.yaml
 
+# FVM Version Cache
+.fvm/
+
 # Testing
 /coverage/
 
