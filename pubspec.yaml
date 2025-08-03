@@ -53,7 +53,7 @@ melos:
     clean:
       description: Deep clean-up
       run: >
-        git clean --exclude="!linux" --exclude="!macos" --exclude="!web" --exclude="!windows" -dfX MELOS_ROOT_PATH
+        git clean --exclude="!.fvm" --exclude="!linux" --exclude="!macos" --exclude="!web" --exclude="!windows" -dfX MELOS_ROOT_PATH
 
     # Code generation
     gen:
