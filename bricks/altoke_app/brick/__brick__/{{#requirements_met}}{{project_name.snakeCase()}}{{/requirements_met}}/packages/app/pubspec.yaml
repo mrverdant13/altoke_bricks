@@ -5,17 +5,17 @@ version: 1.0.0+1
 resolution: workspace
 
 environment:
-  sdk: ">=3.8.1 <4.0.0"
-  flutter: ">=3.32.7 <4.0.0"
+  sdk: ">=3.9.0 <4.0.0"
+  flutter: ">=3.35.2 <4.0.0"
 
 dependencies:
-  {{#use_auto_route}}auto_route: ^10.1.0
+  {{#use_auto_route}}auto_route: ^10.1.2
   {{/use_auto_route}}flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^2.6.1
-  {{#use_go_router}}go_router: ^16.0.0
+  {{#use_go_router}}go_router: ^16.2.0
   {{/use_go_router}}intl: ^0.20.2
   riverpod_annotation: ^2.6.1
 

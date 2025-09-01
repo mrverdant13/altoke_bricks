@@ -1,3 +1,6 @@
+// Allow non-const constructors for testing
+// ignore_for_file: prefer_const_constructors
+
 import 'package:altoke_app/app/app.dart';
 import 'package:altoke_app/flavors/flavors.dart';
 import 'package:altoke_app/routing/routing.dart';
@@ -43,7 +46,7 @@ THEN the flavor banner should be displayed
             asyncInitializationPod.overrideWith((_) async {}),
             routerConfigPod.overrideWithValue(routerConfig),
           ],
-          child: const MyApp(),
+          child: MyApp(),
         ),
       );
       expect(find.byType(FlavorBanner), findsOneWidget);
@@ -83,7 +86,7 @@ THEN the initialized router content should be shown
             asyncInitializationPod.overrideWith((_) async {}),
             routerConfigPod.overrideWithValue(routerConfig),
           ],
-          child: const MyApp(),
+          child: MyApp(),
         ),
       );
       expect(find.byType(InitializingScreen), findsOneWidget);
@@ -129,7 +132,7 @@ THEN the errored initialization screen should be shown
             }),
             routerConfigPod.overrideWithValue(routerConfig),
           ],
-          child: const MyApp(),
+          child: MyApp(),
         ),
       );
       expect(find.byType(InitializingScreen), findsOneWidget);
@@ -172,7 +175,7 @@ THEN the flavor banner should be displayed
             asyncInitializationPod.overrideWith((_) async {}),
             routerConfigPod.overrideWithValue(routerConfig),
           ],
-          child: const MyApp(),
+          child: MyApp(),
         ),
       );
       expect(find.byType(FlavorBanner), findsOneWidget);
@@ -208,7 +211,7 @@ THEN the initialized router content should be shown
             asyncInitializationPod.overrideWith((_) async {}),
             routerConfigPod.overrideWithValue(routerConfig),
           ],
-          child: const MyApp(),
+          child: MyApp(),
         ),
       );
       expect(find.byType(InitializingScreen), findsOneWidget);
@@ -250,7 +253,7 @@ THEN the errored initialization screen should be shown
             }),
             routerConfigPod.overrideWithValue(routerConfig),
           ],
-          child: const MyApp(),
+          child: MyApp(),
         ),
       );
       expect(find.byType(InitializingScreen), findsOneWidget);

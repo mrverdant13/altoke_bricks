@@ -18,13 +18,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.32.7
+          flutter-version: 3.35.2
       - name: Install melos
-        run: dart pub global activate melos 7.0.0-dev.9
+        run: dart pub global activate melos 7.1.0
       - name: Initialize READMEs resolver
         run: melos bs --scope=readmes_resolver
       - name: Resolve root README file
@@ -51,18 +51,18 @@ jobs:
       scopes: ${{ steps.identify-brick-scopes.outputs.scopes }}
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.32.7
+          flutter-version: 3.35.2
       - name: Install melos
-        run: dart pub global activate melos 7.0.0-dev.9
+        run: dart pub global activate melos 7.1.0
       - name: Initialize brick scopes
         run: melos bs --category=scopes
       - name: Identify brick scopes
         id: identify-brick-scopes
-        run: echo "scopes=$(melos list --category=scopes --json | tr -d '\n')" >> "$GITHUB_OUTPUT"
+        run: echo "scopes=$(melos list --category=scopes --json | sed -n '/^\[/,$p' | tr -d '\n')" >> "$GITHUB_OUTPUT"
       - name: List identified scopes
         run: echo "${{ join(steps.identify-brick-scopes.outputs.scopes.*.name, ', ') }}"
   resolve-brick-readme:
@@ -83,13 +83,13 @@ jobs:
         id: build-brick-tag-name
         run: echo "brick-tag-name=$(echo ${{ steps.build-brick-name.outputs.brick-name }} | sed 's/_/-/g')" >> "$GITHUB_OUTPUT"
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.32.7
+          flutter-version: 3.35.2
       - name: Install melos
-        run: dart pub global activate melos 7.0.0-dev.9
+        run: dart pub global activate melos 7.1.0
       - name: Initialize READMEs resolver
         run: melos bs --scope=readmes_resolver
       - name: Set relevant packages
