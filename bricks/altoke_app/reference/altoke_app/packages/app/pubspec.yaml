@@ -14,7 +14,7 @@ dependencies:
     path: ../../../../../altoke_common/reference/common/
   #remove-end-x#
   #{{#use_auto_route}}x#
-  auto_route: ^10.1.0
+  auto_route: ^10.1.2
   #{{/use_auto_route}}#
   #x-remove-start#
   drift: ^2.28.0
