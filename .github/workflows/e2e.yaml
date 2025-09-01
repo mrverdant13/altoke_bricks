@@ -25,13 +25,13 @@ jobs:
           # - windows-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: 3.35.2
       - name: Install melos
-        run: dart pub global activate melos 7.0.0-dev.9
+        run: dart pub global activate melos 7.1.0
       - name: Install coverage
         run: dart pub global activate coverage 1.9.0
       - name: Install coverde
