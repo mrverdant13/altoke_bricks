@@ -25,12 +25,12 @@ jobs:
         with:
           flutter-version: 3.35.2
       - name: Install melos
-        run: dart pub global activate melos 7.0.0-dev.9
+        run: dart pub global activate melos 7.1.0
       - name: Initialize melos
         run: melos bs --category=scopes
       - name: Identify brick scopes
         id: identify-brick-scopes
-        run: echo "scopes=$(melos list --category=scopes --json | tr -d '\n')" >> "$GITHUB_OUTPUT"
+        run: echo "scopes=$(melos list --category=scopes --json | sed -n '/^\[/,$p' | tr -d '\n')" >> "$GITHUB_OUTPUT"
       - name: List identified scopes
         run: echo "${{ join(steps.identify-brick-scopes.outputs.scopes.*.name, ', ') }}"
   generate-templates:
@@ -57,7 +57,7 @@ jobs:
         with:
           flutter-version: 3.35.2
       - name: Install melos
-        run: dart pub global activate melos 7.0.0-dev.9
+        run: dart pub global activate melos 7.1.0
       - name: Initialize brick generator
         run: melos bs --scope=brick_generator
       - name: Set brick scope as unique relevant packages
