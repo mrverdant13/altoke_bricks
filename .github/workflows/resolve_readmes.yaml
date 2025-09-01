@@ -18,11 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.32.7
+          flutter-version: 3.35.2
       - name: Install melos
         run: dart pub global activate melos 7.0.0-dev.9
       - name: Initialize READMEs resolver
@@ -51,11 +51,11 @@ jobs:
       scopes: ${{ steps.identify-brick-scopes.outputs.scopes }}
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.32.7
+          flutter-version: 3.35.2
       - name: Install melos
         run: dart pub global activate melos 7.0.0-dev.9
       - name: Initialize brick scopes
@@ -83,11 +83,11 @@ jobs:
         id: build-brick-tag-name
         run: echo "brick-tag-name=$(echo ${{ steps.build-brick-name.outputs.brick-name }} | sed 's/_/-/g')" >> "$GITHUB_OUTPUT"
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.32.7
+          flutter-version: 3.35.2
       - name: Install melos
         run: dart pub global activate melos 7.0.0-dev.9
       - name: Initialize READMEs resolver

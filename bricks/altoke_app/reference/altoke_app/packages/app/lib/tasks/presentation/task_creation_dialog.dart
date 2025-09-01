@@ -141,7 +141,7 @@ class _NewTaskFormState extends ConsumerState<NewTaskForm> {
         ),
         const SizedBox.square(dimension: 16),
         DropdownButtonFormField(
-          value: priority,
+          initialValue: priority,
           decoration: InputDecoration(labelText: l10n.newTaskFormPriorityLabel),
           items: [
             for (final priority in TaskPriority.values)
