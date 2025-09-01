@@ -1,3 +1,6 @@
+// Allow non-const constructors for testing
+// ignore_for_file: prefer_const_constructors
+
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/app/app.dart';
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/flavors/flavors.dart';
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/routing/routing.dart';{{#use_auto_route}}
@@ -38,7 +41,7 @@ THEN the flavor banner should be displayed
             asyncInitializationPod.overrideWith((_) async {}),
             routerConfigPod.overrideWithValue(routerConfig),
           ],
-          child: const MyApp(),
+          child: MyApp(),
         ),
       );
       expect(find.byType(FlavorBanner), findsOneWidget);
@@ -78,7 +81,7 @@ THEN the initialized router content should be shown
             asyncInitializationPod.overrideWith((_) async {}),
             routerConfigPod.overrideWithValue(routerConfig),
           ],
-          child: const MyApp(),
+          child: MyApp(),
         ),
       );
       expect(find.byType(InitializingScreen), findsOneWidget);
@@ -124,7 +127,7 @@ THEN the errored initialization screen should be shown
             }),
             routerConfigPod.overrideWithValue(routerConfig),
           ],
-          child: const MyApp(),
+          child: MyApp(),
         ),
       );
       expect(find.byType(InitializingScreen), findsOneWidget);
@@ -162,7 +165,7 @@ THEN the flavor banner should be displayed
             asyncInitializationPod.overrideWith((_) async {}),
             routerConfigPod.overrideWithValue(routerConfig),
           ],
-          child: const MyApp(),
+          child: MyApp(),
         ),
       );
       expect(find.byType(FlavorBanner), findsOneWidget);
@@ -198,7 +201,7 @@ THEN the initialized router content should be shown
             asyncInitializationPod.overrideWith((_) async {}),
             routerConfigPod.overrideWithValue(routerConfig),
           ],
-          child: const MyApp(),
+          child: MyApp(),
         ),
       );
       expect(find.byType(InitializingScreen), findsOneWidget);
@@ -240,7 +243,7 @@ THEN the errored initialization screen should be shown
             }),
             routerConfigPod.overrideWithValue(routerConfig),
           ],
-          child: const MyApp(),
+          child: MyApp(),
         ),
       );
       expect(find.byType(InitializingScreen), findsOneWidget);
