@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -51,7 +51,7 @@ jobs:
       scopes: ${{ steps.identify-brick-scopes.outputs.scopes }}
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -83,7 +83,7 @@ jobs:
         id: build-brick-tag-name
         run: echo "brick-tag-name=$(echo ${{ steps.build-brick-name.outputs.brick-name }} | sed 's/_/-/g')" >> "$GITHUB_OUTPUT"
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
