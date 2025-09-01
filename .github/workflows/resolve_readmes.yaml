@@ -24,7 +24,7 @@ jobs:
         with:
           flutter-version: 3.35.2
       - name: Install melos
-        run: dart pub global activate melos 7.0.0-dev.9
+        run: dart pub global activate melos 7.1.0
       - name: Initialize READMEs resolver
         run: melos bs --scope=readmes_resolver
       - name: Resolve root README file
@@ -57,7 +57,7 @@ jobs:
         with:
           flutter-version: 3.35.2
       - name: Install melos
-        run: dart pub global activate melos 7.0.0-dev.9
+        run: dart pub global activate melos 7.1.0
       - name: Initialize brick scopes
         run: melos bs --category=scopes
       - name: Identify brick scopes
@@ -89,7 +89,7 @@ jobs:
         with:
           flutter-version: 3.35.2
       - name: Install melos
-        run: dart pub global activate melos 7.0.0-dev.9
+        run: dart pub global activate melos 7.1.0
       - name: Initialize READMEs resolver
         run: melos bs --scope=readmes_resolver
       - name: Set relevant packages
