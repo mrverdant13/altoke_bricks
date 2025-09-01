@@ -7,7 +7,7 @@ resolution: workspace
 #remove-end#
 
 environment:
-  sdk: ">=3.8.1 <4.0.0"
+  sdk: ">=3.9.0 <4.0.0"
 
 dependencies:
   #{{#use_dart_mappable}}x#
@@ -33,5 +33,5 @@ dev_dependencies:
   #x{{#use_freezed}}x#
   freezed: ^3.1.0
   #x{{/use_freezed}}#
-  test: ^1.25.15
+  test: ^1.26.2
   very_good_analysis: ^9.0.0
