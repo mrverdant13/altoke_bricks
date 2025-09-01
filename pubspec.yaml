@@ -2,10 +2,10 @@ name: altoke_bricks_monorepo
 repository: https://github.com/mrverdant13/altoke_bricks
 
 environment:
-  sdk: ">=3.8.1 <4.0.0"
+  sdk: ">=3.9.0 <4.0.0"
 
 dev_dependencies:
-  melos: ^7.0.0-dev.9
+  melos: ^7.1.0
   very_good_analysis: ^9.0.0
 
 melos:
@@ -25,8 +25,8 @@ melos:
   command:
     bootstrap:
       environment:
-        sdk: ">=3.8.1 <4.0.0"
-        flutter: ">=3.32.7 <4.0.0"
+        sdk: ">=3.9.0 <4.0.0"
+        flutter: ">=3.35.2 <4.0.0"
       dependencies:
         collection: ^1.19.1
         intl: ^0.20.2
@@ -37,23 +37,36 @@ melos:
         build_runner: ^2.5.4
         collection: ^1.19.1
         mason: ^0.1.1
-        melos: ^7.0.0-dev.9
+        melos: ^7.1.0
         meta: ^1.16.0
         mocktail: ^1.0.4
         path: ^1.9.1
-        test: ^1.25.15
+        test: ^1.26.2
         very_good_analysis: ^9.0.0
+      hooks:
+        pre:
+          run: melos run bootstrap
     clean:
       hooks:
         pre:
           run: melos run clean
 
   scripts:
+    bootstrap:
+      # HACK: Workaround to avoid workspace bug
+      # https://github.com/flutter/flutter/issues/174205
+      run: >
+        cd MELOS_ROOT_PATH/bricks/altoke_app/reference/altoke_app/packages/app/
+        &&
+        flutter pub get
+
     # Clean-up
     clean:
       description: Deep clean-up
+      # Preserves FVM internal folder to avoid re-installing the Flutter SDK when developing locally.
+      # Preserves platform-specific folders to keep them for local development.
       run: >
-        git clean --exclude="!linux" --exclude="!macos" --exclude="!web" --exclude="!windows" -dfX MELOS_ROOT_PATH
+        git clean --exclude="!.fvm" --exclude="!linux" --exclude="!macos" --exclude="!web" --exclude="!windows" -dfX MELOS_ROOT_PATH
 
     # Code generation
     gen:
@@ -142,7 +155,7 @@ melos:
       run: >
         dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random --color
         &&
-        format_coverage --lcov --in=./coverage/ --out=./coverage/lcov.info --report-on=lib -c -b 'MELOS_PACKAGE_PATH'
+        format_coverage --lcov --in=./coverage/ --out=./coverage/lcov.info --report-on=lib --check-ignore -b 'MELOS_PACKAGE_PATH'
       packageFilters:
         flutter: false
         dirExists:
@@ -188,7 +201,7 @@ melos:
     test.ci:
       description: Test all packages (CI)
       run: >
-        melos exec --order-dependents --fail-fast --no-flutter --dir-exists="test" --depends-on=test -- "dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random && format_coverage --lcov --in=./coverage/ --out=./coverage/lcov.info --report-on=lib -c -b 'MELOS_PACKAGE_PATH'"
+        melos exec --order-dependents --fail-fast --no-flutter --dir-exists="test" --depends-on=test -- "dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random && format_coverage --lcov --in=./coverage/ --out=./coverage/lcov.info --report-on=lib --check-ignore -b 'MELOS_PACKAGE_PATH'"
         &&
         melos exec --order-dependents --fail-fast --flutter --dir-exists="test" --depends-on=flutter_test -- "flutter test -x ci-only --coverage -r expanded --test-randomize-ordering-seed random"
     coverage.merge:
