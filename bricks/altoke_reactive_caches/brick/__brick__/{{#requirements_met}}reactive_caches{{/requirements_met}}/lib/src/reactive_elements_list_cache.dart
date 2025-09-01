@@ -99,7 +99,7 @@ class ReactiveElementsListCache<E extends Object?> {
     required PlacementMode mode,
   }) {
     streamController.add(
-      this.elements
+      elements
           .mapIndexed((index, currentElement) {
             final overridingElements = indexedElements
                 .where((indexedElement) => indexedElement.$1 == index)
@@ -161,7 +161,7 @@ class ReactiveElementsListCache<E extends Object?> {
     WhereIndexedCallback<E> where = noIndexedFilter,
   }) {
     streamController.add([
-      for (final (index, element) in this.elements.indexed)
+      for (final (index, element) in elements.indexed)
         if (where(index, element)) update(element) else element,
     ]);
   }
@@ -170,7 +170,7 @@ class ReactiveElementsListCache<E extends Object?> {
   /// callback.
   void remove({WhereIndexedCallback<E> where = noIndexedFilter}) {
     streamController.add([
-      for (final (index, element) in this.elements.indexed)
+      for (final (index, element) in elements.indexed)
         if (!where(index, element)) element,
     ]);
   }
@@ -181,7 +181,7 @@ class ReactiveElementsListCache<E extends Object?> {
   /// is removed.
   void removeLast([int count = 1]) {
     if (count < 1) return;
-    streamController.add([...this.elements.take(this.elements.length - count)]);
+    streamController.add([...elements.take(elements.length - count)]);
   }
 
   /// Removes the first [count] elements from the cached list.
@@ -190,7 +190,7 @@ class ReactiveElementsListCache<E extends Object?> {
   /// is removed.
   void removeFirst([int count = 1]) {
     if (count < 1) return;
-    streamController.add([...this.elements.skip(count)]);
+    streamController.add([...elements.skip(count)]);
   }
 
   /// Releases the resources used by the cache.
