@@ -7,19 +7,19 @@ resolution: workspace
 #w 2v w#
 
 environment:
-  sdk: ">=3.8.1 <4.0.0"
-  flutter: ">=3.32.7 <4.0.0"
+  sdk: ">=3.9.0 <4.0.0"
+  flutter: ">=3.35.2 <4.0.0"
 
 dev_dependencies:
-  melos: ^7.0.0-dev.9
+  melos: ^7.1.0
   very_good_analysis: ^9.0.0
 
 melos:
   command:
     bootstrap:
       environment:
-        sdk: ">=3.8.1 <4.0.0"
-        flutter: ">=3.32.7 <4.0.0"
+        sdk: ">=3.9.0 <4.0.0"
+        flutter: ">=3.35.2 <4.0.0"
       dependencies:
         meta: ^1.16.0
       dev_dependencies:
@@ -119,7 +119,7 @@ melos:
       run: >
         dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random --color
         &&
-        format_coverage --lcov --in=./coverage/ --out=./coverage/lcov.info --report-on=lib -c -b 'MELOS_PACKAGE_PATH'
+        format_coverage --lcov --in=./coverage/ --out=./coverage/lcov.info --report-on=lib --check-ignore -b 'MELOS_PACKAGE_PATH'
       packageFilters:
         flutter: false
         dirExists:
@@ -149,7 +149,7 @@ melos:
     test.ci:
       description: Test all packages (CI)
       run: >
-        melos exec --order-dependents --fail-fast --no-flutter --dir-exists="test" --depends-on=test -- "dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random && format_coverage --lcov --in=./coverage/ --out=./coverage/lcov.info --report-on=lib -c -b 'MELOS_PACKAGE_PATH'"
+        melos exec --order-dependents --fail-fast --no-flutter --dir-exists="test" --depends-on=test -- "dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random && format_coverage --lcov --in=./coverage/ --out=./coverage/lcov.info --report-on=lib --check-ignore -b 'MELOS_PACKAGE_PATH'"
         &&
         melos exec --order-dependents --fail-fast --flutter --dir-exists="test" --depends-on=flutter_test -- "flutter test -x ci-only --coverage -r expanded --test-randomize-ordering-seed random"
     coverage.merge:

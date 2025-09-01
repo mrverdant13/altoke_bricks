@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Check spelling
         uses: streetsidesoftware/cspell-action@v7
         with:
@@ -31,9 +31,9 @@ jobs:
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.32.7
+          flutter-version: 3.35.2
       - name: Install melos
-        run: dart pub global activate melos 7.0.0-dev.9
+        run: dart pub global activate melos 7.1.0
       - name: Initialize melos
         run: melos bs
       - name: Format and analyze
@@ -60,7 +60,7 @@ jobs:
         run: |
           sudo apt install -y libsqlite3-dev
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Ignore tests related to SQLite on Windows
         if: matrix.os == 'windows-latest'
         run: |
@@ -71,9 +71,9 @@ jobs:
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.32.7
+          flutter-version: 3.35.2
       - name: Install melos
-        run: dart pub global activate melos 7.0.0-dev.9
+        run: dart pub global activate melos 7.1.0
       - name: Install coverage
         run: dart pub global activate coverage 1.9.0
       - name: Install coverde
