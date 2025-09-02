@@ -41,7 +41,7 @@ class _TaskDismissibleState extends ConsumerState<TaskDismissible> {
     if (_isDismissed) return const SizedBox.shrink();
     return Dismissible(
       key: ValueKey(
-        '''<tasks::task-lits-tile::task-dismissible::task-id:$id>''',
+        '''<tasks::task-list-tile::task-dismissible::task-id:$id>''',
       ),
       onDismissed: (direction) {
         deleteTaskById(ref, id);
