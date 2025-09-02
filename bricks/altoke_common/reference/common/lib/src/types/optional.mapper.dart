@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format off
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
@@ -65,10 +66,17 @@ class DmSomeMapper extends ClassMapperBase<DmSome> {
     _$value,
     arg: _arg$value,
   );
+  static int _$hashCode(DmSome v) => v.hashCode;
+  static const Field<DmSome, int> _f$hashCode = Field(
+    'hashCode',
+    _$hashCode,
+    mode: FieldMode.member,
+  );
 
   @override
   final MappableFields<DmSome> fields = const {
     #value: _f$value,
+    #hashCode: _f$hashCode,
   };
 
   static DmSome<T> _instantiate<T extends Object?>(DecodingData data) {
@@ -105,8 +113,15 @@ class DmNoneMapper extends ClassMapperBase<DmNone> {
   Function get typeFactory =>
       <T extends Object?>(f) => f<DmNone<T>>();
 
+  static int _$hashCode(DmNone v) => v.hashCode;
+  static const Field<DmNone, int> _f$hashCode = Field(
+    'hashCode',
+    _$hashCode,
+    mode: FieldMode.member,
+  );
+
   @override
-  final MappableFields<DmNone> fields = const {};
+  final MappableFields<DmNone> fields = const {#hashCode: _f$hashCode};
 
   static DmNone<T> _instantiate<T extends Object?>(DecodingData data) {
     return DmNone();
@@ -122,3 +137,4 @@ mixin DmNoneMappable<T extends Object?> {
     return DmNoneMapper.ensureInitialized().stringifyValue(this as DmNone<T>);
   }
 }
+
