@@ -40,7 +40,9 @@ class _TaskDismissibleState extends ConsumerState<TaskDismissible> {
     final Task(:id) = widget.task;
     if (_isDismissed) return const SizedBox.shrink();
     return Dismissible(
-      key: ValueKey('''<tasks::task-lits-tile::task-$id>'''),
+      key: ValueKey(
+        '''<tasks::task-list-tile::task-dismissible::task-id:$id>''',
+      ),
       onDismissed: (direction) {
         deleteTaskById(ref, id);
         setState(() => _isDismissed = true);

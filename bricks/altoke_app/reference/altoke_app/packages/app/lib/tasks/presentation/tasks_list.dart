@@ -35,7 +35,7 @@ class LoadedTasksList extends ConsumerWidget {
             child: Text(
               l10n.noTasksFoundMessage,
               key: const Key(
-                '''<tasks::loaded-tasks-list::no-tasks-found-message>''',
+                '''<tasks::tasks-list::loaded-tasks-list::no-tasks-found-message>''',
               ),
             ),
           );
@@ -46,7 +46,12 @@ class LoadedTasksList extends ConsumerWidget {
       itemCount: tasks.length,
       itemBuilder: (context, index) {
         final task = tasks.elementAt(index);
-        return TaskListTile(task: task);
+        return TaskListTile(
+          key: ValueKey(
+            '''<tasks::tasks-list::loaded-tasks-list::task-list-tile::task-id:${task.id}-idx:$index>''',
+          ),
+          task: task,
+        );
       },
     );
   }
