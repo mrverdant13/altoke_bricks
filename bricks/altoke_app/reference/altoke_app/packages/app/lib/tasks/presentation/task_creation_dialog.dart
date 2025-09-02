@@ -1,6 +1,7 @@
 import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/tasks/tasks.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/experimental/mutation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:local_database/local_database.dart';
 
@@ -38,15 +39,12 @@ class TaskCreationDialogContent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = context.l10n;
-    ref.listen(createTaskMutationPod, (previous, current) {
-      if (previous == null) return;
-      if (!previous.isRefreshing) return;
-      if (current is! AsyncData) return;
+    ref.listen(createTaskMutation, (previous, current) {
+      if (!current.isSuccess) return;
+      final l10n = context.l10n;
       final message = l10n.createTaskSuccessMessage;
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(message)));
+      final snackBar = SnackBar(content: Text(message));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
       Navigator.pop(context);
     });
     return const NewTaskForm();
@@ -80,18 +78,19 @@ class _NewTaskFormState extends ConsumerState<NewTaskForm> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    ref.listen(createTaskMutationPod.select((result) => result.error), (
-      previousError,
-      currentError,
+    ref.listen(createTaskMutation, (
+      previous,
+      current,
     ) {
-      if (currentError == null) return;
-      if (currentError is! CreateTaskFailure) {
+      if (current is! MutationError<Task>) return;
+      final error = current.error;
+      if (error is! CreateTaskFailure) {
         setState(() {
           genericError = l10n.createTaskGenericMessage;
         });
         return;
       }
-      switch (currentError) {
+      switch (error) {
         case CreateTaskFailureInvalidData(
           :final titleValidationErrors,
           :final complexValidationErrors,
@@ -173,7 +172,7 @@ class _NewTaskFormState extends ConsumerState<NewTaskForm> {
               priority: priority,
               description: description,
             );
-            ref.read(createTaskMutationPod.notifier).createTask(newTask);
+            createTask(ref, newTask);
           },
           child: Text(l10n.newTaskFormSubmitButtonLabel),
         ),

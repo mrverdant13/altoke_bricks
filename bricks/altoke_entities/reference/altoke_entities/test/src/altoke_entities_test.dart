@@ -769,7 +769,9 @@ THEN a string representation of the partial task is returned
         );
         expect(
           partialTask.toString(),
-          '''DmPartialTask(name: DmSome(value: name), description: DmSome(value: description))''',
+          matches(
+            r'DmPartialTask\(name: DmSome\(value: name, hashCode: \d+\), description: DmSome\(value: description, hashCode: \d+\)\)',
+          ),
         );
         /*x{{/use_dart_mappable}}x*/
         /*remove-start*/

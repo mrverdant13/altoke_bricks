@@ -4,7 +4,6 @@ import 'package:auto_route/auto_route.dart';
 /*x{{/use_auto_route}}*/
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 /*x{{#use_go_router}}*/
 import 'package:go_router/go_router.dart';
 /*x{{/use_go_router}}*/
@@ -61,7 +60,7 @@ RouterConfig<UrlState> autoRouteConfig(Ref ref) {
     /*remove-end*/
   ],
 )
-class HomeRouteData extends GoRouteData with _$HomeRouteData {
+class HomeRouteData extends GoRouteData with $HomeRouteData {
   const HomeRouteData();
 
   @override
@@ -70,7 +69,7 @@ class HomeRouteData extends GoRouteData with _$HomeRouteData {
   }
 }
 
-class CounterRouteData extends GoRouteData with _$CounterRouteData {
+class CounterRouteData extends GoRouteData with $CounterRouteData {
   const CounterRouteData();
 
   @override
@@ -81,7 +80,7 @@ class CounterRouteData extends GoRouteData with _$CounterRouteData {
 
 /*x-remove-start*/
 // coverage:ignore-start
-class TasksRouteData extends GoRouteData with _$TasksRouteData {
+class TasksRouteData extends GoRouteData with $TasksRouteData {
   const TasksRouteData();
 
   @override

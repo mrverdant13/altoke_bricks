@@ -1,7 +1,9 @@
 import 'dart:developer' as developer;
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/experimental/mutation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart';
 
 /*w 2v w*/
 /*remove-start*/
@@ -24,9 +26,8 @@ class LoggerProviderObserver extends ProviderObserver {
 
   @override
   void didAddProvider(
-    ProviderBase<Object?> provider,
+    ProviderObserverContext context,
     Object? value,
-    ProviderContainer container,
   ) {
     final message =
         '''
@@ -35,15 +36,14 @@ Provider added
 Initial:  $value
 '''
             .trim();
-    log(message, name: provider.loggerName);
+    log(message, name: context.provider.loggerName);
   }
 
   @override
   void providerDidFail(
-    ProviderBase<Object?> provider,
+    ProviderObserverContext context,
     Object error,
     StackTrace stackTrace,
-    ProviderContainer container,
   ) {
     final message =
         '''
@@ -56,16 +56,15 @@ $error
       message,
       error: error,
       stackTrace: stackTrace,
-      name: provider.loggerName,
+      name: context.provider.loggerName,
     );
   }
 
   @override
   void didUpdateProvider(
-    ProviderBase<Object?> provider,
+    ProviderObserverContext context,
     Object? previousValue,
     Object? newValue,
-    ProviderContainer container,
   ) {
     final message =
         '''
@@ -75,13 +74,12 @@ Previous: $previousValue
 New:      $newValue
 '''
             .trim();
-    log(message, name: provider.loggerName);
+    log(message, name: context.provider.loggerName);
   }
 
   @override
   void didDisposeProvider(
-    ProviderBase<Object?> provider,
-    ProviderContainer container,
+    ProviderObserverContext context,
   ) {
     final message =
         '''
@@ -89,12 +87,80 @@ ${DateTime.now()}
 Provider disposed
 '''
             .trim();
-    log(message, name: provider.loggerName);
+    log(message, name: context.provider.loggerName);
+  }
+
+  @override
+  void mutationReset(
+    ProviderObserverContext context,
+    Mutation<Object?> mutation,
+  ) {
+    final message =
+        '''
+${DateTime.now()}
+Mutation reset
+'''
+            .trim();
+    log(message, name: mutation.loggerName);
+  }
+
+  @override
+  void mutationStart(
+    ProviderObserverContext context,
+    Mutation<Object?> mutation,
+  ) {
+    final message =
+        '''
+${DateTime.now()}
+Mutation started
+'''
+            .trim();
+    log(message, name: mutation.loggerName);
+  }
+
+  @override
+  void mutationError(
+    ProviderObserverContext context,
+    Mutation<Object?> mutation,
+    Object error,
+    StackTrace stackTrace,
+  ) {
+    final message =
+        '''
+${DateTime.now()}
+Mutation error
+'''
+            .trim();
+    log(
+      message,
+      error: error,
+      stackTrace: stackTrace,
+      name: mutation.loggerName,
+    );
+  }
+
+  @override
+  void mutationSuccess(
+    ProviderObserverContext context,
+    Mutation<Object?> mutation,
+    Object? result,
+  ) {
+    final message =
+        '''
+${DateTime.now()}
+Mutation success
+'''
+            .trim();
+    log(message, name: mutation.loggerName);
   }
 }
 
-extension on ProviderBase<Object?> {
+extension on ProviderBase<dynamic> {
   String get loggerName => name ?? runtimeType.toString();
+}
+
+extension on Mutation<dynamic> {
+  String get loggerName => label?.toString() ?? runtimeType.toString();
 }
 
 // coverage:ignore-end

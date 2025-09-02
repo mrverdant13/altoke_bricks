@@ -128,16 +128,17 @@ THEN the form should show the localized error
 ''',
     (tester) async {
       await tester.pumpAppWithScreen(
-        const ProviderScope(child: Scaffold(body: NewTaskForm())),
+        const ProviderScope(
+          child: Scaffold(
+            body: NewTaskForm(),
+          ),
+        ),
       );
       final context = tester.element(find.byType(NewTaskForm));
       final container = ProviderScope.containerOf(context, listen: false);
-      final subscription = container.listen(
-        createTaskMutationPod.notifier,
-        (_, _) {},
-      );
-      addTearDown(subscription.close);
-      subscription.read().state = const AsyncError(Object(), StackTrace.empty);
+      createTaskMutation
+          .run(container, (tsx) async => throw Exception('unknown error'))
+          .ignore();
       await tester.pumpAndSettle();
       expect(
         find.l10n.text((l10n) => l10n.createTaskGenericMessage),
@@ -149,28 +150,29 @@ THEN the form should show the localized error
   testWidgets(
     '''
 
-GIVEN a localization variant for an empty title error message when creating a task
-WHEN testing the new task form
-THEN the form should show the localized error
-''',
+  GIVEN a localization variant for an empty title error message when creating a task
+  WHEN testing the new task form
+  THEN the form should show the localized error
+  ''',
     (tester) async {
       await tester.pumpAppWithScreen(
-        const ProviderScope(child: Scaffold(body: NewTaskForm())),
+        const ProviderScope(
+          child: Scaffold(
+            body: NewTaskForm(),
+          ),
+        ),
       );
       final context = tester.element(find.byType(NewTaskForm));
       final container = ProviderScope.containerOf(context, listen: false);
-      final subscription = container.listen(
-        createTaskMutationPod.notifier,
-        (_, _) {},
-      );
-      addTearDown(subscription.close);
-      subscription.read().state = const AsyncError(
-        CreateTaskFailureInvalidData(
-          titleValidationErrors: {TaskTitleValidationError.empty},
-          complexValidationErrors: {},
-        ),
-        StackTrace.empty,
-      );
+      createTaskMutation
+          .run(
+            container,
+            (tsx) async => throw const CreateTaskFailureInvalidData(
+              titleValidationErrors: {TaskTitleValidationError.empty},
+              complexValidationErrors: {},
+            ),
+          )
+          .ignore();
       await tester.pumpAndSettle();
       expect(
         find.l10n.widgetWithText(
@@ -185,30 +187,31 @@ THEN the form should show the localized error
   testWidgets(
     '''
 
-GIVEN a localization variant for a description required error message when creating a high priority task
-WHEN testing the new task form
-THEN the form should show the localized error
-''',
+  GIVEN a localization variant for a description required error message when creating a high priority task
+  WHEN testing the new task form
+  THEN the form should show the localized error
+  ''',
     (tester) async {
       await tester.pumpAppWithScreen(
-        const ProviderScope(child: Scaffold(body: NewTaskForm())),
+        const ProviderScope(
+          child: Scaffold(
+            body: NewTaskForm(),
+          ),
+        ),
       );
       final context = tester.element(find.byType(NewTaskForm));
       final container = ProviderScope.containerOf(context, listen: false);
-      final subscription = container.listen(
-        createTaskMutationPod.notifier,
-        (_, _) {},
-      );
-      addTearDown(subscription.close);
-      subscription.read().state = const AsyncError(
-        CreateTaskFailureInvalidData(
-          titleValidationErrors: {},
-          complexValidationErrors: {
-            TaskComplexValidationError.highPriorityWithNoDescription,
-          },
-        ),
-        StackTrace.empty,
-      );
+      createTaskMutation
+          .run(
+            container,
+            (tsx) async => throw const CreateTaskFailureInvalidData(
+              titleValidationErrors: {},
+              complexValidationErrors: {
+                TaskComplexValidationError.highPriorityWithNoDescription,
+              },
+            ),
+          )
+          .ignore();
       await tester.pumpAndSettle();
       expect(
         find.l10n.widgetWithText(

@@ -924,7 +924,9 @@ THEN a string representation of the partial altoke entity is returned
         );
         expect(
           partialAltokeEntity.toString(),
-          '''DmPartialAltokeEntity(name: DmSome(value: name), description: DmSome(value: description))''',
+          matches(
+            r'DmPartialAltokeEntity\(name: DmSome\(value: name, hashCode: \d+\), description: DmSome\(value: description, hashCode: \d+\)\)',
+          ),
         );
         /*x{{/use_dart_mappable}}x*/
         /*remove-start*/
