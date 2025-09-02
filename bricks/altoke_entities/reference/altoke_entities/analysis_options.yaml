@@ -9,8 +9,3 @@ analyzer:
     - lib/**.freezed.dart
     #x{{/use_freezed}}#
 #{{/use_code_generation}}x#
-linter:
-  rules:
-    # HACK: Disable conflicting rule
-    # Issue: https://github.com/dart-lang/dart_style/issues/1646
-    require_trailing_commas: false
