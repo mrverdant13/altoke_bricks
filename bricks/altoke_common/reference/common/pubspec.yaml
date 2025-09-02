@@ -17,7 +17,7 @@ dependencies:
   equatable: ^2.0.7
   #x{{/use_equatable}}x#
   #x{{#use_freezed}}x#
-  freezed_annotation: ^3.0.0
+  freezed_annotation: ^3.1.0
   #x{{/use_freezed}}x#
   #x{{#use_meta}}#
   meta: ^1.16.0

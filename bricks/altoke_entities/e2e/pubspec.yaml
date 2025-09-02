@@ -13,7 +13,8 @@ dev_dependencies:
   monorepo_elements:
     path: ../../../tools/monorepo_elements
   path: ^1.9.1
-  shell: any
+  shell:
+    path: ../../../tools/shell
   test: ^1.26.2
   value_equality_approach:
     path: ../../../tools/value_equality_approach
