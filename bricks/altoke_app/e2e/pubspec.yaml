@@ -15,6 +15,7 @@ dev_dependencies:
   path: ^1.9.1
   router_package:
     path: ../../../tools/router_package
-  shell: any
+  shell:
+    path: ../../../tools/shell
   test: ^1.26.2
   very_good_analysis: ^9.0.0

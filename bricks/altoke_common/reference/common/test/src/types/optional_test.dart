@@ -311,7 +311,10 @@ THEN a string representation of the present value is returned
         /*remove-end-x*/
         /*x{{#use_dart_mappable}}x*/
         const presentValue = DmOptional.some('some-value');
-        expect(presentValue.toString(), 'DmSome(value: some-value)');
+        expect(
+          presentValue.toString(),
+          matches(r'DmSome\(value: some-value, hashCode: \d+\)'),
+        );
         /*x{{/use_dart_mappable}}x*/
         /*remove-start*/
       }
@@ -361,7 +364,10 @@ THEN a string representation of the absent value is returned
         /*remove-end-x*/
         /*x{{#use_dart_mappable}}x*/
         const absentValue = DmOptional<String>.none();
-        expect(absentValue.toString(), 'DmNone()');
+        expect(
+          absentValue.toString(),
+          matches(r'DmNone\(hashCode: \d+\)'),
+        );
         /*x{{/use_dart_mappable}}x*/
         /*remove-start*/
       }

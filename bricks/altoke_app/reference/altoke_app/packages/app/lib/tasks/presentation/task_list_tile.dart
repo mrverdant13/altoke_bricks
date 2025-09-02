@@ -13,13 +13,37 @@ class TaskListTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref
-      ..watch(deleteTaskByIdMutationPod.notifier)
-      ..watch(updateTaskMutationPod.notifier);
-    final Task(:id, :title, :priority, :completed, :description) = task;
+      ..watch(deleteTaskByIdMutation)
+      ..watch(updateTaskMutation);
+    return TaskDismissible(task: task);
+  }
+}
+
+@visibleForTesting
+class TaskDismissible extends ConsumerStatefulWidget {
+  const TaskDismissible({
+    required this.task,
+    super.key,
+  });
+
+  final Task task;
+
+  @override
+  ConsumerState<TaskDismissible> createState() => _TaskDismissibleState();
+}
+
+class _TaskDismissibleState extends ConsumerState<TaskDismissible> {
+  bool _isDismissed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final Task(:id) = widget.task;
+    if (_isDismissed) return const SizedBox.shrink();
     return Dismissible(
       key: ValueKey('''<tasks::task-lits-tile::task-$id>'''),
       onDismissed: (direction) {
-        ref.read(deleteTaskByIdMutationPod.notifier).deleteTaskById(id);
+        deleteTaskById(ref, id);
+        setState(() => _isDismissed = true);
       },
       direction: DismissDirection.endToStart,
       background: ColoredBox(
@@ -35,39 +59,53 @@ class TaskListTile extends ConsumerWidget {
           ),
         ),
       ),
-      child: CheckboxListTile.adaptive(
-        activeColor: Colors.grey,
-        secondary: Icon(
-          Icons.flag_circle,
-          color: switch (priority) {
-            TaskPriority.high => Colors.red,
-            TaskPriority.medium => Colors.orange,
-            TaskPriority.low => Colors.green,
-          }.withValues(alpha: completed ? 0.5 : 1),
-        ),
-        title: Text(
-          title,
-          style: completed
-              ? const TextStyle(decoration: TextDecoration.lineThrough)
-              : null,
-        ),
-        subtitle: description == null
-            ? null
-            : Text(
-                description,
-                style: completed
-                    ? const TextStyle(decoration: TextDecoration.lineThrough)
-                    : null,
-              ),
-        value: completed,
-        onChanged: (value) {
-          if (value == null) return;
-          final task = PartialTask(completed: Optional.some(value));
-          ref
-              .read(updateTaskMutationPod.notifier)
-              .updateTask(taskId: id, task: task);
-        },
+      child: TaskCheckboxListTile(task: widget.task),
+    );
+  }
+}
+
+@visibleForTesting
+class TaskCheckboxListTile extends ConsumerWidget {
+  const TaskCheckboxListTile({
+    required this.task,
+    super.key,
+  });
+
+  final Task task;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final Task(:id, :title, :priority, :completed, :description) = task;
+    return CheckboxListTile.adaptive(
+      activeColor: Colors.grey,
+      secondary: Icon(
+        Icons.flag_circle,
+        color: switch (priority) {
+          TaskPriority.high => Colors.red,
+          TaskPriority.medium => Colors.orange,
+          TaskPriority.low => Colors.green,
+        }.withValues(alpha: completed ? 0.5 : 1),
       ),
+      title: Text(
+        title,
+        style: completed
+            ? const TextStyle(decoration: TextDecoration.lineThrough)
+            : null,
+      ),
+      subtitle: description == null
+          ? null
+          : Text(
+              description,
+              style: completed
+                  ? const TextStyle(decoration: TextDecoration.lineThrough)
+                  : null,
+            ),
+      value: completed,
+      onChanged: (value) {
+        if (value == null) return;
+        final task = PartialTask(completed: Optional.some(value));
+        updateTask(ref, taskId: id, task: task);
+      },
     );
   }
 }
