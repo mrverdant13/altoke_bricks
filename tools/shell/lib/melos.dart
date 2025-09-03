@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io' hide stderr, stdin, stdout;
 
 import 'package:shell/shell.dart';
@@ -8,8 +9,8 @@ abstract class Melos {
   static Future<void> bootstrap(
     Directory directory, {
     Stdin? stdin,
-    Stdout? stdout,
-    Stdout? stderr,
+    StreamSink<List<int>>? stdout,
+    StreamSink<List<int>>? stderr,
     AsyncVoidCallback? onStart,
     AsyncVoidCallback? onSuccess,
     AsyncVoidHandlerCallback<ExceptionDetails>? onError,
@@ -33,8 +34,8 @@ abstract class Melos {
     Directory directory,
     String script, {
     Stdin? stdin,
-    Stdout? stdout,
-    Stdout? stderr,
+    StreamSink<List<int>>? stdout,
+    StreamSink<List<int>>? stderr,
     AsyncVoidCallback? onStart,
     AsyncVoidCallback? onSuccess,
     AsyncVoidHandlerCallback<ExceptionDetails>? onError,

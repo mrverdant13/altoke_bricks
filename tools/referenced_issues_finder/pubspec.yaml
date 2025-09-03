@@ -1,0 +1,14 @@
+name: referenced_issues_finder
+description: A tool to find referenced GitHub issues.
+publish_to: none
+resolution: workspace
+
+environment:
+  sdk: ">=3.9.0 <4.0.0"
+
+dependencies:
+  shell:
+    path: ../shell
+
+dev_dependencies:
+  very_good_analysis: ^9.0.0
