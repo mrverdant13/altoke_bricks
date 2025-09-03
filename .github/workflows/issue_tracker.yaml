@@ -47,7 +47,7 @@ jobs:
         if: ${{ steps.get-issue-metrics.outputs.metrics.issues != '[]' }}
         shell: bash
         run: |
-          echo "ISSUES: ${{ steps.get-issue-metrics.outputs.metrics.issues }}"
+          echo "ISSUES: ${{ steps.get-issue-metrics.outputs.metrics }}"
           repo_id="${{matrix.issue.owner}}/${{matrix.issue.repo}}"
           issue_number=${{matrix.issue.number}}
           issue_id="$repo_id#$issue_number"
