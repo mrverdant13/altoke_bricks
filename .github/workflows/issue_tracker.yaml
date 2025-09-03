@@ -40,7 +40,7 @@ jobs:
         id: get-issue-metrics
         uses: github/issue-metrics@v3
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SEARCH_QUERY: 'repo:${{ matrix.issue.owner }}/${{ matrix.issue.repo }} is:issue is:closed #${{ matrix.issue.number }}'
       - name: Prepare report data
         id: prepare-report-data
