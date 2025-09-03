@@ -61,7 +61,7 @@ jobs:
             gh issue list \
               --search "${{ env.TITLE }}" \
               --json number \
-              --jq '.[0].number'\
+              --jq '.[0].number // empty'\
             )
           if [[ -n $issue_number ]]; then
             exit 0
