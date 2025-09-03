@@ -31,13 +31,13 @@ dependencies:
 
 dev_dependencies:
   #x{{#use_code_generation}}#
-  build_runner: ^2.5.4
+  build_runner: ^2.7.1
   #{{/use_code_generation}}#
   #{{#use_dart_mappable}}x#
-  dart_mappable_builder: ^4.5.0
+  dart_mappable_builder: ^4.6.0
   #x{{/use_dart_mappable}}x#
   #x{{#use_freezed}}x#
-  freezed: ^3.1.0
+  freezed: ^3.2.0
   #x{{/use_freezed}}#
   test: ^1.26.2
   very_good_analysis: ^9.0.0
