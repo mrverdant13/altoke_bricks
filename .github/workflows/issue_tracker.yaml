@@ -57,13 +57,13 @@ jobs:
           echo "report-title=$report_title" >> "$GITHUB_OUTPUT"
       - name: Create report for closed issues
         run: |
-          issue-number=$(\
+          issue_number=$(\
             gh issue list \
               --search "${{ env.TITLE }}" \
               --json number \
               --jq '.[0].number'\
             )
-          if [[ -n $issue-number ]]; then
+          if [[ -n $issue_number ]]; then
             exit 0
           fi
           gh issue create \
