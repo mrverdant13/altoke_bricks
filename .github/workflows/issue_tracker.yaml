@@ -51,7 +51,7 @@ jobs:
           issue_number=${{matrix.issue.number}}
           issue_id="$repo_id#$issue_number"
           issue_url="https://github.com/$repo_id/issues/$issue_number"
-          report_title=chore: evaluate implications of ${issue_id}
+          report_title=chore: evaluate implications of $issue_id
           echo "issue-id=$issue_id" >> "$GITHUB_OUTPUT"
           echo "issue-url=$issue_url" >> "$GITHUB_OUTPUT"
           echo "report-title=$report_title" >> "$GITHUB_OUTPUT"
