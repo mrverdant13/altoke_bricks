@@ -47,14 +47,14 @@ jobs:
         if: ${{ steps.get-issue-metrics.outputs.metrics.issues != '[]' }}
         shell: bash
         run: |
-          repo-id="${{matrix.issue.owner}}/${{matrix.issue.repo}}"
-          issue-number=${{matrix.issue.number}}
-          issue-id="$repo-id#$issue-number"
-          issue-url="https://github.com/$repo-id/issues/$issue-number"
-          report-title=chore: evaluate implications of ${issue-id}
-          echo "issue-id=$issue-id" >> "$GITHUB_OUTPUT"
-          echo "issue-url=$issue-url" >> "$GITHUB_OUTPUT"
-          echo "report-title=$report-title" >> "$GITHUB_OUTPUT"
+          repo_id="${{matrix.issue.owner}}/${{matrix.issue.repo}}"
+          issue_number=${{matrix.issue.number}}
+          issue_id="$repo_id#$issue_number"
+          issue_url="https://github.com/$repo_id/issues/$issue_number"
+          report_title=chore: evaluate implications of $issue_id
+          echo "issue-id=$issue_id" >> "$GITHUB_OUTPUT"
+          echo "issue-url=$issue_url" >> "$GITHUB_OUTPUT"
+          echo "report-title=$report_title" >> "$GITHUB_OUTPUT"
       - name: Create report for closed issues
         run: |
           issue-number=$(\
