@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io' hide stderr, stdin, stdout;
 
 import 'package:shell/shell.dart';
@@ -10,8 +11,8 @@ abstract class Coverage {
     required File output,
     required Directory reportOn,
     Stdin? stdin,
-    Stdout? stdout,
-    Stdout? stderr,
+    StreamSink<List<int>>? stdout,
+    StreamSink<List<int>>? stderr,
     AsyncVoidCallback? onStart,
     AsyncVoidCallback? onSuccess,
     AsyncVoidHandlerCallback<ExceptionDetails>? onError,
@@ -39,8 +40,8 @@ abstract class Coverage {
     required File outputLcov,
     required List<String> filters,
     Stdin? stdin,
-    Stdout? stdout,
-    Stdout? stderr,
+    StreamSink<List<int>>? stdout,
+    StreamSink<List<int>>? stderr,
     AsyncVoidCallback? onStart,
     AsyncVoidCallback? onSuccess,
     AsyncVoidHandlerCallback<ExceptionDetails>? onError,
@@ -66,8 +67,8 @@ abstract class Coverage {
     required File inputLcov,
     required int threshold,
     Stdin? stdin,
-    Stdout? stdout,
-    Stdout? stderr,
+    StreamSink<List<int>>? stdout,
+    StreamSink<List<int>>? stderr,
     AsyncVoidCallback? onStart,
     AsyncVoidCallback? onSuccess,
     AsyncVoidHandlerCallback<ExceptionDetails>? onError,

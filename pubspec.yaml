@@ -237,6 +237,11 @@ melos:
         - docs.root
         - docs.brick
 
+    # Misc
+    issues:
+      description: List referenced issues
+      run: dart run MELOS_ROOT_PATH/tools/referenced_issues_finder/lib/main.dart
+
     # Brick management
     brick.gen:
       description: Generate brick
@@ -315,6 +320,7 @@ workspace:
   - tools/monorepo_elements
   - tools/pubspec_deps_sorter
   - tools/readmes_resolver
+  - tools/referenced_issues_finder
   - tools/router_package
   - tools/shell
   - tools/value_equality_approach
