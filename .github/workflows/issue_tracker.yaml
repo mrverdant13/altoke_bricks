@@ -42,12 +42,13 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SEARCH_QUERY: 'repo:${{ matrix.issue.owner }}/${{ matrix.issue.repo }} is:issue is:closed #${{ matrix.issue.number }}'
+      - name: List found metrics
+        run: echo "${{ steps.get-issue-metrics.outputs.metrics }}"
       - name: Prepare report data
         id: prepare-report-data
         if: ${{ steps.get-issue-metrics.outputs.metrics.issues != '[]' }}
         shell: bash
         run: |
-          echo "ISSUES: ${{ steps.get-issue-metrics.outputs.metrics }}"
           repo_id="${{matrix.issue.owner}}/${{matrix.issue.repo}}"
           issue_number=${{matrix.issue.number}}
           issue_id="$repo_id#$issue_number"
