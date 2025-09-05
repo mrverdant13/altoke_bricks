@@ -475,7 +475,9 @@ THEN a string representation of the partial task is returned
         );
         expect(
           partialTask.toString(),
-          '''PartialTask(name: DmSome(value: name), description: DmSome(value: description))''',
+          matches(
+            r'PartialTask\(name: DmSome\(value: name, hashCode: \d+\), description: DmSome\(value: description, hashCode: \d+\)\)',
+          ),
         );{{/use_dart_mappable}}{{#use_equatable}}const partialTask = PartialTask(
           name: Optional.some('name'),
           description: Optional.some('description'),
