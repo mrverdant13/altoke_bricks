@@ -48,7 +48,7 @@ dev_dependencies:
   #{{#use_auto_route}}x#
   auto_route_generator: ^10.2.4
   #{{/use_auto_route}}x#
-  build_runner: ^2.7.0
+  build_runner: ^2.7.1
   custom_lint: ^0.8.0
   flutter_test:
     sdk: flutter
