@@ -34,7 +34,7 @@ melos:
         meta: ^1.16.0
         path: ^1.9.1
       dev_dependencies:
-        build_runner: ^2.7.0
+        build_runner: ^2.7.1
         collection: ^1.19.1
         mason: ^0.1.1
         melos: ^7.1.0
