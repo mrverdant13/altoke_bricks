@@ -1,8 +1,7 @@
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/routing/routing.dart';{{#use_auto_route}}
 import 'package:auto_route/auto_route.dart';{{/use_auto_route}}
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';{{#use_go_router}}
+import 'package:flutter/widgets.dart';{{#use_go_router}}
 import 'package:go_router/go_router.dart';{{/use_go_router}}
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -42,7 +41,7 @@ RouterConfig<UrlState> routerConfig(Ref ref) {
     TypedGoRoute<CounterRouteData>(path: 'counter', name: 'CounterRoute'),
   ],
 )
-class HomeRouteData extends GoRouteData with _$HomeRouteData {
+class HomeRouteData extends GoRouteData with $HomeRouteData {
   const HomeRouteData();
 
   @override
@@ -51,7 +50,7 @@ class HomeRouteData extends GoRouteData with _$HomeRouteData {
   }
 }
 
-class CounterRouteData extends GoRouteData with _$CounterRouteData {
+class CounterRouteData extends GoRouteData with $CounterRouteData {
   const CounterRouteData();
 
   @override
