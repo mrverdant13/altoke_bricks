@@ -36,15 +36,15 @@ jobs:
       matrix:
         issue: ${{fromJson(needs.identify-referenced-issues.outputs.issues)}}
     steps:
-      - name: Get issue metrics
-        id: get-issue-metrics
-        uses: github/issue-metrics@v3
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SEARCH_QUERY: 'repo:${{ matrix.issue.owner }}/${{ matrix.issue.repo }} is:issue is:closed #${{ matrix.issue.number }}'
+      - name: Check whether the issue has been closed
+        id: check-issue-closed
+        run: |
+          closed=$(gh --repo ${{ matrix.issue.owner }}/${{ matrix.issue.repo }} issue view ${{ matrix.issue.number }} --json closed | jq -r '.closed')
+          echo "Issue closed status: $closed"
+          echo "issue_closed=$closed" >> "$GITHUB_OUTPUT"
       - name: Prepare report data
         id: prepare-report-data
-        if: ${{ steps.get-issue-metrics.outputs.metrics.issues != '[]' }}
+        if: ${{ steps.check-issue-closed.outputs.issue_closed == 'true' }}
         shell: bash
         run: |
           repo_id="${{matrix.issue.owner}}/${{matrix.issue.repo}}"
