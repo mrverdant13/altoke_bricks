@@ -67,7 +67,7 @@ dev_dependencies:
   #remove-end#
   #w 1v 2> w#
   riverpod_generator: ^3.0.0-dev.17
-  riverpod_lint: ^3.0.0-dev.17
+  riverpod_lint: ^3.0.0
   very_good_analysis: ^9.0.0
 
 flutter:
