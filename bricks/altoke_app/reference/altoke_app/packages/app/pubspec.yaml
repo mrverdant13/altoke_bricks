@@ -26,7 +26,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  flutter_riverpod: ^3.0.0-dev.17
+  flutter_riverpod: ^3.0.0
   #{{#use_go_router}}x#
   go_router: ^16.2.1
   #{{/use_go_router}}x#
