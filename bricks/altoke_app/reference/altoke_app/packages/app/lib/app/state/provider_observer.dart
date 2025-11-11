@@ -11,7 +11,7 @@ import 'package:flutter_riverpod/misc.dart';
 /*remove-end*/
 // coverage:ignore-start
 
-class LoggerProviderObserver extends ProviderObserver {
+final class LoggerProviderObserver extends ProviderObserver {
   const LoggerProviderObserver();
 
   void log(
