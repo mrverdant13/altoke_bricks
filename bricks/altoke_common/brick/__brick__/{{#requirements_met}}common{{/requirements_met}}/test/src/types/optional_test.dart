@@ -183,7 +183,10 @@ THEN a string representation of the present value is returned
 ''',
     () {
 {{#use_dart_mappable}}const presentValue = Optional.some('some-value');
-        expect(presentValue.toString(), 'DmSome(value: some-value)');{{/use_dart_mappable}}{{#use_equatable}}const presentValue = Optional.some('some-value');
+        expect(
+          presentValue.toString(),
+          matches(r'DmSome\(value: some-value, hashCode: \d+\)'),
+        );{{/use_dart_mappable}}{{#use_equatable}}const presentValue = Optional.some('some-value');
         expect(presentValue.toString(), 'ESome<String>(some-value)');{{/use_equatable}}{{#use_freezed}}const presentValue = Optional.some('some-value');
         expect(
           presentValue.toString(),
@@ -202,7 +205,10 @@ THEN a string representation of the absent value is returned
 ''',
     () {
 {{#use_dart_mappable}}const absentValue = Optional<String>.none();
-        expect(absentValue.toString(), 'DmNone()');{{/use_dart_mappable}}{{#use_equatable}}const absentValue = Optional<String>.none();
+        expect(
+          absentValue.toString(),
+          matches(r'DmNone\(hashCode: \d+\)'),
+        );{{/use_dart_mappable}}{{#use_equatable}}const absentValue = Optional<String>.none();
         expect(absentValue.toString(), 'ENone<String>()');{{/use_equatable}}{{#use_freezed}}const absentValue = Optional<String>.none();
         expect(absentValue.toString(), 'Optional<String>.none()');{{/use_freezed}}{{#use_overrides}}const absentValue = Optional<String>.none();
         expect(absentValue.toString(), 'None<String>()');{{/use_overrides}}
