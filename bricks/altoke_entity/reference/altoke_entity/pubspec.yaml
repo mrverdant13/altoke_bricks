@@ -17,7 +17,7 @@ dependencies:
     # path: ../common/
     #replace-end#
   #{{#use_dart_mappable}}x#
-  dart_mappable: ^4.6.0
+  dart_mappable: ^4.6.1
   #x{{/use_dart_mappable}}x#
   #x{{#use_equatable}}x#
   equatable: ^2.0.7
