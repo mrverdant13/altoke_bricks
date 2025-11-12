@@ -630,7 +630,9 @@ THEN a string representation of the partial {{entity_singular.lowerCase()}} is r
         );
         expect(
           partial{{entity_singular.pascalCase()}}.toString(),
-          '''Partial{{entity_singular.pascalCase()}}(name: DmSome(value: name), description: DmSome(value: description))''',
+          matches(
+            r'Partial{{entity_singular.pascalCase()}}\(name: DmSome\(value: name, hashCode: \d+\), description: DmSome\(value: description, hashCode: \d+\)\)',
+          ),
         );{{/use_dart_mappable}}{{#use_equatable}}const partial{{entity_singular.pascalCase()}} = Partial{{entity_singular.pascalCase()}}(
           name: Optional.some('name'),
           description: Optional.some('description'),
