@@ -31,7 +31,7 @@ dev_dependencies:
   dart_mappable_builder: ^4.6.0
   #x{{/use_dart_mappable}}x#
   #x{{#use_freezed}}x#
-  freezed: ^3.2.0
+  freezed: ^3.2.3
   #x{{/use_freezed}}#
   test: ^1.26.2
   very_good_analysis: ^9.0.0
