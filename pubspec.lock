@@ -293,10 +293,10 @@ packages:
     dependency: transitive
     description:
       name: dart_mappable
-      sha256: "15f41a35da8ee690bbfa0059fa241edeeaea73f89a2ba685b354ece07cd8ada6"
+      sha256: "0e219930c9f7b9e0f14ae7c1de931c401875110fd5c67975b6b9492a6d3a531b"
       url: "https://pub.dev"
     source: hosted
-    version: "4.6.0"
+    version: "4.6.1"
   dart_mappable_builder:
     dependency: transitive
     description:
@@ -1196,4 +1196,4 @@ packages:
     version: "2.2.2"
 sdks:
   dart: ">=3.9.0 <4.0.0"
-  flutter: ">=3.35.2 <4.0.0"
+  flutter: ">=3.35.2"
