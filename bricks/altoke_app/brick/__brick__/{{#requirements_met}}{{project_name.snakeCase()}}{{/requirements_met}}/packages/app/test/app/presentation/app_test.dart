@@ -120,8 +120,7 @@ THEN the errored initialization screen should be shown
         ProviderScope(
           overrides: [
             asyncInitializationPod.overrideWith((ref) async {
-              final asyncValue = ref.state;
-              if (!asyncValue.isRefreshing) {
+              if (!ref.isRefresh) {
                 throw Exception('error');
               }
             }),
@@ -131,7 +130,7 @@ THEN the errored initialization screen should be shown
         ),
       );
       expect(find.byType(InitializingScreen), findsOneWidget);
-      await tester.pumpAndSettle();
+      await tester.pump();
       expect(find.byType(ErroredInitializationScreen), findsOneWidget);
       await tester.tap(find.byType(ElevatedButton));
       await tester.pump();
@@ -236,8 +235,7 @@ THEN the errored initialization screen should be shown
         ProviderScope(
           overrides: [
             asyncInitializationPod.overrideWith((ref) async {
-              final asyncValue = ref.state;
-              if (!asyncValue.isRefreshing) {
+              if (!ref.isRefresh) {
                 throw Exception('error');
               }
             }),
@@ -247,7 +245,7 @@ THEN the errored initialization screen should be shown
         ),
       );
       expect(find.byType(InitializingScreen), findsOneWidget);
-      await tester.pumpAndSettle();
+      await tester.pump();
       expect(find.byType(ErroredInitializationScreen), findsOneWidget);
       await tester.tap(find.byType(ElevatedButton));
       await tester.pump();
