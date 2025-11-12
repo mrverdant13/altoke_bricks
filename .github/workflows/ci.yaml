@@ -6,16 +6,16 @@ on:
     branches:
       - main
     paths:
-      - '!.github/**'
-      - '.github/workflows/ci.yaml'
-      - 'bricks/**'
+      - "!.github/**"
+      - ".github/workflows/ci.yaml"
+      - "bricks/**"
   push:
     branches:
       - main
     paths:
-      - '!.github/**'
-      - '.github/workflows/ci.yaml'
-      - 'bricks/**'
+      - "!.github/**"
+      - ".github/workflows/ci.yaml"
+      - "bricks/**"
 
 jobs:
   min-conditions:
@@ -35,7 +35,7 @@ jobs:
       - name: Install melos
         run: dart pub global activate melos 7.1.0
       - name: Initialize melos
-        run: melos bs
+        run: melos bootstrap
       - name: Format and analyze
         run: melos run format.ci && melos run analyze.ci
 
@@ -79,6 +79,6 @@ jobs:
       - name: Install coverde
         run: dart pub global activate coverde 0.2.0+2
       - name: Initialize melos
-        run: melos bs
+        run: melos bootstrap
       - name: Run tests, merge coverage data, and check coverage
         run: melos run test.ci && melos run coverage.merge && melos run coverage.check

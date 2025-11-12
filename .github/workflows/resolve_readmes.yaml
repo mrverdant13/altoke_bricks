@@ -26,7 +26,7 @@ jobs:
       - name: Install melos
         run: dart pub global activate melos 7.1.0
       - name: Initialize READMEs resolver
-        run: melos bs --scope=readmes_resolver
+        run: melos bootstrap --scope=readmes_resolver
       - name: Resolve root README file
         run: melos run docs.root
       - name: Create PR
@@ -36,8 +36,8 @@ jobs:
           add-paths: |
             ./README.md
           branch: docs/update-root-readme
-          commit-message: 'docs: update root README'
-          title: 'docs: update root README'
+          commit-message: "docs: update root README"
+          title: "docs: update root README"
           body: Update root README.
           delete-branch: true
           author: Altoke Bot <altoke.bot@users.noreply.github.com>
@@ -59,7 +59,7 @@ jobs:
       - name: Install melos
         run: dart pub global activate melos 7.1.0
       - name: Initialize brick scopes
-        run: melos bs --category=scopes
+        run: melos bootstrap --category=scopes
       - name: Identify brick scopes
         id: identify-brick-scopes
         run: echo "scopes=$(melos list --category=scopes --json | sed -n '/^\[/,$p' | tr -d '\n')" >> "$GITHUB_OUTPUT"
@@ -91,7 +91,7 @@ jobs:
       - name: Install melos
         run: dart pub global activate melos 7.1.0
       - name: Initialize READMEs resolver
-        run: melos bs --scope=readmes_resolver
+        run: melos bootstrap --scope=readmes_resolver
       - name: Set relevant packages
         run: echo "MELOS_PACKAGES=${{ steps.build-brick-scope-name.outputs.brick-scope-name }}" >> "$GITHUB_ENV"
       - name: Generate template
@@ -103,12 +103,11 @@ jobs:
           add-paths: |
             ./bricks/${{ steps.build-brick-name.outputs.brick-name }}/brick/README.md
           branch: docs/${{ steps.build-brick-tag-name.outputs.brick-tag-name }}/update-readme
-          commit-message: 'docs(b-${{ steps.build-brick-tag-name.outputs.brick-tag-name }}): update README'
-          title: 'docs(b-${{ steps.build-brick-tag-name.outputs.brick-tag-name }}): update README'
+          commit-message: "docs(b-${{ steps.build-brick-tag-name.outputs.brick-tag-name }}): update README"
+          title: "docs(b-${{ steps.build-brick-tag-name.outputs.brick-tag-name }}): update README"
           body: Update README.
           delete-branch: true
           author: Altoke Bot <altoke.bot@users.noreply.github.com>
           committer: Altoke Bot <altoke.bot@users.noreply.github.com>
           assignees: mrverdant13
           reviewers: mrverdant13
-
