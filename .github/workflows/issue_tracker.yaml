@@ -4,7 +4,7 @@ on:
   workflow_dispatch: {}
   schedule:
     # Runs all mondays at 00:00
-    - cron: '0 0 * * 1'
+    - cron: "0 0 * * 1"
 
 jobs:
   identify-referenced-issues:
@@ -22,7 +22,7 @@ jobs:
       - name: Install melos
         run: dart pub global activate melos 7.1.0
       - name: Initialize issues finder
-        run: melos bs --scope=referenced_issues_finder
+        run: melos bootstrap --scope=referenced_issues_finder
       - name: Identify referenced issues
         id: identify-referenced-issues
         run: echo "issues=$(melos run issues | sed -n '/^\[/,$p' | tr -d '\n')" >> "$GITHUB_OUTPUT"
@@ -81,4 +81,3 @@ jobs:
             Now that the referenced issue has been closed, we need to evaluate if there are any implications.
           PINNED: false
           CLOSE_PREVIOUS: false
-

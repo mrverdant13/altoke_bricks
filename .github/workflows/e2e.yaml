@@ -37,6 +37,6 @@ jobs:
       - name: Install coverde
         run: dart pub global activate coverde 0.2.0+2
       - name: Initialize E2E tests
-        run: melos bs --category=e2e
+        run: melos bootstrap --category=e2e
       - name: Run E2E tests
         run: melos run test.e2e.all
