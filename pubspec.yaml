@@ -37,7 +37,7 @@ melos:
         build_runner: ^2.7.1
         collection: ^1.19.1
         mason: ^0.1.1
-        melos: ^7.1.0
+        melos: ^7.3.0
         meta: ^1.16.0
         mocktail: ^1.0.4
         path: ^1.9.1
@@ -45,14 +45,15 @@ melos:
         very_good_analysis: ^9.0.0
       hooks:
         pre:
-          run: melos run bootstrap
+          run: melos run --include-private .bootstrap
     clean:
       hooks:
         pre:
-          run: melos run clean
+          run: melos run --include-private .clean
 
   scripts:
-    bootstrap:
+    .bootstrap:
+      private: true
       # HACK: Workaround to avoid workspace bug
       # https://github.com/flutter/flutter/issues/174205
       run: >
@@ -61,7 +62,8 @@ melos:
         flutter pub get
 
     # Clean-up
-    clean:
+    .clean:
+      private: true
       description: Deep clean-up
       # Preserves FVM internal folder to avoid re-installing the Flutter SDK when developing locally.
       # Preserves platform-specific folders to keep them for local development.
