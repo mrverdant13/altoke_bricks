@@ -16,7 +16,9 @@ dependencies:
   #{{#use_auto_route}}x#
   auto_route: ^10.2.2
   #{{/use_auto_route}}#
-  #x-remove-start#
+  bloc_concurrency: ^0.3.0
+  dart_mappable: ^4.6.1
+  #remove-start#
   drift: ^2.29.0
   drift_flutter: ^0.2.7
   drift_local_database:
@@ -24,6 +26,7 @@ dependencies:
   #remove-end-x#
   flutter:
     sdk: flutter
+  flutter_bloc: ^9.1.1
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^3.0.3
@@ -50,6 +53,7 @@ dev_dependencies:
   #{{/use_auto_route}}x#
   build_runner: ^2.7.1
   custom_lint: ^0.8.0
+  dart_mappable_builder: ^4.6.0
   flutter_test:
     sdk: flutter
   #{{#use_go_router}}x#
