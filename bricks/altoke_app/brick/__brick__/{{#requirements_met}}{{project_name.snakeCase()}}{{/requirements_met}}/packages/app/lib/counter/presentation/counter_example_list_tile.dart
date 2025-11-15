@@ -11,8 +11,8 @@ class CounterExampleListTile extends ConsumerWidget {
     final l10n = context.l10n;
     return ListTile(
       title: Text(l10n.counterExampleListTileTitle),
-      onTap: () {
-        {{#use_auto_route}}const CounterRoute().navigate(context);{{/use_auto_route}}{{#use_go_router}}const CounterRouteData().go(context);{{/use_go_router}}
+      onTap: () async {
+        {{#use_auto_route}}await const CounterRoute().navigate(context);{{/use_auto_route}}{{#use_go_router}}const CounterRouteData().go(context);{{/use_go_router}}
       },
     );
   }

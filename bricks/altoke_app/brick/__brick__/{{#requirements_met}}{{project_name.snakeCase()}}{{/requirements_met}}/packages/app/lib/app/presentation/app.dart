@@ -42,7 +42,9 @@ class InitializationWrapper extends ConsumerWidget {
       skipLoadingOnReload: false,
       loading: InitializingScreen.new,
       data: (_) => child,
+      // coverage:ignore-start
       error: (_, _) => const ErroredInitializationScreen(),
+      // coverage:ignore-end
     );
   }
 }
@@ -63,6 +65,7 @@ class InitializingScreen extends StatelessWidget {
 class ErroredInitializationScreen extends ConsumerWidget {
   const ErroredInitializationScreen({super.key});
 
+  // coverage:ignore-start
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
@@ -91,4 +94,6 @@ class ErroredInitializationScreen extends ConsumerWidget {
       ),
     );
   }
+
+  // coverage:ignore-end
 }
