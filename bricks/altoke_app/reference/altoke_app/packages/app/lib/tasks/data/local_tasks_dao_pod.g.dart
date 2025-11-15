@@ -6,6 +6,9 @@ part of 'local_tasks_dao_pod.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
 @ProviderFor(localTasksDao)
 const localTasksDaoPod = LocalTasksDaoProvider._();
 
@@ -64,6 +67,3 @@ final class LocalTasksDaoProvider
 }
 
 String _$localTasksDaoHash() => r'696b6929be909b8add2f4668549b6ddf29165115';
-
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

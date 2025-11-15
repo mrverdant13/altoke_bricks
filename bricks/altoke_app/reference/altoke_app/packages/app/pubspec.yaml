@@ -14,10 +14,10 @@ dependencies:
     path: ../../../../../altoke_common/reference/common/
   #remove-end-x#
   #{{#use_auto_route}}x#
-  auto_route: ^10.1.2
+  auto_route: ^10.2.2
   #{{/use_auto_route}}#
   #x-remove-start#
-  drift: ^2.28.1
+  drift: ^2.29.0
   drift_flutter: ^0.2.7
   drift_local_database:
     path: ../../../../../altoke_local_database/reference/local_database/drift_local_database/
@@ -26,7 +26,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  flutter_riverpod: ^3.0.0-dev.17
+  flutter_riverpod: ^3.0.3
   #{{#use_go_router}}x#
   go_router: ^17.0.0
   #{{/use_go_router}}x#
@@ -42,11 +42,11 @@ dependencies:
   path: ^1.9.1
   path_provider: ^2.1.5
   #remove-end#
-  riverpod_annotation: ^3.0.0-dev.17
+  riverpod_annotation: ^3.0.3
 
 dev_dependencies:
   #{{#use_auto_route}}x#
-  auto_route_generator: ^10.2.4
+  auto_route_generator: ^10.2.6
   #{{/use_auto_route}}x#
   build_runner: ^2.7.1
   custom_lint: ^0.8.0
@@ -66,8 +66,8 @@ dev_dependencies:
   plugin_platform_interface: ^2.1.8
   #remove-end#
   #w 1v 2> w#
-  riverpod_generator: ^3.0.0-dev.17
-  riverpod_lint: ^3.0.0-dev.17
+  riverpod_generator: ^3.0.3
+  riverpod_lint: ^3.0.3
   very_good_analysis: ^9.0.0
 
 flutter:
