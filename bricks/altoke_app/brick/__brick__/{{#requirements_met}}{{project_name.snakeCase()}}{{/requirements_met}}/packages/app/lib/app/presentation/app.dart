@@ -4,7 +4,12 @@ import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/routing/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
+@Dependencies([
+  routerConfig,
+  asyncInitialization,
+])
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
@@ -27,6 +32,9 @@ class MyApp extends ConsumerWidget {
   }
 }
 
+@Dependencies([
+  asyncInitialization,
+])
 @visibleForTesting
 class InitializationWrapper extends ConsumerWidget {
   const InitializationWrapper({required this.child, super.key});
@@ -61,6 +69,9 @@ class InitializingScreen extends StatelessWidget {
   }
 }
 
+@Dependencies([
+  asyncInitialization,
+])
 @visibleForTesting
 class ErroredInitializationScreen extends ConsumerWidget {
   const ErroredInitializationScreen({super.key});

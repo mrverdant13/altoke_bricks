@@ -1,11 +1,16 @@
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/app/app.dart';
+import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/counter/counter.dart';
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/flavors/flavors.dart';
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/routing/routing.dart';{{#use_auto_route}}
 import 'package:auto_route/auto_route.dart';{{/use_auto_route}}
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';{{#use_go_router}}
-import 'package:go_router/go_router.dart';{{/use_go_router}}
+import 'package:go_router/go_router.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';{{/use_go_router}}
 
+@Dependencies([
+  Counter,
+])
 void main() {
   setUp(() {
     debugFlavor = AppFlavor.dev;

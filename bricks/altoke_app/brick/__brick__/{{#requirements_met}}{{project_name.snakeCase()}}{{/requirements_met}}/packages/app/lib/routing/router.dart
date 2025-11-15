@@ -1,8 +1,10 @@
+import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/counter/counter.dart';
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/routing/routing.dart';{{#use_auto_route}}
 import 'package:auto_route/auto_route.dart';{{/use_auto_route}}
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';{{#use_go_router}}
-import 'package:go_router/go_router.dart';{{/use_go_router}}
+import 'package:go_router/go_router.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';{{/use_go_router}}
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 export 'routes/routes.dart';
@@ -34,7 +36,10 @@ RouterConfig<UrlState> routerConfig(Ref ref) {
   final appRouter = AppRouter();
   ref.onDispose(appRouter.dispose);
   return appRouter.config();
-}{{/use_auto_route}}{{#use_go_router}}@TypedGoRoute<HomeRouteData>(
+}{{/use_auto_route}}{{#use_go_router}}@Dependencies([
+  Counter,
+  ])
+@TypedGoRoute<HomeRouteData>(
   path: '/',
   name: 'HomeRoute',
   routes: [
@@ -50,6 +55,9 @@ class HomeRouteData extends GoRouteData with $HomeRouteData {
   }
 }
 
+@Dependencies([
+  Counter,
+])
 class CounterRouteData extends GoRouteData with $CounterRouteData {
   const CounterRouteData();
 
@@ -59,7 +67,11 @@ class CounterRouteData extends GoRouteData with $CounterRouteData {
   }
 }
 
-@Riverpod(dependencies: [])
+@Riverpod(
+  dependencies: [
+    Counter,
+    ],
+)
 RouterConfig<RouteMatchList> routerConfig(Ref ref) {
   final goRouter = GoRouter(
     routes: $appRoutes,
