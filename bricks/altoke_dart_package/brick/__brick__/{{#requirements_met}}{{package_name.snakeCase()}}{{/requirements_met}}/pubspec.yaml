@@ -9,4 +9,4 @@ environment:
 dev_dependencies:
   {{#use_code_generation}}build_runner: ^2.7.1
   {{/use_code_generation}}test: ^1.26.2
-  very_good_analysis: ^9.0.0
+  very_good_analysis: ^10.0.0
