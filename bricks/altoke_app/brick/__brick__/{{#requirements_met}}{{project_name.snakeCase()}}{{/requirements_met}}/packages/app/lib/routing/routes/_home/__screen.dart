@@ -1,7 +1,12 @@
+import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/counter/counter.dart';
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/home/home.dart';{{#use_auto_route}}
 import 'package:auto_route/auto_route.dart';{{/use_auto_route}}
 import 'package:flutter/material.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
+@Dependencies([
+  Counter,
+  ])
 {{#use_auto_route}}@RoutePage(name: 'HomeRoute')
 {{/use_auto_route}}class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
