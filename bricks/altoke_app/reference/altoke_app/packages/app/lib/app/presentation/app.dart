@@ -3,6 +3,7 @@ import 'package:altoke_app/flavors/flavors.dart';
 import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/routing/routing.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MyApp extends ConsumerWidget {
@@ -11,25 +12,31 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final routerConfig = ref.watch(routerConfigPod);
-    return MaterialApp.router(
-      onGenerateTitle: (context) => context.l10n.appTitle,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      routerConfig: routerConfig,
-      builder: (context, router) {
-        router!;
-        /*replace-start*/
-        final child =
-            /*with*/
-            // return
-            /*replace-end*/ NavigatorUriListener(
-              router: router as Router<Object>,
-              child: FlavorBanner(child: InitializationWrapper(child: router)),
-            );
-        /*x-remove-start*/
-        return RouterPackageSwitcherWrapper(child: child);
-        /*remove-end*/
-      },
+    return BlocProvider(
+      create: (context) =>
+          AppInitializationBloc()..add(const AppInitializationRequested()),
+      child: MaterialApp.router(
+        onGenerateTitle: (context) => context.l10n.appTitle,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        routerConfig: routerConfig,
+        builder: (context, router) {
+          router!;
+          /*replace-start*/
+          final child =
+              /*with*/
+              // return
+              /*replace-end*/ NavigatorUriListener(
+                router: router as Router<Object>,
+                child: FlavorBanner(
+                  child: InitializationWrapper(child: router),
+                ),
+              );
+          /*x-remove-start*/
+          return RouterPackageSwitcherWrapper(child: child);
+          /*remove-end*/
+        },
+      ),
     );
   }
 } /*w 2v w*/
@@ -96,17 +103,12 @@ class InitializationWrapper extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final asyncInitialization = ref.watch(asyncInitializationPod);
-    return asyncInitialization.when(
-      skipError: false,
-      skipLoadingOnRefresh: false,
-      skipLoadingOnReload: false,
-      loading: InitializingScreen.new,
-      data: (_) => child,
-      // coverage:ignore-start
-      error: (_, _) => const ErroredInitializationScreen(),
-      // coverage:ignore-end
-    );
+    final appInitializationState = context.watch<AppInitializationBloc>().state;
+    return switch (appInitializationState) {
+      AppUninitialized() || AppInitializing() => const InitializingScreen(),
+      SuccessfulAppInitialization() => child,
+      FailedAppInitialization() => const ErroredInitializationScreen(),
+    };
   }
 }
 
@@ -145,7 +147,9 @@ class ErroredInitializationScreen extends ConsumerWidget {
               const SizedBox.square(dimension: 16),
               ElevatedButton(
                 onPressed: () {
-                  ref.invalidate(asyncInitializationPod);
+                  context.read<AppInitializationBloc>().add(
+                    const AppInitializationRequested(),
+                  );
                 },
                 child: Text(l10n.genericRetryButtonLabel),
               ),
