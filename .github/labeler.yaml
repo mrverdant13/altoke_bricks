@@ -22,12 +22,6 @@ b:entities:
       - bricks/altoke_entities/**
       - bricks/entities/**
 
-b:entity:
-  - changed-files:
-    - any-glob-to-any-file:
-      - bricks/altoke_entity/**
-      - bricks/entity/**
-
 b:local_database:
   - changed-files:
     - any-glob-to-any-file:
