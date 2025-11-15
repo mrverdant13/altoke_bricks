@@ -11,13 +11,13 @@ class CounterExampleListTile extends ConsumerWidget {
     final l10n = context.l10n;
     return ListTile(
       title: Text(l10n.counterExampleListTileTitle),
-      onTap: () {
+      onTap: () async {
         /*remove-start*/
         switch (ref.read(selectedRouterPackagePod)) {
           case RouterPackage.autoRoute:
             /*remove-end-x*/
             /*{{#use_auto_route}}x*/
-            const CounterRoute().navigate(context);
+            await const CounterRoute().navigate(context);
           /*x{{/use_auto_route}}x*/
           /*remove-start*/
           case RouterPackage.goRouter:
