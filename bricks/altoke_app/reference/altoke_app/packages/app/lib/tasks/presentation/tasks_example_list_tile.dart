@@ -12,14 +12,14 @@ class TasksExampleListTile extends ConsumerWidget {
     final l10n = context.l10n;
     return ListTile(
       title: Text(l10n.tasksExampleListTileTitle),
-      onTap: () {
+      onTap: () async {
         /*w 1v w*/
         /*remove-start*/
         switch (ref.read(selectedRouterPackagePod)) {
           case RouterPackage.autoRoute:
             /*remove-end*/
             /*{{#use_auto_route}}*/
-            const TasksRoute().navigate(context);
+            await const TasksRoute().navigate(context);
           /*{{/use_auto_route}}*/
           /*remove-start*/
           case RouterPackage.goRouter:
