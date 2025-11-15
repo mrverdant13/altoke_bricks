@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:altoke_app/tasks/tasks.dart';
 import 'package:altoke_common/common.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +46,7 @@ class _TaskDismissibleState extends ConsumerState<TaskDismissible> {
         '''<tasks::task-list-tile::task-dismissible::task-id:$id>''',
       ),
       onDismissed: (direction) {
-        deleteTaskById(ref, id);
+        unawaited(deleteTaskById(ref, id));
         setState(() => _isDismissed = true);
       },
       direction: DismissDirection.endToStart,
@@ -103,10 +105,10 @@ class TaskCheckboxListTile extends ConsumerWidget {
                   : null,
             ),
       value: completed,
-      onChanged: (value) {
+      onChanged: (value) async {
         if (value == null) return;
         final task = PartialTask(completed: Optional.some(value));
-        updateTask(ref, taskId: id, task: task);
+        await updateTask(ref, taskId: id, task: task);
       },
     );
   }

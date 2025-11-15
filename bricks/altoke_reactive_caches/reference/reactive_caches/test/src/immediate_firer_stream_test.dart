@@ -13,7 +13,7 @@ void main() {
     });
 
     tearDown(() {
-      controller.close();
+      unawaited(controller.close());
     });
 
     ImmediateFirerStream<int> buildSubject({

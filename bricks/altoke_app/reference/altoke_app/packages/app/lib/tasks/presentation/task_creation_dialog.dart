@@ -166,13 +166,13 @@ class _NewTaskFormState extends ConsumerState<NewTaskForm> {
         ],
         const SizedBox.square(dimension: 24),
         ElevatedButton(
-          onPressed: () {
+          onPressed: () async {
             final newTask = NewTask(
               title: title,
               priority: priority,
               description: description,
             );
-            createTask(ref, newTask);
+            await createTask(ref, newTask);
           },
           child: Text(l10n.newTaskFormSubmitButtonLabel),
         ),

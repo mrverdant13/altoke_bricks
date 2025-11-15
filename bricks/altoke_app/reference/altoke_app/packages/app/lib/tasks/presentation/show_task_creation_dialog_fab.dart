@@ -10,8 +10,8 @@ class ShowTaskCreationDialogFab extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return FloatingActionButton(
-      onPressed: () {
-        showDialog<void>(
+      onPressed: () async {
+        await showDialog<void>(
           context: context,
           builder: (context) => const TaskCreationDialog(),
         );
