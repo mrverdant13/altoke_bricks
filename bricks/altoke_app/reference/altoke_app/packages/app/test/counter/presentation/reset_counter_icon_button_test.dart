@@ -3,9 +3,13 @@ import 'dart:math';
 import 'package:altoke_app/counter/counter.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
 import '../../helpers/helpers.dart';
 
+@Dependencies([
+  Counter,
+])
 void main() {
   testWidgets(
     '''

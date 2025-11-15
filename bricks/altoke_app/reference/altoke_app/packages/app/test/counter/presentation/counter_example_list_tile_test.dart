@@ -10,9 +10,16 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 /*x{{/use_go_router}}*/
 import 'package:mocktail/mocktail.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
 import '../../helpers/helpers.dart';
 
+@Dependencies([
+  /*remove-start*/
+  SelectedRouterPackage,
+  /*remove-end-x*/
+  Counter,
+])
 void main() {
   testWidgets(
     '''

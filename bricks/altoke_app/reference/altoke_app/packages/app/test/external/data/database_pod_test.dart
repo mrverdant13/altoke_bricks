@@ -5,7 +5,13 @@ import 'package:drift_local_database/drift_local_database.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart' as path;
+import 'package:riverpod_annotation/experimental/scope.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+@Dependencies([
+  asyncDriftLocalDatabase,
+  asyncHiveInitialization,
+])
 void main() {
   test(
     '''

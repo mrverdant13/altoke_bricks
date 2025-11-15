@@ -1,4 +1,5 @@
 import 'package:altoke_app/app/app.dart';
+import 'package:altoke_app/counter/counter.dart';
 import 'package:altoke_app/flavors/flavors.dart';
 import 'package:altoke_app/routing/routing.dart';
 /*x{{#use_auto_route}}*/
@@ -8,8 +9,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 /*x{{#use_go_router}}*/
 import 'package:go_router/go_router.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 /*x{{/use_go_router}}*/
 
+@Dependencies([
+  /*remove-start*/
+  SelectedRouterPackage,
+  /*remove-end-x*/
+  Counter,
+])
 void main() {
   setUp(() {
     debugFlavor = AppFlavor.dev;

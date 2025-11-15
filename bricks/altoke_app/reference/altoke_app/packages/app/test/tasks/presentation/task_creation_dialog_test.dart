@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:local_database/local_database.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
 import '../../helpers/helpers.dart';
 
+@Dependencies([
+  localTasksDao,
+])
 void main() {
   testWidgets(
     '''

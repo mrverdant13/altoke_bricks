@@ -1,13 +1,24 @@
 import 'dart:math' as math;
 
+/*remove-start*/
+import 'package:altoke_app/external/external.dart';
 import 'package:altoke_app/tasks/tasks.dart';
+/*remove-end-x*/
 /*{{#use_auto_route}}*/
 import 'package:auto_route/auto_route.dart';
 /*{{/use_auto_route}}*/
 import 'package:flutter/material.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
 // coverage:ignore-start
 
+@Dependencies([
+  /*remove-start*/
+  SelectedLocalDatabasePackage,
+  asyncTasks,
+  localTasksDao,
+  /*remove-end-x*/
+])
 /*{{#use_auto_route}}*/
 @RoutePage(name: 'TasksRoute')
 /*{{/use_auto_route}}*/

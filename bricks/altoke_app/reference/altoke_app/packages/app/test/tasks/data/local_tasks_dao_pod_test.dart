@@ -6,9 +6,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:local_database/local_database.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../helpers/helpers.dart';
 
+@Dependencies([
+  /*remove-start*/
+  SelectedLocalDatabasePackage,
+  /*remove-end-x*/
+  localTasksDao,
+])
 void main() {
   test(
     '''

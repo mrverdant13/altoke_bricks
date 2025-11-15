@@ -1,9 +1,20 @@
+import 'package:altoke_app/external/external.dart';
 import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/routing/routing.dart';
+import 'package:altoke_app/tasks/tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
 // coverage:ignore-start
+/*remove-start*/
+@Dependencies([
+  SelectedRouterPackage,
+  SelectedLocalDatabasePackage,
+  asyncTasks,
+  localTasksDao,
+])
+/*remove-end-x*/
 class TasksExampleListTile extends ConsumerWidget {
   const TasksExampleListTile({super.key});
 

@@ -5,9 +5,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../helpers/helpers.dart';
 
+@Dependencies([
+  asyncApplicationDocumentsDirectory,
+  asyncTemporaryDirectory,
+])
 void main() {
   late PathProviderPlatform pathProviderPlatform;
 
