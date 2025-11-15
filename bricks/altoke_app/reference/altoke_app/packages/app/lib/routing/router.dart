@@ -1,4 +1,11 @@
+import 'package:altoke_app/counter/counter.dart';
+/*remove-start*/
+import 'package:altoke_app/external/external.dart';
+/*remove-end-x*/
 import 'package:altoke_app/routing/routing.dart';
+/*remove-start*/
+import 'package:altoke_app/tasks/tasks.dart';
+/*remove-end-x*/
 /*x{{#use_auto_route}}*/
 import 'package:auto_route/auto_route.dart';
 /*x{{/use_auto_route}}*/
@@ -6,6 +13,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 /*x{{#use_go_router}}*/
 import 'package:go_router/go_router.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 /*x{{/use_go_router}}*/
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -50,6 +58,15 @@ RouterConfig<UrlState> autoRouteConfig(Ref ref) {
 /*x{{/use_auto_route}}x*/
 
 /*x{{#use_go_router}}x*/
+@Dependencies([
+  Counter,
+  /*remove-start*/
+  SelectedLocalDatabasePackage,
+  SelectedRouterPackage,
+  asyncTasks,
+  localTasksDao,
+  /*remove-end-x*/
+])
 @TypedGoRoute<HomeRouteData>(
   path: '/',
   name: 'HomeRoute',
@@ -69,6 +86,9 @@ class HomeRouteData extends GoRouteData with $HomeRouteData {
   }
 }
 
+@Dependencies([
+  Counter,
+])
 class CounterRouteData extends GoRouteData with $CounterRouteData {
   const CounterRouteData();
 
@@ -80,6 +100,11 @@ class CounterRouteData extends GoRouteData with $CounterRouteData {
 
 /*x-remove-start*/
 // coverage:ignore-start
+@Dependencies([
+  SelectedLocalDatabasePackage,
+  asyncTasks,
+  localTasksDao,
+])
 class TasksRouteData extends GoRouteData with $TasksRouteData {
   const TasksRouteData();
 
@@ -91,7 +116,17 @@ class TasksRouteData extends GoRouteData with $TasksRouteData {
 // coverage:ignore-end
 /*remove-end*/
 
-@Riverpod(dependencies: [])
+@Riverpod(
+  dependencies: [
+    Counter,
+    /*remove-start*/
+    SelectedLocalDatabasePackage,
+    SelectedRouterPackage,
+    asyncTasks,
+    localTasksDao,
+    /*remove-end-x*/
+  ],
+)
 /*replace-start*/
 RouterConfig<RouteMatchList> goRouterConfig(Ref ref) {
   /*with*/

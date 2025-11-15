@@ -4,7 +4,15 @@ import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/routing/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
+@Dependencies([
+  routerConfig,
+  asyncInitialization,
+  /*x-remove-start*/
+  SelectedRouterPackage,
+  /*remove-end*/
+])
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
@@ -36,6 +44,9 @@ class MyApp extends ConsumerWidget {
 
 /*remove-start*/
 // coverage:ignore-start
+@Dependencies([
+  SelectedRouterPackage,
+])
 class RouterPackageSwitcherWrapper extends ConsumerWidget {
   const RouterPackageSwitcherWrapper({required this.child, super.key});
 
@@ -88,6 +99,9 @@ class RouterPackageSwitcherWrapper extends ConsumerWidget {
 // coverage:ignore-end
 /*remove-end*/
 
+@Dependencies([
+  asyncInitialization,
+])
 @visibleForTesting
 class InitializationWrapper extends ConsumerWidget {
   const InitializationWrapper({required this.child, super.key});
@@ -122,6 +136,9 @@ class InitializingScreen extends StatelessWidget {
   }
 }
 
+@Dependencies([
+  asyncInitialization,
+])
 @visibleForTesting
 class ErroredInitializationScreen extends ConsumerWidget {
   const ErroredInitializationScreen({super.key});

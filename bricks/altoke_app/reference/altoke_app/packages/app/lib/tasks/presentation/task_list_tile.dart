@@ -5,8 +5,12 @@ import 'package:altoke_common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:local_database/local_database.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
 // coverage:ignore-start
+@Dependencies([
+  localTasksDao,
+])
 class TaskListTile extends ConsumerWidget {
   const TaskListTile({required this.task, super.key});
 
@@ -21,6 +25,9 @@ class TaskListTile extends ConsumerWidget {
   }
 }
 
+@Dependencies([
+  localTasksDao,
+])
 @visibleForTesting
 class TaskDismissible extends ConsumerStatefulWidget {
   const TaskDismissible({
@@ -68,6 +75,9 @@ class _TaskDismissibleState extends ConsumerState<TaskDismissible> {
   }
 }
 
+@Dependencies([
+  localTasksDao,
+])
 @visibleForTesting
 class TaskCheckboxListTile extends ConsumerWidget {
   const TaskCheckboxListTile({

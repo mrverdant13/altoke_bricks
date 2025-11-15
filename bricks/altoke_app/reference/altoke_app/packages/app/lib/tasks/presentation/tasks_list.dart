@@ -2,8 +2,13 @@ import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/tasks/tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
 // coverage:ignore-start
+@Dependencies([
+  asyncTasks,
+  localTasksDao,
+])
 class TasksList extends ConsumerWidget {
   const TasksList({super.key});
 
@@ -18,6 +23,10 @@ class TasksList extends ConsumerWidget {
   }
 }
 
+@Dependencies([
+  asyncTasks,
+  localTasksDao,
+])
 @visibleForTesting
 class LoadedTasksList extends ConsumerWidget {
   const LoadedTasksList({super.key});
@@ -57,6 +66,9 @@ class LoadedTasksList extends ConsumerWidget {
   }
 }
 
+@Dependencies([
+  asyncTasks,
+])
 @visibleForTesting
 class FailedTasks extends ConsumerWidget {
   const FailedTasks({super.key});

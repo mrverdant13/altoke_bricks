@@ -1,3 +1,5 @@
+import 'package:altoke_app/counter/counter.dart';
+import 'package:altoke_app/external/external.dart';
 import 'package:altoke_app/routing/routing.dart';
 /*remove-start*/
 import 'package:altoke_app/tasks/tasks.dart';
@@ -12,9 +14,23 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 /*x{{/use_go_router}}*/
 import 'package:path/path.dart' as path;
+import 'package:riverpod_annotation/experimental/scope.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../helpers/helpers.dart';
 
+@Dependencies([
+  routerConfig,
+  /*remove-start*/
+  SelectedRouterPackage,
+  /*remove-end-x*/
+  Counter,
+  /*remove-start*/
+  SelectedLocalDatabasePackage,
+  /*remove-end-x*/
+  asyncTasks,
+  localTasksDao,
+])
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 

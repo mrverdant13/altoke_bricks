@@ -2,7 +2,11 @@ import 'package:altoke_app/counter/counter.dart';
 import 'package:altoke_app/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
+@Dependencies([
+  Counter,
+])
 class CounterBody extends StatelessWidget {
   const CounterBody({super.key});
 
@@ -23,6 +27,9 @@ class CounterBody extends StatelessWidget {
 }
 
 @visibleForTesting
+@Dependencies([
+  Counter,
+])
 class PushCountMessage extends ConsumerWidget {
   const PushCountMessage({super.key});
 
@@ -49,6 +56,9 @@ class PushCountMessage extends ConsumerWidget {
   }
 }
 
+@Dependencies([
+  Counter,
+])
 @visibleForTesting
 class PushCountValue extends ConsumerWidget {
   const PushCountValue({super.key});

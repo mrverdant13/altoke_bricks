@@ -1,12 +1,29 @@
 import 'package:altoke_app/app/app.dart';
+import 'package:altoke_app/counter/state/counter_pod.dart';
+/*remove-start*/
+import 'package:altoke_app/external/external.dart';
+/*remove-end-x*/
 import 'package:altoke_app/flavors/flavors.dart';
 import 'package:altoke_app/routing/routing.dart';
+/*remove-start*/
+import 'package:altoke_app/tasks/tasks.dart';
+/*remove-end-x*/
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 /*x{{#use_go_router}}*/
 import 'package:go_router/go_router.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 /*x{{/use_go_router}}*/
 
+@Dependencies([
+  Counter,
+  /*remove-start*/
+  SelectedRouterPackage,
+  SelectedLocalDatabasePackage,
+  asyncTasks,
+  localTasksDao,
+  /*remove-end-x*/
+])
 void main() {
   setUp(() {
     debugFlavor = AppFlavor.dev;

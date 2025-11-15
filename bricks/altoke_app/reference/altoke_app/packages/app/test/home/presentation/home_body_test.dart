@@ -1,12 +1,26 @@
 import 'package:altoke_app/counter/counter.dart';
+/*remove-start*/
+import 'package:altoke_app/external/external.dart';
+/*remove-end-x*/
 import 'package:altoke_app/home/home.dart';
-/*x-remove-start*/
+/*remove-start*/
+import 'package:altoke_app/routing/routing.dart';
 import 'package:altoke_app/tasks/tasks.dart';
 /*remove-end*/
 import 'package:flutter_test/flutter_test.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
 import '../../helpers/helpers.dart';
 
+@Dependencies([
+  Counter,
+  /*remove-start*/
+  SelectedRouterPackage,
+  SelectedLocalDatabasePackage,
+  asyncTasks,
+  localTasksDao,
+  /*remove-end-x*/
+])
 void main() {
   testWidgets(
     '''
