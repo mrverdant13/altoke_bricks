@@ -28,7 +28,7 @@ dependencies:
     sdk: flutter
   flutter_riverpod: ^3.0.0-dev.17
   #{{#use_go_router}}x#
-  go_router: ^16.2.1
+  go_router: ^17.0.0
   #{{/use_go_router}}x#
   #remove-start#
   hive: ^2.2.3
