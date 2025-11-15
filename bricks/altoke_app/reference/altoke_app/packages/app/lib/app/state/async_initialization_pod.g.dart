@@ -6,6 +6,9 @@ part of 'async_initialization_pod.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
 @ProviderFor(asyncInitialization)
 const asyncInitializationPod = AsyncInitializationProvider._();
 
@@ -55,6 +58,3 @@ final class AsyncInitializationProvider
 
 String _$asyncInitializationHash() =>
     r'cd515118506c4b8f845cb21f9bf3dddd709a4a86';
-
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

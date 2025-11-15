@@ -6,6 +6,9 @@ part of 'async_tasks_pod.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
 @ProviderFor(asyncTasks)
 const asyncTasksPod = AsyncTasksProvider._();
 
@@ -63,6 +66,3 @@ final class AsyncTasksProvider
 }
 
 String _$asyncTasksHash() => r'befe0325d2483f47a0461b813fee3d06fc575009';
-
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
