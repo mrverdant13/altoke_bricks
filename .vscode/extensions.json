@@ -7,5 +7,6 @@
     "felixangelov.mason",
     "github.vscode-github-actions",
     "redhat.vscode-yaml",
+    "felixangelov.bloc",
   ],
 }
