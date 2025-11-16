@@ -160,9 +160,40 @@ final class GoRouterConfigProvider
         retry: null,
         name: r'goRouterConfigPod',
         isAutoDispose: true,
-        dependencies: const <ProviderOrFamily>[],
-        $allTransitiveDependencies: const <ProviderOrFamily>[],
+        dependencies: const <ProviderOrFamily>[
+          counterPod,
+          selectedLocalDatabasePackagePod,
+          selectedRouterPackagePod,
+          asyncTasksPod,
+          localTasksDaoPod,
+        ],
+        $allTransitiveDependencies: const <ProviderOrFamily>{
+          GoRouterConfigProvider.$allTransitiveDependencies0,
+          GoRouterConfigProvider.$allTransitiveDependencies1,
+          GoRouterConfigProvider.$allTransitiveDependencies2,
+          GoRouterConfigProvider.$allTransitiveDependencies3,
+          GoRouterConfigProvider.$allTransitiveDependencies4,
+          GoRouterConfigProvider.$allTransitiveDependencies5,
+          GoRouterConfigProvider.$allTransitiveDependencies6,
+          GoRouterConfigProvider.$allTransitiveDependencies7,
+          GoRouterConfigProvider.$allTransitiveDependencies8,
+        },
       );
+
+  static const $allTransitiveDependencies0 = counterPod;
+  static const $allTransitiveDependencies1 = selectedLocalDatabasePackagePod;
+  static const $allTransitiveDependencies2 = selectedRouterPackagePod;
+  static const $allTransitiveDependencies3 = asyncTasksPod;
+  static const $allTransitiveDependencies4 =
+      AsyncTasksProvider.$allTransitiveDependencies0;
+  static const $allTransitiveDependencies5 =
+      AsyncTasksProvider.$allTransitiveDependencies2;
+  static const $allTransitiveDependencies6 =
+      AsyncTasksProvider.$allTransitiveDependencies3;
+  static const $allTransitiveDependencies7 =
+      AsyncTasksProvider.$allTransitiveDependencies4;
+  static const $allTransitiveDependencies8 =
+      AsyncTasksProvider.$allTransitiveDependencies5;
 
   @override
   String debugGetCreateSourceHash() => _$goRouterConfigHash();
@@ -187,7 +218,7 @@ final class GoRouterConfigProvider
   }
 }
 
-String _$goRouterConfigHash() => r'36abcb131ca29d324161a8c15ca16812458b9c2c';
+String _$goRouterConfigHash() => r'62fa60b2b647a82fba220cdd613f5792c7fb9a2b';
 
 @ProviderFor(routerConfig)
 const routerConfigPod = RouterConfigProvider._();
@@ -212,16 +243,40 @@ final class RouterConfigProvider
           autoRouteConfigPod,
           goRouterConfigPod,
         ],
-        $allTransitiveDependencies: const <ProviderOrFamily>[
+        $allTransitiveDependencies: const <ProviderOrFamily>{
           RouterConfigProvider.$allTransitiveDependencies0,
           RouterConfigProvider.$allTransitiveDependencies1,
           RouterConfigProvider.$allTransitiveDependencies2,
-        ],
+          RouterConfigProvider.$allTransitiveDependencies3,
+          RouterConfigProvider.$allTransitiveDependencies4,
+          RouterConfigProvider.$allTransitiveDependencies5,
+          RouterConfigProvider.$allTransitiveDependencies6,
+          RouterConfigProvider.$allTransitiveDependencies7,
+          RouterConfigProvider.$allTransitiveDependencies8,
+          RouterConfigProvider.$allTransitiveDependencies9,
+          RouterConfigProvider.$allTransitiveDependencies10,
+        },
       );
 
   static const $allTransitiveDependencies0 = selectedRouterPackagePod;
   static const $allTransitiveDependencies1 = autoRouteConfigPod;
   static const $allTransitiveDependencies2 = goRouterConfigPod;
+  static const $allTransitiveDependencies3 =
+      GoRouterConfigProvider.$allTransitiveDependencies0;
+  static const $allTransitiveDependencies4 =
+      GoRouterConfigProvider.$allTransitiveDependencies1;
+  static const $allTransitiveDependencies5 =
+      GoRouterConfigProvider.$allTransitiveDependencies3;
+  static const $allTransitiveDependencies6 =
+      GoRouterConfigProvider.$allTransitiveDependencies4;
+  static const $allTransitiveDependencies7 =
+      GoRouterConfigProvider.$allTransitiveDependencies5;
+  static const $allTransitiveDependencies8 =
+      GoRouterConfigProvider.$allTransitiveDependencies6;
+  static const $allTransitiveDependencies9 =
+      GoRouterConfigProvider.$allTransitiveDependencies7;
+  static const $allTransitiveDependencies10 =
+      GoRouterConfigProvider.$allTransitiveDependencies8;
 
   @override
   String debugGetCreateSourceHash() => _$routerConfigHash();
