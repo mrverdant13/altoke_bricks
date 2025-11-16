@@ -1,13 +1,20 @@
+import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/counter/counter.dart';
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/routing/routing.dart';{{#use_auto_route}}
-import 'package:auto_route/auto_route.dart';{{/use_auto_route}}
-import 'package:flutter/material.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';{{/use_auto_route}}
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';{{#use_go_router}}
 import 'package:go_router/go_router.dart';{{/use_go_router}}
 import 'package:path/path.dart' as path;
+import 'package:riverpod_annotation/experimental/scope.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../helpers/helpers.dart';
 
+@Dependencies([
+  routerConfig,
+  Counter,
+  ])
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 

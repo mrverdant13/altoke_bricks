@@ -83,7 +83,7 @@ THEN the generated outputs should be valid and testable
 GIVEN the Altoke Dart Package brick
 AND hooks disabled
 WHEN the generation is run
-THEN the requirements file should be generated
+THEN only the requirements file should be generated
 ''',
     () async {
       final altokeDartPackageVars = <String, dynamic>{
@@ -91,14 +91,13 @@ THEN the requirements file should be generated
         'package_description': 'A test Altoke Dart package.',
         'use_code_generation': true,
       };
-      Future<void> action() async => BrickGenerator.dartPackage.runGeneration(
+      await BrickGenerator.dartPackage.runGeneration(
         target: target,
         vars: altokeDartPackageVars,
         runHooks: false,
       );
-      expect(action(), throwsA(isNotNull));
       expect(outputDir.existsSync(), isFalse);
-      expect(requirementsFile.existsSync(), isFalse);
+      expect(requirementsFile.existsSync(), isTrue);
     },
   );
 }

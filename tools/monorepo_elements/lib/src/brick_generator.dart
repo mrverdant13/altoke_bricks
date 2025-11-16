@@ -32,11 +32,6 @@ extension BrickGenerator on MasonGenerator {
     brickDir: 'altoke_dart_package',
   );
 
-  /// Altoke Entity brick generator.
-  static Future<MasonGenerator> entity = _buildAsyncGenerator(
-    brickDir: 'altoke_entity',
-  );
-
   /// Altoke Entities brick generator.
   static Future<MasonGenerator> entities = _buildAsyncGenerator(
     brickDir: 'altoke_entities',

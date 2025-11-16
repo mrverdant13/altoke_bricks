@@ -158,7 +158,7 @@ Future<void> testGenerationWithoutHooks({
 GIVEN the Altoke App brick
 AND hooks disabled
 WHEN the generation is run
-THEN no outputs should be generated
+THEN only the requirements file should be generated
 => with ${routerPackage.readableName}
 ''';
     test(composedDescription, () async {
@@ -173,12 +173,11 @@ THEN no outputs should be generated
         'project_description': 'This is a test project.',
         RouterPackage.varKey: routerPackage.readableName,
       };
-      Future<void> action() async => BrickGenerator.app.runGeneration(
+      await BrickGenerator.app.runGeneration(
         target: directoryGeneratorTarget,
         vars: altokeAppVars,
         runHooks: false,
       );
-      expect(action(), throwsA(isNotNull), reason: 'Generation fails');
       final outputDir = directoryGeneratorTarget.outputDir;
       final requirementsFile = directoryGeneratorTarget.requirementsFile;
       expect(
@@ -188,7 +187,7 @@ THEN no outputs should be generated
       );
       expect(
         requirementsFile.existsSync(),
-        isFalse,
+        isTrue,
         reason: 'No requirements file',
       );
     });

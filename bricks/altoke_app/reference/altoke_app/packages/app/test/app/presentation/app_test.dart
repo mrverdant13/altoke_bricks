@@ -13,7 +13,14 @@ import 'package:flutter_test/flutter_test.dart';
 /*x{{#use_go_router}}*/
 import 'package:go_router/go_router.dart';
 /*x{{/use_go_router}}*/
+import 'package:riverpod_annotation/experimental/scope.dart';
 
+@Dependencies([
+  /*remove-start*/
+  SelectedRouterPackage,
+  /*remove-end-x*/
+  asyncInitialization,
+])
 void main() {
   /*{{#use_auto_route}}x*/
   testWidgets(

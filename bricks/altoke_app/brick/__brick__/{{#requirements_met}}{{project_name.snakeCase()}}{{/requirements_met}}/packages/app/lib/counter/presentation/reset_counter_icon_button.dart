@@ -2,7 +2,11 @@ import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
+@Dependencies([
+  Counter,
+])
 class ResetCounterIconButton extends ConsumerWidget {
   const ResetCounterIconButton({super.key});
 

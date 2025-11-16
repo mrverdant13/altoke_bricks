@@ -1,12 +1,17 @@
 import 'package:altoke_app/tasks/tasks.dart';
 import 'package:flutter_riverpod/experimental/mutation.dart';
 import 'package:local_database/local_database.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'async_tasks_pod.g.dart';
 
 // coverage:ignore-start
-@Riverpod(dependencies: [localTasksDao])
+@Riverpod(
+  dependencies: [
+    localTasksDao,
+  ],
+)
 Stream<Iterable<Task>> asyncTasks(Ref ref) {
   return ref.watch(localTasksDaoPod).watchAll();
 }
@@ -15,6 +20,9 @@ final createTaskMutation = Mutation<Task>(
   label: 'createTaskMutation',
 );
 
+@Dependencies([
+  localTasksDao,
+])
 Future<void> createTask(MutationTarget target, NewTask newTask) async {
   await createTaskMutation.run(target, (tsx) async {
     final localTasksDao = tsx.get(localTasksDaoPod);
@@ -27,6 +35,9 @@ final updateTaskMutation = Mutation<(int, PartialTask)>(
   label: 'updateTaskMutation',
 );
 
+@Dependencies([
+  localTasksDao,
+])
 Future<void> updateTask(
   MutationTarget target, {
   required int taskId,
@@ -43,6 +54,9 @@ final deleteTaskByIdMutation = Mutation<int>(
   label: 'deleteTaskByIdMutation',
 );
 
+@Dependencies([
+  localTasksDao,
+])
 Future<void> deleteTaskById(MutationTarget target, int taskId) async {
   await deleteTaskByIdMutation.run(target, (tsx) async {
     final localTasksDao = tsx.get(localTasksDaoPod);

@@ -179,7 +179,7 @@ GIVEN the Altoke Entities brick
 AND hooks disabled
 AND an existing "common" package
 WHEN the generation is run
-THEN the generated outputs should be valid and testable
+THEN only the requirements file should be generated
 => with ${valueEqualityApproach.readableName}
 ''';
     test(composedDescription, () async {
@@ -200,16 +200,15 @@ THEN the generated outputs should be valid and testable
       final altokeEntitiesVars = <String, dynamic>{
         ValueEqualityApproach.varKey: valueEqualityApproach.readableName,
       };
-      Future<void> action() async => BrickGenerator.entities.runGeneration(
+      await BrickGenerator.entities.runGeneration(
         target: directoryGeneratorTarget,
         vars: altokeEntitiesVars,
         runHooks: false,
       );
-      expect(action(), throwsA(isNotNull));
       final outputDir = directoryGeneratorTarget.outputDir;
       expect(outputDir.existsSync(), isFalse);
       final requirementsFile = directoryGeneratorTarget.requirementsFile;
-      expect(requirementsFile.existsSync(), isFalse);
+      expect(requirementsFile.existsSync(), isTrue);
     });
   }
 }

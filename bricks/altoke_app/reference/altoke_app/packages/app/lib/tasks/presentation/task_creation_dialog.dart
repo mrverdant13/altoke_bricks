@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/experimental/mutation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:local_database/local_database.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
 // coverage:ignore-start
+@Dependencies([
+  localTasksDao,
+])
 class TaskCreationDialog extends StatelessWidget {
   const TaskCreationDialog({super.key});
 
@@ -33,6 +37,9 @@ class TaskCreationDialog extends StatelessWidget {
   }
 }
 
+@Dependencies([
+  localTasksDao,
+])
 @visibleForTesting
 class TaskCreationDialogContent extends ConsumerWidget {
   const TaskCreationDialogContent({super.key});
@@ -51,6 +58,9 @@ class TaskCreationDialogContent extends ConsumerWidget {
   }
 }
 
+@Dependencies([
+  localTasksDao,
+])
 class NewTaskForm extends ConsumerStatefulWidget {
   const NewTaskForm({super.key});
 

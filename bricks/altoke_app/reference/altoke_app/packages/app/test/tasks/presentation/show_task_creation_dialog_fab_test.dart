@@ -1,8 +1,12 @@
 import 'package:altoke_app/tasks/tasks.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
 import '../../helpers/helpers.dart';
 
+@Dependencies([
+  localTasksDao,
+])
 void main() {
   testWidgets(
     '''

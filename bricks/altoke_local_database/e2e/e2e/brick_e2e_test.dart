@@ -203,7 +203,7 @@ GIVEN the Altoke Local Database brick
 AND hooks disabled
 AND an existing "common" package
 WHEN the generation is run
-THEN the generated outputs should be valid and testable
+THEN only the requirements file should be generated
 => with `${localDatabaseAlternative.varIdentifier}`
 ''',
       () async {
@@ -225,17 +225,15 @@ THEN the generated outputs should be valid and testable
           LocalDatabaseAlternative.varKey:
               localDatabaseAlternative.varIdentifier,
         };
-        Future<void> action() async =>
-            BrickGenerator.localDatabase.runGeneration(
-              target: directoryGeneratorTarget,
-              vars: altokeLocalDatabaseVars,
-              runHooks: false,
-            );
-        expect(action(), throwsA(isNotNull));
+        await BrickGenerator.localDatabase.runGeneration(
+          target: directoryGeneratorTarget,
+          vars: altokeLocalDatabaseVars,
+          runHooks: false,
+        );
         final outputDir = directoryGeneratorTarget.outputDir;
         expect(outputDir.existsSync(), isFalse);
         final requirementsFile = directoryGeneratorTarget.requirementsFile;
-        expect(requirementsFile.existsSync(), isFalse);
+        expect(requirementsFile.existsSync(), isTrue);
       },
     );
   }

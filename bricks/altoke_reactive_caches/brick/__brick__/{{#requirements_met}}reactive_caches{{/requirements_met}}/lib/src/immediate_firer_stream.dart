@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 /// {@endtemplate}
 class ImmediateFirerStream<T extends Object?> extends StreamView<T> {
   /// {@macro {{#requirements_met}}reactive_caches{{/requirements_met}}.immediate_firer_stream}
-  ImmediateFirerStream(super.source, {required this.computeInitialValue});
+  ImmediateFirerStream(super.stream, {required this.computeInitialValue});
 
   /// Whether the wrapped stream is done.
   @visibleForTesting
@@ -43,7 +43,7 @@ class ImmediateFirerStream<T extends Object?> extends StreamView<T> {
     controller.onCancel = () {
       currentListeners.remove(controller);
       if (currentListeners.isEmpty) {
-        sourceSubscription?.cancel();
+        unawaited(sourceSubscription?.cancel());
         sourceSubscription = null;
       }
     };

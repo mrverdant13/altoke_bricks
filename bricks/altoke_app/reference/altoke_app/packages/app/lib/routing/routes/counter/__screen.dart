@@ -5,7 +5,11 @@ import 'package:altoke_app/counter/counter.dart';
 import 'package:auto_route/auto_route.dart';
 /*x{{/use_auto_route}}*/
 import 'package:flutter/material.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
+@Dependencies([
+  Counter,
+])
 /*{{#use_auto_route}}x*/
 @RoutePage(name: 'CounterRoute')
 /*{{/use_auto_route}}x*/
