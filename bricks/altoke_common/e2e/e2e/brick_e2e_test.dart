@@ -119,7 +119,7 @@ Future<void> testGenerationWithoutHooks({
 GIVEN the Altoke Common brick
 AND hooks disabled
 WHEN the generation is run
-THEN the generated outputs should be valid and testable
+THEN only the requirements file should be generated
 => with ${valueEqualityApproach.readableName}
 ''';
     test(composedDescription, () async {
@@ -131,16 +131,15 @@ THEN the generated outputs should be valid and testable
       final altokeCommonVars = <String, dynamic>{
         ValueEqualityApproach.varKey: valueEqualityApproach.readableName,
       };
-      Future<void> action() async => BrickGenerator.common.runGeneration(
+      await BrickGenerator.common.runGeneration(
         target: directoryGeneratorTarget,
         vars: altokeCommonVars,
         runHooks: false,
       );
-      expect(action(), throwsA(isNotNull));
       final outputDir = directoryGeneratorTarget.outputDir;
       expect(outputDir.existsSync(), isFalse);
       final requirementsFile = directoryGeneratorTarget.requirementsFile;
-      expect(requirementsFile.existsSync(), isFalse);
+      expect(requirementsFile.existsSync(), isTrue);
     });
   }
 }
