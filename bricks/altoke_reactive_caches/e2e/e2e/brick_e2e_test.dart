@@ -110,7 +110,7 @@ GIVEN the Altoke Reactive Caches brick
 AND hooks disabled
 AND an existing "common" package
 WHEN the generation is run
-THEN no output should be generated
+THEN only the requirements file should be generated
 ''',
     () async {
       final altokeCommonVars = <String, dynamic>{
@@ -122,15 +122,13 @@ THEN no output should be generated
         runHooks: true,
       );
       final altokeReactiveCachesVars = <String, dynamic>{};
-      Future<void> action() async =>
-          BrickGenerator.reactiveCaches.runGeneration(
-            target: target,
-            vars: altokeReactiveCachesVars,
-            runHooks: false,
-          );
-      expect(action(), throwsA(isNotNull));
+      await BrickGenerator.reactiveCaches.runGeneration(
+        target: target,
+        vars: altokeReactiveCachesVars,
+        runHooks: false,
+      );
       expect(outputDir.existsSync(), isFalse);
-      expect(requirementsFile.existsSync(), isFalse);
+      expect(requirementsFile.existsSync(), isTrue);
     },
   );
 }
