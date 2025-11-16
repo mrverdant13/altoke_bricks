@@ -1,5 +1,7 @@
+/*remove-start*/
 import 'dart:io';
 
+/*remove-end-x*/
 import 'package:altoke_app/app/app.dart';
 /*remove-start*/
 import 'package:altoke_app/external/external.dart';
@@ -17,9 +19,11 @@ import '../../helpers/helpers.dart';
 
 @Dependencies([
   asyncInitialization,
+  /*x-remove-start*/
   asyncApplicationDocumentsDirectory,
   asyncDriftLocalDatabase,
   asyncHiveInitialization,
+  /*remove-end*/
 ])
 void main() {
   test(

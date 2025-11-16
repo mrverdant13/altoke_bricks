@@ -12,8 +12,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 /*x{{#use_go_router}}*/
 import 'package:go_router/go_router.dart';
-import 'package:riverpod_annotation/experimental/scope.dart';
 /*x{{/use_go_router}}*/
+import 'package:riverpod_annotation/experimental/scope.dart';
 
 @Dependencies([
   /*remove-start*/
