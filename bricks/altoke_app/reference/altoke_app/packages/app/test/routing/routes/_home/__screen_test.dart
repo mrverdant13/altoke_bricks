@@ -19,6 +19,7 @@ import 'package:riverpod_annotation/experimental/scope.dart';
   Counter,
   /*remove-start*/
   SelectedRouterPackage,
+  SelectedStateManagementPackage,
   SelectedLocalDatabasePackage,
   asyncTasks,
   localTasksDao,

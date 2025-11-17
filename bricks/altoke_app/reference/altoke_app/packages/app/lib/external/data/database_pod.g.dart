@@ -26,7 +26,7 @@ final class AsyncDriftLocalDatabaseProvider
         argument: null,
         retry: null,
         name: r'asyncDriftLocalDatabasePod',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: const <ProviderOrFamily>[
           asyncApplicationDocumentsDirectoryPod,
           asyncTemporaryDirectoryPod,
@@ -57,7 +57,7 @@ final class AsyncDriftLocalDatabaseProvider
 }
 
 String _$asyncDriftLocalDatabaseHash() =>
-    r'3acd52622330646468ea5cd9b4bf4726398303ad';
+    r'bfb674a2270c3a4f8d3d09f6f4bda895aea2040a';
 
 @ProviderFor(asyncHiveInitialization)
 const asyncHiveInitializationPod = AsyncHiveInitializationProvider._();
@@ -71,7 +71,7 @@ final class AsyncHiveInitializationProvider
         argument: null,
         retry: null,
         name: r'asyncHiveInitializationPod',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: const <ProviderOrFamily>[
           asyncApplicationDocumentsDirectoryPod,
         ],
@@ -98,7 +98,7 @@ final class AsyncHiveInitializationProvider
 }
 
 String _$asyncHiveInitializationHash() =>
-    r'a73dd6f3d1f37f5bee2b68d48d4ed0dd50bf16b3';
+    r'912c756b8016c1a13b72eb69fdcca2eaf82cae20';
 
 @ProviderFor(SelectedLocalDatabasePackage)
 const selectedLocalDatabasePackagePod =

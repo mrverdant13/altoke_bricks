@@ -1,3 +1,6 @@
+/*remove-start*/
+import 'package:altoke_app/app/app.dart';
+/*remove-end-x*/
 import 'package:altoke_app/counter/counter.dart';
 /*remove-start*/
 import 'package:altoke_app/external/external.dart';
@@ -11,17 +14,20 @@ import 'package:altoke_app/tasks/tasks.dart';
 import 'package:auto_route/auto_route.dart';
 /*x{{/use_auto_route}}*/
 import 'package:flutter/material.dart';
+/*{{#use_riverpod}}*/
 import 'package:riverpod_annotation/experimental/scope.dart';
 
 @Dependencies([
   Counter,
   /*remove-start*/
-  SelectedRouterPackage,
   SelectedLocalDatabasePackage,
+  SelectedRouterPackage,
+  SelectedStateManagementPackage,
   asyncTasks,
   localTasksDao,
   /*remove-end-x*/
 ])
+/*{{/use_riverpod}}*/
 /*{{#use_auto_route}}x*/
 @RoutePage(name: 'HomeRoute')
 /*{{/use_auto_route}}x*/

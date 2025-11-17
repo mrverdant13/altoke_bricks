@@ -21,7 +21,7 @@ final class AsyncInitializationProvider
         argument: null,
         retry: null,
         name: r'asyncInitializationPod',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: const <ProviderOrFamily>[
           asyncApplicationDocumentsDirectoryPod,
           asyncTemporaryDirectoryPod,
@@ -57,4 +57,4 @@ final class AsyncInitializationProvider
 }
 
 String _$asyncInitializationHash() =>
-    r'cd515118506c4b8f845cb21f9bf3dddd709a4a86';
+    r'cea4126051151c275630ff222dfb47f9376a11c7';

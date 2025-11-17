@@ -5,12 +5,12 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'directories_pods.g.dart';
 
-@Riverpod(dependencies: [])
+@Riverpod(dependencies: [], keepAlive: true)
 Future<Directory> asyncApplicationDocumentsDirectory(Ref ref) async {
   return getApplicationDocumentsDirectory();
 }
 
-@Riverpod(dependencies: [])
+@Riverpod(dependencies: [], keepAlive: true)
 Future<Directory> asyncTemporaryDirectory(Ref ref) async {
   return getTemporaryDirectory();
 }

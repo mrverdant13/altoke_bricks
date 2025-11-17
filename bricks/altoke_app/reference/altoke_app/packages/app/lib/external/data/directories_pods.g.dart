@@ -27,7 +27,7 @@ final class AsyncApplicationDocumentsDirectoryProvider
         argument: null,
         retry: null,
         name: r'asyncApplicationDocumentsDirectoryPod',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: const <ProviderOrFamily>[],
         $allTransitiveDependencies: const <ProviderOrFamily>[],
       );
@@ -48,7 +48,7 @@ final class AsyncApplicationDocumentsDirectoryProvider
 }
 
 String _$asyncApplicationDocumentsDirectoryHash() =>
-    r'8388d657a90c1871ddc558f0c0dacd50065a0f8f';
+    r'99c980951aab80b900b1b63a3b82c50171228a5e';
 
 @ProviderFor(asyncTemporaryDirectory)
 const asyncTemporaryDirectoryPod = AsyncTemporaryDirectoryProvider._();
@@ -67,7 +67,7 @@ final class AsyncTemporaryDirectoryProvider
         argument: null,
         retry: null,
         name: r'asyncTemporaryDirectoryPod',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: const <ProviderOrFamily>[],
         $allTransitiveDependencies: const <ProviderOrFamily>[],
       );
@@ -87,4 +87,4 @@ final class AsyncTemporaryDirectoryProvider
 }
 
 String _$asyncTemporaryDirectoryHash() =>
-    r'c382a38a3426e6356a4ee2dd8485aff5bc5875a0';
+    r'e5806eba28caa0bad6564f9ad8e33e158a825066';

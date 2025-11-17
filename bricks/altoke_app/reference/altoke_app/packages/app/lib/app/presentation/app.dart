@@ -3,7 +3,10 @@ import 'package:altoke_app/flavors/flavors.dart';
 import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/routing/routing.dart';
 import 'package:flutter/material.dart';
+/*{{#use_bloc}}*/
 import 'package:flutter_bloc/flutter_bloc.dart';
+/*{{/use_bloc}}*/
+/*{{#use_riverpod}}*/
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/experimental/scope.dart';
 
@@ -12,18 +15,20 @@ import 'package:riverpod_annotation/experimental/scope.dart';
   asyncInitialization,
   /*x-remove-start*/
   SelectedRouterPackage,
+  SelectedStateManagementPackage,
   /*remove-end*/
 ])
+/*{{/use_riverpod}}*/
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final routerConfig = ref.watch(routerConfigPod);
-    return BlocProvider(
+    return /*{{#use_bloc}}*/ BlocProvider(
       create: (context) =>
           AppInitializationBloc()..add(const AppInitializationRequested()),
-      child: MaterialApp.router(
+      child: /*{{/use_bloc}}*/ MaterialApp.router(
         onGenerateTitle: (context) => context.l10n.appTitle,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
@@ -41,11 +46,13 @@ class MyApp extends ConsumerWidget {
                 ),
               );
           /*x-remove-start*/
-          return RouterPackageSwitcherWrapper(child: child);
+          return OptionsSwitcherWrapper(
+            child: child,
+          );
           /*remove-end*/
         },
-      ),
-    );
+      ) /*{{/use_bloc}}*/,
+    ) /*{{/use_bloc}}*/;
   }
 } /*w 2v w*/
 
@@ -53,9 +60,13 @@ class MyApp extends ConsumerWidget {
 // coverage:ignore-start
 @Dependencies([
   SelectedRouterPackage,
+  SelectedStateManagementPackage,
 ])
-class RouterPackageSwitcherWrapper extends ConsumerWidget {
-  const RouterPackageSwitcherWrapper({required this.child, super.key});
+class OptionsSwitcherWrapper extends ConsumerWidget {
+  const OptionsSwitcherWrapper({
+    required this.child,
+    super.key,
+  });
 
   final Widget child;
 
@@ -63,6 +74,9 @@ class RouterPackageSwitcherWrapper extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final routerPackageIdentifier = ref.watch(
       selectedRouterPackagePod.select((package) => package.identifier),
+    );
+    final stateManagementPackageIdentifier = ref.watch(
+      selectedStateManagementPackagePod.select((package) => package.identifier),
     );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -81,21 +95,40 @@ class RouterPackageSwitcherWrapper extends ConsumerWidget {
             left: false,
             right: false,
             maintainBottomViewPadding: true,
-            child: Center(
-              child: TextButton.icon(
-                onPressed: () {
-                  final selectedRouterPackageIndex = ref
-                      .read(selectedRouterPackagePod)
-                      .index;
-                  final newRouterPackageIndex =
-                      (selectedRouterPackageIndex + 1) %
-                      RouterPackage.values.length;
-                  ref.read(selectedRouterPackagePod.notifier).value =
-                      RouterPackage.values[newRouterPackageIndex];
-                },
-                label: Text(routerPackageIdentifier),
-                icon: const Icon(Icons.travel_explore),
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton.icon(
+                  onPressed: () {
+                    final selectedRouterPackageIndex = ref
+                        .read(selectedRouterPackagePod)
+                        .index;
+                    final newRouterPackageIndex =
+                        (selectedRouterPackageIndex + 1) %
+                        RouterPackage.values.length;
+                    ref.read(selectedRouterPackagePod.notifier).value =
+                        RouterPackage.values[newRouterPackageIndex];
+                  },
+                  label: Text(routerPackageIdentifier),
+                  icon: const Icon(Icons.route),
+                ),
+                TextButton.icon(
+                  onPressed: () {
+                    final selectedStateManagementPackageIndex = ref
+                        .read(selectedStateManagementPackagePod)
+                        .index;
+                    final newStateManagementPackageIndex =
+                        (selectedStateManagementPackageIndex + 1) %
+                        StateManagementPackage.values.length;
+                    ref
+                        .read(selectedStateManagementPackagePod.notifier)
+                        .value = StateManagementPackage
+                        .values[newStateManagementPackageIndex];
+                  },
+                  label: Text(stateManagementPackageIdentifier),
+                  icon: const Icon(Icons.precision_manufacturing),
+                ),
+              ],
             ),
           ),
         ),
@@ -103,12 +136,18 @@ class RouterPackageSwitcherWrapper extends ConsumerWidget {
     );
   }
 }
+
 // coverage:ignore-end
 /*remove-end*/
 
+/*{{#use_riverpod}}*/
 @Dependencies([
   asyncInitialization,
+  /*x-remove-start*/
+  SelectedStateManagementPackage,
+  /*remove-end-x*/
 ])
+/*{{/use_riverpod}}*/
 @visibleForTesting
 class InitializationWrapper extends ConsumerWidget {
   const InitializationWrapper({required this.child, super.key});
@@ -117,12 +156,34 @@ class InitializationWrapper extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appInitializationState = context.watch<AppInitializationBloc>().state;
-    return switch (appInitializationState) {
-      AppUninitialized() || AppInitializing() => const InitializingScreen(),
-      SuccessfulAppInitialization() => child,
-      FailedAppInitialization() => const ErroredInitializationScreen(),
-    };
+    /*remove-start*/
+    final selectedStateManagementPackage = ref.watch(
+      selectedStateManagementPackagePod,
+    );
+    switch (selectedStateManagementPackage) {
+      case StateManagementPackage.bloc:
+        /*remove-end-x*/ /*{{#use_bloc}}x*/
+        return switch (context.watch<AppInitializationBloc>().state) {
+          AppUninitialized() || AppInitializing() => const InitializingScreen(),
+          SuccessfulAppInitialization() => child,
+          FailedAppInitialization() => const ErroredInitializationScreen(),
+        };
+      /*x{{/use_bloc}}*/ /*x-remove-start*/
+      case StateManagementPackage.riverpod:
+        /*remove-end-x*/ /*{{#use_riverpod}}x*/
+        final asyncInitialization = ref.watch(asyncInitializationPod);
+        return asyncInitialization.when(
+          skipError: false,
+          skipLoadingOnRefresh: false,
+          skipLoadingOnReload: false,
+          loading: InitializingScreen.new,
+          data: (_) => child,
+          // coverage:ignore-start
+          error: (_, _) => const ErroredInitializationScreen(),
+          // coverage:ignore-end
+        );
+      /*x{{/use_riverpod}}*/ /*x-remove-start*/
+    } /*remove-end*/
   }
 }
 
@@ -138,9 +199,11 @@ class InitializingScreen extends StatelessWidget {
   }
 }
 
+/*{{#use_riverpod}}*/
 @Dependencies([
   asyncInitialization,
 ])
+/*{{/use_riverpod}}*/
 @visibleForTesting
 class ErroredInitializationScreen extends ConsumerWidget {
   const ErroredInitializationScreen({super.key});
@@ -164,9 +227,14 @@ class ErroredInitializationScreen extends ConsumerWidget {
               const SizedBox.square(dimension: 16),
               ElevatedButton(
                 onPressed: () {
+                  /*{{#use_bloc}}*/
                   context.read<AppInitializationBloc>().add(
                     const AppInitializationRequested(),
                   );
+                  /*{{/use_bloc}}x*/
+                  /*x{{#use_riverpod}}*/
+                  ref.invalidate(asyncInitializationPod);
+                  /*{{/use_riverpod}}*/
                 },
                 child: Text(l10n.genericRetryButtonLabel),
               ),

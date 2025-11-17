@@ -15,6 +15,7 @@ import 'package:riverpod_annotation/experimental/scope.dart';
 @Dependencies([
   /*remove-start*/
   SelectedRouterPackage,
+  SelectedStateManagementPackage,
   /*remove-end-x*/
   Counter,
 ])

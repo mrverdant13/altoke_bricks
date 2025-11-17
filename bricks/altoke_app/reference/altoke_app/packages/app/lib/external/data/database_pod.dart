@@ -12,7 +12,11 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'database_pod.g.dart';
 
 @Riverpod(
-  dependencies: [asyncApplicationDocumentsDirectory, asyncTemporaryDirectory],
+  dependencies: [
+    asyncApplicationDocumentsDirectory,
+    asyncTemporaryDirectory,
+  ],
+  keepAlive: true,
 )
 Future<LocalDatabase> asyncDriftLocalDatabase(Ref ref) async {
   const dbName = 'app_db';
@@ -40,7 +44,12 @@ Future<LocalDatabase> asyncDriftLocalDatabase(Ref ref) async {
   return db;
 }
 
-@Riverpod(dependencies: [asyncApplicationDocumentsDirectory])
+@Riverpod(
+  dependencies: [
+    asyncApplicationDocumentsDirectory,
+  ],
+  keepAlive: true,
+)
 Future<void> asyncHiveInitialization(Ref ref) async {
   if (!kIsWeb) {
     const dbName = 'app_db';

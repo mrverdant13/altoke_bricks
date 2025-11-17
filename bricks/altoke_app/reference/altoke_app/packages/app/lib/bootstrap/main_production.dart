@@ -8,6 +8,7 @@ import 'package:riverpod_annotation/experimental/scope.dart';
   asyncInitialization,
   /*x-remove-start*/
   SelectedRouterPackage,
+  SelectedStateManagementPackage,
   /*remove-end*/
 ])
 Future<void> main() async {

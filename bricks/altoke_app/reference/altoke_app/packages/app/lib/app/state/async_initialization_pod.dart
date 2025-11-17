@@ -14,6 +14,7 @@ part 'async_initialization_pod.g.dart';
     asyncDriftLocalDatabase,
     asyncHiveInitialization,
   ],
+  keepAlive: true,
 )
 // coverage:ignore-end
 /*with*/

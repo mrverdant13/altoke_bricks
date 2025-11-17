@@ -1,3 +1,6 @@
+/*remove-start*/
+import 'package:altoke_app/app/app.dart';
+/*remove-end-x*/
 import 'package:altoke_app/counter/counter.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:riverpod_annotation/experimental/scope.dart';
@@ -6,6 +9,9 @@ import '../../helpers/helpers.dart';
 
 @Dependencies([
   Counter,
+  /*x-remove-start*/
+  SelectedStateManagementPackage,
+  /*remove-end-x*/
 ])
 void main() {
   testWidgets(
