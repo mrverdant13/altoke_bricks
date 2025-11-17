@@ -2,6 +2,7 @@
 altoke
 ansi
 coverde
+felixangelov
 github
 isar
 lcov
