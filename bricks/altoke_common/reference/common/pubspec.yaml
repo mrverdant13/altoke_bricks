@@ -20,7 +20,7 @@ dependencies:
   freezed_annotation: ^3.1.0
   #x{{/use_freezed}}x#
   #x{{#use_meta}}#
-  meta: ^1.16.0
+  meta: ^1.17.0
   #x{{/use_meta}}#
 
 dev_dependencies:

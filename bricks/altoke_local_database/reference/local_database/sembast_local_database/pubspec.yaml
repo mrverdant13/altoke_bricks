@@ -23,7 +23,7 @@ dependencies:
   collection: ^1.19.1
   local_database:
     path: ../local_database/
-  meta: ^1.16.0
+  meta: ^1.17.0
   sembast: ^3.8.5+2
 
 dev_dependencies:
