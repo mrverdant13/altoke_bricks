@@ -16,7 +16,11 @@ dependencies:
   #{{#use_auto_route}}x#
   auto_route: ^10.2.2
   #{{/use_auto_route}}#
-  #x-remove-start#
+  #x{{#use_bloc}}#
+  bloc_concurrency: ^0.3.0
+  dart_mappable: ^4.6.1
+  #x{{/use_bloc}}#
+  #remove-start#
   drift: ^2.29.0
   drift_flutter: ^0.2.7
   drift_local_database:
@@ -24,9 +28,14 @@ dependencies:
   #remove-end-x#
   flutter:
     sdk: flutter
+  #x{{#use_bloc}}#
+  flutter_bloc: ^9.1.1
+  #x{{/use_bloc}}#
   flutter_localizations:
     sdk: flutter
+  #x{{#use_riverpod}}#
   flutter_riverpod: ^3.0.3
+  #x{{/use_riverpod}}#
   #{{#use_go_router}}x#
   go_router: ^17.0.0
   #{{/use_go_router}}x#
@@ -42,14 +51,24 @@ dependencies:
   path: ^1.9.1
   path_provider: ^2.1.5
   #remove-end#
+  #x{{#use_riverpod}}#
   riverpod_annotation: ^3.0.3
+  #x{{/use_riverpod}}#
 
 dev_dependencies:
   #{{#use_auto_route}}x#
   auto_route_generator: ^10.2.6
   #{{/use_auto_route}}x#
+  #x{{#use_bloc}}#
+  bloc_test: ^10.0.0
+  #x{{/use_bloc}}#
   build_runner: ^2.7.1
+  #x{{#use_riverpod}}#
   custom_lint: ^0.8.0
+  #x{{/use_riverpod}}#
+  #x{{#use_bloc}}#
+  dart_mappable_builder: ^4.6.0
+  #x{{/use_bloc}}#
   flutter_test:
     sdk: flutter
   #{{#use_go_router}}x#
@@ -66,8 +85,10 @@ dev_dependencies:
   plugin_platform_interface: ^2.1.8
   #remove-end#
   #w 1v 2> w#
+  #x{{#use_riverpod}}#
   riverpod_generator: ^3.0.3
   riverpod_lint: ^3.0.3
+  #x{{/use_riverpod}}#
   very_good_analysis: ^10.0.0
 
 flutter:
