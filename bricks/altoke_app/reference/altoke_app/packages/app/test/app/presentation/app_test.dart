@@ -23,87 +23,92 @@ import 'package:riverpod_annotation/experimental/scope.dart';
 ])
 void main() {
   /*{{#use_auto_route}}x*/
-  testWidgets(
-    '''
+  /*remove-start*/
+  group('(using auto_route)', () {
+    /*remove-end*/
+    late RootStackRouter router;
+
+    setUp(() {
+      debugFlavor = AppFlavor.dev;
+      router = RootStackRouter.build(
+        routes: [
+          AutoRoute(
+            path: '/',
+            page: PageInfo(
+              'FakeRoute',
+              builder: (data) => const Scaffold(
+                body: Center(
+                  child: Text('Fake Screen'),
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+    });
+
+    tearDown(() {
+      router.dispose();
+      debugFlavor = null;
+    });
+
+    @Dependencies([
+      asyncInitialization,
+      /*x-remove-start*/
+      SelectedRouterPackage,
+      /*remove-end*/
+    ])
+    Widget buildSubjectApp() {
+      return MyApp(
+        routerConfig: router.config(),
+      );
+    }
+
+    testWidgets(
+      '''
 
 GIVEN an app
 WHEN the app is built
 THEN the flavor banner should be displayed
 ''',
-    (tester) async {
-      debugFlavor = AppFlavor.dev;
-      addTearDown(() => debugFlavor = null);
-      final router = AppRouter(
-        testRoutes: [
-          AutoRoute(
-            path: '/',
-            page: PageInfo(
-              'FakeRoute',
-              builder: (data) =>
-                  const Scaffold(body: Center(child: Text('Fake Screen'))),
-            ),
+      (tester) async {
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [
+              asyncInitializationPod.overrideWith((_) async {}),
+            ],
+            child: buildSubjectApp(),
           ),
-        ],
-      );
-      addTearDown(router.dispose);
-      final routerConfig = router.config();
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            asyncInitializationPod.overrideWith((_) async {}),
-            routerConfigPod.overrideWithValue(routerConfig),
-          ],
-          child: MyApp(),
-        ),
-      );
-      expect(find.byType(FlavorBanner), findsOneWidget);
-      await tester.pumpAndSettle();
-      expect(find.text('Fake Screen'), findsOneWidget);
-    },
-  );
+        );
+        expect(find.byType(FlavorBanner), findsOneWidget);
+      },
+    );
 
-  testWidgets(
-    '''
+    testWidgets(
+      '''
 
 GIVEN an app
 WHEN the app is built
 AND the initialization process is completed
 THEN the initialized router content should be shown
 ''',
-    (tester) async {
-      debugFlavor = AppFlavor.dev;
-      addTearDown(() => debugFlavor = null);
-      final router = AppRouter(
-        testRoutes: [
-          AutoRoute(
-            path: '/',
-            page: PageInfo(
-              'FakeRoute',
-              builder: (data) =>
-                  const Scaffold(body: Center(child: Text('Fake Screen'))),
-            ),
+      (tester) async {
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [
+              asyncInitializationPod.overrideWith((_) async {}),
+            ],
+            child: buildSubjectApp(),
           ),
-        ],
-      );
-      addTearDown(router.dispose);
-      final routerConfig = router.config();
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            asyncInitializationPod.overrideWith((_) async {}),
-            routerConfigPod.overrideWithValue(routerConfig),
-          ],
-          child: MyApp(),
-        ),
-      );
-      expect(find.byType(InitializingScreen), findsOneWidget);
-      await tester.pumpAndSettle();
-      expect(find.text('Fake Screen'), findsOneWidget);
-    },
-  );
+        );
+        expect(find.byType(InitializingScreen), findsOneWidget);
+        await tester.pumpAndSettle();
+        expect(find.text('Fake Screen'), findsOneWidget);
+      },
+    );
 
-  testWidgets(
-    '''
+    testWidgets(
+      '''
 
 GIVEN an app
 WHEN the app is built
@@ -111,124 +116,120 @@ AND the initialization process fails
 THEN the errored initialization screen should be shown
 ├─ THAT allows the user to retry the initialization process
 ''',
-    (tester) async {
+      (tester) async {
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [
+              asyncInitializationPod.overrideWith((ref) async {
+                if (!ref.isRefresh) {
+                  throw Exception('error');
+                }
+              }),
+            ],
+            child: buildSubjectApp(),
+          ),
+        );
+        expect(find.byType(InitializingScreen), findsOneWidget);
+        await tester.pump();
+        expect(find.byType(ErroredInitializationScreen), findsOneWidget);
+        await tester.tap(find.byType(ElevatedButton));
+        await tester.pump();
+        expect(find.byType(InitializingScreen), findsOneWidget);
+        await tester.pumpAndSettle();
+        expect(find.text('Fake Screen'), findsOneWidget);
+      },
+      skip: true, // Riverpod 3.0 behaves differently in test mode
+    );
+    /*remove-start*/
+  });
+  /*remove-end*/
+  /*x{{/use_auto_route}}x*/
+
+  /*x{{#use_go_router}}x*/
+  /*remove-start*/
+  group('(using go_router)', () {
+    /*remove-end*/
+    late GoRouter router;
+
+    setUp(() {
       debugFlavor = AppFlavor.dev;
-      addTearDown(() => debugFlavor = null);
-      final router = AppRouter(
-        testRoutes: [
-          AutoRoute(
+      router = GoRouter(
+        routes: [
+          GoRoute(
             path: '/',
-            page: PageInfo(
-              'FakeRoute',
-              builder: (data) =>
-                  const Scaffold(body: Center(child: Text('Fake Screen'))),
+            name: 'FakeRoute',
+            builder: (context, state) => Scaffold(
+              body: Center(
+                child: Text('Fake Screen'),
+              ),
             ),
           ),
         ],
       );
-      addTearDown(router.dispose);
-      final routerConfig = router.config();
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            asyncInitializationPod.overrideWith((ref) async {
-              if (!ref.isRefresh) {
-                throw Exception('error');
-              }
-            }),
-            routerConfigPod.overrideWithValue(routerConfig),
-          ],
-          child: MyApp(),
-        ),
+    });
+
+    tearDown(() {
+      router.dispose();
+      debugFlavor = null;
+    });
+
+    @Dependencies([
+      asyncInitialization,
+      /*x-remove-start*/
+      SelectedRouterPackage,
+      /*remove-end*/
+    ])
+    Widget buildSubjectApp() {
+      return MyApp(
+        routerConfig: router,
       );
-      expect(find.byType(InitializingScreen), findsOneWidget);
-      await tester.pump();
-      expect(find.byType(ErroredInitializationScreen), findsOneWidget);
-      await tester.tap(find.byType(ElevatedButton));
-      await tester.pump();
-      expect(find.byType(InitializingScreen), findsOneWidget);
-      await tester.pumpAndSettle();
-      expect(find.text('Fake Screen'), findsOneWidget);
-    },
-    skip: true, // Riverpod 3.0 behaves differently in test mode
-  );
+    }
 
-  /*x{{/use_auto_route}}x*/
-
-  /*x{{#use_go_router}}x*/
-  testWidgets(
-    '''
+    testWidgets(
+      '''
 
 GIVEN an app
 WHEN the app is built
 THEN the flavor banner should be displayed
 ''',
-    (tester) async {
-      debugFlavor = AppFlavor.dev;
-      addTearDown(() => debugFlavor = null);
-      final routerConfig = GoRouter(
-        routes: [
-          GoRoute(
-            path: '/',
-            name: 'FakeRoute',
-            builder: (context, state) =>
-                const Scaffold(body: Center(child: Text('Fake Screen'))),
+      (tester) async {
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [
+              asyncInitializationPod.overrideWith((_) async {}),
+            ],
+            child: buildSubjectApp(),
           ),
-        ],
-      );
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            asyncInitializationPod.overrideWith((_) async {}),
-            routerConfigPod.overrideWithValue(routerConfig),
-          ],
-          child: MyApp(),
-        ),
-      );
-      expect(find.byType(FlavorBanner), findsOneWidget);
-      await tester.pumpAndSettle();
-      expect(find.text('Fake Screen'), findsOneWidget);
-    },
-  );
+        );
+        expect(find.byType(FlavorBanner), findsOneWidget);
+      },
+    );
 
-  testWidgets(
-    '''
+    testWidgets(
+      '''
 
 GIVEN an app
 WHEN the app is built
 AND the initialization process is completed
 THEN the initialized router content should be shown
 ''',
-    (tester) async {
-      debugFlavor = AppFlavor.dev;
-      addTearDown(() => debugFlavor = null);
-      final routerConfig = GoRouter(
-        routes: [
-          GoRoute(
-            path: '/',
-            name: 'FakeRoute',
-            builder: (context, state) =>
-                const Scaffold(body: Center(child: Text('Fake Screen'))),
+      (tester) async {
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [
+              asyncInitializationPod.overrideWith((_) async {}),
+            ],
+            child: buildSubjectApp(),
           ),
-        ],
-      );
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            asyncInitializationPod.overrideWith((_) async {}),
-            routerConfigPod.overrideWithValue(routerConfig),
-          ],
-          child: MyApp(),
-        ),
-      );
-      expect(find.byType(InitializingScreen), findsOneWidget);
-      await tester.pumpAndSettle();
-      expect(find.text('Fake Screen'), findsOneWidget);
-    },
-  );
+        );
+        expect(find.byType(InitializingScreen), findsOneWidget);
+        await tester.pumpAndSettle();
+        expect(find.text('Fake Screen'), findsOneWidget);
+      },
+    );
 
-  testWidgets(
-    '''
+    testWidgets(
+      '''
 
   GIVEN an app
   WHEN the app is built
@@ -236,42 +237,32 @@ THEN the initialized router content should be shown
   THEN the errored initialization screen should be shown
   ├─ THAT allows the user to retry the initialization process
   ''',
-    (tester) async {
-      debugFlavor = AppFlavor.dev;
-      addTearDown(() => debugFlavor = null);
-      final routerConfig = GoRouter(
-        routes: [
-          GoRoute(
-            path: '/',
-            name: 'FakeRoute',
-            builder: (context, state) =>
-                const Scaffold(body: Center(child: Text('Fake Screen'))),
+      (tester) async {
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [
+              asyncInitializationPod.overrideWith((ref) async {
+                if (!ref.isRefresh) {
+                  throw Exception('error');
+                }
+              }),
+            ],
+            child: buildSubjectApp(),
           ),
-        ],
-      );
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            asyncInitializationPod.overrideWith((ref) async {
-              if (!ref.isRefresh) {
-                throw Exception('error');
-              }
-            }),
-            routerConfigPod.overrideWithValue(routerConfig),
-          ],
-          child: MyApp(),
-        ),
-      );
-      expect(find.byType(InitializingScreen), findsOneWidget);
-      await tester.pump();
-      expect(find.byType(ErroredInitializationScreen), findsOneWidget);
-      await tester.tap(find.byType(ElevatedButton));
-      await tester.pump();
-      expect(find.byType(InitializingScreen), findsOneWidget);
-      await tester.pumpAndSettle();
-      expect(find.text('Fake Screen'), findsOneWidget);
-    },
-    skip: true, // Riverpod 3.0 behaves differently in test mode
-  );
+        );
+        expect(find.byType(InitializingScreen), findsOneWidget);
+        await tester.pump();
+        expect(find.byType(ErroredInitializationScreen), findsOneWidget);
+        await tester.tap(find.byType(ElevatedButton));
+        await tester.pump();
+        expect(find.byType(InitializingScreen), findsOneWidget);
+        await tester.pumpAndSettle();
+        expect(find.text('Fake Screen'), findsOneWidget);
+      },
+      skip: true, // Riverpod 3.0 behaves differently in test mode
+    );
+    /*remove-start*/
+  });
+  /*remove-end*/
   /*x{{/use_go_router}}*/
 }
