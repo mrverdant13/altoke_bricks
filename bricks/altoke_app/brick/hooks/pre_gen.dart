@@ -1,11 +1,13 @@
 import 'package:mason/mason.dart';
 import 'package:router_package/router_package.dart';
+import 'package:state_management_package/state_management_package.dart';
 
 import 'lib/src/android_application_identifier.dart';
 import 'lib/src/ios_bundle_identifier.dart';
 
 void run(HookContext context) {
   context.vars.addAll(context.routerPackageSelectionMap);
+  context.vars.addAll(context.stateManagementPackageSelectionMap);
   switch (context.vars['android_application_identifier']) {
     case null:
       context.vars.addAll({'include_android_platform': false});
