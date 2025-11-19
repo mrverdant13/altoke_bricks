@@ -10,7 +10,9 @@ import 'package:altoke_app/tasks/tasks.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+/*x{{#use_go_router}}*/
 import 'package:go_router/go_router.dart';
+/*x{{/use_go_router}}*/
 import 'package:riverpod_annotation/experimental/scope.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -26,12 +28,16 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 ])
 Future<void> bootstrap({List<Override> overrides = const []}) async {
   WidgetsFlutterBinding.ensureInitialized();
+  /*{{#use_auto_route}}x*/
   final appRouter = AppRouter();
+  /*x{{/use_auto_route}}x*/
+  /*x{{#use_go_router}}x*/
   final goRouter = GoRouter(
     routes: $appRoutes,
     debugLogDiagnostics: kDebugMode,
     initialLocation: const HomeRouteData().location,
   );
+  /*x{{/use_go_router}}*/
   runApp(
     ProviderScope(
       overrides: overrides,

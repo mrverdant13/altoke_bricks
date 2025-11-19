@@ -1,11 +1,12 @@
 import 'package:altoke_app/counter/state/counter_pod.dart';
 /*remove-start*/
 import 'package:altoke_app/external/external.dart';
+/*remove-end*/
 import 'package:altoke_app/routing/routing.dart';
 /*remove-start*/
 import 'package:altoke_app/tasks/tasks.dart';
+/*remove-end*/
 import 'package:flutter_test/flutter_test.dart';
-/*x{{/use_go_router}}*/
 import 'package:riverpod_annotation/experimental/scope.dart';
 
 import '../../../helpers/helpers.dart';
@@ -59,7 +60,8 @@ void main() {
         },
       );
     });
-    /*remove-end*/
+    /*remove-start*/
   });
+  /*remove-end*/
   /*x{{/use_go_router}}x*/
 }

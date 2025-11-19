@@ -1,19 +1,23 @@
 import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/routing/routing.dart';
+/*x{{#use_auto_route}}x*/
 import 'package:auto_route/auto_route.dart';
+/*x{{/use_auto_route}}*/
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+/*x{{#use_go_router}}x*/
 import 'package:go_router/go_router.dart';
+/*x{{/use_go_router}}*/
 import 'package:riverpod_annotation/experimental/scope.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 /*{{#use_auto_route}}x*/
-typedef RouteOverrides = Map<String, AutoRoutePageBuilder>;
+typedef AutoRouteOverrides = Map<String, AutoRoutePageBuilder>;
 
 extension on Iterable<AutoRoute> {
   Iterable<AutoRoute> overrideRoutes(
-    RouteOverrides overrides,
+    AutoRouteOverrides overrides,
   ) sync* {
     final routes = this;
     for (final route in routes) {
@@ -38,19 +42,19 @@ class TestableAppRouter extends AppRouter {
     this.overrides = const {},
   });
 
-  final RouteOverrides overrides;
+  final AutoRouteOverrides overrides;
 
   @override
   List<AutoRoute> get routes => super.routes.overrideRoutes(overrides).toList();
 }
-/*x{{/use_auto_route}}*/
+/*x{{/use_auto_route}}x*/
 
 @Dependencies([])
 extension AppTester on WidgetTester {
   /*{{#use_auto_route}}x*/
   Future<void> pumpAutoRouteAppWithInitialPath(
     String path, {
-    RouteOverrides routeOverrides = const {},
+    AutoRouteOverrides routeOverrides = const {},
     Widget Function(Widget child)? wrapper,
   }) async {
     final appRouter = TestableAppRouter(overrides: routeOverrides);
@@ -77,7 +81,7 @@ extension AppTester on WidgetTester {
 
   Future<void> pumpAutoRouteAppWithInitialRoute(
     PageRouteInfo<dynamic> pageRoute, {
-    RouteOverrides overrides = const {},
+    AutoRouteOverrides overrides = const {},
     Widget Function(Widget child)? wrapper,
   }) async {
     final appRouter = TestableAppRouter(overrides: overrides);
@@ -104,7 +108,7 @@ extension AppTester on WidgetTester {
 
   Future<void> pumpAutoRouteAppWithInitialRoutes(
     List<PageRouteInfo<dynamic>> pageRoutes, {
-    RouteOverrides overrides = const {},
+    AutoRouteOverrides overrides = const {},
     Widget Function(Widget child)? wrapper,
   }) async {
     final appRouter = TestableAppRouter(overrides: overrides);
@@ -133,7 +137,6 @@ extension AppTester on WidgetTester {
   /*x{{#use_go_router}}x*/
   Future<void> pumpGoRouterAppWithInitialPath(
     String path, {
-    RouteOverrides overrides = const {},
     Widget Function(Widget child)? wrapper,
   }) async {
     final goRouter = GoRouter(
@@ -157,7 +160,6 @@ extension AppTester on WidgetTester {
 
   Future<void> pumpGoRouterAppWithInitialRoute(
     GoRouteData route, {
-    RouteOverrides overrides = const {},
     Widget Function(Widget child)? wrapper,
   }) async {
     final goRouter = GoRouter(

@@ -1,6 +1,3 @@
-// Allow non-const constructors for testing
-// ignore_for_file: prefer_const_constructors
-
 import 'package:altoke_app/app/app.dart';
 import 'package:altoke_app/flavors/flavors.dart';
 import 'package:altoke_app/routing/routing.dart';
@@ -158,7 +155,7 @@ THEN the errored initialization screen should be shown
           GoRoute(
             path: '/',
             name: 'FakeRoute',
-            builder: (context, state) => Scaffold(
+            builder: (context, state) => const Scaffold(
               body: Center(
                 child: Text('Fake Screen'),
               ),

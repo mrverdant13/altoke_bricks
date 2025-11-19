@@ -18,7 +18,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 export 'routes/routes.dart';
 
+/*x{{#use_go_router}}x*/
+
 part 'router.g.dart';
+/*x{{/use_go_router}}*/
 
 /*{{#use_auto_route}}x*/
 @AutoRouterConfig(generateForDir: ['lib/routing/'])
@@ -80,9 +83,12 @@ class HomeRouteData extends GoRouteData with $HomeRouteData {
 
   static const name = 'HomeRoute';
 
+  @visibleForTesting
+  static GoRouterWidgetBuilder? testBuilder;
+
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const HomeScreen();
+    return testBuilder?.call(context, state) ?? const HomeScreen();
   }
 }
 
@@ -94,9 +100,12 @@ class CounterRouteData extends GoRouteData with $CounterRouteData {
 
   static const name = 'CounterRoute';
 
+  @visibleForTesting
+  static GoRouterWidgetBuilder? testBuilder;
+
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const CounterScreen();
+    return testBuilder?.call(context, state) ?? const CounterScreen();
   }
 }
 
@@ -112,9 +121,12 @@ class TasksRouteData extends GoRouteData with $TasksRouteData {
 
   static const name = 'TasksRoute';
 
+  @visibleForTesting
+  static GoRouterWidgetBuilder? testBuilder;
+
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const TasksScreen();
+    return testBuilder?.call(context, state) ?? const TasksScreen();
   }
 }
 // coverage:ignore-end
