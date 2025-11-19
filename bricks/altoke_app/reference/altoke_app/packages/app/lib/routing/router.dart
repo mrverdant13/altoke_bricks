@@ -1,3 +1,6 @@
+/*remove-start*/
+import 'package:altoke_app/app/app.dart';
+/*remove-end*/
 import 'package:altoke_app/counter/counter.dart';
 /*remove-start*/
 import 'package:altoke_app/external/external.dart';
@@ -58,6 +61,7 @@ class AppRouter extends RootStackRouter {
   /*remove-start*/
   SelectedLocalDatabasePackage,
   SelectedRouterPackage,
+  SelectedStateManagementPackage,
   asyncTasks,
   localTasksDao,
   /*remove-end-x*/
@@ -94,6 +98,9 @@ class HomeRouteData extends GoRouteData with $HomeRouteData {
 
 @Dependencies([
   Counter,
+  /*remove-start*/
+  SelectedStateManagementPackage,
+  /*remove-end*/
 ])
 class CounterRouteData extends GoRouteData with $CounterRouteData {
   const CounterRouteData();

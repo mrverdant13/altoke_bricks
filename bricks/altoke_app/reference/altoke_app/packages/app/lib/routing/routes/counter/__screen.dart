@@ -1,5 +1,8 @@
 import 'dart:math' as math;
 
+/*remove-start*/
+import 'package:altoke_app/app/app.dart';
+/*remove-end*/
 import 'package:altoke_app/counter/counter.dart';
 /*x{{#use_auto_route}}*/
 import 'package:auto_route/auto_route.dart';
@@ -9,6 +12,9 @@ import 'package:riverpod_annotation/experimental/scope.dart';
 
 @Dependencies([
   Counter,
+  /*remove-start*/
+  SelectedStateManagementPackage,
+  /*remove-end*/
 ])
 /*{{#use_auto_route}}x*/
 @RoutePage(name: 'CounterRoute')

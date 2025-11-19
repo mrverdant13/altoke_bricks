@@ -1,3 +1,6 @@
+/*remove-start*/
+import 'package:altoke_app/app/app.dart';
+/*remove-end*/
 import 'package:altoke_app/counter/counter.dart';
 import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/routing/routing.dart';
@@ -8,6 +11,7 @@ import 'package:riverpod_annotation/experimental/scope.dart';
 @Dependencies([
   /*remove-start*/
   SelectedRouterPackage,
+  SelectedStateManagementPackage,
   /*remove-end-x*/
   Counter,
 ])

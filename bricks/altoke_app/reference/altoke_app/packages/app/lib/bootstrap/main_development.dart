@@ -6,7 +6,9 @@ import 'package:altoke_app/external/external.dart';
 import 'package:altoke_app/routing/routing.dart';
 import 'package:altoke_app/tasks/tasks.dart';
 /*remove-end*/
+/*x{{#use_riverpod}}*/
 import 'package:riverpod_annotation/experimental/scope.dart';
+/*x{{/use_riverpod}}*/
 
 @Dependencies([
   asyncInitialization,
@@ -16,6 +18,7 @@ import 'package:riverpod_annotation/experimental/scope.dart';
   localTasksDao,
   SelectedLocalDatabasePackage,
   SelectedRouterPackage,
+  SelectedStateManagementPackage,
   /*remove-end*/
 ])
 Future<void> main() async {

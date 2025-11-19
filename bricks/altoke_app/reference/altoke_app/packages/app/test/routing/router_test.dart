@@ -1,3 +1,6 @@
+/*remove-start*/
+import 'package:altoke_app/app/app.dart';
+/*remove-end*/
 import 'package:altoke_app/counter/counter.dart';
 /*remove-start*/
 import 'package:altoke_app/external/external.dart';
@@ -22,10 +25,11 @@ import '../helpers/helpers.dart';
 @Dependencies([
   Counter,
   /*remove-start*/
-  SelectedLocalDatabasePackage,
-  SelectedRouterPackage,
   asyncTasks,
   localTasksDao,
+  SelectedLocalDatabasePackage,
+  SelectedRouterPackage,
+  SelectedStateManagementPackage,
   /*remove-end-x*/
 ])
 void main() {

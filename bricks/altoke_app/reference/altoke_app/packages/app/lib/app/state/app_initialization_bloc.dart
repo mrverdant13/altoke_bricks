@@ -112,7 +112,9 @@ class AppInitializationBloc
         ),
       );
     } on Object {
+      /*remove-start*/
       // TODO(mrverdant13): Include error for analytics.
+      /*remove-end*/
       emit(
         FailedAppInitialization(
           applicationDocumentsDirectory: applicationDocumentsDirectory,

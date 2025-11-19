@@ -3,13 +3,17 @@ import 'package:altoke_app/flavors/flavors.dart';
 import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/routing/routing.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+/*x{{#use_riverpod}}#*/
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/experimental/scope.dart';
+/*x{{/use_riverpod}}#*/
 
 @Dependencies([
   asyncInitialization,
   /*x-remove-start*/
   SelectedRouterPackage,
+  SelectedStateManagementPackage,
   /*remove-end*/
 ])
 class MyApp extends ConsumerWidget {
@@ -104,6 +108,9 @@ class RouterPackageSwitcherWrapper extends ConsumerWidget {
 
 @Dependencies([
   asyncInitialization,
+  /*x-remove-start*/
+  SelectedStateManagementPackage,
+  /*remove-end*/
 ])
 @visibleForTesting
 class InitializationWrapper extends ConsumerWidget {
@@ -113,17 +120,37 @@ class InitializationWrapper extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final asyncInitialization = ref.watch(asyncInitializationPod);
-    return asyncInitialization.when(
-      skipError: false,
-      skipLoadingOnRefresh: false,
-      skipLoadingOnReload: false,
-      loading: InitializingScreen.new,
-      data: (_) => child,
-      // coverage:ignore-start
-      error: (_, _) => const ErroredInitializationScreen(),
-      // coverage:ignore-end
+    /*remove-start*/
+    final selectedStateManagementPackage = ref.watch(
+      selectedStateManagementPackagePod,
     );
+    switch (selectedStateManagementPackage) {
+      case StateManagementPackage.bloc: /*remove-end*/
+        /*{{#use_bloc}}*/
+        final appInitializationState = context
+            .watch<AppInitializationBloc>()
+            .state;
+        return switch (appInitializationState) {
+          AppUninitialized() || AppInitializing() => const InitializingScreen(),
+          SuccessfulAppInitialization() => child,
+          FailedAppInitialization() => const ErroredInitializationScreen(),
+        }; /*{{/use_bloc}}*/
+      /*remove-start*/
+      case StateManagementPackage.riverpod: /*remove-end*/
+        /*{{#use_riverpod}}*/
+        final asyncInitialization = ref.watch(asyncInitializationPod);
+        return asyncInitialization.when(
+          skipError: false,
+          skipLoadingOnRefresh: false,
+          skipLoadingOnReload: false,
+          loading: InitializingScreen.new,
+          data: (_) => child,
+          // coverage:ignore-start
+          error: (_, _) => const ErroredInitializationScreen(),
+          // coverage:ignore-end
+        ); /*{{/use_riverpod}}*/
+      /*remove-start*/
+    } /*remove-end*/
   }
 }
 
@@ -141,6 +168,9 @@ class InitializingScreen extends StatelessWidget {
 
 @Dependencies([
   asyncInitialization,
+  /*x-remove-start*/
+  SelectedStateManagementPackage,
+  /*remove-end*/
 ])
 @visibleForTesting
 class ErroredInitializationScreen extends ConsumerWidget {
@@ -165,7 +195,26 @@ class ErroredInitializationScreen extends ConsumerWidget {
               const SizedBox.square(dimension: 16),
               ElevatedButton(
                 onPressed: () {
-                  ref.invalidate(asyncInitializationPod);
+                  /*remove-start*/
+                  final selectedStateManagementPackage = ref.read(
+                    selectedStateManagementPackagePod,
+                  );
+                  switch (selectedStateManagementPackage) {
+                    case StateManagementPackage.bloc:
+                      /*remove-end*/
+                      /*{{#use_bloc}}*/
+                      context.read<AppInitializationBloc>().add(
+                        const AppInitializationRequested(),
+                      );
+                    /*{{/use_bloc}}*/
+                    /*remove-start*/
+                    case StateManagementPackage.riverpod:
+                      /*remove-end*/
+                      /*{{#use_riverpod}}*/
+                      ref.invalidate(asyncInitializationPod);
+                    /*{{/use_riverpod}}*/
+                    /*remove-start*/
+                  } /*remove-end*/
                 },
                 child: Text(l10n.genericRetryButtonLabel),
               ),

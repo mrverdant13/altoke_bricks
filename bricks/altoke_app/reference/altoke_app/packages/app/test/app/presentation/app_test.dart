@@ -15,6 +15,7 @@ import 'package:riverpod_annotation/experimental/scope.dart';
 @Dependencies([
   /*remove-start*/
   SelectedRouterPackage,
+  SelectedStateManagementPackage,
   /*remove-end-x*/
   asyncInitialization,
 ])
@@ -53,6 +54,7 @@ void main() {
       asyncInitialization,
       /*x-remove-start*/
       SelectedRouterPackage,
+      SelectedStateManagementPackage,
       /*remove-end*/
     ])
     Widget buildSubjectApp() {
@@ -174,6 +176,7 @@ THEN the errored initialization screen should be shown
       asyncInitialization,
       /*x-remove-start*/
       SelectedRouterPackage,
+      SelectedStateManagementPackage,
       /*remove-end*/
     ])
     Widget buildSubjectApp() {

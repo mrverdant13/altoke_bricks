@@ -9,10 +9,18 @@ import 'package:altoke_app/tasks/tasks.dart';
 /*remove-end*/
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+/*x{{#use_bloc}}*/
+import 'package:flutter_bloc/flutter_bloc.dart';
+/*x{{/use_bloc}}*/
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 /*x{{#use_go_router}}*/
 import 'package:go_router/go_router.dart';
 /*x{{/use_go_router}}*/
+/*x{{#use_bloc}}*/
+/*remove-start*/
+import 'package:path_provider/path_provider.dart';
+/*remove-end*/
+/*x{{/use_bloc}}*/
 import 'package:riverpod_annotation/experimental/scope.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -24,9 +32,12 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
   localTasksDao,
   SelectedLocalDatabasePackage,
   SelectedRouterPackage,
+  SelectedStateManagementPackage,
   /*remove-end*/
 ])
-Future<void> bootstrap({List<Override> overrides = const []}) async {
+Future<void> bootstrap({
+  List<Override> overrides = const [],
+}) async {
   WidgetsFlutterBinding.ensureInitialized();
   /*{{#use_auto_route}}x*/
   final appRouter = AppRouter();
@@ -39,24 +50,43 @@ Future<void> bootstrap({List<Override> overrides = const []}) async {
   );
   /*x{{/use_go_router}}*/
   runApp(
-    ProviderScope(
+    /*{{#use_riverpod}}*/ ProviderScope(
       overrides: overrides,
-      observers: const [LoggerProviderObserver()],
+      observers: const [
+        LoggerProviderObserver(),
+      ],
       retry: (retryCount, error) => null, // Disable automatic retrying
-      child: /*remove-start*/ Consumer(
-        builder: (context, ref, child) {
-          final selectedRouterPackage = ref.watch(selectedRouterPackagePod);
-          return /*remove-end*/ MyApp(
-            routerConfig: /*remove-start*/ switch (selectedRouterPackage) {
-              RouterPackage.autoRoute => /*remove-end*/
-                /*{{#use_auto_route}}*/ appRouter
-                    .config() /*{{/use_auto_route}}*/ /*remove-start*/,
-              RouterPackage.goRouter => /*remove-end*/
-                /*{{#use_go_router}}*/ goRouter /*{{/use_go_router}}*/ /*remove-start*/,
-            } /*remove-end*/,
-          ) /*remove-start*/;
-        },
-      ) /*remove-end*/,
-    ),
+      child:
+          /*{{/use_riverpod}}*/
+          /*remove-start*/
+          Consumer(
+            builder: (context, ref, child) {
+              final selectedRouterPackage = ref.watch(selectedRouterPackagePod);
+              return /*remove-end*/ /*{{#use_bloc}}*/ BlocProvider(
+                create: (context) => AppInitializationBloc(
+                  /*remove-start*/
+                  applicationDocumentsDirectoryGetter:
+                      getApplicationDocumentsDirectory,
+                  temporaryDirectoryGetter: getTemporaryDirectory,
+                  localDatabaseBuilder: buildLocalDatabase,
+                  hiveInitializer: initializeHive,
+                  /*remove-end*/
+                )..add(const AppInitializationRequested()),
+                child: /*{{/use_bloc}}*/ MyApp(
+                  routerConfig:
+                      /*remove-start*/
+                      switch (selectedRouterPackage) {
+                        RouterPackage.autoRoute => /*remove-end*/
+                          /*{{#use_auto_route}}*/ appRouter
+                              .config() /*{{/use_auto_route}}*/ /*remove-start*/,
+                        RouterPackage.goRouter => /*remove-end*/
+                          /*{{#use_go_router}}*/ goRouter /*{{/use_go_router}}*/ /*remove-start*/,
+                      } /*remove-end*/,
+                ) /*{{#use_bloc}}*/,
+              ) /*{{/use_bloc}}*/
+              /*remove-start*/;
+            },
+          ) /*remove-end*/ /*{{#use_riverpod}}*/,
+    ) /*{{/use_riverpod}}*/,
   );
 }
