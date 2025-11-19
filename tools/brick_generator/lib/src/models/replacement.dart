@@ -25,7 +25,22 @@ class Replacement with ReplacementMappable {
   final String to;
 
   /// Applies the replacement to the [input].
-  String apply(String input) => input.replaceAll(from, to);
+  // String apply(String input) => input.replaceAll(from, to);
+  String apply(String input) => input.replaceAllMapped(from, (match) {
+    match as RegExpMatch;
+    final toGroupMatches = RegExp(r'\${(\d+)}').allMatches(to);
+    final toGroups = toGroupMatches
+        .map((match) => int.parse(match.group(1)!))
+        .toSet();
+    final resolvedTo = toGroups.fold(
+      to,
+      (resolved, group) => resolved.replaceAll(
+        '\${$group}',
+        match.group(group) ?? '',
+      ),
+    );
+    return resolvedTo;
+  });
 }
 
 /// An [List] of [Replacement]s.
