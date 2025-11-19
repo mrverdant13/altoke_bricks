@@ -321,4 +321,5 @@ workspace:
   - tools/referenced_issues_finder
   - tools/router_package
   - tools/shell
+  - tools/state_management_package
   - tools/value_equality_approach
