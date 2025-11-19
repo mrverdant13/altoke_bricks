@@ -87,12 +87,9 @@ class HomeRouteData extends GoRouteData with $HomeRouteData {
 
   static const name = 'HomeRoute';
 
-  @visibleForTesting
-  static GoRouterWidgetBuilder? testBuilder;
-
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return testBuilder?.call(context, state) ?? const HomeScreen();
+    return const HomeScreen();
   }
 }
 
@@ -107,12 +104,9 @@ class CounterRouteData extends GoRouteData with $CounterRouteData {
 
   static const name = 'CounterRoute';
 
-  @visibleForTesting
-  static GoRouterWidgetBuilder? testBuilder;
-
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return testBuilder?.call(context, state) ?? const CounterScreen();
+    return const CounterScreen();
   }
 }
 
