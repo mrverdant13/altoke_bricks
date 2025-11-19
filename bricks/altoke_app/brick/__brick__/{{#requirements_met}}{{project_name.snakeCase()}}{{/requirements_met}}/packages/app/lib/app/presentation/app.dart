@@ -7,15 +7,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/experimental/scope.dart';
 
 @Dependencies([
-  routerConfig,
   asyncInitialization,
 ])
 class MyApp extends ConsumerWidget {
-  const MyApp({super.key});
+  const MyApp({
+    required this.routerConfig,
+    super.key,
+  });
+
+  final RouterConfig<Object> routerConfig;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final routerConfig = ref.watch(routerConfigPod);
     return MaterialApp.router(
       onGenerateTitle: (context) => context.l10n.appTitle,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
