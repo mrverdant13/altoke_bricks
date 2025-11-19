@@ -1,144 +1,98 @@
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/counter/counter.dart';
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/routing/routing.dart';{{#use_auto_route}}
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';{{/use_auto_route}}
+import 'package:auto_route/auto_route.dart';{{/use_auto_route}}
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';{{#use_go_router}}
 import 'package:go_router/go_router.dart';{{/use_go_router}}
-import 'package:path/path.dart' as path;
+import 'package:path/path.dart' as p;
 import 'package:riverpod_annotation/experimental/scope.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../helpers/helpers.dart';
 
 @Dependencies([
-  routerConfig,
   Counter,
   ])
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  {{#use_auto_route}}test(
-    '''
+  {{#use_auto_route}}group('$AppRouter', () {
+    test(
+      'defaultRouteType is $AdaptiveRouteType',
+      () {
+        final router = AppRouter();
+        addTearDown(router.dispose);
+        expect(router.defaultRouteType, isA<AdaptiveRouteType>());
+      },
+    );
 
-GIVEN a router config pod
-WHEN the pod is built
-THEN the config is injected
-''',
-    () {
-      final container = ProviderContainer();
-      addTearDown(container.dispose);
-      final routerConfig = container.read(routerConfigPod);
-      expect(routerConfig, isA<RouterConfig<UrlState>>());
-    },
-  );
+    testWidgets(
+      '["/"] path mounts the $HomeRoute',
+      (tester) async {
+        await tester.pumpAutoRouteAppWithInitialPath(
+          p.joinAll([
+            '/',
+          ]),
+        );
+        final routerDelegate = tester.autoRouterDelegate;
+        expect(
+          routerDelegate.controller.topRoute.name,
+          HomeRoute.name,
+        );
+      },
+    );
 
-  test(
-    '''
+    testWidgets(
+      '["/", "counter"] path mounts the $CounterRoute',
+      (tester) async {
+        await tester.pumpAutoRouteAppWithInitialPath(
+          p.joinAll([
+            '/',
+            'counter',
+          ]),
+        );
+        final routerDelegate = tester.autoRouterDelegate;
+        expect(
+          routerDelegate.controller.topRoute.name,
+          CounterRoute.name,
+        );
+      },
+    );
 
-GIVEN a router
-WHEN the router is built
-THEN the router uses an adaptive route type
-''',
-    () {
-      final router = AppRouter();
-      addTearDown(router.dispose);
-      expect(router.defaultRouteType, isA<AdaptiveRouteType>());
-    },
-  );
+    
+  });{{/use_auto_route}}{{#use_go_router}}group('$GoRouter', () {
+    testWidgets(
+      '["/"] path mounts the $HomeRouteData',
+      (tester) async {
+        await tester.pumpGoRouterAppWithInitialPath(
+          p.joinAll([
+            '/',
+          ]),
+        );
+        final routerDelegate = tester.goRouterDelegate;
+        expect(
+          routerDelegate.state.name,
+          HomeRouteData.name,
+        );
+      },
+    );
 
-  testWidgets(
-    '''
-GIVEN a router
-WHEN the ["/"] path is visited
-THEN the home screen should be shown
-''',
-    (tester) async {
-      final router = AppRouter();
-      addTearDown(router.dispose);
-      final config = router.config(
-        deepLinkBuilder: (_) => DeepLink.path(path.joinAll(['/'])),
-      );
-      await tester.pumpRoutedApp(
-        overrides: [routerConfigPod.overrideWithValue(config)],
-      );
-      await tester.pumpAndSettle();
-      expect(find.byType(HomeScreen), findsOneWidget);
-    },
-  );
+    testWidgets(
+      '["/", "counter"] path mounts the $CounterRouteData',
+      (tester) async {
+        await tester.pumpGoRouterAppWithInitialPath(
+          p.joinAll([
+            '/',
+            'counter',
+          ]),
+        );
+        final routerDelegate = tester.goRouterDelegate;
+        expect(
+          routerDelegate.state.name,
+          CounterRouteData.name,
+        );
+      },
+    );
 
-  testWidgets(
-    '''
-GIVEN a router
-WHEN the ["/", "counter"] path is visited
-THEN the counter screen should be shown
-''',
-    (tester) async {
-      final router = AppRouter();
-      addTearDown(router.dispose);
-      final config = router.config(
-        deepLinkBuilder: (_) => DeepLink.path(path.joinAll(['/', 'counter'])),
-      );
-      await tester.pumpRoutedApp(
-        overrides: [routerConfigPod.overrideWithValue(config)],
-      );
-      await tester.pumpAndSettle();
-      expect(find.byType(CounterScreen), findsOneWidget);
-    },
-  );{{/use_auto_route}}{{#use_go_router}}test(
-    '''
-
-GIVEN a router config pod
-WHEN the pod is built
-THEN the config is injected
-''',
-    () {
-      final container = ProviderContainer();
-      addTearDown(container.dispose);
-      final routerConfig = container.read(routerConfigPod);
-      expect(routerConfig, isA<GoRouter>());
-    },
-  );
-
-  testWidgets(
-    '''
-GIVEN a router
-WHEN the ["/"] path is visited
-THEN the home screen should be shown
-''',
-    (tester) async {
-      final router = GoRouter(
-        routes: $appRoutes,
-        initialLocation: path.joinAll(['/']),
-      );
-      addTearDown(router.dispose);
-      final config = router;
-      await tester.pumpRoutedApp(
-        overrides: [routerConfigPod.overrideWithValue(config)],
-      );
-      await tester.pumpAndSettle();
-      expect(find.byType(HomeScreen), findsOneWidget);
-    },
-  );
-
-  testWidgets(
-    '''
-GIVEN a router
-WHEN the ["/", "counter"] path is visited
-THEN the counter screen should be shown
-''',
-    (tester) async {
-      final router = GoRouter(
-        routes: $appRoutes,
-        initialLocation: path.joinAll(['/', 'counter']),
-      );
-      addTearDown(router.dispose);
-      final config = router;
-      await tester.pumpRoutedApp(
-        overrides: [routerConfigPod.overrideWithValue(config)],
-      );
-      await tester.pumpAndSettle();
-      expect(find.byType(CounterScreen), findsOneWidget);
-    },
-  );{{/use_go_router}}
+    
+  });{{/use_go_router}}
 }

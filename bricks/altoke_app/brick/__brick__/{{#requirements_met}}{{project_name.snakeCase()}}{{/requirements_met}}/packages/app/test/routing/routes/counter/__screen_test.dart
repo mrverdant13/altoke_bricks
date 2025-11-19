@@ -1,74 +1,37 @@
-import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/app/app.dart';
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/counter/counter.dart';
-import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/flavors/flavors.dart';
-import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/routing/routing.dart';{{#use_auto_route}}
-import 'package:auto_route/auto_route.dart';{{/use_auto_route}}
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_test/flutter_test.dart';{{#use_go_router}}
-import 'package:go_router/go_router.dart';{{/use_go_router}}
+import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/routing/routing.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:riverpod_annotation/experimental/scope.dart';
+
+import '../../../helpers/helpers.dart';
 
 @Dependencies([
   Counter,
 ])
 void main() {
-  setUp(() {
-    debugFlavor = AppFlavor.dev;
-  });
-
-  tearDown(() {
-    debugFlavor = null;
-  });
-
-  {{#use_auto_route}}testWidgets(
-    '''
-
-GIVEN a routed app
-├─ THAT starts with the counter path
-WHEN the app starts
-THEN the counter screen should be shown
-''',
-    (tester) async {
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            asyncInitializationPod.overrideWith((_) async {}),
-            routerConfigPod.overrideWithValue(
-              AppRouter().config(
-                deepLinkBuilder: (_) => const DeepLink.path('/counter'),
-              ),
-            ),
-          ],
-          child: const MyApp(),
-        ),
+  {{#use_auto_route}}group('$CounterRoute', () {
+      testWidgets(
+        'shows the $CounterScreen',
+        (tester) async {
+          await tester.pumpAutoRouteAppWithInitialRoute(
+            const CounterRoute(),
+          );
+          await tester.pumpUntilFound(
+            find.byType(CounterScreen),
+          );
+        },
       );
-      await tester.pumpAndSettle();
-      final counterScreenFinder = find.byType(CounterScreen);
-      expect(counterScreenFinder, findsOneWidget);
-    },
-  );{{/use_auto_route}}{{#use_go_router}}testWidgets(
-    '''
-
-GIVEN a routed app
-├─ THAT starts with the counter path
-WHEN the app starts
-THEN the counter screen should be shown
-''',
-    (tester) async {
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            asyncInitializationPod.overrideWith((_) async {}),
-            routerConfigPod.overrideWithValue(
-              GoRouter(routes: $appRoutes, initialLocation: '/counter'),
-            ),
-          ],
-          child: const MyApp(),
-        ),
+    });{{/use_auto_route}}{{#use_go_router}}group('$CounterRouteData', () {
+      testWidgets(
+        'shows the $CounterScreen',
+        (tester) async {
+          await tester.pumpGoRouterAppWithInitialRoute(
+            const CounterRouteData(),
+          );
+          await tester.pumpUntilFound(
+            find.byType(CounterScreen),
+          );
+        },
       );
-      await tester.pumpAndSettle();
-      final counterScreenFinder = find.byType(CounterScreen);
-      expect(counterScreenFinder, findsOneWidget);
-    },
-  );{{/use_go_router}}
+    });{{/use_go_router}}
 }
