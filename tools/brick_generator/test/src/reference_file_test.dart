@@ -491,11 +491,11 @@ and even more text
 ''';
           const resultingContent = '''
 text
-{{~partialA.partial}}
+{{> partialA.partial }}
 more text
-{{~partialB.partial}}
+{{> partialB.partial }}
 yet more text
-{{~partialC.partial}}
+{{> partialC.partial }}
 and even more text
 ''';
           file.writeAsStringSync(originalContent);
@@ -514,7 +514,7 @@ and even more text
           const cases = ['A', 'B', 'C'];
           for (final partialName in cases) {
             final partialFile = testDir.descendantFile(
-              'partial$partialName.partial',
+              '{{~ partial$partialName.partial }}',
             );
             final partialContent =
                 '''
