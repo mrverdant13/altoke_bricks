@@ -4,13 +4,17 @@ import 'package:altoke_app/routing/routing.dart';
 import 'package:auto_route/auto_route.dart';
 /*x{{/use_auto_route}}*/
 import 'package:flutter/material.dart';
+/*x{{#use_riverpod}}x*/
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+/*x{{/use_riverpod}}*/
 import 'package:flutter_test/flutter_test.dart';
 /*x{{#use_go_router}}x*/
 import 'package:go_router/go_router.dart';
 /*x{{/use_go_router}}*/
+/*x{{#use_riverpod}}x*/
 import 'package:riverpod_annotation/experimental/scope.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+/*x{{/use_riverpod}}*/
 
 /*{{#use_auto_route}}x*/
 typedef AutoRouteOverrides = Map<String, AutoRoutePageBuilder>;
@@ -67,15 +71,18 @@ extension AppTester on WidgetTester {
     );
     final effectiveWrapper = wrapper ?? (child) => child;
     await pumpWidget(
+      /*{{#use_riverpod}}*/
       ProviderScope(
-        child: effectiveWrapper(
+        child: /*{{/use_riverpod}}*/ effectiveWrapper(
           MaterialApp.router(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
             routerConfig: routerConfig,
           ),
         ),
+        /*{{#use_riverpod}}*/
       ),
+      /*{{/use_riverpod}}*/
     );
   }
 
@@ -94,15 +101,18 @@ extension AppTester on WidgetTester {
     );
     final effectiveWrapper = wrapper ?? (child) => child;
     await pumpWidget(
+      /*{{#use_riverpod}}*/
       ProviderScope(
-        child: effectiveWrapper(
+        child: /*{{/use_riverpod}}*/ effectiveWrapper(
           MaterialApp.router(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
             routerConfig: routerConfig,
           ),
         ),
+        /*{{#use_riverpod}}*/
       ),
+      /*{{/use_riverpod}}*/
     );
   }
 
@@ -121,15 +131,18 @@ extension AppTester on WidgetTester {
     );
     final effectiveWrapper = wrapper ?? (child) => child;
     await pumpWidget(
+      /*{{#use_riverpod}}*/
       ProviderScope(
-        child: effectiveWrapper(
+        child: /*{{/use_riverpod}}*/ effectiveWrapper(
           MaterialApp.router(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
             routerConfig: routerConfig,
           ),
         ),
+        /*{{#use_riverpod}}*/
       ),
+      /*{{/use_riverpod}}*/
     );
   }
   /*x{{/use_auto_route}}x*/
@@ -146,15 +159,18 @@ extension AppTester on WidgetTester {
     addTearDown(goRouter.dispose);
     final effectiveWrapper = wrapper ?? (child) => child;
     await pumpWidget(
+      /*{{#use_riverpod}}*/
       ProviderScope(
-        child: effectiveWrapper(
+        child: /*{{/use_riverpod}}*/ effectiveWrapper(
           MaterialApp.router(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
             routerConfig: goRouter,
           ),
         ),
+        /*{{#use_riverpod}}*/
       ),
+      /*{{/use_riverpod}}*/
     );
   }
 
@@ -169,42 +185,62 @@ extension AppTester on WidgetTester {
     addTearDown(goRouter.dispose);
     final effectiveWrapper = wrapper ?? (child) => child;
     await pumpWidget(
+      /*{{#use_riverpod}}*/
       ProviderScope(
-        child: effectiveWrapper(
+        child: /*{{/use_riverpod}}*/ effectiveWrapper(
           MaterialApp.router(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
             routerConfig: goRouter,
           ),
         ),
+        /*{{#use_riverpod}}*/
       ),
+      /*{{/use_riverpod}}*/
     );
   }
   /*x{{/use_go_router}}*/
 
+  /*remove-start*/
+  // dart format off
+  /*remove-end*/
   Future<void> pumpAppWithScreen(
-    Widget screen, {
+    Widget screen, /*{{#use_riverpod}}*/ {
     List<Override> overrides = const [],
-  }) async {
+  } /*{{/use_riverpod}}*/) async {
+  /*remove-start*/
+  // dart format on
+    /*remove-end*/
     await pumpWidget(
+      /*{{#use_riverpod}}*/
       ProviderScope(
         overrides: overrides,
-        child: MaterialApp(
+        child: /*{{/use_riverpod}}*/ MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           home: screen,
         ),
+        /*{{#use_riverpod}}*/
       ),
+      /*{{/use_riverpod}}*/
     );
   }
 
+  /*remove-start*/
+  // dart format off
+  /*remove-end*/
   Future<void> pumpAppWithScaffold(
-    Widget body, {
+    Widget body, /*{{#use_riverpod}}*/ {
     List<Override> overrides = const [],
-  }) async {
+  } /*{{/use_riverpod}}*/ ) async {
+  /*remove-start*/
+  // dart format on
+    /*remove-end*/
     await pumpAppWithScreen(
       Scaffold(body: body),
+      /*{{#use_riverpod}}*/
       overrides: overrides,
+      /*{{/use_riverpod}}*/
     );
   }
 
@@ -212,7 +248,9 @@ extension AppTester on WidgetTester {
     List<Widget> slivers, {
     ScrollPhysics? physics,
     ScrollController? scrollController,
+    /*{{#use_riverpod}}*/
     List<Override> overrides = const [],
+    /*{{/use_riverpod}}*/
   }) async {
     await pumpAppWithScaffold(
       CustomScrollView(
@@ -220,7 +258,9 @@ extension AppTester on WidgetTester {
         controller: scrollController,
         slivers: slivers,
       ),
+      /*{{#use_riverpod}}*/
       overrides: overrides,
+      /*{{/use_riverpod}}*/
     );
   }
 
@@ -229,7 +269,9 @@ extension AppTester on WidgetTester {
     double fakeHeaderHeight = 0,
     ScrollPhysics? physics,
     ScrollController? scrollController,
+    /*{{#use_riverpod}}*/
     List<Override> overrides = const [],
+    /*{{/use_riverpod}}*/
   }) async {
     await pumpAppWithScaffold(
       NestedScrollView(
@@ -245,7 +287,9 @@ extension AppTester on WidgetTester {
         ],
         body: body,
       ),
+      /*{{#use_riverpod}}*/
       overrides: overrides,
+      /*{{/use_riverpod}}*/
     );
   }
 

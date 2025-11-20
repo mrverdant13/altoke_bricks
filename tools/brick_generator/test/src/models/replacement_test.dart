@@ -71,11 +71,30 @@ void main() {
 
     test('apply', () {
       final replacements = [
-        Replacement(from: RegExp('some test pattern'), to: 'XxXxXxX'),
-        Replacement(from: RegExp('another test pattern'), to: 'YyYyYyY'),
+        Replacement(
+          from: RegExp('some test pattern'),
+          to: 'a replacement XxXxXxX',
+        ),
+        Replacement(
+          from: RegExp('another test pattern'),
+          to: 'a replacement YyYyYyY',
+        ),
+        Replacement(
+          from: RegExp(
+            'test pattern with a group value of ([a-z]+)',
+            dotAll: true,
+          ),
+          to: r'replacement ZzZzZzZ (group value: ${1})',
+        ),
       ];
-      const input = 'This is some test pattern. This is another test pattern.';
-      const expected = 'This is XxXxXxX. This is YyYyYyY.';
+      const input =
+          'This is some test pattern. '
+          'This is another test pattern. '
+          'This is a test pattern with a group value of asdf.';
+      const expected =
+          'This is a replacement XxXxXxX. '
+          'This is a replacement YyYyYyY. '
+          'This is a replacement ZzZzZzZ (group value: asdf).';
       final actual = replacements.apply(input);
       expect(actual, expected);
     });

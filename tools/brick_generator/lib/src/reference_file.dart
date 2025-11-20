@@ -35,15 +35,15 @@ extension on String {
   String get withResolveReplacements {
     final patternGroups = [
       (
-        r'\/\*replace-start\*\/ *\n.*?\n *\/\*with(?: +i(?<indentation>\d+))?\*\/ *\n(?<replacement>.*?)\n *\/\*replace-end\*\/',
+        r'\/\*replace-start\*\/ *\n*.*?\n* *\/\*with(?: +i(?<indentation>\d+))?\*\/ *\n(?<replacement>.*?)\n *\/\*replace-end\*\/',
         r'\/\/ (?<line>.*)',
       ),
       (
-        r'#replace-start# *\n.*?\n *#with(?: +i(?<indentation>\d+))?# *\n(?<replacement>.*?)\n *#replace-end#',
+        r'#replace-start# *\n*.*?\n* *#with(?: +i(?<indentation>\d+))?# *\n(?<replacement>.*?)\n *#replace-end#',
         '# (?<line>.*)',
       ),
       (
-        r'<!--replace-start--> *\n.*?\n *<!--with(?: +i(?<indentation>\d+))?--> *\n(?<replacement>.*?)\n *<!--replace-end-->',
+        r'<!--replace-start--> *\n*.*?\n* *<!--with(?: +i(?<indentation>\d+))?--> *\n(?<replacement>.*?)\n *<!--replace-end-->',
         '<!-- (?<line>.*)-->',
       ),
     ];
@@ -164,10 +164,10 @@ extension on String {
         match as RegExpMatch;
         final partialName = match.namedGroup('partialName') ?? '';
         final partialPayload = match.namedGroup('partialPayload') ?? '';
-        File(p.join(targetAbsolutePath, '$partialName.partial'))
+        File(p.join(targetAbsolutePath, '{{~ $partialName.partial }}'))
           ..createSync(recursive: true)
           ..writeAsStringSync(partialPayload);
-        return '{{~$partialName.partial}}';
+        return '{{> $partialName.partial }}';
       });
     });
   }

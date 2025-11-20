@@ -28,3 +28,6 @@ targets:
           - lib/**/pod.dart
           - lib/**/pods.dart
           - lib/routing/router.dart
+          #x-remove-start#
+          - lib/app/state/state.dart
+          #remove-end#

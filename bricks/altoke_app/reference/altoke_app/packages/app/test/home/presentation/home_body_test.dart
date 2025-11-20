@@ -1,3 +1,6 @@
+/*remove-start*/
+import 'package:altoke_app/app/app.dart';
+/*remove-end*/
 import 'package:altoke_app/counter/counter.dart';
 /*remove-start*/
 import 'package:altoke_app/external/external.dart';
@@ -8,17 +11,21 @@ import 'package:altoke_app/routing/routing.dart';
 import 'package:altoke_app/tasks/tasks.dart';
 /*remove-end*/
 import 'package:flutter_test/flutter_test.dart';
+/*x{{#use_riverpod}}x*/
 import 'package:riverpod_annotation/experimental/scope.dart';
+
+/*x{{/use_riverpod}}x*/
 
 import '../../helpers/helpers.dart';
 
 @Dependencies([
   Counter,
   /*remove-start*/
-  SelectedRouterPackage,
-  SelectedLocalDatabasePackage,
   asyncTasks,
   localTasksDao,
+  SelectedLocalDatabasePackage,
+  SelectedRouterPackage,
+  SelectedStateManagementPackage,
   /*remove-end-x*/
 ])
 void main() {

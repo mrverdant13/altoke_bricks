@@ -9,6 +9,7 @@
 - **FEAT**: Flavoring (development, staging, production - Android & iOS only).
 - **FEAT**: Internationalization (i18n/l10n).
 - **FEAT**: State management with `flutter_riverpod`.
+- **FEAT**: State management with `flutter_bloc`.
 - **FEAT**: Strict lint rules with `very_good_analysis`.
 - **FEAT**: Custom lint rules with `custom_lint`.
 - **FEAT**: 100% test coverage.

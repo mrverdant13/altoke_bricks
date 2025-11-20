@@ -11,38 +11,44 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 ])
 void main() {
   group(
-    '''
-
-GIVEN a counter pod''',
+    '$Counter',
     () {
       test(
-        '''
-
-WHEN the pod is built
-THEN its initial state should be 0
-''',
+        'initial state is 0',
         () {
-          final container = ProviderContainer();
+          final container = ProviderContainer.test();
           final counter = container.read(counterPod.notifier);
           expect(counter.state, isZero);
         },
       );
 
       test(
-        '''
-
-WHEN the increment method is called
-THEN the state should be incremented by 1
-''',
+        'increment',
         () {
-          final container = ProviderContainer();
-          addTearDown(container.dispose);
+          final container = ProviderContainer.test();
           final counterNotifier = container.read(counterPod.notifier);
           final initialValue = Random().nextInt(100);
           counterNotifier.state = initialValue;
           expect(counterNotifier.state, initialValue);
           counterNotifier.increment();
           expect(counterNotifier.state, initialValue + 1);
+        },
+      );
+
+      test(
+        'reset',
+        () {
+          final container = ProviderContainer.test(
+            overrides: [
+              counterPod.overrideWithBuild(
+                (ref, counter) => 100,
+              ),
+            ],
+          );
+          final counterNotifier = container.read(counterPod.notifier);
+          expect(counterNotifier.state, 100);
+          counterNotifier.reset();
+          expect(counterNotifier.state, 0);
         },
       );
     },

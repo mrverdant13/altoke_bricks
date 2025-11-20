@@ -1,4 +1,9 @@
+/*remove-start*/
+import 'package:altoke_app/app/app.dart';
+/*remove-end*/
+/*x{{#use_riverpod}}x*/
 import 'package:altoke_app/counter/counter.dart';
+/*x{{/use_riverpod}}x*/
 /*remove-start*/
 import 'package:altoke_app/external/external.dart';
 /*remove-end-x*/
@@ -9,23 +14,29 @@ import 'package:altoke_app/tasks/tasks.dart';
 /*x{{#use_auto_route}}*/
 import 'package:auto_route/auto_route.dart';
 /*x{{/use_auto_route}}*/
+/*x{{#use_riverpod}}x*/
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+/*x{{/use_riverpod}}x*/
 import 'package:flutter_test/flutter_test.dart';
 /*x{{#use_go_router}}*/
 import 'package:go_router/go_router.dart';
 /*x{{/use_go_router}}*/
 import 'package:path/path.dart' as p;
+/*x{{#use_riverpod}}x*/
 import 'package:riverpod_annotation/experimental/scope.dart';
+
+/*x{{/use_riverpod}}x*/
 
 import '../helpers/helpers.dart';
 
 @Dependencies([
   Counter,
   /*remove-start*/
-  SelectedLocalDatabasePackage,
-  SelectedRouterPackage,
   asyncTasks,
   localTasksDao,
+  SelectedLocalDatabasePackage,
+  SelectedRouterPackage,
+  SelectedStateManagementPackage,
   /*remove-end-x*/
 ])
 void main() {

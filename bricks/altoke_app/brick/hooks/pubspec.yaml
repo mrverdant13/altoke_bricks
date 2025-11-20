@@ -19,6 +19,11 @@ dependencies:
       url: https://github.com/mrverdant13/altoke_bricks.git
       ref: 66da4935d7f254b9d02693cae5cd706575003958
       path: ./tools/shell/
+  state_management_package:
+    git:
+      url: https://github.com/mrverdant13/altoke_bricks.git
+      ref: f329553eb65af5fe19b3d3d31b0416a7bf1f0a23
+      path: ./tools/state_management_package/
 
 dev_dependencies:
   test: ^1.26.2
