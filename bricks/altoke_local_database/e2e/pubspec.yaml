@@ -10,12 +10,12 @@ dev_dependencies:
   local_database_alternative:
     path: ../../../tools/local_database_alternative
   mason: ^0.1.1
-  meta: ^1.16.0
+  meta: ^1.17.0
   mocktail: ^1.0.4
   monorepo_elements:
     path: ../../../tools/monorepo_elements
   path: ^1.9.1
   shell:
     path: ../../../tools/shell
-  test: ^1.26.2
+  test: ^1.26.3
   very_good_analysis: ^10.0.0
