@@ -26,7 +26,7 @@ melos:
     bootstrap:
       environment:
         sdk: ">=3.9.0 <4.0.0"
-        flutter: ">=3.35.2 <4.0.0"
+        flutter: ">=3.38.2 <4.0.0"
       dependencies:
         collection: ^1.19.1
         intl: ^0.20.2
