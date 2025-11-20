@@ -1,12 +1,16 @@
 /*remove-start*/
 import 'package:altoke_app/app/app.dart';
 /*remove-end*/
+/*{{#use_riverpod}}*/
 import 'package:altoke_app/counter/counter.dart';
+/*{{/use_riverpod}}*/
 import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/routing/routing.dart';
 import 'package:flutter/material.dart';
+/*{{#use_riverpod}}*/
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/experimental/scope.dart';
+/*{{/use_riverpod}}*/
 
 @Dependencies([
   /*remove-start*/

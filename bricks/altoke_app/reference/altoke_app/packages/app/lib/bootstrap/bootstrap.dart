@@ -1,5 +1,7 @@
 import 'package:altoke_app/app/app.dart';
+/*{{#use_riverpod}}*/
 import 'package:altoke_app/counter/counter.dart';
+/*{{/use_riverpod}}*/
 /*remove-start*/
 import 'package:altoke_app/external/external.dart';
 /*remove-end*/
@@ -7,12 +9,16 @@ import 'package:altoke_app/routing/routing.dart';
 /*remove-start*/
 import 'package:altoke_app/tasks/tasks.dart';
 /*remove-end*/
+/*{{#use_go_router}}x*/
 import 'package:flutter/foundation.dart';
+/*{{/use_go_router}}x*/
 import 'package:flutter/material.dart';
 /*x{{#use_bloc}}*/
 import 'package:flutter_bloc/flutter_bloc.dart';
 /*x{{/use_bloc}}*/
+/*{{#use_riverpod}}*/
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+/*{{/use_riverpod}}*/
 /*x{{#use_go_router}}*/
 import 'package:go_router/go_router.dart';
 /*x{{/use_go_router}}*/
@@ -21,8 +27,10 @@ import 'package:go_router/go_router.dart';
 import 'package:path_provider/path_provider.dart';
 /*remove-end*/
 /*x{{/use_bloc}}*/
+/*x{{#use_riverpod}}*/
 import 'package:riverpod_annotation/experimental/scope.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+/*x{{/use_riverpod}}*/
 
 @Dependencies([
   asyncInitialization,
@@ -35,9 +43,15 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
   SelectedStateManagementPackage,
   /*remove-end*/
 ])
-Future<void> bootstrap({
+/*remove-start*/
+// dart format off
+/*remove-end*/
+Future<void> bootstrap( /*{{#use_riverpod}}*/ {
   List<Override> overrides = const [],
-}) async {
+} /*{{/use_riverpod}}*/ ) async {
+/*remove-start*/
+// dart format on
+  /*remove-end*/
   WidgetsFlutterBinding.ensureInitialized();
   /*{{#use_auto_route}}x*/
   final appRouter = AppRouter();

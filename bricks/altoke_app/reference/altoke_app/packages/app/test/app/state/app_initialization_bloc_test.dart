@@ -1,15 +1,25 @@
+/*remove-start*/
 import 'dart:io';
+
+/*remove-end*/
 
 import 'package:altoke_app/app/app.dart';
 import 'package:bloc_test/bloc_test.dart';
+/*remove-start*/
 import 'package:drift_local_database/drift_local_database.dart';
+/*remove-end*/
 import 'package:flutter_test/flutter_test.dart';
+/*remove-start*/
 import 'package:mocktail/mocktail.dart';
+/*remove-end*/
 
+/*remove-start*/
 class _MockLocalDatabase extends Mock implements LocalDatabase {}
+/*remove-end*/
 
 void main() {
   group('$AppInitializationBloc', () {
+    /*remove-start*/
     AppInitializationBloc buildSubjectBloc({
       required Future<Directory> Function() applicationDocumentsDirectoryGetter,
       required Future<Directory> Function() temporaryDirectoryGetter,
@@ -31,9 +41,10 @@ void main() {
         hiveInitializer: hiveInitializer,
       );
     }
+    /*remove-end*/
 
     test('initial state is $AppUninitialized', () {
-      final bloc = buildSubjectBloc(
+      final bloc = /*replace-start*/ buildSubjectBloc(
         applicationDocumentsDirectoryGetter: () async => fail(
           'applicationDocumentsDirectoryGetter should not be called',
         ),
@@ -54,6 +65,9 @@ void main() {
               'hiveInitializer should not be called',
             ),
       );
+      /*with i0*/
+      // AppInitializationBloc();
+      /*replace-end*/
       addTearDown(bloc.close);
       expect(bloc.state, const AppUninitialized());
     });
@@ -66,7 +80,7 @@ void main() {
         '] '
         'when the current state is $AppUninitialized '
         'and the initialization fails',
-        build: () => buildSubjectBloc(
+        build: /*replace-start*/ () => buildSubjectBloc(
           applicationDocumentsDirectoryGetter: expectAsync0(
             () async => throw Exception(
               'Failed to get application documents directory',
@@ -93,11 +107,18 @@ void main() {
                 'hiveInitializer should not be called',
               ),
         ),
+        /*with*/
+        // AppInitializationBloc.new,
+        /*replace-end*/
         seed: AppUninitialized.new,
         act: (bloc) => bloc.add(const AppInitializationRequested()),
         expect: () => [
           const AppInitializing(),
-          const FailedAppInitialization(hiveDatabaseInitialized: false),
+          const FailedAppInitialization(
+            /*remove-start*/
+            hiveDatabaseInitialized: false,
+            /*remove-end*/
+          ),
         ],
       );
 
@@ -109,11 +130,13 @@ void main() {
         '''when the current state is $FailedAppInitialization (with only successful folders initialization) '''
         'and the initialization fails',
         () async {
+          /*remove-start*/
           final applicationDocumentsDirectory = Directory.systemTemp
               .createTempSync();
           final temporaryDirectory = Directory.systemTemp.createTempSync();
+          /*remove-end*/
           await testBloc<AppInitializationBloc, AppInitializationState>(
-            build: () => buildSubjectBloc(
+            build: /*replace-start*/ () => buildSubjectBloc(
               applicationDocumentsDirectoryGetter: () async => fail(
                 'applicationDocumentsDirectoryGetter should not be called',
               ),
@@ -140,18 +163,32 @@ void main() {
                     id: 'hiveInitializer',
                   )(),
             ),
-            seed: () => FailedAppInitialization(
-              applicationDocumentsDirectory: applicationDocumentsDirectory,
-              temporaryDirectory: temporaryDirectory,
-              hiveDatabaseInitialized: false,
-            ),
+            /*with*/
+            // AppInitializationBloc.new,
+            /*replace-end*/
+            seed: () =>
+                /*insert-start*/
+                // const
+                /*insert-end*/
+                FailedAppInitialization(
+                  /*remove-start*/
+                  applicationDocumentsDirectory: applicationDocumentsDirectory,
+                  temporaryDirectory: temporaryDirectory,
+                  hiveDatabaseInitialized: false,
+                  /*remove-end*/
+                ),
             act: (bloc) => bloc.add(const AppInitializationRequested()),
             expect: () => [
               const AppInitializing(),
+              /*insert-start*/
+              // const
+              /*insert-end*/
               FailedAppInitialization(
+                /*remove-start*/
                 applicationDocumentsDirectory: applicationDocumentsDirectory,
                 temporaryDirectory: temporaryDirectory,
                 hiveDatabaseInitialized: false,
+                /*remove-end*/
               ),
             ],
           );
@@ -166,12 +203,14 @@ void main() {
         '''when the current state is $FailedAppInitialization (with successful local database initialization) '''
         'and the initialization fails',
         () async {
+          /*remove-start*/
           final applicationDocumentsDirectory = Directory.systemTemp
               .createTempSync();
           final temporaryDirectory = Directory.systemTemp.createTempSync();
           final localDatabase = _MockLocalDatabase();
+          /*remove-end*/
           await testBloc<AppInitializationBloc, AppInitializationState>(
-            build: () => buildSubjectBloc(
+            build: /*replace-start*/ () => buildSubjectBloc(
               applicationDocumentsDirectoryGetter: () async => fail(
                 'applicationDocumentsDirectoryGetter should not be called',
               ),
@@ -193,19 +232,33 @@ void main() {
                     id: 'hiveInitializer',
                   )(),
             ),
-            seed: () => FailedAppInitialization(
-              applicationDocumentsDirectory: applicationDocumentsDirectory,
-              temporaryDirectory: temporaryDirectory,
-              localDatabase: localDatabase,
-              hiveDatabaseInitialized: false,
-            ),
+            /*with*/
+            //  AppInitializationBloc.new,
+            /*replace-end*/
+            seed: () =>
+                /*insert-start*/
+                // const
+                /*insert-end*/
+                FailedAppInitialization(
+                  /*remove-start*/
+                  applicationDocumentsDirectory: applicationDocumentsDirectory,
+                  temporaryDirectory: temporaryDirectory,
+                  localDatabase: localDatabase,
+                  hiveDatabaseInitialized: false,
+                  /*remove-end*/
+                ),
             act: (bloc) => bloc.add(const AppInitializationRequested()),
             expect: () => [
               const AppInitializing(),
+              /*insert-start*/
+              // const
+              /*insert-end*/
               SuccessfulAppInitialization(
+                /*remove-start*/
                 applicationDocumentsDirectory: applicationDocumentsDirectory,
                 temporaryDirectory: temporaryDirectory,
                 localDatabase: localDatabase,
+                /*remove-end*/
               ),
             ],
           );
@@ -220,12 +273,14 @@ void main() {
         '''when the current state is $FailedAppInitialization (with successful hive database initialization) '''
         'and the initialization fails',
         () async {
+          /*remove-start*/
           final applicationDocumentsDirectory = Directory.systemTemp
               .createTempSync();
           final temporaryDirectory = Directory.systemTemp.createTempSync();
           final localDatabase = _MockLocalDatabase();
+          /*remove-end*/
           await testBloc<AppInitializationBloc, AppInitializationState>(
-            build: () => buildSubjectBloc(
+            build: /*replace-start*/ () => buildSubjectBloc(
               applicationDocumentsDirectoryGetter: () async => fail(
                 'applicationDocumentsDirectoryGetter should not be called',
               ),
@@ -247,19 +302,33 @@ void main() {
                     'hiveInitializer should not be called',
                   ),
             ),
-            seed: () => FailedAppInitialization(
-              applicationDocumentsDirectory: applicationDocumentsDirectory,
-              temporaryDirectory: temporaryDirectory,
-              localDatabase: localDatabase,
-              hiveDatabaseInitialized: true,
-            ),
+            /*with*/
+            //  AppInitializationBloc.new,
+            /*replace-end*/
+            seed: () =>
+                /*insert-start*/
+                // const
+                /*insert-end*/
+                FailedAppInitialization(
+                  /*remove-start*/
+                  applicationDocumentsDirectory: applicationDocumentsDirectory,
+                  temporaryDirectory: temporaryDirectory,
+                  localDatabase: localDatabase,
+                  hiveDatabaseInitialized: true,
+                  /*remove-end*/
+                ),
             act: (bloc) => bloc.add(const AppInitializationRequested()),
             expect: () => [
               const AppInitializing(),
+              /*insert-start*/
+              // const
+              /*insert-end*/
               SuccessfulAppInitialization(
+                /*remove-start*/
                 applicationDocumentsDirectory: applicationDocumentsDirectory,
                 temporaryDirectory: temporaryDirectory,
                 localDatabase: localDatabase,
+                /*remove-end*/
               ),
             ],
           );
@@ -273,12 +342,14 @@ void main() {
         '] '
         'when the initialization is successful',
         () async {
+          /*remove-start*/
           final applicationDocumentsDirectory = Directory.systemTemp
               .createTempSync();
           final temporaryDirectory = Directory.systemTemp.createTempSync();
           final localDatabase = _MockLocalDatabase();
+          /*remove-end*/
           await testBloc<AppInitializationBloc, AppInitializationState>(
-            build: () => buildSubjectBloc(
+            build: /*replace-start*/ () => buildSubjectBloc(
               applicationDocumentsDirectoryGetter: expectAsync0(
                 () async => applicationDocumentsDirectory,
                 id: 'applicationDocumentsDirectoryGetter',
@@ -303,13 +374,21 @@ void main() {
                     id: 'hiveInitializer',
                   )(),
             ),
+            /*with*/
+            //  AppInitializationBloc.new,
+            /*replace-end*/
             act: (bloc) => bloc.add(const AppInitializationRequested()),
             expect: () => [
               const AppInitializing(),
+              /*insert-start*/
+              // const
+              /*insert-end*/
               SuccessfulAppInitialization(
+                /*remove-start*/
                 applicationDocumentsDirectory: applicationDocumentsDirectory,
                 temporaryDirectory: temporaryDirectory,
                 localDatabase: localDatabase,
+                /*remove-end*/
               ),
             ],
           );

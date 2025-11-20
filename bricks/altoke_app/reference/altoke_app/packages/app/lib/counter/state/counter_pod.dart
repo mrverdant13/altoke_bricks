@@ -9,6 +9,8 @@ class Counter extends _$Counter {
   int build() => 0;
 
   void increment() => state = state + 1;
+
+  void reset() => state = 0;
 }
 
 @visibleForTesting

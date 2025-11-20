@@ -40,7 +40,7 @@ class ResetCounterIconButton extends ConsumerWidget {
           case StateManagementPackage.riverpod:
             /*remove-end*/
             /*{{#use_riverpod}}*/
-            ref.invalidate(counterPod);
+            ref.read(counterPod.notifier).reset();
           /*{{/use_riverpod}}*/
           /*remove-start*/
         } /*remove-end*/

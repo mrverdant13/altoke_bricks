@@ -9,7 +9,9 @@ import 'package:altoke_app/tasks/tasks.dart';
 /*remove-end*/
 /*w 1v w*/
 import 'package:flutter/material.dart';
+/*{{#use_riverpod}}*/
 import 'package:riverpod_annotation/experimental/scope.dart';
+/*{{/use_riverpod}}*/
 
 @Dependencies([
   Counter,

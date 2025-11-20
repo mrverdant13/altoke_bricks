@@ -1,7 +1,9 @@
 /*remove-start*/
 import 'package:altoke_app/app/app.dart';
 /*remove-end*/
+/*{{#use_riverpod}}*/
 import 'package:altoke_app/counter/counter.dart';
+/*{{/use_riverpod}}*/
 /*remove-start*/
 import 'package:altoke_app/external/external.dart';
 /*remove-end-x*/
@@ -12,12 +14,15 @@ import 'package:altoke_app/tasks/tasks.dart';
 /*x{{#use_auto_route}}*/
 import 'package:auto_route/auto_route.dart';
 /*x{{/use_auto_route}}*/
-import 'package:flutter/widgets.dart';
 /*x{{#use_go_router}}*/
+import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
-import 'package:riverpod_annotation/experimental/scope.dart';
 /*x{{/use_go_router}}*/
+/*x{{#use_riverpod}}*/
+import 'package:riverpod_annotation/experimental/scope.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+/*x{{/use_riverpod}}*/
 
 export 'routes/routes.dart';
 

@@ -1,6 +1,10 @@
+/*{{#use_riverpod}}*/
 import 'package:altoke_app/app/app.dart';
+/*{{/use_riverpod}}*/
 import 'package:altoke_app/bootstrap/bootstrap.dart';
+/*{{#use_riverpod}}*/
 import 'package:altoke_app/counter/counter.dart';
+/*{{/use_riverpod}}*/
 /*remove-start*/
 import 'package:altoke_app/external/external.dart';
 import 'package:altoke_app/routing/routing.dart';

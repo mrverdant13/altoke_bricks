@@ -4,7 +4,9 @@ import 'package:altoke_app/app/app.dart';
 import 'package:altoke_app/counter/counter.dart';
 import 'package:altoke_app/l10n/l10n.dart';
 import 'package:flutter/material.dart';
+/*{{#use_bloc}}*/
 import 'package:flutter_bloc/flutter_bloc.dart';
+/*{{/use_bloc}}*/
 /*{{#use_riverpod}}*/
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/experimental/scope.dart';

@@ -11,7 +11,10 @@ import 'package:altoke_app/routing/routing.dart';
 import 'package:altoke_app/tasks/tasks.dart';
 /*remove-end*/
 import 'package:flutter_test/flutter_test.dart';
+/*x{{#use_riverpod}}x*/
 import 'package:riverpod_annotation/experimental/scope.dart';
+
+/*x{{/use_riverpod}}x*/
 
 import '../../helpers/helpers.dart';
 

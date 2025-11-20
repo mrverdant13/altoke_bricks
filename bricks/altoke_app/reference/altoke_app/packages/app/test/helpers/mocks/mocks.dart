@@ -1,4 +1,3 @@
-export 'counter.dart';
 /*x-remove-start*/
 export 'directories.dart';
 export 'external.dart';

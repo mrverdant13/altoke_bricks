@@ -1,10 +1,15 @@
 /*remove-start*/
 import 'package:altoke_app/app/app.dart';
 /*remove-end*/
+/*x{{#use_riverpod}}x*/
 import 'package:altoke_app/counter/counter.dart';
+/*x{{/use_riverpod}}x*/
 import 'package:altoke_app/routing/routing.dart';
 import 'package:flutter_test/flutter_test.dart';
+/*x{{#use_riverpod}}x*/
 import 'package:riverpod_annotation/experimental/scope.dart';
+
+/*x{{/use_riverpod}}x*/
 
 import '../../../helpers/helpers.dart';
 

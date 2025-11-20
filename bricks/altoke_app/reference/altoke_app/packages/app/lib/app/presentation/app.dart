@@ -3,11 +3,13 @@ import 'package:altoke_app/flavors/flavors.dart';
 import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/routing/routing.dart';
 import 'package:flutter/material.dart';
+/*{{#use_bloc}}*/
 import 'package:flutter_bloc/flutter_bloc.dart';
-/*x{{#use_riverpod}}#*/
+/*{{/use_bloc}}*/
+/*x{{#use_riverpod}}*/
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/experimental/scope.dart';
-/*x{{/use_riverpod}}#*/
+/*x{{/use_riverpod}}*/
 
 @Dependencies([
   asyncInitialization,

@@ -2,11 +2,31 @@
 import 'package:altoke_app/app/app.dart';
 /*remove-end*/
 import 'package:altoke_app/counter/counter.dart';
+/*{{#use_bloc}}*/
+import 'package:bloc_test/bloc_test.dart';
+/*{{/use_bloc}}*/
+import 'package:flutter/widgets.dart';
+/*{{#use_bloc}}*/
+import 'package:flutter_bloc/flutter_bloc.dart';
+/*{{/use_bloc}}*/
+/*{{#use_riverpod}}*/
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+/*{{/use_riverpod}}*/
 import 'package:flutter_test/flutter_test.dart';
+/*{{#use_bloc}}*/
+import 'package:mocktail/mocktail.dart';
+/*{{/use_bloc}}*/
+/*{{#use_riverpod}}*/
 import 'package:riverpod_annotation/experimental/scope.dart';
 
+/*{{/use_riverpod}}*/
+
 import '../../helpers/helpers.dart';
+
+/*{{#use_bloc}}*/
+class _MockCounterBloc extends MockBloc<CounterEvent, int>
+    implements CounterBloc {}
+/*{{/use_bloc}}*/
 
 @Dependencies([
   Counter,
@@ -15,92 +35,237 @@ import '../../helpers/helpers.dart';
   /*remove-end*/
 ])
 void main() {
-  testWidgets(
-    '''
+  /*{{#use_bloc}}*/
+  /*remove-start*/
+  group('(using bloc)', () {
+    /*remove-end*/
+    group('$CounterBody', () {
+      late CounterBloc counterBloc;
 
-GIVEN a counter body
-WHEN it is displayed
-THEN a count message and a count value should be shown
-''',
-    (tester) async {
-      await tester.pumpAppWithScreen(const CounterBody());
-      expect(find.byType(PushCountMessage), findsOneWidget);
-      expect(find.byType(PushCountValue), findsOneWidget);
-    },
-  );
+      setUp(() {
+        counterBloc = _MockCounterBloc();
+      });
 
-  testWidgets(
-    '''
+      /*remove-start*/
+      @Dependencies([
+        Counter,
+      ])
+      /*remove-end*/
+      Widget buildSubjectWidget() {
+        return /*remove-start*/ ProviderScope(
+          overrides: [
+            selectedStateManagementPackagePod.overrideWithValue(
+              StateManagementPackage.bloc,
+            ),
+          ],
+          child:
+              /*remove-end*/
+              BlocProvider.value(
+                value: counterBloc,
+                child: const CounterBody(),
+              ) /*remove-start*/,
+        ) /*remove-end*/;
+      }
 
-GIVEN a counter body
-├─ THAT has a count of 0
-WHEN it is displayed
-THEN the body should include the localized message
-''',
-    (tester) async {
-      await tester.pumpAppWithScreen(
-        ProviderScope(
-          overrides: [counterPod.overrideWith(() => MockCounter(() => 0))],
-          child: const CounterBody(),
-        ),
+      testWidgets(
+        'displays a $PushCountMessage and a $PushCountValue',
+        (tester) async {
+          when(() => counterBloc.state).thenReturn(5);
+          await tester.pumpAppWithScreen(
+            buildSubjectWidget(),
+          );
+          expect(find.byType(PushCountMessage), findsOneWidget);
+          expect(find.byType(PushCountValue), findsOneWidget);
+        },
       );
-      expect(
-        find.l10n.widgetWithText(
-          PushCountMessage,
-          (l10n) => l10n.counterPushTimesMessage(0),
-        ),
-        findsOneWidget,
-      );
-    },
-  );
+    });
 
-  testWidgets(
-    '''
+    group('$PushCountMessage', () {
+      late CounterBloc counterBloc;
 
-GIVEN a counter body
-├─ THAT has a count of 1
-WHEN it is displayed
-THEN the body should include the localized message
-''',
-    (tester) async {
-      await tester.pumpAppWithScreen(
-        ProviderScope(
-          overrides: [counterPod.overrideWith(() => MockCounter(() => 1))],
-          child: const CounterBody(),
-        ),
-      );
-      expect(
-        find.l10n.widgetWithText(
-          PushCountMessage,
-          (l10n) => l10n.counterPushTimesMessage(1),
-        ),
-        findsOneWidget,
-      );
-    },
-  );
+      setUp(() {
+        counterBloc = _MockCounterBloc();
+      });
 
-  testWidgets(
-    '''
+      /*remove-start*/
+      @Dependencies([
+        Counter,
+      ])
+      /*remove-end*/
+      Widget buildSubjectWidget() {
+        return /*remove-start*/ ProviderScope(
+          overrides: [
+            selectedStateManagementPackagePod.overrideWithValue(
+              StateManagementPackage.bloc,
+            ),
+          ],
+          child: /*remove-end*/ BlocProvider.value(
+            value: counterBloc,
+            child: const PushCountMessage(),
+          ) /*remove-start*/,
+        ) /*remove-end*/;
+      }
 
-GIVEN a counter body
-├─ THAT has a count of 8
-WHEN it is displayed
-THEN the body should include the localized message
-''',
-    (tester) async {
-      await tester.pumpAppWithScreen(
-        ProviderScope(
-          overrides: [counterPod.overrideWith(() => MockCounter(() => 8))],
-          child: const CounterBody(),
-        ),
+      testWidgets(
+        'displays the localized message',
+        (tester) async {
+          when(() => counterBloc.state).thenReturn(5);
+          await tester.pumpAppWithScreen(
+            buildSubjectWidget(),
+          );
+          expect(
+            find.l10n.text(
+              (l10n) => l10n.counterPushTimesMessage(5),
+            ),
+            findsOneWidget,
+          );
+        },
       );
-      expect(
-        find.l10n.widgetWithText(
-          PushCountMessage,
-          (l10n) => l10n.counterPushTimesMessage(8),
-        ),
-        findsOneWidget,
+    });
+
+    group('$PushCountValue', () {
+      late CounterBloc counterBloc;
+
+      setUp(() {
+        counterBloc = _MockCounterBloc();
+      });
+
+      /*remove-start*/
+      @Dependencies([
+        Counter,
+      ])
+      /*remove-end*/
+      Widget buildSubjectWidget() {
+        return /*remove-start*/ ProviderScope(
+          overrides: [
+            selectedStateManagementPackagePod.overrideWithValue(
+              StateManagementPackage.bloc,
+            ),
+          ],
+          child: /*remove-end*/ BlocProvider.value(
+            value: counterBloc,
+            child: const PushCountValue(),
+          ) /*remove-start*/,
+        ) /*remove-end*/;
+      }
+
+      testWidgets(
+        'displays the count value',
+        (tester) async {
+          when(() => counterBloc.state).thenReturn(5);
+          await tester.pumpAppWithScreen(
+            buildSubjectWidget(),
+          );
+          expect(find.text('5'), findsOneWidget);
+        },
       );
-    },
-  );
+    });
+    /*remove-start*/
+  });
+  /*remove-end*/
+  /*{{/use_bloc}}*/
+
+  /*{{#use_riverpod}}*/
+  /*remove-start*/
+  group('(using riverpod)', () {
+    /*remove-end*/
+    group('$CounterBody', () {
+      @Dependencies([
+        Counter,
+      ])
+      Widget buildSubjectWidget() {
+        return /*remove-start*/ ProviderScope(
+          overrides: [
+            selectedStateManagementPackagePod.overrideWithValue(
+              StateManagementPackage.riverpod,
+            ),
+          ],
+          child:
+              /*remove-end*/
+              const CounterBody() /*remove-start*/,
+        ) /*remove-end*/;
+      }
+
+      testWidgets(
+        'displays a $PushCountMessage and a $PushCountValue',
+        (tester) async {
+          await tester.pumpAppWithScreen(
+            buildSubjectWidget(),
+          );
+          expect(find.byType(PushCountMessage), findsOneWidget);
+          expect(find.byType(PushCountValue), findsOneWidget);
+        },
+      );
+    });
+
+    group('$PushCountMessage', () {
+      @Dependencies([
+        Counter,
+      ])
+      Widget buildSubjectWidget() {
+        return /*remove-start*/ ProviderScope(
+          overrides: [
+            selectedStateManagementPackagePod.overrideWithValue(
+              StateManagementPackage.riverpod,
+            ),
+          ],
+          child: /*remove-end*/ const PushCountMessage() /*remove-start*/,
+        ) /*remove-end*/;
+      }
+
+      testWidgets(
+        'displays the localized message',
+        (tester) async {
+          await tester.pumpAppWithScreen(
+            ProviderScope(
+              overrides: [
+                counterPod.overrideWithValue(5),
+              ],
+              child: buildSubjectWidget(),
+            ),
+          );
+          expect(
+            find.l10n.text(
+              (l10n) => l10n.counterPushTimesMessage(5),
+            ),
+            findsOneWidget,
+          );
+        },
+      );
+    });
+
+    group('$PushCountValue', () {
+      @Dependencies([
+        Counter,
+      ])
+      Widget buildSubjectWidget() {
+        return /*remove-start*/ ProviderScope(
+          overrides: [
+            selectedStateManagementPackagePod.overrideWithValue(
+              StateManagementPackage.riverpod,
+            ),
+          ],
+          child: /*remove-end*/ const PushCountValue() /*remove-start*/,
+        ) /*remove-end*/;
+      }
+
+      testWidgets(
+        'displays the count value',
+        (tester) async {
+          await tester.pumpAppWithScreen(
+            ProviderScope(
+              overrides: [
+                counterPod.overrideWithValue(5),
+              ],
+              child: buildSubjectWidget(),
+            ),
+          );
+          expect(find.text('5'), findsOneWidget);
+        },
+      );
+    });
+    /*remove-start*/
+  });
+  /*remove-end*/
+  /*{{/use_riverpod}}*/
 }
