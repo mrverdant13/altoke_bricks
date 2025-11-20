@@ -1,0 +1,95 @@
+
+        testWidgets('displays $FlavorBanner', (tester) async {
+          await tester.pumpWidget(
+            ProviderScope(
+              overrides: [
+                asyncInitializationPod.overrideWithValue(
+                  const AsyncLoading(),
+                ),
+              ],
+              child: buildSubjectApp(),
+            ),
+          );
+          expect(find.byType(FlavorBanner), findsOneWidget);
+        });
+
+        testWidgets(
+          'displays $InitializingScreen '
+          'when the initialization process is not completed',
+          (tester) async {
+            await tester.pumpWidget(
+              ProviderScope(
+                overrides: [
+                  asyncInitializationPod.overrideWithValue(
+                    const AsyncLoading(),
+                  ),
+                ],
+                child: buildSubjectApp(),
+              ),
+            );
+            expect(find.byType(InitializingScreen), findsOneWidget);
+          },
+        );
+
+        testWidgets(
+          'displays the router content '
+          'when the initialization process is completed',
+          (tester) async {
+            await tester.pumpWidget(
+              ProviderScope(
+                overrides: [
+                  asyncInitializationPod.overrideWithValue(
+                    const AsyncData(null),
+                  ),
+                ],
+                child: buildSubjectApp(),
+              ),
+            );
+            await tester.pumpUntilFound(find.text('Fake Screen'));
+          },
+        );
+
+        testWidgets(
+          'displays $ErroredInitializationScreen '
+          'when the initialization process fails',
+          (tester) async {
+            await tester.pumpWidget(
+              ProviderScope(
+                overrides: [
+                  asyncInitializationPod.overrideWithValue(
+                    AsyncError(
+                      Exception('error'),
+                      StackTrace.current,
+                    ),
+                  ),
+                ],
+                child: buildSubjectApp(),
+              ),
+            );
+            expect(find.byType(ErroredInitializationScreen), findsOneWidget);
+          },
+        );
+
+        testWidgets(
+          'allows requesting a new initialization process '
+          'when the initialization process fails',
+          (tester) async {
+            var refreshed = false;
+            await tester.pumpWidget(
+              ProviderScope(
+                overrides: [
+                  asyncInitializationPod.overrideWith((ref) async {
+                    if (ref.isRefresh) refreshed = true;
+                    throw Exception('error');
+                  }),
+                ],
+                child: buildSubjectApp(),
+              ),
+            );
+            expect(find.byType(ErroredInitializationScreen), findsOneWidget);
+            await tester.tap(find.byType(ElevatedButton));
+            expect(refreshed, isTrue);
+          },
+          skip: true, // Riverpod 3.0 behaves differently in test mode
+        );
+        

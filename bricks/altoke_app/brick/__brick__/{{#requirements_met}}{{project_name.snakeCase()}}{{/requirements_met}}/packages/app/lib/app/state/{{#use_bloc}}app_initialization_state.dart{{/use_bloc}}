@@ -1,0 +1,37 @@
+part of '{{#use_bloc}}app_initialization_bloc.dart{{/use_bloc}}';
+
+sealed class AppInitializationState {
+  const AppInitializationState();
+}
+
+@MappableClass()
+final class AppUninitialized extends AppInitializationState
+    with AppUninitializedMappable {
+  const AppUninitialized();
+}
+
+@MappableClass()
+final class AppInitializing extends AppInitializationState
+    with AppInitializingMappable {
+  const AppInitializing();
+}
+
+@MappableClass()
+final class SuccessfulAppInitialization extends AppInitializationState
+    with SuccessfulAppInitializationMappable {
+  const SuccessfulAppInitialization
+  ()
+  ;
+
+  
+}
+
+@MappableClass()
+final class FailedAppInitialization extends AppInitializationState
+    with FailedAppInitializationMappable {
+  const FailedAppInitialization
+  ()
+  ;
+
+  
+}

@@ -1,0 +1,17 @@
+part of '{{#use_bloc}}counter_bloc.dart{{/use_bloc}}';
+
+sealed class CounterEvent {
+  const CounterEvent();
+}
+
+@MappableClass()
+final class CounterIncreaseRequested extends CounterEvent
+    with CounterIncreaseRequestedMappable {
+  const CounterIncreaseRequested();
+}
+
+@MappableClass()
+final class CounterResetRequested extends CounterEvent
+    with CounterResetRequestedMappable {
+  const CounterResetRequested();
+}

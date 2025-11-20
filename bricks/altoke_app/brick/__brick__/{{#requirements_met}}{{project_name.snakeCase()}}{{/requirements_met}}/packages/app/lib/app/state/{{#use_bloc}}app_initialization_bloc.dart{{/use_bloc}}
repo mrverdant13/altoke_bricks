@@ -1,0 +1,48 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:dart_mappable/dart_mappable.dart';
+
+import 'package:flutter_bloc/{{#use_bloc}}flutter_bloc.dart{{/use_bloc}}';
+
+part 'app_initialization_bloc.mapper.dart';
+part '{{#use_bloc}}app_initialization_event.dart{{/use_bloc}}';
+part '{{#use_bloc}}app_initialization_state.dart{{/use_bloc}}';
+
+class AppInitializationBloc
+    extends Bloc<AppInitializationEvent, AppInitializationState> {
+  AppInitializationBloc
+  () :
+      super(const AppUninitialized()) {
+    on<AppInitializationRequested>(
+      _onAppInitializationRequested,
+      transformer: droppable(),
+    );
+  }
+
+  
+
+  Future<void> _onAppInitializationRequested(
+    AppInitializationRequested event,
+    Emitter<AppInitializationState> emit,
+  ) async {
+    if (state is SuccessfulAppInitialization) return;
+    emit(const AppInitializing());
+    try {
+      
+      // Run async initialization.
+      emit(
+        const
+        SuccessfulAppInitialization(
+          
+        ),
+      );
+    } on Object {
+      
+      emit(
+        const
+        FailedAppInitialization(
+          
+        ),
+      );
+    }
+  }
+}
