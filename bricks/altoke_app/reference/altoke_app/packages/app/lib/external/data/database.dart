@@ -33,9 +33,7 @@ Future<void> initializeHive({
       dbName,
     ]);
     final databaseDir = Directory(databasePath);
-    if (!databaseDir.existsSync()) {
-      await databaseDir.create(recursive: true);
-    }
+    if (!databaseDir.existsSync()) await databaseDir.create(recursive: true);
     Hive.init(databasePath);
   }
 }
