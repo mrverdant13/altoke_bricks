@@ -1,17 +1,12 @@
-import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/counter/counter.dart';
-import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/routing/routing.dart';{{#use_auto_route}}
+{{#use_riverpod}}import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/counter/counter.dart';{{/use_riverpod}}import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/routing/routing.dart';{{#use_auto_route}}
 import 'package:auto_route/auto_route.dart';{{/use_auto_route}}
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_test/flutter_test.dart';{{#use_go_router}}
+{{#use_riverpod}}import 'package:flutter_riverpod/flutter_riverpod.dart';{{/use_riverpod}}import 'package:flutter_test/flutter_test.dart';{{#use_go_router}}
 import 'package:go_router/go_router.dart';{{/use_go_router}}
-import 'package:path/path.dart' as p;
-import 'package:riverpod_annotation/experimental/scope.dart';
+import 'package:path/path.dart' as p;{{#use_riverpod}}import 'package:riverpod_annotation/experimental/scope.dart';{{/use_riverpod}}import '../helpers/helpers.dart';
 
-import '../helpers/helpers.dart';
-
-@Dependencies([
+{{#use_riverpod}}@Dependencies([
   Counter,
-  ])
+  ]){{/use_riverpod}}
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 

@@ -1,12 +1,17 @@
+
+{{#use_riverpod}}
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/counter/counter.dart';
+{{/use_riverpod}}
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/home/home.dart';{{#use_auto_route}}
 import 'package:auto_route/auto_route.dart';{{/use_auto_route}}
 import 'package:flutter/material.dart';
+{{#use_riverpod}}
 import 'package:riverpod_annotation/experimental/scope.dart';
+{{/use_riverpod}}
 
-@Dependencies([
+{{#use_riverpod}}@Dependencies([
   Counter,
-  ])
+  ]){{/use_riverpod}}
 {{#use_auto_route}}@RoutePage(name: 'HomeRoute')
 {{/use_auto_route}}class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

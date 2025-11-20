@@ -1,0 +1,147 @@
+
+
+import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/app/app.dart';
+import 'package:bloc_test/bloc_test.dart';
+
+import 'package:flutter_test/flutter_test.dart';
+
+
+
+
+void main() {
+  group('$AppInitializationBloc', () {
+    
+
+    test('initial state is $AppUninitialized', () {
+      final bloc = AppInitializationBloc();
+      addTearDown(bloc.close);
+      expect(bloc.state, const AppUninitialized());
+    });
+
+    group('$AppInitializationRequested', () {
+      blocTest<AppInitializationBloc, AppInitializationState>(
+        'emits ['
+        '$AppInitializing, '
+        '$FailedAppInitialization (with no successful initialization steps) '
+        '] '
+        'when the current state is $AppUninitialized '
+        'and the initialization fails',
+        build: AppInitializationBloc.new,
+        seed: AppUninitialized.new,
+        act: (bloc) => bloc.add(const AppInitializationRequested()),
+        expect: () => [
+          const AppInitializing(),
+          const FailedAppInitialization(
+            
+          ),
+        ],
+      );
+
+      test(
+        'emits ['
+        '$AppInitializing, '
+        '''$FailedAppInitialization (with only successful folders initialization) '''
+        '] '
+        '''when the current state is $FailedAppInitialization (with only successful folders initialization) '''
+        'and the initialization fails',
+        () async {
+          
+          await testBloc<AppInitializationBloc, AppInitializationState>(
+            build: AppInitializationBloc.new,
+            seed: () =>
+                const
+                FailedAppInitialization(
+                  
+                ),
+            act: (bloc) => bloc.add(const AppInitializationRequested()),
+            expect: () => [
+              const AppInitializing(),
+              const
+              FailedAppInitialization(
+                
+              ),
+            ],
+          );
+        },
+      );
+
+      test(
+        'emits ['
+        '$AppInitializing, '
+        '''$SuccessfulAppInitialization '''
+        '] '
+        '''when the current state is $FailedAppInitialization (with successful local database initialization) '''
+        'and the initialization fails',
+        () async {
+          
+          await testBloc<AppInitializationBloc, AppInitializationState>(
+            build:  AppInitializationBloc.new,
+            seed: () =>
+                const
+                FailedAppInitialization(
+                  
+                ),
+            act: (bloc) => bloc.add(const AppInitializationRequested()),
+            expect: () => [
+              const AppInitializing(),
+              const
+              SuccessfulAppInitialization(
+                
+              ),
+            ],
+          );
+        },
+      );
+
+      test(
+        'emits ['
+        '$AppInitializing, '
+        '''$SuccessfulAppInitialization '''
+        '] '
+        '''when the current state is $FailedAppInitialization (with successful hive database initialization) '''
+        'and the initialization fails',
+        () async {
+          
+          await testBloc<AppInitializationBloc, AppInitializationState>(
+            build:  AppInitializationBloc.new,
+            seed: () =>
+                const
+                FailedAppInitialization(
+                  
+                ),
+            act: (bloc) => bloc.add(const AppInitializationRequested()),
+            expect: () => [
+              const AppInitializing(),
+              const
+              SuccessfulAppInitialization(
+                
+              ),
+            ],
+          );
+        },
+      );
+
+      test(
+        'emits ['
+        '$AppInitializing, '
+        '''$SuccessfulAppInitialization '''
+        '] '
+        'when the initialization is successful',
+        () async {
+          
+          await testBloc<AppInitializationBloc, AppInitializationState>(
+            build:  AppInitializationBloc.new,
+            act: (bloc) => bloc.add(const AppInitializationRequested()),
+            expect: () => [
+              const AppInitializing(),
+              const
+              SuccessfulAppInitialization(
+                
+              ),
+            ],
+          );
+        },
+      );
+    });
+  });
+}
