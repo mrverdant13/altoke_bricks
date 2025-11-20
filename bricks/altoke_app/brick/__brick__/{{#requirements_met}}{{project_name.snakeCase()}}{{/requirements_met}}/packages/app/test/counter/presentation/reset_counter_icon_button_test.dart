@@ -1,61 +1,131 @@
-import 'dart:math';
 
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/counter/counter.dart';
+{{#use_bloc}}
+import 'package:bloc_test/bloc_test.dart';
+{{/use_bloc}}
+import 'package:flutter/widgets.dart';
+{{#use_bloc}}
+import 'package:flutter_bloc/{{#use_bloc}}flutter_bloc.dart{{/use_bloc}}';
+{{/use_bloc}}
+{{#use_riverpod}}
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+{{/use_riverpod}}
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+{{#use_riverpod}}
 import 'package:riverpod_annotation/experimental/scope.dart';
+
+{{/use_riverpod}}
 
 import '../../helpers/helpers.dart';
 
-@Dependencies([
+{{#use_riverpod}}
+class _MockCounter extends CounterBase with Mock implements Counter {}
+{{/use_riverpod}}
+
+{{#use_bloc}}
+class _MockCounterBloc extends MockBloc<CounterEvent, int>
+    implements CounterBloc {}
+{{/use_bloc}}
+
+{{#use_riverpod}}@Dependencies([
   Counter,
-])
+  
+]){{/use_riverpod}}
 void main() {
-  testWidgets(
-    '''
+  group('$ResetCounterIconButton', () {
+    {{#use_bloc}}
+    
+      late CounterBloc counterBloc;
 
-GIVEN a reset counter icon button
-WHEN it is displayed
-THEN the button should include the localized tooltip
-''',
-    (tester) async {
-      await tester.pumpAppWithScreen(const ResetCounterIconButton());
-      expect(
-        find.l10n.byTooltip((l10n) => l10n.counterResetButtonTooltip),
-        findsOneWidget,
-      );
-    },
-  );
+      setUp(() {
+        counterBloc = _MockCounterBloc();
+      });
 
-  testWidgets(
-    '''
+      
+      Widget buildSubjectWidget() {
+        return  BlocProvider.value(
+            value: counterBloc,
+            child: const ResetCounterIconButton(),
+          ) ;
+      }
 
-GIVEN a reset counter icon button
-WHEN it is tapped
-THEN the counter should be reset
-''',
-    (tester) async {
-      final counterNotifier = MockCounter(() => 0);
-      final container = ProviderContainer(
-        overrides: [counterPod.overrideWith(() => counterNotifier)],
+      testWidgets(
+        'includes a localized tooltip',
+        (tester) async {
+          await tester.pumpAppWithScreen(
+            buildSubjectWidget(),
+          );
+          expect(
+            find.l10n.byTooltip((l10n) => l10n.counterResetButtonTooltip),
+            findsOneWidget,
+          );
+        },
       );
-      addTearDown(container.dispose);
-      final subscription = container.listen(counterPod.notifier, (_, _) {});
-      addTearDown(subscription.close);
-      await tester.pumpAppWithScreen(
-        UncontrolledProviderScope(
-          container: container,
-          child: const ResetCounterIconButton(),
-        ),
+
+      testWidgets(
+        'resets the counter',
+        (tester) async {
+          when(() => counterBloc.state).thenReturn(5);
+          await tester.pumpAppWithScreen(
+            buildSubjectWidget(),
+          );
+          await tester.pumpAndSettle();
+          final resetButtonFinder = find.byType(ResetCounterIconButton);
+          await tester.tap(resetButtonFinder);
+          verify(
+            () => counterBloc.add(const CounterResetRequested()),
+          ).called(1);
+        },
       );
-      counterNotifier.state = Random().nextInt(100) + 1;
-      expect(container.read(counterPod), isNonZero);
-      await tester.pumpAndSettle();
-      final resetButtonFinder = find.byType(ResetCounterIconButton);
-      await tester.tap(resetButtonFinder);
-      await tester.pumpAndSettle();
-      expect(container.read(counterPod), isZero);
-      await tester.pumpAndSettle();
-    },
-  );
+      
+    {{/use_bloc}}
+
+    {{#use_riverpod}}
+    
+
+      {{#use_riverpod}}@Dependencies([
+        Counter,
+      ]){{/use_riverpod}}
+      Widget buildSubjectWidget() {
+        return  const ResetCounterIconButton() ;
+      }
+
+      testWidgets(
+        'includes a localized tooltip',
+        (tester) async {
+          await tester.pumpAppWithScreen(
+            buildSubjectWidget(),
+          );
+          expect(
+            find.l10n.byTooltip((l10n) => l10n.counterResetButtonTooltip),
+            findsOneWidget,
+          );
+        },
+      );
+
+      testWidgets(
+        'resets the counter',
+        (tester) async {
+          final counterNotifier = _MockCounter();
+          when(counterNotifier.build).thenReturn(5);
+          await tester.pumpAppWithScreen(
+            ProviderScope(
+              overrides: [
+                counterPod.overrideWith(
+                  () => counterNotifier,
+                ),
+              ],
+              child: buildSubjectWidget(),
+            ),
+          );
+          await tester.pumpAndSettle();
+          final resetButtonFinder = find.byType(ResetCounterIconButton);
+          await tester.tap(resetButtonFinder);
+          verify(counterNotifier.reset).called(1);
+        },
+      );
+      
+    {{/use_riverpod}}
+  });
 }

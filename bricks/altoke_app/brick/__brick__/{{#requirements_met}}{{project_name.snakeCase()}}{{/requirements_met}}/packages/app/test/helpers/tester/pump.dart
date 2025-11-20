@@ -1,10 +1,9 @@
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/l10n/l10n.dart';
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/routing/routing.dart';{{#use_auto_route}}import 'package:auto_route/auto_route.dart';{{/use_auto_route}}
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';{{#use_riverpod}}import 'package:flutter_riverpod/flutter_riverpod.dart';{{/use_riverpod}}
 import 'package:flutter_test/flutter_test.dart';{{#use_go_router}}import 'package:go_router/go_router.dart';{{/use_go_router}}
-import 'package:riverpod_annotation/experimental/scope.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+{{#use_riverpod}}import 'package:riverpod_annotation/experimental/scope.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';{{/use_riverpod}}
 
 {{#use_auto_route}}typedef AutoRouteOverrides = Map<String, AutoRoutePageBuilder>;
 
@@ -39,7 +38,7 @@ class TestableAppRouter extends AppRouter {
 
   @override
   List<AutoRoute> get routes => super.routes.overrideRoutes(overrides).toList();
-}{{/use_auto_route}}@Dependencies([])
+}{{/use_auto_route}}{{#use_riverpod}}@Dependencies([]){{/use_riverpod}}
 extension AppTester on WidgetTester {
   {{#use_auto_route}}Future<void> pumpAutoRouteAppWithInitialPath(
     String path, {
@@ -56,15 +55,18 @@ extension AppTester on WidgetTester {
     );
     final effectiveWrapper = wrapper ?? (child) => child;
     await pumpWidget(
+      {{#use_riverpod}}
       ProviderScope(
-        child: effectiveWrapper(
+        child: {{/use_riverpod}} effectiveWrapper(
           MaterialApp.router(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
             routerConfig: routerConfig,
           ),
         ),
+        {{#use_riverpod}}
       ),
+      {{/use_riverpod}}
     );
   }
 
@@ -83,15 +85,18 @@ extension AppTester on WidgetTester {
     );
     final effectiveWrapper = wrapper ?? (child) => child;
     await pumpWidget(
+      {{#use_riverpod}}
       ProviderScope(
-        child: effectiveWrapper(
+        child: {{/use_riverpod}} effectiveWrapper(
           MaterialApp.router(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
             routerConfig: routerConfig,
           ),
         ),
+        {{#use_riverpod}}
       ),
+      {{/use_riverpod}}
     );
   }
 
@@ -110,15 +115,18 @@ extension AppTester on WidgetTester {
     );
     final effectiveWrapper = wrapper ?? (child) => child;
     await pumpWidget(
+      {{#use_riverpod}}
       ProviderScope(
-        child: effectiveWrapper(
+        child: {{/use_riverpod}} effectiveWrapper(
           MaterialApp.router(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
             routerConfig: routerConfig,
           ),
         ),
+        {{#use_riverpod}}
       ),
+      {{/use_riverpod}}
     );
   }{{/use_auto_route}}{{#use_go_router}}Future<void> pumpGoRouterAppWithInitialPath(
     String path, {
@@ -131,15 +139,18 @@ extension AppTester on WidgetTester {
     addTearDown(goRouter.dispose);
     final effectiveWrapper = wrapper ?? (child) => child;
     await pumpWidget(
+      {{#use_riverpod}}
       ProviderScope(
-        child: effectiveWrapper(
+        child: {{/use_riverpod}} effectiveWrapper(
           MaterialApp.router(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
             routerConfig: goRouter,
           ),
         ),
+        {{#use_riverpod}}
       ),
+      {{/use_riverpod}}
     );
   }
 
@@ -154,41 +165,53 @@ extension AppTester on WidgetTester {
     addTearDown(goRouter.dispose);
     final effectiveWrapper = wrapper ?? (child) => child;
     await pumpWidget(
+      {{#use_riverpod}}
       ProviderScope(
-        child: effectiveWrapper(
+        child: {{/use_riverpod}} effectiveWrapper(
           MaterialApp.router(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
             routerConfig: goRouter,
           ),
         ),
+        {{#use_riverpod}}
       ),
+      {{/use_riverpod}}
     );
   }{{/use_go_router}}
 
+  
   Future<void> pumpAppWithScreen(
-    Widget screen, {
+    Widget screen, {{#use_riverpod}} {
     List<Override> overrides = const [],
-  }) async {
+  } {{/use_riverpod}}) async {
+  
     await pumpWidget(
+      {{#use_riverpod}}
       ProviderScope(
         overrides: overrides,
-        child: MaterialApp(
+        child: {{/use_riverpod}} MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           home: screen,
         ),
+        {{#use_riverpod}}
       ),
+      {{/use_riverpod}}
     );
   }
 
+  
   Future<void> pumpAppWithScaffold(
-    Widget body, {
+    Widget body, {{#use_riverpod}} {
     List<Override> overrides = const [],
-  }) async {
+  } {{/use_riverpod}} ) async {
+  
     await pumpAppWithScreen(
       Scaffold(body: body),
+      {{#use_riverpod}}
       overrides: overrides,
+      {{/use_riverpod}}
     );
   }
 
@@ -196,7 +219,9 @@ extension AppTester on WidgetTester {
     List<Widget> slivers, {
     ScrollPhysics? physics,
     ScrollController? scrollController,
+    {{#use_riverpod}}
     List<Override> overrides = const [],
+    {{/use_riverpod}}
   }) async {
     await pumpAppWithScaffold(
       CustomScrollView(
@@ -204,7 +229,9 @@ extension AppTester on WidgetTester {
         controller: scrollController,
         slivers: slivers,
       ),
+      {{#use_riverpod}}
       overrides: overrides,
+      {{/use_riverpod}}
     );
   }
 
@@ -213,7 +240,9 @@ extension AppTester on WidgetTester {
     double fakeHeaderHeight = 0,
     ScrollPhysics? physics,
     ScrollController? scrollController,
+    {{#use_riverpod}}
     List<Override> overrides = const [],
+    {{/use_riverpod}}
   }) async {
     await pumpAppWithScaffold(
       NestedScrollView(
@@ -229,7 +258,9 @@ extension AppTester on WidgetTester {
         ],
         body: body,
       ),
+      {{#use_riverpod}}
       overrides: overrides,
+      {{/use_riverpod}}
     );
   }
 

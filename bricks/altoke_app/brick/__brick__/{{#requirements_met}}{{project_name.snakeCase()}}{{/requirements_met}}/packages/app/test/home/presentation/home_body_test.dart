@@ -1,14 +1,12 @@
+
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/counter/counter.dart';
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/home/home.dart';
 
-import 'package:flutter_test/flutter_test.dart';
-import 'package:riverpod_annotation/experimental/scope.dart';
+import 'package:flutter_test/flutter_test.dart';{{#use_riverpod}}import 'package:riverpod_annotation/experimental/scope.dart';{{/use_riverpod}}import '../../helpers/helpers.dart';
 
-import '../../helpers/helpers.dart';
-
-@Dependencies([
+{{#use_riverpod}}@Dependencies([
   Counter,
-  ])
+  ]){{/use_riverpod}}
 void main() {
   testWidgets(
     '''
