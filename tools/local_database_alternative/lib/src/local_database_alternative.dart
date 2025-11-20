@@ -15,7 +15,8 @@ enum LocalDatabaseAlternative {
   /// Sembast.
   ///
   /// NoSQL database.
-  sembast('sembast');
+  sembast('sembast')
+  ;
 
   const LocalDatabaseAlternative(this.varIdentifier);
 

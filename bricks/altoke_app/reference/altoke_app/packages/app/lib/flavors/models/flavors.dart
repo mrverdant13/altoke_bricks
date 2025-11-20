@@ -5,7 +5,8 @@ import 'package:flutter/services.dart';
 enum AppFlavor {
   dev('development', 'DEV'),
   stg('staging', 'STG'),
-  prod('production', 'PROD');
+  prod('production', 'PROD')
+  ;
 
   const AppFlavor(this.identifier, this.label);
 
