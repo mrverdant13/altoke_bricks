@@ -22,7 +22,51 @@ void main() {
         final result = regexHook.beforeDecode(input);
         expect(
           result,
-          isA<RegExp>().having((r) => r.pattern, 'pattern', input),
+          isA<RegExp>().having(
+            (r) => r.pattern,
+            'pattern',
+            input,
+          ),
+        );
+      });
+
+      test('for Map<String, dynamic> input', () {
+        const input = {
+          'pattern': '.*',
+          'dotAll': true,
+          'multiLine': false,
+          'unicode': true,
+          'caseSensitive': false,
+        };
+        final result = regexHook.beforeDecode(input);
+        expect(
+          result,
+          isA<RegExp>()
+              .having(
+                (r) => r.pattern,
+                'pattern',
+                input['pattern'],
+              )
+              .having(
+                (r) => r.isDotAll,
+                'dotAll',
+                input['dotAll'],
+              )
+              .having(
+                (r) => r.isMultiLine,
+                'multiLine',
+                input['multiLine'],
+              )
+              .having(
+                (r) => r.isUnicode,
+                'unicode',
+                input['unicode'],
+              )
+              .having(
+                (r) => r.isCaseSensitive,
+                'caseSensitive',
+                input['caseSensitive'],
+              ),
         );
       });
 
@@ -31,7 +75,11 @@ void main() {
         final result = regexHook.beforeDecode(input);
         expect(
           result,
-          isA<RegExp>().having((r) => r.pattern, 'pattern', input.toString()),
+          isA<RegExp>().having(
+            (r) => r.pattern,
+            'pattern',
+            input.toString(),
+          ),
         );
       });
     });
