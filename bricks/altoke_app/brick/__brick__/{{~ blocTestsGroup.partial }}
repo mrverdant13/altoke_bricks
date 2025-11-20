@@ -1,0 +1,97 @@
+
+        testWidgets('displays $FlavorBanner', (tester) async {
+          
+          when(
+            () => appInitializationBloc.state,
+          ).thenReturn(
+            const AppInitializing(),
+          );
+          await tester.pumpWidget(
+            buildSubjectApp(),
+          );
+          expect(find.byType(FlavorBanner), findsOneWidget);
+        });
+
+        testWidgets(
+          'displays $InitializingScreen '
+          'when the initialization process is not completed',
+          (tester) async {
+            
+            when(
+              () => appInitializationBloc.state,
+            ).thenReturn(
+              const AppInitializing(),
+            );
+            await tester.pumpWidget(
+              buildSubjectApp(),
+            );
+            expect(find.byType(InitializingScreen), findsOneWidget);
+          },
+        );
+
+        testWidgets(
+          'displays the router content '
+          'when the initialization process is completed',
+          (tester) async {
+            
+            when(
+              () => appInitializationBloc.state,
+            ).thenReturn(
+              const
+              SuccessfulAppInitialization(
+                
+              ),
+            );
+            await tester.pumpWidget(
+              buildSubjectApp(),
+            );
+            await tester.pumpUntilFound(find.text('Fake Screen'));
+          },
+        );
+
+        testWidgets(
+          'displays $ErroredInitializationScreen '
+          'when the initialization process fails',
+          (tester) async {
+            
+            when(
+              () => appInitializationBloc.state,
+            ).thenReturn(
+              const
+              FailedAppInitialization(
+                
+              ),
+            );
+            await tester.pumpWidget(
+              buildSubjectApp(),
+            );
+            expect(find.byType(ErroredInitializationScreen), findsOneWidget);
+          },
+        );
+
+        testWidgets(
+          'allows requesting a new initialization process '
+          'when the initialization process fails',
+          (tester) async {
+            
+            when(
+              () => appInitializationBloc.state,
+            ).thenReturn(
+              const
+              FailedAppInitialization(
+                
+              ),
+            );
+            await tester.pumpWidget(
+              buildSubjectApp(),
+            );
+            expect(find.byType(ErroredInitializationScreen), findsOneWidget);
+            await tester.tap(find.byType(ElevatedButton));
+            verify(
+              () => appInitializationBloc.add(
+                const AppInitializationRequested(),
+              ),
+            ).called(1);
+          },
+        );
+        
