@@ -66,18 +66,9 @@ class DmSomeMapper extends ClassMapperBase<DmSome> {
     _$value,
     arg: _arg$value,
   );
-  static int _$hashCode(DmSome v) => v.hashCode;
-  static const Field<DmSome, int> _f$hashCode = Field(
-    'hashCode',
-    _$hashCode,
-    mode: FieldMode.member,
-  );
 
   @override
-  final MappableFields<DmSome> fields = const {
-    #value: _f$value,
-    #hashCode: _f$hashCode,
-  };
+  final MappableFields<DmSome> fields = const {#value: _f$value};
 
   static DmSome<T> _instantiate<T extends Object?>(DecodingData data) {
     return DmSome(data.dec(_f$value));
@@ -113,15 +104,8 @@ class DmNoneMapper extends ClassMapperBase<DmNone> {
   Function get typeFactory =>
       <T extends Object?>(f) => f<DmNone<T>>();
 
-  static int _$hashCode(DmNone v) => v.hashCode;
-  static const Field<DmNone, int> _f$hashCode = Field(
-    'hashCode',
-    _$hashCode,
-    mode: FieldMode.member,
-  );
-
   @override
-  final MappableFields<DmNone> fields = const {#hashCode: _f$hashCode};
+  final MappableFields<DmNone> fields = const {};
 
   static DmNone<T> _instantiate<T extends Object?>(DecodingData data) {
     return DmNone();

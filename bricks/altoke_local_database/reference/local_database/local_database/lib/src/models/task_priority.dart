@@ -7,7 +7,8 @@ enum TaskPriority {
   medium,
 
   /// A high task priority.
-  high;
+  high
+  ;
 
   const TaskPriority();
 }

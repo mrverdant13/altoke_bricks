@@ -144,7 +144,8 @@ class TasksRouteData extends GoRouteData with $TasksRouteData {
 
 enum RouterPackage {
   autoRoute('auto_route'),
-  goRouter('go_router');
+  goRouter('go_router')
+  ;
 
   const RouterPackage(this.identifier);
 
