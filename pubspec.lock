@@ -77,10 +77,10 @@ packages:
     dependency: transitive
     description:
       name: auto_route
-      sha256: "4916e0fe1cb782e315d0e1ebdd34170f1836a8f6e24cb528083671302b486ace"
+      sha256: "9303e105233e596c63a9b81560a10dc834ac602134ba95780f030dbbc520c855"
       url: "https://pub.dev"
     source: hosted
-    version: "10.2.2"
+    version: "10.2.3"
   auto_route_generator:
     dependency: transitive
     description:

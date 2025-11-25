@@ -14,7 +14,7 @@ dependencies:
     path: ../../../../../altoke_common/reference/common/
   #remove-end-x#
   #{{#use_auto_route}}x#
-  auto_route: ^10.2.2
+  auto_route: ^10.2.3
   #{{/use_auto_route}}#
   #x{{#use_bloc}}#
   bloc_concurrency: ^0.3.0
