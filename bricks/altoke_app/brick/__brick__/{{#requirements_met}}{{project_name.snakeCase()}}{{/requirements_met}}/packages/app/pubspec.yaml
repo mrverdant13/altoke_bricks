@@ -9,7 +9,7 @@ environment:
   flutter: ">=3.38.2 <4.0.0"
 
 dependencies:
-  {{#use_auto_route}}auto_route: ^10.2.2
+  {{#use_auto_route}}auto_route: ^10.2.3
   {{/use_auto_route}}
   {{#use_bloc}}
   bloc_concurrency: ^0.3.0
