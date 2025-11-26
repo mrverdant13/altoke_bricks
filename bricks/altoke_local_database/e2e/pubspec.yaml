@@ -9,7 +9,7 @@ dev_dependencies:
   checked_yaml: ^2.0.4
   local_database_alternative:
     path: ../../../tools/local_database_alternative
-  mason: ^0.1.1
+  mason: ^0.1.2
   meta: ^1.17.0
   mocktail: ^1.0.4
   monorepo_elements:
