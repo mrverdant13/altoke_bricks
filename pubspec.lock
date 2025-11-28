@@ -77,10 +77,10 @@ packages:
     dependency: transitive
     description:
       name: auto_route
-      sha256: "9303e105233e596c63a9b81560a10dc834ac602134ba95780f030dbbc520c855"
+      sha256: "6d3ccc11b520b6eff0ab5a2c3d1c43c46d1486249cc746c4bb14486d876e8b43"
       url: "https://pub.dev"
     source: hosted
-    version: "10.2.3"
+    version: "10.3.0"
   auto_route_generator:
     dependency: transitive
     description:
@@ -1252,4 +1252,4 @@ packages:
     version: "2.2.2"
 sdks:
   dart: ">=3.10.0 <4.0.0"
-  flutter: ">=3.38.2 <4.0.0"
+  flutter: ">=3.38.2"
