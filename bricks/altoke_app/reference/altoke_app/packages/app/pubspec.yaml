@@ -57,7 +57,7 @@ dependencies:
 
 dev_dependencies:
   #{{#use_auto_route}}x#
-  auto_route_generator: ^10.2.6
+  auto_route_generator: ^10.3.0
   #{{/use_auto_route}}x#
   #x{{#use_bloc}}#
   bloc_test: ^10.0.0
