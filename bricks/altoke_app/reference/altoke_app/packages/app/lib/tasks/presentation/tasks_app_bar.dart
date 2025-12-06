@@ -2,8 +2,14 @@ import 'package:altoke_app/external/external.dart';
 import 'package:altoke_app/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
 // coverage:ignore-start
+/*remove-start*/
+@Dependencies([
+  SelectedLocalDatabasePackage,
+])
+/*remove-end-x*/
 class TasksAppBar extends AppBar {
   TasksAppBar({super.key})
     : super(
@@ -12,6 +18,11 @@ class TasksAppBar extends AppBar {
       );
 }
 
+/*remove-start*/
+@Dependencies([
+  SelectedLocalDatabasePackage,
+])
+/*remove-end-x*/
 @visibleForTesting
 class TasksAppBarTitle extends ConsumerWidget {
   const TasksAppBarTitle({super.key});
@@ -28,6 +39,11 @@ class TasksAppBarTitle extends ConsumerWidget {
   }
 }
 
+/*remove-start*/
+@Dependencies([
+  SelectedLocalDatabasePackage,
+])
+/*remove-end-x*/
 @visibleForTesting
 class SwitchDbPackageAction extends ConsumerWidget {
   const SwitchDbPackageAction({super.key});

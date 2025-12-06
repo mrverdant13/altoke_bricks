@@ -2,8 +2,13 @@ import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/tasks/tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
 // coverage:ignore-start
+@Dependencies([
+  asyncTasks,
+  localTasksDao,
+])
 class TasksList extends ConsumerWidget {
   const TasksList({super.key});
 
@@ -18,6 +23,10 @@ class TasksList extends ConsumerWidget {
   }
 }
 
+@Dependencies([
+  asyncTasks,
+  localTasksDao,
+])
 @visibleForTesting
 class LoadedTasksList extends ConsumerWidget {
   const LoadedTasksList({super.key});
@@ -35,7 +44,7 @@ class LoadedTasksList extends ConsumerWidget {
             child: Text(
               l10n.noTasksFoundMessage,
               key: const Key(
-                '''<tasks::loaded-tasks-list::no-tasks-found-message>''',
+                '''<tasks::tasks-list::loaded-tasks-list::no-tasks-found-message>''',
               ),
             ),
           );
@@ -46,12 +55,20 @@ class LoadedTasksList extends ConsumerWidget {
       itemCount: tasks.length,
       itemBuilder: (context, index) {
         final task = tasks.elementAt(index);
-        return TaskListTile(task: task);
+        return TaskListTile(
+          key: ValueKey(
+            '''<tasks::tasks-list::loaded-tasks-list::task-list-tile::task-id:${task.id}-idx:$index>''',
+          ),
+          task: task,
+        );
       },
     );
   }
 }
 
+@Dependencies([
+  asyncTasks,
+])
 @visibleForTesting
 class FailedTasks extends ConsumerWidget {
   const FailedTasks({super.key});

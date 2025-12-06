@@ -39,6 +39,37 @@
     {
       "from": "An Altoke App.",
       "to": "{{project_description}}"
+    },
+    {
+      "from": {
+        "pattern": "@Dependencies\\(\\[(.*?)\\]\\)",
+        "dotAll": true
+      },
+      "to": "{{#use_riverpod}}@Dependencies([${1}]){{/use_riverpod}}"
+    },
+    {
+      "from": ", WidgetRef ref",
+      "to": "{{#use_riverpod}}, WidgetRef ref{{/use_riverpod}}"
+    },
+    {
+      "from": "ConsumerWidget",
+      "to": "{{#use_riverpod}}ConsumerWidget{{/use_riverpod}}{{^use_riverpod}}StatelessWidget{{/use_riverpod}}"
+    },
+    {
+      "from": "([a-zA-Z0-9_]+)_pod(s)?(_test)?\\.dart",
+      "to": "{{#use_riverpod}}${1}_pod${2}${3}.dart{{/use_riverpod}}"
+    },
+    {
+      "from": "provider_observer.dart",
+      "to": "{{#use_riverpod}}provider_observer.dart{{/use_riverpod}}"
+    },
+    {
+      "from": "([a-zA-Z0-9_]+)_(bloc|state|event)(_test)?\\.dart",
+      "to": "{{#use_bloc}}${1}_${2}${3}.dart{{/use_bloc}}"
+    },
+    {
+      "from": "bloc_observer.dart",
+      "to": "{{#use_bloc}}bloc_observer.dart{{/use_bloc}}"
     }
   ],
   "lineDeletions": [

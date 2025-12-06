@@ -30,3 +30,11 @@ vars:
     description: The package to use for routing.
     default: auto_route
     prompt: What router to use?
+  state_management_package:
+    type: enum
+    values:
+      - "`bloc`"
+      - "`riverpod`"
+    description: The package to use for state management.
+    default: bloc
+    prompt: What state management to use?

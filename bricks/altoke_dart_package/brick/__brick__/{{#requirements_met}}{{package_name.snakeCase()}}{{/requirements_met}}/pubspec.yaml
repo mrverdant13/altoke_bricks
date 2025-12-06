@@ -4,9 +4,9 @@ version: 0.0.1+1
 publish_to: none
 
 environment:
-  sdk: ">=3.8.1 <4.0.0"
+  sdk: ">=3.10.0 <4.0.0"
 
 dev_dependencies:
-  {{#use_code_generation}}build_runner: ^2.5.4
-  {{/use_code_generation}}test: ^1.25.15
-  very_good_analysis: ^9.0.0
+  {{#use_code_generation}}build_runner: ^2.10.4
+  {{/use_code_generation}}test: ^1.26.3
+  very_good_analysis: ^10.0.0

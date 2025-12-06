@@ -53,7 +53,7 @@ GIVEN a $LocalTasksDriftDao
       });
 
       tearDown(() {
-        database.close();
+        unawaited(database.close());
       });
 
       test(

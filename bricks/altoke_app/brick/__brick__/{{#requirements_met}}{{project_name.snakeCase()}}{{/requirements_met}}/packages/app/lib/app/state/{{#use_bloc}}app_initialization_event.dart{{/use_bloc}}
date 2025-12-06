@@ -1,0 +1,11 @@
+part of '{{#use_bloc}}app_initialization_bloc.dart{{/use_bloc}}';
+
+sealed class AppInitializationEvent {
+  const AppInitializationEvent();
+}
+
+@MappableClass()
+final class AppInitializationRequested extends AppInitializationEvent
+    with AppInitializationRequestedMappable {
+  const AppInitializationRequested();
+}

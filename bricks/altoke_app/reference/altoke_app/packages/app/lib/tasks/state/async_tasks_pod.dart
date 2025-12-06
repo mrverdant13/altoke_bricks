@@ -1,69 +1,68 @@
 import 'package:altoke_app/tasks/tasks.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/experimental/mutation.dart';
 import 'package:local_database/local_database.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'async_tasks_pod.g.dart';
 
 // coverage:ignore-start
-@Riverpod(dependencies: [localTasksDao])
+@Riverpod(
+  dependencies: [
+    localTasksDao,
+  ],
+)
 Stream<Iterable<Task>> asyncTasks(Ref ref) {
   return ref.watch(localTasksDaoPod).watchAll();
 }
 
-@Riverpod(dependencies: [localTasksDao])
-class CreateTaskMutation extends _$CreateTaskMutation {
-  @override
-  Future<NewTask?> build() async => Future.value();
+final createTaskMutation = Mutation<Task>(
+  label: 'createTaskMutation',
+);
 
-  Future<void> createTask(NewTask newTask) async {
-    if (state is AsyncLoading) return;
-    state = const AsyncLoading<NewTask?>().copyWithPrevious(AsyncData(newTask));
-    state = await AsyncValue.guard(() async {
-      await ref.read(localTasksDaoPod).createOne(newTask);
-      return newTask;
-    });
-    state = const AsyncData(null);
-  }
+@Dependencies([
+  localTasksDao,
+])
+Future<void> createTask(MutationTarget target, NewTask newTask) async {
+  await createTaskMutation.run(target, (tsx) async {
+    final localTasksDao = tsx.get(localTasksDaoPod);
+    final task = await localTasksDao.createOne(newTask);
+    return task;
+  });
 }
 
-@Riverpod(dependencies: [localTasksDao])
-class UpdateTaskMutation extends _$UpdateTaskMutation {
-  @override
-  Future<(int, PartialTask)?> build() async => Future.value();
+final updateTaskMutation = Mutation<(int, PartialTask)>(
+  label: 'updateTaskMutation',
+);
 
-  Future<void> updateTask({
-    required int taskId,
-    required PartialTask task,
-  }) async {
-    if (state is AsyncLoading) return;
-    state = const AsyncLoading<(int, PartialTask)>().copyWithPrevious(
-      AsyncData((taskId, task)),
-    );
-    state = await AsyncValue.guard(() async {
-      await ref
-          .read(localTasksDaoPod)
-          .updateOneById(taskId: taskId, task: task);
-      return (taskId, task);
-    });
-    state = const AsyncData(null);
-  }
+@Dependencies([
+  localTasksDao,
+])
+Future<void> updateTask(
+  MutationTarget target, {
+  required int taskId,
+  required PartialTask task,
+}) async {
+  await updateTaskMutation.run(target, (tsx) async {
+    final localTasksDao = tsx.get(localTasksDaoPod);
+    await localTasksDao.updateOneById(taskId: taskId, task: task);
+    return (taskId, task);
+  });
 }
 
-@Riverpod(dependencies: [localTasksDao])
-class DeleteTaskByIdMutation extends _$DeleteTaskByIdMutation {
-  @override
-  Future<int?> build() async => Future.value();
+final deleteTaskByIdMutation = Mutation<int>(
+  label: 'deleteTaskByIdMutation',
+);
 
-  Future<void> deleteTaskById(int taskId) async {
-    if (state is AsyncLoading) return;
-    state = const AsyncLoading<int>().copyWithPrevious(AsyncData(taskId));
-    state = await AsyncValue.guard(() async {
-      await ref.read(localTasksDaoPod).deleteOneById(taskId);
-      return taskId;
-    });
-    state = const AsyncData(null);
-  }
+@Dependencies([
+  localTasksDao,
+])
+Future<void> deleteTaskById(MutationTarget target, int taskId) async {
+  await deleteTaskByIdMutation.run(target, (tsx) async {
+    final localTasksDao = tsx.get(localTasksDaoPod);
+    await localTasksDao.deleteOneById(taskId);
+    return taskId;
+  });
 }
 
 // coverage:ignore-end

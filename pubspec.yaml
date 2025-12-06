@@ -2,11 +2,11 @@ name: altoke_bricks_monorepo
 repository: https://github.com/mrverdant13/altoke_bricks
 
 environment:
-  sdk: ">=3.8.1 <4.0.0"
+  sdk: ">=3.10.0 <4.0.0"
 
 dev_dependencies:
-  melos: ^7.0.0-dev.9
-  very_good_analysis: ^9.0.0
+  melos: ^7.3.0
+  very_good_analysis: ^10.0.0
 
 melos:
   categories:
@@ -25,32 +25,45 @@ melos:
   command:
     bootstrap:
       environment:
-        sdk: ">=3.8.1 <4.0.0"
-        flutter: ">=3.32.7 <4.0.0"
+        sdk: ">=3.10.0 <4.0.0"
+        flutter: ">=3.38.2 <4.0.0"
       dependencies:
         collection: ^1.19.1
         intl: ^0.20.2
-        mason: ^0.1.1
-        meta: ^1.16.0
+        mason: ^0.1.2
+        meta: ^1.17.0
         path: ^1.9.1
       dev_dependencies:
-        build_runner: ^2.5.4
+        build_runner: ^2.10.4
         collection: ^1.19.1
-        mason: ^0.1.1
-        melos: ^7.0.0-dev.9
-        meta: ^1.16.0
+        mason: ^0.1.2
+        melos: ^7.3.0
+        meta: ^1.17.0
         mocktail: ^1.0.4
         path: ^1.9.1
-        test: ^1.25.15
-        very_good_analysis: ^9.0.0
+        test: ^1.26.3
+        very_good_analysis: ^10.0.0
+      hooks:
+        pre:
+          run: melos run --include-private .bootstrap
     clean:
       hooks:
         pre:
-          run: melos run clean
+          run: melos run --include-private .clean
 
   scripts:
+    .bootstrap:
+      private: true
+      # HACK: Workaround to avoid workspace bug
+      # https://github.com/flutter/flutter/issues/174205
+      run: >
+        cd MELOS_ROOT_PATH/bricks/altoke_app/reference/altoke_app/packages/app/
+        &&
+        flutter pub get
+
     # Clean-up
-    clean:
+    .clean:
+      private: true
       description: Deep clean-up
       # Preserves FVM internal folder to avoid re-installing the Flutter SDK when developing locally.
       # Preserves platform-specific folders to keep them for local development.
@@ -144,7 +157,7 @@ melos:
       run: >
         dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random --color
         &&
-        format_coverage --lcov --in=./coverage/ --out=./coverage/lcov.info --report-on=lib -c -b 'MELOS_PACKAGE_PATH'
+        format_coverage --lcov --in=./coverage/ --out=./coverage/lcov.info --report-on=lib --check-ignore -b 'MELOS_PACKAGE_PATH'
       packageFilters:
         flutter: false
         dirExists:
@@ -190,7 +203,7 @@ melos:
     test.ci:
       description: Test all packages (CI)
       run: >
-        melos exec --order-dependents --fail-fast --no-flutter --dir-exists="test" --depends-on=test -- "dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random && format_coverage --lcov --in=./coverage/ --out=./coverage/lcov.info --report-on=lib -c -b 'MELOS_PACKAGE_PATH'"
+        melos exec --order-dependents --fail-fast --no-flutter --dir-exists="test" --depends-on=test -- "dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random && format_coverage --lcov --in=./coverage/ --out=./coverage/lcov.info --report-on=lib --check-ignore -b 'MELOS_PACKAGE_PATH'"
         &&
         melos exec --order-dependents --fail-fast --flutter --dir-exists="test" --depends-on=flutter_test -- "flutter test -x ci-only --coverage -r expanded --test-randomize-ordering-seed random"
     coverage.merge:
@@ -225,6 +238,11 @@ melos:
       steps:
         - docs.root
         - docs.brick
+
+    # Misc
+    issues:
+      description: List referenced issues
+      run: dart run MELOS_ROOT_PATH/tools/referenced_issues_finder/lib/main.dart
 
     # Brick management
     brick.gen:
@@ -281,10 +299,6 @@ workspace:
   - bricks/altoke_entities/brick/hooks
   - bricks/altoke_entities/e2e
   - bricks/altoke_entities/reference/altoke_entities
-  - bricks/altoke_entity
-  - bricks/altoke_entity/brick/hooks
-  - bricks/altoke_entity/e2e
-  - bricks/altoke_entity/reference/altoke_entity
   - bricks/altoke_local_database
   - bricks/altoke_local_database/brick/hooks
   - bricks/altoke_local_database/e2e
@@ -304,6 +318,8 @@ workspace:
   - tools/monorepo_elements
   - tools/pubspec_deps_sorter
   - tools/readmes_resolver
+  - tools/referenced_issues_finder
   - tools/router_package
   - tools/shell
+  - tools/state_management_package
   - tools/value_equality_approach

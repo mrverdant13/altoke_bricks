@@ -3,16 +3,16 @@ publish_to: none
 resolution: workspace
 
 environment:
-  sdk: ">=3.8.1 <4.0.0"
+  sdk: ">=3.10.0 <4.0.0"
 
 dependencies:
-  mason: ^0.1.1
+  mason: ^0.1.2
   path: ^1.9.1
   shell:
     git:
       url: https://github.com/mrverdant13/altoke_bricks.git
-      ref: 575389c0d0d0752834361c4b4be6888ef4e32f83
+      ref: 66da4935d7f254b9d02693cae5cd706575003958
       path: ./tools/shell/
 
 dev_dependencies:
-  very_good_analysis: ^9.0.0
+  very_good_analysis: ^10.0.0

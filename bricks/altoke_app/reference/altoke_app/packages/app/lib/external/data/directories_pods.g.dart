@@ -6,44 +6,85 @@ part of 'directories_pods.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(asyncApplicationDocumentsDirectory)
+const asyncApplicationDocumentsDirectoryPod =
+    AsyncApplicationDocumentsDirectoryProvider._();
+
+final class AsyncApplicationDocumentsDirectoryProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<Directory>,
+          Directory,
+          FutureOr<Directory>
+        >
+    with $FutureModifier<Directory>, $FutureProvider<Directory> {
+  const AsyncApplicationDocumentsDirectoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'asyncApplicationDocumentsDirectoryPod',
+        isAutoDispose: true,
+        dependencies: const <ProviderOrFamily>[],
+        $allTransitiveDependencies: const <ProviderOrFamily>[],
+      );
+
+  @override
+  String debugGetCreateSourceHash() =>
+      _$asyncApplicationDocumentsDirectoryHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<Directory> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<Directory> create(Ref ref) {
+    return asyncApplicationDocumentsDirectory(ref);
+  }
+}
+
 String _$asyncApplicationDocumentsDirectoryHash() =>
     r'8388d657a90c1871ddc558f0c0dacd50065a0f8f';
 
-/// See also [asyncApplicationDocumentsDirectory].
-@ProviderFor(asyncApplicationDocumentsDirectory)
-final asyncApplicationDocumentsDirectoryPod =
-    AutoDisposeFutureProvider<Directory>.internal(
-      asyncApplicationDocumentsDirectory,
-      name: r'asyncApplicationDocumentsDirectoryPod',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$asyncApplicationDocumentsDirectoryHash,
-      dependencies: const <ProviderOrFamily>[],
-      allTransitiveDependencies: const <ProviderOrFamily>{},
-    );
+@ProviderFor(asyncTemporaryDirectory)
+const asyncTemporaryDirectoryPod = AsyncTemporaryDirectoryProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef AsyncApplicationDocumentsDirectoryRef =
-    AutoDisposeFutureProviderRef<Directory>;
+final class AsyncTemporaryDirectoryProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<Directory>,
+          Directory,
+          FutureOr<Directory>
+        >
+    with $FutureModifier<Directory>, $FutureProvider<Directory> {
+  const AsyncTemporaryDirectoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'asyncTemporaryDirectoryPod',
+        isAutoDispose: true,
+        dependencies: const <ProviderOrFamily>[],
+        $allTransitiveDependencies: const <ProviderOrFamily>[],
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$asyncTemporaryDirectoryHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<Directory> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<Directory> create(Ref ref) {
+    return asyncTemporaryDirectory(ref);
+  }
+}
+
 String _$asyncTemporaryDirectoryHash() =>
     r'c382a38a3426e6356a4ee2dd8485aff5bc5875a0';
-
-/// See also [asyncTemporaryDirectory].
-@ProviderFor(asyncTemporaryDirectory)
-final asyncTemporaryDirectoryPod =
-    AutoDisposeFutureProvider<Directory>.internal(
-      asyncTemporaryDirectory,
-      name: r'asyncTemporaryDirectoryPod',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$asyncTemporaryDirectoryHash,
-      dependencies: const <ProviderOrFamily>[],
-      allTransitiveDependencies: const <ProviderOrFamily>{},
-    );
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef AsyncTemporaryDirectoryRef = AutoDisposeFutureProviderRef<Directory>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

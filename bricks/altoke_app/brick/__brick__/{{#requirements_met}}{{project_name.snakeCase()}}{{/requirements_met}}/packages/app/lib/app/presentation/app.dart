@@ -3,14 +3,26 @@ import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/l10n/l10n.dart';
 import 'package:{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}/routing/routing.dart';
 import 'package:flutter/material.dart';
+{{#use_bloc}}
+import 'package:flutter_bloc/{{#use_bloc}}flutter_bloc.dart{{/use_bloc}}';
+{{/use_bloc}}
+{{#use_riverpod}}
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';{{/use_riverpod}}
 
-class MyApp extends ConsumerWidget {
-  const MyApp({super.key});
+{{#use_riverpod}}@Dependencies([
+  asyncInitialization,
+]){{/use_riverpod}}
+class MyApp extends {{#use_riverpod}}ConsumerWidget{{/use_riverpod}}{{^use_riverpod}}StatelessWidget{{/use_riverpod}} {
+  const MyApp({
+    required this.routerConfig,
+    super.key,
+  });
+
+  final RouterConfig<Object> routerConfig;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final routerConfig = ref.watch(routerConfigPod);
+  Widget build(BuildContext context{{#use_riverpod}}, WidgetRef ref{{/use_riverpod}}) {
     return MaterialApp.router(
       onGenerateTitle: (context) => context.l10n.appTitle,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -27,23 +39,41 @@ class MyApp extends ConsumerWidget {
   }
 }
 
+{{#use_riverpod}}@Dependencies([
+  asyncInitialization,
+]){{/use_riverpod}}
 @visibleForTesting
-class InitializationWrapper extends ConsumerWidget {
+class InitializationWrapper extends {{#use_riverpod}}ConsumerWidget{{/use_riverpod}}{{^use_riverpod}}StatelessWidget{{/use_riverpod}} {
   const InitializationWrapper({required this.child, super.key});
 
   final Widget child;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final asyncInitialization = ref.watch(asyncInitializationPod);
-    return asyncInitialization.when(
-      skipError: false,
-      skipLoadingOnRefresh: false,
-      skipLoadingOnReload: false,
-      loading: InitializingScreen.new,
-      data: (_) => child,
-      error: (_, _) => const ErroredInitializationScreen(),
-    );
+  Widget build(BuildContext context{{#use_riverpod}}, WidgetRef ref{{/use_riverpod}}) {
+    
+        {{#use_bloc}}
+        final appInitializationState = context
+            .watch<AppInitializationBloc>()
+            .state;
+        return switch (appInitializationState) {
+          AppUninitialized() || AppInitializing() => const InitializingScreen(),
+          SuccessfulAppInitialization() => child,
+          FailedAppInitialization() => const ErroredInitializationScreen(),
+        }; {{/use_bloc}}
+      
+        {{#use_riverpod}}
+        final asyncInitialization = ref.watch(asyncInitializationPod);
+        return asyncInitialization.when(
+          skipError: false,
+          skipLoadingOnRefresh: false,
+          skipLoadingOnReload: false,
+          loading: InitializingScreen.new,
+          data: (_) => child,
+          // coverage:ignore-start
+          error: (_, _) => const ErroredInitializationScreen(),
+          // coverage:ignore-end
+        ); {{/use_riverpod}}
+      
   }
 }
 
@@ -59,12 +89,16 @@ class InitializingScreen extends StatelessWidget {
   }
 }
 
+{{#use_riverpod}}@Dependencies([
+  asyncInitialization,
+]){{/use_riverpod}}
 @visibleForTesting
-class ErroredInitializationScreen extends ConsumerWidget {
+class ErroredInitializationScreen extends {{#use_riverpod}}ConsumerWidget{{/use_riverpod}}{{^use_riverpod}}StatelessWidget{{/use_riverpod}} {
   const ErroredInitializationScreen({super.key});
 
+  // coverage:ignore-start
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context{{#use_riverpod}}, WidgetRef ref{{/use_riverpod}}) {
     final l10n = context.l10n;
     return Scaffold(
       body: Padding(
@@ -81,7 +115,17 @@ class ErroredInitializationScreen extends ConsumerWidget {
               const SizedBox.square(dimension: 16),
               ElevatedButton(
                 onPressed: () {
-                  ref.invalidate(asyncInitializationPod);
+                  
+                      {{#use_bloc}}
+                      context.read<AppInitializationBloc>().add(
+                        const AppInitializationRequested(),
+                      );
+                    {{/use_bloc}}
+                    
+                      {{#use_riverpod}}
+                      ref.invalidate(asyncInitializationPod);
+                    {{/use_riverpod}}
+                    
                 },
                 child: Text(l10n.genericRetryButtonLabel),
               ),
@@ -91,4 +135,6 @@ class ErroredInitializationScreen extends ConsumerWidget {
       ),
     );
   }
+
+  // coverage:ignore-end
 }

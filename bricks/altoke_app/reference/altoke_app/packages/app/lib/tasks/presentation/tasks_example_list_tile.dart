@@ -1,9 +1,20 @@
+import 'package:altoke_app/external/external.dart';
 import 'package:altoke_app/l10n/l10n.dart';
 import 'package:altoke_app/routing/routing.dart';
+import 'package:altoke_app/tasks/tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
 
 // coverage:ignore-start
+/*remove-start*/
+@Dependencies([
+  SelectedRouterPackage,
+  SelectedLocalDatabasePackage,
+  asyncTasks,
+  localTasksDao,
+])
+/*remove-end-x*/
 class TasksExampleListTile extends ConsumerWidget {
   const TasksExampleListTile({super.key});
 
@@ -12,14 +23,14 @@ class TasksExampleListTile extends ConsumerWidget {
     final l10n = context.l10n;
     return ListTile(
       title: Text(l10n.tasksExampleListTileTitle),
-      onTap: () {
+      onTap: () async {
         /*w 1v w*/
         /*remove-start*/
         switch (ref.read(selectedRouterPackagePod)) {
           case RouterPackage.autoRoute:
             /*remove-end*/
             /*{{#use_auto_route}}*/
-            const TasksRoute().navigate(context);
+            await const TasksRoute().navigate(context);
           /*{{/use_auto_route}}*/
           /*remove-start*/
           case RouterPackage.goRouter:

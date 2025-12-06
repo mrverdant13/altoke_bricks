@@ -34,7 +34,8 @@
     "editor.quickSuggestions": {
       "other": true,
       "comments": false,
-      "strings": true
-    }
-  }
+      "strings": true,
+    },
+  },
+  "dart.flutterSdkPath": ".fvm/versions/3.38.2",
 }

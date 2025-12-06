@@ -1,5 +1,7 @@
+/*remove-start*/
 import 'dart:io';
 
+/*remove-end-x*/
 import 'package:altoke_app/app/app.dart';
 /*remove-start*/
 import 'package:altoke_app/external/external.dart';
@@ -7,12 +9,22 @@ import 'package:drift_local_database/drift_local_database.dart';
 /*remove-end-x*/
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 /*x-remove-start*/
 
 import '../../helpers/helpers.dart';
 /*remove-end*/
 
+@Dependencies([
+  asyncInitialization,
+  /*x-remove-start*/
+  asyncApplicationDocumentsDirectory,
+  asyncDriftLocalDatabase,
+  asyncHiveInitialization,
+  /*remove-end*/
+])
 void main() {
   test(
     '''

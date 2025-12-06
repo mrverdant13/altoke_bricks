@@ -8,8 +8,8 @@ abstract class Shell {
     required Directory source,
     required Directory destination,
     Stdin? stdin,
-    Stdout? stdout,
-    Stdout? stderr,
+    StreamSink<List<int>>? stdout,
+    StreamSink<List<int>>? stderr,
     AsyncVoidCallback? onStart,
     AsyncVoidCallback? onSuccess,
     AsyncVoidHandlerCallback<ExceptionDetails>? onError,
@@ -42,8 +42,8 @@ abstract class Shell {
   static Future<void> removeDirectory(
     Directory directory, {
     Stdin? stdin,
-    Stdout? stdout,
-    Stdout? stderr,
+    StreamSink<List<int>>? stdout,
+    StreamSink<List<int>>? stderr,
     AsyncVoidCallback? onStart,
     AsyncVoidCallback? onSuccess,
     AsyncVoidHandlerCallback<ExceptionDetails>? onError,
@@ -73,8 +73,8 @@ abstract class Shell {
     String fullCommand, {
     String? workingDir,
     Stdin? stdin,
-    Stdout? stdout,
-    Stdout? stderr,
+    StreamSink<List<int>>? stdout,
+    StreamSink<List<int>>? stderr,
     AsyncVoidCallback? onStart,
     AsyncVoidCallback? onSuccess,
     AsyncVoidHandlerCallback<ExceptionDetails>? onError,
@@ -93,19 +93,21 @@ abstract class Shell {
     await onStart?.call();
     try {
       final outBuf = StringBuffer()..writeln();
+      final processStdout = process.stdout.asBroadcastStream();
+      final processStderr = process.stderr.asBroadcastStream();
       final [int exitCode, ...] = await [
         process.exitCode,
-        process.stdout.forEach((raw) {
+        processStdout.forEach((raw) {
           final record = String.fromCharCodes(raw);
           outBuf.write('\x1B[34m$record\x1B[0m');
         }),
-        process.stderr.forEach((raw) {
+        processStderr.forEach((raw) {
           final record = String.fromCharCodes(raw);
           outBuf.write('\x1B[31m$record\x1B[0m');
         }),
         if (stdin != null) process.stdin.addStream(stdin),
-        if (stdout != null) stdout.addStream(process.stdout),
-        if (stderr != null) stderr.addStream(process.stderr),
+        if (stdout != null) stdout.addStream(processStdout),
+        if (stderr != null) stderr.addStream(processStderr),
       ].wait;
       if (exitCode != 0) {
         throw ProcessException(

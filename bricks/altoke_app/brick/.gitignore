@@ -2,6 +2,7 @@
 /**/__brick__/**/*.g.dart
 /**/__brick__/**/*.gr.dart
 /**/__brick__/**/*.lock
+/**/__brick__/**/*.mapper.dart
 /**/__brick__/**/app_localizations*.dart
 /**/__brick__/**/external/**
 /**/__brick__/**/test/helpers/fakes/selected_router_package.dart

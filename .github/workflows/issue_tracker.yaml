@@ -1,0 +1,83 @@
+name: issue_tracker
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    # Runs all mondays at 00:00
+    - cron: "0 0 * * 1"
+
+jobs:
+  identify-referenced-issues:
+    name: Identify referenced issues
+    runs-on: ubuntu-latest
+    outputs:
+      issues: ${{ steps.identify-referenced-issues.outputs.issues }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.38.2
+      - name: Install melos
+        run: dart pub global activate melos 7.1.0
+      - name: Initialize issues finder
+        run: melos bootstrap --scope=referenced_issues_finder
+      - name: Identify referenced issues
+        id: identify-referenced-issues
+        run: echo "issues=$(melos run issues | sed -n '/^\[/,$p' | tr -d '\n')" >> "$GITHUB_OUTPUT"
+  report-closed-issues:
+    name: Report closed issues
+    runs-on: ubuntu-latest
+    needs: identify-referenced-issues
+    permissions:
+      issues: write
+    strategy:
+      matrix:
+        issue: ${{fromJson(needs.identify-referenced-issues.outputs.issues)}}
+    steps:
+      - name: Check whether the issue has been closed
+        id: check-issue-closed
+        run: |
+          closed=$(gh --repo ${{ matrix.issue.owner }}/${{ matrix.issue.repo }} issue view ${{ matrix.issue.number }} --json closed | jq -r '.closed')
+          echo "Issue closed status: $closed"
+          echo "issue_closed=$closed" >> "$GITHUB_OUTPUT"
+      - name: Prepare report data
+        id: prepare-report-data
+        if: ${{ steps.check-issue-closed.outputs.issue_closed == 'true' }}
+        shell: bash
+        run: |
+          repo_id="${{matrix.issue.owner}}/${{matrix.issue.repo}}"
+          issue_number=${{matrix.issue.number}}
+          issue_id="$repo_id#$issue_number"
+          issue_url="https://github.com/$repo_id/issues/$issue_number"
+          report_title="chore: evaluate implications of $issue_id"
+          echo "issue-id=$issue_id" >> "$GITHUB_OUTPUT"
+          echo "issue-url=$issue_url" >> "$GITHUB_OUTPUT"
+          echo "report-title=$report_title" >> "$GITHUB_OUTPUT"
+      - name: Create report for closed issues
+        run: |
+          issue_number=$(\
+            gh issue list \
+              --search "${{ env.TITLE }}" \
+              --json number \
+              --jq '.[0].number // empty'\
+            )
+          if [[ -n $issue_number ]]; then
+            exit 0
+          fi
+          gh issue create \
+            --title "${{ env.TITLE }}" \
+            --body "${{ env.BODY }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          TITLE: ${{ steps.prepare-report-data.outputs.report-title }}
+          BODY: |
+            ## Details
+
+            This project references the issue [${{ steps.prepare-report-data.outputs.issue-id }}](${{ steps.prepare-report-data.outputs.issue-url }}).
+
+            Now that the referenced issue has been closed, we need to evaluate if there are any implications.
+          PINNED: false
+          CLOSE_PREVIOUS: false

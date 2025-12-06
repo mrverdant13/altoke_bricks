@@ -1,8 +1,23 @@
+/*remove-start*/
+import 'package:altoke_app/app/app.dart';
+/*remove-end*/
 import 'package:altoke_app/counter/counter.dart';
 import 'package:altoke_app/l10n/l10n.dart';
 import 'package:flutter/material.dart';
+/*{{#use_bloc}}*/
+import 'package:flutter_bloc/flutter_bloc.dart';
+/*{{/use_bloc}}*/
+/*{{#use_riverpod}}*/
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/experimental/scope.dart';
+/*{{/use_riverpod}}*/
 
+@Dependencies([
+  Counter,
+  /*remove-start*/
+  SelectedStateManagementPackage,
+  /*remove-end*/
+])
 class CounterBody extends StatelessWidget {
   const CounterBody({super.key});
 
@@ -23,6 +38,12 @@ class CounterBody extends StatelessWidget {
 }
 
 @visibleForTesting
+@Dependencies([
+  Counter,
+  /*remove-start*/
+  SelectedStateManagementPackage,
+  /*remove-end*/
+])
 class PushCountMessage extends ConsumerWidget {
   const PushCountMessage({super.key});
 
@@ -30,7 +51,27 @@ class PushCountMessage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = Theme.of(context).textTheme;
     final l10n = context.l10n;
-    final message = l10n.counterPushTimesMessage(ref.watch(counterPod));
+    final count = /*remove-start*/ () {
+      switch (ref.watch(
+        selectedStateManagementPackagePod,
+      )) {
+        case StateManagementPackage.bloc:
+          return
+          /*remove-end*/
+          /*{{#use_bloc}}*/
+          context.watch<CounterBloc>().state;
+        /*{{/use_bloc}}*/
+        /*remove-start*/
+        case StateManagementPackage.riverpod:
+          return
+          /*remove-end*/
+          /*{{#use_riverpod}}*/
+          ref.watch(counterPod);
+        /*{{/use_riverpod}}*/
+        /*remove-start*/
+      }
+    }(); /*remove-end*/
+    final message = l10n.counterPushTimesMessage(count);
     return LayoutBuilder(
       builder: (context, constraints) {
         final width = constraints.maxWidth;
@@ -49,6 +90,12 @@ class PushCountMessage extends ConsumerWidget {
   }
 }
 
+@Dependencies([
+  Counter,
+  /*remove-start*/
+  SelectedStateManagementPackage,
+  /*remove-end*/
+])
 @visibleForTesting
 class PushCountValue extends ConsumerWidget {
   const PushCountValue({super.key});
@@ -56,6 +103,26 @@ class PushCountValue extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = Theme.of(context).textTheme;
+    final count = /*remove-start*/ () {
+      switch (ref.watch(
+        selectedStateManagementPackagePod,
+      )) {
+        case StateManagementPackage.bloc:
+          return
+          /*remove-end*/
+          /*{{#use_bloc}}*/
+          context.watch<CounterBloc>().state;
+        /*{{/use_bloc}}*/
+        /*remove-start*/
+        case StateManagementPackage.riverpod:
+          return
+          /*remove-end*/
+          /*{{#use_riverpod}}*/
+          ref.watch(counterPod);
+        /*{{/use_riverpod}}*/
+        /*remove-start*/
+      }
+    }(); /*remove-end*/
     return LayoutBuilder(
       builder: (context, constraints) {
         final width = constraints.maxWidth;
@@ -67,7 +134,7 @@ class PushCountValue extends ConsumerWidget {
           duration: CounterBody.textStyleChangeDuration,
           style: textTheme.titleMedium!.copyWith(fontSize: fontSize),
           textAlign: TextAlign.center,
-          child: Text('${ref.watch(counterPod)}'),
+          child: Text('$count'),
         );
       },
     );

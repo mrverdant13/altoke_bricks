@@ -82,7 +82,9 @@ Create a [Flutter][link_docs_flutter] app, **_al toque_** (_quickly_).
   VSCode integration with the [ARB Editor extension][link_docs_vsc_arb_editor].
 
 - **State management:**\
-  Supported with [`flutter_riverpod`][link_pub_package_flutter_riverpod].
+  Supported with one of the following packages:
+  - [`flutter_bloc`][link_pub_package_flutter_bloc]
+  - [`flutter_riverpod`][link_pub_package_flutter_riverpod]
 
 - **Strict lint rules:**\
   Enforced by:
@@ -145,25 +147,6 @@ Create a package to hold app entities, **_al toque_** (_quickly_).
 - **Testing:**\
   Tests with 100% coverage.
 
-### 🧱 Altoke Entity
-
-Create an entity, **_al toque_** (_quickly_).
-
-#### Features
-
-- **Value equality:**\
-  Supported with one of the following approaches:
-    - [`dart_mappable`][pub_package_dart_mappable] with code generation.
-    - [`equatable`][pub_package_equatable] without code generation.
-    - [`freezed`][pub_package_freezed] with code generation.
-    - Manual `==` operator and `hashCode` overrides.
-
-- **Strict lint rules:**\
-  Enforced by [`very_good_analysis`][pub_package_very_good_analysis] for [native Dart & Flutter rules][docs_dart_and_flutter_linter_rules_link].
-
-- **Testing:**\
-  Tests with 100% coverage.
-
 ### 🧱 Altoke Local Database
 
 Create a local database, **_al toque_** (_quickly_).
@@ -210,6 +193,7 @@ Create a package that provides general-purpose caches, **_al toque_** (_quickly_
 [link_docs_vsc_spell_checker]: https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker
 [link_pub_package_auto_route]: https://pub.dev/packages/auto_route
 [link_pub_package_custom_lint]: https://pub.dev/packages/custom_lint
+[link_pub_package_flutter_bloc]: https://pub.dev/packages/flutter_bloc
 [link_pub_package_flutter_riverpod]: https://pub.dev/packages/flutter_riverpod
 [link_pub_package_go_router]: https://pub.dev/packages/go_router
 [link_pub_package_riverpod_lint]: https://pub.dev/packages/riverpod_lint

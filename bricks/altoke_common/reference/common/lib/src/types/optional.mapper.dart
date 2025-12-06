@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format off
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
@@ -67,9 +68,7 @@ class DmSomeMapper extends ClassMapperBase<DmSome> {
   );
 
   @override
-  final MappableFields<DmSome> fields = const {
-    #value: _f$value,
-  };
+  final MappableFields<DmSome> fields = const {#value: _f$value};
 
   static DmSome<T> _instantiate<T extends Object?>(DecodingData data) {
     return DmSome(data.dec(_f$value));
@@ -122,3 +121,4 @@ mixin DmNoneMappable<T extends Object?> {
     return DmNoneMapper.ensureInitialized().stringifyValue(this as DmNone<T>);
   }
 }
+

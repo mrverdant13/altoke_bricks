@@ -3,23 +3,28 @@ publish_to: none
 resolution: workspace
 
 environment:
-  sdk: ">=3.8.1 <4.0.0"
+  sdk: ">=3.10.0 <4.0.0"
 
 dependencies:
   collection: ^1.19.1
-  mason: ^0.1.1
+  mason: ^0.1.2
   path: ^1.9.1
   router_package:
     git:
       url: https://github.com/mrverdant13/altoke_bricks.git
-      ref: 5a0798ccaf78f3a13d2211955193e9891638a29e
+      ref: 66da4935d7f254b9d02693cae5cd706575003958
       path: ./tools/router_package/
   shell:
     git:
       url: https://github.com/mrverdant13/altoke_bricks.git
-      ref: 575389c0d0d0752834361c4b4be6888ef4e32f83
+      ref: 66da4935d7f254b9d02693cae5cd706575003958
       path: ./tools/shell/
+  state_management_package:
+    git:
+      url: https://github.com/mrverdant13/altoke_bricks.git
+      ref: f329553eb65af5fe19b3d3d31b0416a7bf1f0a23
+      path: ./tools/state_management_package/
 
 dev_dependencies:
-  test: ^1.25.15
-  very_good_analysis: ^9.0.0
+  test: ^1.26.3
+  very_good_analysis: ^10.0.0

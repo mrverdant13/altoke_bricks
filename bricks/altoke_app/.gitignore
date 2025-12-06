@@ -14,5 +14,9 @@
 /**/packages/app/macos/
 /**/packages/app/windows/
 
-# Generated reference files
+# Generated files
+/**/__brick__/**/*.g.dart
+/**/__brick__/**/*.gr.dart
+/**/__brick__/**/*.lock
+/**/__brick__/**/*.mapper.dart
 /**/reference/**/*.lock

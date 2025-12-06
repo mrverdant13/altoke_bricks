@@ -85,7 +85,8 @@ Future<void> asyncHiveInitialization(Ref ref) async {
 // coverage:ignore-start
 enum LocalDatabasePackage {
   drift('drift', 'Drift (SQLite)'),
-  hive('hive', 'Hive');
+  hive('hive', 'Hive')
+  ;
 
   const LocalDatabasePackage(this.identifier, this.displayName);
 

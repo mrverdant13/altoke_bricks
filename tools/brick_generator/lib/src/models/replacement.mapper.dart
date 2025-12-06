@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format off
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, unnecessary_cast, override_on_non_overriding_member
 // ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
@@ -30,10 +31,7 @@ class ReplacementMapper extends ClassMapperBase<Replacement> {
   static const Field<Replacement, String> _f$to = Field('to', _$to);
 
   @override
-  final MappableFields<Replacement> fields = const {
-    #from: _f$from,
-    #to: _f$to,
-  };
+  final MappableFields<Replacement> fields = const {#from: _f$from, #to: _f$to};
 
   static Replacement _instantiate(DecodingData data) {
     return Replacement(from: data.dec(_f$from), to: data.dec(_f$to));
@@ -126,3 +124,4 @@ class _ReplacementCopyWithImpl<$R, $Out>
     Then<$Out2, $R2> t,
   ) => _ReplacementCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
+

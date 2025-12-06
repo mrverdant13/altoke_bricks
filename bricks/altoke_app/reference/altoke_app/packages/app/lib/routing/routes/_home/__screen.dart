@@ -1,9 +1,35 @@
+/*remove-start*/
+import 'package:altoke_app/app/app.dart';
+/*remove-end*/
+/*{{#use_riverpod}}*/
+import 'package:altoke_app/counter/counter.dart';
+/*{{/use_riverpod}}*/
+/*remove-start*/
+import 'package:altoke_app/external/external.dart';
+/*remove-end-x*/
 import 'package:altoke_app/home/home.dart';
+/*remove-start*/
+import 'package:altoke_app/routing/routing.dart';
+import 'package:altoke_app/tasks/tasks.dart';
+/*remove-end-x*/
 /*x{{#use_auto_route}}*/
 import 'package:auto_route/auto_route.dart';
 /*x{{/use_auto_route}}*/
 import 'package:flutter/material.dart';
+/*{{#use_riverpod}}*/
+import 'package:riverpod_annotation/experimental/scope.dart';
+/*{{/use_riverpod}}*/
 
+@Dependencies([
+  Counter,
+  /*remove-start*/
+  asyncTasks,
+  localTasksDao,
+  SelectedLocalDatabasePackage,
+  SelectedRouterPackage,
+  SelectedStateManagementPackage,
+  /*remove-end-x*/
+])
 /*{{#use_auto_route}}x*/
 @RoutePage(name: 'HomeRoute')
 /*{{/use_auto_route}}x*/

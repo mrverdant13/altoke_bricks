@@ -4,14 +4,14 @@ publish_to: none
 resolution: workspace
 
 environment:
-  sdk: ">=3.8.1 <4.0.0"
+  sdk: ">=3.10.0 <4.0.0"
 
 dependencies:
   checked_yaml: ^2.0.4
-  mason: ^0.1.1
+  mason: ^0.1.2
   monorepo_elements:
     path: ../monorepo_elements
   path: ^1.9.1
 
 dev_dependencies:
-  very_good_analysis: ^9.0.0
+  very_good_analysis: ^10.0.0
