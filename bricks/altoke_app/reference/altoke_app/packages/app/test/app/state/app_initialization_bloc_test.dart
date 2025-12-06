@@ -24,12 +24,12 @@ void main() {
       required Future<Directory> Function() applicationDocumentsDirectoryGetter,
       required Future<Directory> Function() temporaryDirectoryGetter,
       required Future<LocalDatabase> Function({
-        required String applicationDocumentsDirectoryPath,
-        required String temporaryDirectoryPath,
+        required String? applicationDocumentsDirectoryPath,
+        required String? temporaryDirectoryPath,
       })
       localDatabaseBuilder,
       required Future<void> Function({
-        required String applicationDocumentsDirectoryPath,
+        required String? applicationDocumentsDirectoryPath,
       })
       hiveInitializer,
     }) {

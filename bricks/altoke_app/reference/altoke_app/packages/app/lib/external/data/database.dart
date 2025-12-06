@@ -7,33 +7,49 @@ import 'package:hive/hive.dart';
 import 'package:path/path.dart' as p;
 
 Future<LocalDatabase> buildLocalDatabase({
-  required String applicationDocumentsDirectoryPath,
-  required String temporaryDirectoryPath,
+  required String? applicationDocumentsDirectoryPath,
+  required String? temporaryDirectoryPath,
 }) async {
+  final nativeOptions = await () async {
+    if (kIsWeb) return null;
+    if (applicationDocumentsDirectoryPath == null) return null;
+    if (temporaryDirectoryPath == null) return null;
+    return DriftNativeOptions(
+      databaseDirectory: () async => applicationDocumentsDirectoryPath,
+      tempDirectoryPath: () async => temporaryDirectoryPath,
+    );
+  }();
+
+  final webOptions = await () async {
+    if (!kIsWeb) return null;
+    return DriftWebOptions(
+      sqlite3Wasm: Uri.parse('sqlite3.wasm'),
+      driftWorker: Uri.parse('drift_worker.js'),
+    );
+  }();
+
   return LocalDatabase(
     schemaVersion: 1,
     queryExecutor: driftDatabase(
       name: 'app_db',
-      native: DriftNativeOptions(
-        databaseDirectory: () async => applicationDocumentsDirectoryPath,
-        tempDirectoryPath: () async => temporaryDirectoryPath,
-      ),
+      native: nativeOptions,
+      web: webOptions,
     ),
   );
 }
 
 Future<void> initializeHive({
-  required String applicationDocumentsDirectoryPath,
+  required String? applicationDocumentsDirectoryPath,
 }) async {
-  if (!kIsWeb) {
-    const dbName = 'app_db';
-    final databasePath = p.joinAll([
-      applicationDocumentsDirectoryPath,
-      'hive_database',
-      dbName,
-    ]);
-    final databaseDir = Directory(databasePath);
-    if (!databaseDir.existsSync()) await databaseDir.create(recursive: true);
-    Hive.init(databasePath);
-  }
+  if (kIsWeb) return;
+  if (applicationDocumentsDirectoryPath == null) return;
+  const dbName = 'app_db';
+  final databasePath = p.joinAll([
+    applicationDocumentsDirectoryPath,
+    'hive_database',
+    dbName,
+  ]);
+  final databaseDir = Directory(databasePath);
+  if (!databaseDir.existsSync()) await databaseDir.create(recursive: true);
+  Hive.init(databasePath);
 }

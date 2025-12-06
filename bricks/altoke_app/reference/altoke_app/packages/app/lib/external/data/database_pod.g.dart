@@ -98,7 +98,7 @@ final class AsyncHiveInitializationProvider
 }
 
 String _$asyncHiveInitializationHash() =>
-    r'740c42d271ffa8f8ad35b920c741ed0fe481c1b5';
+    r'fa87d413f216fdfc116f2cd053c53e3ea1a05dea';
 
 @ProviderFor(SelectedLocalDatabasePackage)
 const selectedLocalDatabasePackagePod =

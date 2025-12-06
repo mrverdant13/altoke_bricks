@@ -75,9 +75,7 @@ Future<void> asyncHiveInitialization(Ref ref) async {
     ),
   );
   final databaseDir = Directory(databasePath);
-  if (!databaseDir.existsSync()) {
-    await databaseDir.create(recursive: true);
-  }
+  if (!databaseDir.existsSync()) await databaseDir.create(recursive: true);
   Hive.init(databasePath);
 }
 

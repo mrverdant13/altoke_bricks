@@ -23,12 +23,12 @@ class AppInitializationBloc
     required Future<Directory> Function() applicationDocumentsDirectoryGetter,
     required Future<Directory> Function() temporaryDirectoryGetter,
     required Future<LocalDatabase> Function({
-      required String applicationDocumentsDirectoryPath,
-      required String temporaryDirectoryPath,
+      required String? applicationDocumentsDirectoryPath,
+      required String? temporaryDirectoryPath,
     })
     localDatabaseBuilder,
     required Future<void> Function({
-      required String applicationDocumentsDirectoryPath,
+      required String? applicationDocumentsDirectoryPath,
     })
     hiveInitializer,
   })
@@ -55,14 +55,14 @@ class AppInitializationBloc
 
   @visibleForTesting
   final Future<LocalDatabase> Function({
-    required String applicationDocumentsDirectoryPath,
-    required String temporaryDirectoryPath,
+    required String? applicationDocumentsDirectoryPath,
+    required String? temporaryDirectoryPath,
   })
   buildLocalDatabase;
 
   @visibleForTesting
   final Future<void> Function({
-    required String applicationDocumentsDirectoryPath,
+    required String? applicationDocumentsDirectoryPath,
   })
   initializeHive;
   /*remove-end*/
@@ -96,28 +96,30 @@ class AppInitializationBloc
     emit(const AppInitializing());
     try {
       /*remove-start*/
-      (
-        applicationDocumentsDirectory,
-        temporaryDirectory,
-      ) = await (
-        Future(
-          () async =>
-              applicationDocumentsDirectory ??
-              await getApplicationDocumentsDirectory(),
-        ),
-        Future(
-          () async => temporaryDirectory ?? await getTemporaryDirectory(),
-        ),
-      ).wait;
+      if (!kIsWeb) {
+        (
+          applicationDocumentsDirectory,
+          temporaryDirectory,
+        ) = await (
+          Future(
+            () async =>
+                applicationDocumentsDirectory ??
+                await getApplicationDocumentsDirectory(),
+          ),
+          Future(
+            () async => temporaryDirectory ?? await getTemporaryDirectory(),
+          ),
+        ).wait;
+      }
       localDatabase ??= await buildLocalDatabase(
-        applicationDocumentsDirectoryPath: applicationDocumentsDirectory.path,
-        temporaryDirectoryPath: temporaryDirectory.path,
+        applicationDocumentsDirectoryPath: applicationDocumentsDirectory?.path,
+        temporaryDirectoryPath: temporaryDirectory?.path,
       );
       hiveDatabaseInitialized = await (() async {
         if (hiveDatabaseInitialized) return true;
         return initializeHive(
           applicationDocumentsDirectoryPath:
-              applicationDocumentsDirectory!.path,
+              applicationDocumentsDirectory?.path,
         ).then((value) => true);
       })();
       /*remove-end*/
