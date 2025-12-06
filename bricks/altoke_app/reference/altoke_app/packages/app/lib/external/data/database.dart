@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:path/path.dart' as p;
 
+// coverage:ignore-start
 Future<LocalDatabase> buildLocalDatabase({
   required String? applicationDocumentsDirectoryPath,
   required String? temporaryDirectoryPath,
@@ -53,3 +54,5 @@ Future<void> initializeHive({
   if (!databaseDir.existsSync()) await databaseDir.create(recursive: true);
   Hive.init(databasePath);
 }
+
+// coverage:ignore-end

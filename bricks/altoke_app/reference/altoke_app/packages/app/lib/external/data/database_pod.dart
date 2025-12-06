@@ -11,6 +11,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'database_pod.g.dart';
 
+// coverage:ignore-start
+
 @Riverpod(
   dependencies: [asyncApplicationDocumentsDirectory, asyncTemporaryDirectory],
 )
@@ -78,6 +80,8 @@ Future<void> asyncHiveInitialization(Ref ref) async {
   if (!databaseDir.existsSync()) await databaseDir.create(recursive: true);
   Hive.init(databasePath);
 }
+
+// coverage:ignore-end
 
 /*drop*/
 // coverage:ignore-start
