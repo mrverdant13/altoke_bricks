@@ -5,9 +5,11 @@ endtemplate
 insertable
 mocktail
 nodoc
+pbxproj
 rxdart
 strftime
 unawaited
 unmanaged
 vsync
 writeln
+xcodeproj
