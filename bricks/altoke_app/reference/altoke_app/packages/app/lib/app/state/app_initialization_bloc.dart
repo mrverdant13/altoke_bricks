@@ -17,10 +17,9 @@ part 'app_initialization_state.dart';
 
 class AppInitializationBloc
     extends Bloc<AppInitializationEvent, AppInitializationState> {
-  AppInitializationBloc
-  /*replace-start*/
-  ({
+  AppInitializationBloc({
     required AsyncCallback initializationCallback,
+    /*remove-start*/
     required AsyncValueGetter<Directory> applicationDocumentsDirectoryGetter,
     required AsyncValueGetter<Directory> temporaryDirectoryGetter,
     required Future<LocalDatabase> Function({
@@ -32,16 +31,15 @@ class AppInitializationBloc
       required String? applicationDocumentsDirectoryPath,
     })
     hiveInitializer,
-  })
-    : initialize = initializationCallback,
-      getApplicationDocumentsDirectory = applicationDocumentsDirectoryGetter,
-      getTemporaryDirectory = temporaryDirectoryGetter,
-      buildLocalDatabase = localDatabaseBuilder,
-      initializeHive = hiveInitializer,
-      /*with*/
-      // () :
-      /*replace-end*/
-      super(const AppUninitialized()) {
+    /*remove-end*/
+  }) : initialize = initializationCallback,
+       /*remove-start*/
+       getApplicationDocumentsDirectory = applicationDocumentsDirectoryGetter,
+       getTemporaryDirectory = temporaryDirectoryGetter,
+       buildLocalDatabase = localDatabaseBuilder,
+       initializeHive = hiveInitializer,
+       /*remove-end*/
+       super(const AppUninitialized()) {
     on<AppInitializationRequested>(
       _onAppInitializationRequested,
       transformer: droppable(),
