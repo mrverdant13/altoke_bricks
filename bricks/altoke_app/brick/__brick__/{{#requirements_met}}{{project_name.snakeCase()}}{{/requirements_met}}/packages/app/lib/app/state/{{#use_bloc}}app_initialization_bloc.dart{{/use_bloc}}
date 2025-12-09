@@ -9,9 +9,12 @@ part '{{#use_bloc}}app_initialization_state.dart{{/use_bloc}}';
 
 class AppInitializationBloc
     extends Bloc<AppInitializationEvent, AppInitializationState> {
-  AppInitializationBloc
-  () :
-      super(const AppUninitialized()) {
+  AppInitializationBloc({
+    required AsyncCallback initializationCallback,
+    
+  }) : initialize = initializationCallback,
+       
+       super(const AppUninitialized()) {
     on<AppInitializationRequested>(
       _onAppInitializationRequested,
       transformer: droppable(),
