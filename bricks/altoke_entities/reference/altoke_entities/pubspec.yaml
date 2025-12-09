@@ -34,7 +34,7 @@ dev_dependencies:
   build_runner: ^2.10.4
   #{{/use_code_generation}}#
   #{{#use_dart_mappable}}x#
-  dart_mappable_builder: ^4.6.1
+  dart_mappable_builder: ^4.6.3
   #x{{/use_dart_mappable}}x#
   #x{{#use_freezed}}x#
   freezed: ^3.2.3

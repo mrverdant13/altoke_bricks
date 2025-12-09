@@ -67,7 +67,7 @@ dev_dependencies:
   custom_lint: ^0.8.1
   #x{{/use_riverpod}}#
   #x{{#use_bloc}}#
-  dart_mappable_builder: ^4.6.1
+  dart_mappable_builder: ^4.6.3
   #x{{/use_bloc}}#
   flutter_test:
     sdk: flutter
