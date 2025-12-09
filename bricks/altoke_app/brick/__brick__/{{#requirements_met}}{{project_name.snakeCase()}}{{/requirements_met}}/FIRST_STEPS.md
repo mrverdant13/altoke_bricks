@@ -62,3 +62,20 @@ For each flavor, you should create an app icon by following these steps:
 6. In the attributes of the set, make sure to use **Single Size** for **iOS**.
 7. In the attributes of the set, select the desired **Appearance**.
 8.  Double click on the desired asset variant placeholder and pick the desired image (it should be a 1024x1024 PNG file).
+
+### 1.3. Web
+
+#### Resources:
+
+- [Web app manifests](https://developer.mozilla.org/en-US/docs/Web/Manifest)\
+  Documentation on web app manifests and PWA configuration.
+- [PWA Asset Generator](https://github.com/onderceylan/pwa-asset-generator)\
+  Tool to generate all required PWA assets from a single source image.
+
+#### Opinionated guide
+
+For the web platform, you should update the following assets:
+
+1. Update the `web/favicon.png` file with your app's icon (16x16 pixels PNG).
+2. Update the PNG files under the `web/icons/` directory with your app's icon (192x192 and 512x512 pixels PNG).
+3. Adjust the `theme_color` and `background_color` fields in the `web/manifest.json` file to match your app's branding.
