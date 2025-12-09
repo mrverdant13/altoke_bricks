@@ -18,6 +18,9 @@ class AppInitializationBloc
     );
   }
 
+  @visibleForTesting
+  final AsyncCallback? initialize;
+
   
 
   Future<void> _onAppInitializationRequested(
@@ -27,8 +30,9 @@ class AppInitializationBloc
     if (state is SuccessfulAppInitialization) return;
     emit(const AppInitializing());
     try {
-      
       // Run async initialization.
+      await initialize?.call();
+      
       emit(
         const
         SuccessfulAppInitialization(
