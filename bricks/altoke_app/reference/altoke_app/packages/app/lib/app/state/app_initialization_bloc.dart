@@ -7,8 +7,8 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dart_mappable/dart_mappable.dart';
 /*remove-start*/
 import 'package:drift_local_database/drift_local_database.dart';
-import 'package:flutter/foundation.dart';
 /*remove-end*/
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'app_initialization_bloc.mapper.dart';
