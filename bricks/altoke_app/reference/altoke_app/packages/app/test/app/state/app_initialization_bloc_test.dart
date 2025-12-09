@@ -24,6 +24,7 @@ void main() {
         initializationCallback: () async => fail(
           'initializationCallback should not be called',
         ),
+        /*remove-start*/
         applicationDocumentsDirectoryGetter: () async => fail(
           'applicationDocumentsDirectoryGetter should not be called',
         ),
@@ -43,6 +44,7 @@ void main() {
             }) async => fail(
               'hiveInitializer should not be called',
             ),
+        /*remove-end*/
       );
       addTearDown(bloc.close);
       expect(bloc.state, const AppUninitialized());
@@ -59,6 +61,7 @@ void main() {
         build: () => AppInitializationBloc(
           initializationCallback: () async =>
               throw Exception('Failed to initialize'),
+          /*remove-start*/
           applicationDocumentsDirectoryGetter: () async => fail(
             'applicationDocumentsDirectoryGetter should not be called',
           ),
@@ -78,6 +81,7 @@ void main() {
               }) => fail(
                 'hiveInitializer should not be called',
               ),
+          /*remove-end*/
         ),
         seed: AppUninitialized.new,
         act: (bloc) => bloc.add(const AppInitializationRequested()),
@@ -105,6 +109,7 @@ void main() {
               id: 'initializationCallback',
             )();
           },
+          /*remove-start*/
           applicationDocumentsDirectoryGetter: () async {
             return expectAsync0(
               () async => Directory.systemTemp.createTempSync(),
@@ -132,6 +137,7 @@ void main() {
                 () async {},
                 id: 'hiveInitializer',
               )(),
+          /*remove-end*/
         ),
         seed: AppUninitialized.new,
         act: (bloc) {
