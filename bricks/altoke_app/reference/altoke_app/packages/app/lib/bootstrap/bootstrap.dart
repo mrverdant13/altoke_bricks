@@ -78,6 +78,10 @@ Future<void> bootstrap( /*{{#use_riverpod}}*/ {
               final selectedRouterPackage = ref.watch(selectedRouterPackagePod);
               return /*remove-end*/ /*{{#use_bloc}}*/ BlocProvider(
                 create: (context) => AppInitializationBloc(
+                  // Defining a general purpose TODO
+                  // ignore: flutter_style_todos, lines_longer_than_80_chars
+                  // TODO: Provide initialization callbacks or other dependencies.
+                  initializationCallback: () async {},
                   /*remove-start*/
                   applicationDocumentsDirectoryGetter:
                       getApplicationDocumentsDirectory,

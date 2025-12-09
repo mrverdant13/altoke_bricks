@@ -20,8 +20,9 @@ class AppInitializationBloc
   AppInitializationBloc
   /*replace-start*/
   ({
-    required Future<Directory> Function() applicationDocumentsDirectoryGetter,
-    required Future<Directory> Function() temporaryDirectoryGetter,
+    required AsyncCallback initializationCallback,
+    required AsyncValueGetter<Directory> applicationDocumentsDirectoryGetter,
+    required AsyncValueGetter<Directory> temporaryDirectoryGetter,
     required Future<LocalDatabase> Function({
       required String? applicationDocumentsDirectoryPath,
       required String? temporaryDirectoryPath,
@@ -32,7 +33,8 @@ class AppInitializationBloc
     })
     hiveInitializer,
   })
-    : getApplicationDocumentsDirectory = applicationDocumentsDirectoryGetter,
+    : initialize = initializationCallback,
+      getApplicationDocumentsDirectory = applicationDocumentsDirectoryGetter,
       getTemporaryDirectory = temporaryDirectoryGetter,
       buildLocalDatabase = localDatabaseBuilder,
       initializeHive = hiveInitializer,
@@ -46,12 +48,15 @@ class AppInitializationBloc
     );
   }
 
+  @visibleForTesting
+  final AsyncCallback? initialize;
+
   /*remove-start*/
   @visibleForTesting
-  final Future<Directory> Function() getApplicationDocumentsDirectory;
+  final AsyncValueGetter<Directory> getApplicationDocumentsDirectory;
 
   @visibleForTesting
-  final Future<Directory> Function() getTemporaryDirectory;
+  final AsyncValueGetter<Directory> getTemporaryDirectory;
 
   @visibleForTesting
   final Future<LocalDatabase> Function({
@@ -73,6 +78,7 @@ class AppInitializationBloc
   ) async {
     if (state is SuccessfulAppInitialization) return;
     /*remove-start*/
+    // coverage:ignore-start
     var (
       Directory? applicationDocumentsDirectory,
       Directory? temporaryDirectory,
@@ -92,23 +98,25 @@ class AppInitializationBloc
         false,
       ),
     };
+    // coverage:ignore-end
     /*remove-end-x*/
     emit(const AppInitializing());
     try {
+      // Run async initialization.
+      await initialize?.call();
       /*remove-start*/
+      // coverage:ignore-start
       if (!kIsWeb) {
         (
           applicationDocumentsDirectory,
           temporaryDirectory,
         ) = await (
-          Future(
-            () async =>
-                applicationDocumentsDirectory ??
-                await getApplicationDocumentsDirectory(),
-          ),
-          Future(
-            () async => temporaryDirectory ?? await getTemporaryDirectory(),
-          ),
+          applicationDocumentsDirectory != null
+              ? Future.value(applicationDocumentsDirectory)
+              : Future(getApplicationDocumentsDirectory),
+          temporaryDirectory != null
+              ? Future.value(temporaryDirectory)
+              : Future(getTemporaryDirectory),
         ).wait;
       }
       localDatabase ??= await buildLocalDatabase(
@@ -122,8 +130,8 @@ class AppInitializationBloc
               applicationDocumentsDirectory?.path,
         ).then((value) => true);
       })();
+      // coverage:ignore-end
       /*remove-end*/
-      // Run async initialization.
       emit(
         /*insert-start*/
         // const
