@@ -1,7 +1,7 @@
 /*x-remove-start*/
 import 'package:altoke_app/external/external.dart';
-/*remove-end-x*/
 import 'package:flutter/foundation.dart';
+/*remove-end-x*/
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'async_initialization_pod.g.dart';
