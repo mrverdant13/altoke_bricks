@@ -7,8 +7,8 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dart_mappable/dart_mappable.dart';
 /*remove-start*/
 import 'package:drift_local_database/drift_local_database.dart';
-import 'package:flutter/foundation.dart';
 /*remove-end*/
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'app_initialization_bloc.mapper.dart';
@@ -17,52 +17,55 @@ part 'app_initialization_state.dart';
 
 class AppInitializationBloc
     extends Bloc<AppInitializationEvent, AppInitializationState> {
-  AppInitializationBloc
-  /*replace-start*/
-  ({
-    required Future<Directory> Function() applicationDocumentsDirectoryGetter,
-    required Future<Directory> Function() temporaryDirectoryGetter,
+  AppInitializationBloc({
+    required AsyncCallback initializationCallback,
+    /*remove-start*/
+    required AsyncValueGetter<Directory> applicationDocumentsDirectoryGetter,
+    required AsyncValueGetter<Directory> temporaryDirectoryGetter,
     required Future<LocalDatabase> Function({
-      required String applicationDocumentsDirectoryPath,
-      required String temporaryDirectoryPath,
+      required String? applicationDocumentsDirectoryPath,
+      required String? temporaryDirectoryPath,
     })
     localDatabaseBuilder,
     required Future<void> Function({
-      required String applicationDocumentsDirectoryPath,
+      required String? applicationDocumentsDirectoryPath,
     })
     hiveInitializer,
-  })
-    : getApplicationDocumentsDirectory = applicationDocumentsDirectoryGetter,
-      getTemporaryDirectory = temporaryDirectoryGetter,
-      buildLocalDatabase = localDatabaseBuilder,
-      initializeHive = hiveInitializer,
-      /*with*/
-      // () :
-      /*replace-end*/
-      super(const AppUninitialized()) {
+    /*remove-end*/
+  }) : initialize = initializationCallback,
+       /*remove-start*/
+       getApplicationDocumentsDirectory = applicationDocumentsDirectoryGetter,
+       getTemporaryDirectory = temporaryDirectoryGetter,
+       buildLocalDatabase = localDatabaseBuilder,
+       initializeHive = hiveInitializer,
+       /*remove-end*/
+       super(const AppUninitialized()) {
     on<AppInitializationRequested>(
       _onAppInitializationRequested,
       transformer: droppable(),
     );
   }
 
+  @visibleForTesting
+  final AsyncCallback? initialize;
+
   /*remove-start*/
   @visibleForTesting
-  final Future<Directory> Function() getApplicationDocumentsDirectory;
+  final AsyncValueGetter<Directory> getApplicationDocumentsDirectory;
 
   @visibleForTesting
-  final Future<Directory> Function() getTemporaryDirectory;
+  final AsyncValueGetter<Directory> getTemporaryDirectory;
 
   @visibleForTesting
   final Future<LocalDatabase> Function({
-    required String applicationDocumentsDirectoryPath,
-    required String temporaryDirectoryPath,
+    required String? applicationDocumentsDirectoryPath,
+    required String? temporaryDirectoryPath,
   })
   buildLocalDatabase;
 
   @visibleForTesting
   final Future<void> Function({
-    required String applicationDocumentsDirectoryPath,
+    required String? applicationDocumentsDirectoryPath,
   })
   initializeHive;
   /*remove-end*/
@@ -73,6 +76,7 @@ class AppInitializationBloc
   ) async {
     if (state is SuccessfulAppInitialization) return;
     /*remove-start*/
+    // coverage:ignore-start
     var (
       Directory? applicationDocumentsDirectory,
       Directory? temporaryDirectory,
@@ -92,36 +96,40 @@ class AppInitializationBloc
         false,
       ),
     };
+    // coverage:ignore-end
     /*remove-end-x*/
     emit(const AppInitializing());
     try {
+      // Run async initialization.
+      await initialize?.call();
       /*remove-start*/
-      (
-        applicationDocumentsDirectory,
-        temporaryDirectory,
-      ) = await (
-        Future(
-          () async =>
-              applicationDocumentsDirectory ??
-              await getApplicationDocumentsDirectory(),
-        ),
-        Future(
-          () async => temporaryDirectory ?? await getTemporaryDirectory(),
-        ),
-      ).wait;
+      // coverage:ignore-start
+      if (!kIsWeb) {
+        (
+          applicationDocumentsDirectory,
+          temporaryDirectory,
+        ) = await (
+          applicationDocumentsDirectory != null
+              ? Future.value(applicationDocumentsDirectory)
+              : Future(getApplicationDocumentsDirectory),
+          temporaryDirectory != null
+              ? Future.value(temporaryDirectory)
+              : Future(getTemporaryDirectory),
+        ).wait;
+      }
       localDatabase ??= await buildLocalDatabase(
-        applicationDocumentsDirectoryPath: applicationDocumentsDirectory.path,
-        temporaryDirectoryPath: temporaryDirectory.path,
+        applicationDocumentsDirectoryPath: applicationDocumentsDirectory?.path,
+        temporaryDirectoryPath: temporaryDirectory?.path,
       );
       hiveDatabaseInitialized = await (() async {
         if (hiveDatabaseInitialized) return true;
         return initializeHive(
           applicationDocumentsDirectoryPath:
-              applicationDocumentsDirectory!.path,
+              applicationDocumentsDirectory?.path,
         ).then((value) => true);
       })();
+      // coverage:ignore-end
       /*remove-end*/
-      // Run async initialization.
       emit(
         /*insert-start*/
         // const

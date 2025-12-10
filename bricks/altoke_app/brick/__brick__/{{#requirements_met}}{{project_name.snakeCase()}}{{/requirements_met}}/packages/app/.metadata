@@ -4,7 +4,7 @@
 # This file should be version controlled and should not be manually edited.
 
 version:
-  revision: "05db9689081f091050f01aed79f04dce0c750154"
+  revision: "f5a8537f90d143abd5bb2f658fa69c388da9677b"
   channel: "stable"
 
 project_type: app
@@ -13,14 +13,23 @@ project_type: app
 migration:
   platforms:
     - platform: root
-      create_revision: 05db9689081f091050f01aed79f04dce0c750154
-      base_revision: 05db9689081f091050f01aed79f04dce0c750154
-
-  # User provided section
+      create_revision: f5a8537f90d143abd5bb2f658fa69c388da9677b
+      base_revision: f5a8537f90d143abd5bb2f658fa69c388da9677b
+    {{#include_android_platform}}- platform: android
+      create_revision: f5a8537f90d143abd5bb2f658fa69c388da9677b
+      base_revision: f5a8537f90d143abd5bb2f658fa69c388da9677b
+    {{/include_android_platform}}{{#include_ios_platform}}- platform: ios
+      create_revision: f5a8537f90d143abd5bb2f658fa69c388da9677b
+      base_revision: f5a8537f90d143abd5bb2f658fa69c388da9677b
+    {{/include_ios_platform}}{{#include_web_platform}}- platform: web
+      create_revision: f5a8537f90d143abd5bb2f658fa69c388da9677b
+      base_revision: f5a8537f90d143abd5bb2f658fa69c388da9677b
+    {{/include_web_platform}}# User provided section
 
   # List of Local paths (relative to this file) that should be
   # ignored by the migrate tool.
   #
   # Files that are not part of the templates will be ignored by default.
   unmanaged_files:
-    - "lib/main.dart"
+    - "lib/main.dart"{{#include_ios_platform}}
+    - "ios/Runner.xcodeproj/project.pbxproj"{{/include_ios_platform}}

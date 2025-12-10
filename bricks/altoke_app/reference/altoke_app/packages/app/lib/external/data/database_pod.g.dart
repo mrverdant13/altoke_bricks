@@ -57,7 +57,7 @@ final class AsyncDriftLocalDatabaseProvider
 }
 
 String _$asyncDriftLocalDatabaseHash() =>
-    r'3acd52622330646468ea5cd9b4bf4726398303ad';
+    r'ac1f01566115b44079e3bbb40fde0cda3b1fcedb';
 
 @ProviderFor(asyncHiveInitialization)
 const asyncHiveInitializationPod = AsyncHiveInitializationProvider._();
@@ -98,7 +98,7 @@ final class AsyncHiveInitializationProvider
 }
 
 String _$asyncHiveInitializationHash() =>
-    r'a73dd6f3d1f37f5bee2b68d48d4ed0dd50bf16b3';
+    r'fa87d413f216fdfc116f2cd053c53e3ea1a05dea';
 
 @ProviderFor(SelectedLocalDatabasePackage)
 const selectedLocalDatabasePackagePod =

@@ -10,12 +10,12 @@ dev_dependencies:
   mason: ^0.1.2
   meta: ^1.17.0
   mocktail: ^1.0.4
-  monorepo_elements:
-    path: ../../../tools/monorepo_elements
   path: ^1.9.1
   router_package:
     path: ../../../tools/router_package
   shell:
     path: ../../../tools/shell
+  state_management_package:
+    path: ../../../tools/state_management_package
   test: ^1.26.3
   very_good_analysis: ^10.0.0

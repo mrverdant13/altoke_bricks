@@ -11,29 +11,52 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'database_pod.g.dart';
 
+// coverage:ignore-start
+
 @Riverpod(
   dependencies: [asyncApplicationDocumentsDirectory, asyncTemporaryDirectory],
 )
 Future<LocalDatabase> asyncDriftLocalDatabase(Ref ref) async {
   const dbName = 'app_db';
-  final databaseDirectoryPath = ref.watch(
-    asyncApplicationDocumentsDirectoryPod.selectAsync(
-      (dir) => path.joinAll([dir.path, 'drift_database']),
-    ),
-  );
-  final temporaryDirectoryPath = ref.watch(
-    asyncTemporaryDirectoryPod.selectAsync(
-      (dir) => path.joinAll([dir.path, 'drift_database']),
-    ),
-  );
+
+  final nativeOptions = await () async {
+    if (kIsWeb) return null;
+    final databaseDirectoryPathFuture = ref.watch(
+      asyncApplicationDocumentsDirectoryPod.selectAsync(
+        (dir) => path.joinAll([
+          dir.path,
+          'drift_database',
+        ]),
+      ),
+    );
+    final temporaryDirectoryPathFuture = ref.watch(
+      asyncTemporaryDirectoryPod.selectAsync(
+        (dir) => path.joinAll([
+          dir.path,
+          'drift_database',
+        ]),
+      ),
+    );
+    return DriftNativeOptions(
+      databaseDirectory: () => databaseDirectoryPathFuture,
+      tempDirectoryPath: () => temporaryDirectoryPathFuture,
+    );
+  }();
+
+  final webOptions = await () async {
+    if (!kIsWeb) return null;
+    return DriftWebOptions(
+      sqlite3Wasm: Uri.parse('sqlite3.wasm'),
+      driftWorker: Uri.parse('drift_worker.js'),
+    );
+  }();
+
   final db = LocalDatabase(
     schemaVersion: 1,
     queryExecutor: driftDatabase(
       name: dbName,
-      native: DriftNativeOptions(
-        databaseDirectory: () async => databaseDirectoryPath,
-        tempDirectoryPath: () async => temporaryDirectoryPath,
-      ),
+      native: nativeOptions,
+      web: webOptions,
     ),
   );
   ref.onDispose(db.close);
@@ -42,21 +65,23 @@ Future<LocalDatabase> asyncDriftLocalDatabase(Ref ref) async {
 
 @Riverpod(dependencies: [asyncApplicationDocumentsDirectory])
 Future<void> asyncHiveInitialization(Ref ref) async {
-  if (!kIsWeb) {
-    const dbName = 'app_db';
-    final databasePath = ref.watch(
-      asyncApplicationDocumentsDirectoryPod.select(
-        (asyncDir) =>
-            path.joinAll([asyncDir.requireValue.path, 'hive_database', dbName]),
-      ),
-    );
-    final databaseDir = Directory(databasePath);
-    if (!databaseDir.existsSync()) {
-      await databaseDir.create(recursive: true);
-    }
-    Hive.init(databasePath);
-  }
+  if (kIsWeb) return;
+  const dbName = 'app_db';
+  final databasePath = ref.watch(
+    asyncApplicationDocumentsDirectoryPod.select(
+      (asyncDir) => path.joinAll([
+        asyncDir.requireValue.path,
+        'hive_database',
+        dbName,
+      ]),
+    ),
+  );
+  final databaseDir = Directory(databasePath);
+  if (!databaseDir.existsSync()) await databaseDir.create(recursive: true);
+  Hive.init(databasePath);
 }
+
+// coverage:ignore-end
 
 /*drop*/
 // coverage:ignore-start

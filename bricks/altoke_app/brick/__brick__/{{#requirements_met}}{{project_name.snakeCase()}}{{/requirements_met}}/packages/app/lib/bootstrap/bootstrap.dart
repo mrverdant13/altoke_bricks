@@ -46,6 +46,10 @@ Future<void> bootstrap( {{#use_riverpod}} {
           {{/use_riverpod}}
            {{#use_bloc}} BlocProvider(
                 create: (context) => AppInitializationBloc(
+                  // Defining a general purpose TODO
+                  // ignore: flutter_style_todos
+                  // TODO: Provide initialization callbacks or dependencies.
+                  initializationCallback: () async {},
                   
                 )..add(const AppInitializationRequested()),
                 child: {{/use_bloc}} MyApp(
