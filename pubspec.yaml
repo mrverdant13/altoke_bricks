@@ -179,11 +179,10 @@ melos:
         &&
         format_coverage
         --lcov
-        --in=coverage/
+        --in=coverage
         --out=coverage/lcov.info
         --report-on=lib
         --check-ignore
-        -b 'MELOS_PACKAGE_PATH'
       packageFilters:
         flutter: false
         dirExists:
@@ -260,11 +259,10 @@ melos:
         &&
         format_coverage
         --lcov
-        --in=coverage/
+        --in=coverage
         --out=coverage/lcov.info
         --report-on=lib
-        --check-ignore
-        -b 'MELOS_PACKAGE_PATH'"
+        --check-ignore"
         &&
         melos exec
         --order-dependents
