@@ -3,19 +3,19 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 /*remove-end*/
 
-/*x{{#use_bloc}}#*/
+/*x{{#use_bloc}}*/
 export 'app_initialization_bloc.dart';
-/*x{{/use_bloc}}#x*/
-/*x{{#use_riverpod}}#*/
+/*x{{/use_bloc}}x*/
+/*x{{#use_riverpod}}*/
 export 'async_initialization_pod.dart';
-/*x{{/use_riverpod}}#*/
-/*{{#use_bloc}}#x*/
+/*x{{/use_riverpod}}*/
+/*{{#use_bloc}}x*/
 export 'bloc_observer.dart';
-/*x{{/use_bloc}}#x*/
-/*x{{#use_riverpod}}#x*/
+/*x{{/use_bloc}}x*/
+/*x{{#use_riverpod}}x*/
 export 'provider_observer.dart';
 
-/*x{{/use_riverpod}}#*/
+/*x{{/use_riverpod}}*/
 
 /*drop*/
 part 'state.g.dart';

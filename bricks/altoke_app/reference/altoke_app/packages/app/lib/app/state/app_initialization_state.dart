@@ -32,8 +32,8 @@ final class SuccessfulAppInitialization extends AppInitializationState
   ;
 
   /*remove-start*/
-  final Directory applicationDocumentsDirectory;
-  final Directory temporaryDirectory;
+  final Directory? applicationDocumentsDirectory;
+  final Directory? temporaryDirectory;
   final LocalDatabase localDatabase;
   /*remove-end*/
 }

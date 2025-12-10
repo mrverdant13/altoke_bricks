@@ -21,6 +21,10 @@
       "to": "packages/app/{{#include_ios_platform}}ios{{/include_ios_platform}}"
     },
     {
+      "from": "packages/app/web",
+      "to": "packages/app/{{#include_web_platform}}web{{/include_web_platform}}"
+    },
+    {
       "from": "\\b(REQUIREMENTS.md)\\b",
       "to": "{{^requirements_met}}REQUIREMENTS.md{{/requirements_met}}"
     },

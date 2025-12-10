@@ -369,7 +369,7 @@ class SuccessfulAppInitializationMapper
   @override
   final String id = 'SuccessfulAppInitialization';
 
-  static Directory _$applicationDocumentsDirectory(
+  static Directory? _$applicationDocumentsDirectory(
     SuccessfulAppInitialization v,
   ) => v.applicationDocumentsDirectory;
   static const Field<SuccessfulAppInitialization, Directory>
@@ -377,7 +377,7 @@ class SuccessfulAppInitializationMapper
     'applicationDocumentsDirectory',
     _$applicationDocumentsDirectory,
   );
-  static Directory _$temporaryDirectory(SuccessfulAppInitialization v) =>
+  static Directory? _$temporaryDirectory(SuccessfulAppInitialization v) =>
       v.temporaryDirectory;
   static const Field<SuccessfulAppInitialization, Directory>
   _f$temporaryDirectory = Field('temporaryDirectory', _$temporaryDirectory);
@@ -504,14 +504,14 @@ class _SuccessfulAppInitializationCopyWithImpl<$R, $Out>
       SuccessfulAppInitializationMapper.ensureInitialized();
   @override
   $R call({
-    Directory? applicationDocumentsDirectory,
-    Directory? temporaryDirectory,
+    Object? applicationDocumentsDirectory = $none,
+    Object? temporaryDirectory = $none,
     LocalDatabase? localDatabase,
   }) => $apply(
     FieldCopyWithData({
-      if (applicationDocumentsDirectory != null)
+      if (applicationDocumentsDirectory != $none)
         #applicationDocumentsDirectory: applicationDocumentsDirectory,
-      if (temporaryDirectory != null) #temporaryDirectory: temporaryDirectory,
+      if (temporaryDirectory != $none) #temporaryDirectory: temporaryDirectory,
       if (localDatabase != null) #localDatabase: localDatabase,
     }),
   );

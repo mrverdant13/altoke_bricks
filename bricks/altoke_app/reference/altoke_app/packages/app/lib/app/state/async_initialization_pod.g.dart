@@ -57,4 +57,4 @@ final class AsyncInitializationProvider
 }
 
 String _$asyncInitializationHash() =>
-    r'cd515118506c4b8f845cb21f9bf3dddd709a4a86';
+    r'06a63750fb72efd104656213c6b5e64d4d2107eb';
