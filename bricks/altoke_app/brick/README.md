@@ -103,6 +103,7 @@ Create a [Flutter][link_docs_flutter] app, **_al toque_** (_quickly_).
 | `project_description` | A description of the project. | _None_ | String |
 | `android_organization` | The organization of the Android project. | _None_ | String |
 | `ios_bundle_identifier` | The bundle identifier of the iOS project. | _None_ | String |
+| `include_web_platform` | Whether to include the web platform. | _None_ | Boolean |
 | `router_package` | The package to use for routing. | auto_route | Enumeration |
 | `state_management_package` | The package to use for state management. | bloc | Enumeration |
 <!-- VARIABLES -->
