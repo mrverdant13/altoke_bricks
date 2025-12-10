@@ -58,6 +58,7 @@ Create a [Flutter][link_docs_flutter] app, **_al toque_** (_quickly_).
   Support for the following platforms:
   - Android
   - iOS
+  - Web
 
 - **Mono-repo setup:**\
   Supported with [Dart Workspaces][link_docs_dart_workspaces] and [Melos][link_docs_melos], with pre-configured scripts for common tasks.
