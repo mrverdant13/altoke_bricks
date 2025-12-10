@@ -31,7 +31,7 @@ dev_dependencies:
   build_runner: ^2.10.4{{#use_riverpod}}
   custom_lint: ^0.8.1{{/use_riverpod}}
   {{#use_bloc}}
-  dart_mappable_builder: ^4.6.1{{/use_bloc}}
+  dart_mappable_builder: ^4.6.3{{/use_bloc}}
   flutter_test:
     sdk: flutter
   {{#use_go_router}}go_router_builder: ^4.1.3
