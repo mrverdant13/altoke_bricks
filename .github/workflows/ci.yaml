@@ -78,5 +78,11 @@ jobs:
         run: dart pub global activate coverage 1.9.0
       - name: Initialize melos
         run: melos bootstrap
-      - name: Run tests, merge coverage data, and check coverage
-        run: melos run test.ci && melos run coverage.merge && melos run coverage.check
+      - name: Run tests
+        run: melos run test.ci
+      - name: Merge coverage data
+        run: melos run coverage.merge
+      - name: Log merged coverage data
+        run: cat coverage/filtered.lcov.info
+      - name: Check coverage
+        run: melos run coverage.check
