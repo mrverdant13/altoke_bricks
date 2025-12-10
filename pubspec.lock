@@ -273,6 +273,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.15.0"
+  coverde:
+    dependency: "direct dev"
+    description:
+      path: "packages/coverde_cli"
+      ref: "019bf05daa0d9032d43a296ba67aff1cee154a8e"
+      resolved-ref: "019bf05daa0d9032d43a296ba67aff1cee154a8e"
+      url: "https://github.com/mrverdant13/coverde.git"
+    source: git
+    version: "0.2.0+2"
   crypto:
     dependency: transitive
     description:
@@ -281,6 +290,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.7"
+  csslib:
+    dependency: transitive
+    description:
+      name: csslib
+      sha256: "09bad715f418841f976c77db72d5398dc1253c21fb9c0c7f0b0b985860b2d58e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   custom_lint:
     dependency: transitive
     description:
@@ -517,6 +534,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.3.0"
+  html:
+    dependency: transitive
+    description:
+      name: html
+      sha256: "6d1264f2dffa1b1101c25a91dff0dc2daee4c18e87cd8538729773c073dbf602"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.15.6"
   http:
     dependency: transitive
     description:
@@ -1122,6 +1147,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.0"
+  universal_io:
+    dependency: transitive
+    description:
+      name: universal_io
+      sha256: f63cbc48103236abf48e345e07a03ce5757ea86285ed313a6a032596ed9301e2
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.1"
   uuid:
     dependency: transitive
     description:
