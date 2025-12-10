@@ -38,7 +38,7 @@ dev_dependencies:
     git:
       url: https://github.com/mrverdant13/coverde.git
       ref: 019bf05daa0d9032d43a296ba67aff1cee154a8e
-      path: ./packages/coverde_cli/
+      path: packages/coverde_cli/
   #remove-end-x#
   #{{#use_dart_mappable}}x#
   dart_mappable_builder: ^4.6.3

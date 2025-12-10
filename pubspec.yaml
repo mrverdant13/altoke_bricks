@@ -9,7 +9,7 @@ dev_dependencies:
     git:
       url: https://github.com/mrverdant13/coverde.git
       ref: 019bf05daa0d9032d43a296ba67aff1cee154a8e
-      path: ./packages/coverde_cli/
+      path: packages/coverde_cli/
   melos: ^7.3.0
   very_good_analysis: ^10.0.0
 
@@ -45,7 +45,7 @@ melos:
           git:
             url: https://github.com/mrverdant13/coverde.git
             ref: 019bf05daa0d9032d43a296ba67aff1cee154a8e
-            path: ./packages/coverde_cli/
+            path: packages/coverde_cli/
         mason: ^0.1.2
         melos: ^7.3.0
         meta: ^1.17.0
@@ -115,7 +115,7 @@ melos:
     # Spell checking
     spellcheck:
       description: Run spell checking for the entire project
-      run: cspell lint --no-progress -c ./.cspell/cspell.yaml MELOS_ROOT_PATH/**
+      run: cspell lint --no-progress -c .cspell/cspell.yaml MELOS_ROOT_PATH/**
 
     # Formatting
     format:
@@ -179,8 +179,8 @@ melos:
         &&
         format_coverage
         --lcov
-        --in=./coverage/
-        --out=./coverage/lcov.info
+        --in=coverage/
+        --out=coverage/lcov.info
         --report-on=lib
         --check-ignore
         -b 'MELOS_PACKAGE_PATH'
@@ -260,8 +260,8 @@ melos:
         &&
         format_coverage
         --lcov
-        --in=./coverage/
-        --out=./coverage/lcov.info
+        --in=coverage/
+        --out=coverage/lcov.info
         --report-on=lib
         --check-ignore
         -b 'MELOS_PACKAGE_PATH'"
