@@ -14,13 +14,13 @@ vars:
     type: string
     description: A description of the project.
     prompt: What is the description of the project?
-  android_organization:
+  android_application_identifier:
     type: string
-    description: The organization of the Android project.
-    prompt: What is the organization of the Android project? If not provided, no Android project will be created.
+    description: The application identifier for the Android project.
+    prompt: What is the application identifier for the Android project? If not provided, no Android project will be created.
   ios_bundle_identifier:
     type: string
-    description: The bundle identifier of the iOS project.
+    description: The bundle identifier for the iOS project.
     prompt: What is the bundle identifier of the iOS project? If not provided, no iOS project will be created.
   include_web_platform:
     type: boolean
