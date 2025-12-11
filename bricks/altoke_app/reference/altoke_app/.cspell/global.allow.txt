@@ -1,5 +1,3 @@
 # Globally allowed words
+coverde
 pubspec
-/*w 1v w*/
-/*drop*/
-altoke

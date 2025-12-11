@@ -1,17 +1,9 @@
 # Globally allowed words
 altoke
-ansi
 circlecodesolution
 coverde
 felixangelov
-github
-isar
-lcov
-linux
-melos
 mrverdant13
-nullable
 pubspec
 riverpod
 sembast
-sqlite

@@ -20,33 +20,42 @@ dictionaryDefinitions:
   - name: global-allow
     path: ./global.allow.txt
     addWords: true
-  - name: android-allow
-    path: ./android.allow.txt
-    addWords: true
-  - name: ios-allow
-    path: ./ios.allow.txt
-    addWords: true
   - name: dart-allow
     path: ./dart.allow.txt
     addWords: true
   - name: ci-allow
     path: ./ci.allow.txt
     addWords: true
-dictionaries:
-  - global-allow
+  - name: altoke-app-global-allow
+    path: ../bricks/altoke_app/reference/altoke_app/.cspell/global.allow.txt
+  - name: altoke-app-dart-allow
+    path: ../bricks/altoke_app/reference/altoke_app/.cspell/dart.allow.txt
+  - name: altoke-app-android-allow
+    path: ../bricks/altoke_app/reference/altoke_app/.cspell/android.allow.txt
+  - name: altoke-app-ios-allow
+    path: ../bricks/altoke_app/reference/altoke_app/.cspell/ios.allow.txt
 useGitignore: true
 overrides:
-  - filename: "**/android/**/*"
+  - filename: "**"
     dictionaries:
-      - android-allow
-  - filename: "**/ios/**/*"
-    dictionaries:
-      - ios-allow
+      - global-allow
   - filename: "**/{*.dart,pubspec.yaml,.metadata,build.yaml,melos.yaml,*.drift}"
     dictionaries:
       - dart-allow
   - filename: "**/.github/**/*"
     dictionaries:
       - ci-allow
+  - filename: "**/altoke_app/**"
+    dictionaries:
+      - altoke-app-global-allow
+  - filename: "**/altoke_app/**/{*.dart,pubspec.yaml,.metadata,build.yaml,melos.yaml,*.drift}"
+    dictionaries:
+      - altoke-app-dart-allow
+  - filename: "**/altoke_app/**/android/**/*"
+    dictionaries:
+      - altoke-app-android-allow
+  - filename: "**/altoke_app/**/{ios/**/*,.metadata}"
+    dictionaries:
+      - altoke-app-ios-allow
 enableFiletypes:
   - github-actions-workflow
