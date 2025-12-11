@@ -53,24 +53,12 @@ melos:
         path: ^1.9.1
         test: ^1.26.3
         very_good_analysis: ^10.0.0
-      hooks:
-        pre:
-          run: melos run --include-private .bootstrap
     clean:
       hooks:
         pre:
           run: melos run --include-private .clean
 
   scripts:
-    .bootstrap:
-      private: true
-      # HACK: Workaround to avoid workspace bug
-      # https://github.com/flutter/flutter/issues/174205
-      run: >
-        cd MELOS_ROOT_PATH/bricks/altoke_app/reference/altoke_app/packages/app/
-        &&
-        flutter pub get
-
     # Clean-up
     .clean:
       private: true
