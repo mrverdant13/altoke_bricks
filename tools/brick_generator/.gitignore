@@ -8,3 +8,4 @@
 
 # Testing
 /coverage/
+/test/optimized_tests.dart

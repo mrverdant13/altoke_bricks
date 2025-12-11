@@ -5,6 +5,11 @@ environment:
   sdk: ">=3.10.0 <4.0.0"
 
 dev_dependencies:
+  coverde:
+    git:
+      url: https://github.com/mrverdant13/coverde.git
+      ref: 019bf05daa0d9032d43a296ba67aff1cee154a8e
+      path: packages/coverde_cli/
   melos: ^7.3.0
   very_good_analysis: ^10.0.0
 
@@ -36,6 +41,11 @@ melos:
       dev_dependencies:
         build_runner: ^2.10.4
         collection: ^1.19.1
+        coverde:
+          git:
+            url: https://github.com/mrverdant13/coverde.git
+            ref: 019bf05daa0d9032d43a296ba67aff1cee154a8e
+            path: packages/coverde_cli/
         mason: ^0.1.2
         melos: ^7.3.0
         meta: ^1.17.0
@@ -105,7 +115,7 @@ melos:
     # Spell checking
     spellcheck:
       description: Run spell checking for the entire project
-      run: cspell lint --no-progress -c ./.cspell/cspell.yaml MELOS_ROOT_PATH/**
+      run: cspell lint --no-progress -c .cspell/cspell.yaml MELOS_ROOT_PATH/**
 
     # Formatting
     format:
@@ -155,9 +165,24 @@ melos:
     test.dart:
       description: Test a Dart package
       run: >
-        dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random --color
+        dart pub run
+        coverde optimize-tests
+        --output test/optimized_tests.dart
         &&
-        format_coverage --lcov --in=./coverage/ --out=./coverage/lcov.info --report-on=lib --check-ignore -b 'MELOS_PACKAGE_PATH'
+        dart test
+        -x ci-only
+        --coverage=coverage
+        -r expanded
+        --test-randomize-ordering-seed random
+        --color
+        test/optimized_tests.dart
+        &&
+        format_coverage
+        --lcov
+        --in=coverage
+        --out=coverage/lcov.info
+        --report-on=lib
+        --check-ignore
       packageFilters:
         flutter: false
         dirExists:
@@ -169,7 +194,17 @@ melos:
         orderDependents: true
     test.flutter:
       description: Test a Flutter package
-      run: flutter test -x ci-only --coverage -r expanded --test-randomize-ordering-seed random
+      run: >
+        dart pub run
+        coverde optimize-tests
+        --output test/optimized_tests.dart
+        &&
+        flutter test
+        -x ci-only
+        --coverage
+        -r expanded
+        --test-randomize-ordering-seed random
+        test/optimized_tests.dart
       packageFilters:
         flutter: true
         dirExists:
@@ -203,19 +238,75 @@ melos:
     test.ci:
       description: Test all packages (CI)
       run: >
-        melos exec --order-dependents --fail-fast --no-flutter --dir-exists="test" --depends-on=test -- "dart test -x ci-only --coverage=coverage -r expanded --test-randomize-ordering-seed random && format_coverage --lcov --in=./coverage/ --out=./coverage/lcov.info --report-on=lib --check-ignore -b 'MELOS_PACKAGE_PATH'"
+        melos exec
+        --order-dependents
+        --fail-fast
+        --no-flutter
+        --dir-exists="test"
+        --depends-on=test
+        --
+        "
+        dart pub run
+        coverde optimize-tests
+        --output test/optimized_tests.dart
         &&
-        melos exec --order-dependents --fail-fast --flutter --dir-exists="test" --depends-on=flutter_test -- "flutter test -x ci-only --coverage -r expanded --test-randomize-ordering-seed random"
+        dart test
+        -x ci-only
+        --coverage=coverage
+        -r expanded
+        --test-randomize-ordering-seed random
+        test/optimized_tests.dart
+        &&
+        format_coverage
+        --lcov
+        --in=coverage
+        --out=coverage/lcov.info
+        --report-on=lib
+        --check-ignore"
+        &&
+        melos exec
+        --order-dependents
+        --fail-fast
+        --flutter
+        --dir-exists="test"
+        --depends-on=flutter_test
+        --
+        "
+        dart pub run
+        coverde optimize-tests
+        --output test/optimized_tests.dart
+        &&
+        flutter test
+        -x ci-only
+        --coverage
+        -r expanded
+        --test-randomize-ordering-seed random
+        test/optimized_tests.dart"
     coverage.merge:
       description: Merge all packages coverage trace files ignoring data related to generated files
       run: >
-        coverde rm MELOS_ROOT_PATH/coverage/filtered.lcov.info
+        dart pub run
+        coverde rm
+        MELOS_ROOT_PATH/coverage/filtered.lcov.info
         &&
-        melos exec -c 1 --file-exists=coverage/lcov.info -- "coverde filter --input ./coverage/lcov.info --output MELOS_ROOT_PATH/coverage/filtered.lcov.info --paths-parent MELOS_PACKAGE_PATH  --filters \.drift\.dart,\.freezed\.dart,\.g\.dart,\.gr\.dart,\.mapper\.dart"
+        melos exec
+        -c 1
+        --file-exists=coverage/lcov.info
+        --
+        "
+        dart pub run
+        coverde filter
+        --input=coverage/lcov.info
+        --output=MELOS_ROOT_PATH/coverage/filtered.lcov.info
+        --base-directory=MELOS_ROOT_PATH
+        --filters \.drift\.dart,\.freezed\.dart,\.g\.dart,\.gr\.dart,\.mapper\.dart"
     coverage.check:
       description: Check test coverage
       run: >
-        coverde check -i MELOS_ROOT_PATH/coverage/filtered.lcov.info 100
+        dart pub run
+        coverde check
+        -i MELOS_ROOT_PATH/coverage/filtered.lcov.info
+        100
 
     # Documentation
     docs.root:

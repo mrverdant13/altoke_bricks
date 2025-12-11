@@ -8,6 +8,7 @@
 
 # Testing
 /coverage/
+/test/optimized_tests.dart
 
 # Platforms
 /**/packages/app/linux/
