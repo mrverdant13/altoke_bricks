@@ -53,6 +53,9 @@ Future<void> bootstrap( /*{{#use_riverpod}}*/ {
 // dart format on
   /*remove-end*/
   WidgetsFlutterBinding.ensureInitialized();
+  /*{{#use_bloc}}*/
+  Bloc.observer = const AppBlocObserver();
+  /*{{/use_bloc}}*/
   /*{{#use_auto_route}}x*/
   final appRouter = AppRouter();
   /*x{{/use_auto_route}}x*/
