@@ -3,6 +3,5 @@ allprojects
 dists
 jvmargs
 metaspace
-mipmap
 subproject
 subprojects
