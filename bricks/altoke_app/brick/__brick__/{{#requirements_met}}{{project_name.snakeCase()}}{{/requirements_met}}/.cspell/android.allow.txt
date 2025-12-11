@@ -1,0 +1,7 @@
+# Allowed words for Android files
+allprojects
+dists
+jvmargs
+metaspace
+subproject
+subprojects
