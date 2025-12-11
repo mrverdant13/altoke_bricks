@@ -1,8 +1,9 @@
 {
   "recommendations": [
     "dart-code.flutter",
+    "circlecodesolution.ccs-flutter-color",
+    "felixangelov.bloc",
     "google.arb-editor",
-    "blaugold.melos-code",
     "streetsidesoftware.code-spell-checker",
     "felixangelov.mason",
     "github.vscode-github-actions",

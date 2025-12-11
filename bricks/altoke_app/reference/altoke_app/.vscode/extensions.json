@@ -1,8 +1,12 @@
 {
   "recommendations": [
+    "circlecodesolution.ccs-flutter-color",
     "dart-code.flutter",
+    /*{{#use_bloc}}x*/
+    "felixangelov.bloc",
+    /*{{/use_bloc}}x*/
     "google.arb-editor",
-    "streetsidesoftware.code-spell-checker",
     "redhat.vscode-yaml",
+    "streetsidesoftware.code-spell-checker",
   ],
 }
