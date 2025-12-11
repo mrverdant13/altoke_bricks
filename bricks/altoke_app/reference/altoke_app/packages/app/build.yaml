@@ -18,6 +18,7 @@ targets:
         generate_for:
           - lib/routing/router.dart
       #x{{/use_go_router}}#
+      #{{#use_riverpod}}x#
       riverpod_generator:
         options:
           provider_name_suffix: Pod
@@ -31,3 +32,4 @@ targets:
           #x-remove-start#
           - lib/app/state/state.dart
           #remove-end#
+      #x{{/use_riverpod}}#
