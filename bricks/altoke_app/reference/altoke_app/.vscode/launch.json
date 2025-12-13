@@ -14,8 +14,9 @@
         "--no-pub",
         "--flavor=${input:FLAVOR}",
         /*x{{#include_web_platform}}*/
-        "--web-port=3000"
+        "--web-port=3000",
         /*x{{/include_web_platform}}*/
+        "--dart-define-from-file=env.${input:FLAVOR}.json",
       ],
     },
   ],

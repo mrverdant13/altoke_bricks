@@ -12,7 +12,8 @@
       "toolArgs": [
         "--no-pub",
         "--flavor=${input:FLAVOR}",
-        "--web-port=3000"
+        "--web-port=3001",
+        "--dart-define-from-file=env.${input:FLAVOR}.json",
       ],
       "program": "lib/bootstrap/main_${input:FLAVOR}.dart",
     },
