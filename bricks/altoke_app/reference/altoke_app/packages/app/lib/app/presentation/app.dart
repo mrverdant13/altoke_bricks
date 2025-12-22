@@ -44,7 +44,7 @@ class MyApp extends ConsumerWidget {
               child: FlavorBanner(child: InitializationWrapper(child: router)),
             );
         /*x-remove-start*/
-        return RouterPackageSwitcherWrapper(child: child);
+        return OptionsSwitcherWrapper(child: child);
         /*remove-end*/
       },
     );
@@ -55,9 +55,13 @@ class MyApp extends ConsumerWidget {
 // coverage:ignore-start
 @Dependencies([
   SelectedRouterPackage,
+  SelectedStateManagementPackage,
 ])
-class RouterPackageSwitcherWrapper extends ConsumerWidget {
-  const RouterPackageSwitcherWrapper({required this.child, super.key});
+class OptionsSwitcherWrapper extends ConsumerWidget {
+  const OptionsSwitcherWrapper({
+    required this.child,
+    super.key,
+  });
 
   final Widget child;
 
@@ -65,6 +69,9 @@ class RouterPackageSwitcherWrapper extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final routerPackageIdentifier = ref.watch(
       selectedRouterPackagePod.select((package) => package.identifier),
+    );
+    final stateManagementPackageIdentifier = ref.watch(
+      selectedStateManagementPackagePod.select((package) => package.identifier),
     );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -83,21 +90,40 @@ class RouterPackageSwitcherWrapper extends ConsumerWidget {
             left: false,
             right: false,
             maintainBottomViewPadding: true,
-            child: Center(
-              child: TextButton.icon(
-                onPressed: () {
-                  final selectedRouterPackageIndex = ref
-                      .read(selectedRouterPackagePod)
-                      .index;
-                  final newRouterPackageIndex =
-                      (selectedRouterPackageIndex + 1) %
-                      RouterPackage.values.length;
-                  ref.read(selectedRouterPackagePod.notifier).value =
-                      RouterPackage.values[newRouterPackageIndex];
-                },
-                label: Text(routerPackageIdentifier),
-                icon: const Icon(Icons.travel_explore),
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton.icon(
+                  onPressed: () {
+                    final selectedRouterPackageIndex = ref
+                        .read(selectedRouterPackagePod)
+                        .index;
+                    final newRouterPackageIndex =
+                        (selectedRouterPackageIndex + 1) %
+                        RouterPackage.values.length;
+                    ref.read(selectedRouterPackagePod.notifier).value =
+                        RouterPackage.values[newRouterPackageIndex];
+                  },
+                  label: Text(routerPackageIdentifier),
+                  icon: const Icon(Icons.travel_explore),
+                ),
+                TextButton.icon(
+                  onPressed: () {
+                    final selectedStateManagementPackageIndex = ref
+                        .read(selectedStateManagementPackagePod)
+                        .index;
+                    final newStateManagementPackageIndex =
+                        (selectedStateManagementPackageIndex + 1) %
+                        StateManagementPackage.values.length;
+                    ref
+                        .read(selectedStateManagementPackagePod.notifier)
+                        .value = StateManagementPackage
+                        .values[newStateManagementPackageIndex];
+                  },
+                  label: Text(stateManagementPackageIdentifier),
+                  icon: const Icon(Icons.dashboard),
+                ),
+              ],
             ),
           ),
         ),
