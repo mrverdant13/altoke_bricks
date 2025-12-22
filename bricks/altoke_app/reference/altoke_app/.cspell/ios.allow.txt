@@ -17,6 +17,7 @@ infoplist
 iphoneos
 libc
 lldb
+lldbinit
 lproj
 msgsend
 nonnull
@@ -30,6 +31,7 @@ podhelper
 realpath
 runpath
 sandboxing
+scrroot
 sdkroot
 sourcecode
 subviews
