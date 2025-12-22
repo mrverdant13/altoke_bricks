@@ -1,0 +1,11 @@
+// The base name of the app
+APP_NAME_BASE = Altoke App
+
+// The base product bundle identifier
+PRODUCT_BUNDLE_IDENTIFIER_BASE = com.mrverdant13.altokeApp
+
+// The resolved app name
+APP_NAME = $(APP_NAME_PREFIX)$(APP_NAME_BASE)
+
+// The resolved product bundle identifier
+PRODUCT_BUNDLE_IDENTIFIER = $(PRODUCT_BUNDLE_IDENTIFIER_BASE)$(PRODUCT_BUNDLE_IDENTIFIER_SUFFIX)
