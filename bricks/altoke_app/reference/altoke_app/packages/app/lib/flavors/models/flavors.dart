@@ -34,10 +34,9 @@ set debugFlavor(AppFlavor? value) {
 @pragma('dart2js:prefer-inline')
 AppFlavor get flavor {
   AppFlavor? flavor;
-  flavor = [
-    ...AppFlavor.values,
-    null,
-  ].firstWhere((flavor) => flavor?.identifier == appFlavor);
+  if (AppFlavor.dev.identifier == appFlavor) flavor = AppFlavor.dev;
+  if (AppFlavor.stg.identifier == appFlavor) flavor = AppFlavor.stg;
+  if (AppFlavor.prod.identifier == appFlavor) flavor = AppFlavor.prod;
   if (kDebugMode && debugFlavor != null) flavor = debugFlavor;
   if (flavor != null) return flavor;
   throw FlutterError(
