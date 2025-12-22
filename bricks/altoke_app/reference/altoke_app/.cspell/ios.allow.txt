@@ -31,7 +31,7 @@ podhelper
 realpath
 runpath
 sandboxing
-scrroot
+SRCROOT
 sdkroot
 sourcecode
 subviews
