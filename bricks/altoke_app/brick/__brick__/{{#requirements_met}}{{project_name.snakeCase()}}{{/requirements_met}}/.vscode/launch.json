@@ -13,7 +13,8 @@
       "toolArgs": [
         "--no-pub",
         "--flavor=${input:FLAVOR}",{{#include_web_platform}}
-        "--web-port=3000"{{/include_web_platform}}
+        "--web-port=3000",{{/include_web_platform}}
+        "--dart-define-from-file=env.${input:FLAVOR}.json",
       ],
     },
   ],

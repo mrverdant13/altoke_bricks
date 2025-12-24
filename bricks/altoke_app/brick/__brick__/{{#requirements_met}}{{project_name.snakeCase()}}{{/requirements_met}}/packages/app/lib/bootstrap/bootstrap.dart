@@ -30,6 +30,9 @@ Future<void> bootstrap( {{#use_riverpod}} {
 } {{/use_riverpod}} ) async {
 
   WidgetsFlutterBinding.ensureInitialized();
+  {{#use_bloc}}
+  Bloc.observer = const AppBlocObserver();
+  {{/use_bloc}}
   {{#use_auto_route}}final appRouter = AppRouter();{{/use_auto_route}}{{#use_go_router}}final goRouter = GoRouter(
     routes: $appRoutes,
     debugLogDiagnostics: kDebugMode,

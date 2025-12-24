@@ -5,6 +5,7 @@ ignorePaths:
   - "**/.cspell/*.txt"
   - "**/.git/**"
   - "**/.gitignore"
+  - "**/app_localizations*.dart"
   - "**/pubspec.lock"
   - "**/*.arb"
   - "**/*.g.dart"
@@ -13,14 +14,28 @@ enableGlobDot: true
 dictionaryDefinitions:
   - name: global-allow
     path: ./global.allow.txt
-    addWords: true
   - name: dart-allow
     path: ./dart.allow.txt
-    addWords: true
-dictionaries:
-  - global-allow
+  - name: android-allow
+    path: ./android.allow.txt
+  - name: ios-allow
+    path: ./ios.allow.txt
+  - name: macos-allow
+    path: ./macos.allow.txt
 useGitignore: true
 overrides:
-  - filename: "**/{*.dart,pubspec.yaml,.metadata,build.yaml,melos.yaml}"
+  - filename: "**"
+    dictionaries:
+      - global-allow
+  - filename: "**/android/**/*"
+    dictionaries:
+      - android-allow
+  - filename: "**/{ios/**/*,.metadata}"
+    dictionaries:
+      - ios-allow
+  - filename: "**/{macos/**/*,.metadata}"
+    dictionaries:
+      - macos-allow
+  - filename: "**/{*.dart,pubspec.yaml,.metadata,build.yaml,melos.yaml,*.drift}"
     dictionaries:
       - dart-allow

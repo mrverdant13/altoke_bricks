@@ -20,28 +20,17 @@ melos:
         meta: ^1.16.0
       dev_dependencies:
         very_good_analysis: ^10.0.0
-      hooks:
-        pre:
-          run: melos run --include-private .bootstrap
     clean:
       hooks:
         pre:
           run: melos run --include-private .clean
 
   scripts:
-    .bootstrap:
-      private: true
-      # HACK: Workaround to avoid workspace bug
-      # https://github.com/flutter/flutter/issues/174205
-      run: >
-        cd MELOS_ROOT_PATH/packages/app/
-        &&
-        flutter pub get
     .clean:
       description: Deep clean-up
       # Preserves FVM internal folder to avoid re-installing the Flutter SDK when developing locally.
       run: >
-        git clean --exclude="!.fvm" -dfX MELOS_ROOT_PATH
+        git clean --exclude="!.fvm" --exclude="!env.*.json" -dfX MELOS_ROOT_PATH
 
     # Code generation
     gen:
