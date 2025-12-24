@@ -1,4 +1,4 @@
-<!-- cspell:ignore xcassets -->
+<!-- cspell:ignore xcassets, xcconfig -->
 # 👣 First Steps
 
 ## Update the app icon
