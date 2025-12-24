@@ -19,4 +19,5 @@
 /**/__brick__/**/*.gr.dart
 /**/__brick__/**/*.lock
 /**/__brick__/**/*.mapper.dart
+/**/__brick__/**/macos/**/GeneratedPluginRegistrant.swift
 /**/reference/**/*.lock
