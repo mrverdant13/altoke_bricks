@@ -58,6 +58,7 @@ Create a [Flutter][link_docs_flutter] app, **_al toque_** (_quickly_).
   Support for the following platforms:
   - Android
   - iOS
+  - macOS
   - Web
 
 - **Mono-repo setup:**\
@@ -73,7 +74,7 @@ Create a [Flutter][link_docs_flutter] app, **_al toque_** (_quickly_).
   VSCode integration with the [Code Spell Checker extension][link_docs_vsc_spell_checker].
 
 - **Flavoring:**\
-  Support for the following environments (Android & iOS only):
+  Support for the following environments (Android, iOS & macOS only):
   - 🔴 Development
   - 🟡 Staging
   - 🟢 Production
