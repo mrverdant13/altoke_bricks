@@ -34,6 +34,8 @@ dictionaryDefinitions:
     path: ../bricks/altoke_app/reference/altoke_app/.cspell/android.allow.txt
   - name: altoke-app-ios-allow
     path: ../bricks/altoke_app/reference/altoke_app/.cspell/ios.allow.txt
+  - name: altoke-app-macos-allow
+    path: ../bricks/altoke_app/reference/altoke_app/.cspell/macos.allow.txt
 useGitignore: true
 overrides:
   - filename: "**"
@@ -57,5 +59,8 @@ overrides:
   - filename: "**/altoke_app/**/{ios/**/*,.metadata}"
     dictionaries:
       - altoke-app-ios-allow
+  - filename: "**/altoke_app/**/{macos/**/*,.metadata}"
+    dictionaries:
+      - altoke-app-macos-allow
 enableFiletypes:
   - github-actions-workflow

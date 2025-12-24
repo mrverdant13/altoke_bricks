@@ -50,8 +50,6 @@
 # Project platforms
 /**/__brick__/**/linux/
 /**/reference_app/**/linux/
-/**/__brick__/**/macos/
-/**/reference_app/**/macos/
 /**/__brick__/**/windows/
 /**/reference_app/**/windows/
 
