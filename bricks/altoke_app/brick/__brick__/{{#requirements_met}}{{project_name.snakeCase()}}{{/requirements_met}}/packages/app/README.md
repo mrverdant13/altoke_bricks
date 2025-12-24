@@ -49,6 +49,17 @@ This project uses the [`go_router` package][pub_package_go_router] to support de
 
 _For more information, see the [`go_router` package][pub_package_go_router] documentation._{{/use_go_router}}
 
+## Flavoring
+
+This project supports the following flavors:
+- Development
+- Staging
+- Production
+
+### Environment variables
+
+The environment variables are stored in the `env.<flavor>.json` files, located in the root directory of the project.
+
 ## Internationalization
 
 This project follows the [official internationalization guide for Flutter][flutter_docs_internationalization_link], and relies on the [flutter_localizations][pub_package_flutter_localizations] and [intl][pub_package_intl] packages.

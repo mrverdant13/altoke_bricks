@@ -1,9 +1,9 @@
- <!-- cspell:ignore xcassets -->
+<!-- cspell:ignore xcassets, xcconfig -->
 # 👣 First Steps
 
-## 1. Update the app icon.
-
-### 1.1. Android
+## Update the app icon
+{{#include_android_platform}}
+### Android
 
 #### Resources:
 
@@ -40,8 +40,8 @@ For each flavor, you should create an adaptive icon by following these steps:
  12. Select the desired flavor as the **Source set**.
  13. Review the outputs.
  14. Click on the **Finish** button.
-
-### 1.2. iOS
+{{/include_android_platform}}{{#include_ios_platform}}
+### iOS
 
 #### Resources:
 
@@ -49,6 +49,8 @@ For each flavor, you should create an adaptive icon by following these steps:
   Design guidance on iOS app icons.
 - [Configuring your app icon](https://developer.apple.com/documentation/xcode/configuring-your-app-icon)\
   Developer guidance on how to setup your app icon.
+- [App Icon Generator](https://www.appicon.co/)\
+  Tool to generate all required iOS app icons from a single source image.
 
 #### Opinionated guide
 
@@ -57,13 +59,40 @@ For each flavor, you should create an app icon by following these steps:
 1. Right click on the `ios` folder in the `app` package.
 2. Select the **Open in Xcode** action.
 3. In Xcode, pick the **Project navigator** view.
-4. Select the `Runner/Runner/Assets` (`Assets.xcassets`) folder.
+4. Select the `Runner/Runner/Resources/Assets` (`Assets.xcassets`) folder.
 5.  Select the asset corresponding to the app icon for the desired flavor.
 6. In the attributes of the set, make sure to use **Single Size** for **iOS**.
 7. In the attributes of the set, select the desired **Appearance**.
 8.  Double click on the desired asset variant placeholder and pick the desired image (it should be a 1024x1024 PNG file).
 
-### 1.3. Web
+As long as you pick the **Single Size** option, you will be required to pick a single 1024x1024 PNG file, which you can generate using the [App Icon Generator](https://www.appicon.co/) tool.
+{{/include_ios_platform}}{{#include_macos_platform}}
+### macOS
+
+#### Resources:
+
+- [App icons](https://developer.apple.com/design/human-interface-guidelines/app-icons)\
+  Design guidance on macOS app icons.
+- [Configuring your app icon](https://developer.apple.com/documentation/xcode/configuring-your-app-icon)\
+  Developer guidance on how to setup your app icon.
+- [App Icon Generator](https://www.appicon.co/)\
+  Tool to generate all required macOS app icons from a single source image.
+
+#### Opinionated guide
+
+For each flavor, you should create an app icon by following these steps:
+
+1. Right click on the `macos` folder in the `app` package.
+2. Select the **Open in Xcode** action.
+3. In Xcode, pick the **Project navigator** view.
+4. Select the `Runner/Runner/Resources/Assets` (`Assets.xcassets`) folder.
+5.  Select the asset corresponding to the app icon for the desired flavor.
+6. In the attributes of the set, make sure to use **All Sizes** for **macOS**.
+7.  Double click on the desired asset variant placeholder and pick the desired image.
+
+Since **All Sizes** option is selected, you will be required to provide PNG files for the following sizes: 16x16, 32x32, 128x128, 256x256, 512x512 and 1024x1024. You can generate these files using the [App Icon Generator](https://www.appicon.co/) tool.
+{{/include_macos_platform}}{{#include_web_platform}}
+### Web
 
 #### Resources:
 
@@ -79,3 +108,16 @@ For the web platform, you should update the following assets:
 1. Update the `web/favicon.png` file with your app's icon (16x16 pixels PNG).
 2. Update the PNG files under the `web/icons/` directory with your app's icon (192x192 and 512x512 pixels PNG).
 3. Adjust the `theme_color` and `background_color` fields in the `web/manifest.json` file to match your app's branding.
+{{/include_web_platform}}
+{{#include_macos_platform}}
+## Update other platform-specific information
+
+### macOS
+
+#### `PRODUCT_OWNER` configuration key
+
+The `PRODUCT_OWNER` configuration variable is used to resolve the copyright displayed in the app's information.
+
+1. Open the `packages/app/{{#include_macos_platform}}macos{{/include_macos_platform}}/Runner/Configs/BaseAppInfo.xcconfig` file.
+2. Set the `PRODUCT_OWNER` variable to your company or organization name.
+{{/include_macos_platform}}
