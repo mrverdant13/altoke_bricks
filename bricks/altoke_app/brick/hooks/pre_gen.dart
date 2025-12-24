@@ -3,7 +3,7 @@ import 'package:router_package/router_package.dart';
 import 'package:state_management_package/state_management_package.dart';
 
 import 'lib/src/android_application_identifier.dart';
-import 'lib/src/ios_bundle_identifier.dart';
+import 'lib/src/apple_bundle_identifier.dart';
 
 void run(HookContext context) {
   context.vars.addAll(context.routerPackageSelectionMap);
@@ -26,8 +26,15 @@ void run(HookContext context) {
     case null:
       context.vars.addAll({'include_ios_platform': false});
     case final String rawIosBundleIdentifier:
-      IosBundleIdentifier(rawIosBundleIdentifier);
+      AppleBundleIdentifier(rawIosBundleIdentifier);
       context.vars.addAll({'include_ios_platform': true});
+  }
+  switch (context.vars['macos_bundle_identifier']) {
+    case null:
+      context.vars.addAll({'include_macos_platform': false});
+    case final String rawMacosBundleIdentifier:
+      AppleBundleIdentifier(rawMacosBundleIdentifier);
+      context.vars.addAll({'include_macos_platform': true});
   }
   context.vars.addAll({'requirements_met': true});
 }

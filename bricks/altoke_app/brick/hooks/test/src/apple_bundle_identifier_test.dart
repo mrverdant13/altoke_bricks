@@ -1,8 +1,8 @@
-import 'package:altoke_app_brick_hooks/src/ios_bundle_identifier.dart';
+import 'package:altoke_app_brick_hooks/src/apple_bundle_identifier.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('IosBundleIdentifier', () {
+  group('$AppleBundleIdentifier', () {
     test('can be created if its value is valid', () {
       final candidates = [
         'com.example.app',
@@ -13,7 +13,7 @@ void main() {
       ];
       for (final candidate in candidates) {
         expect(
-          () => IosBundleIdentifier(candidate),
+          () => AppleBundleIdentifier(candidate),
           returnsNormally,
           reason: 'The value "$candidate" should be valid.',
         );
@@ -28,7 +28,7 @@ void main() {
       ];
       for (final candidate in candidates) {
         expect(
-          () => IosBundleIdentifier(candidate),
+          () => AppleBundleIdentifier(candidate),
           throwsArgumentError,
           reason: 'The value "$candidate" should be invalid.',
         );

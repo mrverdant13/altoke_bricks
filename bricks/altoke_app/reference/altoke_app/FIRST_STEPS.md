@@ -1,7 +1,7 @@
 <!-- cspell:ignore xcassets -->
 # 👣 First Steps
 
-## Update the app icon.
+## Update the app icon
 <!--{{#include_android_platform}}-->
 ### Android
 
@@ -112,3 +112,15 @@ For the web platform, you should update the following assets:
 2. Update the PNG files under the `web/icons/` directory with your app's icon (192x192 and 512x512 pixels PNG).
 3. Adjust the `theme_color` and `background_color` fields in the `web/manifest.json` file to match your app's branding.
 <!--{{/include_web_platform}}-->
+<!--x{{#include_macos_platform}}-->
+## Update other platform-specific information
+
+### macOS
+
+#### `PRODUCT_OWNER` configuration key
+
+The `PRODUCT_OWNER` configuration variable is used to resolve the copyright displayed in the app's information.
+
+1. Open the `packages/app/macos/Runner/Configs/BaseAppInfo.xcconfig` file.
+2. Set the `PRODUCT_OWNER` variable to your company or organization name.
+<!--{{/include_macos_platform}}-->

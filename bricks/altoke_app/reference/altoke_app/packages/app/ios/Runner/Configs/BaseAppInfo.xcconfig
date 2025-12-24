@@ -2,7 +2,7 @@
 APP_NAME_BASE = Altoke App
 
 // The base product bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER_BASE = com.mrverdant13.altokeApp
+PRODUCT_BUNDLE_IDENTIFIER_BASE = com.mrverdant13.altokeIosApp
 
 // The resolved app name
 APP_NAME = $(APP_NAME_PREFIX)$(APP_NAME_BASE)
