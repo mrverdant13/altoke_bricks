@@ -1,5 +1,5 @@
-/// {@template altoke_app_hooks.ios_bundle_identifier}
-/// **A unique identifier for a bundle.**
+/// {@template altoke_app_hooks.apple_bundle_identifier}
+/// **A unique identifier for an Apple bundle.**
 ///
 /// A bundle ID uniquely identifies a single app throughout the system.
 ///
@@ -12,30 +12,30 @@
 /// See more:
 /// https://developer.apple.com/documentation/bundleresources/information-property-list/cfbundleidentifier
 /// {@endtemplate}
-extension type IosBundleIdentifier._(String value) {
-  /// Creates a new [IosBundleIdentifier] from a [String] [value].
+extension type AppleBundleIdentifier._(String value) {
+  /// Creates a new [AppleBundleIdentifier] from a [String] [value].
   ///
   /// ---
   ///
-  /// {@macro altoke_app_hooks.ios_bundle_identifier}
-  factory IosBundleIdentifier(String value) {
+  /// {@macro altoke_app_hooks.apple_bundle_identifier}
+  factory AppleBundleIdentifier(String value) {
     validate(value);
-    return IosBundleIdentifier._(value);
+    return AppleBundleIdentifier._(value);
   }
 
-  /// The pattern that a valid iOS Bundle Identifier must match.
+  /// The pattern that a valid Apple Bundle Identifier must match.
   static final pattern = RegExp(r'^[a-zA-Z0-9-.]*[a-zA-Z0-9-]$');
 
-  /// Evaluates if the given [value] is a valid iOS Bundle Identifier.
+  /// Evaluates if the given [value] is a valid Apple Bundle Identifier.
   ///
-  /// Throws an [ArgumentError] if the [value] is not a valid iOS Bundle
+  /// Throws an [ArgumentError] if the [value] is not a valid Apple Bundle
   /// Identifier.
   static void validate(String value) {
     if (pattern.hasMatch(value)) return;
     throw ArgumentError.value(
       value,
       'value',
-      'Invalid iOS Bundle Identifier. '
+      'Invalid Apple Bundle Identifier. '
           'It must match the pattern: $pattern',
     );
   }

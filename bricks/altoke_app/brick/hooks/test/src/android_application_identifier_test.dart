@@ -2,7 +2,7 @@ import 'package:altoke_app_brick_hooks/src/android_application_identifier.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('AndroidApplicationIdentifier', () {
+  group('$AndroidApplicationIdentifier', () {
     test('can be created if its value is valid', () {
       final candidates = [
         'com.example.app',

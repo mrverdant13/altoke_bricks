@@ -22,6 +22,10 @@ vars:
     type: string
     description: The bundle identifier for the iOS project.
     prompt: What is the bundle identifier of the iOS project? If not provided, no iOS project will be created.
+  macos_bundle_identifier:
+    type: string
+    description: The bundle identifier for the macOS project.
+    prompt: What is the bundle identifier of the macOS project? If not provided, no macOS project will be created.
   include_web_platform:
     type: boolean
     description: Whether to include the web platform.
