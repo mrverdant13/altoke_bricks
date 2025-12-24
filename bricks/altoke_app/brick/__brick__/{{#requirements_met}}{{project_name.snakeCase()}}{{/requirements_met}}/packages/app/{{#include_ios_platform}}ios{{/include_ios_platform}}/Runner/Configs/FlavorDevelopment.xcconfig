@@ -1,0 +1,8 @@
+// The prefix for the app name
+APP_NAME_PREFIX = [DEV] $()
+
+// The suffix for the product bundle identifier
+PRODUCT_BUNDLE_IDENTIFIER_SUFFIX = .dev
+
+// The suffix for the app icon set
+APP_ICON_SET_SUFFIX = -dev

@@ -1,0 +1,20 @@
+// The base name of the app
+APP_NAME_BASE = {{project_name.titleCase()}}
+
+// The base product bundle identifier
+PRODUCT_BUNDLE_IDENTIFIER_BASE = {{macos_bundle_identifier}}
+
+// The product owner
+PRODUCT_OWNER =
+
+// ************************************************** RESOLVED VALUES **************************************************
+
+// The resolved app name
+APP_NAME = $(APP_NAME_PREFIX)$(APP_NAME_BASE)
+PRODUCT_NAME = $(APP_NAME)
+
+// The resolved product bundle identifier
+PRODUCT_BUNDLE_IDENTIFIER = $(PRODUCT_BUNDLE_IDENTIFIER_BASE)$(PRODUCT_BUNDLE_IDENTIFIER_SUFFIX)
+
+// The resolved copyright displayed in application information
+PRODUCT_COPYRIGHT = Copyright © 2025 $(PRODUCT_OWNER). All rights reserved.

@@ -13,7 +13,7 @@ targets:
           - lib/routing/router.dart{{/use_auto_route}}{{#use_go_router}}go_router_builder:
         generate_for:
           - lib/routing/router.dart{{/use_go_router}}
-      riverpod_generator:
+      {{#use_riverpod}}riverpod_generator:
         options:
           provider_name_suffix: Pod
           provider_family_name_suffix: Pod
@@ -22,4 +22,4 @@ targets:
           - lib/**/**_pods.dart
           - lib/**/pod.dart
           - lib/**/pods.dart
-          - lib/routing/router.dart
+          - lib/routing/router.dart{{/use_riverpod}}

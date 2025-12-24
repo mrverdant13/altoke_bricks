@@ -45,3 +45,8 @@
 # Testing
 /coverage/
 /test/optimized_tests.dart
+
+# Environment variables
+env.development.json
+env.staging.json
+env.production.json
