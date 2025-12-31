@@ -275,6 +275,7 @@ melos:
       run: >
         dart pub run
         coverde rm
+        --no-dry-run
         MELOS_ROOT_PATH/coverage/filtered.lcov.info
         &&
         melos exec
