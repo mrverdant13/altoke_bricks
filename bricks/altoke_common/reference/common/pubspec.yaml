@@ -14,7 +14,7 @@ dependencies:
   dart_mappable: ^4.6.1
   #x{{/use_dart_mappable}}x#
   #x{{#use_equatable}}x#
-  equatable: ^2.0.7
+  equatable: ^2.0.8
   #x{{/use_equatable}}x#
   #x{{#use_freezed}}x#
   freezed_annotation: ^3.1.0
