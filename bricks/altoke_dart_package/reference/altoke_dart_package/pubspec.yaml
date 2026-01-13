@@ -11,7 +11,7 @@ environment:
 
 dev_dependencies:
   #{{#use_code_generation}}x#
-  build_runner: ^2.10.4
+  build_runner: ^2.10.5
   #{{/use_code_generation}}x#
   #remove-start#
   coverde:

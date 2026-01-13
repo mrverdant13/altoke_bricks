@@ -16,7 +16,7 @@ dependencies:
     path: ../shell
 
 dev_dependencies:
-  build_runner: ^2.10.4
+  build_runner: ^2.10.5
   coverde:
     git:
       url: https://github.com/mrverdant13/coverde.git

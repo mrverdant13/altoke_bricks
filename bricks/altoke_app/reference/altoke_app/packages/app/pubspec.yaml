@@ -62,7 +62,7 @@ dev_dependencies:
   #x{{#use_bloc}}#
   bloc_test: ^10.0.0
   #x{{/use_bloc}}#
-  build_runner: ^2.10.4
+  build_runner: ^2.10.5
   #remove-start#
   coverde:
     git:

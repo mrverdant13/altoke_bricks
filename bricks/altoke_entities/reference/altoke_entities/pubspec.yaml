@@ -31,7 +31,7 @@ dependencies:
 
 dev_dependencies:
   #x{{#use_code_generation}}#
-  build_runner: ^2.10.4
+  build_runner: ^2.10.5
   #{{/use_code_generation}}#
   #remove-start#
   coverde:
