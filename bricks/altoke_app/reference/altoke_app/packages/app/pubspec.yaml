@@ -21,7 +21,7 @@ dependencies:
   dart_mappable: ^4.6.1
   #x{{/use_bloc}}#
   #remove-start#
-  drift: ^2.30.0
+  drift: ^2.30.1
   drift_flutter: ^0.2.8
   drift_local_database:
     path: ../../../../../altoke_local_database/reference/local_database/drift_local_database/
