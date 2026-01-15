@@ -96,19 +96,19 @@ mixin $TasksRouteData on GoRouteData {
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(SelectedRouterPackage)
-const selectedRouterPackagePod = SelectedRouterPackageProvider._();
+final selectedRouterPackagePod = SelectedRouterPackageProvider._();
 
 final class SelectedRouterPackageProvider
     extends $NotifierProvider<SelectedRouterPackage, RouterPackage> {
-  const SelectedRouterPackageProvider._()
+  SelectedRouterPackageProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
         name: r'selectedRouterPackagePod',
         isAutoDispose: false,
-        dependencies: const <ProviderOrFamily>[],
-        $allTransitiveDependencies: const <ProviderOrFamily>[],
+        dependencies: <ProviderOrFamily>[],
+        $allTransitiveDependencies: <ProviderOrFamily>[],
       );
 
   @override
@@ -135,7 +135,6 @@ abstract class _$SelectedRouterPackage extends $Notifier<RouterPackage> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<RouterPackage, RouterPackage>;
     final element =
         ref.element
@@ -145,6 +144,6 @@ abstract class _$SelectedRouterPackage extends $Notifier<RouterPackage> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
