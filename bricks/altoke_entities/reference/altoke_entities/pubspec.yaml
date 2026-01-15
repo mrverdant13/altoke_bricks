@@ -34,11 +34,7 @@ dev_dependencies:
   build_runner: ^2.10.5
   #{{/use_code_generation}}#
   #remove-start#
-  coverde:
-    git:
-      url: https://github.com/mrverdant13/coverde.git
-      ref: 019bf05daa0d9032d43a296ba67aff1cee154a8e
-      path: packages/coverde_cli/
+  coverde: ^0.3.0
   #remove-end-x#
   #{{#use_dart_mappable}}x#
   dart_mappable_builder: ^4.6.3

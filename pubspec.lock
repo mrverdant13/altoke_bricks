@@ -237,10 +237,10 @@ packages:
     dependency: transitive
     description:
       name: code_builder
-      sha256: "11654819532ba94c34de52ff5feb52bd81cba1de00ef2ed622fd50295f9d4243"
+      sha256: "6a6cab2ba4680d6423f34a9b972a4c9a94ebe1b62ecec4e1a1f2cba91fd1319d"
       url: "https://pub.dev"
     source: hosted
-    version: "4.11.0"
+    version: "4.11.1"
   collection:
     dependency: transitive
     description:
@@ -276,12 +276,11 @@ packages:
   coverde:
     dependency: "direct dev"
     description:
-      path: "packages/coverde_cli"
-      ref: "019bf05daa0d9032d43a296ba67aff1cee154a8e"
-      resolved-ref: "019bf05daa0d9032d43a296ba67aff1cee154a8e"
-      url: "https://github.com/mrverdant13/coverde.git"
-    source: git
-    version: "0.2.0+2"
+      name: coverde
+      sha256: "2fd909212e6bcb87411c5af259d2e50dd9c0a00eded08f8923ccb61ba81ea997"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.0+1"
   crypto:
     dependency: transitive
     description:
