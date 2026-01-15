@@ -10,7 +10,7 @@ part of 'async_tasks_pod.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(asyncTasks)
-const asyncTasksPod = AsyncTasksProvider._();
+final asyncTasksPod = AsyncTasksProvider._();
 
 final class AsyncTasksProvider
     extends
@@ -20,15 +20,15 @@ final class AsyncTasksProvider
           Stream<Iterable<Task>>
         >
     with $FutureModifier<Iterable<Task>>, $StreamProvider<Iterable<Task>> {
-  const AsyncTasksProvider._()
+  AsyncTasksProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
         name: r'asyncTasksPod',
         isAutoDispose: true,
-        dependencies: const <ProviderOrFamily>[localTasksDaoPod],
-        $allTransitiveDependencies: const <ProviderOrFamily>{
+        dependencies: <ProviderOrFamily>[localTasksDaoPod],
+        $allTransitiveDependencies: <ProviderOrFamily>{
           AsyncTasksProvider.$allTransitiveDependencies0,
           AsyncTasksProvider.$allTransitiveDependencies1,
           AsyncTasksProvider.$allTransitiveDependencies2,
@@ -38,16 +38,16 @@ final class AsyncTasksProvider
         },
       );
 
-  static const $allTransitiveDependencies0 = localTasksDaoPod;
-  static const $allTransitiveDependencies1 =
+  static final $allTransitiveDependencies0 = localTasksDaoPod;
+  static final $allTransitiveDependencies1 =
       LocalTasksDaoProvider.$allTransitiveDependencies0;
-  static const $allTransitiveDependencies2 =
+  static final $allTransitiveDependencies2 =
       LocalTasksDaoProvider.$allTransitiveDependencies1;
-  static const $allTransitiveDependencies3 =
+  static final $allTransitiveDependencies3 =
       LocalTasksDaoProvider.$allTransitiveDependencies2;
-  static const $allTransitiveDependencies4 =
+  static final $allTransitiveDependencies4 =
       LocalTasksDaoProvider.$allTransitiveDependencies3;
-  static const $allTransitiveDependencies5 =
+  static final $allTransitiveDependencies5 =
       LocalTasksDaoProvider.$allTransitiveDependencies4;
 
   @override

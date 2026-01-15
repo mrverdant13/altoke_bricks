@@ -10,25 +10,25 @@ part of 'async_initialization_pod.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(asyncInitialization)
-const asyncInitializationPod = AsyncInitializationProvider._();
+final asyncInitializationPod = AsyncInitializationProvider._();
 
 final class AsyncInitializationProvider
     extends $FunctionalProvider<AsyncValue<void>, void, FutureOr<void>>
     with $FutureModifier<void>, $FutureProvider<void> {
-  const AsyncInitializationProvider._()
+  AsyncInitializationProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
         name: r'asyncInitializationPod',
         isAutoDispose: true,
-        dependencies: const <ProviderOrFamily>[
+        dependencies: <ProviderOrFamily>[
           asyncApplicationDocumentsDirectoryPod,
           asyncTemporaryDirectoryPod,
           asyncDriftLocalDatabasePod,
           asyncHiveInitializationPod,
         ],
-        $allTransitiveDependencies: const <ProviderOrFamily>{
+        $allTransitiveDependencies: <ProviderOrFamily>{
           AsyncInitializationProvider.$allTransitiveDependencies0,
           AsyncInitializationProvider.$allTransitiveDependencies1,
           AsyncInitializationProvider.$allTransitiveDependencies2,
@@ -36,11 +36,11 @@ final class AsyncInitializationProvider
         },
       );
 
-  static const $allTransitiveDependencies0 =
+  static final $allTransitiveDependencies0 =
       asyncApplicationDocumentsDirectoryPod;
-  static const $allTransitiveDependencies1 = asyncTemporaryDirectoryPod;
-  static const $allTransitiveDependencies2 = asyncDriftLocalDatabasePod;
-  static const $allTransitiveDependencies3 = asyncHiveInitializationPod;
+  static final $allTransitiveDependencies1 = asyncTemporaryDirectoryPod;
+  static final $allTransitiveDependencies2 = asyncDriftLocalDatabasePod;
+  static final $allTransitiveDependencies3 = asyncHiveInitializationPod;
 
   @override
   String debugGetCreateSourceHash() => _$asyncInitializationHash();

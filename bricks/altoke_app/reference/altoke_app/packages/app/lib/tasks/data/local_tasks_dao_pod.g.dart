@@ -10,24 +10,24 @@ part of 'local_tasks_dao_pod.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(localTasksDao)
-const localTasksDaoPod = LocalTasksDaoProvider._();
+final localTasksDaoPod = LocalTasksDaoProvider._();
 
 final class LocalTasksDaoProvider
     extends $FunctionalProvider<LocalTasksDao, LocalTasksDao, LocalTasksDao>
     with $Provider<LocalTasksDao> {
-  const LocalTasksDaoProvider._()
+  LocalTasksDaoProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
         name: r'localTasksDaoPod',
         isAutoDispose: true,
-        dependencies: const <ProviderOrFamily>[
+        dependencies: <ProviderOrFamily>[
           selectedLocalDatabasePackagePod,
           asyncDriftLocalDatabasePod,
           asyncHiveInitializationPod,
         ],
-        $allTransitiveDependencies: const <ProviderOrFamily>{
+        $allTransitiveDependencies: <ProviderOrFamily>{
           LocalTasksDaoProvider.$allTransitiveDependencies0,
           LocalTasksDaoProvider.$allTransitiveDependencies1,
           LocalTasksDaoProvider.$allTransitiveDependencies2,
@@ -36,13 +36,13 @@ final class LocalTasksDaoProvider
         },
       );
 
-  static const $allTransitiveDependencies0 = selectedLocalDatabasePackagePod;
-  static const $allTransitiveDependencies1 = asyncDriftLocalDatabasePod;
-  static const $allTransitiveDependencies2 =
+  static final $allTransitiveDependencies0 = selectedLocalDatabasePackagePod;
+  static final $allTransitiveDependencies1 = asyncDriftLocalDatabasePod;
+  static final $allTransitiveDependencies2 =
       AsyncDriftLocalDatabaseProvider.$allTransitiveDependencies0;
-  static const $allTransitiveDependencies3 =
+  static final $allTransitiveDependencies3 =
       AsyncDriftLocalDatabaseProvider.$allTransitiveDependencies1;
-  static const $allTransitiveDependencies4 = asyncHiveInitializationPod;
+  static final $allTransitiveDependencies4 = asyncHiveInitializationPod;
 
   @override
   String debugGetCreateSourceHash() => _$localTasksDaoHash();
