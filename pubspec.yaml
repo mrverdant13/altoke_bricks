@@ -171,7 +171,7 @@ melos:
       run: >
         dart run coverde optimize-tests
         --include 'test/**_test.dart'
-        --output 'test/optimized_test.dart'
+        --output test/optimized_test.dart
         &&
         dart test
         --color
@@ -195,7 +195,7 @@ melos:
       run: >
         dart run coverde optimize-tests
         --include 'test/**_test.dart'
-        --output 'test/optimized_test.dart'
+        --output test/optimized_test.dart
         &&
         flutter test
         --coverage
@@ -249,7 +249,7 @@ melos:
         -- "
         dart run coverde optimize-tests
         --include 'test/**_test.dart'
-        --output 'test/optimized_test.dart'
+        --output test/optimized_test.dart
         &&
         dart test
         --coverage-path coverage/lcov.info
@@ -269,7 +269,7 @@ melos:
         -- "
         dart run coverde optimize-tests
         --include 'test/**_test.dart'
-        --output 'test/optimized_test.dart'
+        --output test/optimized_test.dart
         &&
         flutter test
         --coverage
@@ -291,7 +291,7 @@ melos:
         "
         dart run coverde filter
         --base-directory MELOS_ROOT_PATH
-        --filters '\.drift\.dart,\.freezed\.dart,\.g\.dart,\.gr\.dart,\.mapper\.dart'
+        --filters \.drift\.dart,\.freezed\.dart,\.g\.dart,\.gr\.dart,\.mapper\.dart
         --input coverage/lcov.info
         --output MELOS_ROOT_PATH/coverage/filtered.lcov.info
         "
