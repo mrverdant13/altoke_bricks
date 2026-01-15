@@ -10,7 +10,7 @@ part of 'state.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(SelectedStateManagementPackage)
-const selectedStateManagementPackagePod =
+final selectedStateManagementPackagePod =
     SelectedStateManagementPackageProvider._();
 
 final class SelectedStateManagementPackageProvider
@@ -19,15 +19,15 @@ final class SelectedStateManagementPackageProvider
           SelectedStateManagementPackage,
           StateManagementPackage
         > {
-  const SelectedStateManagementPackageProvider._()
+  SelectedStateManagementPackageProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
         name: r'selectedStateManagementPackagePod',
         isAutoDispose: false,
-        dependencies: const <ProviderOrFamily>[],
-        $allTransitiveDependencies: const <ProviderOrFamily>[],
+        dependencies: <ProviderOrFamily>[],
+        $allTransitiveDependencies: <ProviderOrFamily>[],
       );
 
   @override
@@ -55,7 +55,6 @@ abstract class _$SelectedStateManagementPackage
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref =
         this.ref as $Ref<StateManagementPackage, StateManagementPackage>;
     final element =
@@ -66,6 +65,6 @@ abstract class _$SelectedStateManagementPackage
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
