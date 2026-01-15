@@ -176,6 +176,7 @@ melos:
         dart test
         --color
         --coverage-path coverage/lcov.info
+        --coverage-package MELOS_PACKAGE_NAME
         --exclude-tags ci-only
         --reporter expanded
         --test-randomize-ordering-seed random
@@ -252,6 +253,7 @@ melos:
         &&
         dart test
         --coverage-path coverage/lcov.info
+        --coverage-package MELOS_PACKAGE_NAME
         --exclude-tags ci-only
         --reporter expanded
         --test-randomize-ordering-seed random
