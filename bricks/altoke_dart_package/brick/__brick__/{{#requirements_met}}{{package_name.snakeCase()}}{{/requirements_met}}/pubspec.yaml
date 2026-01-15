@@ -7,6 +7,6 @@ environment:
   sdk: ">=3.10.0 <4.0.0"
 
 dev_dependencies:
-  {{#use_code_generation}}build_runner: ^2.10.4
+  {{#use_code_generation}}build_runner: ^2.10.5
   {{/use_code_generation}}test: ^1.26.3
   very_good_analysis: ^10.0.0
