@@ -70,9 +70,6 @@ dev_dependencies:
       ref: 019bf05daa0d9032d43a296ba67aff1cee154a8e
       path: packages/coverde_cli/
   #remove-end-x#
-  #x{{#use_riverpod}}#
-  custom_lint: ^0.8.1
-  #x{{/use_riverpod}}#
   #x{{#use_bloc}}#
   dart_mappable_builder: ^4.6.3
   #x{{/use_bloc}}#
