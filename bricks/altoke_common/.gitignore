@@ -8,7 +8,7 @@
 
 # Testing
 /coverage/
-/test/optimized_tests.dart
+/test/optimized_test.dart
 
 # Generated source files
 /**/__brick__/**/*.freezed.dart
