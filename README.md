@@ -91,8 +91,7 @@ Create a [Flutter][link_docs_flutter] app, **_al toque_** (_quickly_).
 - **Strict lint rules:**\
   Enforced by:
   - [`very_good_analysis`][link_pub_package_very_good_analysis] for [native Dart & Flutter rules][link_docs_dart_and_flutter_linter_rules].
-  - [`custom_lint`][link_pub_package_custom_lint] for the following specialized rules:
-    - [`riverpod_lint`][link_pub_package_riverpod_lint].
+  - [`riverpod_lint`][link_pub_package_riverpod_lint] for Riverpod rules.
 
 - **Testing:**\
   Tests with 100% coverage.
@@ -194,7 +193,6 @@ Create a package that provides general-purpose caches, **_al toque_** (_quickly_
 [link_docs_vsc_arb_editor]: https://marketplace.visualstudio.com/items?itemName=Google.arb-editor
 [link_docs_vsc_spell_checker]: https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker
 [link_pub_package_auto_route]: https://pub.dev/packages/auto_route
-[link_pub_package_custom_lint]: https://pub.dev/packages/custom_lint
 [link_pub_package_flutter_bloc]: https://pub.dev/packages/flutter_bloc
 [link_pub_package_flutter_riverpod]: https://pub.dev/packages/flutter_riverpod
 [link_pub_package_go_router]: https://pub.dev/packages/go_router
