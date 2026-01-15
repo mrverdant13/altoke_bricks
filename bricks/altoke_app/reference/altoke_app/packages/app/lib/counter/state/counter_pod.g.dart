@@ -10,18 +10,18 @@ part of 'counter_pod.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(Counter)
-const counterPod = CounterProvider._();
+final counterPod = CounterProvider._();
 
 final class CounterProvider extends $NotifierProvider<Counter, int> {
-  const CounterProvider._()
+  CounterProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
         name: r'counterPod',
         isAutoDispose: true,
-        dependencies: const <ProviderOrFamily>[],
-        $allTransitiveDependencies: const <ProviderOrFamily>[],
+        dependencies: <ProviderOrFamily>[],
+        $allTransitiveDependencies: <ProviderOrFamily>[],
       );
 
   @override
@@ -47,7 +47,6 @@ abstract class _$Counter extends $Notifier<int> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<int, int>;
     final element =
         ref.element
@@ -57,6 +56,6 @@ abstract class _$Counter extends $Notifier<int> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }

@@ -10,7 +10,7 @@ part of 'database_pod.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(asyncDriftLocalDatabase)
-const asyncDriftLocalDatabasePod = AsyncDriftLocalDatabaseProvider._();
+final asyncDriftLocalDatabasePod = AsyncDriftLocalDatabaseProvider._();
 
 final class AsyncDriftLocalDatabaseProvider
     extends
@@ -20,26 +20,26 @@ final class AsyncDriftLocalDatabaseProvider
           FutureOr<LocalDatabase>
         >
     with $FutureModifier<LocalDatabase>, $FutureProvider<LocalDatabase> {
-  const AsyncDriftLocalDatabaseProvider._()
+  AsyncDriftLocalDatabaseProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
         name: r'asyncDriftLocalDatabasePod',
         isAutoDispose: true,
-        dependencies: const <ProviderOrFamily>[
+        dependencies: <ProviderOrFamily>[
           asyncApplicationDocumentsDirectoryPod,
           asyncTemporaryDirectoryPod,
         ],
-        $allTransitiveDependencies: const <ProviderOrFamily>[
+        $allTransitiveDependencies: <ProviderOrFamily>[
           AsyncDriftLocalDatabaseProvider.$allTransitiveDependencies0,
           AsyncDriftLocalDatabaseProvider.$allTransitiveDependencies1,
         ],
       );
 
-  static const $allTransitiveDependencies0 =
+  static final $allTransitiveDependencies0 =
       asyncApplicationDocumentsDirectoryPod;
-  static const $allTransitiveDependencies1 = asyncTemporaryDirectoryPod;
+  static final $allTransitiveDependencies1 = asyncTemporaryDirectoryPod;
 
   @override
   String debugGetCreateSourceHash() => _$asyncDriftLocalDatabaseHash();
@@ -60,27 +60,25 @@ String _$asyncDriftLocalDatabaseHash() =>
     r'ac1f01566115b44079e3bbb40fde0cda3b1fcedb';
 
 @ProviderFor(asyncHiveInitialization)
-const asyncHiveInitializationPod = AsyncHiveInitializationProvider._();
+final asyncHiveInitializationPod = AsyncHiveInitializationProvider._();
 
 final class AsyncHiveInitializationProvider
     extends $FunctionalProvider<AsyncValue<void>, void, FutureOr<void>>
     with $FutureModifier<void>, $FutureProvider<void> {
-  const AsyncHiveInitializationProvider._()
+  AsyncHiveInitializationProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
         name: r'asyncHiveInitializationPod',
         isAutoDispose: true,
-        dependencies: const <ProviderOrFamily>[
-          asyncApplicationDocumentsDirectoryPod,
-        ],
-        $allTransitiveDependencies: const <ProviderOrFamily>[
+        dependencies: <ProviderOrFamily>[asyncApplicationDocumentsDirectoryPod],
+        $allTransitiveDependencies: <ProviderOrFamily>[
           AsyncHiveInitializationProvider.$allTransitiveDependencies0,
         ],
       );
 
-  static const $allTransitiveDependencies0 =
+  static final $allTransitiveDependencies0 =
       asyncApplicationDocumentsDirectoryPod;
 
   @override
@@ -101,21 +99,21 @@ String _$asyncHiveInitializationHash() =>
     r'fa87d413f216fdfc116f2cd053c53e3ea1a05dea';
 
 @ProviderFor(SelectedLocalDatabasePackage)
-const selectedLocalDatabasePackagePod =
+final selectedLocalDatabasePackagePod =
     SelectedLocalDatabasePackageProvider._();
 
 final class SelectedLocalDatabasePackageProvider
     extends
         $NotifierProvider<SelectedLocalDatabasePackage, LocalDatabasePackage> {
-  const SelectedLocalDatabasePackageProvider._()
+  SelectedLocalDatabasePackageProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
         name: r'selectedLocalDatabasePackagePod',
         isAutoDispose: false,
-        dependencies: const <ProviderOrFamily>[],
-        $allTransitiveDependencies: const <ProviderOrFamily>[],
+        dependencies: <ProviderOrFamily>[],
+        $allTransitiveDependencies: <ProviderOrFamily>[],
       );
 
   @override
@@ -143,7 +141,6 @@ abstract class _$SelectedLocalDatabasePackage
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<LocalDatabasePackage, LocalDatabasePackage>;
     final element =
         ref.element
@@ -153,6 +150,6 @@ abstract class _$SelectedLocalDatabasePackage
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }
