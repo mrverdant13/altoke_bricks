@@ -6,7 +6,7 @@ resolution: workspace
 
 environment:
   sdk: ">=3.10.0 <4.0.0"
-  flutter: ">=3.38.2 <4.0.0"
+  flutter: ">=3.38.7 <4.0.0"
 
 dependencies:
   #remove-start#
@@ -90,6 +90,9 @@ dev_dependencies:
   riverpod_lint: ^3.1.0
   #x{{/use_riverpod}}#
   very_good_analysis: ^10.0.0
+
+dependency_overrides:
+  test_api: ^0.7.9
 
 flutter:
   generate: true

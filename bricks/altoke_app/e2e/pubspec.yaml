@@ -18,5 +18,5 @@ dev_dependencies:
     path: ../../../tools/shell
   state_management_package:
     path: ../../../tools/state_management_package
-  test: ^1.26.3
+  test: ^1.29.0
   very_good_analysis: ^10.0.0

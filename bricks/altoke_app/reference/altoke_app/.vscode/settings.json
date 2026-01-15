@@ -37,5 +37,5 @@
       "strings": true,
     },
   },
-  "dart.flutterSdkPath": ".fvm/versions/3.38.2",
+  "dart.flutterSdkPath": ".fvm/versions/3.38.7",
 }

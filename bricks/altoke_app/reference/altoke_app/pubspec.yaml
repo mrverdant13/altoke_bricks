@@ -8,7 +8,7 @@ resolution: workspace
 
 environment:
   sdk: ">=3.10.0 <4.0.0"
-  flutter: ">=3.38.2 <4.0.0"
+  flutter: ">=3.38.7 <4.0.0"
 
 dev_dependencies:
   melos: ^7.3.0
@@ -19,7 +19,7 @@ melos:
     bootstrap:
       environment:
         sdk: ">=3.10.0 <4.0.0"
-        flutter: ">=3.38.2 <4.0.0"
+        flutter: ">=3.38.7 <4.0.0"
       dependencies:
         meta: ^1.16.0
       dev_dependencies:

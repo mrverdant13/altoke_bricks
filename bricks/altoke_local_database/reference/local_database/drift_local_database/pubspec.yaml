@@ -32,5 +32,5 @@ dev_dependencies:
   coverde: ^0.3.0
   #remove-end-x#
   drift_dev: ^2.30.1
-  test: ^1.26.3
+  test: ^1.29.0
   very_good_analysis: ^10.0.0

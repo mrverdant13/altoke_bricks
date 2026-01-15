@@ -5,7 +5,7 @@ environment:
   sdk: ">=3.10.0 <4.0.0"
 
 dev_dependencies:
-  coverde: ^0.3.0
+  coverde: ^0.3.0+1
   melos: ^7.3.0
   very_good_analysis: ^10.0.0
 
@@ -27,7 +27,7 @@ melos:
     bootstrap:
       environment:
         sdk: ">=3.10.0 <4.0.0"
-        flutter: ">=3.38.2 <4.0.0"
+        flutter: ">=3.38.7 <4.0.0"
       dependencies:
         collection: ^1.19.1
         intl: ^0.20.2
@@ -43,12 +43,13 @@ melos:
         meta: ^1.17.0
         mocktail: ^1.0.4
         path: ^1.9.1
-        test: ^1.26.3
+        test: ^1.29.0
         very_good_analysis: ^10.0.0
     clean:
       hooks:
         pre:
-          run: melos run --include-private .clean
+          run: >
+            melos run --include-private .clean
 
   scripts:
     # Clean-up
@@ -58,19 +59,29 @@ melos:
       # Preserves FVM internal folder to avoid re-installing the Flutter SDK when developing locally.
       # Preserves platform-specific folders to keep them for local development.
       run: >
-        git clean --exclude="!.fvm" --exclude="!env.*.json" --exclude="!linux" --exclude="!macos" --exclude="!web" --exclude="!windows" -dfX MELOS_ROOT_PATH
+        git clean
+        --exclude="!.fvm"
+        --exclude="!env.*.json"
+        --exclude="!linux"
+        --exclude="!macos"
+        --exclude="!web"
+        --exclude="!windows"
+        -dfX
+        MELOS_ROOT_PATH
 
     # Code generation
     gen:
-      description: Generate code for a package
-      run: dart run build_runner build --delete-conflicting-outputs
-      packageFilters:
-        dependsOn:
-          - build_runner
+      description: Run code generation for a package
+      run: >
+        dart run build_runner build
+        --delete-conflicting-outputs
       exec:
         concurrency: 1
         failFast: true
         orderDependents: true
+      packageFilters:
+        dependsOn:
+          - build_runner
     gen.l10n:
       description: Generate l10n code for a package
       run: flutter gen-l10n
@@ -81,26 +92,42 @@ melos:
         concurrency: 1
         failFast: true
     gen.all:
-      description: Generate code for all packages
+      description: Run code generation for all packages
       steps:
         - gen
         - gen.l10n
     gen.all.fast:
-      description: Generate code for all packages (multi-threaded)
+      description: Run code generation for all packages (multi-threaded)
       run: >
-        melos exec --depends-on=build_runner --order-dependents -- "dart run build_runner build --delete-conflicting-outputs"
+        melos exec
+        --depends-on build_runner
+        --order-dependents
+        -- "
+        dart run build_runner build
+        --delete-conflicting-outputs
+        "
         &&
-        melos exec --file-exists=l10n.yaml --order-dependents -- "flutter gen-l10n"
+        melos exec
+        --file-exists l10n.yaml
+        --order-dependents
+        -- "
+        flutter gen-l10n
+        "
 
     # Spell checking
     spellcheck:
       description: Run spell checking for the entire project
-      run: cspell lint --no-progress -c .cspell/cspell.yaml MELOS_ROOT_PATH/**
+      run: >
+        cspell lint
+        --config .cspell/cspell.yaml
+        --no-progress
+        "MELOS_ROOT_PATH/**"
 
     # Formatting
     format:
       description: Format a package
-      run: dart format .
+      run: >
+        dart format .
       exec:
         concurrency: 1
       packageFilters:
@@ -112,167 +139,165 @@ melos:
         - format
     format.ci:
       description: Format all packages (CI)
-      run: melos exec --ignore="*_brick_scope" --order-dependents --fail-fast -- "dart format --set-exit-if-changed ."
+      run: >
+        melos exec
+        --ignore "*_brick_scope"
+        --order-dependents
+        --fail-fast
+        -- "
+        dart format
+        --set-exit-if-changed
+        .
+        "
 
     # Analyzing
     analyze:
       description: Analyze a package
-      run: flutter analyze --no-pub
-    analyze.all:
-      description: Analyze all packages
-      steps:
-        - analyze
+      run: >
+        flutter analyze --no-pub
     analyze.ci:
       description: Analyze all packages (CI)
       run: >
-        flutter analyze --no-pub --fatal-infos --fatal-warnings --no-congratulate --no-preamble
+        flutter analyze
+        --no-pub
+        --fatal-infos
+        --fatal-warnings
+        --no-congratulate
+        --no-preamble
 
     # Testing & Coverage
     test.dart:
-      description: Test a Dart package
+      description: Run tests and generate coverage trace file for a Dart package
       run: >
-        dart pub run
-        coverde optimize-tests
-        --output test/optimized_tests.dart
+        dart run coverde optimize-tests
+        --include 'test/**_test.dart'
+        --output 'test/optimized_test.dart'
         &&
         dart test
-        -x ci-only
-        --coverage=coverage
-        -r expanded
-        --test-randomize-ordering-seed random
         --color
-        test/optimized_tests.dart
-        &&
-        format_coverage
-        --lcov
-        --in=coverage
-        --out=coverage/lcov.info
-        --report-on=lib
-        --check-ignore
-      packageFilters:
-        flutter: false
-        dirExists:
-          - test
-        dependsOn:
-          - test
+        --coverage-path coverage/lcov.info
+        --exclude-tags ci-only
+        --reporter expanded
+        --test-randomize-ordering-seed random
+        test/optimized_test.dart
       exec:
         concurrency: 1
         orderDependents: true
+      packageFilters:
+        dependsOn:
+          - test
+        dirExists:
+          - test
+        flutter: false
     test.flutter:
       description: Test a Flutter package
       run: >
-        dart pub run
-        coverde optimize-tests
-        --output test/optimized_tests.dart
+        dart run coverde optimize-tests
+        --include 'test/**_test.dart'
+        --output 'test/optimized_test.dart'
         &&
         flutter test
-        -x ci-only
         --coverage
-        -r expanded
+        --exclude-tags ci-only
+        --reporter expanded
         --test-randomize-ordering-seed random
-        test/optimized_tests.dart
+        test/optimized_test.dart
+      exec:
+        concurrency: 1
+        orderDependents: true
       packageFilters:
-        flutter: true
-        dirExists:
-          - test
         dependsOn:
           - flutter_test
-      exec:
-        concurrency: 1
-        orderDependents: true
+        dirExists:
+          - test
+        flutter: true
     test.e2e:
       description: Run E2E tests
-      run: dart test e2e --run-skipped -t e2e
+      run: >
+        dart test
+        --run-skipped
+        --tags e2e
+        e2e
       packageFilters:
-        flutter: false
         category:
           - e2e
-        fileExists:
-          - e2e/brick_e2e_test.dart
+        dirExists:
+          - e2e
+        flutter: false
       exec:
         concurrency: 1
         orderDependents: true
+    test.all:
+      description: Run tests for all packages
+      steps:
+        - test.dart
+        - test.flutter
     test.e2e.all:
       description: Run E2E tests for all packages
       steps:
         - test.e2e
-    test.all:
-      description: Test all packages
-      steps:
-        - test.dart
-        - test.flutter
     test.ci:
-      description: Test all packages (CI)
+      description: Run tests for all packages (CI)
       run: >
         melos exec
-        --order-dependents
+        --depends-on test
+        --dir-exists test
         --fail-fast
         --no-flutter
-        --dir-exists="test"
-        --depends-on=test
-        --
-        "
-        dart pub run
-        coverde optimize-tests
-        --output test/optimized_tests.dart
+        --order-dependents
+        -- "
+        dart run coverde optimize-tests
+        --include 'test/**_test.dart'
+        --output 'test/optimized_test.dart'
         &&
         dart test
-        -x ci-only
-        --coverage=coverage
-        -r expanded
+        --coverage-path coverage/lcov.info
+        --exclude-tags ci-only
+        --reporter expanded
         --test-randomize-ordering-seed random
-        test/optimized_tests.dart
-        &&
-        format_coverage
-        --lcov
-        --in=coverage
-        --out=coverage/lcov.info
-        --report-on=lib
-        --check-ignore"
+        test/optimized_test.dart
+        "
         &&
         melos exec
-        --order-dependents
+        --depends-on flutter_test
+        --dir-exists test
         --fail-fast
         --flutter
-        --dir-exists="test"
-        --depends-on=flutter_test
-        --
-        "
-        dart pub run
-        coverde optimize-tests
-        --output test/optimized_tests.dart
+        --order-dependents
+        -- "
+        dart run coverde optimize-tests
+        --include 'test/**_test.dart'
+        --output 'test/optimized_test.dart'
         &&
         flutter test
-        -x ci-only
         --coverage
-        -r expanded
+        --exclude-tags ci-only
+        --reporter expanded
         --test-randomize-ordering-seed random
-        test/optimized_tests.dart"
+        test/optimized_test.dart
+        "
     coverage.merge:
-      description: Merge all packages coverage trace files ignoring data related to generated files
+      description: Merge all packages coverage trace files
       run: >
-        dart pub run
-        coverde rm
+        dart run coverde rm
         --no-dry-run
         MELOS_ROOT_PATH/coverage/filtered.lcov.info
         &&
         melos exec
-        -c 1
-        --file-exists=coverage/lcov.info
+        --file-exists coverage/lcov.info
         --
         "
-        dart pub run
-        coverde filter
-        --input=coverage/lcov.info
-        --output=MELOS_ROOT_PATH/coverage/filtered.lcov.info
-        --base-directory=MELOS_ROOT_PATH
-        --filters \.drift\.dart,\.freezed\.dart,\.g\.dart,\.gr\.dart,\.mapper\.dart"
+        dart run coverde filter
+        --base-directory MELOS_ROOT_PATH
+        --filters '\.drift\.dart,\.freezed\.dart,\.g\.dart,\.gr\.dart,\.mapper\.dart'
+        --input coverage/lcov.info
+        --output MELOS_ROOT_PATH/coverage/filtered.lcov.info
+        "
     coverage.check:
       description: Check test coverage
       run: >
-        dart pub run
-        coverde check
-        -i MELOS_ROOT_PATH/coverage/filtered.lcov.info
+        dart run coverde check
+        --input MELOS_ROOT_PATH/coverage/filtered.lcov.info
         100
 
     # Documentation
