@@ -4,7 +4,9 @@ analyzer:
     - lib/**.g.dart{{#use_auto_route}}
     - lib/**.gr.dart{{/use_auto_route}}
   plugins:
-    - custom_lint
+    - riverpod_lint
 linter:
   rules:
     public_member_api_docs: false
+plugins:
+  riverpod_lint: ^3.1.0

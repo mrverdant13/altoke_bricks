@@ -19,18 +19,16 @@ dependencies:
   flutter_bloc: ^9.1.1{{/use_bloc}}
   flutter_localizations:
     sdk: flutter{{#use_riverpod}}
-  flutter_riverpod: ^3.0.3{{/use_riverpod}}
+  flutter_riverpod: ^3.1.0{{/use_riverpod}}
   {{#use_go_router}}go_router: ^17.0.1
   {{/use_go_router}}intl: ^0.20.2{{#use_riverpod}}
-  riverpod_annotation: ^3.0.3{{/use_riverpod}}
+  riverpod_annotation: ^4.0.0{{/use_riverpod}}
 
 dev_dependencies:
   {{#use_auto_route}}auto_route_generator: ^10.4.0
   {{/use_auto_route}}{{#use_bloc}}
   bloc_test: ^10.0.0{{/use_bloc}}
-  build_runner: ^2.10.4{{#use_riverpod}}
-  custom_lint: ^0.8.1{{/use_riverpod}}
-  {{#use_bloc}}
+  build_runner: ^2.10.5{{#use_bloc}}
   dart_mappable_builder: ^4.6.3{{/use_bloc}}
   flutter_test:
     sdk: flutter
@@ -39,8 +37,8 @@ dev_dependencies:
   mocktail: ^1.0.4
   path: ^1.9.1
   {{#use_riverpod}}
-  riverpod_generator: ^3.0.3
-  riverpod_lint: ^3.0.3{{/use_riverpod}}
+  riverpod_generator: ^4.0.0+1
+  riverpod_lint: ^3.1.0{{/use_riverpod}}
   very_good_analysis: ^10.0.0
 
 flutter:
