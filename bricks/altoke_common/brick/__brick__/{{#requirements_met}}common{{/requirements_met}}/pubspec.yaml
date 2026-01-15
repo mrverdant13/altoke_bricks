@@ -13,5 +13,5 @@ dependencies:
 dev_dependencies:{{#use_code_generation}}
   build_runner: ^2.10.5
   {{/use_code_generation}}{{#use_dart_mappable}}dart_mappable_builder: ^4.6.3{{/use_dart_mappable}}{{#use_freezed}}freezed: ^3.2.3{{/use_freezed}}
-  test: ^1.26.3
+  test: ^1.29.0
   very_good_analysis: ^10.0.0
