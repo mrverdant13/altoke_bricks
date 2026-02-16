@@ -87,7 +87,7 @@ dev_dependencies:
   #w 1v 2> w#
   #x{{#use_riverpod}}#
   riverpod_generator: ^4.0.0+1
-  riverpod_lint: ^3.1.0
+  riverpod_lint: ^3.1.3
   #x{{/use_riverpod}}#
   very_good_analysis: ^10.0.0
 
