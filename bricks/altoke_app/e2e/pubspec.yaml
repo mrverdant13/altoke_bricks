@@ -19,4 +19,4 @@ dev_dependencies:
   state_management_package:
     path: ../../../tools/state_management_package
   test: ^1.29.0
-  very_good_analysis: ^10.0.0
+  very_good_analysis: ^10.2.0
