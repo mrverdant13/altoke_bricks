@@ -34,7 +34,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   #x{{#use_riverpod}}#
-  flutter_riverpod: ^3.1.0
+  flutter_riverpod: ^3.2.1
   #x{{/use_riverpod}}#
   #{{#use_go_router}}x#
   go_router: ^17.0.1
