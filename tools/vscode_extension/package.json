@@ -1,0 +1,35 @@
+{
+  "name": "brick-generator",
+  "displayName": "Brick Generator",
+  "description": "Editor support for brick generator annotations in reference projects.",
+  "version": "0.0.1",
+  "publisher": "altoke-bricks",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrverdant13/altoke_bricks.git",
+    "directory": "tools/vscode_extension"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {},
+  "scripts": {
+    "compile": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "package": "npm run compile && vsce package --no-dependencies",
+    "vscode:prepublish": "npm run compile"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.2.1",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.7.2"
+  }
+}
