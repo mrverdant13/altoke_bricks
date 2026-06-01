@@ -137,11 +137,12 @@ old
     });
 
     group('validateDirectory', () {
-      final tempDir = Directory('./test/_validate_temp_');
+      late Directory tempDir;
 
       setUp(() {
-        if (tempDir.existsSync()) tempDir.deleteSync(recursive: true);
-        tempDir.createSync(recursive: true);
+        tempDir = Directory.systemTemp.createTempSync(
+          'annotation_validator_',
+        );
       });
 
       tearDown(() {
