@@ -370,14 +370,14 @@ melos:
     # VS Code extension
     vscode.compile:
       description: Compile the Brick Generator VS Code extension
-      run: npm run compile
+      run: pnpm run compile
       exec:
         concurrency: 1
       packageFilters:
         scope: vscode_extension
     vscode.package:
       description: Package the Brick Generator VS Code extension as a VSIX
-      run: npm run package
+      run: pnpm run package
       exec:
         concurrency: 1
       packageFilters:

@@ -2,10 +2,12 @@
 .vscode-test/**
 src/**
 .gitignore
+.dart_tool/**
+*.iml
 pubspec.yaml
 tsconfig.json
 esbuild.mjs
-package-lock.json
+pnpm-lock.yaml
 **/*.map
 **/*.ts
 node_modules/**

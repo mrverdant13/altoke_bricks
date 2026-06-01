@@ -3,6 +3,7 @@
   "displayName": "Brick Generator",
   "description": "Editor support for brick generator annotations in reference projects.",
   "version": "0.0.1",
+  "packageManager": "pnpm@10.12.1",
   "publisher": "altoke-bricks",
   "license": "MIT",
   "repository": {
@@ -22,8 +23,8 @@
   "scripts": {
     "compile": "node esbuild.mjs",
     "watch": "node esbuild.mjs --watch",
-    "package": "npm run compile && vsce package --no-dependencies",
-    "vscode:prepublish": "npm run compile"
+    "package": "pnpm run compile && vsce package --no-dependencies",
+    "vscode:prepublish": "pnpm run compile"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

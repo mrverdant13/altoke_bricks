@@ -7,6 +7,7 @@ This package is a scaffold: syntax highlighting, folding, diagnostics, and inlin
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) 20+
+- [pnpm](https://pnpm.io/) 10+ ([install](https://pnpm.io/installation))
 - [VS Code](https://code.visualstudio.com/) 1.85+
 
 ## Development
@@ -14,9 +15,9 @@ This package is a scaffold: syntax highlighting, folding, diagnostics, and inlin
 From this directory:
 
 ```bash
-npm install
-npm run compile   # one-off build → out/extension.js
-npm run watch     # rebuild on file changes
+pnpm install
+pnpm run compile   # one-off build → out/extension.js
+pnpm run watch     # rebuild on file changes
 ```
 
 Open the repository root in VS Code and use **Run Extension** from `tools/vscode_extension` (F5 with a launch config), or load the folder as a workspace folder.
@@ -24,8 +25,8 @@ Open the repository root in VS Code and use **Run Extension** from `tools/vscode
 ## Package a `.vsix`
 
 ```bash
-npm install
-npm run package
+pnpm install
+pnpm run package
 ```
 
 Produces `brick-generator-0.0.1.vsix` in this directory.
@@ -36,11 +37,11 @@ From the monorepo root you can also run:
 melos run vscode.package
 ```
 
-(after `melos bootstrap` and `npm install` in `tools/vscode_extension`).
+(after `melos bootstrap` and `pnpm install` in `tools/vscode_extension`).
 
 ## Install locally
 
-1. Build a VSIX: `npm run package`
+1. Build a VSIX: `pnpm run package`
 2. In VS Code: **Extensions** → `…` menu → **Install from VSIX…** → select the `.vsix` file.
 
 Or from the CLI:
