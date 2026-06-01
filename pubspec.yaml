@@ -367,6 +367,22 @@ melos:
         - brick.gen
         - brick.install
 
+    # VS Code extension
+    vscode.compile:
+      description: Compile the Brick Generator VS Code extension
+      run: npm run compile
+      exec:
+        concurrency: 1
+      packageFilters:
+        scope: vscode_extension
+    vscode.package:
+      description: Package the Brick Generator VS Code extension as a VSIX
+      run: npm run package
+      exec:
+        concurrency: 1
+      packageFilters:
+        scope: vscode_extension
+
     # Dependencies management
     deps.outdated:
       description: Check outdated dependencies
@@ -417,3 +433,4 @@ workspace:
   - tools/shell
   - tools/state_management_package
   - tools/value_equality_approach
+  - tools/vscode_extension
