@@ -339,6 +339,15 @@ melos:
       packageFilters:
         category:
           - scopes
+    brick.validate:
+      description: Validate brick reference annotations
+      run: >
+        dart run MELOS_ROOT_PATH/tools/brick_generator/lib/main.dart validate
+      exec:
+        concurrency: 1
+      packageFilters:
+        category:
+          - scopes
     brick.gen.all:
       description: Generate brick for all packages
       steps:
