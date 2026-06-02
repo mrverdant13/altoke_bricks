@@ -138,8 +138,6 @@ function findReplaceBlockRegions(text: string): ReplaceBlockRegions {
             expecting = 'start'; blockStart = undefined; withMarker = undefined;
           } else if (marker.kind === 'start') {
             blockStart = marker; withMarker = undefined; expecting = 'with';
-          } else {
-            withMarker = marker; expecting = 'end';
           }
           break;
       }
