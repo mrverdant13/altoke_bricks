@@ -8,10 +8,11 @@ The extension now provides annotation-aware highlighting for all currently suppo
 
 - Marker highlighting for: `remove-start/end`, `drop`, `replace-start/with/end`, `insert-start/end`, `partial v/^`, Mustache tags (`{{...}}`) inside comment annotations, and spacing directives (`w ... w`)
 - Block/range shading for: remove blocks, drop tails, replace original/replacement segments, insert blocks, and partial payload blocks
+- Code folding for: `remove-start/end`, `replace-start/end`, and matching `partial v/^` blocks (all three comment flavors)
 - Coverage across reference file types used in this monorepo, including `.dart`, `.sh`, `.yaml`, `.yml`, `.html`, `.xml`, `.md`, and ignore-style files such as `.gitignore`
 - Theme-friendly TextMate scopes with extension-provided defaults for both dark and light themes
 
-Folding, diagnostics, and inline preview land in follow-up changes.
+Diagnostics and inline preview land in follow-up changes.
 
 ## Customizing annotation colors
 
