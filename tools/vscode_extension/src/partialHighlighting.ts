@@ -58,7 +58,7 @@ function collectPartialMarkers(
   for (const match of text.matchAll(expression)) {
     const offset = match.index;
     if (offset === undefined) continue;
-    markers.push({ kind, offset, length: match[0].length, name: (match[1] ?? '').trim() });
+    markers.push({ kind, offset, length: match[0].length, name: match[1] ?? '' });
   }
 
   return markers;
