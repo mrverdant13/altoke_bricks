@@ -5,9 +5,9 @@ import { matchToRange } from './rangeUtils';
 import { isSupportedBrickFile } from './supportedFiles';
 
 const SPACING_MARKER_PATTERNS = [
-  /\/\*w (?:\d+[v>] )*w\*\//g,
-  /#w (?:\d+[v>] )*w#/g,
-  /<!--w (?:\d+[v>] )*w-->/g,
+  /\/\*w ?(?:\d+[v>] ?)* ?w\*\//g,
+  /#w ?(?:\d+[v>] ?)* ?w#/g,
+  /<!--w ?(?:\d+[v>] ?)* ?w-->/g,
 ];
 
 let spacingDecoration = vscode.window.createTextEditorDecorationType({});

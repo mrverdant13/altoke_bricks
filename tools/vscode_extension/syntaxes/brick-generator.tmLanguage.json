@@ -79,7 +79,7 @@
       }
     },
     "dart-spacing": {
-      "match": "/\\*w ((?:\\d+[v>] ?)*) w\\*/",
+      "match": "/\\*w ?((?:\\d+[v>] ?)*) ?w\\*/",
       "name": "meta.annotation.brick-generator.spacing",
       "captures": {
         "1": { "name": "constant.numeric.brick-generator.spacing" }
@@ -131,7 +131,7 @@
       }
     },
     "hash-spacing": {
-      "match": "#w ((?:\\d+[v>] ?)*) w#",
+      "match": "#w ?((?:\\d+[v>] ?)*) ?w#",
       "name": "meta.annotation.brick-generator.spacing",
       "captures": {
         "1": { "name": "constant.numeric.brick-generator.spacing" }
@@ -183,7 +183,7 @@
       }
     },
     "html-spacing": {
-      "match": "<!--w ((?:\\d+[v>] ?)*) w-->",
+      "match": "<!--w ?((?:\\d+[v>] ?)*) ?w-->",
       "name": "meta.annotation.brick-generator.spacing",
       "captures": {
         "1": { "name": "constant.numeric.brick-generator.spacing" }
