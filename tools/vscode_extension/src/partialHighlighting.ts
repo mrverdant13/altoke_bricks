@@ -16,11 +16,11 @@ interface PartialMarker {
 const PARTIAL_MARKER_SETS = [
   { start: /\/\*partial v ([^*]+)\*\//g, end: /\/\*partial \^ ([^*]+)\*\//g },
   { start: /#partial v ([^#]+)#/g, end: /#partial \^ ([^#]+)#/g },
-  { start: /<!--partial v ([^-]+)-->/g, end: /<!--partial \^ ([^-]+)-->/g },
+  { start: /<!--partial v (.+?)-->/g, end: /<!--partial \^ (.+?)-->/g },
 ];
 
 const PARTIAL_BOUNDARY_MARKER_PATTERN =
-  /\/\*partial [v^] [^*]+\*\/|#partial [v^] [^#]+#|<!--partial [v^] [^-]+-->/g;
+  /\/\*partial [v^] [^*]+\*\/|#partial [v^] [^#]+#|<!--partial [v^] .+?-->/g;
 
 let markerDecoration = vscode.window.createTextEditorDecorationType({});
 let payloadDecoration = vscode.window.createTextEditorDecorationType({});

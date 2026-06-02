@@ -175,7 +175,7 @@
       "name": "keyword.annotation.brick-generator.drop"
     },
     "html-partial": {
-      "match": "<!--partial ([v^]) ([^-]+)-->",
+      "match": "<!--partial ([v^]) (.*?)-->",
       "name": "meta.annotation.brick-generator.partial",
       "captures": {
         "1": { "name": "keyword.annotation.brick-generator.partial.marker" },
