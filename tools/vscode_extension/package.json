@@ -21,7 +21,21 @@
     "onStartupFinished"
   ],
   "main": "./out/extension.js",
-  "contributes": {},
+  "contributes": {
+    "grammars": [
+      {
+        "scopeName": "brick-generator.injection",
+        "path": "./syntaxes/brick-generator.tmLanguage.json",
+        "injectTo": [
+          "source.dart",
+          "source.shell",
+          "source.yaml",
+          "text.html",
+          "text.xml"
+        ]
+      }
+    ]
+  },
   "scripts": {
     "compile": "node esbuild.mjs",
     "watch": "node esbuild.mjs --watch",
