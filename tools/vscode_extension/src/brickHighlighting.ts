@@ -24,24 +24,24 @@ function refreshAllVisibleEditors(): void {
   }
 }
 
+function refreshEditorsForDocument(document: vscode.TextDocument): void {
+  for (const editor of vscode.window.visibleTextEditors) {
+    if (editor.document === document) {
+      refreshBrickHighlights(editor);
+    }
+  }
+}
+
 export function registerBrickHighlighting(context: vscode.ExtensionContext): void {
   refreshAllVisibleEditors();
 
   context.subscriptions.push(
     vscode.window.onDidChangeActiveTextEditor(refreshBrickHighlights),
     vscode.workspace.onDidChangeTextDocument((event) => {
-      refreshBrickHighlights(
-        vscode.window.visibleTextEditors.find(
-          (editor) => editor.document === event.document,
-        ),
-      );
+      refreshEditorsForDocument(event.document);
     }),
     vscode.workspace.onDidOpenTextDocument((document) => {
-      refreshBrickHighlights(
-        vscode.window.visibleTextEditors.find(
-          (editor) => editor.document === document,
-        ),
-      );
+      refreshEditorsForDocument(document);
     }),
     vscode.workspace.onDidChangeConfiguration((event) => {
       if (!event.affectsConfiguration('brickGenerator.colors')) return;
