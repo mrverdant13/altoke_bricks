@@ -149,10 +149,11 @@ function findReplaceBlockRegions(text: string): ReplaceBlockRegions {
 
 function findRangesForPattern(
   document: vscode.TextDocument,
+  text: string,
   pattern: RegExp,
 ): vscode.Range[] {
   const ranges: vscode.Range[] = [];
-  for (const match of document.getText().matchAll(pattern)) {
+  for (const match of text.matchAll(pattern)) {
     const index = match.index;
     if (index === undefined) continue;
     ranges.push(
@@ -173,17 +174,16 @@ export function refreshReplaceHighlights(
 
   if (editor === undefined || !isSupportedBrickFile(editor.document)) return;
 
-  const { originalInteriors, replacementInteriors } = findReplaceBlockRegions(
-    editor.document.getText(),
-  );
+  const text = editor.document.getText();
+  const { originalInteriors, replacementInteriors } = findReplaceBlockRegions(text);
 
   editor.setDecorations(
     boundaryDecoration,
-    findRangesForPattern(editor.document, REPLACE_START_END_MARKER_PATTERN),
+    findRangesForPattern(editor.document, text, REPLACE_START_END_MARKER_PATTERN),
   );
   editor.setDecorations(
     withDecoration,
-    findRangesForPattern(editor.document, WITH_MARKER_PATTERN),
+    findRangesForPattern(editor.document, text, WITH_MARKER_PATTERN),
   );
   editor.setDecorations(
     originalDecoration,
