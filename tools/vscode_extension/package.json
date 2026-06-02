@@ -59,8 +59,9 @@
           },
           {
             "scope": [
-              "keyword.annotation.brick-generator.partial",
-              "keyword.annotation.brick-generator.partial.marker"
+              "meta.annotation.brick-generator.partial",
+              "keyword.annotation.brick-generator.partial.marker",
+              "entity.name.section.brick-generator.partial"
             ],
             "settings": {
               "foreground": "#569CD6",
@@ -81,10 +82,8 @@
               "fontStyle": "bold"
             }
           }
-        ]
-      },
-      "[Default Light+]": {
-        "editor.tokenColorCustomizations": {
+        ],
+        "[Default Light+]": {
           "textMateRules": [
             {
               "scope": [
@@ -120,8 +119,9 @@
             },
             {
               "scope": [
-                "keyword.annotation.brick-generator.partial",
-                "keyword.annotation.brick-generator.partial.marker"
+                "meta.annotation.brick-generator.partial",
+                "keyword.annotation.brick-generator.partial.marker",
+                "entity.name.section.brick-generator.partial"
               ],
               "settings": {
                 "foreground": "#0451A5",
