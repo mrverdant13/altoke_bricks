@@ -50,4 +50,4 @@ Or from the CLI:
 code --install-extension brick-generator-0.0.1.vsix
 ```
 
-Reload the window if the extension does not activate immediately.
+The extension activates after startup (`onStartupFinished`). When debugging from source, reload the window if you do not see expected behavior after installing or rebuilding.
