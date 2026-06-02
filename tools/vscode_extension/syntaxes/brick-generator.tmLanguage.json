@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/martinringert/language-json-schema/master/dist/textmate/syntax-tmLanguage.schema.json",
   "name": "Brick Generator Annotations",
   "scopeName": "brick-generator.injection",
-  "injectionSelector": "L:source",
+  "injectionSelector": "L:comment",
   "patterns": [
     { "include": "#dart-block-annotations" },
     { "include": "#hash-annotations" },
@@ -45,21 +45,7 @@
 
     "dart-remove": {
       "match": "/\\*(?:x-)?remove-start\\*/|/\\*remove-end(?:-x)?\\*/",
-      "name": "keyword.annotation.brick-generator.remove",
-      "captures": {
-        "0": {
-          "patterns": [
-            {
-              "match": "x-",
-              "name": "constant.language.brick-generator.drop-flag"
-            },
-            {
-              "match": "-x",
-              "name": "constant.language.brick-generator.drop-flag"
-            }
-          ]
-        }
-      }
+      "name": "keyword.annotation.brick-generator.remove"
     },
     "dart-replace": {
       "patterns": [
@@ -100,7 +86,7 @@
       }
     },
     "dart-mustache": {
-      "match": "/\\*(x)?(\\{\\{[^*]+\\}\\})(x)?\\*/",
+      "match": "/\\*(x)?(\\{\\{[^}]*?\\}\\})(x)?\\*/",
       "name": "meta.annotation.brick-generator.mustache",
       "captures": {
         "1": { "name": "constant.language.brick-generator.drop-flag" },
@@ -111,21 +97,7 @@
 
     "hash-remove": {
       "match": "#(?:x-)?remove-start#|#remove-end(?:-x)?#",
-      "name": "keyword.annotation.brick-generator.remove",
-      "captures": {
-        "0": {
-          "patterns": [
-            {
-              "match": "x-",
-              "name": "constant.language.brick-generator.drop-flag"
-            },
-            {
-              "match": "-x",
-              "name": "constant.language.brick-generator.drop-flag"
-            }
-          ]
-        }
-      }
+      "name": "keyword.annotation.brick-generator.remove"
     },
     "hash-replace": {
       "patterns": [
@@ -166,7 +138,7 @@
       }
     },
     "hash-mustache": {
-      "match": "#(x)?(\\{\\{[^#]+\\}\\})(x)?#",
+      "match": "#(x)?(\\{\\{[^}]*?\\}\\})(x)?#",
       "name": "meta.annotation.brick-generator.mustache",
       "captures": {
         "1": { "name": "constant.language.brick-generator.drop-flag" },
@@ -177,21 +149,7 @@
 
     "html-remove": {
       "match": "<!--(?:x-)?remove-start-->|<!--remove-end(?:-x)?-->",
-      "name": "keyword.annotation.brick-generator.remove",
-      "captures": {
-        "0": {
-          "patterns": [
-            {
-              "match": "x-",
-              "name": "constant.language.brick-generator.drop-flag"
-            },
-            {
-              "match": "-x",
-              "name": "constant.language.brick-generator.drop-flag"
-            }
-          ]
-        }
-      }
+      "name": "keyword.annotation.brick-generator.remove"
     },
     "html-replace": {
       "patterns": [
@@ -232,7 +190,7 @@
       }
     },
     "html-mustache": {
-      "match": "<!--(x)?(\\{\\{[^-]+\\}\\})(x)?-->",
+      "match": "<!--(x)?(\\{\\{[^}]*?\\}\\})(x)?-->",
       "name": "meta.annotation.brick-generator.mustache",
       "captures": {
         "1": { "name": "constant.language.brick-generator.drop-flag" },
