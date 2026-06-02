@@ -8,9 +8,9 @@ import { isSupportedBrickFile } from './supportedFiles';
 const MUSTACHE_TAG = String.raw`\{\{[^}]*?\}\}`;
 
 const MUSTACHE_COMMENT_PATTERNS = [
-  new RegExp(String.raw`/\*(x)?(${MUSTACHE_TAG})(x)?\*/`, 'gd'),
-  new RegExp(String.raw`#(x)?(${MUSTACHE_TAG})(x)?#`, 'gd'),
-  new RegExp(String.raw`<!--(x)?(${MUSTACHE_TAG})(x)?-->`, 'gd'),
+  new RegExp(String.raw`/\*(x)?(${MUSTACHE_TAG})(x)?\*/`, 'g'),
+  new RegExp(String.raw`#(x)?(${MUSTACHE_TAG})(x)?#`, 'g'),
+  new RegExp(String.raw`<!--(x)?(${MUSTACHE_TAG})(x)?-->`, 'g'),
 ];
 
 let commentDecoration = vscode.window.createTextEditorDecorationType({});
@@ -62,7 +62,7 @@ function findMustacheHighlightRanges(document: vscode.TextDocument): {
 
       const leadingFlag = captureToRange(document, match, 1);
       const tag = captureToRange(document, match, 2);
-      const trailingFlag = captureToRange(document, match, 3);
+      const trailingFlag = captureToRange(document, match, 3, 'last');
 
       if (leadingFlag !== undefined) dropFlags.push(leadingFlag);
       if (tag !== undefined) tags.push(tag);

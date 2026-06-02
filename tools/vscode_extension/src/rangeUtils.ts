@@ -25,17 +25,18 @@ export function captureToRange(
   document: vscode.TextDocument,
   match: RegExpMatchArray,
   groupIndex: number,
+  occurrence: 'first' | 'last' = 'first',
 ): vscode.Range | undefined {
   const capture = match[groupIndex];
   if (capture === undefined || capture.length === 0) {
     return undefined;
   }
 
-  const groupIndices = match.indices?.[groupIndex];
-  const start =
-    groupIndices !== undefined
-      ? groupIndices[0]
-      : (match.index ?? 0) + match[0].indexOf(capture);
+  const offsetInMatch =
+    occurrence === 'last'
+      ? match[0].lastIndexOf(capture)
+      : match[0].indexOf(capture);
+  const start = (match.index ?? 0) + offsetInMatch;
 
   return new vscode.Range(
     document.positionAt(start),
