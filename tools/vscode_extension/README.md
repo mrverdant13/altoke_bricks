@@ -2,7 +2,49 @@
 
 Editor support for [brick generator](https://github.com/mrverdant13/altoke_bricks/tree/main/tools/brick_generator) annotation syntax in reference projects.
 
-Syntax highlighting for brick annotation markers is active in `.dart`, `.sh`, `.yaml`, `.html`, and `.xml` reference files. Folding, diagnostics, and inline preview land in follow-up changes.
+The extension now provides annotation-aware highlighting for all currently supported marker types, including range shading for block annotations.
+
+## Current capabilities
+
+- Marker highlighting for: `remove-start/end`, `drop`, `replace-start/with/end`, `insert-start/end`, `partial v/^`, Mustache tags (`{{...}}`) inside comment annotations, and spacing directives (`w ... w`)
+- Block/range shading for: remove blocks, drop tails, replace original/replacement segments, insert blocks, and partial payload blocks
+- Coverage across reference file types used in this monorepo, including `.dart`, `.sh`, `.yaml`, `.yml`, `.html`, `.xml`, `.md`, and ignore-style files such as `.gitignore`
+- Theme-friendly TextMate scopes with extension-provided defaults for both dark and light themes
+
+Folding, diagnostics, and inline preview land in follow-up changes.
+
+## Customizing annotation colors
+
+All annotation colors are configurable in VS Code settings under `brickGenerator.colors.*`.
+
+Example:
+
+```json
+{
+  "brickGenerator.colors.remove.markerForeground": "#ff6b6b",
+  "brickGenerator.colors.remove.contentBackground": "rgba(255, 107, 107, 0.18)",
+  "brickGenerator.colors.replace.withMarkerForeground": "#43c6ac",
+  "brickGenerator.colors.mustache.tagForeground": "#c77dff"
+}
+```
+
+Available keys:
+
+- `brickGenerator.colors.remove.markerForeground`
+- `brickGenerator.colors.remove.contentBackground`
+- `brickGenerator.colors.replace.boundaryMarkerForeground`
+- `brickGenerator.colors.replace.withMarkerForeground`
+- `brickGenerator.colors.replace.originalBackground`
+- `brickGenerator.colors.replace.replacementBackground`
+- `brickGenerator.colors.insert.markerForeground`
+- `brickGenerator.colors.insert.contentBackground`
+- `brickGenerator.colors.partial.markerForeground`
+- `brickGenerator.colors.partial.payloadBackground`
+- `brickGenerator.colors.mustache.tagForeground`
+- `brickGenerator.colors.mustache.commentBackground`
+- `brickGenerator.colors.mustache.dropFlagForeground`
+- `brickGenerator.colors.spacing.markerForeground`
+- `brickGenerator.colors.spacing.markerBackground`
 
 ## Prerequisites
 
