@@ -10,22 +10,16 @@ import {
   REMOVE_MARKER_SETS,
   REPLACE_MARKER_SETS,
 } from './annotationMarkerSets';
+import { spanToFoldingRange } from './rangeUtils';
 import { isSupportedBrickFile } from './supportedFiles';
 
 function spansToFoldingRanges(
   document: vscode.TextDocument,
   spans: TextSpan[],
 ): vscode.FoldingRange[] {
-  return spans.map(({ start, end }) => {
-    const startLine = document.positionAt(start).line;
-    const endLine = document.positionAt(Math.max(start, end - 1)).line;
-
-    return new vscode.FoldingRange(
-      startLine,
-      endLine,
-      vscode.FoldingRangeKind.Region,
-    );
-  });
+  return spans
+    .map((span) => spanToFoldingRange(document, span))
+    .filter((range): range is vscode.FoldingRange => range !== undefined);
 }
 
 function collectAnnotationFoldingRanges(

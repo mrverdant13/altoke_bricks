@@ -43,3 +43,55 @@ export function captureToRange(
     document.positionAt(start + capture.length),
   );
 }
+
+function hasNonWhitespaceBefore(
+  document: vscode.TextDocument,
+  offset: number,
+): boolean {
+  const line = document.lineAt(document.positionAt(offset).line);
+  const before = document.getText(
+    new vscode.Range(line.range.start, document.positionAt(offset)),
+  );
+  return before.trim().length > 0;
+}
+
+function hasNonWhitespaceAfter(
+  document: vscode.TextDocument,
+  offset: number,
+): boolean {
+  const line = document.lineAt(document.positionAt(offset).line);
+  const after = document.getText(
+    new vscode.Range(document.positionAt(offset), line.range.end),
+  );
+  return after.trim().length > 0;
+}
+
+/** Maps a marker span to fold lines, keeping same-line leading/trailing code visible. */
+export function spanToFoldingRange(
+  document: vscode.TextDocument,
+  span: { start: number; end: number },
+): vscode.FoldingRange | undefined {
+  const startLine = document.positionAt(span.start).line;
+  const endLine = document.positionAt(Math.max(span.start, span.end - 1)).line;
+
+  let foldStartLine = startLine;
+  let foldEndLine = endLine;
+
+  if (hasNonWhitespaceBefore(document, span.start)) {
+    foldStartLine = startLine + 1;
+  }
+
+  if (hasNonWhitespaceAfter(document, span.end)) {
+    foldEndLine = endLine - 1;
+  }
+
+  if (foldStartLine > foldEndLine) {
+    return undefined;
+  }
+
+  return new vscode.FoldingRange(
+    foldStartLine,
+    foldEndLine,
+    vscode.FoldingRangeKind.Region,
+  );
+}
