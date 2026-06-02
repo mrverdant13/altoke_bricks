@@ -31,7 +31,12 @@ export function captureToRange(
     return undefined;
   }
 
-  const start = (match.index ?? 0) + match[0].indexOf(capture);
+  const groupIndices = match.indices?.[groupIndex];
+  const start =
+    groupIndices !== undefined
+      ? groupIndices[0]
+      : (match.index ?? 0) + match[0].indexOf(capture);
+
   return new vscode.Range(
     document.positionAt(start),
     document.positionAt(start + capture.length),

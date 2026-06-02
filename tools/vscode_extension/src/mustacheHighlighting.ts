@@ -8,9 +8,9 @@ import { isSupportedBrickFile } from './supportedFiles';
 const MUSTACHE_TAG = String.raw`\{\{[^}]*?\}\}`;
 
 const MUSTACHE_COMMENT_PATTERNS = [
-  new RegExp(String.raw`/\*(x)?(${MUSTACHE_TAG})(x)?\*/`, 'g'),
-  new RegExp(String.raw`#(x)?(${MUSTACHE_TAG})(x)?#`, 'g'),
-  new RegExp(String.raw`<!--(x)?(${MUSTACHE_TAG})(x)?-->`, 'g'),
+  new RegExp(String.raw`/\*(x)?(${MUSTACHE_TAG})(x)?\*/`, 'gd'),
+  new RegExp(String.raw`#(x)?(${MUSTACHE_TAG})(x)?#`, 'gd'),
+  new RegExp(String.raw`<!--(x)?(${MUSTACHE_TAG})(x)?-->`, 'gd'),
 ];
 
 let commentDecoration = vscode.window.createTextEditorDecorationType({});
