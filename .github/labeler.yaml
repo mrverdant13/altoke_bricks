@@ -84,6 +84,11 @@ t:value_equality_approach:
     - any-glob-to-any-file:
       - tools/value_equality_approach/**
 
+t:vscode_extension:
+  - changed-files:
+    - any-glob-to-any-file:
+      - tools/vscode_extension/**
+
 s:brick:
   - changed-files:
     - any-glob-to-any-file:
