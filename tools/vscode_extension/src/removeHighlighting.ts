@@ -86,19 +86,25 @@ function findRemoveBlockInteriors(text: string): Array<{ start: number; end: num
 }
 
 function findDropBlockInteriors(text: string): Array<{ start: number; end: number }> {
-  const interiors: Array<{ start: number; end: number }> = [];
   const documentEnd = text.length;
+  let earliestInteriorStart: number | undefined;
 
   for (const pattern of DROP_MARKER_SETS) {
     for (const match of collectRegexMatches(text, pattern)) {
       const interiorStart = match.offset + match.length;
-      if (documentEnd > interiorStart) {
-        interiors.push({ start: interiorStart, end: documentEnd });
+      if (interiorStart >= documentEnd) continue;
+      if (
+        earliestInteriorStart === undefined ||
+        interiorStart < earliestInteriorStart
+      ) {
+        earliestInteriorStart = interiorStart;
       }
     }
   }
 
-  return interiors;
+  if (earliestInteriorStart === undefined) return [];
+
+  return [{ start: earliestInteriorStart, end: documentEnd }];
 }
 
 function findRemovedBoundaryMarkerRanges(document: vscode.TextDocument): vscode.Range[] {
