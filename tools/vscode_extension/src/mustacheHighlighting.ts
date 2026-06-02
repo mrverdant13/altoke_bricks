@@ -16,6 +16,34 @@ const MUSTACHE_COMMENT_PATTERNS = [
 let commentDecoration = vscode.window.createTextEditorDecorationType({});
 let tagDecoration = vscode.window.createTextEditorDecorationType({});
 let dropFlagDecoration = vscode.window.createTextEditorDecorationType({});
+let appliedConfigKey = '';
+
+function ensureDecorations(config: AnnotationConfig): void {
+  const key = JSON.stringify(config.mustache);
+  if (key === appliedConfigKey) return;
+
+  const prevComment = commentDecoration;
+  const prevTag = tagDecoration;
+  const prevDropFlag = dropFlagDecoration;
+
+  commentDecoration = vscode.window.createTextEditorDecorationType({
+    backgroundColor: config.mustache.commentBackground,
+    isWholeLine: false,
+  });
+  tagDecoration = vscode.window.createTextEditorDecorationType({
+    color: config.mustache.tagForeground,
+    fontWeight: 'bold',
+  });
+  dropFlagDecoration = vscode.window.createTextEditorDecorationType({
+    color: config.mustache.dropFlagForeground,
+    fontWeight: 'bold',
+  });
+
+  prevComment.dispose();
+  prevTag.dispose();
+  prevDropFlag.dispose();
+  appliedConfigKey = key;
+}
 
 function findMustacheHighlightRanges(document: vscode.TextDocument): {
   comments: vscode.Range[];
@@ -49,26 +77,7 @@ export function refreshMustacheHighlights(
   editor: vscode.TextEditor | undefined,
   config: AnnotationConfig,
 ): void {
-  const prevComment = commentDecoration;
-  const prevTag = tagDecoration;
-  const prevDropFlag = dropFlagDecoration;
-
-  commentDecoration = vscode.window.createTextEditorDecorationType({
-    backgroundColor: config.mustache.commentBackground,
-    isWholeLine: false,
-  });
-  tagDecoration = vscode.window.createTextEditorDecorationType({
-    color: config.mustache.tagForeground,
-    fontWeight: 'bold',
-  });
-  dropFlagDecoration = vscode.window.createTextEditorDecorationType({
-    color: config.mustache.dropFlagForeground,
-    fontWeight: 'bold',
-  });
-
-  prevComment.dispose();
-  prevTag.dispose();
-  prevDropFlag.dispose();
+  ensureDecorations(config);
 
   if (editor === undefined || !isSupportedBrickFile(editor.document)) return;
 

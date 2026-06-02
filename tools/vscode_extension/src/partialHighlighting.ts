@@ -24,6 +24,28 @@ const PARTIAL_BOUNDARY_MARKER_PATTERN =
 
 let markerDecoration = vscode.window.createTextEditorDecorationType({});
 let payloadDecoration = vscode.window.createTextEditorDecorationType({});
+let appliedConfigKey = '';
+
+function ensureDecorations(config: AnnotationConfig): void {
+  const key = JSON.stringify(config.partial);
+  if (key === appliedConfigKey) return;
+
+  const prevMarker = markerDecoration;
+  const prevPayload = payloadDecoration;
+
+  markerDecoration = vscode.window.createTextEditorDecorationType({
+    color: config.partial.markerForeground,
+    fontWeight: 'bold',
+  });
+  payloadDecoration = vscode.window.createTextEditorDecorationType({
+    backgroundColor: config.partial.payloadBackground,
+    isWholeLine: false,
+  });
+
+  prevMarker.dispose();
+  prevPayload.dispose();
+  appliedConfigKey = key;
+}
 
 function collectPartialMarkers(
   text: string,
@@ -72,20 +94,7 @@ export function refreshPartialHighlights(
   editor: vscode.TextEditor | undefined,
   config: AnnotationConfig,
 ): void {
-  const prevMarker = markerDecoration;
-  const prevPayload = payloadDecoration;
-
-  markerDecoration = vscode.window.createTextEditorDecorationType({
-    color: config.partial.markerForeground,
-    fontWeight: 'bold',
-  });
-  payloadDecoration = vscode.window.createTextEditorDecorationType({
-    backgroundColor: config.partial.payloadBackground,
-    isWholeLine: false,
-  });
-
-  prevMarker.dispose();
-  prevPayload.dispose();
+  ensureDecorations(config);
 
   if (editor === undefined || !isSupportedBrickFile(editor.document)) return;
 

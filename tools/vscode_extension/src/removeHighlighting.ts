@@ -33,6 +33,28 @@ const DROP_MARKER_PATTERN = /\/\*drop\*\/|#drop#|<!--drop-->/g;
 
 let markerDecoration = vscode.window.createTextEditorDecorationType({});
 let contentDecoration = vscode.window.createTextEditorDecorationType({});
+let appliedConfigKey = '';
+
+function ensureDecorations(config: AnnotationConfig): void {
+  const key = JSON.stringify(config.remove);
+  if (key === appliedConfigKey) return;
+
+  const prevMarker = markerDecoration;
+  const prevContent = contentDecoration;
+
+  markerDecoration = vscode.window.createTextEditorDecorationType({
+    color: config.remove.markerForeground,
+    fontWeight: 'bold',
+  });
+  contentDecoration = vscode.window.createTextEditorDecorationType({
+    backgroundColor: config.remove.contentBackground,
+    isWholeLine: false,
+  });
+
+  prevMarker.dispose();
+  prevContent.dispose();
+  appliedConfigKey = key;
+}
 
 function collectMarkers(text: string, pattern: RegExp, kind: MarkerKind): MarkerMatch[] {
   return collectRegexMatches(text, pattern).map((m) => ({ ...m, kind }));
@@ -103,20 +125,7 @@ export function refreshRemoveHighlights(
   editor: vscode.TextEditor | undefined,
   config: AnnotationConfig,
 ): void {
-  const prevMarker = markerDecoration;
-  const prevContent = contentDecoration;
-
-  markerDecoration = vscode.window.createTextEditorDecorationType({
-    color: config.remove.markerForeground,
-    fontWeight: 'bold',
-  });
-  contentDecoration = vscode.window.createTextEditorDecorationType({
-    backgroundColor: config.remove.contentBackground,
-    isWholeLine: false,
-  });
-
-  prevMarker.dispose();
-  prevContent.dispose();
+  ensureDecorations(config);
 
   if (editor === undefined || !isSupportedBrickFile(editor.document)) return;
 

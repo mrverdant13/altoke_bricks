@@ -24,6 +24,28 @@ const INSERT_BOUNDARY_MARKER_PATTERN =
 
 let markerDecoration = vscode.window.createTextEditorDecorationType({});
 let contentDecoration = vscode.window.createTextEditorDecorationType({});
+let appliedConfigKey = '';
+
+function ensureDecorations(config: AnnotationConfig): void {
+  const key = JSON.stringify(config.insert);
+  if (key === appliedConfigKey) return;
+
+  const prevMarker = markerDecoration;
+  const prevContent = contentDecoration;
+
+  markerDecoration = vscode.window.createTextEditorDecorationType({
+    color: config.insert.markerForeground,
+    fontWeight: 'bold',
+  });
+  contentDecoration = vscode.window.createTextEditorDecorationType({
+    backgroundColor: config.insert.contentBackground,
+    isWholeLine: false,
+  });
+
+  prevMarker.dispose();
+  prevContent.dispose();
+  appliedConfigKey = key;
+}
 
 function collectMarkers(text: string, pattern: RegExp, kind: MarkerKind): MarkerMatch[] {
   return collectRegexMatches(text, pattern).map((m) => ({ ...m, kind }));
@@ -58,20 +80,7 @@ export function refreshInsertHighlights(
   editor: vscode.TextEditor | undefined,
   config: AnnotationConfig,
 ): void {
-  const prevMarker = markerDecoration;
-  const prevContent = contentDecoration;
-
-  markerDecoration = vscode.window.createTextEditorDecorationType({
-    color: config.insert.markerForeground,
-    fontWeight: 'bold',
-  });
-  contentDecoration = vscode.window.createTextEditorDecorationType({
-    backgroundColor: config.insert.contentBackground,
-    isWholeLine: false,
-  });
-
-  prevMarker.dispose();
-  prevContent.dispose();
+  ensureDecorations(config);
 
   if (editor === undefined || !isSupportedBrickFile(editor.document)) return;
 

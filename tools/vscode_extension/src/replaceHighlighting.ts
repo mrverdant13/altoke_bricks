@@ -45,6 +45,40 @@ let boundaryDecoration = vscode.window.createTextEditorDecorationType({});
 let withDecoration = vscode.window.createTextEditorDecorationType({});
 let originalDecoration = vscode.window.createTextEditorDecorationType({});
 let replacementDecoration = vscode.window.createTextEditorDecorationType({});
+let appliedConfigKey = '';
+
+function ensureDecorations(config: AnnotationConfig): void {
+  const key = JSON.stringify(config.replace);
+  if (key === appliedConfigKey) return;
+
+  const prevBoundary = boundaryDecoration;
+  const prevWith = withDecoration;
+  const prevOriginal = originalDecoration;
+  const prevReplacement = replacementDecoration;
+
+  boundaryDecoration = vscode.window.createTextEditorDecorationType({
+    color: config.replace.boundaryMarkerForeground,
+    fontWeight: 'bold',
+  });
+  withDecoration = vscode.window.createTextEditorDecorationType({
+    color: config.replace.withMarkerForeground,
+    fontWeight: 'bold',
+  });
+  originalDecoration = vscode.window.createTextEditorDecorationType({
+    backgroundColor: config.replace.originalBackground,
+    isWholeLine: false,
+  });
+  replacementDecoration = vscode.window.createTextEditorDecorationType({
+    backgroundColor: config.replace.replacementBackground,
+    isWholeLine: false,
+  });
+
+  prevBoundary.dispose();
+  prevWith.dispose();
+  prevOriginal.dispose();
+  prevReplacement.dispose();
+  appliedConfigKey = key;
+}
 
 function collectReplaceMarkers(
   text: string,
@@ -137,32 +171,7 @@ export function refreshReplaceHighlights(
   editor: vscode.TextEditor | undefined,
   config: AnnotationConfig,
 ): void {
-  const prevBoundary = boundaryDecoration;
-  const prevWith = withDecoration;
-  const prevOriginal = originalDecoration;
-  const prevReplacement = replacementDecoration;
-
-  boundaryDecoration = vscode.window.createTextEditorDecorationType({
-    color: config.replace.boundaryMarkerForeground,
-    fontWeight: 'bold',
-  });
-  withDecoration = vscode.window.createTextEditorDecorationType({
-    color: config.replace.withMarkerForeground,
-    fontWeight: 'bold',
-  });
-  originalDecoration = vscode.window.createTextEditorDecorationType({
-    backgroundColor: config.replace.originalBackground,
-    isWholeLine: false,
-  });
-  replacementDecoration = vscode.window.createTextEditorDecorationType({
-    backgroundColor: config.replace.replacementBackground,
-    isWholeLine: false,
-  });
-
-  prevBoundary.dispose();
-  prevWith.dispose();
-  prevOriginal.dispose();
-  prevReplacement.dispose();
+  ensureDecorations(config);
 
   if (editor === undefined || !isSupportedBrickFile(editor.document)) return;
 

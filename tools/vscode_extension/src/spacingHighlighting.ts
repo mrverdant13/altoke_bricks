@@ -11,6 +11,21 @@ const SPACING_MARKER_PATTERNS = [
 ];
 
 let spacingDecoration = vscode.window.createTextEditorDecorationType({});
+let appliedConfigKey = '';
+
+function ensureDecorations(config: AnnotationConfig): void {
+  const key = JSON.stringify(config.spacing);
+  if (key === appliedConfigKey) return;
+
+  const prev = spacingDecoration;
+  spacingDecoration = vscode.window.createTextEditorDecorationType({
+    color: config.spacing.markerForeground,
+    backgroundColor: config.spacing.markerBackground,
+    fontWeight: 'bold',
+  });
+  prev.dispose();
+  appliedConfigKey = key;
+}
 
 function findSpacingMarkerRanges(document: vscode.TextDocument): vscode.Range[] {
   const text = document.getText();
@@ -30,15 +45,7 @@ export function refreshSpacingHighlights(
   editor: vscode.TextEditor | undefined,
   config: AnnotationConfig,
 ): void {
-  const prev = spacingDecoration;
-
-  spacingDecoration = vscode.window.createTextEditorDecorationType({
-    color: config.spacing.markerForeground,
-    backgroundColor: config.spacing.markerBackground,
-    fontWeight: 'bold',
-  });
-
-  prev.dispose();
+  ensureDecorations(config);
 
   if (editor === undefined || !isSupportedBrickFile(editor.document)) return;
 
