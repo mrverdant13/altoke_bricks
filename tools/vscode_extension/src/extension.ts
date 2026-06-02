@@ -3,11 +3,11 @@ import * as vscode from 'vscode';
 /**
  * Activates the Brick Generator extension.
  *
- * Annotation highlighting, folding, diagnostics, and preview are added in
- * follow-up changes; this entry point only wires the extension lifecycle.
+ * Annotation syntax highlighting is contributed declaratively via TextMate
+ * grammar injection. Folding, diagnostics, and preview register here later.
  */
 export function activate(_context: vscode.ExtensionContext): void {
-  // Scaffold — no features registered yet.
+  // No programmatic providers yet — grammar injection handles highlighting.
 }
 
 export function deactivate(): void {

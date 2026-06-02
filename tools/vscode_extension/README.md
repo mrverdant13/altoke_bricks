@@ -2,7 +2,7 @@
 
 Editor support for [brick generator](https://github.com/mrverdant13/altoke_bricks/tree/main/tools/brick_generator) annotation syntax in reference projects.
 
-This package is a scaffold: syntax highlighting, folding, diagnostics, and inline preview land in follow-up changes.
+Syntax highlighting for brick annotation markers is active in `.dart`, `.sh`, `.yaml`, `.html`, and `.xml` reference files. Folding, diagnostics, and inline preview land in follow-up changes.
 
 ## Prerequisites
 
