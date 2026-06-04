@@ -5,7 +5,9 @@ void main() {
   group('PreviewVars', () {
     test('parses booleans, numbers, and strings', () {
       expect(
-        PreviewVars.parse('requirements_met=true,use_drift=false,count=3,name=app'),
+        PreviewVars.parse(
+          'requirements_met=true,use_drift=false,count=3,name=app',
+        ),
         {
           'requirements_met': true,
           'use_drift': false,

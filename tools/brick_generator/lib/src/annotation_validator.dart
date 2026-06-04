@@ -7,11 +7,12 @@ import 'package:path/path.dart' as p;
 class AnnotationValidator {
   /// Validates [content] and returns any issues found.
   List<AnnotationIssue> validateContent(String content) {
-    final issues = <AnnotationIssue>[];
-    issues.addAll(_validatePairedMarkers(content, _removeMarkerSets));
-    issues.addAll(_validatePairedMarkers(content, _insertMarkerSets));
-    issues.addAll(_validateReplaceBlocks(content));
-    issues.addAll(_validatePartialBlocks(content));
+    final issues = <AnnotationIssue>[
+      ..._validatePairedMarkers(content, _removeMarkerSets),
+      ..._validatePairedMarkers(content, _insertMarkerSets),
+      ..._validateReplaceBlocks(content),
+      ..._validatePartialBlocks(content),
+    ];
     return issues;
   }
 
@@ -42,7 +43,9 @@ class AnnotationValidator {
   /// Walks [referenceDir] recursively and validates every file.
   List<AnnotationIssue> validateDirectory(Directory referenceDir) {
     if (!referenceDir.existsSync()) {
-      throw ArgumentError('Reference directory not found (${referenceDir.path}).');
+      throw ArgumentError(
+        'Reference directory not found (${referenceDir.path}).',
+      );
     }
     final issues = <AnnotationIssue>[];
     for (final entity in referenceDir.listSync(recursive: true)) {
@@ -83,14 +86,14 @@ class AnnotationValidator {
     ),
     _MarkerSet(
       flavor: '# #',
-      start: RegExp(r'#(?:x-)?remove-start#'),
-      end: RegExp(r'#remove-end(?:-x)?#'),
+      start: RegExp('#(?:x-)?remove-start#'),
+      end: RegExp('#remove-end(?:-x)?#'),
       blockName: 'remove',
     ),
     _MarkerSet(
       flavor: '<!-- -->',
-      start: RegExp(r'<!--(?:x-)?remove-start-->'),
-      end: RegExp(r'<!--remove-end(?:-x)?-->'),
+      start: RegExp('<!--(?:x-)?remove-start-->'),
+      end: RegExp('<!--remove-end(?:-x)?-->'),
       blockName: 'remove',
     ),
   ];
@@ -104,14 +107,14 @@ class AnnotationValidator {
     ),
     _MarkerSet(
       flavor: '# #',
-      start: RegExp(r'#insert-start#'),
-      end: RegExp(r'#insert-end#'),
+      start: RegExp('#insert-start#'),
+      end: RegExp('#insert-end#'),
       blockName: 'insert',
     ),
     _MarkerSet(
       flavor: '<!-- -->',
-      start: RegExp(r'<!--insert-start-->'),
-      end: RegExp(r'<!--insert-end-->'),
+      start: RegExp('<!--insert-start-->'),
+      end: RegExp('<!--insert-end-->'),
       blockName: 'insert',
     ),
   ];
@@ -155,7 +158,8 @@ class AnnotationValidator {
                 _issue(
                   content,
                   marker.offset,
-                  'Unmatched ${markerSet.blockName}-end marker (${markerSet.flavor})',
+                  'Unmatched ${markerSet.blockName}-end marker '
+                  '(${markerSet.flavor})',
                 ),
               );
             } else {
@@ -168,7 +172,8 @@ class AnnotationValidator {
           _issue(
             content,
             unmatched.offset,
-            'Unmatched ${markerSet.blockName}-start marker (${markerSet.flavor})',
+            'Unmatched ${markerSet.blockName}-start marker '
+            '(${markerSet.flavor})',
           ),
         );
       }
@@ -181,13 +186,19 @@ class AnnotationValidator {
     for (final markerSet in _replaceMarkerSets) {
       final markers = <_ReplaceMarker>[];
       for (final match in markerSet.start.allMatches(content)) {
-        markers.add(_ReplaceMarker(_ReplaceMarkerKind.start, match.start, markerSet));
+        markers.add(
+          _ReplaceMarker(_ReplaceMarkerKind.start, match.start, markerSet),
+        );
       }
       for (final match in markerSet.withMarker.allMatches(content)) {
-        markers.add(_ReplaceMarker(_ReplaceMarkerKind.withMarker, match.start, markerSet));
+        markers.add(
+          _ReplaceMarker(_ReplaceMarkerKind.withMarker, match.start, markerSet),
+        );
       }
       for (final match in markerSet.end.allMatches(content)) {
-        markers.add(_ReplaceMarker(_ReplaceMarkerKind.end, match.start, markerSet));
+        markers.add(
+          _ReplaceMarker(_ReplaceMarkerKind.end, match.start, markerSet),
+        );
       }
       markers.sort((a, b) => a.offset.compareTo(b.offset));
       var expecting = _ReplaceMarkerKind.start;
@@ -203,7 +214,8 @@ class AnnotationValidator {
                 _issue(
                   content,
                   marker.offset,
-                  'Unexpected ${marker.kind.label} before replace-start (${markerSet.flavor})',
+                  'Unexpected ${marker.kind.label} before replace-start '
+                  '(${markerSet.flavor})',
                 ),
               );
             }
@@ -215,7 +227,8 @@ class AnnotationValidator {
                 _issue(
                   content,
                   marker.offset,
-                  'Nested replace-start is not supported (${markerSet.flavor})',
+                  'Nested replace-start is not supported '
+                  '(${markerSet.flavor})',
                 ),
               );
             } else {
@@ -223,7 +236,8 @@ class AnnotationValidator {
                 _issue(
                   content,
                   marker.offset,
-                  'replace-end without a matching with marker (${markerSet.flavor})',
+                  'replace-end without a matching with marker '
+                  '(${markerSet.flavor})',
                 ),
               );
               expecting = _ReplaceMarkerKind.start;
@@ -236,7 +250,8 @@ class AnnotationValidator {
                   _issue(
                     content,
                     marker.offset,
-                    'Unmatched replace-end marker (${markerSet.flavor})',
+                    'Unmatched replace-end marker '
+                    '(${markerSet.flavor})',
                   ),
                 );
               } else {
@@ -248,7 +263,8 @@ class AnnotationValidator {
                 _issue(
                   content,
                   marker.offset,
-                  'Duplicate with marker in replace block (${markerSet.flavor})',
+                  'Duplicate with marker in replace block '
+                  '(${markerSet.flavor})',
                 ),
               );
               expecting = _ReplaceMarkerKind.end;
@@ -257,7 +273,8 @@ class AnnotationValidator {
                 _issue(
                   content,
                   marker.offset,
-                  'replace-start block is missing replace-end (${markerSet.flavor})',
+                  'replace-start block is missing replace-end '
+                  '(${markerSet.flavor})',
                 ),
               );
               stack.add(marker.offset);
@@ -270,7 +287,8 @@ class AnnotationValidator {
           _issue(
             content,
             startOffset,
-            'Unmatched replace-start marker (${markerSet.flavor})',
+            'Unmatched replace-start marker '
+            '(${markerSet.flavor})',
           ),
         );
       }
@@ -287,15 +305,15 @@ class AnnotationValidator {
     ),
     _ReplaceMarkerSet(
       flavor: '# #',
-      start: RegExp(r'#replace-start#'),
+      start: RegExp('#replace-start#'),
       withMarker: RegExp(r'#with(?: +i\d+)?#'),
-      end: RegExp(r'#replace-end#'),
+      end: RegExp('#replace-end#'),
     ),
     _ReplaceMarkerSet(
       flavor: '<!-- -->',
-      start: RegExp(r'<!--replace-start-->'),
+      start: RegExp('<!--replace-start-->'),
       withMarker: RegExp(r'<!--with(?: +i\d+)?-->'),
-      end: RegExp(r'<!--replace-end-->'),
+      end: RegExp('<!--replace-end-->'),
     ),
   ];
 
@@ -337,7 +355,8 @@ class AnnotationValidator {
                 _issue(
                   content,
                   marker.offset,
-                  'Unmatched partial ^ marker for "${marker.name}" (${markerSet.flavor})',
+                  'Unmatched partial ^ marker for "${marker.name}" '
+                  '(${markerSet.flavor})',
                 ),
               );
             } else {
@@ -348,7 +367,8 @@ class AnnotationValidator {
                     content,
                     marker.offset,
                     'partial ^ name "${marker.name}" does not match '
-                    'partial v name "${start.name}" (${markerSet.flavor})',
+                    'partial v name "${start.name}" '
+                    '(${markerSet.flavor})',
                   ),
                 );
               }
@@ -360,7 +380,8 @@ class AnnotationValidator {
           _issue(
             content,
             unmatched.offset,
-            'Unmatched partial v marker for "${unmatched.name}" (${markerSet.flavor})',
+            'Unmatched partial v marker for "${unmatched.name}" '
+            '(${markerSet.flavor})',
           ),
         );
       }
@@ -376,12 +397,12 @@ class AnnotationValidator {
     ),
     _PartialMarkerSet(
       flavor: '# #',
-      start: RegExp(r'#partial v (?<name>.*?)#'),
+      start: RegExp('#partial v (?<name>.*?)#'),
       end: RegExp(r'#partial \^ (?<name>.*?)#'),
     ),
     _PartialMarkerSet(
       flavor: '<!-- -->',
-      start: RegExp(r'<!--partial v (?<name>.*?)-->'),
+      start: RegExp('<!--partial v (?<name>.*?)-->'),
       end: RegExp(r'<!--partial \^ (?<name>.*?)-->'),
     ),
   ];
@@ -438,13 +459,14 @@ class _Marker {
 enum _ReplaceMarkerKind {
   start,
   withMarker,
-  end;
+  end
+  ;
 
   String get label => switch (this) {
-        _ReplaceMarkerKind.start => 'replace-start',
-        _ReplaceMarkerKind.withMarker => 'with',
-        _ReplaceMarkerKind.end => 'replace-end',
-      };
+    _ReplaceMarkerKind.start => 'replace-start',
+    _ReplaceMarkerKind.withMarker => 'with',
+    _ReplaceMarkerKind.end => 'replace-end',
+  };
 }
 
 class _ReplaceMarkerSet {
