@@ -13,6 +13,7 @@ export interface BrickGenLineRange {
 
 export interface BrickGenLineDeletion {
   filePath: string;
+  ranges: BrickGenLineRange[];
 }
 
 export interface BrickGenOptions {
@@ -45,6 +46,10 @@ export function loadBrickGenOptions(scopeDir: string): BrickGenOptions {
     })),
     lineDeletions: (document.lineDeletions ?? []).map((deletion) => ({
       filePath: deletion.filePath,
+      ranges: (deletion.ranges ?? []).map((range) => ({
+        start: range.start,
+        end: range.end,
+      })),
     })),
   };
 }
