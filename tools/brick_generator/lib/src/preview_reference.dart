@@ -78,6 +78,11 @@ Future<void> previewReference(
       brickGenData: brickGenData,
     );
 
+    if (options.templateOnly) {
+      emit(annotatedContent);
+      return;
+    }
+
     final partials = _loadPartials(tempTargetDir);
     final rendered = annotatedContent.render(options.vars, partials);
     emit(rendered);

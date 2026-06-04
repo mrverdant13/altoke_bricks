@@ -11,6 +11,7 @@ class PreviewOptions {
     required this.brickScope,
     required this.vars,
     required this.rootPath,
+    this.templateOnly = false,
   });
 
   /// Parses [args] after the `preview` subcommand name.
@@ -19,10 +20,13 @@ class PreviewOptions {
     String? brickScope;
     String? varsRaw;
     String? rootPath;
+    var templateOnly = false;
 
     for (var index = 0; index < args.length; index++) {
       final arg = args[index];
       switch (arg) {
+        case '--template-only':
+          templateOnly = true;
         case '--file':
           filePath = _readValue(args, index, arg);
           index++;
@@ -52,6 +56,7 @@ class PreviewOptions {
       brickScope: brickScope,
       vars: PreviewVars.parse(varsRaw),
       rootPath: resolveMonorepoRoot(rootPath),
+      templateOnly: templateOnly,
     );
   }
 
@@ -67,6 +72,10 @@ class PreviewOptions {
 
   /// Absolute path to the monorepo root.
   final String rootPath;
+
+  /// When true, applies annotation and [brick-gen.json] transforms only and
+  /// leaves Mustache tags unresolved.
+  final bool templateOnly;
 }
 
 /// Utilities for resolving monorepo and brick-scope paths.

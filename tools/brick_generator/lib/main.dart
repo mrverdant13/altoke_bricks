@@ -8,7 +8,8 @@ import 'package:meta/meta.dart';
 ///
 /// Subcommands:
 /// - `validate` — check reference files for annotation errors
-/// - `preview` — transform a single reference file with supplied variables
+/// - `preview` — transform a single reference file; use `--template-only` to
+///   skip Mustache variable resolution
 /// - default / `gen` — generate the brick template from references
 Future<void> main(
   List<String> args, {
