@@ -53,7 +53,7 @@ function extractMustacheVariables(
 
   for (const match of content.matchAll(MUSTACHE_TAG_PATTERN)) {
     const body = match[1]?.trim();
-    if (!body || body.startsWith('>') || body.startsWith('~')) {
+    if (!body || body.startsWith('>') || body.startsWith('~') || body.startsWith('!')) {
       continue;
     }
 
