@@ -33,7 +33,10 @@ export async function savePreviewVariables(
   scopeName: string,
   values: Record<string, PreviewVarValue>,
 ): Promise<void> {
-  await context.globalState.update(storageKey(scopeName), values);
+  const key = storageKey(scopeName);
+  const existing =
+    context.globalState.get<Record<string, PreviewVarValue>>(key) ?? {};
+  await context.globalState.update(key, { ...existing, ...values });
 }
 
 function storageKey(scopeName: string): string {
