@@ -4,7 +4,7 @@ import { type AnnotationConfig } from './annotationConfig';
 import { captureToRange, matchToRange } from './rangeUtils';
 import { isSupportedBrickFile } from './supportedFiles';
 
-/** Mustache tag body — allows `#` inside section tags (e.g. `{{#use_foo}}`). */
+/** Full Mustache tag, including `{{` / `}}` delimiters (e.g. `{{#use_foo}}`). */
 export const MUSTACHE_TAG_PATTERN = String.raw`\{\{[^}]*?\}\}`;
 
 const MUSTACHE_COMMENT_SOURCES = [
