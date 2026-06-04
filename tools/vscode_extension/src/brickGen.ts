@@ -6,6 +6,11 @@ export interface BrickGenReplacement {
   to: string;
 }
 
+export interface BrickGenLineRange {
+  start: number;
+  end: number;
+}
+
 export interface BrickGenLineDeletion {
   filePath: string;
 }
@@ -17,7 +22,7 @@ export interface BrickGenOptions {
 
 interface BrickGenJson {
   replacements?: Array<{ from: string | RegExpSource; to: string }>;
-  lineDeletions?: Array<{ filePath: string }>;
+  lineDeletions?: Array<{ filePath: string; ranges?: BrickGenLineRange[] }>;
 }
 
 interface RegExpSource {
