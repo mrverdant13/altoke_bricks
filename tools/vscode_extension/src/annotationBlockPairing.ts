@@ -11,6 +11,7 @@ export interface MarkerMatch {
 export interface TextSpan {
   start: number;
   end: number;
+  endMarkerStart?: number;
 }
 
 export interface StartEndMarkerSet {
@@ -89,6 +90,7 @@ function pairStartEndMarkers(markers: MarkerMatch[]): TextSpan[] {
     spans.push({
       start: startMarker.offset,
       end: marker.offset + marker.length,
+      endMarkerStart: marker.offset,
     });
   }
 
@@ -181,6 +183,7 @@ export function findNamedPairedBlockSpans(
       spans.push({
         start: startMarker.offset,
         end: marker.offset + marker.length,
+        endMarkerStart: marker.offset,
       });
     }
   }

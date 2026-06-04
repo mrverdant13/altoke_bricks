@@ -69,7 +69,7 @@ function hasNonWhitespaceAfter(
 /** Maps a marker span to fold lines, keeping same-line leading/trailing code visible. */
 export function spanToFoldingRange(
   document: vscode.TextDocument,
-  span: { start: number; end: number },
+  span: { start: number; end: number; endMarkerStart?: number },
 ): vscode.FoldingRange | undefined {
   const startLine = document.positionAt(span.start).line;
   const endLine = document.positionAt(Math.max(span.start, span.end - 1)).line;
@@ -81,7 +81,11 @@ export function spanToFoldingRange(
     foldStartLine = startLine + 1;
   }
 
-  if (hasNonWhitespaceAfter(document, span.end)) {
+  const endMarkerStart = span.endMarkerStart ?? span.end;
+  if (
+    hasNonWhitespaceBefore(document, endMarkerStart) ||
+    hasNonWhitespaceAfter(document, span.end)
+  ) {
     foldEndLine = endLine - 1;
   }
 
