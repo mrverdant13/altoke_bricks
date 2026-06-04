@@ -22,9 +22,17 @@ The extension:
 1. Detects the brick scope from the nearest `brick-gen.json`
 2. Reads variable definitions from `brick/brick.yaml`
 3. Prompts for variable values with quick-pick dialogs (last-used values per brick scope are remembered as defaults)
-4. Runs `brick_generator preview` and opens a diff editor with the transformed file
+4. Runs the installed `brick_generator preview` CLI and opens a diff editor with the transformed file
 
-Requires the Dart SDK on your `PATH` and a workspace rooted at this monorepo (or a parent folder containing `bricks/` and `pubspec.yaml`).
+### CLI prerequisite
+
+Preview uses the `brick_generator` CLI (not `dart run`). Install it once from the monorepo root:
+
+```bash
+dart install ./tools/brick_generator
+```
+
+Dart installs executables to its install bin directory (on macOS: `~/Library/Application Support/Dart/install/bin`). Add that directory to your `PATH`, or set `brickGenerator.cliPath` in VS Code settings to the full executable path.
 
 ## Customizing annotation colors
 

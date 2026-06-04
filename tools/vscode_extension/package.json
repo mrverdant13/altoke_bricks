@@ -156,6 +156,11 @@
     "configuration": {
       "title": "Brick Generator",
       "properties": {
+        "brickGenerator.cliPath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Path to the `brick_generator` CLI executable. When empty, the extension searches `PATH`, the Dart install bin directory, and `~/.pub-cache/bin`. Install with `dart install ./tools/brick_generator` from the monorepo root."
+        },
         "brickGenerator.colors.remove.markerForeground": {
           "type": "string",
           "default": "#F48771",

@@ -1,5 +1,4 @@
 import { execFile } from 'child_process';
-import * as path from 'path';
 import { promisify } from 'util';
 
 import type { BrickScopeInfo } from './brickScope';
@@ -11,14 +10,9 @@ export async function runPreviewCommand(options: {
   scope: BrickScopeInfo;
   filePath: string;
   vars: Record<string, string | boolean | number>;
+  cliCommand: string;
 }): Promise<string> {
-  const mainDart = path.join(
-    options.scope.monorepoRoot,
-    'tools/brick_generator/lib/main.dart',
-  );
   const args = [
-    'run',
-    mainDart,
     'preview',
     '--file',
     options.filePath,
@@ -34,7 +28,7 @@ export async function runPreviewCommand(options: {
   }
 
   try {
-    const { stdout } = await execFileAsync('dart', args, {
+    const { stdout } = await execFileAsync(options.cliCommand, args, {
       cwd: options.scope.monorepoRoot,
       maxBuffer: 16 * 1024 * 1024,
     });

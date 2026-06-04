@@ -2,6 +2,7 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 
 import { findBrickScopeForFile } from './brickScope';
+import { resolveBrickGeneratorCli } from './brickGeneratorCli';
 import { loadBrickVariables } from './brickVariables';
 import {
   loadSavedPreviewVariables,
@@ -60,6 +61,15 @@ async function previewGeneratedOutput(
 
   const expandedVars = expandPreviewVars(variables, selectedValues);
 
+  let cliCommand: string;
+  try {
+    cliCommand = await resolveBrickGeneratorCli();
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    void vscode.window.showErrorMessage(message);
+    return;
+  }
+
   await vscode.window.withProgress(
     {
       location: vscode.ProgressLocation.Notification,
@@ -72,6 +82,7 @@ async function previewGeneratedOutput(
           scope,
           filePath: document.fileName,
           vars: expandedVars,
+          cliCommand,
         });
         await openPreviewDiff(document, previewContent);
       } catch (error) {
