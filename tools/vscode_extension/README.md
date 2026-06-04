@@ -21,7 +21,7 @@ The extension:
 
 1. Detects the brick scope from the nearest `brick-gen.json`
 2. Reads variable definitions from `brick/brick.yaml`
-3. Prompts for variable values with quick-pick dialogs
+3. Prompts for variable values with quick-pick dialogs (last-used values per brick scope are remembered as defaults)
 4. Runs `brick_generator preview` and opens a diff editor with the transformed file
 
 Requires the Dart SDK on your `PATH` and a workspace rooted at this monorepo (or a parent folder containing `bricks/` and `pubspec.yaml`).
