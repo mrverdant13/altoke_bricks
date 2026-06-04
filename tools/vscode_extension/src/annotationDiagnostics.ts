@@ -13,7 +13,7 @@ function issueToDiagnostic(
   issue: AnnotationIssue,
 ): vscode.Diagnostic {
   const start = document.positionAt(issue.offset);
-  const end = start.translate(0, 1);
+  const end = document.positionAt(issue.offset + issue.length);
   const diagnostic = new vscode.Diagnostic(
     new vscode.Range(start, end),
     issue.message,

@@ -2,6 +2,7 @@ import { collectRegexMatches } from './markerScanning';
 
 export interface AnnotationIssue {
   offset: number;
+  length: number;
   line: number;
   column: number;
   message: string;
@@ -32,6 +33,7 @@ type MarkerKind = 'start' | 'end';
 interface Marker {
   kind: MarkerKind;
   offset: number;
+  length: number;
 }
 
 type ReplaceMarkerKind = 'start' | 'withMarker' | 'end';
@@ -39,6 +41,7 @@ type ReplaceMarkerKind = 'start' | 'withMarker' | 'end';
 interface ReplaceMarker {
   kind: ReplaceMarkerKind;
   offset: number;
+  length: number;
 }
 
 type PartialMarkerKind = 'start' | 'end';
@@ -46,6 +49,7 @@ type PartialMarkerKind = 'start' | 'end';
 interface PartialMarker {
   kind: PartialMarkerKind;
   offset: number;
+  length: number;
   name: string;
 }
 
@@ -150,9 +154,15 @@ function columnAt(content: string, offset: number): number {
   return offset - lastNewline;
 }
 
-function issue(content: string, offset: number, message: string): AnnotationIssue {
+function issue(
+  content: string,
+  offset: number,
+  length: number,
+  message: string,
+): AnnotationIssue {
   return {
     offset,
+    length,
     line: lineAt(content, offset),
     column: columnAt(content, offset),
     message,
@@ -167,6 +177,7 @@ function collectMarkers(
   return collectRegexMatches(text, pattern).map((match) => ({
     kind,
     offset: match.offset,
+    length: match.length,
   }));
 }
 
@@ -194,6 +205,7 @@ function validatePairedMarkers(
           issue(
             content,
             marker.offset,
+            marker.length,
             `Unmatched ${markerSet.blockName}-end marker (${markerSet.flavor})`,
           ),
         );
@@ -208,6 +220,7 @@ function validatePairedMarkers(
         issue(
           content,
           unmatched.offset,
+          unmatched.length,
           `Unmatched ${markerSet.blockName}-start marker (${markerSet.flavor})`,
         ),
       );
@@ -225,6 +238,7 @@ function collectReplaceMarkers(
   return collectRegexMatches(text, pattern).map((match) => ({
     kind,
     offset: match.offset,
+    length: match.length,
   }));
 }
 
@@ -239,19 +253,20 @@ function validateReplaceBlocks(content: string): AnnotationIssue[] {
     ].sort((a, b) => a.offset - b.offset);
 
     let expecting: ReplaceMarkerKind = 'start';
-    const stack: number[] = [];
+    const stack: Array<{ offset: number; length: number }> = [];
 
     for (const marker of markers) {
       switch (expecting) {
         case 'start':
           if (marker.kind === 'start') {
-            stack.push(marker.offset);
+            stack.push({ offset: marker.offset, length: marker.length });
             expecting = 'withMarker';
           } else {
             issues.push(
               issue(
                 content,
                 marker.offset,
+                marker.length,
                 `Unexpected ${replaceMarkerLabel(marker.kind)} before replace-start (${markerSet.flavor})`,
               ),
             );
@@ -265,6 +280,7 @@ function validateReplaceBlocks(content: string): AnnotationIssue[] {
               issue(
                 content,
                 marker.offset,
+                marker.length,
                 `Nested replace-start is not supported (${markerSet.flavor})`,
               ),
             );
@@ -273,6 +289,7 @@ function validateReplaceBlocks(content: string): AnnotationIssue[] {
               issue(
                 content,
                 marker.offset,
+                marker.length,
                 `replace-end without a matching with marker (${markerSet.flavor})`,
               ),
             );
@@ -287,6 +304,7 @@ function validateReplaceBlocks(content: string): AnnotationIssue[] {
                 issue(
                   content,
                   marker.offset,
+                  marker.length,
                   `Unmatched replace-end marker (${markerSet.flavor})`,
                 ),
               );
@@ -299,11 +317,12 @@ function validateReplaceBlocks(content: string): AnnotationIssue[] {
               issue(
                 content,
                 marker.offset,
+                marker.length,
                 `replace-start block is missing replace-end (${markerSet.flavor})`,
               ),
             );
             if (marker.kind === 'start') {
-              stack.push(marker.offset);
+              stack.push({ offset: marker.offset, length: marker.length });
               expecting = 'withMarker';
             } else {
               expecting = 'end';
@@ -313,11 +332,12 @@ function validateReplaceBlocks(content: string): AnnotationIssue[] {
       }
     }
 
-    for (const startOffset of stack) {
+    for (const startMarker of stack) {
       issues.push(
         issue(
           content,
-          startOffset,
+          startMarker.offset,
+          startMarker.length,
           `Unmatched replace-start marker (${markerSet.flavor})`,
         ),
       );
@@ -343,6 +363,7 @@ function collectNamedMarkers(
     markers.push({
       kind,
       offset,
+      length: match[0].length,
       name: match[1] ?? '',
     });
   }
@@ -371,6 +392,7 @@ function validatePartialBlocks(content: string): AnnotationIssue[] {
           issue(
             content,
             marker.offset,
+            marker.length,
             `Unmatched partial ^ marker for "${marker.name}" (${markerSet.flavor})`,
           ),
         );
@@ -383,6 +405,7 @@ function validatePartialBlocks(content: string): AnnotationIssue[] {
           issue(
             content,
             marker.offset,
+            marker.length,
             `partial ^ name "${marker.name}" does not match `
               + `partial v name "${start.name}" (${markerSet.flavor})`,
           ),
@@ -395,6 +418,7 @@ function validatePartialBlocks(content: string): AnnotationIssue[] {
         issue(
           content,
           unmatched.offset,
+          unmatched.length,
           `Unmatched partial v marker for "${unmatched.name}" (${markerSet.flavor})`,
         ),
       );
