@@ -16,6 +16,7 @@ const LOCAL_DATABASE_OPTIONS = ['drift', 'hive', 'sembast'] as const;
 
 const ANDROID_IDENTIFIER_PATTERN =
   /^[a-zA-Z][a-zA-Z0-9_]*(?:\.[a-zA-Z][a-zA-Z0-9_]*)+$/;
+const APPLE_BUNDLE_IDENTIFIER_PATTERN = /^[a-zA-Z0-9-.]*[a-zA-Z0-9-]$/;
 
 /**
  * Expands user-selected brick variables with hook-derived flags so preview
@@ -99,8 +100,28 @@ function applyOptionalPlatformIdentifier(
     return;
   }
 
-  target[includeKey] = true;
-  if (platform === 'android' && ANDROID_IDENTIFIER_PATTERN.test(identifier)) {
-    target.android_application_identifier_as_path = identifier.split('.').join('/');
+  switch (platform) {
+    case 'android':
+      if (!ANDROID_IDENTIFIER_PATTERN.test(identifier)) {
+        throw new Error(
+          `Invalid Android Application Identifier "${identifier}". ` +
+            `It must match the pattern: ${ANDROID_IDENTIFIER_PATTERN}`,
+        );
+      }
+      target[includeKey] = true;
+      target.android_application_identifier_as_path = identifier
+        .split('.')
+        .join('/');
+      break;
+    case 'ios':
+    case 'macos':
+      if (!APPLE_BUNDLE_IDENTIFIER_PATTERN.test(identifier)) {
+        throw new Error(
+          `Invalid Apple Bundle Identifier "${identifier}". ` +
+            `It must match the pattern: ${APPLE_BUNDLE_IDENTIFIER_PATTERN}`,
+        );
+      }
+      target[includeKey] = true;
+      break;
   }
 }
