@@ -243,6 +243,15 @@ class AnnotationValidator {
                 stack.removeLast();
               }
               expecting = _ReplaceMarkerKind.start;
+            } else if (marker.kind == _ReplaceMarkerKind.withMarker) {
+              issues.add(
+                _issue(
+                  content,
+                  marker.offset,
+                  'Duplicate with marker in replace block (${markerSet.flavor})',
+                ),
+              );
+              expecting = _ReplaceMarkerKind.end;
             } else {
               issues.add(
                 _issue(
@@ -251,12 +260,8 @@ class AnnotationValidator {
                   'replace-start block is missing replace-end (${markerSet.flavor})',
                 ),
               );
-              if (marker.kind == _ReplaceMarkerKind.start) {
-                stack.add(marker.offset);
-                expecting = _ReplaceMarkerKind.withMarker;
-              } else {
-                expecting = _ReplaceMarkerKind.end;
-              }
+              stack.add(marker.offset);
+              expecting = _ReplaceMarkerKind.withMarker;
             }
         }
       }

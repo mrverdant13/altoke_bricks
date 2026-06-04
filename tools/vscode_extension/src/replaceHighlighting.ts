@@ -1,5 +1,10 @@
 import * as vscode from 'vscode';
 
+import {
+  REPLACE_START_END_MARKER_PATTERN,
+  REPLACE_WITH_MARKER_SETS,
+  WITH_MARKER_PATTERN,
+} from './annotationMarkerSets';
 import { type AnnotationConfig } from './annotationConfig';
 import { collectRegexMatches, type TextMatch } from './markerScanning';
 import { interiorsToRanges } from './rangeUtils';
@@ -10,36 +15,6 @@ type ReplaceMarkerKind = 'start' | 'with' | 'end';
 interface ReplaceMarker extends TextMatch {
   kind: ReplaceMarkerKind;
 }
-
-interface ReplaceMarkerSet {
-  start: RegExp;
-  withMarker: RegExp;
-  end: RegExp;
-}
-
-const REPLACE_MARKER_SETS: ReplaceMarkerSet[] = [
-  {
-    start: /\/\*replace-start\*\//g,
-    withMarker: /\/\*with(?: +i\d+)?\*\//g,
-    end: /\/\*replace-end\*\//g,
-  },
-  {
-    start: /#replace-start#/g,
-    withMarker: /#with(?: +i\d+)?#/g,
-    end: /#replace-end#/g,
-  },
-  {
-    start: /<!--replace-start-->/g,
-    withMarker: /<!--with(?: +i\d+)?-->/g,
-    end: /<!--replace-end-->/g,
-  },
-];
-
-const REPLACE_START_END_MARKER_PATTERN =
-  /\/\*replace-start\*\/|\/\*replace-end\*\/|#replace-start#|#replace-end#|<!--replace-start-->|<!--replace-end-->/g;
-
-const WITH_MARKER_PATTERN =
-  /\/\*with(?: +i\d+)?\*\/|#with(?: +i\d+)?#|<!--with(?: +i\d+)?-->/g;
 
 let boundaryDecoration = vscode.window.createTextEditorDecorationType({});
 let withDecoration = vscode.window.createTextEditorDecorationType({});
@@ -97,7 +72,7 @@ function findReplaceBlockRegions(text: string): ReplaceBlockRegions {
   const originalInteriors: Array<{ start: number; end: number }> = [];
   const replacementInteriors: Array<{ start: number; end: number }> = [];
 
-  for (const markerSet of REPLACE_MARKER_SETS) {
+  for (const markerSet of REPLACE_WITH_MARKER_SETS) {
     const markers = [
       ...collectReplaceMarkers(text, markerSet.start, 'start'),
       ...collectReplaceMarkers(text, markerSet.withMarker, 'with'),
