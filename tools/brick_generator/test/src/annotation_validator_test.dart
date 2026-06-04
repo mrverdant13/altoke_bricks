@@ -252,6 +252,16 @@ new
         expect(issues.single.filePath, 'broken.dart');
       });
 
+      test('uses the file path when display path is omitted', () {
+        final file = File(p.join(tempDir.path, 'broken.dart'))
+          ..createSync(recursive: true)
+          ..writeAsStringSync('/*remove-start*/\n');
+
+        final issues = validator.validateFile(file);
+        expect(issues, hasLength(1));
+        expect(issues.single.filePath, file.path);
+      });
+
       test('skips ignored files', () {
         final file = File(p.join(tempDir.path, 'icon.png'))
           ..createSync(recursive: true)

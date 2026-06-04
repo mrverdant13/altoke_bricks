@@ -49,6 +49,19 @@ void main() {
       if (tempDir.existsSync()) await tempDir.delete(recursive: true);
     });
 
+    test('uses MELOS_ROOT_PATH from the environment map', () {
+      final melosRoot = p.join(tempDir.path, 'melos');
+      Directory(melosRoot).createSync();
+
+      expect(
+        resolveMonorepoRoot(
+          null,
+          environment: {'MELOS_ROOT_PATH': melosRoot},
+        ),
+        p.normalize(melosRoot),
+      );
+    });
+
     test('uses an explicit --root argument', () {
       final explicitRoot = p.join(tempDir.path, 'explicit');
       Directory(explicitRoot).createSync();
