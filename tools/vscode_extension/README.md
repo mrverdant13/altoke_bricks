@@ -11,8 +11,20 @@ The extension now provides annotation-aware highlighting for all currently suppo
 - Code folding for: `remove-start/end`, `replace-start/end`, and matching `partial v/^` blocks (all three comment flavors)
 - Coverage across reference file types used in this monorepo, including `.dart`, `.sh`, `.yaml`, `.yml`, `.html`, `.xml`, `.md`, and ignore-style files such as `.gitignore`
 - Theme-friendly TextMate scopes with extension-provided defaults for both dark and light themes
+- Inline preview of generated output via **Brick Generator: Preview generated output** (Command Palette or CodeLens on the first annotation)
 
-Diagnostics and inline preview land in follow-up changes.
+## Preview generated output
+
+Open a reference file under `bricks/<scope>/reference/` and run **Brick Generator: Preview generated output** from the Command Palette, or use the **Preview generated output** CodeLens above the first annotation.
+
+The extension:
+
+1. Detects the brick scope from the nearest `brick-gen.json`
+2. Reads variable definitions from `brick/brick.yaml`
+3. Prompts for variable values with quick-pick dialogs
+4. Runs `brick_generator preview` and opens a diff editor with the transformed file
+
+Requires the Dart SDK on your `PATH` and a workspace rooted at this monorepo (or a parent folder containing `bricks/` and `pubspec.yaml`).
 
 ## Customizing annotation colors
 
