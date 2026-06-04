@@ -70,7 +70,9 @@ void main() {
 
     test('walks up from the current directory', () {
       Directory(p.join(tempDir.path, 'bricks')).createSync();
-      File(p.join(tempDir.path, 'pubspec.yaml')).writeAsStringSync('name: root\n');
+      File(
+        p.join(tempDir.path, 'pubspec.yaml'),
+      ).writeAsStringSync('name: root\n');
       final nested = Directory(p.join(tempDir.path, 'nested', 'deep'))
         ..createSync(recursive: true);
       Directory.current = nested;
@@ -84,7 +86,10 @@ void main() {
     });
 
     test('throws when the monorepo root cannot be resolved', () {
-      expect(() => resolveMonorepoRoot(null), throwsArgumentError);
+      expect(
+        () => resolveMonorepoRoot(null, environment: {}),
+        throwsArgumentError,
+      );
     });
   });
 
@@ -144,7 +149,9 @@ void main() {
     setUp(() async {
       tempDir = await Directory.systemTemp.createTemp('brick_preview_args_');
       Directory(p.join(tempDir.path, 'bricks')).createSync();
-      File(p.join(tempDir.path, 'pubspec.yaml')).writeAsStringSync('name: root\n');
+      File(
+        p.join(tempDir.path, 'pubspec.yaml'),
+      ).writeAsStringSync('name: root\n');
 
       final scopeDir = Directory(p.join(tempDir.path, 'bricks', 'sample'))
         ..createSync(recursive: true);
@@ -184,8 +191,10 @@ void main() {
       expect(
         () => PreviewOptions.fromArgs(['--brick', 'sample']),
         throwsA(
-          predicate<ArgumentError>(
-            (error) => error.message.contains('Missing required --file'),
+          isA<ArgumentError>().having(
+            (error) => error.message,
+            'message',
+            contains('Missing required --file'),
           ),
         ),
       );
@@ -202,8 +211,10 @@ void main() {
       expect(
         () => PreviewOptions.fromArgs(['--file']),
         throwsA(
-          predicate<ArgumentError>(
-            (error) => error.message.contains('Missing value for --file'),
+          isA<ArgumentError>().having(
+            (error) => error.message,
+            'message',
+            contains('Missing value for --file'),
           ),
         ),
       );
