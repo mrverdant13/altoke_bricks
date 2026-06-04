@@ -46,6 +46,7 @@ export function registerPreviewCodeLens(context: vscode.ExtensionContext): void 
         { language: 'html' },
         { language: 'xml' },
         { language: 'markdown' },
+        { language: 'ignore' },
       ],
       new PreviewCodeLensProvider(),
     ),
