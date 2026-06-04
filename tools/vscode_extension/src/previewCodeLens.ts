@@ -6,7 +6,7 @@ import { collectRegexMatches } from './markerScanning';
 import { isSupportedBrickFile } from './supportedFiles';
 
 const FIRST_ANNOTATION_PATTERN =
-  /\/\*(?:x-)?(?:remove-start|replace-start|insert-start|partial v|drop)\*\/|#(?:x-)?(?:remove-start|replace-start|insert-start|partial v|drop)#|<!--(?:x-)?(?:remove-start|replace-start|insert-start|partial v|drop)-->|\/\*\{\{/g;
+  /\/\*(?:x-)?(?:remove-start|replace-start|insert-start|partial v|drop)\*\/|#(?:x-)?(?:remove-start|replace-start|insert-start|partial v|drop)#|<!--(?:x-)?(?:remove-start|replace-start|insert-start|partial v|drop)-->|\/\*(?:x)?\{\{|#(?:x)?\{\{|<!--(?:x)?\{\{/g;
 
 class PreviewCodeLensProvider implements vscode.CodeLensProvider {
   provideCodeLenses(document: vscode.TextDocument): vscode.CodeLens[] {
