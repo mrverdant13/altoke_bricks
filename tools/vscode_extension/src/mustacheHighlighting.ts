@@ -4,8 +4,14 @@ import { type AnnotationConfig } from './annotationConfig';
 import { captureToRange, matchToRange } from './rangeUtils';
 import { isSupportedBrickFile } from './supportedFiles';
 
-/** Full Mustache tag, including `{{` / `}}` delimiters (e.g. `{{#use_foo}}`). */
-export const MUSTACHE_TAG_PATTERN = String.raw`\{\{[^}]*?\}\}`;
+/** Full Mustache tag, including `{{` / `}}` delimiters (e.g. `{{#use_foo}}`, `{{{name}}}`). */
+export const MUSTACHE_TAG_PATTERN = String.raw`\{\{\{?[^}]+?\}\}?\}`;
+
+/** Same as [MUSTACHE_TAG_PATTERN] with a capture group for the tag body. */
+export const MUSTACHE_TAG_BODY_REGEX = new RegExp(
+  MUSTACHE_TAG_PATTERN.replace('[^}]+', '([^}]+)'),
+  'g',
+);
 
 const MUSTACHE_COMMENT_SOURCES = [
   String.raw`/\*(x)?(${MUSTACHE_TAG_PATTERN})(x)?\*/`,

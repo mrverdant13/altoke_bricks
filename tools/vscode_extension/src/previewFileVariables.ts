@@ -1,10 +1,9 @@
 import type { BrickGenOptions } from './brickGen';
 import { applyBrickGenReplacements } from './brickGen';
 import type { BrickVariable, BrickVarType } from './brickVariables';
+import { MUSTACHE_TAG_BODY_REGEX } from './mustacheHighlighting';
 
 type InferredVarType = 'boolean' | 'string';
-
-const MUSTACHE_TAG_PATTERN = /\{\{\{?([^}]+)\}\}?\}/g;
 
 /**
  * Variables required to preview [fileContent]: Mustache names in the file after
@@ -51,7 +50,7 @@ function extractMustacheVariables(
 ): Map<string, InferredVarType> {
   const usages = new Map<string, Set<'section' | 'value'>>();
 
-  for (const match of content.matchAll(MUSTACHE_TAG_PATTERN)) {
+  for (const match of content.matchAll(MUSTACHE_TAG_BODY_REGEX)) {
     const body = match[1]?.trim();
     if (!body || body.startsWith('>') || body.startsWith('~') || body.startsWith('!')) {
       continue;
