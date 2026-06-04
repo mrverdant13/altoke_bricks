@@ -2,7 +2,10 @@ import * as vscode from 'vscode';
 
 import { ANY_ANNOTATION_MARKER_PATTERN } from './annotationMarkerSets';
 import { findBrickScopeForFile } from './brickScope';
-import { PREVIEW_COMMAND_ID } from './previewCommand';
+import {
+  PREVIEW_COMMAND_ID,
+  PREVIEW_TEMPLATE_COMMAND_ID,
+} from './previewCommand';
 import { collectRegexMatches } from './markerScanning';
 import { isSupportedBrickFile } from './supportedFiles';
 
@@ -31,6 +34,11 @@ class PreviewCodeLensProvider implements vscode.CodeLensProvider {
       new vscode.CodeLens(range, {
         title: 'Preview generated output',
         command: PREVIEW_COMMAND_ID,
+        arguments: [document.uri],
+      }),
+      new vscode.CodeLens(range, {
+        title: 'Preview template output',
+        command: PREVIEW_TEMPLATE_COMMAND_ID,
         arguments: [document.uri],
       }),
     ];
