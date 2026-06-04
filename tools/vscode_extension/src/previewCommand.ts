@@ -50,7 +50,17 @@ async function previewGeneratedOutput(
     return;
   }
 
-  const variables = loadBrickVariables(scope.brickYamlPath);
+  let variables;
+  try {
+    variables = loadBrickVariables(scope.brickYamlPath);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    void vscode.window.showErrorMessage(
+      `Could not load brick variables: ${message}`,
+    );
+    return;
+  }
+
   const savedValues = loadSavedPreviewVariables(context, scope.scopeName, variables);
   const selectedValues = await collectPreviewVariableValues(variables, savedValues);
   if (selectedValues === undefined) {
@@ -59,7 +69,14 @@ async function previewGeneratedOutput(
 
   await savePreviewVariables(context, scope.scopeName, selectedValues);
 
-  const expandedVars = expandPreviewVars(variables, selectedValues);
+  let expandedVars;
+  try {
+    expandedVars = expandPreviewVars(variables, selectedValues);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    void vscode.window.showErrorMessage(`Preview failed: ${message}`);
+    return;
+  }
 
   let cliCommand: string;
   try {
