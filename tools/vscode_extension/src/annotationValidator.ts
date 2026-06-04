@@ -312,6 +312,16 @@ function validateReplaceBlocks(content: string): AnnotationIssue[] {
               stack.pop();
             }
             expecting = 'start';
+          } else if (marker.kind === 'withMarker') {
+            issues.push(
+              issue(
+                content,
+                marker.offset,
+                marker.length,
+                `Duplicate with marker in replace block (${markerSet.flavor})`,
+              ),
+            );
+            expecting = 'end';
           } else {
             issues.push(
               issue(
@@ -321,12 +331,8 @@ function validateReplaceBlocks(content: string): AnnotationIssue[] {
                 `replace-start block is missing replace-end (${markerSet.flavor})`,
               ),
             );
-            if (marker.kind === 'start') {
-              stack.push({ offset: marker.offset, length: marker.length });
-              expecting = 'withMarker';
-            } else {
-              expecting = 'end';
-            }
+            stack.push({ offset: marker.offset, length: marker.length });
+            expecting = 'withMarker';
           }
           break;
       }

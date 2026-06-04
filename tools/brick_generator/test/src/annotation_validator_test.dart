@@ -105,6 +105,23 @@ old
         expect(validator.validateContent(content), isEmpty);
       });
 
+      test('detects duplicate with marker in replace block', () {
+        const content = '''
+/*replace-start*/
+old
+/*with*/
+/*with*/
+new
+/*replace-end*/
+''';
+        final issues = validator.validateContent(content);
+        expect(issues, isNotEmpty);
+        expect(
+          issues.map((i) => i.message),
+          anyElement(contains('Duplicate with marker')),
+        );
+      });
+
       test('detects partial name mismatch', () {
         const content =
             '/*partial v foo*/payload/*partial ^ bar*/';
