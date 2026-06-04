@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 
+import { INSERT_BOUNDARY_MARKER_PATTERN, INSERT_MARKER_SETS } from './annotationMarkerSets';
 import { type AnnotationConfig } from './annotationConfig';
 import { collectRegexMatches } from './markerScanning';
 import { interiorsToRanges } from './rangeUtils';
@@ -12,15 +13,6 @@ interface MarkerMatch {
   offset: number;
   length: number;
 }
-
-const INSERT_MARKER_SETS = [
-  { start: /\/\*insert-start\*\//g, end: /\/\*insert-end\*\//g },
-  { start: /#insert-start#/g, end: /#insert-end#/g },
-  { start: /<!--insert-start-->/g, end: /<!--insert-end-->/g },
-];
-
-const INSERT_BOUNDARY_MARKER_PATTERN =
-  /\/\*insert-start\*\/|\/\*insert-end\*\/|#insert-start#|#insert-end#|<!--insert-start-->|<!--insert-end-->/g;
 
 let markerDecoration = vscode.window.createTextEditorDecorationType({});
 let contentDecoration = vscode.window.createTextEditorDecorationType({});

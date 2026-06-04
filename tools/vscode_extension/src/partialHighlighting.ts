@@ -1,5 +1,9 @@
 import * as vscode from 'vscode';
 
+import {
+  PARTIAL_BOUNDARY_MARKER_PATTERN,
+  PARTIAL_MARKER_SETS,
+} from './annotationMarkerSets';
 import { type AnnotationConfig } from './annotationConfig';
 import { interiorsToRanges } from './rangeUtils';
 import { isSupportedBrickFile } from './supportedFiles';
@@ -12,15 +16,6 @@ interface PartialMarker {
   length: number;
   name: string;
 }
-
-const PARTIAL_MARKER_SETS = [
-  { start: /\/\*partial v ([^*]+)\*\//g, end: /\/\*partial \^ ([^*]+)\*\//g },
-  { start: /#partial v ([^#]+)#/g, end: /#partial \^ ([^#]+)#/g },
-  { start: /<!--partial v (.+?)-->/g, end: /<!--partial \^ (.+?)-->/g },
-];
-
-const PARTIAL_BOUNDARY_MARKER_PATTERN =
-  /\/\*partial [v^] [^*]+\*\/|#partial [v^] [^#]+#|<!--partial [v^] .+?-->/g;
 
 let markerDecoration = vscode.window.createTextEditorDecorationType({});
 let payloadDecoration = vscode.window.createTextEditorDecorationType({});
