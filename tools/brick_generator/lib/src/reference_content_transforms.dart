@@ -5,6 +5,7 @@ import 'package:path/path.dart' as p;
 
 /// Annotation-marker transforms applied to reference file contents.
 extension ReferenceContentTransforms on String {
+  /// Applies the remotion transformations to the content.
   String get withResolvedRemotions {
     final blockDropPatterns = [r'\/\*drop\*\/.*', '#drop#.*', '<!--drop-->.*'];
     final blockDropPattern = blockDropPatterns
@@ -30,6 +31,7 @@ extension ReferenceContentTransforms on String {
     });
   }
 
+  /// Applies the replacement transformations to the content.
   String get withResolveReplacements {
     final patternGroups = [
       (
@@ -66,6 +68,7 @@ extension ReferenceContentTransforms on String {
     });
   }
 
+  /// Applies the insertion transformations to the content.
   String get withResolvedInsertions {
     final patternGroups = [
       (
@@ -97,6 +100,7 @@ extension ReferenceContentTransforms on String {
     });
   }
 
+  /// Applies the mustache tag transformations to the content.
   String get withResolveMustacheTags {
     final patterns = [
       r'(?<leading>\s*)\/\*(?<dropLeading>x)?(?<mustacheTag>{{.*?}})(?<dropTrailing>x)?\*\/(?<trailing>\s*)',
@@ -121,6 +125,7 @@ extension ReferenceContentTransforms on String {
     });
   }
 
+  /// Applies the spacing group transformations to the content.
   String get withResolveSpacingGroups {
     const groupPatterns = [
       r'\s*\/\*w ?(?<spacingGroups>(?:\d+[v>] ?)*) ?w\*\/\s*',
@@ -150,6 +155,7 @@ extension ReferenceContentTransforms on String {
     });
   }
 
+  /// Applies the partial transformations to the content.
   String withResolvedPartials({required String targetAbsolutePath}) {
     final partialPatterns = [
       r'\/\*partial v (?<partialName>.*?)\*\/(?<partialPayload>.*?)\/\*partial \^ \k<partialName>\*\/',

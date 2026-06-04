@@ -22,9 +22,7 @@ Future<void> validateReferences() async {
     return;
   }
 
-  for (final issue in issues) {
-    stderr.writeln(issue);
-  }
+  issues.forEach(stderr.writeln);
   stderr.writeln('Found ${issues.length} annotation issue(s).');
   exitCode = 1;
 }

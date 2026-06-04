@@ -123,8 +123,7 @@ new
       });
 
       test('detects partial name mismatch', () {
-        const content =
-            '/*partial v foo*/payload/*partial ^ bar*/';
+        const content = '/*partial v foo*/payload/*partial ^ bar*/';
         final issues = validator.validateContent(content);
         expect(issues, hasLength(1));
         expect(
@@ -167,13 +166,13 @@ new
       });
 
       test('walks reference files and attaches paths', () {
-        final validFile = File(p.join(tempDir.path, 'valid.dart'));
-        validFile.createSync(recursive: true);
-        validFile.writeAsStringSync('/*remove-start*/\n/*remove-end*/\n');
+        File(p.join(tempDir.path, 'valid.dart'))
+          ..createSync(recursive: true)
+          ..writeAsStringSync('/*remove-start*/\n/*remove-end*/\n');
 
-        final invalidFile = File(p.join(tempDir.path, 'invalid.dart'));
-        invalidFile.createSync(recursive: true);
-        invalidFile.writeAsStringSync('/*remove-start*/\n');
+        File(p.join(tempDir.path, 'invalid.dart'))
+          ..createSync(recursive: true)
+          ..writeAsStringSync('/*remove-start*/\n');
 
         final issues = validator.validateDirectory(tempDir);
         expect(issues, hasLength(1));
@@ -181,17 +180,17 @@ new
       });
 
       test('skips binary extensions', () {
-        final image = File(p.join(tempDir.path, 'icon.png'));
-        image.createSync(recursive: true);
-        image.writeAsBytesSync([0, 1, 2]);
+        File(p.join(tempDir.path, 'icon.png'))
+          ..createSync(recursive: true)
+          ..writeAsBytesSync([0, 1, 2]);
 
         expect(validator.validateDirectory(tempDir), isEmpty);
       });
 
       test('skips non-UTF-8 files', () {
-        final binary = File(p.join(tempDir.path, 'notes.txt'));
-        binary.createSync(recursive: true);
-        binary.writeAsBytesSync([0xFF, 0xFE, 0x00]);
+        File(p.join(tempDir.path, 'notes.txt'))
+          ..createSync(recursive: true)
+          ..writeAsBytesSync([0xFF, 0xFE, 0x00]);
 
         expect(validator.validateDirectory(tempDir), isEmpty);
       });

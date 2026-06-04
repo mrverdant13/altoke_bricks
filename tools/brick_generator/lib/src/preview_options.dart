@@ -57,7 +57,8 @@ class PreviewOptions {
   /// Absolute path to the reference file to preview.
   final String filePath;
 
-  /// Brick scope identifier (e.g. `altoke_common` or `altoke_common_brick_scope`).
+  /// Brick scope identifier (e.g. `altoke_common` or
+  /// `altoke_common_brick_scope`).
   final String brickScope;
 
   /// Mason variable values supplied by the caller.
@@ -88,12 +89,14 @@ abstract final class BrickScopePaths {
     if (scopeDir.existsSync()) return p.normalize(scopeDir.path);
 
     throw ArgumentError(
-      'Brick scope not found for "$brickScope" (looked under ${scopeDir.path}).',
+      'Brick scope not found for "$brickScope" '
+      '(looked under ${scopeDir.path}).',
     );
   }
 }
 
-/// Resolves the monorepo root from [rootArg], `MELOS_ROOT_PATH`, or [Directory.current].
+/// Resolves the monorepo root from [rootArg], `MELOS_ROOT_PATH`, or
+/// [Directory.current].
 String resolveMonorepoRoot(String? rootArg) {
   if (rootArg != null && rootArg.isNotEmpty) {
     return p.normalize(p.absolute(rootArg));
@@ -117,7 +120,8 @@ String resolveMonorepoRoot(String? rootArg) {
   }
 
   throw ArgumentError(
-    'Could not resolve monorepo root. Pass --root <path> or set MELOS_ROOT_PATH.',
+    'Could not resolve monorepo root. Pass --root <path> or set '
+    'MELOS_ROOT_PATH.',
   );
 }
 

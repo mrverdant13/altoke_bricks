@@ -49,7 +49,10 @@ Future<void> previewReference(
     'brick_generator_preview_',
   );
   try {
-    final referenceRelativePath = p.relative(referencePath, from: referenceDir.path);
+    final referenceRelativePath = p.relative(
+      referencePath,
+      from: referenceDir.path,
+    );
     final simulatedTargetPath = p.join(
       tempTargetDir.path,
       referenceRelativePath,
@@ -60,9 +63,10 @@ Future<void> previewReference(
       options: brickGenOptions,
     );
 
-    final resolvedTargetPath = brickGenData.applyReplacementsToTargetRelativeDescendant(
-      simulatedTargetPath,
-    );
+    final resolvedTargetPath = brickGenData
+        .applyReplacementsToTargetRelativeDescendant(
+          simulatedTargetPath,
+        );
     final targetRelativePath = p.relative(
       resolvedTargetPath,
       from: tempTargetDir.path,
