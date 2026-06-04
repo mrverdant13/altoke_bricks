@@ -77,14 +77,10 @@ async function isBrickGeneratorCliAvailable(command: string): Promise<boolean> {
     }
 
     const stderr = readExecStderr(error);
-    if (
+    return (
       stderr.includes('Missing required --file') ||
       stderr.includes('Missing value for --file')
-    ) {
-      return true;
-    }
-
-    return !isCommandNotFound(error);
+    );
   }
 }
 
