@@ -1,12 +1,10 @@
 import * as vscode from 'vscode';
 
+import { ANY_ANNOTATION_MARKER_PATTERN } from './annotationMarkerSets';
 import { findBrickScopeForFile } from './brickScope';
 import { PREVIEW_COMMAND_ID } from './previewCommand';
 import { collectRegexMatches } from './markerScanning';
 import { isSupportedBrickFile } from './supportedFiles';
-
-const FIRST_ANNOTATION_PATTERN =
-  /\/\*(?:x-)?(?:remove-start|replace-start|insert-start|partial v|drop)\*\/|#(?:x-)?(?:remove-start|replace-start|insert-start|partial v|drop)#|<!--(?:x-)?(?:remove-start|replace-start|insert-start|partial v|drop)-->|\/\*(?:x)?\{\{|#(?:x)?\{\{|<!--(?:x)?\{\{/g;
 
 class PreviewCodeLensProvider implements vscode.CodeLensProvider {
   provideCodeLenses(document: vscode.TextDocument): vscode.CodeLens[] {
@@ -17,7 +15,10 @@ class PreviewCodeLensProvider implements vscode.CodeLensProvider {
       return [];
     }
 
-    const matches = collectRegexMatches(document.getText(), FIRST_ANNOTATION_PATTERN);
+    const matches = collectRegexMatches(
+      document.getText(),
+      ANY_ANNOTATION_MARKER_PATTERN,
+    );
     const firstMatch = matches[0];
     if (!firstMatch) {
       return [];

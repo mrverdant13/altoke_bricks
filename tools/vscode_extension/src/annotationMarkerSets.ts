@@ -2,6 +2,7 @@ import {
   type NamedStartEndMarkerSet,
   type StartEndMarkerSet,
 } from './annotationBlockPairing';
+import { MUSTACHE_COMMENT_MARKER_PATTERN } from './mustacheHighlighting';
 
 export const COMMENT_FLAVORS = ['/* */', '# #', '<!-- -->'] as const;
 
@@ -71,3 +72,21 @@ export const PARTIAL_BOUNDARY_MARKER_PATTERN =
 export const DROP_MARKER_SETS = [/\/\*drop\*\//g, /#drop#/g, /<!--drop-->/g];
 
 export const DROP_MARKER_PATTERN = /\/\*drop\*\/|#drop#|<!--drop-->/g;
+
+function combineMarkerPatterns(...patterns: RegExp[]): RegExp {
+  return new RegExp(
+    patterns.map((pattern) => `(?:${pattern.source})`).join('|'),
+    'g',
+  );
+}
+
+/** Matches any brick annotation marker, including mustache comment wrappers. */
+export const ANY_ANNOTATION_MARKER_PATTERN = combineMarkerPatterns(
+  REMOVE_BOUNDARY_MARKER_PATTERN,
+  INSERT_BOUNDARY_MARKER_PATTERN,
+  REPLACE_START_END_MARKER_PATTERN,
+  WITH_MARKER_PATTERN,
+  PARTIAL_BOUNDARY_MARKER_PATTERN,
+  DROP_MARKER_PATTERN,
+  MUSTACHE_COMMENT_MARKER_PATTERN,
+);
