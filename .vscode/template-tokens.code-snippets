@@ -107,7 +107,7 @@
       "#replace-end#",
     ]
   },
-  "Replacee Selection (generic)": {
+  "Replace Selection (generic)": {
     "scope": "dart,javascript,json,markdown,typescript",
     "description": "Enclosing tokens for the replacement of an optionally selected fragment",
     "prefix": "ReplaceSelection",

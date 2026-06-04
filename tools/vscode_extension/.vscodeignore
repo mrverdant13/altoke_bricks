@@ -6,7 +6,7 @@ src/**
 *.iml
 pubspec.yaml
 tsconfig.json
-esbuild.mjs
+esbuild.mjs # cspell:disable-line
 pnpm-lock.yaml
 **/*.map
 **/*.ts
