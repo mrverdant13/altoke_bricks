@@ -73,7 +73,7 @@ async function promptEnumVariable(
     picked: value === resolvedDefault,
   }));
   if (options.length === 0) {
-    return promptStringVariable(variable, label);
+    return promptStringVariable(variable, label, savedValues);
   }
 
   const selection = await vscode.window.showQuickPick(options, {
