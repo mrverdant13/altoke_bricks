@@ -16,7 +16,8 @@ abstract class Git {
     AsyncVoidHandlerCallback<ExceptionDetails>? onError,
   }) async {
     await Shell.run(
-      'git clean -dfX ${directory.path}',
+      'git clean -dfX .',
+      workingDir: directory.path,
       stdin: stdin,
       stdout: stdout,
       stderr: stderr,

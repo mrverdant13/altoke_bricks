@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
 
 /// Parsed CLI options for the `preview` subcommand.
@@ -97,12 +98,16 @@ abstract final class BrickScopePaths {
 
 /// Resolves the monorepo root from [rootArg], `MELOS_ROOT_PATH`, or
 /// [Directory.current].
-String resolveMonorepoRoot(String? rootArg) {
+String resolveMonorepoRoot(
+  String? rootArg, {
+  @visibleForTesting Map<String, String>? environment,
+}) {
   if (rootArg != null && rootArg.isNotEmpty) {
     return p.normalize(p.absolute(rootArg));
   }
 
-  final melosRoot = Platform.environment['MELOS_ROOT_PATH'];
+  final env = environment ?? Platform.environment;
+  final melosRoot = env['MELOS_ROOT_PATH'];
   if (melosRoot != null && melosRoot.isNotEmpty) {
     return p.normalize(melosRoot);
   }

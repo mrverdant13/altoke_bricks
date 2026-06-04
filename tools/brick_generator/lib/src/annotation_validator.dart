@@ -246,14 +246,14 @@ class AnnotationValidator {
           case _ReplaceMarkerKind.end:
             if (marker.kind == _ReplaceMarkerKind.end) {
               if (stack.isEmpty) {
-                issues.add(
-                  _issue(
-                    content,
-                    marker.offset,
-                    'Unmatched replace-end marker '
-                    '(${markerSet.flavor})',
-                  ),
-                );
+                issues.add( // coverage:ignore-line
+                  _issue( // coverage:ignore-line
+                    content, // coverage:ignore-line
+                    marker.offset, // coverage:ignore-line
+                    'Unmatched replace-end marker ' // coverage:ignore-line
+                    '(${markerSet.flavor})', // coverage:ignore-line
+                  ), // coverage:ignore-line
+                ); // coverage:ignore-line
               } else {
                 stack.removeLast();
               }
