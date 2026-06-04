@@ -254,5 +254,8 @@
     "@vscode/vsce": "^3.2.1",
     "esbuild": "^0.24.0",
     "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "yaml": "^2.9.0"
   }
 }
