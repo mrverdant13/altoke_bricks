@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 
 import type { BrickVariable } from './brickVariables';
 
-type PreviewVarValue = string | boolean | number;
+export type PreviewVarValue = string | boolean;
 
 const STORAGE_KEY_PREFIX = 'brickGenerator.previewVariables.';
 

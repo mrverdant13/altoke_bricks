@@ -3,13 +3,14 @@ import { promisify } from 'util';
 
 import type { BrickScopeInfo } from './brickScope';
 import { formatVarsForCli } from './brickVariables';
+import type { PreviewVarValue } from './previewVariableState';
 
 const execFileAsync = promisify(execFile);
 
 export async function runPreviewCommand(options: {
   scope: BrickScopeInfo;
   filePath: string;
-  vars: Record<string, string | boolean | number>;
+  vars: Record<string, PreviewVarValue>;
   cliCommand: string;
 }): Promise<string> {
   const args = [

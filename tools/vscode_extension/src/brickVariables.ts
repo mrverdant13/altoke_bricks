@@ -2,6 +2,8 @@ import * as fs from 'fs';
 
 import { parse as parseYaml } from 'yaml';
 
+import type { PreviewVarValue } from './previewVariableState';
+
 export type BrickVarType = 'string' | 'boolean' | 'enum';
 
 export interface BrickVariable {
@@ -50,7 +52,7 @@ export function loadBrickVariables(brickYamlPath: string): BrickVariable[] {
 
 /** Formats a variable map for the preview CLI `--vars` flag. */
 export function formatVarsForCli(
-  vars: Record<string, string | boolean | number>,
+  vars: Record<string, PreviewVarValue>,
 ): string {
   for (const [key, value] of Object.entries(vars)) {
     if (typeof value === 'string' && value.includes(',')) {
@@ -62,7 +64,7 @@ export function formatVarsForCli(
 
   return Object.entries(vars)
     .map(([key, value]) => {
-      if (typeof value === 'boolean' || typeof value === 'number') {
+      if (typeof value === 'boolean') {
         return `${key}=${value}`;
       }
       return `${key}=${value}`;

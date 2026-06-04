@@ -1,9 +1,10 @@
 import * as vscode from 'vscode';
 
 import type { BrickVariable } from './brickVariables';
-import { resolvePreviewDefault } from './previewVariableState';
-
-type PreviewVarValue = string | boolean | number;
+import {
+  type PreviewVarValue,
+  resolvePreviewDefault,
+} from './previewVariableState';
 
 export async function collectPreviewVariableValues(
   variables: BrickVariable[],
