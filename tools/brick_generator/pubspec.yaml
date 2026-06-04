@@ -3,6 +3,9 @@ description: A generator for bricks.
 publish_to: none
 resolution: workspace
 
+executables:
+  brick_generator:
+
 environment:
   sdk: ">=3.10.0 <4.0.0"
 
