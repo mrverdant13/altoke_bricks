@@ -75,5 +75,111 @@ class App extends Widget {
 
       expect(output.toString(), contains('class App extends StatelessWidget'));
     });
+
+    test('writes to stdout when no custom sink is provided', () async {
+      await previewReference(
+        PreviewOptions(
+          filePath: referenceFilePath,
+          brickScope: 'sample',
+          vars: PreviewVars.parse('use_riverpod=true'),
+          rootPath: rootPath,
+        ),
+      );
+    });
+
+    test('throws when the reference file does not exist', () async {
+      expect(
+        () => previewReference(
+          PreviewOptions(
+            filePath: p.join(rootPath, 'missing.dart'),
+            brickScope: 'sample',
+            vars: const {},
+            rootPath: rootPath,
+          ),
+        ),
+        throwsArgumentError,
+      );
+    });
+
+    test('throws when the reference directory is missing', () async {
+      final scopeWithoutReference = Directory(
+        p.join(rootPath, 'bricks', 'empty'),
+      )..createSync(recursive: true);
+      await File(p.join(scopeWithoutReference.path, 'brick-gen.json'))
+          .writeAsString('{"replacements":[]}');
+
+      expect(
+        () => previewReference(
+          PreviewOptions(
+            filePath: referenceFilePath,
+            brickScope: 'empty',
+            vars: const {},
+            rootPath: rootPath,
+          ),
+        ),
+        throwsArgumentError,
+      );
+    });
+
+    test('throws when the file is outside the reference directory', () async {
+      final outsideFile = File(p.join(rootPath, 'outside.dart'))
+        ..createSync()
+        ..writeAsStringSync('class Outside {}');
+
+      expect(
+        () => previewReference(
+          PreviewOptions(
+            filePath: outsideFile.path,
+            brickScope: 'sample',
+            vars: const {},
+            rootPath: rootPath,
+          ),
+        ),
+        throwsArgumentError,
+      );
+    });
+
+    test('throws when brick-gen.json is missing', () async {
+      final scopeDir = Directory(p.join(rootPath, 'bricks', 'no_config'))
+        ..createSync(recursive: true);
+      final referenceDir = Directory(p.join(scopeDir.path, 'reference'))
+        ..createSync(recursive: true);
+      final filePath = p.join(referenceDir.path, 'widget.dart');
+      await File(filePath).writeAsString('class Widget {}');
+
+      expect(
+        () => previewReference(
+          PreviewOptions(
+            filePath: filePath,
+            brickScope: 'no_config',
+            vars: const {},
+            rootPath: rootPath,
+          ),
+        ),
+        throwsArgumentError,
+      );
+    });
+
+    test('loads partial files created during transformation', () async {
+      await File(referenceFilePath).writeAsString('''
+class App extends Widget {
+  /*partial v footer*/
+  // footer line
+  /*partial ^ footer*/
+}
+''');
+      final output = StringBuffer();
+      await previewReference(
+        PreviewOptions(
+          filePath: referenceFilePath,
+          brickScope: 'sample',
+          vars: PreviewVars.parse('use_riverpod=true'),
+          rootPath: rootPath,
+        ),
+        write: output.write,
+      );
+
+      expect(output.toString(), contains('footer line'));
+    });
   });
 }
