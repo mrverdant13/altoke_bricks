@@ -11,8 +11,28 @@ The extension now provides annotation-aware highlighting for all currently suppo
 - Code folding for: `remove-start/end`, `replace-start/end`, and matching `partial v/^` blocks (all three comment flavors)
 - Coverage across reference file types used in this monorepo, including `.dart`, `.sh`, `.yaml`, `.yml`, `.html`, `.xml`, `.md`, and ignore-style files such as `.gitignore`
 - Theme-friendly TextMate scopes with extension-provided defaults for both dark and light themes
+- Inline preview of generated output via **Brick Generator: Preview generated output** (Command Palette or CodeLens on the first annotation)
 
-Diagnostics and inline preview land in follow-up changes.
+## Preview generated output
+
+Open a reference file under `bricks/<scope>/reference/` and run **Brick Generator: Preview generated output** from the Command Palette, or use the **Preview generated output** CodeLens above the first annotation.
+
+The extension:
+
+1. Detects the brick scope from the nearest `brick-gen.json`
+2. Applies `brick-gen.json` content replacements, then prompts only for Mustache variables referenced in that transformed file (using `brick/brick.yaml` definitions when available)
+3. Remembers last-used values per brick scope as quick-pick defaults
+4. Runs the installed `brick_generator preview` CLI and opens a diff editor with the transformed file
+
+### CLI prerequisite
+
+Preview uses the `brick_generator` CLI (not `dart run`). Install it once from the monorepo root:
+
+```bash
+dart install ./tools/brick_generator
+```
+
+Dart installs executables to its install bin directory (on macOS: `~/Library/Application Support/Dart/install/bin`). Add that directory to your `PATH`, or set `brickGenerator.cliPath` in VS Code settings to the full executable path.
 
 ## Customizing annotation colors
 

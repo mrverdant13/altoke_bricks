@@ -4,14 +4,29 @@ import { type AnnotationConfig } from './annotationConfig';
 import { captureToRange, matchToRange } from './rangeUtils';
 import { isSupportedBrickFile } from './supportedFiles';
 
-/** Mustache tag body — allows `#` inside section tags (e.g. `{{#use_foo}}`). */
-const MUSTACHE_TAG = String.raw`\{\{[^}]*?\}\}`;
+/** Full Mustache tag, including `{{` / `}}` delimiters (e.g. `{{#use_foo}}`, `{{{name}}}`). */
+export const MUSTACHE_TAG_PATTERN = String.raw`\{\{\{?[^}]+?\}\}?\}`;
 
-const MUSTACHE_COMMENT_PATTERNS = [
-  new RegExp(String.raw`/\*(x)?(${MUSTACHE_TAG})(x)?\*/`, 'g'),
-  new RegExp(String.raw`#(x)?(${MUSTACHE_TAG})(x)?#`, 'g'),
-  new RegExp(String.raw`<!--(x)?(${MUSTACHE_TAG})(x)?-->`, 'g'),
-];
+/** Same as [MUSTACHE_TAG_PATTERN] with a capture group for the tag body. */
+export const MUSTACHE_TAG_BODY_REGEX = new RegExp(
+  MUSTACHE_TAG_PATTERN.replace('[^}]+', '([^}]+)'),
+  'g',
+);
+
+const MUSTACHE_COMMENT_SOURCES = [
+  String.raw`/\*(x)?(${MUSTACHE_TAG_PATTERN})(x)?\*/`,
+  String.raw`#(x)?(${MUSTACHE_TAG_PATTERN})(x)?#`,
+  String.raw`<!--(x)?(${MUSTACHE_TAG_PATTERN})(x)?-->`,
+] as const;
+
+export const MUSTACHE_COMMENT_MARKER_PATTERN = new RegExp(
+  MUSTACHE_COMMENT_SOURCES.map((source) => `(?:${source})`).join('|'),
+  'g',
+);
+
+const MUSTACHE_COMMENT_PATTERNS = MUSTACHE_COMMENT_SOURCES.map(
+  (source) => new RegExp(source, 'g'),
+);
 
 let commentDecoration = vscode.window.createTextEditorDecorationType({});
 let tagDecoration = vscode.window.createTextEditorDecorationType({});
