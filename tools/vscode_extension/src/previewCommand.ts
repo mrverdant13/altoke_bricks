@@ -4,11 +4,11 @@ import * as vscode from 'vscode';
 import { findBrickScopeForFile } from './brickScope';
 import { resolveBrickGeneratorCli } from './brickGeneratorCli';
 import { loadBrickVariables } from './brickVariables';
+import { resolvePreviewVariables } from './previewFileVariables';
 import {
   loadSavedPreviewVariables,
   savePreviewVariables,
 } from './previewVariableState';
-import { expandPreviewVars } from './previewVars';
 import { runPreviewCommand } from './previewRunner';
 import { isSupportedBrickFile } from './supportedFiles';
 import { collectPreviewVariableValues } from './variableQuickPick';
@@ -50,9 +50,9 @@ async function previewGeneratedOutput(
     return;
   }
 
-  let variables;
+  let brickVariables;
   try {
-    variables = loadBrickVariables(scope.brickYamlPath);
+    brickVariables = loadBrickVariables(scope.brickYamlPath);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     void vscode.window.showErrorMessage(
@@ -61,6 +61,7 @@ async function previewGeneratedOutput(
     return;
   }
 
+  const variables = resolvePreviewVariables(brickVariables, document.getText());
   const savedValues = loadSavedPreviewVariables(context, scope.scopeName, variables);
   const selectedValues = await collectPreviewVariableValues(variables, savedValues);
   if (selectedValues === undefined) {
@@ -68,15 +69,6 @@ async function previewGeneratedOutput(
   }
 
   await savePreviewVariables(context, scope.scopeName, selectedValues);
-
-  let expandedVars;
-  try {
-    expandedVars = expandPreviewVars(variables, selectedValues);
-  } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    void vscode.window.showErrorMessage(`Preview failed: ${message}`);
-    return;
-  }
 
   let cliCommand: string;
   try {
@@ -98,7 +90,7 @@ async function previewGeneratedOutput(
         const previewContent = await runPreviewCommand({
           scope,
           filePath: document.fileName,
-          vars: expandedVars,
+          vars: selectedValues,
           cliCommand,
         });
         await openPreviewDiff(document, previewContent);
