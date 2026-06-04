@@ -60,19 +60,6 @@ function collectNamedMarkers(
   return markers;
 }
 
-function findMatchingNamedStartIndex(
-  stack: NamedMarkerMatch[],
-  name: string,
-): number {
-  for (let index = stack.length - 1; index >= 0; index--) {
-    if (stack[index].name === name) {
-      return index;
-    }
-  }
-
-  return -1;
-}
-
 function pairStartEndMarkers(markers: MarkerMatch[]): TextSpan[] {
   const spans: TextSpan[] = [];
   const stack: MarkerMatch[] = [];
@@ -174,12 +161,12 @@ export function findNamedPairedBlockSpans(
         continue;
       }
 
-      const startIndex = findMatchingNamedStartIndex(stack, marker.name);
-      if (startIndex === -1) {
+      const startMarker = stack.at(-1);
+      if (startMarker === undefined || startMarker.name !== marker.name) {
         continue;
       }
 
-      const startMarker = stack.splice(startIndex, 1)[0];
+      stack.pop();
       spans.push({
         start: startMarker.offset,
         end: marker.offset + marker.length,
