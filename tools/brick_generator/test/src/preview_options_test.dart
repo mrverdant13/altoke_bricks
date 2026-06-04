@@ -206,6 +206,22 @@ void main() {
       expect(options.vars, {'use_riverpod': true});
       expect(options.rootPath, p.normalize(tempDir.path));
       expect(options.filePath, p.normalize(p.absolute(referenceFilePath)));
+      expect(options.templateOnly, isFalse);
+    });
+
+    test('parses --template-only', () {
+      final options = PreviewOptions.fromArgs([
+        '--template-only',
+        '--file',
+        referenceFilePath,
+        '--brick',
+        'sample',
+        '--root',
+        tempDir.path,
+      ]);
+
+      expect(options.templateOnly, isTrue);
+      expect(options.vars, isEmpty);
     });
 
     test('requires --file and --brick', () {

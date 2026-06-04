@@ -61,6 +61,26 @@ class App extends Widget {
       expect(result, isNot(contains('scaffold')));
     });
 
+    test('keeps mustache tags when templateOnly is true', () async {
+      final output = StringBuffer();
+      await previewReference(
+        PreviewOptions(
+          filePath: referenceFilePath,
+          brickScope: 'sample',
+          vars: PreviewVars.parse('use_riverpod=true'),
+          rootPath: rootPath,
+          templateOnly: true,
+        ),
+        write: output.write,
+      );
+
+      final result = output.toString();
+      expect(result, contains('{{#use_riverpod}}ConsumerWidget{{/use_riverpod}}'));
+      expect(result, contains('{{^use_riverpod}}StatelessWidget{{/use_riverpod}}'));
+      expect(result, isNot(contains('class App extends ConsumerWidget')));
+      expect(result, isNot(contains('remove-start')));
+    });
+
     test('selects the stateless branch when use_riverpod is false', () async {
       final output = StringBuffer();
       await previewReference(
