@@ -1,3 +1,11 @@
+import {
+  COMMENT_FLAVORS,
+  INSERT_MARKER_SETS,
+  PARTIAL_MARKER_SETS,
+  REMOVE_MARKER_SETS,
+  REPLACE_WITH_MARKER_SETS,
+  type CommentFlavor,
+} from './annotationMarkerSets';
 import { collectRegexMatches } from './markerScanning';
 
 export interface AnnotationIssue {
@@ -6,26 +14,6 @@ export interface AnnotationIssue {
   line: number;
   column: number;
   message: string;
-}
-
-interface MarkerSet {
-  flavor: string;
-  blockName: string;
-  start: RegExp;
-  end: RegExp;
-}
-
-interface ReplaceMarkerSet {
-  flavor: string;
-  start: RegExp;
-  withMarker: RegExp;
-  end: RegExp;
-}
-
-interface PartialMarkerSet {
-  flavor: string;
-  start: RegExp;
-  end: RegExp;
 }
 
 type MarkerKind = 'start' | 'end';
@@ -53,86 +41,54 @@ interface PartialMarker {
   name: string;
 }
 
-const REMOVE_MARKER_SETS: MarkerSet[] = [
-  {
-    flavor: '/* */',
-    blockName: 'remove',
-    start: /\/\*(?:x-)?remove-start\*\//g,
-    end: /\/\*remove-end(?:-x)?\*\//g,
-  },
-  {
-    flavor: '# #',
-    blockName: 'remove',
-    start: /#(?:x-)?remove-start#/g,
-    end: /#remove-end(?:-x)?#/g,
-  },
-  {
-    flavor: '<!-- -->',
-    blockName: 'remove',
-    start: /<!--(?:x-)?remove-start-->/g,
-    end: /<!--remove-end(?:-x)?-->/g,
-  },
-];
+interface FlavoredMarkerSet {
+  flavor: CommentFlavor;
+  blockName: string;
+  start: RegExp;
+  end: RegExp;
+}
 
-const INSERT_MARKER_SETS: MarkerSet[] = [
-  {
-    flavor: '/* */',
-    blockName: 'insert',
-    start: /\/\*insert-start\*\//g,
-    end: /\/\*insert-end\*\//g,
-  },
-  {
-    flavor: '# #',
-    blockName: 'insert',
-    start: /#insert-start#/g,
-    end: /#insert-end#/g,
-  },
-  {
-    flavor: '<!-- -->',
-    blockName: 'insert',
-    start: /<!--insert-start-->/g,
-    end: /<!--insert-end-->/g,
-  },
-];
+interface FlavoredReplaceMarkerSet {
+  flavor: CommentFlavor;
+  start: RegExp;
+  withMarker: RegExp;
+  end: RegExp;
+}
 
-const REPLACE_MARKER_SETS: ReplaceMarkerSet[] = [
-  {
-    flavor: '/* */',
-    start: /\/\*replace-start\*\//g,
-    withMarker: /\/\*with(?: +i\d+)?\*\//g,
-    end: /\/\*replace-end\*\//g,
-  },
-  {
-    flavor: '# #',
-    start: /#replace-start#/g,
-    withMarker: /#with(?: +i\d+)?#/g,
-    end: /#replace-end#/g,
-  },
-  {
-    flavor: '<!-- -->',
-    start: /<!--replace-start-->/g,
-    withMarker: /<!--with(?: +i\d+)?-->/g,
-    end: /<!--replace-end-->/g,
-  },
-];
+interface FlavoredPartialMarkerSet {
+  flavor: CommentFlavor;
+  start: RegExp;
+  end: RegExp;
+}
 
-const PARTIAL_MARKER_SETS: PartialMarkerSet[] = [
-  {
-    flavor: '/* */',
-    start: /\/\*partial v ([^*]+)\*\//g,
-    end: /\/\*partial \^ ([^*]+)\*\//g,
-  },
-  {
-    flavor: '# #',
-    start: /#partial v ([^#]+)#/g,
-    end: /#partial \^ ([^#]+)#/g,
-  },
-  {
-    flavor: '<!-- -->',
-    start: /<!--partial v (.+?)-->/g,
-    end: /<!--partial \^ (.+?)-->/g,
-  },
-];
+function withBlockName(
+  sets: Array<{ start: RegExp; end: RegExp }>,
+  blockName: string,
+): FlavoredMarkerSet[] {
+  return sets.map((set, index) => ({
+    ...set,
+    flavor: COMMENT_FLAVORS[index],
+    blockName,
+  }));
+}
+
+function withFlavor<T extends { start: RegExp; end: RegExp }>(
+  sets: T[],
+): Array<T & { flavor: CommentFlavor }> {
+  return sets.map((set, index) => ({
+    ...set,
+    flavor: COMMENT_FLAVORS[index],
+  }));
+}
+
+const FLAVORED_REMOVE_MARKER_SETS = withBlockName(REMOVE_MARKER_SETS, 'remove');
+const FLAVORED_INSERT_MARKER_SETS = withBlockName(INSERT_MARKER_SETS, 'insert');
+const FLAVORED_REPLACE_MARKER_SETS: FlavoredReplaceMarkerSet[] = withFlavor(
+  REPLACE_WITH_MARKER_SETS,
+);
+const FLAVORED_PARTIAL_MARKER_SETS: FlavoredPartialMarkerSet[] = withFlavor(
+  PARTIAL_MARKER_SETS,
+);
 
 function replaceMarkerLabel(kind: ReplaceMarkerKind): string {
   switch (kind) {
@@ -183,7 +139,7 @@ function collectMarkers(
 
 function validatePairedMarkers(
   content: string,
-  markerSets: MarkerSet[],
+  markerSets: FlavoredMarkerSet[],
 ): AnnotationIssue[] {
   const issues: AnnotationIssue[] = [];
 
@@ -245,7 +201,7 @@ function collectReplaceMarkers(
 function validateReplaceBlocks(content: string): AnnotationIssue[] {
   const issues: AnnotationIssue[] = [];
 
-  for (const markerSet of REPLACE_MARKER_SETS) {
+  for (const markerSet of FLAVORED_REPLACE_MARKER_SETS) {
     const markers = [
       ...collectReplaceMarkers(content, markerSet.start, 'start'),
       ...collectReplaceMarkers(content, markerSet.withMarker, 'withMarker'),
@@ -380,7 +336,7 @@ function collectNamedMarkers(
 function validatePartialBlocks(content: string): AnnotationIssue[] {
   const issues: AnnotationIssue[] = [];
 
-  for (const markerSet of PARTIAL_MARKER_SETS) {
+  for (const markerSet of FLAVORED_PARTIAL_MARKER_SETS) {
     const markers = [
       ...collectNamedMarkers(content, markerSet.start, 'start'),
       ...collectNamedMarkers(content, markerSet.end, 'end'),
@@ -437,8 +393,8 @@ function validatePartialBlocks(content: string): AnnotationIssue[] {
 /** Validates brick-generator annotation markers in file contents. */
 export function validateAnnotationContent(content: string): AnnotationIssue[] {
   return [
-    ...validatePairedMarkers(content, REMOVE_MARKER_SETS),
-    ...validatePairedMarkers(content, INSERT_MARKER_SETS),
+    ...validatePairedMarkers(content, FLAVORED_REMOVE_MARKER_SETS),
+    ...validatePairedMarkers(content, FLAVORED_INSERT_MARKER_SETS),
     ...validateReplaceBlocks(content),
     ...validatePartialBlocks(content),
   ];
