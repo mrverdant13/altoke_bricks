@@ -1,17 +1,19 @@
 import * as vscode from 'vscode';
 
 import type { BrickVariable } from './brickVariables';
+import { resolvePreviewDefault } from './previewVariableState';
 
 type PreviewVarValue = string | boolean | number;
 
 export async function collectPreviewVariableValues(
   variables: BrickVariable[],
+  savedValues: Record<string, PreviewVarValue> = {},
 ): Promise<Record<string, PreviewVarValue> | undefined> {
   const values: Record<string, PreviewVarValue> = {};
 
   for (const variable of variables) {
     const label = variable.prompt ?? variable.description ?? variable.name;
-    const value = await promptForVariableValue(variable, label);
+    const value = await promptForVariableValue(variable, label, savedValues);
     if (value === undefined) {
       return undefined;
     }
@@ -24,23 +26,26 @@ export async function collectPreviewVariableValues(
 async function promptForVariableValue(
   variable: BrickVariable,
   label: string,
+  savedValues: Record<string, PreviewVarValue>,
 ): Promise<PreviewVarValue | undefined> {
   switch (variable.type) {
     case 'boolean':
-      return promptBooleanVariable(variable, label);
+      return promptBooleanVariable(variable, label, savedValues);
     case 'enum':
-      return promptEnumVariable(variable, label);
+      return promptEnumVariable(variable, label, savedValues);
     default:
-      return promptStringVariable(variable, label);
+      return promptStringVariable(variable, label, savedValues);
   }
 }
 
 async function promptBooleanVariable(
   variable: BrickVariable,
   label: string,
+  savedValues: Record<string, PreviewVarValue>,
 ): Promise<boolean | undefined> {
+  const resolvedDefault = resolvePreviewDefault(variable, savedValues);
   const defaultValue =
-    typeof variable.default === 'boolean' ? variable.default : false;
+    typeof resolvedDefault === 'boolean' ? resolvedDefault : false;
   const selection = await vscode.window.showQuickPick(
     [
       { label: 'true', picked: defaultValue === true },
@@ -60,10 +65,12 @@ async function promptBooleanVariable(
 async function promptEnumVariable(
   variable: BrickVariable,
   label: string,
+  savedValues: Record<string, PreviewVarValue>,
 ): Promise<string | undefined> {
+  const resolvedDefault = resolvePreviewDefault(variable, savedValues);
   const options = (variable.values ?? []).map((value) => ({
     label: value,
-    picked: value === variable.default,
+    picked: value === resolvedDefault,
   }));
   if (options.length === 0) {
     return promptStringVariable(variable, label);
@@ -79,9 +86,11 @@ async function promptEnumVariable(
 async function promptStringVariable(
   variable: BrickVariable,
   label: string,
+  savedValues: Record<string, PreviewVarValue>,
 ): Promise<string | undefined> {
+  const resolvedDefault = resolvePreviewDefault(variable, savedValues);
   const defaultValue =
-    typeof variable.default === 'string' ? variable.default : undefined;
+    typeof resolvedDefault === 'string' ? resolvedDefault : undefined;
   return vscode.window.showInputBox({
     title: label,
     prompt: variable.description,

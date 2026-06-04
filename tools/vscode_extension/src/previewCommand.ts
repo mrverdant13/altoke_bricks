@@ -3,6 +3,10 @@ import * as vscode from 'vscode';
 
 import { findBrickScopeForFile } from './brickScope';
 import { loadBrickVariables } from './brickVariables';
+import {
+  loadSavedPreviewVariables,
+  savePreviewVariables,
+} from './previewVariableState';
 import { expandPreviewVars } from './previewVars';
 import { runPreviewCommand } from './previewRunner';
 import { isSupportedBrickFile } from './supportedFiles';
@@ -15,13 +19,16 @@ export function registerPreviewCommand(context: vscode.ExtensionContext): void {
     vscode.commands.registerCommand(
       PREVIEW_COMMAND_ID,
       async (uri?: vscode.Uri) => {
-        await previewGeneratedOutput(uri);
+        await previewGeneratedOutput(context, uri);
       },
     ),
   );
 }
 
-async function previewGeneratedOutput(uri?: vscode.Uri): Promise<void> {
+async function previewGeneratedOutput(
+  context: vscode.ExtensionContext,
+  uri?: vscode.Uri,
+): Promise<void> {
   const document = await resolveTargetDocument(uri);
   if (!document) {
     return;
@@ -43,10 +50,13 @@ async function previewGeneratedOutput(uri?: vscode.Uri): Promise<void> {
   }
 
   const variables = loadBrickVariables(scope.brickYamlPath);
-  const selectedValues = await collectPreviewVariableValues(variables);
+  const savedValues = loadSavedPreviewVariables(context, scope.scopeName, variables);
+  const selectedValues = await collectPreviewVariableValues(variables, savedValues);
   if (selectedValues === undefined) {
     return;
   }
+
+  await savePreviewVariables(context, scope.scopeName, selectedValues);
 
   const expandedVars = expandPreviewVars(variables, selectedValues);
 
