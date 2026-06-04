@@ -45,12 +45,12 @@
       "to": "{{#requirements_met}}{{project_name.snakeCase()}}{{/requirements_met}}"
     },
     {
-      "from": "Altoke App",
-      "to": "{{project_name.titleCase()}}"
-    },
-    {
       "from": "An Altoke App.",
       "to": "{{project_description}}"
+    },
+    {
+      "from": "Altoke App",
+      "to": "{{project_name.titleCase()}}"
     },
     {
       "from": {
