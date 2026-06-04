@@ -68,21 +68,46 @@ void main() {
       expect(resolveMonorepoRoot(explicitRoot), p.normalize(explicitRoot));
     });
 
-    test('walks up from the current directory', () {
-      Directory(p.join(tempDir.path, 'bricks')).createSync();
-      File(
-        p.join(tempDir.path, 'pubspec.yaml'),
-      ).writeAsStringSync('name: root\n');
-      final nested = Directory(p.join(tempDir.path, 'nested', 'deep'))
-        ..createSync(recursive: true);
-      Directory.current = nested;
+    test('reads Platform.environment when no override is provided', () {
+      final melosRoot = Platform.environment['MELOS_ROOT_PATH'];
+      if (melosRoot != null && melosRoot.isNotEmpty) {
+        expect(
+          resolveMonorepoRoot(null),
+          p.normalize(melosRoot),
+        );
+        return;
+      }
 
-      final resolvedRoot = resolveMonorepoRoot(null);
+      Directory(p.join(tempDir.path, 'bricks')).createSync();
+      File(p.join(tempDir.path, 'pubspec.yaml')).writeAsStringSync('name: root\n');
+      Directory.current = tempDir;
+
       expect(
-        Directory(p.join(resolvedRoot, 'bricks')).existsSync(),
-        isTrue,
+        resolveMonorepoRoot(null),
+        p.normalize(Directory.current.path),
       );
-      expect(File(p.join(resolvedRoot, 'pubspec.yaml')).existsSync(), isTrue);
+    });
+
+    test('returns the current directory when it is the monorepo root', () {
+      Directory(p.join(tempDir.path, 'bricks')).createSync();
+      File(p.join(tempDir.path, 'pubspec.yaml')).writeAsStringSync('name: root\n');
+      Directory.current = tempDir;
+      final expectedRoot = p.normalize(Directory.current.path);
+
+      expect(resolveMonorepoRoot(null, environment: {}), expectedRoot);
+    });
+
+    test('walks up from a nested directory to the monorepo root', () {
+      Directory(p.join(tempDir.path, 'bricks')).createSync();
+      File(p.join(tempDir.path, 'pubspec.yaml')).writeAsStringSync('name: root\n');
+      Directory.current = tempDir;
+      final expectedRoot = resolveMonorepoRoot(null, environment: {});
+
+      Directory.current = Directory(
+        p.join(tempDir.path, 'nested', 'deep'),
+      )..createSync(recursive: true);
+
+      expect(resolveMonorepoRoot(null, environment: {}), expectedRoot);
     });
 
     test('throws when the monorepo root cannot be resolved', () {
