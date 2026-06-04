@@ -6,8 +6,8 @@ import { MUSTACHE_TAG_BODY_REGEX } from './mustacheHighlighting';
 type InferredVarType = 'boolean' | 'string';
 
 /**
- * Variables required to preview [fileContent]: Mustache names in the file after
- * applying [brickGen] content replacements, using [brickVariables] definitions
+ * Variables required to preview a file: Mustache names in `fileContent` after
+ * applying `brickGen` content replacements, using `brickVariables` definitions
  * when available.
  */
 export function resolvePreviewVariables(
