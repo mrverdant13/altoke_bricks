@@ -1,35 +1,16 @@
 import * as vscode from 'vscode';
 
+import { findPairedBlockInteriors } from './annotationBlockPairing';
+import {
+  DROP_MARKER_PATTERN,
+  DROP_MARKER_SETS,
+  REMOVE_BOUNDARY_MARKER_PATTERN,
+  REMOVE_MARKER_SETS,
+} from './annotationMarkerSets';
 import { type AnnotationConfig } from './annotationConfig';
 import { collectRegexMatches } from './markerScanning';
 import { interiorsToRanges } from './rangeUtils';
 import { isSupportedBrickFile } from './supportedFiles';
-
-type MarkerKind = 'start' | 'end';
-
-interface MarkerMatch {
-  kind: MarkerKind;
-  offset: number;
-  length: number;
-}
-
-interface MarkerSet {
-  start: RegExp;
-  end: RegExp;
-}
-
-const REMOVE_MARKER_SETS: MarkerSet[] = [
-  { start: /\/\*(?:x-)?remove-start\*\//g, end: /\/\*remove-end(?:-x)?\*\//g },
-  { start: /#(?:x-)?remove-start#/g, end: /#remove-end(?:-x)?#/g },
-  { start: /<!--(?:x-)?remove-start-->/g, end: /<!--remove-end(?:-x)?-->/g },
-];
-
-const DROP_MARKER_SETS = [/\/\*drop\*\//g, /#drop#/g, /<!--drop-->/g];
-
-const REMOVE_BOUNDARY_MARKER_PATTERN =
-  /\/\*(?:x-)?remove-start\*\/|\/\*remove-end(?:-x)?\*\/|#(?:x-)?remove-start#|#remove-end(?:-x)?#|<!--(?:x-)?remove-start-->|<!--remove-end(?:-x)?-->/g;
-
-const DROP_MARKER_PATTERN = /\/\*drop\*\/|#drop#|<!--drop-->/g;
 
 let markerDecoration = vscode.window.createTextEditorDecorationType({});
 let contentDecoration = vscode.window.createTextEditorDecorationType({});
@@ -54,35 +35,6 @@ function ensureDecorations(config: AnnotationConfig): void {
   prevMarker.dispose();
   prevContent.dispose();
   appliedConfigKey = key;
-}
-
-function collectMarkers(text: string, pattern: RegExp, kind: MarkerKind): MarkerMatch[] {
-  return collectRegexMatches(text, pattern).map((m) => ({ ...m, kind }));
-}
-
-function findRemoveBlockInteriors(text: string): Array<{ start: number; end: number }> {
-  const interiors: Array<{ start: number; end: number }> = [];
-
-  for (const markerSet of REMOVE_MARKER_SETS) {
-    const markers = [
-      ...collectMarkers(text, markerSet.start, 'start'),
-      ...collectMarkers(text, markerSet.end, 'end'),
-    ].sort((a, b) => a.offset - b.offset);
-
-    const stack: MarkerMatch[] = [];
-    for (const marker of markers) {
-      if (marker.kind === 'start') { stack.push(marker); continue; }
-      if (stack.length === 0) continue;
-      const startMarker = stack.pop()!;
-      const interiorStart = startMarker.offset + startMarker.length;
-      const interiorEnd = marker.offset;
-      if (interiorEnd > interiorStart) {
-        interiors.push({ start: interiorStart, end: interiorEnd });
-      }
-    }
-  }
-
-  return interiors;
 }
 
 function findDropBlockInteriors(text: string): Array<{ start: number; end: number }> {
@@ -140,7 +92,7 @@ export function refreshRemoveHighlights(
   editor.setDecorations(
     contentDecoration,
     interiorsToRanges(editor.document, [
-      ...findRemoveBlockInteriors(text),
+      ...findPairedBlockInteriors(text, REMOVE_MARKER_SETS),
       ...findDropBlockInteriors(text),
     ]),
   );

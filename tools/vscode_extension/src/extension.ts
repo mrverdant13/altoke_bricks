@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 
+import { registerBlockFolding } from './blockFolding';
 import { registerBrickHighlighting } from './brickHighlighting';
 import { registerInsertHighlighting } from './insertHighlighting';
 import { registerMustacheHighlighting } from './mustacheHighlighting';
@@ -13,9 +14,10 @@ import { registerSpacingHighlighting } from './spacingHighlighting';
  *
  * Annotation syntax highlighting is contributed via TextMate grammar injection;
  * annotation regions are tinted programmatically so colors apply reliably inside
- * comment regions. Folding, diagnostics, and preview register here later.
+ * comment regions. Diagnostics and preview register here later.
  */
 export function activate(context: vscode.ExtensionContext): void {
+  registerBlockFolding(context);
   registerRemoveHighlighting(context);
   registerReplaceHighlighting(context);
   registerInsertHighlighting(context);
