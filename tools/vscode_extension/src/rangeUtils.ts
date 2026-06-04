@@ -89,7 +89,7 @@ export function spanToFoldingRange(
     foldEndLine = endLine - 1;
   }
 
-  if (foldStartLine > foldEndLine) {
+  if (foldStartLine >= foldEndLine) {
     return undefined;
   }
 
