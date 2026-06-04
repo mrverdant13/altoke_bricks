@@ -2,8 +2,8 @@
   "Docs template": {
     "description": "Comment block for a documentation template",
     "prefix": [
-      "doctemplate",
-      "doct",
+      "doctemplate", // cspell:disable-line
+      "doct", // cspell:disable-line
       "dt",
     ],
     "scope": "dart",
@@ -16,13 +16,13 @@
   "Docs macro": {
     "description": "Comment block for a documentation macro",
     "prefix": [
-      "docmacro",
+      "docmacro", // cspell:disable-line
       "docm",
       "dm",
     ],
     "scope": "dart",
     "body": [
-      "/// {@macro ${1:teamplate_name}}",
+      "/// {@macro ${1:template_name}}",
     ]
   },
 }
