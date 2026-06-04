@@ -52,13 +52,18 @@ export function loadBrickVariables(brickYamlPath: string): BrickVariable[] {
 export function formatVarsForCli(
   vars: Record<string, string | boolean | number>,
 ): string {
+  for (const [key, value] of Object.entries(vars)) {
+    if (typeof value === 'string' && value.includes(',')) {
+      throw new Error(
+        `Variable "${key}" cannot contain commas in preview mode.`,
+      );
+    }
+  }
+
   return Object.entries(vars)
     .map(([key, value]) => {
       if (typeof value === 'boolean' || typeof value === 'number') {
         return `${key}=${value}`;
-      }
-      if (value.includes(',') || value.includes('=')) {
-        return `${key}="${value}"`;
       }
       return `${key}=${value}`;
     })
