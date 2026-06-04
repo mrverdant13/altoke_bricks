@@ -1,3 +1,5 @@
+import type { BrickGenOptions } from './brickGen';
+import { applyBrickGenReplacements } from './brickGen';
 import type { BrickVariable, BrickVarType } from './brickVariables';
 
 type InferredVarType = 'boolean' | 'string';
@@ -6,13 +8,21 @@ const MUSTACHE_TAG_PATTERN = /\{\{\{?([^}]+)\}\}?\}/g;
 
 /**
  * Variables required to preview [fileContent]: all [brickVariables] from
- * `brick.yaml`, plus any additional names referenced in Mustache tags.
+ * `brick.yaml`, plus Mustache names found after applying [brickGen] and in
+ * brick-gen metadata strings.
  */
 export function resolvePreviewVariables(
   brickVariables: BrickVariable[],
   fileContent: string,
+  brickGen: BrickGenOptions,
 ): BrickVariable[] {
-  const referenced = extractMustacheVariables(fileContent);
+  const transformedContent = applyBrickGenReplacements(
+    fileContent,
+    brickGen.replacements,
+  );
+  const referenced = extractMustacheVariables(transformedContent);
+  mergeReferencedVariables(referenced, extractMustacheFromBrickGen(brickGen));
+
   const brickNames = new Set(brickVariables.map((variable) => variable.name));
   const ordered: BrickVariable[] = [...brickVariables];
 
@@ -29,6 +39,36 @@ export function resolvePreviewVariables(
   }
 
   return ordered;
+}
+
+function extractMustacheFromBrickGen(
+  brickGen: BrickGenOptions,
+): Map<string, InferredVarType> {
+  const sources = [
+    ...brickGen.replacements.map((replacement) => replacement.to),
+    ...brickGen.lineDeletions.map((deletion) => deletion.filePath),
+  ];
+  const referenced = new Map<string, InferredVarType>();
+  for (const source of sources) {
+    mergeReferencedVariables(referenced, extractMustacheVariables(source));
+  }
+  return referenced;
+}
+
+function mergeReferencedVariables(
+  target: Map<string, InferredVarType>,
+  source: Map<string, InferredVarType>,
+): void {
+  for (const [name, inferredType] of source) {
+    const existing = target.get(name);
+    if (existing === undefined) {
+      target.set(name, inferredType);
+      continue;
+    }
+    if (existing === 'string' || inferredType === 'string') {
+      target.set(name, 'string');
+    }
+  }
 }
 
 function extractMustacheVariables(

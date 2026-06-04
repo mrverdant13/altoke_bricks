@@ -3,6 +3,7 @@ import * as vscode from 'vscode';
 
 import { findBrickScopeForFile } from './brickScope';
 import { resolveBrickGeneratorCli } from './brickGeneratorCli';
+import { loadBrickGenOptions } from './brickGen';
 import { loadBrickVariables } from './brickVariables';
 import { resolvePreviewVariables } from './previewFileVariables';
 import {
@@ -51,17 +52,23 @@ async function previewGeneratedOutput(
   }
 
   let brickVariables;
+  let brickGen;
   try {
     brickVariables = loadBrickVariables(scope.brickYamlPath);
+    brickGen = loadBrickGenOptions(scope.scopeDir);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     void vscode.window.showErrorMessage(
-      `Could not load brick variables: ${message}`,
+      `Could not load brick configuration: ${message}`,
     );
     return;
   }
 
-  const variables = resolvePreviewVariables(brickVariables, document.getText());
+  const variables = resolvePreviewVariables(
+    brickVariables,
+    document.getText(),
+    brickGen,
+  );
   const savedValues = loadSavedPreviewVariables(context, scope.scopeName, variables);
   const selectedValues = await collectPreviewVariableValues(variables, savedValues);
   if (selectedValues === undefined) {
