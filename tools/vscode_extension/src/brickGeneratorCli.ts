@@ -39,10 +39,14 @@ function getCliCandidates(configured?: string): string[] {
   return [...new Set(candidates)];
 }
 
-function getDefaultDartInstallExecutable(): string {
+function getDefaultDartInstallExecutable(): string | undefined {
   if (process.platform === 'win32') {
+    const localAppData = process.env.LOCALAPPDATA?.trim();
+    if (!localAppData) {
+      return undefined;
+    }
     return path.join(
-      process.env.LOCALAPPDATA ?? '',
+      localAppData,
       'Dart',
       'install',
       'bin',
