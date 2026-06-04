@@ -5,30 +5,23 @@ type InferredVarType = 'boolean' | 'string';
 const MUSTACHE_TAG_PATTERN = /\{\{\{?([^}]+)\}\}?\}/g;
 
 /**
- * Variables required to preview [fileContent]: names referenced in Mustache tags,
- * enriched with definitions from [brickVariables] when present.
+ * Variables required to preview [fileContent]: all [brickVariables] from
+ * `brick.yaml`, plus any additional names referenced in Mustache tags.
  */
 export function resolvePreviewVariables(
   brickVariables: BrickVariable[],
   fileContent: string,
 ): BrickVariable[] {
   const referenced = extractMustacheVariables(fileContent);
-  if (referenced.size === 0) {
-    return [];
-  }
-
-  const ordered: BrickVariable[] = [];
-
-  for (const variable of brickVariables) {
-    if (referenced.has(variable.name)) {
-      ordered.push(variable);
-      referenced.delete(variable.name);
-    }
-  }
+  const brickNames = new Set(brickVariables.map((variable) => variable.name));
+  const ordered: BrickVariable[] = [...brickVariables];
 
   for (const [name, inferredType] of [...referenced.entries()].sort(([a], [b]) =>
     a.localeCompare(b),
   )) {
+    if (brickNames.has(name)) {
+      continue;
+    }
     ordered.push({
       name,
       type: toBrickVarType(inferredType),

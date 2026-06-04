@@ -20,8 +20,8 @@ Open a reference file under `bricks/<scope>/reference/` and run **Brick Generato
 The extension:
 
 1. Detects the brick scope from the nearest `brick-gen.json`
-2. Collects Mustache variables referenced in the open file and enriches them with definitions from `brick/brick.yaml` when available
-3. Prompts for those variable values with quick-pick dialogs (last-used values per brick scope are remembered as defaults)
+2. Prompts for every variable defined in `brick/brick.yaml`, plus any additional Mustache variables referenced in the open file
+3. Remembers last-used values per brick scope as quick-pick defaults
 4. Runs the installed `brick_generator preview` CLI and opens a diff editor with the transformed file
 
 ### CLI prerequisite
