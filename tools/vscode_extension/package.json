@@ -1,0 +1,278 @@
+{
+  "name": "brick-generator",
+  "displayName": "Brick Generator",
+  "description": "Editor support for brick generator annotations in reference projects.",
+  "version": "0.0.1",
+  "packageManager": "pnpm@10.12.1",
+  "publisher": "altoke-bricks",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrverdant13/altoke_bricks.git",
+    "directory": "tools/vscode_extension"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "brickGenerator.preview",
+        "title": "Preview generated output",
+        "category": "Brick Generator"
+      },
+      {
+        "command": "brickGenerator.previewTemplate",
+        "title": "Preview template output",
+        "category": "Brick Generator"
+      }
+    ],
+    "configurationDefaults": {
+      "editor.tokenColorCustomizations": {
+        "textMateRules": [
+          {
+            "scope": [
+              "keyword.annotation.brick-generator.remove",
+              "keyword.annotation.brick-generator.drop",
+              "constant.language.brick-generator.drop-flag"
+            ],
+            "settings": {
+              "foreground": "#F48771",
+              "fontStyle": "bold"
+            }
+          },
+          {
+            "scope": "keyword.annotation.brick-generator.replace.boundary",
+            "settings": {
+              "foreground": "#E5A84B",
+              "fontStyle": "bold"
+            }
+          },
+          {
+            "scope": "keyword.annotation.brick-generator.replace.with",
+            "settings": {
+              "foreground": "#4EC9B0",
+              "fontStyle": "bold"
+            }
+          },
+          {
+            "scope": "keyword.annotation.brick-generator.insert",
+            "settings": {
+              "foreground": "#C586C0",
+              "fontStyle": "bold"
+            }
+          },
+          {
+            "scope": [
+              "meta.annotation.brick-generator.partial",
+              "keyword.annotation.brick-generator.partial.marker",
+              "entity.name.section.brick-generator.partial"
+            ],
+            "settings": {
+              "foreground": "#569CD6",
+              "fontStyle": "bold"
+            }
+          },
+          {
+            "scope": "entity.name.tag.mustache.brick-generator",
+            "settings": {
+              "foreground": "#C678DD",
+              "fontStyle": "bold"
+            }
+          },
+          {
+            "scope": "meta.annotation.brick-generator.spacing",
+            "settings": {
+              "foreground": "#A0A1A7",
+              "fontStyle": "bold"
+            }
+          }
+        ],
+        "[Default Light+]": {
+          "textMateRules": [
+            {
+              "scope": [
+                "keyword.annotation.brick-generator.remove",
+                "keyword.annotation.brick-generator.drop",
+                "constant.language.brick-generator.drop-flag"
+              ],
+              "settings": {
+                "foreground": "#D16969",
+                "fontStyle": "bold"
+              }
+            },
+            {
+              "scope": "keyword.annotation.brick-generator.replace.boundary",
+              "settings": {
+                "foreground": "#B8890B",
+                "fontStyle": "bold"
+              }
+            },
+            {
+              "scope": "keyword.annotation.brick-generator.replace.with",
+              "settings": {
+                "foreground": "#098658",
+                "fontStyle": "bold"
+              }
+            },
+            {
+              "scope": "keyword.annotation.brick-generator.insert",
+              "settings": {
+                "foreground": "#A626A4",
+                "fontStyle": "bold"
+              }
+            },
+            {
+              "scope": [
+                "meta.annotation.brick-generator.partial",
+                "keyword.annotation.brick-generator.partial.marker",
+                "entity.name.section.brick-generator.partial"
+              ],
+              "settings": {
+                "foreground": "#0451A5",
+                "fontStyle": "bold"
+              }
+            },
+            {
+              "scope": "entity.name.tag.mustache.brick-generator",
+              "settings": {
+                "foreground": "#AF00DB",
+                "fontStyle": "bold"
+              }
+            },
+            {
+              "scope": "meta.annotation.brick-generator.spacing",
+              "settings": {
+                "foreground": "#6A737D",
+                "fontStyle": "bold"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "configuration": {
+      "title": "Brick Generator",
+      "properties": {
+        "brickGenerator.cliPath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Path to the `brick_generator` CLI executable. When empty, the extension searches `PATH`, the Dart install bin directory, and `~/.pub-cache/bin`. Install with `dart install ./tools/brick_generator` from the monorepo root."
+        },
+        "brickGenerator.colors.remove.markerForeground": {
+          "type": "string",
+          "default": "#F48771",
+          "description": "Foreground color for remove-start / remove-end / drop markers."
+        },
+        "brickGenerator.colors.remove.contentBackground": {
+          "type": "string",
+          "default": "rgba(244, 135, 113, 0.14)",
+          "description": "Background color for content inside remove blocks and after drop markers."
+        },
+        "brickGenerator.colors.replace.boundaryMarkerForeground": {
+          "type": "string",
+          "default": "#E5A84B",
+          "description": "Foreground color for replace-start / replace-end markers."
+        },
+        "brickGenerator.colors.replace.withMarkerForeground": {
+          "type": "string",
+          "default": "#4EC9B0",
+          "description": "Foreground color for the with marker inside replace blocks."
+        },
+        "brickGenerator.colors.replace.originalBackground": {
+          "type": "string",
+          "default": "rgba(229, 168, 75, 0.14)",
+          "description": "Background color for the original (scaffold) section inside replace blocks."
+        },
+        "brickGenerator.colors.replace.replacementBackground": {
+          "type": "string",
+          "default": "rgba(78, 201, 176, 0.14)",
+          "description": "Background color for the replacement section inside replace blocks."
+        },
+        "brickGenerator.colors.insert.markerForeground": {
+          "type": "string",
+          "default": "#C586C0",
+          "description": "Foreground color for insert-start / insert-end markers."
+        },
+        "brickGenerator.colors.insert.contentBackground": {
+          "type": "string",
+          "default": "rgba(197, 134, 192, 0.14)",
+          "description": "Background color for content inside insert blocks."
+        },
+        "brickGenerator.colors.partial.markerForeground": {
+          "type": "string",
+          "default": "#569CD6",
+          "description": "Foreground color for partial v / partial ^ markers."
+        },
+        "brickGenerator.colors.partial.payloadBackground": {
+          "type": "string",
+          "default": "rgba(86, 156, 214, 0.14)",
+          "description": "Background color for the payload inside partial blocks."
+        },
+        "brickGenerator.colors.mustache.tagForeground": {
+          "type": "string",
+          "default": "#C678DD",
+          "description": "Foreground color for {{…}} mustache tags inside annotation comments."
+        },
+        "brickGenerator.colors.mustache.commentBackground": {
+          "type": "string",
+          "default": "rgba(198, 120, 221, 0.10)",
+          "description": "Background color for mustache annotation comments."
+        },
+        "brickGenerator.colors.mustache.dropFlagForeground": {
+          "type": "string",
+          "default": "#F48771",
+          "description": "Foreground color for the x drop-flag inside mustache annotation comments."
+        },
+        "brickGenerator.colors.spacing.markerForeground": {
+          "type": "string",
+          "default": "#A0A1A7",
+          "description": "Foreground color for spacing directives (w … w)."
+        },
+        "brickGenerator.colors.spacing.markerBackground": {
+          "type": "string",
+          "default": "rgba(160, 161, 167, 0.12)",
+          "description": "Background color for spacing directives (w … w)."
+        }
+      }
+    },
+    "grammars": [
+      {
+        "scopeName": "brick-generator.injection",
+        "path": "./syntaxes/brick-generator.tmLanguage.json",
+        "injectTo": [
+          "source.dart",
+          "source.shell",
+          "source.yaml",
+          "text.html",
+          "text.xml",
+          "text.html.markdown",
+          "source.ignore"
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "package": "pnpm run compile && vsce package --no-dependencies",
+    "vscode:prepublish": "pnpm run compile"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/vscode": "1.85.0",
+    "@vscode/vsce": "^3.2.1",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "yaml": "^2.9.0"
+  }
+}

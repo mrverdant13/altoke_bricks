@@ -1,9 +1,12 @@
 # Globally allowed words
 altoke
+basenames
 circlecodesolution
 coverde
 felixangelov
 mrverdant13
 pubspec
+rgba
 riverpod
 sembast
+webp

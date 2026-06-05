@@ -4,10 +4,12 @@ language: en
 ignorePaths:
   - "**/__brick__/**"
   - "**/.cspell/*.txt"
+  - "**/.cursor/**"
   - "**/.git/**"
   - "**/.gitignore"
   - "**/app_localizations*.dart"
   - "**/drift_worker.js"
+  - "**/pnpm-lock.yaml"
   - "**/pubspec.lock"
   - "**/*.arb"
   - "**/*.fakes.*"
@@ -41,7 +43,7 @@ overrides:
   - filename: "**"
     dictionaries:
       - global-allow
-  - filename: "**/{*.dart,pubspec.yaml,.metadata,build.yaml,melos.yaml,*.drift}"
+  - filename: "**/{*.dart,pubspec.yaml,.metadata,build.yaml,melos.yaml,*.drift,*.code-snippets}"
     dictionaries:
       - dart-allow
   - filename: "**/.github/**/*"

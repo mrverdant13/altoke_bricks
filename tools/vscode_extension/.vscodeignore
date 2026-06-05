@@ -1,0 +1,13 @@
+.vscode/**
+.vscode-test/**
+src/**
+.gitignore
+.dart_tool/**
+*.iml
+pubspec.yaml
+tsconfig.json
+esbuild.mjs # cspell:disable-line
+pnpm-lock.yaml
+**/*.map
+**/*.ts
+node_modules/**

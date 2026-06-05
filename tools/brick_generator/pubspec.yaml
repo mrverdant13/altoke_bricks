@@ -3,11 +3,15 @@ description: A generator for bricks.
 publish_to: none
 resolution: workspace
 
+executables:
+  brick_generator:
+
 environment:
   sdk: ">=3.10.0 <4.0.0"
 
 dependencies:
   dart_mappable: ^4.6.1
+  mason: ^0.1.2
   meta: ^1.17.0
   monorepo_elements:
     path: ../monorepo_elements

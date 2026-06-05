@@ -1,0 +1,202 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinringert/language-json-schema/master/dist/textmate/syntax-tmLanguage.schema.json",
+  "name": "Brick Generator Annotations",
+  "scopeName": "brick-generator.injection",
+  "injectionSelector": "L:comment",
+  "patterns": [
+    { "include": "#dart-block-annotations" },
+    { "include": "#hash-annotations" },
+    { "include": "#html-annotations" }
+  ],
+  "repository": {
+    "dart-block-annotations": {
+      "patterns": [
+        { "include": "#dart-remove" },
+        { "include": "#dart-replace" },
+        { "include": "#dart-insert" },
+        { "include": "#dart-drop" },
+        { "include": "#dart-partial" },
+        { "include": "#dart-spacing" },
+        { "include": "#dart-mustache" }
+      ]
+    },
+    "hash-annotations": {
+      "patterns": [
+        { "include": "#hash-remove" },
+        { "include": "#hash-replace" },
+        { "include": "#hash-insert" },
+        { "include": "#hash-drop" },
+        { "include": "#hash-partial" },
+        { "include": "#hash-spacing" },
+        { "include": "#hash-mustache" }
+      ]
+    },
+    "html-annotations": {
+      "patterns": [
+        { "include": "#html-remove" },
+        { "include": "#html-replace" },
+        { "include": "#html-insert" },
+        { "include": "#html-drop" },
+        { "include": "#html-partial" },
+        { "include": "#html-spacing" },
+        { "include": "#html-mustache" }
+      ]
+    },
+
+    "dart-remove": {
+      "match": "/\\*(?:x-)?remove-start\\*/|/\\*remove-end(?:-x)?\\*/",
+      "name": "keyword.annotation.brick-generator.remove"
+    },
+    "dart-replace": {
+      "patterns": [
+        {
+          "match": "/\\*replace-start\\*/|/\\*replace-end\\*/",
+          "name": "keyword.annotation.brick-generator.replace.boundary"
+        },
+        {
+          "match": "/\\*with(?: +i(\\d+))?\\*/",
+          "name": "keyword.annotation.brick-generator.replace.with",
+          "captures": {
+            "1": { "name": "constant.numeric.brick-generator.indent" }
+          }
+        }
+      ]
+    },
+    "dart-insert": {
+      "match": "/\\*insert-start\\*/|/\\*insert-end\\*/",
+      "name": "keyword.annotation.brick-generator.insert"
+    },
+    "dart-drop": {
+      "match": "/\\*drop\\*/",
+      "name": "keyword.annotation.brick-generator.drop"
+    },
+    "dart-partial": {
+      "match": "/\\*partial ([v^]) ([^*]+)\\*/",
+      "name": "meta.annotation.brick-generator.partial",
+      "captures": {
+        "1": { "name": "keyword.annotation.brick-generator.partial.marker" },
+        "2": { "name": "entity.name.section.brick-generator.partial" }
+      }
+    },
+    "dart-spacing": {
+      "match": "/\\*w ?((?:\\d+[v>] ?)*) ?w\\*/",
+      "name": "meta.annotation.brick-generator.spacing",
+      "captures": {
+        "1": { "name": "constant.numeric.brick-generator.spacing" }
+      }
+    },
+    "dart-mustache": {
+      "match": "/\\*(x)?(\\{\\{[^}]*?\\}\\})(x)?\\*/",
+      "name": "meta.annotation.brick-generator.mustache",
+      "captures": {
+        "1": { "name": "constant.language.brick-generator.drop-flag" },
+        "2": { "name": "entity.name.tag.mustache.brick-generator" },
+        "3": { "name": "constant.language.brick-generator.drop-flag" }
+      }
+    },
+
+    "hash-remove": {
+      "match": "#(?:x-)?remove-start#|#remove-end(?:-x)?#",
+      "name": "keyword.annotation.brick-generator.remove"
+    },
+    "hash-replace": {
+      "patterns": [
+        {
+          "match": "#replace-start#|#replace-end#",
+          "name": "keyword.annotation.brick-generator.replace.boundary"
+        },
+        {
+          "match": "#with(?: +i(\\d+))?#",
+          "name": "keyword.annotation.brick-generator.replace.with",
+          "captures": {
+            "1": { "name": "constant.numeric.brick-generator.indent" }
+          }
+        }
+      ]
+    },
+    "hash-insert": {
+      "match": "#insert-start#|#insert-end#",
+      "name": "keyword.annotation.brick-generator.insert"
+    },
+    "hash-drop": {
+      "match": "#drop#",
+      "name": "keyword.annotation.brick-generator.drop"
+    },
+    "hash-partial": {
+      "match": "#partial ([v^]) ([^#]+)#",
+      "name": "meta.annotation.brick-generator.partial",
+      "captures": {
+        "1": { "name": "keyword.annotation.brick-generator.partial.marker" },
+        "2": { "name": "entity.name.section.brick-generator.partial" }
+      }
+    },
+    "hash-spacing": {
+      "match": "#w ?((?:\\d+[v>] ?)*) ?w#",
+      "name": "meta.annotation.brick-generator.spacing",
+      "captures": {
+        "1": { "name": "constant.numeric.brick-generator.spacing" }
+      }
+    },
+    "hash-mustache": {
+      "match": "#(x)?(\\{\\{[^}]*?\\}\\})(x)?#",
+      "name": "meta.annotation.brick-generator.mustache",
+      "captures": {
+        "1": { "name": "constant.language.brick-generator.drop-flag" },
+        "2": { "name": "entity.name.tag.mustache.brick-generator" },
+        "3": { "name": "constant.language.brick-generator.drop-flag" }
+      }
+    },
+
+    "html-remove": {
+      "match": "<!--(?:x-)?remove-start-->|<!--remove-end(?:-x)?-->",
+      "name": "keyword.annotation.brick-generator.remove"
+    },
+    "html-replace": {
+      "patterns": [
+        {
+          "match": "<!--replace-start-->|<!--replace-end-->",
+          "name": "keyword.annotation.brick-generator.replace.boundary"
+        },
+        {
+          "match": "<!--with(?: +i(\\d+))?-->",
+          "name": "keyword.annotation.brick-generator.replace.with",
+          "captures": {
+            "1": { "name": "constant.numeric.brick-generator.indent" }
+          }
+        }
+      ]
+    },
+    "html-insert": {
+      "match": "<!--insert-start-->|<!--insert-end-->",
+      "name": "keyword.annotation.brick-generator.insert"
+    },
+    "html-drop": {
+      "match": "<!--drop-->",
+      "name": "keyword.annotation.brick-generator.drop"
+    },
+    "html-partial": {
+      "match": "<!--partial ([v^]) (.*?)-->",
+      "name": "meta.annotation.brick-generator.partial",
+      "captures": {
+        "1": { "name": "keyword.annotation.brick-generator.partial.marker" },
+        "2": { "name": "entity.name.section.brick-generator.partial" }
+      }
+    },
+    "html-spacing": {
+      "match": "<!--w ?((?:\\d+[v>] ?)*) ?w-->",
+      "name": "meta.annotation.brick-generator.spacing",
+      "captures": {
+        "1": { "name": "constant.numeric.brick-generator.spacing" }
+      }
+    },
+    "html-mustache": {
+      "match": "<!--(x)?(\\{\\{[^}]*?\\}\\})(x)?-->",
+      "name": "meta.annotation.brick-generator.mustache",
+      "captures": {
+        "1": { "name": "constant.language.brick-generator.drop-flag" },
+        "2": { "name": "entity.name.tag.mustache.brick-generator" },
+        "3": { "name": "constant.language.brick-generator.drop-flag" }
+      }
+    }
+  }
+}

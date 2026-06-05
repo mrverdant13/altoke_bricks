@@ -62,6 +62,8 @@ jobs:
         run: melos bootstrap --scope=brick_generator
       - name: Set brick scope as unique relevant packages
         run: echo "MELOS_PACKAGES=${{ steps.build-brick-scope-name.outputs.brick-scope-name }}" >> "$GITHUB_ENV"
+      - name: Validate reference annotations
+        run: melos run brick.validate
       - name: Generate template
         run: melos run brick.gen
       - name: Create PR
