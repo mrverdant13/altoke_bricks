@@ -26,7 +26,7 @@ The extension:
 
 ## Preview template output
 
-Run **Brick Generator: Preview template output** (or the matching CodeLens) to see the brick template for the current file without resolving Mustache variables. The extension still applies annotation transforms and `brick-gen.json` replacements, so `{{…}}` tags and conditional sections remain visible for inspection.
+Run **Brick Generator: Preview template output** (or the matching CodeLens) to see the brick template for the current file without resolving Mustache variables. The preview still applies annotation transforms and `brick-gen.json` replacements, so `{{…}}` tags and conditional sections remain visible for inspection.
 
 ### CLI prerequisite
 
