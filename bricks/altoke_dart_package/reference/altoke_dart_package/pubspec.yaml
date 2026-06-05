@@ -16,5 +16,5 @@ dev_dependencies:
   #remove-start#
   coverde: ^0.3.0
   #remove-end-x#
-  test: ^1.29.0
+  test: ^1.31.1
   very_good_analysis: ^10.0.0
