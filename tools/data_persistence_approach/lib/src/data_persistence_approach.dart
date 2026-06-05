@@ -9,7 +9,7 @@ enum DataPersistenceApproach {
   hive('hive'),
 
   /// Use `sembast` for data persistence.
-  sembast('sembast')
+  sembast('sembast'),
   ;
 
   const DataPersistenceApproach(this.varIdentifier);

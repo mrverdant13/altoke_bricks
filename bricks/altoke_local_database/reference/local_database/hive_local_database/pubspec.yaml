@@ -8,7 +8,7 @@ resolution: workspace
 #w 2v w#
 
 environment:
-  sdk: ">=3.10.0 <4.0.0"
+  sdk: ">=3.12.1 <4.0.0"
 
 dependencies:
   #w 1v 2> w#
@@ -24,11 +24,11 @@ dependencies:
   hive: ^2.2.3
   local_database:
     path: ../local_database/
-  meta: ^1.17.0
+  meta: ^1.18.0
 
 dev_dependencies:
   #remove-start#
   coverde: ^0.3.0
   #remove-end-x#
-  test: ^1.29.0
+  test: ^1.31.1
   very_good_analysis: ^10.0.0

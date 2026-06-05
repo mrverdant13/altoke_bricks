@@ -1,8 +1,9 @@
 import 'package:altoke_app/routing/routing.dart';
 
 class FakeSelectedRouterPackage extends SelectedRouterPackage {
-  FakeSelectedRouterPackage({required RouterPackage initialValue})
-    : _initialValue = initialValue;
+  FakeSelectedRouterPackage({
+    required this._initialValue,
+  });
 
   final RouterPackage _initialValue;
 

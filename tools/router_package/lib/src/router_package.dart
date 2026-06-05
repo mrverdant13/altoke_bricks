@@ -6,7 +6,7 @@ enum RouterPackage {
   autoRoute('`auto_route`', 'auto_route'),
 
   /// Use `go_router` for router package.
-  goRouter('`go_router`', 'go_router')
+  goRouter('`go_router`', 'go_router'),
   ;
 
   const RouterPackage(this.readableName, this.varIdentifier);

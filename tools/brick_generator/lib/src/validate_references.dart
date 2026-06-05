@@ -10,7 +10,7 @@ import 'package:monorepo_elements/monorepo_elements.dart';
 ///
 /// When [scopePath] is provided (tests only), it is used instead of
 /// [Dirs.scope].
-Future<void> validateReferences({@visibleForTesting String? scopePath}) async {
+Future<void> validateReferences({@protected String? scopePath}) async {
   final scopeDir = scopePath == null ? Dirs.scope : Directory(scopePath);
   final referenceDir = scopeDir.descendantDir('reference');
   if (!referenceDir.existsSync()) {

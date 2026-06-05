@@ -40,11 +40,13 @@ ResolvedBrickScope resolveBrickScope({String? scopePath}) {
       brickTemplateDir: Directory(p.join(scopePath, 'brick', '__brick__')),
     );
   }
-  return ResolvedBrickScope( // coverage:ignore-line
-    scopeDir: Dirs.scope, // coverage:ignore-line
-    brickGenDataFile: Files.brickGenData, // coverage:ignore-line
-    brickTemplateDir: Dirs.brickTemplate, // coverage:ignore-line
-  ); // coverage:ignore-line
+  // coverage:ignore-start
+  return ResolvedBrickScope(
+    scopeDir: Dirs.scope,
+    brickGenDataFile: Files.brickGenData,
+    brickTemplateDir: Dirs.brickTemplate,
+  );
+  // coverage:ignore-end
 }
 
 /// Generates a brick template from the current scope's reference project.
@@ -52,7 +54,7 @@ ResolvedBrickScope resolveBrickScope({String? scopePath}) {
 /// When [scopePath] is provided (tests only), it is used instead of
 /// [Dirs.scope] and [Files.brickGenData].
 Future<void> generateBrick({
-  @visibleForTesting String? scopePath,
+  @protected String? scopePath,
   @visibleForTesting bool? cleanWithGit,
 }) async {
   final shouldCleanWithGit = cleanWithGit ?? scopePath == null;

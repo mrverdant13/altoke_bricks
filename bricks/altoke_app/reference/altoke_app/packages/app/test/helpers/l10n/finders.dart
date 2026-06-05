@@ -9,8 +9,8 @@ class _LocalizedTextFinder extends MatchFinder {
     this.selector, {
     required this.findRichText,
     required super.skipOffstage,
-    String? description,
-  }) : _description = description;
+    this._description,
+  });
 
   final L10nSelector selector;
   final bool findRichText;
@@ -41,8 +41,8 @@ class _LocalizedTooltipFinder extends MatchFinder {
   _LocalizedTooltipFinder(
     this.selector, {
     required super.skipOffstage,
-    String? description,
-  }) : _description = description;
+    this._description,
+  });
 
   final L10nSelector selector;
 

@@ -3,13 +3,13 @@ publish_to: none
 resolution: workspace
 
 environment:
-  sdk: ">=3.10.0 <4.0.0"
+  sdk: ">=3.12.1 <4.0.0"
 
 dev_dependencies:
   checked_yaml: ^2.0.4
   coverde: ^0.3.0
   mason: ^0.1.2
-  meta: ^1.17.0
+  meta: ^1.18.0
   mocktail: ^1.0.4
   path: ^1.9.1
   router_package:
@@ -18,5 +18,5 @@ dev_dependencies:
     path: ../../../tools/shell
   state_management_package:
     path: ../../../tools/state_management_package
-  test: ^1.29.0
+  test: ^1.31.1
   very_good_analysis: ^10.0.0
