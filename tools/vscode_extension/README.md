@@ -11,7 +11,7 @@ The extension now provides annotation-aware highlighting for all currently suppo
 - Code folding for: `remove-start/end`, `replace-start/end`, and matching `partial v/^` blocks (all three comment flavors)
 - Coverage across reference file types used in this monorepo, including `.dart`, `.sh`, `.yaml`, `.yml`, `.html`, `.xml`, `.md`, and ignore-style files such as `.gitignore`
 - Theme-friendly TextMate scopes with extension-provided defaults for both dark and light themes
-- Inline preview via **Brick Generator: Preview generated output** or **Preview template output** (Command Palette or CodeLens on the first annotation)
+- Inline preview via **Brick Generator: Preview generated output** or **Brick Generator: Preview template output** (Command Palette or CodeLens on the first annotation)
 
 ## Preview generated output
 
