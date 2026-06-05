@@ -10,8 +10,9 @@ const execFileAsync = promisify(execFile);
 export async function runPreviewCommand(options: {
   scope: BrickScopeInfo;
   filePath: string;
-  vars: Record<string, PreviewVarValue>;
+  vars?: Record<string, PreviewVarValue>;
   cliCommand: string;
+  templateOnly?: boolean;
 }): Promise<string> {
   const args = [
     'preview',
@@ -23,9 +24,13 @@ export async function runPreviewCommand(options: {
     options.scope.monorepoRoot,
   ];
 
-  const varsArg = formatVarsForCli(options.vars);
-  if (varsArg.length > 0) {
-    args.push('--vars', varsArg);
+  if (options.templateOnly) {
+    args.push('--template-only');
+  } else {
+    const varsArg = formatVarsForCli(options.vars ?? {});
+    if (varsArg.length > 0) {
+      args.push('--vars', varsArg);
+    }
   }
 
   try {

@@ -11,7 +11,7 @@ The extension now provides annotation-aware highlighting for all currently suppo
 - Code folding for: `remove-start/end`, `replace-start/end`, and matching `partial v/^` blocks (all three comment flavors)
 - Coverage across reference file types used in this monorepo, including `.dart`, `.sh`, `.yaml`, `.yml`, `.html`, `.xml`, `.md`, and ignore-style files such as `.gitignore`
 - Theme-friendly TextMate scopes with extension-provided defaults for both dark and light themes
-- Inline preview of generated output via **Brick Generator: Preview generated output** (Command Palette or CodeLens on the first annotation)
+- Inline preview via **Brick Generator: Preview generated output** or **Brick Generator: Preview template output** (Command Palette or CodeLens on the first annotation)
 
 ## Preview generated output
 
@@ -22,7 +22,11 @@ The extension:
 1. Detects the brick scope from the nearest `brick-gen.json`
 2. Applies `brick-gen.json` content replacements, then prompts only for Mustache variables referenced in that transformed file (using `brick/brick.yaml` definitions when available)
 3. Remembers last-used values per brick scope as quick-pick defaults
-4. Runs the installed `brick_generator preview` CLI and opens a diff editor with the transformed file
+4. Runs the installed `brick_generator preview` CLI and opens a diff editor with the fully resolved file
+
+## Preview template output
+
+Run **Brick Generator: Preview template output** (or the matching CodeLens) to see the brick template for the current file without resolving Mustache variables. The preview still applies annotation transforms and `brick-gen.json` replacements, so `{{…}}` tags and conditional sections remain visible for inspection.
 
 ### CLI prerequisite
 

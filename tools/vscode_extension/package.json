@@ -27,6 +27,11 @@
         "command": "brickGenerator.preview",
         "title": "Preview generated output",
         "category": "Brick Generator"
+      },
+      {
+        "command": "brickGenerator.previewTemplate",
+        "title": "Preview template output",
+        "category": "Brick Generator"
       }
     ],
     "configurationDefaults": {

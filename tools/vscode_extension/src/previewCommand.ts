@@ -15,21 +15,29 @@ import { isSupportedBrickFile } from './supportedFiles';
 import { collectPreviewVariableValues } from './variableQuickPick';
 
 export const PREVIEW_COMMAND_ID = 'brickGenerator.preview';
+export const PREVIEW_TEMPLATE_COMMAND_ID = 'brickGenerator.previewTemplate';
 
 export function registerPreviewCommand(context: vscode.ExtensionContext): void {
   context.subscriptions.push(
     vscode.commands.registerCommand(
       PREVIEW_COMMAND_ID,
       async (uri?: vscode.Uri) => {
-        await previewGeneratedOutput(context, uri);
+        await previewOutput(context, uri, { templateOnly: false });
+      },
+    ),
+    vscode.commands.registerCommand(
+      PREVIEW_TEMPLATE_COMMAND_ID,
+      async (uri?: vscode.Uri) => {
+        await previewOutput(context, uri, { templateOnly: true });
       },
     ),
   );
 }
 
-async function previewGeneratedOutput(
+async function previewOutput(
   context: vscode.ExtensionContext,
-  uri?: vscode.Uri,
+  uri: vscode.Uri | undefined,
+  mode: { templateOnly: boolean },
 ): Promise<void> {
   const document = await resolveTargetDocument(uri);
   if (!document) {
@@ -51,31 +59,39 @@ async function previewGeneratedOutput(
     return;
   }
 
-  let brickVariables;
-  let brickGen;
-  try {
-    brickVariables = loadBrickVariables(scope.brickYamlPath);
-    brickGen = loadBrickGenOptions(scope.scopeDir);
-  } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    void vscode.window.showErrorMessage(
-      `Could not load brick configuration: ${message}`,
+  let selectedValues: Record<string, string | boolean> | undefined;
+
+  if (!mode.templateOnly) {
+    let brickVariables;
+    let brickGen;
+    try {
+      brickVariables = loadBrickVariables(scope.brickYamlPath);
+      brickGen = loadBrickGenOptions(scope.scopeDir);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      void vscode.window.showErrorMessage(
+        `Could not load brick configuration: ${message}`,
+      );
+      return;
+    }
+
+    const variables = resolvePreviewVariables(
+      brickVariables,
+      document.getText(),
+      brickGen,
     );
-    return;
-  }
+    const savedValues = loadSavedPreviewVariables(
+      context,
+      scope.scopeName,
+      variables,
+    );
+    selectedValues = await collectPreviewVariableValues(variables, savedValues);
+    if (selectedValues === undefined) {
+      return;
+    }
 
-  const variables = resolvePreviewVariables(
-    brickVariables,
-    document.getText(),
-    brickGen,
-  );
-  const savedValues = loadSavedPreviewVariables(context, scope.scopeName, variables);
-  const selectedValues = await collectPreviewVariableValues(variables, savedValues);
-  if (selectedValues === undefined) {
-    return;
+    await savePreviewVariables(context, scope.scopeName, selectedValues);
   }
-
-  await savePreviewVariables(context, scope.scopeName, selectedValues);
 
   let cliCommand: string;
   try {
@@ -86,10 +102,15 @@ async function previewGeneratedOutput(
     return;
   }
 
+  const progressTitle = mode.templateOnly
+    ? 'Generating template preview…'
+    : 'Generating preview…';
+  const diffTitlePrefix = mode.templateOnly ? 'Template preview' : 'Preview';
+
   await vscode.window.withProgress(
     {
       location: vscode.ProgressLocation.Notification,
-      title: 'Generating preview…',
+      title: progressTitle,
       cancellable: false,
     },
     async () => {
@@ -99,8 +120,9 @@ async function previewGeneratedOutput(
           filePath: document.fileName,
           vars: selectedValues,
           cliCommand,
+          templateOnly: mode.templateOnly,
         });
-        await openPreviewDiff(document, previewContent);
+        await openPreviewDiff(document, previewContent, diffTitlePrefix);
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
         void vscode.window.showErrorMessage(`Preview failed: ${message}`);
@@ -128,12 +150,13 @@ async function resolveTargetDocument(
 async function openPreviewDiff(
   original: vscode.TextDocument,
   previewContent: string,
+  titlePrefix: string,
 ): Promise<void> {
   const previewDocument = await vscode.workspace.openTextDocument({
     content: previewContent,
     language: original.languageId,
   });
-  const title = `Preview: ${path.basename(original.fileName)}`;
+  const title = `${titlePrefix}: ${path.basename(original.fileName)}`;
   await vscode.commands.executeCommand(
     'vscode.diff',
     original.uri,
