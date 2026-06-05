@@ -459,7 +459,7 @@ class _Marker {
 enum _ReplaceMarkerKind {
   start,
   withMarker,
-  end
+  end,
   ;
 
   String get label => switch (this) {

@@ -24,7 +24,7 @@ part 'state.g.dart';
 
 enum StateManagementPackage {
   bloc('bloc'),
-  riverpod('riverpod')
+  riverpod('riverpod'),
   ;
 
   const StateManagementPackage(this.identifier);

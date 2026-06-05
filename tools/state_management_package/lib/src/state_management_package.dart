@@ -6,7 +6,7 @@ enum StateManagementPackage {
   bloc('`bloc`', 'bloc'),
 
   /// Use `riverpod` for state management package.
-  riverpod('`riverpod`', 'riverpod')
+  riverpod('`riverpod`', 'riverpod'),
   ;
 
   const StateManagementPackage(this.readableName, this.varIdentifier);

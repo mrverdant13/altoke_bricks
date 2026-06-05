@@ -52,7 +52,7 @@ ResolvedBrickScope resolveBrickScope({String? scopePath}) {
 /// When [scopePath] is provided (tests only), it is used instead of
 /// [Dirs.scope] and [Files.brickGenData].
 Future<void> generateBrick({
-  @visibleForTesting String? scopePath,
+  @protected String? scopePath,
   @visibleForTesting bool? cleanWithGit,
 }) async {
   final shouldCleanWithGit = cleanWithGit ?? scopePath == null;

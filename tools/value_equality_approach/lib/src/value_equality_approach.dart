@@ -15,7 +15,7 @@ enum ValueEqualityApproach {
   overrides('Overrides', 'overrides'),
 
   /// No value equality approach.
-  none('None', 'none')
+  none('None', 'none'),
   ;
 
   const ValueEqualityApproach(this.readableName, this.varIdentifier);

@@ -57,7 +57,9 @@ void main() {
       });
 
       test('sets a non-zero exit code when issues are found', () async {
-        await File(p.join(fixture.reference.path, 'invalid.dart')).writeAsString(
+        await File(
+          p.join(fixture.reference.path, 'invalid.dart'),
+        ).writeAsString(
           '/*remove-start*/\n',
         );
 
@@ -92,27 +94,33 @@ void main() {
       });
 
       test('requires a melos scope when scopePath is null', () {
-        expect(() => resolveBrickScope(), throwsA(isA<Object>()));
+        expect(resolveBrickScope, throwsA(isA<Object>()));
       });
     });
 
     group('generateBrick', () {
-      test('generates the brick template from the reference directory', () async {
-        await File(p.join(fixture.reference.path, 'hello.txt')).writeAsString(
-          'hello\n',
-        );
+      test(
+        'generates the brick template from the reference directory',
+        () async {
+          await File(
+            p.join(fixture.reference.path, 'hello.txt'),
+          ).writeAsString(
+            'hello\n',
+          );
 
-        await generateBrick(scopePath: scopePath);
+          await generateBrick(scopePath: scopePath);
 
-        expect(
-          File(p.join(fixture.template.path, 'hello.txt')).existsSync(),
-          isTrue,
-        );
-      });
+          expect(
+            File(p.join(fixture.template.path, 'hello.txt')).existsSync(),
+            isTrue,
+          );
+        },
+      );
 
       test('throws when brick-gen.json is invalid', () async {
-        await File(p.join(fixture.scope.path, 'brick-gen.json'))
-            .writeAsString('not-json');
+        await File(
+          p.join(fixture.scope.path, 'brick-gen.json'),
+        ).writeAsString('not-json');
 
         expect(
           () => generateBrick(scopePath: scopePath),
@@ -128,7 +136,6 @@ void main() {
           throwsException,
         );
       });
-
     });
 
     group('cli.main', () {
@@ -143,10 +150,12 @@ void main() {
       });
 
       test('runs preview via subcommand', () async {
-        final referenceFile = File(p.join(fixture.reference.path, 'widget.dart'))
-          ..createSync()
-          ..writeAsStringSync('class Widget {}');
-        await File(p.join(fixture.scope.path, 'brick-gen.json')).writeAsString('''
+        final referenceFile =
+            File(p.join(fixture.reference.path, 'widget.dart'))
+              ..createSync()
+              ..writeAsStringSync('class Widget {}');
+        await File(p.join(fixture.scope.path, 'brick-gen.json')).writeAsString(
+          '''
 {
   "replacements": [
     {
@@ -155,7 +164,8 @@ void main() {
     }
   ]
 }
-''');
+''',
+        );
 
         await cli.main([
           'preview',
@@ -171,8 +181,11 @@ void main() {
       });
 
       test('runs gen via default subcommand', () async {
-        await File(p.join(fixture.reference.path, 'generated.txt'))
-            .writeAsString('content\n');
+        await File(
+          p.join(fixture.reference.path, 'generated.txt'),
+        ).writeAsString(
+          'content\n',
+        );
 
         await cli.main(const [], scopePath: scopePath);
 

@@ -79,7 +79,11 @@ void main() {
       }
 
       Directory(p.join(tempDir.path, 'bricks')).createSync();
-      File(p.join(tempDir.path, 'pubspec.yaml')).writeAsStringSync('name: root\n');
+      File(
+        p.join(tempDir.path, 'pubspec.yaml'),
+      ).writeAsStringSync(
+        'name: root\n',
+      );
       Directory.current = tempDir;
 
       expect(
@@ -90,7 +94,11 @@ void main() {
 
     test('returns the current directory when it is the monorepo root', () {
       Directory(p.join(tempDir.path, 'bricks')).createSync();
-      File(p.join(tempDir.path, 'pubspec.yaml')).writeAsStringSync('name: root\n');
+      File(
+        p.join(tempDir.path, 'pubspec.yaml'),
+      ).writeAsStringSync(
+        'name: root\n',
+      );
       Directory.current = tempDir;
       final expectedRoot = p.normalize(Directory.current.path);
 
@@ -99,7 +107,11 @@ void main() {
 
     test('walks up from a nested directory to the monorepo root', () {
       Directory(p.join(tempDir.path, 'bricks')).createSync();
-      File(p.join(tempDir.path, 'pubspec.yaml')).writeAsStringSync('name: root\n');
+      File(
+        p.join(tempDir.path, 'pubspec.yaml'),
+      ).writeAsStringSync(
+        'name: root\n',
+      );
       Directory.current = tempDir;
       final expectedRoot = resolveMonorepoRoot(null, environment: {});
 

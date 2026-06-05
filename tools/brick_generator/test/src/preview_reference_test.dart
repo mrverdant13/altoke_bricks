@@ -75,8 +75,14 @@ class App extends Widget {
       );
 
       final result = output.toString();
-      expect(result, contains('{{#use_riverpod}}ConsumerWidget{{/use_riverpod}}'));
-      expect(result, contains('{{^use_riverpod}}StatelessWidget{{/use_riverpod}}'));
+      expect(
+        result,
+        contains('{{#use_riverpod}}ConsumerWidget{{/use_riverpod}}'),
+      );
+      expect(
+        result,
+        contains('{{^use_riverpod}}StatelessWidget{{/use_riverpod}}'),
+      );
       expect(result, isNot(contains('class App extends ConsumerWidget')));
       expect(result, isNot(contains('remove-start')));
     });
@@ -125,8 +131,11 @@ class App extends Widget {
       final scopeWithoutReference = Directory(
         p.join(rootPath, 'bricks', 'empty'),
       )..createSync(recursive: true);
-      await File(p.join(scopeWithoutReference.path, 'brick-gen.json'))
-          .writeAsString('{"replacements":[]}');
+      await File(
+        p.join(scopeWithoutReference.path, 'brick-gen.json'),
+      ).writeAsString(
+        '{"replacements":[]}',
+      );
 
       expect(
         () => previewReference(
