@@ -332,8 +332,7 @@ melos:
     # Brick management
     brick.gen:
       description: Generate brick
-      run: >
-        dart run MELOS_ROOT_PATH/tools/brick_generator/lib/main.dart
+      run: clay gen
       exec:
         concurrency: 1
       packageFilters:
@@ -341,8 +340,7 @@ melos:
           - scopes
     brick.validate:
       description: Validate brick reference annotations
-      run: >
-        dart run MELOS_ROOT_PATH/tools/brick_generator/lib/main.dart validate
+      run: clay validate
       exec:
         concurrency: 1
       packageFilters:
