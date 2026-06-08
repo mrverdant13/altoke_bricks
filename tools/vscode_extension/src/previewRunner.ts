@@ -16,12 +16,10 @@ export async function runPreviewCommand(options: {
 }): Promise<string> {
   const args = [
     'preview',
+    '--cwd',
+    options.scope.scopeDir,
     '--file',
     options.filePath,
-    '--brick',
-    options.scope.scopeName,
-    '--root',
-    options.scope.monorepoRoot,
   ];
 
   if (options.templateOnly) {
@@ -35,7 +33,7 @@ export async function runPreviewCommand(options: {
 
   try {
     const { stdout } = await execFileAsync(options.cliCommand, args, {
-      cwd: options.scope.monorepoRoot,
+      cwd: options.scope.scopeDir,
       maxBuffer: 16 * 1024 * 1024,
     });
     return stdout;

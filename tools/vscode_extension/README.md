@@ -30,7 +30,7 @@ Run **Brick Generator: Preview template output** (or the matching CodeLens) to s
 
 ### CLI prerequisite
 
-Preview uses the `clay` CLI. Install it once:
+Preview uses the `clay preview` subcommand. Install the CLI once:
 
 ```bash
 dart pub global activate --source git https://github.com/mrverdant13/clay.git --git-path packages/clay_cli

@@ -71,7 +71,7 @@ function getDefaultDartInstallExecutable(): string | undefined {
 
 async function isClayCliAvailable(command: string): Promise<boolean> {
   try {
-    await execFileAsync(command, ['--version'], { timeout: 10_000 });
+    await execFileAsync(command, ['preview'], { timeout: 10_000 });
     return true;
   } catch (error) {
     if (isCommandNotFound(error)) {
@@ -79,7 +79,10 @@ async function isClayCliAvailable(command: string): Promise<boolean> {
     }
 
     const stderr = readExecStderr(error);
-    return stderr.includes('0.0.1') || stderr.includes('clay_cli');
+    return (
+      stderr.includes('Missing required --file') ||
+      stderr.includes('Missing value for --file')
+    );
   }
 }
 
