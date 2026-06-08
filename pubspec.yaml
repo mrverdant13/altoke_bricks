@@ -419,7 +419,6 @@ workspace:
   - bricks/altoke_reactive_caches/brick/hooks
   - bricks/altoke_reactive_caches/e2e
   - bricks/altoke_reactive_caches/reference/reactive_caches
-  - tools/brick_generator
   - tools/data_persistence_approach
   - tools/local_brick_installer
   - tools/local_database_alternative
