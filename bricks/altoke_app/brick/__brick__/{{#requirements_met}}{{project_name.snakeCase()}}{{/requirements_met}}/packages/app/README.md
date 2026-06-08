@@ -17,7 +17,7 @@
 
 ## {{project_name.titleCase()}}
 
-An {{project_name.titleCase()}}.
+{{project_description}}
 
 ## Mono-repo management
 
