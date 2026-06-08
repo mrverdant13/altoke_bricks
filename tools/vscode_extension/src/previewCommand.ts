@@ -2,7 +2,7 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 
 import { findBrickScopeForFile } from './brickScope';
-import { resolveBrickGeneratorCli } from './brickGeneratorCli';
+import { resolveClayCli } from './clayCli';
 import { loadBrickGenOptions } from './brickGen';
 import { loadBrickVariables } from './brickVariables';
 import { resolvePreviewVariables } from './previewFileVariables';
@@ -95,7 +95,7 @@ async function previewOutput(
 
   let cliCommand: string;
   try {
-    cliCommand = await resolveBrickGeneratorCli();
+    cliCommand = await resolveClayCli();
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     void vscode.window.showErrorMessage(message);

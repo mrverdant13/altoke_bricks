@@ -10,32 +10,32 @@ import * as vscode from 'vscode';
 const execFileAsync = promisify(execFile);
 
 const INSTALL_HINT =
-  'Install the CLI from the monorepo root with:\n' +
-  '  dart install ./tools/brick_generator\n' +
-  'Then ensure the Dart install bin directory is on PATH, or set brickGenerator.cliPath.';
+  'Install the CLI with:\n' +
+  '  dart pub global activate --source git https://github.com/mrverdant13/clay.git --git-path packages/clay_cli\n' +
+  'Then ensure the Dart global bin directory is on PATH, or set brickGenerator.cliPath.';
 
-/** Resolves an available brick_generator CLI executable and verifies it runs. */
-export async function resolveBrickGeneratorCli(): Promise<string> {
+/** Resolves an available clay CLI executable and verifies it runs. */
+export async function resolveClayCli(): Promise<string> {
   const configured = vscode.workspace
     .getConfiguration('brickGenerator')
     .get<string>('cliPath')
     ?.trim();
 
   for (const candidate of getCliCandidates(configured)) {
-    if (await isBrickGeneratorCliAvailable(candidate)) {
+    if (await isClayCliAvailable(candidate)) {
       return candidate;
     }
   }
 
-  throw new Error(`The brick_generator CLI was not found.\n${INSTALL_HINT}`);
+  throw new Error(`The clay CLI was not found.\n${INSTALL_HINT}`);
 }
 
 function getCliCandidates(configured?: string): string[] {
   const candidates = [
     configured,
-    'brick_generator',
+    'clay',
     getDefaultDartInstallExecutable(),
-    path.join(os.homedir(), '.pub-cache/bin/brick_generator'),
+    path.join(os.homedir(), '.pub-cache/bin/clay'),
   ].filter((value): value is string => Boolean(value?.trim()));
 
   return [...new Set(candidates)];
@@ -52,26 +52,26 @@ function getDefaultDartInstallExecutable(): string | undefined {
       'Dart',
       'install',
       'bin',
-      'brick_generator.exe',
+      'clay.exe',
     );
   }
 
   if (process.platform === 'darwin') {
     return path.join(
       os.homedir(),
-      'Library/Application Support/Dart/install/bin/brick_generator',
+      'Library/Application Support/Dart/install/bin/clay',
     );
   }
 
   return path.join(
     os.homedir(),
-    '.local/share/Dart/install/bin/brick_generator',
+    '.local/share/Dart/install/bin/clay',
   );
 }
 
-async function isBrickGeneratorCliAvailable(command: string): Promise<boolean> {
+async function isClayCliAvailable(command: string): Promise<boolean> {
   try {
-    await execFileAsync(command, ['preview'], { timeout: 10_000 });
+    await execFileAsync(command, ['--version'], { timeout: 10_000 });
     return true;
   } catch (error) {
     if (isCommandNotFound(error)) {
@@ -79,10 +79,7 @@ async function isBrickGeneratorCliAvailable(command: string): Promise<boolean> {
     }
 
     const stderr = readExecStderr(error);
-    return (
-      stderr.includes('Missing required --file') ||
-      stderr.includes('Missing value for --file')
-    );
+    return stderr.includes('0.0.1') || stderr.includes('clay_cli');
   }
 }
 

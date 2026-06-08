@@ -1,6 +1,6 @@
 # Brick Generator (VS Code extension)
 
-Editor support for [brick generator](https://github.com/mrverdant13/altoke_bricks/tree/main/tools/brick_generator) annotation syntax in reference projects.
+Editor support for [Clay](https://github.com/mrverdant13/clay) annotation syntax in reference projects.
 
 The extension now provides annotation-aware highlighting for all currently supported marker types, including range shading for block annotations.
 
@@ -22,7 +22,7 @@ The extension:
 1. Detects the brick scope from the nearest `brick-gen.json`
 2. Applies `brick-gen.json` content replacements, then prompts only for Mustache variables referenced in that transformed file (using `brick/brick.yaml` definitions when available)
 3. Remembers last-used values per brick scope as quick-pick defaults
-4. Runs the installed `brick_generator preview` CLI and opens a diff editor with the fully resolved file
+4. Runs the installed `clay preview` CLI and opens a diff editor with the fully resolved file
 
 ## Preview template output
 
@@ -30,13 +30,13 @@ Run **Brick Generator: Preview template output** (or the matching CodeLens) to s
 
 ### CLI prerequisite
 
-Preview uses the `brick_generator` CLI (not `dart run`). Install it once from the monorepo root:
+Preview uses the `clay` CLI. Install it once:
 
 ```bash
-dart install ./tools/brick_generator
+dart pub global activate --source git https://github.com/mrverdant13/clay.git --git-path packages/clay_cli
 ```
 
-Dart installs executables to its install bin directory (on macOS: `~/Library/Application Support/Dart/install/bin`). Add that directory to your `PATH`, or set `brickGenerator.cliPath` in VS Code settings to the full executable path.
+Dart global executables are installed to `~/.pub-cache/bin`. Add that directory to your `PATH`, or set `brickGenerator.cliPath` in VS Code settings to the full executable path.
 
 ## Customizing annotation colors
 
