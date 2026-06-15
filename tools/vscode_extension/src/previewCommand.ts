@@ -2,7 +2,7 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 
 import { findBrickScopeForFile } from './brickScope';
-import { resolveBrickGeneratorCli } from './brickGeneratorCli';
+import { resolveClayCli } from './clayCli';
 import { loadBrickGenOptions } from './brickGen';
 import { loadBrickVariables } from './brickVariables';
 import { resolvePreviewVariables } from './previewFileVariables';
@@ -54,7 +54,7 @@ async function previewOutput(
   const scope = findBrickScopeForFile(document.fileName);
   if (!scope) {
     void vscode.window.showWarningMessage(
-      'Could not find a brick scope (brick-gen.json) for this file.',
+      'Could not find a brick scope (clay.yaml) for this file.',
     );
     return;
   }
@@ -95,7 +95,7 @@ async function previewOutput(
 
   let cliCommand: string;
   try {
-    cliCommand = await resolveBrickGeneratorCli();
+    cliCommand = await resolveClayCli();
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     void vscode.window.showErrorMessage(message);

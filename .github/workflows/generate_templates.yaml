@@ -7,9 +7,8 @@ on:
       - main
     paths:
       - .github/workflows/generate_templates.yaml
-      - bricks/**/brick-gen.json
+      - bricks/**/clay.yaml
       - bricks/**/reference/**
-      - tools/brick_generator/**
 
 jobs:
   identify-brick-scopes:
@@ -58,8 +57,12 @@ jobs:
           flutter-version: 3.44.1
       - name: Install melos
         run: dart pub global activate melos 7.1.0
-      - name: Initialize brick generator
-        run: melos bootstrap --scope=brick_generator
+      - name: Install clay
+        run: dart install clay_cli
+      - name: Add Dart install bin to PATH
+        run: echo "$HOME/.local/share/Dart/install/bin" >> "$GITHUB_PATH"
+      - name: Initialize melos
+        run: melos bootstrap --category=scopes
       - name: Set brick scope as unique relevant packages
         run: echo "MELOS_PACKAGES=${{ steps.build-brick-scope-name.outputs.brick-scope-name }}" >> "$GITHUB_ENV"
       - name: Validate reference annotations

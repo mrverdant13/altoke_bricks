@@ -1,6 +1,6 @@
 # Brick Generator (VS Code extension)
 
-Editor support for [brick generator](https://github.com/mrverdant13/altoke_bricks/tree/main/tools/brick_generator) annotation syntax in reference projects.
+Editor support for [Clay](https://github.com/mrverdant13/clay) annotation syntax in reference projects.
 
 The extension now provides annotation-aware highlighting for all currently supported marker types, including range shading for block annotations.
 
@@ -19,21 +19,21 @@ Open a reference file under `bricks/<scope>/reference/` and run **Brick Generato
 
 The extension:
 
-1. Detects the brick scope from the nearest `brick-gen.json`
-2. Applies `brick-gen.json` content replacements, then prompts only for Mustache variables referenced in that transformed file (using `brick/brick.yaml` definitions when available)
+1. Detects the brick scope from the nearest `clay.yaml`
+2. Applies `clay.yaml` content replacements, then prompts only for Mustache variables referenced in that transformed file (using `brick/brick.yaml` definitions when available)
 3. Remembers last-used values per brick scope as quick-pick defaults
-4. Runs the installed `brick_generator preview` CLI and opens a diff editor with the fully resolved file
+4. Runs the installed `clay preview` CLI and opens a diff editor with the fully resolved file
 
 ## Preview template output
 
-Run **Brick Generator: Preview template output** (or the matching CodeLens) to see the brick template for the current file without resolving Mustache variables. The preview still applies annotation transforms and `brick-gen.json` replacements, so `{{…}}` tags and conditional sections remain visible for inspection.
+Run **Brick Generator: Preview template output** (or the matching CodeLens) to see the brick template for the current file without resolving Mustache variables. The preview still applies annotation transforms and `clay.yaml` replacements, so `{{…}}` tags and conditional sections remain visible for inspection.
 
 ### CLI prerequisite
 
-Preview uses the `brick_generator` CLI (not `dart run`). Install it once from the monorepo root:
+Preview uses the `clay preview` subcommand. Install the CLI once:
 
 ```bash
-dart install ./tools/brick_generator
+dart install clay_cli
 ```
 
 Dart installs executables to its install bin directory (on macOS: `~/Library/Application Support/Dart/install/bin`). Add that directory to your `PATH`, or set `brickGenerator.cliPath` in VS Code settings to the full executable path.

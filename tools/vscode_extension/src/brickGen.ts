@@ -1,6 +1,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
+import { parse as parseYaml } from 'yaml';
+
 export interface BrickGenReplacement {
   from: RegExp;
   to: string;
@@ -34,11 +36,11 @@ interface RegExpSource {
   caseSensitive?: boolean;
 }
 
-/** Loads `brick-gen.json` from a brick scope directory. */
+/** Loads `clay.yaml` from a brick scope directory. */
 export function loadBrickGenOptions(scopeDir: string): BrickGenOptions {
-  const brickGenPath = path.join(scopeDir, 'brick-gen.json');
-  const raw = fs.readFileSync(brickGenPath, 'utf8');
-  const document = JSON.parse(raw) as BrickGenJson;
+  const clayConfigPath = path.join(scopeDir, 'clay.yaml');
+  const raw = fs.readFileSync(clayConfigPath, 'utf8');
+  const document = parseYaml(raw) as BrickGenJson;
   return {
     replacements: (document.replacements ?? []).map((replacement) => ({
       from: parseReplacementFrom(replacement.from),
@@ -54,7 +56,7 @@ export function loadBrickGenOptions(scopeDir: string): BrickGenOptions {
   };
 }
 
-/** Applies brick-gen content replacements (same order as the CLI). */
+/** Applies clay.yaml content replacements (same order as the CLI). */
 export function applyBrickGenReplacements(
   content: string,
   replacements: BrickGenReplacement[],

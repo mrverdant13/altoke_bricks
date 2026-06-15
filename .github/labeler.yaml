@@ -34,11 +34,6 @@ b:reactive_caches:
       - bricks/altoke_reactive_caches/**
       - bricks/reactive_caches/**
 
-t:brick_generator:
-  - changed-files:
-    - any-glob-to-any-file:
-      - tools/brick_generator/**
-
 t:data_persistence_approach:
   - changed-files:
     - any-glob-to-any-file:
