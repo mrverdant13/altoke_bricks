@@ -103,5 +103,11 @@
         }
       ]
     }
+  ],
+  "ignore": [
+    "**/drift_worker.js",
+    "**/melos_*.iml",
+    "**/macos/**/GeneratedPluginRegistrant.swift",
+    "**/sqlite3.wasm"
   ]
 }
