@@ -7,7 +7,7 @@ on:
       - main
     paths:
       - .github/workflows/generate_templates.yaml
-      - bricks/**/brick-gen.json
+      - bricks/**/clay.yaml
       - bricks/**/reference/**
 
 jobs:
@@ -58,11 +58,7 @@ jobs:
       - name: Install melos
         run: dart pub global activate melos 7.1.0
       - name: Install clay
-        run: >
-          dart pub global activate
-          --source git
-          https://github.com/mrverdant13/clay.git
-          --git-path packages/clay_cli
+        run: dart pub global activate clay_cli
       - name: Initialize melos
         run: melos bootstrap --category=scopes
       - name: Set brick scope as unique relevant packages
