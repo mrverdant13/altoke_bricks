@@ -1,20 +1,9 @@
-{
-  "replacements": [
-    {
-      "from": "altoke_common",
-      "to": "common"
-    },
-    {
-      "from": "altoke_reactive_caches",
-      "to": "reactive_caches"
-    },
-    {
-      "from": "\\b(reactive_caches)\\b",
-      "to": "{{#requirements_met}}reactive_caches{{/requirements_met}}"
-    },
-    {
-      "from": "\\b(REQUIREMENTS.md)\\b",
-      "to": "{{^requirements_met}}REQUIREMENTS.md{{/requirements_met}}"
-    }
-  ]
-}
+replacements:
+  - from: altoke_common
+    to: common
+  - from: altoke_reactive_caches
+    to: reactive_caches
+  - from: \b(reactive_caches)\b
+    to: "{{#requirements_met}}reactive_caches{{/requirements_met}}"
+  - from: \b(REQUIREMENTS.md)\b
+    to: "{{^requirements_met}}REQUIREMENTS.md{{/requirements_met}}"
