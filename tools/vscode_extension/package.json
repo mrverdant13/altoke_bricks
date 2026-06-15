@@ -164,7 +164,7 @@
         "brickGenerator.cliPath": {
           "type": "string",
           "default": "",
-          "markdownDescription": "Path to the `clay` CLI executable. When empty, the extension searches `PATH`, the Dart install bin directory, and `~/.pub-cache/bin`. Install with `dart pub global activate clay_cli`."
+          "markdownDescription": "Path to the `clay` CLI executable. When empty, the extension searches `PATH`, the Dart install bin directory, and `~/.pub-cache/bin`. Install with `dart install clay_cli`."
         },
         "brickGenerator.colors.remove.markerForeground": {
           "type": "string",

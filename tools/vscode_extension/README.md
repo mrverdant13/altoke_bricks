@@ -33,10 +33,10 @@ Run **Brick Generator: Preview template output** (or the matching CodeLens) to s
 Preview uses the `clay preview` subcommand. Install the CLI once:
 
 ```bash
-dart pub global activate clay_cli
+dart install clay_cli
 ```
 
-Dart global executables are installed to `~/.pub-cache/bin`. Add that directory to your `PATH`, or set `brickGenerator.cliPath` in VS Code settings to the full executable path.
+Dart installs executables to its install bin directory (on macOS: `~/Library/Application Support/Dart/install/bin`). Add that directory to your `PATH`, or set `brickGenerator.cliPath` in VS Code settings to the full executable path.
 
 ## Customizing annotation colors
 

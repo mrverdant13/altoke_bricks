@@ -58,7 +58,9 @@ jobs:
       - name: Install melos
         run: dart pub global activate melos 7.1.0
       - name: Install clay
-        run: dart pub global activate clay_cli
+        run: dart install clay_cli
+      - name: Add Dart install bin to PATH
+        run: echo "$HOME/.local/share/Dart/install/bin" >> "$GITHUB_PATH"
       - name: Initialize melos
         run: melos bootstrap --category=scopes
       - name: Set brick scope as unique relevant packages

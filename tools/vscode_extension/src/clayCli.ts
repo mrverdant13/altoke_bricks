@@ -11,8 +11,8 @@ const execFileAsync = promisify(execFile);
 
 const INSTALL_HINT =
   'Install the CLI with:\n' +
-  '  dart pub global activate clay_cli\n' +
-  'Then ensure the Dart global bin directory is on PATH, or set brickGenerator.cliPath.';
+  '  dart install clay_cli\n' +
+  'Then ensure the Dart install bin directory is on PATH, or set brickGenerator.cliPath.';
 
 /** Resolves an available clay CLI executable and verifies it runs. */
 export async function resolveClayCli(): Promise<string> {
