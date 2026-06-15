@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-const BRICK_GEN_JSON = 'brick-gen.json';
+const CLAY_YAML = 'clay.yaml';
 const REFERENCE_DIR = 'reference';
 const BRICK_YAML_RELATIVE = path.join('brick', 'brick.yaml');
 
@@ -13,14 +13,14 @@ export interface BrickScopeInfo {
   brickYamlPath: string;
 }
 
-/** Finds the brick scope for a reference file by walking up to `brick-gen.json`. */
+/** Finds the brick scope for a reference file by walking up to `clay.yaml`. */
 export function findBrickScopeForFile(filePath: string): BrickScopeInfo | undefined {
   const resolvedFile = path.resolve(filePath);
   let dir = path.dirname(resolvedFile);
 
   while (true) {
-    const brickGenPath = path.join(dir, BRICK_GEN_JSON);
-    if (fs.existsSync(brickGenPath)) {
+    const clayConfigPath = path.join(dir, CLAY_YAML);
+    if (fs.existsSync(clayConfigPath)) {
       const referenceDir = path.join(dir, REFERENCE_DIR);
       if (!isPathWithinDirectory(resolvedFile, referenceDir)) {
         return undefined;

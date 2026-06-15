@@ -11,11 +11,11 @@ abstract final class Files {
     throw RootReadmeNotFoundError(readmePath: file.path);
   }();
 
-  /// Brick generation data file of a brick scope managed by the monorepo.
-  static final File brickGenData = () {
-    final file = File(Vars.scopeBrickGenDataPath);
+  /// Clay config file of a brick scope managed by the monorepo.
+  static final File clayConfig = () {
+    final file = File(Vars.scopeClayConfigPath);
     if (file.existsSync()) return file;
-    throw BrickScopeGenDataNotFoundError(brickGenDataPath: file.path);
+    throw BrickScopeClayConfigNotFoundError(clayConfigPath: file.path);
   }();
 
   /// README file of a brick scope managed by the monorepo.

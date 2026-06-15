@@ -56,11 +56,10 @@ abstract final class Vars {
     return packagePath;
   }();
 
-  /// Path to the brick generation data file of a brick scope managed by the
-  /// monorepo.
-  static final String scopeBrickGenDataPath = path.join(
+  /// Path to the Clay config file of a brick scope managed by the monorepo.
+  static final String scopeClayConfigPath = path.join(
     scopePath,
-    'brick-gen.json',
+    'clay.yaml',
   );
 
   /// Name of a brick hooks managed by the monorepo.

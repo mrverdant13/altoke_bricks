@@ -11,7 +11,7 @@ const execFileAsync = promisify(execFile);
 
 const INSTALL_HINT =
   'Install the CLI with:\n' +
-  '  dart pub global activate --source git https://github.com/mrverdant13/clay.git --git-path packages/clay_cli\n' +
+  '  dart pub global activate clay_cli\n' +
   'Then ensure the Dart global bin directory is on PATH, or set brickGenerator.cliPath.';
 
 /** Resolves an available clay CLI executable and verifies it runs. */

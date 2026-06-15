@@ -54,7 +54,7 @@ async function previewOutput(
   const scope = findBrickScopeForFile(document.fileName);
   if (!scope) {
     void vscode.window.showWarningMessage(
-      'Could not find a brick scope (brick-gen.json) for this file.',
+      'Could not find a brick scope (clay.yaml) for this file.',
     );
     return;
   }

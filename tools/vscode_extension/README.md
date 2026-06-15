@@ -19,21 +19,21 @@ Open a reference file under `bricks/<scope>/reference/` and run **Brick Generato
 
 The extension:
 
-1. Detects the brick scope from the nearest `brick-gen.json`
-2. Applies `brick-gen.json` content replacements, then prompts only for Mustache variables referenced in that transformed file (using `brick/brick.yaml` definitions when available)
+1. Detects the brick scope from the nearest `clay.yaml`
+2. Applies `clay.yaml` content replacements, then prompts only for Mustache variables referenced in that transformed file (using `brick/brick.yaml` definitions when available)
 3. Remembers last-used values per brick scope as quick-pick defaults
 4. Runs the installed `clay preview` CLI and opens a diff editor with the fully resolved file
 
 ## Preview template output
 
-Run **Brick Generator: Preview template output** (or the matching CodeLens) to see the brick template for the current file without resolving Mustache variables. The preview still applies annotation transforms and `brick-gen.json` replacements, so `{{…}}` tags and conditional sections remain visible for inspection.
+Run **Brick Generator: Preview template output** (or the matching CodeLens) to see the brick template for the current file without resolving Mustache variables. The preview still applies annotation transforms and `clay.yaml` replacements, so `{{…}}` tags and conditional sections remain visible for inspection.
 
 ### CLI prerequisite
 
 Preview uses the `clay preview` subcommand. Install the CLI once:
 
 ```bash
-dart pub global activate --source git https://github.com/mrverdant13/clay.git --git-path packages/clay_cli
+dart pub global activate clay_cli
 ```
 
 Dart global executables are installed to `~/.pub-cache/bin`. Add that directory to your `PATH`, or set `brickGenerator.cliPath` in VS Code settings to the full executable path.
